@@ -1,0 +1,6 @@
+{"problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time", "turn": 0, "out_tok": 21, "stop": "tool_use", "tools": ["lean_profile"], "text": ""}
+{"problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time", "turn": 1, "out_tok": 87, "stop": "tool_use", "tools": ["lean_goals"], "text": ""}
+{"problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius", "turn": 0, "out_tok": 21, "stop": "tool_use", "tools": ["lean_profile"], "text": ""}
+{"problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time", "turn": 2, "out_tok": 12000, "stop": "tool_use", "tools": ["lean_skeleton"], "text": ""}
+{"problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius", "turn": 1, "out_tok": 164, "stop": "tool_use", "tools": ["lean_run"], "text": ""}
+{"problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius", "turn": 2, "out_tok": 1509, "stop": "tool_use", "tools": ["lean_check_variants"], "text": ""}

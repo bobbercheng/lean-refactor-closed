@@ -1,0 +1,29 @@
+[
+ {
+  "problem": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+  "best_score": 33.33,
+  "checks": 6,
+  "tool_calls": 21,
+  "turns": 21,
+  "out_tokens": 3789,
+  "seconds": 325
+ },
+ {
+  "problem": "Cslib.SKI.parallelReduction_diamond",
+  "best_score": 71.09,
+  "checks": 9,
+  "tool_calls": 10,
+  "turns": 10,
+  "out_tokens": 5465,
+  "seconds": 218
+ },
+ {
+  "problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+  "best_score": 85.07,
+  "checks": 13,
+  "tool_calls": 34,
+  "turns": 34,
+  "out_tokens": 8188,
+  "seconds": 800
+ }
+]

@@ -1,0 +1,13 @@
+{
+ "problem": "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time",
+ "best": {
+  "score": 33.33,
+  "proof": null,
+  "tokens": 1217,
+  "heartbeats": null
+ },
+ "attempts": [],
+ "runs": [],
+ "api_spend": 1.04968,
+ "lineage": "fresh"
+}

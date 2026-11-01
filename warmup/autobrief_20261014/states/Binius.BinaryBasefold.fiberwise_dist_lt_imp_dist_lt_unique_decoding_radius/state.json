@@ -1,0 +1,2109 @@
+{
+ "problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+ "best": {
+  "score": 91.22,
+  "proof": "theorem fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius (i : Fin ℓ) (steps : ℕ)\n    [NeZero steps] (h_i_add_steps : i.val + steps ≤ ℓ)\n    (f : OracleFunction 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩)\n  (h_fw_dist_lt : fiberwiseClose 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate)\n    (i := i) (steps := steps) (h_i_add_steps := h_i_add_steps) (f := f)) :\n  hammingClose 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩ f := by\n  classical\n  obtain ⟨⟨g, hg⟩, hd⟩ := Nat.sInf_mem (Set.range_nonempty\n    (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard))\n  apply (mul_le_mul_left' (Code.distFromCode_le_dist_to_mem f g hg) 2).trans_lt\n  apply ENat.coe_lt_coe.2\n  have hh := Nat.mul_le_mul_right (2 ^ steps) (Nat.le_of_lt_succ (ENat.coe_lt_coe.1 h_fw_dist_lt))\n  simp only [fiberwiseDistance, Set.image_univ, ←hd, Nat.mul_assoc, Nat.sub_mul,\n    ←Nat.pow_add, ←Nat.sub_add_comm (h_i_add_steps.trans (Nat.le_add_right ..)),\n    ←Nat.sub_add_comm h_i_add_steps, Nat.add_sub_add_right] at hh\n  apply Nat.lt_succ_of_le\n  apply le_trans _ hh\n  apply Nat.mul_le_mul_left 2\n  simp only [Set.ncard_eq_toFinset_card', ←Finset.card_fin (2 ^ steps), ←Finset.card_product]\n  apply Finset.card_le_card_of_surjOn (fun p => qMap_total_fiber 𝔽q β _ steps\n    (Nat.lt_add_of_pos_right_of_le _ _ _ h_i_add_steps) p.1 p.2)\n  intro x hx\n  refine ⟨(_, _), ?_, (is_fiber_iff_generates_quotient_point 𝔽q β i steps h_i_add_steps x _).mp rfl⟩\n  exact Finset.mem_product.mpr ⟨Set.mem_toFinset.mpr\n    ⟨x, rfl, (Finset.mem_filter.mp hx).2⟩, Finset.mem_univ _⟩",
+  "tokens": 194,
+  "heartbeats": 2092,
+  "L": 86.74,
+  "H": 86.93,
+  "Z": 100.0,
+  "compat": {
+   "v4.31.0": true,
+   "v4.30.0": true,
+   "v4.29.0": true,
+   "v4.28.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "c1d98646599a",
+   "tokens": 1427,
+   "heartbeats": 15427,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:18:33Z",
+   "score": 35.36
+  },
+  {
+   "sha": "7aa01baea6d6",
+   "tokens": 965,
+   "heartbeats": 12732,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:21:08Z",
+   "score": 51.5
+  },
+  {
+   "sha": "0c123daa9848",
+   "tokens": 517,
+   "heartbeats": 9575,
+   "ok": false,
+   "error": "1295:27: omega could not prove the goal: a possible counterexample may satisfy the constraints k ≥ 0 j ≥ 0 h ≥ 0 e ≥ 0 c ≥ 0 b ≥ 0 b - e ≥ 1 b - e - h ≥ 0 b + c - h - k ≤ 0 a ≥ 0 a - b - c ≥ 1 a - k ≥ 1 where a := ↑r b := ↑ℓ c := ↑𝓡 e := ↑↑i h := ↑steps j := ↑(fiberwiseDisagreementSet 𝔽q β i steps h",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:22:28Z"
+  },
+  {
+   "sha": "3dd49cfe05f7",
+   "tokens": 520,
+   "heartbeats": 9542,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:22:49Z",
+   "score": 59.95
+  },
+  {
+   "sha": "e986c9ccd393",
+   "tokens": 530,
+   "heartbeats": 6599,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:23:40Z",
+   "score": 74.18
+  },
+  {
+   "sha": "4f6526796a3a",
+   "tokens": 528,
+   "heartbeats": 6456,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:26:45Z",
+   "score": 74.52
+  },
+  {
+   "sha": "b27c26b30496",
+   "tokens": 519,
+   "heartbeats": 6031,
+   "ok": false,
+   "error": "1292:48: Function expected at g but this term has type ↥C Note: Expected a function because this term is being applied to the argument x",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:28:13Z"
+  },
+  {
+   "sha": "e4adb0dd42d7",
+   "tokens": 519,
+   "heartbeats": 7366,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:28:37Z"
+  },
+  {
+   "sha": "16d588f8b35d",
+   "tokens": 553,
+   "heartbeats": 6533,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:29:31Z"
+  },
+  {
+   "sha": "a0b9d0611a91",
+   "tokens": 514,
+   "heartbeats": 6234,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:30:01Z",
+   "score": 75.31
+  },
+  {
+   "sha": "4ca5a791612b",
+   "tokens": 514,
+   "heartbeats": 6228,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:31:13Z",
+   "score": 75.32
+  },
+  {
+   "sha": "c7e671a9da72",
+   "tokens": 467,
+   "heartbeats": 5766,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:57:01Z",
+   "score": 77.35
+  },
+  {
+   "sha": "d13115329ad3",
+   "tokens": 447,
+   "heartbeats": 5226,
+   "ok": false,
+   "error": "1294:76: Application type mismatch: The argument i.castSucc has type Fin (ℓ + 1) but is expected to have type Fin r in the application qMap_total_fiber 𝔽q β i.castSucc",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:58:00Z"
+  },
+  {
+   "sha": "0ca459356a71",
+   "tokens": 452,
+   "heartbeats": 5204,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:58:36Z",
+   "score": 78.86
+  },
+  {
+   "sha": "a0c1d28cfbc9",
+   "tokens": 456,
+   "heartbeats": 4168,
+   "ok": false,
+   "error": "1294:93: Application type mismatch: The argument Nat.le_add_right ?m.296 ?m.297 has type ?m.296 ≤ ?m.296 + ?m.297 but is expected to have type ℓ ≤ r in the application LT.lt.trans_le i.isLt (Nat.le_add_right ?m.296 ?m.297)",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:00:21Z"
+  },
+  {
+   "sha": "ffa5bbbdb63c",
+   "tokens": 431,
+   "heartbeats": 4602,
+   "ok": false,
+   "error": "1301:11: don't know how to synthesize implicit argument `b` @And.intro ((y, ?m.3 … [hypotheses omitted] ⊢ Prop",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:00:53Z"
+  },
+  {
+   "sha": "f59f80681e93",
+   "tokens": 427,
+   "heartbeats": 5128,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:01:20Z",
+   "score": 79.59
+  },
+  {
+   "sha": "4c2dee394f38",
+   "tokens": 405,
+   "heartbeats": 1033,
+   "ok": false,
+   "error": "1287:72: Application type mismatch: The argument g has type ↥C but is expected to have type OracleFunction 𝔽q β ⟨↑i, ⋯⟩ in the application fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:02:25Z"
+  },
+  {
+   "sha": "278ab75a52b4",
+   "tokens": 405,
+   "heartbeats": 747,
+   "ok": false,
+   "error": "1286:43: Function expected at Set.image_nonempty but this term has type ((fun g => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f ↑g).ncard) '' ?m.170).Nonempty ↔ Set.Nonempty ?m.170 Note: Expected a function because this term is being applied to the argument Set.univ_nonempty",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:02:37Z"
+  },
+  {
+   "sha": "24fc698d2867",
+   "tokens": 408,
+   "heartbeats": 3667,
+   "ok": false,
+   "error": "1289:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern sInf  … [hypotheses omitted] ⊢ Δ₀(f, g) ≤ d * 2 ^ steps Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of se",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:03:17Z"
+  },
+  {
+   "sha": "c185a396a09e",
+   "tokens": 413,
+   "heartbeats": 3729,
+   "ok": false,
+   "error": "1289:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern sInf  … [hypotheses omitted] ⊢ Δ₀(f, g) ≤ d * 2 ^ steps",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:04:10Z"
+  },
+  {
+   "sha": "6947ec4ad8f5",
+   "tokens": 429,
+   "heartbeats": 4909,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:04:40Z",
+   "score": 80.0
+  },
+  {
+   "sha": "4d571a12438e",
+   "tokens": 419,
+   "heartbeats": 5024,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:05:40Z"
+  },
+  {
+   "sha": "550c06c0159a",
+   "tokens": 417,
+   "heartbeats": 5036,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:06:05Z",
+   "score": 80.01
+  },
+  {
+   "sha": "e98581352fd5",
+   "tokens": 425,
+   "heartbeats": 5410,
+   "ok": false,
+   "error": "1291:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern sInf  … [hypotheses omitted] ⊢ 2 * Y.ncard < (2 ^ (ℓ + 𝓡 - (↑i + steps)) - 2 ^ (ℓ - (↑i + steps))).succ",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:31:44Z"
+  },
+  {
+   "sha": "888bd2051f8e",
+   "tokens": 437,
+   "heartbeats": 5617,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:32:32Z"
+  },
+  {
+   "sha": "785351c8c3a4",
+   "tokens": 425,
+   "heartbeats": 4794,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:33:10Z",
+   "score": 80.33
+  },
+  {
+   "sha": "e8a5e3cae08a",
+   "tokens": 445,
+   "heartbeats": 3323,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:34:27Z",
+   "score": 82.94
+  },
+  {
+   "sha": "324fbbfd9c35",
+   "tokens": 450,
+   "heartbeats": 3334,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:10:11Z"
+  },
+  {
+   "sha": "79c568bc5b70",
+   "tokens": 411,
+   "heartbeats": 3352,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:10:34Z",
+   "score": 83.65
+  },
+  {
+   "sha": "59dacaf19fc1",
+   "tokens": 393,
+   "heartbeats": 3242,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:11:21Z",
+   "score": 84.29
+  },
+  {
+   "sha": "91de8eff2e0b",
+   "tokens": 383,
+   "heartbeats": 3242,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:12:25Z",
+   "score": 84.52
+  },
+  {
+   "sha": "995b2705f6a3",
+   "tokens": 382,
+   "heartbeats": 3145,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:13:44Z",
+   "score": 84.75
+  },
+  {
+   "sha": "e96ec66fe631",
+   "tokens": 378,
+   "heartbeats": 3110,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:14:59Z",
+   "score": 84.91
+  },
+  {
+   "sha": "cbcf680d5503",
+   "tokens": 375,
+   "heartbeats": 3185,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:15:51Z"
+  },
+  {
+   "sha": "22c69d835672",
+   "tokens": 376,
+   "heartbeats": 3106,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:16:12Z",
+   "score": 84.96
+  },
+  {
+   "sha": "bd952e233c2a",
+   "tokens": 371,
+   "heartbeats": 2338,
+   "ok": false,
+   "error": "1292:7: typeclass instance problem is stuck NeZero ?m.288 Note: Lean will not try to resolve this typeclass instance problem because the third type argument to `NeZero` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass. Hint: Adding type annotati",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:17:00Z"
+  },
+  {
+   "sha": "83c99720ec26",
+   "tokens": 375,
+   "heartbeats": 2982,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:17:28Z",
+   "score": 85.25
+  },
+  {
+   "sha": "b07120f4ee63",
+   "tokens": 370,
+   "heartbeats": 2978,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:45:43Z",
+   "score": 85.37
+  },
+  {
+   "sha": "ee80e6681609",
+   "tokens": 369,
+   "heartbeats": 3057,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:47:13Z"
+  },
+  {
+   "sha": "551efb76c8b3",
+   "tokens": 365,
+   "heartbeats": 2216,
+   "ok": false,
+   "error": "1292:7: typeclass instance problem is stuck NeZero ?m.286 Note: Lean will not try to resolve this typeclass instance problem because the third type argument to `NeZero` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass. Hint: Adding type annotati",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:47:19Z"
+  },
+  {
+   "sha": "00c8702ef42d",
+   "tokens": 365,
+   "heartbeats": 2974,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:47:32Z",
+   "score": 85.49
+  },
+  {
+   "sha": "dade4448bdf6",
+   "tokens": 370,
+   "heartbeats": 2138,
+   "ok": false,
+   "error": "1291:13: don't know how to synthesize implicit argument `h_ℓ_add_R_rate` @qMap_t … [hypotheses omitted] ⊢ ℓ + 𝓡 < r",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:48:42Z"
+  },
+  {
+   "sha": "68e241159292",
+   "tokens": 365,
+   "heartbeats": 1934,
+   "ok": false,
+   "error": "1289:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern sInf  … [hypotheses omitted] ⊢ Δ₀(f, g) ≤ d * 2 ^ steps Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of se",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:49:16Z"
+  },
+  {
+   "sha": "8c3bfec14904",
+   "tokens": 365,
+   "heartbeats": 2986,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:49:36Z"
+  },
+  {
+   "sha": "0e4f4f42a969",
+   "tokens": 352,
+   "heartbeats": 2914,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:50:39Z",
+   "score": 85.91
+  },
+  {
+   "sha": "ada18e038284",
+   "tokens": 353,
+   "heartbeats": 2882,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:52:13Z",
+   "score": 85.96
+  },
+  {
+   "sha": "adaf2d1193c2",
+   "tokens": 352,
+   "heartbeats": 2472,
+   "ok": false,
+   "error": "1285:131: Application type mismatch: The argument g has type ↥(BBF_Code 𝔽q β i.castSucc) but is expected to have type OracleFunction 𝔽q β ⟨↑i, ⋯⟩ in the application fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:52:45Z"
+  },
+  {
+   "sha": "82f0f5c2e953",
+   "tokens": 352,
+   "heartbeats": 2900,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:52:58Z"
+  },
+  {
+   "sha": "b75ddbfe0335",
+   "tokens": 350,
+   "heartbeats": 2872,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:53:28Z",
+   "score": 86.04
+  },
+  {
+   "sha": "a101005c78d8",
+   "tokens": 338,
+   "heartbeats": 3469,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:27Z"
+  },
+  {
+   "sha": "9c5347322621",
+   "tokens": 347,
+   "heartbeats": 1916,
+   "ok": false,
+   "error": "1288:23: Tactic `rewrite` failed: Did not find an occurrence of the pattern sInf … [hypotheses omitted] ⊢ Δ₀(f, g) ≤ d * 2 ^ steps Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of se",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:55:02Z"
+  },
+  {
+   "sha": "6db2c5b350ad",
+   "tokens": 349,
+   "heartbeats": 2873,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:55:22Z",
+   "score": 86.07
+  },
+  {
+   "sha": "6cd9bb270682",
+   "tokens": 349,
+   "heartbeats": 2863,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:56:27Z",
+   "score": 86.09
+  },
+  {
+   "sha": "4a7a8d1429aa",
+   "tokens": 349,
+   "heartbeats": 2865,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:57:05Z"
+  },
+  {
+   "sha": "499d14b6f535",
+   "tokens": 351,
+   "heartbeats": 2909,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:57:18Z"
+  },
+  {
+   "sha": "e7094683bfd0",
+   "tokens": 347,
+   "heartbeats": 2852,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:57:42Z",
+   "score": 86.15
+  },
+  {
+   "sha": "f022f187d9bc",
+   "tokens": 345,
+   "heartbeats": 2847,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:58:37Z",
+   "score": 86.21
+  },
+  {
+   "sha": "1dbdfccaf2d8",
+   "tokens": 341,
+   "heartbeats": 2846,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:59:16Z",
+   "score": 86.3
+  },
+  {
+   "sha": "94d0c5d83baf",
+   "tokens": 329,
+   "heartbeats": 3408,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:23:32Z"
+  },
+  {
+   "sha": "37119eb858ac",
+   "tokens": 341,
+   "heartbeats": 2439,
+   "ok": false,
+   "error": "1284:131: Application type mismatch: The argument g has type ↥(BBF_Code 𝔽q β i.castSucc) but is expected to have type OracleFunction 𝔽q β ⟨↑i, ⋯⟩ in the application fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:24:41Z"
+  },
+  {
+   "sha": "db4d94836f53",
+   "tokens": 330,
+   "heartbeats": 2811,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:25:09Z",
+   "score": 86.63
+  },
+  {
+   "sha": "6422244d7597",
+   "tokens": 323,
+   "heartbeats": 2810,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:26:02Z",
+   "score": 86.79
+  },
+  {
+   "sha": "2145fa48efbc",
+   "tokens": 317,
+   "heartbeats": 2762,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:26:49Z",
+   "score": 87.03
+  },
+  {
+   "sha": "abc29f4c8822",
+   "tokens": 302,
+   "heartbeats": 2892,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:28:21Z",
+   "score": 87.1
+  },
+  {
+   "sha": "aaa998a37ab0",
+   "tokens": 299,
+   "heartbeats": 2972,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:29:10Z"
+  },
+  {
+   "sha": "f20cd12440f0",
+   "tokens": 297,
+   "heartbeats": 2905,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:29:30Z",
+   "score": 87.18
+  },
+  {
+   "sha": "c7da8dd38807",
+   "tokens": 284,
+   "heartbeats": 2974,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:30:18Z",
+   "score": 87.34
+  },
+  {
+   "sha": "8cdf8034bdb5",
+   "tokens": 287,
+   "heartbeats": 2944,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:31:10Z"
+  },
+  {
+   "sha": "90a1f5011644",
+   "tokens": 286,
+   "heartbeats": 2935,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:31:47Z",
+   "score": 87.37
+  },
+  {
+   "sha": "611cf7bbfc35",
+   "tokens": 281,
+   "heartbeats": 2929,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:32:33Z",
+   "score": 87.5
+  },
+  {
+   "sha": "ac735b90222f",
+   "tokens": 277,
+   "heartbeats": 200009,
+   "ok": false,
+   "error": "1293:19: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached Note: Use `set_option maxHeartbeats <num>` to set the limit. Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:33:20Z"
+  },
+  {
+   "sha": "3a500dcb4ad1",
+   "tokens": 276,
+   "heartbeats": 2777,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:47:53Z",
+   "score": 87.93
+  },
+  {
+   "sha": "3a500dcb4ad1",
+   "tokens": 276,
+   "heartbeats": 2777,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:49:27Z"
+  },
+  {
+   "sha": "3a500dcb4ad1",
+   "tokens": 276,
+   "heartbeats": 2777,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r9",
+   "t": "2026-10-14T11:58:48Z"
+  },
+  {
+   "sha": "60234927dae2",
+   "tokens": 276,
+   "heartbeats": 1449,
+   "ok": false,
+   "error": "1284:87: Application type mismatch: The argument g has type ↥(BBF_Code 𝔽q β ?m.140) but is expected to have type OracleFunction 𝔽q β ⟨↑i, ⋯⟩ in the application fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g",
+   "run_id": "wuclean-hx-solab1-r9",
+   "t": "2026-10-14T11:58:58Z"
+  },
+  {
+   "sha": "e28fb76cc8db",
+   "tokens": 294,
+   "heartbeats": 3478,
+   "ok": false,
+   "error": "1293:4: Type mismatch: After simplification, term have this := Exists.intro x ⟨rfl, (mem_filter.mp hx).right⟩; this has type iteratedQuotientMap 𝔽q β h_ℓ_add_R_rate i steps h_i_add_steps x ∈ fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g but is expected to have type (⟨Polynomial.eval (↑x) (",
+   "run_id": "wuclean-hx-solab1-r9",
+   "t": "2026-10-14T11:59:04Z"
+  },
+  {
+   "sha": "4ac6ff1ebbed",
+   "tokens": 276,
+   "heartbeats": 2782,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r9",
+   "t": "2026-10-14T11:59:17Z"
+  },
+  {
+   "sha": "be4613626dc3",
+   "tokens": 277,
+   "heartbeats": 2775,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r9",
+   "t": "2026-10-14T11:59:30Z"
+  },
+  {
+   "sha": "3aaf52a39d60",
+   "tokens": 305,
+   "heartbeats": 2853,
+   "ok": false,
+   "error": "1288:4: Type mismatch: After simplification, term hd has type @Eq ℕ (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g).ncard (sInf {n | ∃ g, (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f ↑g).ncard = n}) but is expected to have type @Eq ℕ (fiberwiseDisagreementSet 𝔽q β i steps h_i_add",
+   "run_id": "wuclean-hx-solab1-r9",
+   "t": "2026-10-14T12:00:54Z"
+  },
+  {
+   "sha": "3a500dcb4ad1",
+   "tokens": 276,
+   "heartbeats": 2777,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:17:21Z"
+  },
+  {
+   "sha": "ded07a363e88",
+   "tokens": 277,
+   "heartbeats": 2725,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:17:34Z",
+   "score": 88.01
+  },
+  {
+   "sha": "d62850881fb8",
+   "tokens": 276,
+   "heartbeats": 2786,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:18:13Z"
+  },
+  {
+   "sha": "49a33ffef28e",
+   "tokens": 279,
+   "heartbeats": 3030,
+   "ok": false,
+   "error": "1305:90: Application type mismatch: The argument ENat.coe_lt_coe.mpr hn has type ↑(2 * Δ₀(f, g)) < ↑(BBF_CodeDistance ℓ 𝓡 i.castSucc) but is expected to have type ?m.438 * ↑Δ₀(f, g) < ?m.443 in the application LE.le.trans_lt (_root_.mul_le_mul_right (distFromCode_le_dist_to_mem f g hg) ?m.438) (ENat",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:18:19Z"
+  },
+  {
+   "sha": "2e01e54e9fd5",
+   "tokens": 281,
+   "heartbeats": 2812,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:18:39Z"
+  },
+  {
+   "sha": "e88443235e12",
+   "tokens": 260,
+   "heartbeats": 2616,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:19:28Z",
+   "score": 88.63
+  },
+  {
+   "sha": "b90e84ab03db",
+   "tokens": 277,
+   "heartbeats": 2276,
+   "ok": false,
+   "error": "1292:11: don't know how to synthesize implicit argument `b` @And.intro ((⟨Polyno … [hypotheses omitted] ⊢ Prop",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:20:00Z"
+  },
+  {
+   "sha": "30877e0f055b",
+   "tokens": 286,
+   "heartbeats": 3268,
+   "ok": false,
+   "error": "1294:19: Invalid `⟨...⟩` notation: The expected type Quot.lift (fun l => (⟨Polynomial.eval (↑x) (intermediateNormVpoly 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨steps, ⋯⟩), ⋯⟩, ⟨∑ x_1, 2 ^ ↑x_1 * if ((sDomain_basis 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⋯).repr x) ⟨↑x_1, ⋯⟩ = 0 then 0 else 1, ⋯⟩) ∈ l) ⋯ ((fiberwiseDisagree",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:20:07Z"
+  },
+  {
+   "sha": "9118db1d7fa3",
+   "tokens": 261,
+   "heartbeats": 2766,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:21:03Z"
+  },
+  {
+   "sha": "1c7a7f04f414",
+   "tokens": 262,
+   "heartbeats": 2626,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:21:17Z"
+  },
+  {
+   "sha": "101da68a5ca6",
+   "tokens": 262,
+   "heartbeats": 2651,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:21:30Z"
+  },
+  {
+   "sha": "eb254c348b60",
+   "tokens": 260,
+   "heartbeats": 2618,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:21:44Z"
+  },
+  {
+   "sha": "343ac3b0dd72",
+   "tokens": 264,
+   "heartbeats": 3148,
+   "ok": false,
+   "error": "1294:10: Invalid `⟨...⟩` notation: The expected type Quot.lift (fun l => (⟨Polynomial.eval (↑x) (intermediateNormVpoly 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨steps, ⋯⟩), ⋯⟩, ⟨∑ x_1, 2 ^ ↑x_1 * if ((sDomain_basis 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⋯).repr x) ⟨↑x_1, ⋯⟩ = 0 then 0 else 1, ⋯⟩) ∈ l) ⋯ ((fiberwiseDisagree",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:21:51Z"
+  },
+  {
+   "sha": "bc89ea5d2a06",
+   "tokens": 263,
+   "heartbeats": 2577,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:22:16Z",
+   "score": 88.64
+  },
+  {
+   "sha": "e1fe2a23358b",
+   "tokens": 259,
+   "heartbeats": 2997,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:23:06Z"
+  },
+  {
+   "sha": "fe480c4d3a7f",
+   "tokens": 258,
+   "heartbeats": 2558,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:24:20Z",
+   "score": 88.79
+  },
+  {
+   "sha": "e83f432b6774",
+   "tokens": 254,
+   "heartbeats": 1938,
+   "ok": false,
+   "error": "1296:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern sInf  … [hypotheses omitted] ⊢ 2 * Δ₀(f, g) < BBF_CodeDistance ℓ 𝓡 ⟨↑i, ⋯⟩",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:25:31Z"
+  },
+  {
+   "sha": "dbb00fc9b522",
+   "tokens": 257,
+   "heartbeats": 2555,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:25:51Z",
+   "score": 88.82
+  },
+  {
+   "sha": "bfbc753b802a",
+   "tokens": 255,
+   "heartbeats": 2235,
+   "ok": false,
+   "error": "1298:46: Application type mismatch: The argument hh has type 2 * (sInf ((fun a => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f ↑a).ncard) '' Set.univ) * 2 ^ steps) ≤ (2 ^ (ℓ + 𝓡 - (↑i + steps)) - 2 ^ (ℓ - (↑i + steps))) * 2 ^ steps but is expected to have type 2 * ((bad g).ncard * 2 ^ step",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:26:40Z"
+  },
+  {
+   "sha": "2daaf7f96699",
+   "tokens": 256,
+   "heartbeats": 1560,
+   "ok": false,
+   "error": "1288:4: Tactic `apply` failed: could not unify the conclusion of `card_le_card_o … [hypotheses omitted] ⊢ Δ₀(f, g) ≤ size g * #univ",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:26:53Z"
+  },
+  {
+   "sha": "fac571e3b62d",
+   "tokens": 256,
+   "heartbeats": 2514,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:27:16Z",
+   "score": 88.93
+  },
+  {
+   "sha": "0d993d68b49d",
+   "tokens": 259,
+   "heartbeats": 2546,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:27:54Z"
+  },
+  {
+   "sha": "2c41ae1b2356",
+   "tokens": 230,
+   "heartbeats": 2367,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:29:05Z",
+   "score": 89.83
+  },
+  {
+   "sha": "98ff8e0d3121",
+   "tokens": 229,
+   "heartbeats": 2078,
+   "ok": false,
+   "error": "1296:2: Tactic `apply` failed: could not unify the conclusion of `card_le_card_o … [hypotheses omitted] ⊢ Δ₀(f, g) ≤ (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g).ncard * #univ",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:29:57Z"
+  },
+  {
+   "sha": "9bb8d9cbfc84",
+   "tokens": 231,
+   "heartbeats": 2366,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:30:10Z"
+  },
+  {
+   "sha": "1639ec3d8aa4",
+   "tokens": 230,
+   "heartbeats": 2391,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:30:23Z"
+  },
+  {
+   "sha": "3f285181a249",
+   "tokens": 229,
+   "heartbeats": 2853,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:30:37Z"
+  },
+  {
+   "sha": "748c8b1345d7",
+   "tokens": 219,
+   "heartbeats": 2844,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:54:31Z"
+  },
+  {
+   "sha": "f78b9a19fda0",
+   "tokens": 221,
+   "heartbeats": 3066,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:54:44Z"
+  },
+  {
+   "sha": "30a88f32827f",
+   "tokens": 259,
+   "heartbeats": 4279,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:54:58Z"
+  },
+  {
+   "sha": "4a9e8c1026cf",
+   "tokens": 230,
+   "heartbeats": 1454,
+   "ok": false,
+   "error": "1283:87: Application type mismatch: The argument g has type ↥(BBF_Code 𝔽q β ?m.121) but is expected to have type OracleFunction 𝔽q β ⟨↑i, ⋯⟩ in the application fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:55:04Z"
+  },
+  {
+   "sha": "7cb9babccf87",
+   "tokens": 248,
+   "heartbeats": 3002,
+   "ok": false,
+   "error": "1301:2: Type mismatch: After simplification, term have this := Exists.intro x ⟨rfl, (mem_filter.mp hx).right⟩; this has type iteratedQuotientMap 𝔽q β h_ℓ_add_R_rate i steps h_i_add_steps x ∈ fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g but is expected to have type (⟨Polynomial.eval (↑x) (",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:55:11Z"
+  },
+  {
+   "sha": "8f5ed64bf613",
+   "tokens": 227,
+   "heartbeats": 2522,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:56:00Z"
+  },
+  {
+   "sha": "51ed88a77290",
+   "tokens": 226,
+   "heartbeats": 2370,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:56:13Z",
+   "score": 89.92
+  },
+  {
+   "sha": "76844f716809",
+   "tokens": 209,
+   "heartbeats": 2152,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:57:03Z",
+   "score": 90.76
+  },
+  {
+   "sha": "7631266af02b",
+   "tokens": 221,
+   "heartbeats": 2332,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:57:43Z"
+  },
+  {
+   "sha": "82d9b22af3fc",
+   "tokens": 207,
+   "heartbeats": 2151,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:58:26Z",
+   "score": 90.8
+  },
+  {
+   "sha": "587989d6a267",
+   "tokens": 203,
+   "heartbeats": 2291,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:59:04Z"
+  },
+  {
+   "sha": "c5c3242503c3",
+   "tokens": 208,
+   "heartbeats": 2151,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:59:17Z"
+  },
+  {
+   "sha": "7806f2963fea",
+   "tokens": 203,
+   "heartbeats": 200009,
+   "ok": false,
+   "error": "1280:74: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached Note: Use `set_option maxHeartbeats <num>` to set the limit. Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:59:48Z"
+  },
+  {
+   "sha": "aa0e45a54f06",
+   "tokens": 206,
+   "heartbeats": 2132,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:01Z",
+   "score": 90.87
+  },
+  {
+   "sha": "22e6a15da35d",
+   "tokens": 207,
+   "heartbeats": 1358,
+   "ok": false,
+   "error": "1287:43: Application type mismatch: The argument le_of_lt_succ (ENat.coe_lt_coe.mp h_fw_dist_lt) has type 2 * fiberwiseDistance 𝔽q β i steps h_i_add_steps f ≤ 2 ^ (ℓ + 𝓡 - ↑⟨↑i + steps, ⋯⟩) - 2 ^ (ℓ - ↑⟨↑i + steps, ⋯⟩) of sort `Prop` but is expected to have type ?m.205 of sort `Type ?u.88` in the ap",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:33Z"
+  },
+  {
+   "sha": "cdb144ea2cd1",
+   "tokens": 204,
+   "heartbeats": 2141,
+   "ok": false,
+   "error": "1295:8: omega could not prove the goal: a possible counterexample may satisfy the constraints l - m ≥ 0 k ≥ 0 j ≥ 0 2*j - l + m ≤ 0 h ≥ 0 e ≥ 0 d ≥ 0 c ≥ 0 b ≥ 0 b - d ≥ 1 b - d - e ≥ 0 b + c - e - k ≤ 0 a ≥ 0 a - b - c ≥ 1 a - k ≥ 1 where a := ↑r b := ↑ℓ c := ↑𝓡 d := ↑↑i e := ↑steps h := ↑(sInf ((f",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:40Z"
+  },
+  {
+   "sha": "a297391e333a",
+   "tokens": 205,
+   "heartbeats": 2198,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:01:18Z"
+  },
+  {
+   "sha": "c53c247c312a",
+   "tokens": 206,
+   "heartbeats": 2161,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:01:32Z"
+  },
+  {
+   "sha": "e9eac490acfe",
+   "tokens": 202,
+   "heartbeats": 2129,
+   "ok": false,
+   "error": "1284:8: Application type mismatch: The argument rfl has type ?m.147 = ?m.147 but is expected to have type 0 ∈ Set.range fun g => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f ↑g).ncard in the application Exists.intro 0 rfl",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:01:39Z"
+  },
+  {
+   "sha": "843928c97c6a",
+   "tokens": 204,
+   "heartbeats": 2110,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:02:31Z",
+   "score": 90.96
+  },
+  {
+   "sha": "1fb00f65e7d9",
+   "tokens": 201,
+   "heartbeats": 2104,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:03:09Z",
+   "score": 91.04
+  },
+  {
+   "sha": "6bd77cb76f0a",
+   "tokens": 195,
+   "heartbeats": 2098,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:03:56Z",
+   "score": 91.19
+  },
+  {
+   "sha": "bad93bd93810",
+   "tokens": 195,
+   "heartbeats": 2102,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:05:07Z"
+  },
+  {
+   "sha": "7e6af55009fe",
+   "tokens": 195,
+   "heartbeats": 2110,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:05:20Z"
+  },
+  {
+   "sha": "14aed966fda4",
+   "tokens": 194,
+   "heartbeats": 1823,
+   "ok": false,
+   "error": "1292:2: Tactic `apply` failed: could not unify the conclusion of `card_le_card_o … [hypotheses omitted] ⊢ Δ₀(f, g) ≤ (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g).ncard * #univ",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:05:27Z"
+  },
+  {
+   "sha": "4add9492e099",
+   "tokens": 195,
+   "heartbeats": 2098,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:05:48Z"
+  },
+  {
+   "sha": "a7567d838e9f",
+   "tokens": 195,
+   "heartbeats": 2101,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:06:02Z"
+  },
+  {
+   "sha": "487e78b8a66f",
+   "tokens": 195,
+   "heartbeats": 2105,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:06:16Z"
+  },
+  {
+   "sha": "c96240a18f59",
+   "tokens": 195,
+   "heartbeats": 1431,
+   "ok": false,
+   "error": "1283:87: Application type mismatch: The argument g has type ↥(BBF_Code 𝔽q β ?m.123) but is expected to have type OracleFunction 𝔽q β ⟨↑i, ⋯⟩ in the application fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:25:42Z"
+  },
+  {
+   "sha": "dab2ca748905",
+   "tokens": 195,
+   "heartbeats": 2610,
+   "ok": false,
+   "error": "1298:46: Tactic `assumption` failed … [hypotheses omitted] ⊢ (⟨Polynomial.eval (↑x) (intermediateNormVpoly 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨steps, ⋯⟩), ⋯⟩, ⟨∑ j, 2 ^ ↑j * (fun j => if ((sDomain_basis 𝔽q β h_ℓ_add_R_rate ⟨↑⟨↑i, ⋯⟩, ⋯⟩ ⋯).repr x) ⟨↑j, ⋯⟩ = 0 then 0 else 1) j, ⋯⟩).2 ∈ univ",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:25:49Z"
+  },
+  {
+   "sha": "d7792ec4bac6",
+   "tokens": 192,
+   "heartbeats": 2088,
+   "ok": false,
+   "error": "1294:8: omega could not prove the goal: a possible counterexample may satisfy the constraints l - m ≥ 0 k ≥ 0 j ≥ 0 2*j - l + m ≤ 0 h ≥ 0 e ≥ 0 d ≥ 0 c ≥ 0 b ≥ 0 b - d ≥ 1 b - d - e ≥ 0 b + c - e - k ≤ 0 a ≥ 0 a - b - c ≥ 1 a - k ≥ 1 where a := ↑r b := ↑ℓ c := ↑𝓡 d := ↑↑i e := ↑steps h := ↑(sInf (Se",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:25:56Z"
+  },
+  {
+   "sha": "e98b87005b23",
+   "tokens": 196,
+   "heartbeats": 2099,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:26:09Z"
+  },
+  {
+   "sha": "234738949a33",
+   "tokens": 194,
+   "heartbeats": 2175,
+   "ok": false,
+   "error": "1298:43: Application type mismatch: The argument True.intro has type True but is expected to have type (⟨Polynomial.eval (↑x) (intermediateNormVpoly 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨steps, ⋯⟩), ⋯⟩, ⟨∑ j, 2 ^ ↑j * (fun j => if ((sDomain_basis 𝔽q β h_ℓ_add_R_rate ⟨↑⟨↑i, ⋯⟩, ⋯⟩ ⋯).repr x) ⟨↑j, ⋯⟩ = 0 then ",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:26:16Z"
+  },
+  {
+   "sha": "0a9c944ca692",
+   "tokens": 193,
+   "heartbeats": 2911,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:27:33Z"
+  },
+  {
+   "sha": "46c453c69348",
+   "tokens": 198,
+   "heartbeats": 3112,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:07Z"
+  },
+  {
+   "sha": "9f2adde7856f",
+   "tokens": 194,
+   "heartbeats": 2125,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:20Z"
+  },
+  {
+   "sha": "65dbf0b92a7e",
+   "tokens": 197,
+   "heartbeats": 3112,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:33Z"
+  },
+  {
+   "sha": "692435155f2c",
+   "tokens": 200,
+   "heartbeats": 2267,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:46Z"
+  },
+  {
+   "sha": "b748d10dba5f",
+   "tokens": 203,
+   "heartbeats": 4289,
+   "ok": false,
+   "error": "1297:2: Type mismatch: After simplification, term have this := Exists.intro x ⟨rfl, (mem_filter.mp hx).right⟩; this has type @Membership.mem (↥(sDomain 𝔽q β h_ℓ_add_R_rate ⟨↑i + steps, ⋯⟩)) (Set ↥(sDomain 𝔽q β h_ℓ_add_R_rate ⟨↑i + steps, ⋯⟩)) Set.instMembership (fiberwiseDisagreementSet 𝔽q β i steps",
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:41:28Z"
+  },
+  {
+   "sha": "1716ae6ee4bc",
+   "tokens": 197,
+   "heartbeats": 2109,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:41:41Z"
+  },
+  {
+   "sha": "ac0230d57a84",
+   "tokens": 194,
+   "heartbeats": 2092,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:41:54Z",
+   "score": 91.22
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wuclean-hx-solab1-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:15:15Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:52:17Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:25:40Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r5",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:04:46Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r6",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:41:36Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r7",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:19:29Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:43:16Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r9",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T11:53:30Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r10",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:13:44Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r11",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:50:29Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r12",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:21:36Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:38:16Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  }
+ ],
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 12,
+    "d_score": 0.08,
+    "d_tokens": -3,
+    "d_heartbeats": -10,
+    "diff": "-    let Q := qMap_total_fiber 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) (i.castLE (Nat.le_of_lt (Nat.lt_of_add_right_lt h_ℓ_add_R_rate))) steps\n+    let Q := qMap_total_fiber 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) (i.castLE (Nat.le_of_add_right_le h_ℓ_add_R_rate.le)) steps\n-    have hh := (Nat.mul_le_mul_left 2 hb).trans\n-      (by simpa only [←mul_assoc] using Nat.mul_le_mul_right (2 ^ steps) hf)\n+    have hh := Nat.mul_le_mul_right (2 ^ steps) hf\n+    rw [mul_assoc] at hh\n+    have hh := (Nat.mul_le_mul_left 2 hb).trans hh"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 15,
+    "d_score": 0.03,
+    "d_tokens": -1,
+    "d_heartbeats": 1,
+    "diff": "-    ⟨_, 0, Set.mem_univ _, rfl⟩\n+    ⟨_, 0, trivial, rfl⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 16,
+    "d_score": 0.02,
+    "d_tokens": 0,
+    "d_heartbeats": -10,
+    "diff": "-    have hf := Nat.le_of_lt_succ (WithTop.coe_lt_coe.1 h_fw_dist_lt)\n+    have hf := Nat.le_of_lt_succ (ENat.coe_lt_coe.1 h_fw_dist_lt)\n-  exact (mul_le_mul_left' (Code.distFromCode_le_dist_to_mem f g hg) 2).trans_lt (WithTop.coe_lt_coe.2 hn)\n+  exact (mul_le_mul_left' (Code.distFromCode_le_dist_to_mem f g hg) 2).trans_lt (ENat.coe_lt_coe.2 hn)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 19,
+    "d_score": 0.06,
+    "d_tokens": -2,
+    "d_heartbeats": -11,
+    "diff": "-    have hf := Nat.le_of_lt_succ (ENat.coe_lt_coe.1 h_fw_dist_lt)\n-    have hh := Nat.mul_le_mul_right (2 ^ steps) hf\n-    rw [mul_assoc] at hh\n+    have hh := Nat.mul_le_mul_right (2 ^ steps) (Nat.le_of_lt_succ (ENat.coe_lt_coe.1 h_fw_dist_lt))\n+    rw [Nat.mul_assoc] at hh"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 20,
+    "d_score": 0.06,
+    "d_tokens": -2,
+    "d_heartbeats": -5,
+    "diff": "-  unfold hammingClose"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 21,
+    "d_score": 0.09,
+    "d_tokens": -4,
+    "d_heartbeats": -1,
+    "diff": "-  unfold fiberwiseClose at h_fw_dist_lt"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r7",
+    "check": 3,
+    "d_score": 0.33,
+    "d_tokens": -11,
+    "d_heartbeats": -35,
+    "diff": "-    let y := iteratedQuotientMap 𝔽q β h_ℓ_add_R_rate i steps h_i_add_steps x\n-    refine ⟨(y, _), ?_, (is_fiber_iff_generates_quotient_point 𝔽q β i steps h_i_add_steps x y).mp rfl⟩\n+    refine ⟨(_, _), ?_, (is_fiber_iff_generates_quotient_point 𝔽q β i steps h_i_add_steps x _).mp rfl⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r7",
+    "check": 4,
+    "d_score": 0.16,
+    "d_tokens": -7,
+    "d_heartbeats": -1,
+    "diff": "-    let Q := qMap_total_fiber 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) (i.castLE (Nat.le_of_add_right_le h_ℓ_add_R_rate.le)) steps\n-      (Nat.lt_add_of_pos_right_of_le _ _ _ h_i_add_steps)\n-    apply Finset.card_le_card_of_surjOn (fun p => Q p.1 p.2)\n+    apply Finset.card_le_card_of_surjOn (fun p => (qMap_total_fiber 𝔽q β (i.castLE (Nat.le_of_add_right_le h_ℓ_add_R_rate.le)) steps\n+      (Nat.lt_add_of_pos_right_of_le _ _ _ h_i_add_steps)) p.1 p.2)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r7",
+    "check": 5,
+    "d_score": 0.24,
+    "d_tokens": -6,
+    "d_heartbeats": -48,
+    "diff": "-    apply Finset.card_le_card_of_surjOn (fun p => (qMap_total_fiber 𝔽q β (i.castLE (Nat.le_of_add_right_le h_ℓ_add_R_rate.le)) steps\n+    apply Finset.card_le_card_of_surjOn (fun p => (qMap_total_fiber 𝔽q β _ steps"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r7",
+    "check": 6,
+    "d_score": 0.07,
+    "d_tokens": -15,
+    "d_heartbeats": 130,
+    "diff": "-    let Y := fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g\n-    change H.card ≤ Y.ncard * 2 ^ steps\n-    rw [Set.ncard_eq_toFinset_card', ←Finset.card_fin (2 ^ steps), ←Finset.card_product]\n+    change H.card ≤ _\n+    simp_rw [Set.ncard_eq_toFinset_card', ←Finset.card_fin (2 ^ steps), ←Finset.card_product]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r7",
+    "check": 8,
+    "d_score": 0.08,
+    "d_tokens": -5,
+    "d_heartbeats": 13,
+    "diff": "-    (fun g : BBF_Code 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) i.castSucc => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard) '' Set.univ)\n+    (fun g : BBF_Code 𝔽q β i.castSucc => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard) '' Set.univ)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r7",
+    "check": 9,
+    "d_score": 0.16,
+    "d_tokens": -13,
+    "d_heartbeats": 69,
+    "diff": "-    let H := Finset.univ.filter (fun x => f x ≠ g x)\n-    change H.card ≤ _\n+    change Finset.card _ ≤ _"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r7",
+    "check": 11,
+    "d_score": 0.03,
+    "d_tokens": 2,
+    "d_heartbeats": -39,
+    "diff": "-    (fun g : BBF_Code 𝔽q β i.castSucc => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard) '' Set.univ)\n+    (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard) '' Set.univ)\n-    change Finset.card _ ≤ _\n+    change Finset.card _ ≤ _ * _"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r7",
+    "check": 12,
+    "d_score": 0.13,
+    "d_tokens": -5,
+    "d_heartbeats": -6,
+    "diff": "-    change Finset.card _ ≤ _ * _\n+    change Finset.card _ ≤ _\n-    apply Finset.card_le_card_of_surjOn (fun p => (qMap_total_fiber 𝔽q β _ steps\n-      (Nat.lt_add_of_pos_right_of_le _ _ _ h_i_add_steps)) p.1 p.2)\n+    apply Finset.card_le_card_of_surjOn (fun p => qMap_total_fiber 𝔽q β _ steps\n+      (Nat.lt_add_of_pos_right_of_le _ _ _ h_i_add_steps) p.1 p.2)\n-      Nat.sub_add_cancel (Nat.le_sub_of_add_le' (h_i_add_steps.trans (Nat.le_add_right ℓ 𝓡))),\n+      Nat.sub_add_cancel (Nat.le_sub_of_add_le' (h_i_add_steps.trans (Nat.le_add_right ..))),"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r8",
+    "check": 1,
+    "d_score": 0.43,
+    "d_tokens": -5,
+    "d_heartbeats": -152,
+    "diff": "-    change Finset.card _ ≤ _"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 2,
+    "d_score": 0.08,
+    "d_tokens": 1,
+    "d_heartbeats": -52,
+    "diff": "-    simp_rw [Set.ncard_eq_toFinset_card', ←Finset.card_fin (2 ^ steps), ←Finset.card_product]\n+    simp only [Set.ncard_eq_toFinset_card', ←Finset.card_fin (2 ^ steps), ←Finset.card_product]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 6,
+    "d_score": 0.62,
+    "d_tokens": -17,
+    "d_heartbeats": -109,
+    "diff": "-  have hn : 2 * hammingDist f g < BBF_CodeDistance ℓ 𝓡 i.castSucc := by\n-    have hh := Nat.mul_le_mul_right (2 ^ steps) (Nat.le_of_lt_succ (ENat.coe_lt_coe.1 h_fw_dist_lt))\n-    rw [Nat.mul_assoc] at hh\n-    have hh := (Nat.mul_le_mul_left 2 hb).trans hh\n-    dsimp [BBF_CodeDistance] at hh ⊢\n-    rw [Nat.sub_mul, ←Nat.pow_add, ←Nat.pow_add] at hh\n-    simp only [Nat.sub_add_eq,\n-      Nat.sub_add_cancel (Nat.le_sub_of_add_le' (h_i_add_steps.trans (Nat.le_add_right ..))),\n-      Nat.sub_add_cancel (Nat.le_sub_of_add_le' h_i_add_steps)] at hh\n-    exact Nat.lt_succ_of_le hh\n-  exact (mul_le_mul_left' (Code.distFromCode_le_dist_to_mem f g hg) 2).trans_lt (ENat.coe_lt_coe.2 hn)\n+  apply (mul_l"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 14,
+    "d_score": 0.01,
+    "d_tokens": 3,
+    "d_heartbeats": -39,
+    "diff": "-  let d := fiberwiseDistance 𝔽q β i steps h_i_add_steps f\n+  unfold fiberwiseClose fiberwiseDistance at h_fw_dist_lt\n-  have hb : hammingDist f g ≤ d * 2 ^ steps := by\n-    rw [show d = _ from hd.symm]\n+  rw [←hd] at h_fw_dist_lt\n+  have hb : hammingDist f g ≤ (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g).ncard * 2 ^ steps := by"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 16,
+    "d_score": 0.15,
+    "d_tokens": -5,
+    "d_heartbeats": -19,
+    "diff": "-  unfold fiberwiseClose fiberwiseDistance at h_fw_dist_lt\n-  rw [←hd] at h_fw_dist_lt\n-  rw [Nat.mul_assoc] at hh\n+  unfold fiberwiseDistance at hh\n+  rw [←hd, Nat.mul_assoc] at hh"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 18,
+    "d_score": 0.03,
+    "d_tokens": -1,
+    "d_heartbeats": -3,
+    "diff": "-  unfold fiberwiseDistance at hh\n-  rw [←hd, Nat.mul_assoc] at hh\n+  simp only [fiberwiseDistance, ←hd, Nat.mul_assoc] at hh"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 21,
+    "d_score": 0.11,
+    "d_tokens": -1,
+    "d_heartbeats": -41,
+    "diff": "+  let bad := fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f\n-    (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard) '' Set.univ)\n+    (fun g : BBF_Code 𝔽q β _ => (bad g.1).ncard) '' Set.univ)\n-  have hb : hammingDist f g ≤ (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g).ncard * 2 ^ steps := by\n+  have hb : hammingDist f g ≤ (bad g).ncard * 2 ^ steps := by\n-  simp only [fiberwiseDistance, ←hd, Nat.mul_assoc] at hh\n+  unfold fiberwiseDistance at hh\n+  rw [←hd, Nat.mul_assoc] at hh"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 23,
+    "d_score": 0.9,
+    "d_tokens": -26,
+    "d_heartbeats": -147,
+    "diff": "-  let bad := fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f\n-    (fun g : BBF_Code 𝔽q β _ => (bad g.1).ncard) '' Set.univ)\n+    (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard) '' Set.univ)\n-  have hb : hammingDist f g ≤ (bad g).ncard * 2 ^ steps := by\n-    simp only [Set.ncard_eq_toFinset_card', ←Finset.card_fin (2 ^ steps), ←Finset.card_product]\n-    apply Finset.card_le_card_of_surjOn (fun p => qMap_total_fiber 𝔽q β _ steps\n-      (Nat.lt_add_of_pos_right_of_le _ _ _ h_i_add_steps) p.1 p.2)\n-    intro x hx\n-    refine ⟨(_, _), ?_, (is_fiber_iff_generates_quotient_point 𝔽q β i steps h_i_add_steps x _).mp rfl⟩\n-    exact Finset.mem_produ"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 7,
+    "d_score": 0.09,
+    "d_tokens": -4,
+    "d_heartbeats": 3,
+    "diff": "-  simp only [Nat.sub_add_eq,\n-    Nat.sub_add_cancel (Nat.le_sub_of_add_le' (h_i_add_steps.trans (Nat.le_add_right ..))),\n-    Nat.sub_add_cancel (Nat.le_sub_of_add_le' h_i_add_steps)] at hh\n+  simp only [←Nat.sub_add_comm (h_i_add_steps.trans (Nat.le_add_right ..)),\n+    ←Nat.sub_add_comm h_i_add_steps, Nat.add_sub_add_right] at hh"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 8,
+    "d_score": 0.84,
+    "d_tokens": -17,
+    "d_heartbeats": -218,
+    "diff": "-  simp only [fiberwiseDistance, ←hd, Nat.mul_assoc] at hh\n-  dsimp [BBF_CodeDistance] at hh ⊢\n-  rw [Nat.sub_mul, ←Nat.pow_add, ←Nat.pow_add] at hh\n-  simp only [←Nat.sub_add_comm (h_i_add_steps.trans (Nat.le_add_right ..)),\n+  simp only [fiberwiseDistance, ←hd, Nat.mul_assoc, BBF_CodeDistance, Nat.sub_mul,\n+    ←Nat.pow_add, ←Nat.sub_add_comm (h_i_add_steps.trans (Nat.le_add_right ..)),"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 10,
+    "d_score": 0.04,
+    "d_tokens": -2,
+    "d_heartbeats": -1,
+    "diff": "-  simp only [fiberwiseDistance, ←hd, Nat.mul_assoc, BBF_CodeDistance, Nat.sub_mul,\n+  simp only [fiberwiseDistance, ←hd, Nat.mul_assoc, Nat.sub_mul,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 14,
+    "d_score": 0.07,
+    "d_tokens": -1,
+    "d_heartbeats": -19,
+    "diff": "-    ⟨_, 0, trivial, rfl⟩\n+    (Set.image_nonempty.mpr ⟨0, trivial⟩)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 20,
+    "d_score": 0.09,
+    "d_tokens": -2,
+    "d_heartbeats": -22,
+    "diff": "-  obtain ⟨⟨g, hg⟩, _, hd⟩ := Nat.sInf_mem (s :=\n-    (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard) '' Set.univ)\n-    (Set.image_nonempty.mpr ⟨0, trivial⟩)\n+  obtain ⟨⟨g, hg⟩, hd⟩ := Nat.sInf_mem (s :=\n+    (Set.range fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard))\n+    ⟨_, 0, rfl⟩\n-  simp only [fiberwiseDistance, ←hd, Nat.mul_assoc, Nat.sub_mul,\n+  simp only [fiberwiseDistance, Set.image_univ, ←hd, Nat.mul_assoc, Nat.sub_mul,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 21,
+    "d_score": 0.08,
+    "d_tokens": -3,
+    "d_heartbeats": -6,
+    "diff": "-    ⟨_, 0, rfl⟩\n+    (Set.range_nonempty _)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 22,
+    "d_score": 0.15,
+    "d_tokens": -6,
+    "d_heartbeats": -6,
+    "diff": "-  obtain ⟨⟨g, hg⟩, hd⟩ := Nat.sInf_mem (s :=\n-    (Set.range fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard))\n-    (Set.range_nonempty _)\n+  obtain ⟨⟨g, hg⟩, hd⟩ := Nat.sInf_mem (Set.range_nonempty\n+    (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard))"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r13",
+    "check": 3,
+    "d_score": 0.03,
+    "d_tokens": -1,
+    "d_heartbeats": -6,
+    "diff": "-  refine (Nat.mul_le_mul_left 2 ?_).trans hh\n+  apply le_trans _ hh\n+  apply Nat.mul_le_mul_left 2"
+   }
+  ]
+ },
+ "api_spend": 2.579028,
+ "profile_cache": {
+  "83c99720ec26": {
+   "ok": true,
+   "total": 2982,
+   "floor": null,
+   "reference": 16006,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "unfold fiberwiseClose at h_fw_dist_lt",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": null
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "let d := fiberwiseDistance 𝔽q β i steps h_i_add_steps f",
+     "heartbeats": null
+    },
+    {
+     "lines": "10-12",
+     "depth_indent": 2,
+     "text": "obtain ⟨⟨g, hg⟩, _, hd⟩ := Nat.sInf_mem (s := (fun g : BBF_Code 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_ra",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-26",
+     "depth_indent": 2,
+     "text": "have hb : hammingDist f g ≤ d * 2 ^ steps := by rw [show d = _ from hd.symm] let H := Finset.univ.fi",
+     "heartbeats": null
+    },
+    {
+     "lines": "27-36",
+     "depth_indent": 2,
+     "text": "have hn : 2 * hammingDist f g < BBF_CodeDistance ℓ 𝓡 i.castSucc := by have hf := Nat.le_of_lt_succ (",
+     "heartbeats": null
+    },
+    {
+     "lines": "37-37",
+     "depth_indent": 2,
+     "text": "unfold hammingClose",
+     "heartbeats": null
+    },
+    {
+     "lines": "38-38",
+     "depth_indent": 2,
+     "text": "exact (mul_le_mul_left' (Code.distFromCode_le_dist_to_mem f g hg) 2).trans_lt (WithTop.coe_lt_coe.2 ",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "1dbdfccaf2d8": {
+   "ok": true,
+   "total": 2846,
+   "floor": null,
+   "reference": 16006,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "let d := fiberwiseDistance 𝔽q β i steps h_i_add_steps f",
+     "heartbeats": null
+    },
+    {
+     "lines": "9-11",
+     "depth_indent": 2,
+     "text": "obtain ⟨⟨g, hg⟩, _, hd⟩ := Nat.sInf_mem (s := (fun g : BBF_Code 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_ra",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-25",
+     "depth_indent": 2,
+     "text": "have hb : hammingDist f g ≤ d * 2 ^ steps := by rw [show d = _ from hd.symm] let H := Finset.univ.fi",
+     "heartbeats": null
+    },
+    {
+     "lines": "26-35",
+     "depth_indent": 2,
+     "text": "have hn : 2 * hammingDist f g < BBF_CodeDistance ℓ 𝓡 i.castSucc := by have hh := Nat.mul_le_mul_righ",
+     "heartbeats": null
+    },
+    {
+     "lines": "36-36",
+     "depth_indent": 2,
+     "text": "exact (mul_le_mul_left' (Code.distFromCode_le_dist_to_mem f g hg) 2).trans_lt (ENat.coe_lt_coe.2 hn)",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "611cf7bbfc35": {
+   "ok": true,
+   "total": 2929,
+   "floor": null,
+   "reference": 16006,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "let d := fiberwiseDistance 𝔽q β i steps h_i_add_steps f",
+     "heartbeats": null
+    },
+    {
+     "lines": "9-11",
+     "depth_indent": 2,
+     "text": "obtain ⟨⟨g, hg⟩, _, hd⟩ := Nat.sInf_mem (s := (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet ",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-21",
+     "depth_indent": 2,
+     "text": "have hb : hammingDist f g ≤ d * 2 ^ steps := by rw [show d = _ from hd.symm] change Finset.card _ ≤ ",
+     "heartbeats": null
+    },
+    {
+     "lines": "22-31",
+     "depth_indent": 2,
+     "text": "have hn : 2 * hammingDist f g < BBF_CodeDistance ℓ 𝓡 i.castSucc := by have hh := Nat.mul_le_mul_righ",
+     "heartbeats": null
+    },
+    {
+     "lines": "32-32",
+     "depth_indent": 2,
+     "text": "exact (mul_le_mul_left' (Code.distFromCode_le_dist_to_mem f g hg) 2).trans_lt (ENat.coe_lt_coe.2 hn)",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "3a500dcb4ad1": {
+   "ok": true,
+   "total": 2777,
+   "floor": null,
+   "reference": 16006,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "let d := fiberwiseDistance 𝔽q β i steps h_i_add_steps f",
+     "heartbeats": null
+    },
+    {
+     "lines": "9-11",
+     "depth_indent": 2,
+     "text": "obtain ⟨⟨g, hg⟩, _, hd⟩ := Nat.sInf_mem (s := (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet ",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-20",
+     "depth_indent": 2,
+     "text": "have hb : hammingDist f g ≤ d * 2 ^ steps := by rw [show d = _ from hd.symm] simp_rw [Set.ncard_eq_t",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-30",
+     "depth_indent": 2,
+     "text": "have hn : 2 * hammingDist f g < BBF_CodeDistance ℓ 𝓡 i.castSucc := by have hh := Nat.mul_le_mul_righ",
+     "heartbeats": null
+    },
+    {
+     "lines": "31-31",
+     "depth_indent": 2,
+     "text": "exact (mul_le_mul_left' (Code.distFromCode_le_dist_to_mem f g hg) 2).trans_lt (ENat.coe_lt_coe.2 hn)",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "2c41ae1b2356": {
+   "ok": true,
+   "total": 2367,
+   "floor": null,
+   "reference": 16006,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-10",
+     "depth_indent": 2,
+     "text": "obtain ⟨⟨g, hg⟩, _, hd⟩ := Nat.sInf_mem (s := (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet ",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "apply (mul_le_mul_left' (Code.distFromCode_le_dist_to_mem f g hg) 2).trans_lt",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "apply ENat.coe_lt_coe.2",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "have hh := Nat.mul_le_mul_right (2 ^ steps) (Nat.le_of_lt_succ (ENat.coe_lt_coe.1 h_fw_dist_lt))",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "simp only [fiberwiseDistance, ←hd, Nat.mul_assoc] at hh",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "dsimp [BBF_CodeDistance] at hh ⊢",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "rw [Nat.sub_mul, ←Nat.pow_add, ←Nat.pow_add] at hh",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-19",
+     "depth_indent": 2,
+     "text": "simp only [Nat.sub_add_eq, Nat.sub_add_cancel (Nat.le_sub_of_add_le' (h_i_add_steps.trans (Nat.le_ad",
+     "heartbeats": null
+    },
+    {
+     "lines": "20-20",
+     "depth_indent": 2,
+     "text": "apply Nat.lt_succ_of_le",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "refine (Nat.mul_le_mul_left 2 ?_).trans hh",
+     "heartbeats": null
+    },
+    {
+     "lines": "22-22",
+     "depth_indent": 2,
+     "text": "simp only [Set.ncard_eq_toFinset_card', ←Finset.card_fin (2 ^ steps), ←Finset.card_product]",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "6bd77cb76f0a": {
+   "ok": true,
+   "total": 2098,
+   "floor": null,
+   "reference": 16006,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-9",
+     "depth_indent": 2,
+     "text": "obtain ⟨⟨g, hg⟩, hd⟩ := Nat.sInf_mem (Set.range_nonempty (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisag",
+     "heartbeats": null
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "apply (mul_le_mul_left' (Code.distFromCode_le_dist_to_mem f g hg) 2).trans_lt",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "apply ENat.coe_lt_coe.2",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "have hh := Nat.mul_le_mul_right (2 ^ steps) (Nat.le_of_lt_succ (ENat.coe_lt_coe.1 h_fw_dist_lt))",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-15",
+     "depth_indent": 2,
+     "text": "simp only [fiberwiseDistance, Set.image_univ, ←hd, Nat.mul_assoc, Nat.sub_mul, ←Nat.pow_add, ←Nat.su",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "apply Nat.lt_succ_of_le",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "refine (Nat.mul_le_mul_left 2 ?_).trans hh",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "simp only [Set.ncard_eq_toFinset_card', ←Finset.card_fin (2 ^ steps), ←Finset.card_product]",
+     "heartbeats": null
+    },
+    {
+     "lines": "19-20",
+     "depth_indent": 2,
+     "text": "apply Finset.card_le_card_of_surjOn (fun p => qMap_total_fiber 𝔽q β _ steps (Nat.lt_add_of_pos_right",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "intro x hx",
+     "heartbeats": null
+    },
+    {
+     "lines": "22-22",
+     "depth_indent": 2,
+     "text": "refine ⟨(_, _), ?_, (is_fiber_iff_generates_quotient_point 𝔽q β i steps h_i_add_steps x _).mp rfl⟩",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "budget_milestones": {
+  "2": {
+   "spend": 2.00456,
+   "best": 89.83,
+   "run_id": "wuclean-hx-solab1-r10",
+   "turn": 30,
+   "t": "2026-10-14T12:29:47Z"
+  }
+ }
+}

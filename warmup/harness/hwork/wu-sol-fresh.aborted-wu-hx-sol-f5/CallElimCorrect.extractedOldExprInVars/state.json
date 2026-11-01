@@ -1,0 +1,13 @@
+{
+ "problem": "CallElimCorrect.extractedOldExprInVars",
+ "best": {
+  "score": 33.33,
+  "proof": null,
+  "tokens": 222,
+  "heartbeats": null
+ },
+ "attempts": [],
+ "runs": [],
+ "api_spend": 1.005832,
+ "lineage": "fresh"
+}

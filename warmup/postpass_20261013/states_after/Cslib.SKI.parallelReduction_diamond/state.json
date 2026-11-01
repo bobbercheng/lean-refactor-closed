@@ -1,0 +1,737 @@
+{
+ "problem": "Cslib.SKI.parallelReduction_diamond",
+ "best": {
+  "score": 76.91,
+  "proof": "theorem parallelReduction_diamond : Diamond ParallelReduction := by\n  intro a b c h₁ h₂\n  induction h₁ generalizing c\n  case refl => exact ⟨_, h₂, .refl _⟩\n  all_goals cases h₂\n  case par.par ha hb iha ihb d e hc hd =>\n    obtain ⟨_, hx⟩ := iha hc\n    obtain ⟨_, hy⟩ := ihb hd\n    exact ⟨_, .par hx.1 hy.1, .par hx.2 hy.2⟩\n  all_goals\n    try\n      constructor\n      constructor <;> constructor <;> assumption\n  all_goals\n    first\n    | cases I_irreducible _ ‹_›\n    | obtain ⟨_, h, rfl⟩ := Ka_irreducible _ _ ‹_›\n    | obtain ⟨_, _, h, h', rfl⟩ := Sab_irreducible _ _ _ ‹_›\n    constructor\n    constructor\n    all_goals\n      try\n        repeat' apply ParallelReduction.par\n        all_goals assumption\n    all_goals constructor",
+  "tokens": 132,
+  "heartbeats": 524,
+  "L": 67.57,
+  "H": 63.15,
+  "Z": 100.0,
+  "compat": {
+   "v4.33.0-rc2": true,
+   "v4.32.0": true,
+   "v4.31.0": true,
+   "v4.30.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "2c434b8df674",
+   "tokens": 268,
+   "heartbeats": 465,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:22:12Z",
+   "score": 67.15
+  },
+  {
+   "sha": "85b8c8d8a3f0",
+   "tokens": 169,
+   "heartbeats": 561,
+   "ok": false,
+   "error": "171:11: don't know how to synthesize implicit argument `b` @And.intro (a✝ ⭢ₚ ?m.935) ((I ⬝ b'✝) ⭢ₚ ?m.935) ?m.938 ?m.939 context: a b a✝ b'✝ : SKI hb : a✝ ⭢ₚ b'✝ ha : I ⭢ₚ I ⊢ Prop",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:51:30Z"
+  },
+  {
+   "sha": "d0956e00f2b8",
+   "tokens": 163,
+   "heartbeats": 1233,
+   "ok": false,
+   "error": "172:20: failed",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:52:38Z"
+  },
+  {
+   "sha": "9b75c906d027",
+   "tokens": 162,
+   "heartbeats": 618,
+   "ok": false,
+   "error": "172:57: Tactic `constructor` failed: no applicable constructor found case red_S.h.right.a a b a✝ b✝ c✝ b'✝ : SKI hb : c✝ ⭢ₚ b'✝ w✝¹ w✝ : SKI hh : a✝ ⭢ₚ w✝¹ hh' : b✝ ⭢ₚ w✝ ha : (S ⬝ a✝ ⬝ b✝) ⭢ₚ S ⬝ w✝¹ ⬝ w✝ ⊢ b'✝ ⭢ₚ b✝ ⬝ c✝",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:52:39Z"
+  },
+  {
+   "sha": "c6ae23172e14",
+   "tokens": 173,
+   "heartbeats": 614,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:52:40Z",
+   "score": 71.44
+  },
+  {
+   "sha": "da5d609f6f40",
+   "tokens": 141,
+   "heartbeats": 1057,
+   "ok": false,
+   "error": "166:63: Tactic `assumption` failed c : SKI ⊢ (S ⬝ ?m.1222 ⬝ ?m.1223) ⭢ₚ ?m.1224",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:55:33Z"
+  },
+  {
+   "sha": "118102c0972e",
+   "tokens": 143,
+   "heartbeats": 707,
+   "ok": false,
+   "error": "166:63: Tactic `assumption` failed a b c : SKI ⊢ (S ⬝ ?m.1078 ⬝ ?m.1079) ⭢ₚ ?m.1080",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:55:35Z"
+  },
+  {
+   "sha": "71ec507cd955",
+   "tokens": 163,
+   "heartbeats": 782,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:56:28Z"
+  },
+  {
+   "sha": "9f85506706a7",
+   "tokens": 171,
+   "heartbeats": 624,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:56:29Z"
+  },
+  {
+   "sha": "5917798e748f",
+   "tokens": 163,
+   "heartbeats": 742,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:57:12Z"
+  },
+  {
+   "sha": "5c3bd4af5ad5",
+   "tokens": 161,
+   "heartbeats": 667,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:57:58Z"
+  },
+  {
+   "sha": "925cf353e5d1",
+   "tokens": 171,
+   "heartbeats": 776,
+   "ok": false,
+   "error": "170:4: No goals to be solved",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:58:02Z"
+  },
+  {
+   "sha": "0e633de9f4cf",
+   "tokens": 180,
+   "heartbeats": 155,
+   "ok": false,
+   "error": "164:23: Tactic `apply` failed: could not unify the conclusion of `@Join.symm` St … [hypotheses omitted] ⊢ Join ParallelReduction a✝ (a'✝ ⬝ b'✝)",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:58:35Z"
+  },
+  {
+   "sha": "e2e66a3662a3",
+   "tokens": 180,
+   "heartbeats": 578,
+   "ok": false,
+   "error": "171:11: don't know how to synthesize implicit argument `b` @And.intro ((I ⬝ b'✝) ⭢ₚ ?m.956) (a✝ ⭢ₚ ?m.956) ?m.959 ?m.960 context: a b a✝ b'✝ : SKI hb : a✝ ⭢ₚ b'✝ ha : I ⭢ₚ I ⊢ Prop",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:58:49Z"
+  },
+  {
+   "sha": "877aa3c43046",
+   "tokens": 174,
+   "heartbeats": 621,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:58:55Z"
+  },
+  {
+   "sha": "f499857c8662",
+   "tokens": 206,
+   "heartbeats": 770,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:59:39Z"
+  },
+  {
+   "sha": "e433ccc07612",
+   "tokens": 174,
+   "heartbeats": 570,
+   "ok": false,
+   "error": "168:4: no match",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:00:05Z"
+  },
+  {
+   "sha": "c6e7ba6dd890",
+   "tokens": 177,
+   "heartbeats": 615,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:00:06Z"
+  },
+  {
+   "sha": "1eb3494f1e65",
+   "tokens": 173,
+   "heartbeats": 701,
+   "ok": false,
+   "error": "171:35: Tactic `apply` failed: could not unify the conclusion of `ParallelReduct … [hypotheses omitted] ⊢ Join ParallelReduction a✝² (a'✝ ⬝ b'✝ ⬝ b'✝¹)",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:00:26Z"
+  },
+  {
+   "sha": "fb7acc38eeb6",
+   "tokens": 175,
+   "heartbeats": 1194,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:01:30Z"
+  },
+  {
+   "sha": "ddb547c629f5",
+   "tokens": 171,
+   "heartbeats": 516,
+   "ok": false,
+   "error": "165:37: unsolved goals case a a b a✝ b✝ c✝ a'✝ b'✝ : SKI ha : (S ⬝ a✝ ⬝ b✝) ⭢ₚ a'✝ hb : c✝ ⭢ₚ b'✝ ⊢ a'✝ ⭢ₚ a✝ ⬝ c✝ case a a b a✝ b✝ c✝ a'✝ b'✝ : SKI ha : (S ⬝ a✝ ⬝ b✝) ⭢ₚ a'✝ hb : c✝ ⭢ₚ b'✝ ⊢ b'✝ ⭢ₚ b✝ ⬝ c✝",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:01:42Z"
+  },
+  {
+   "sha": "ca76f34861cd",
+   "tokens": 183,
+   "heartbeats": 626,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:02:23Z"
+  },
+  {
+   "sha": "79e7918e73e7",
+   "tokens": 172,
+   "heartbeats": 271,
+   "ok": false,
+   "error": "162:8: unsolved goals case par.red_I a b a'✝ b✝ b'✝ : SKI hb : b✝ ⭢ₚ b'✝ ihb : ∀ {c : SKI}, b✝ ⭢ₚ c → Join ParallelReduction b'✝ c ha : I ⭢ₚ a'✝ iha : ∀ {c : SKI}, I ⭢ₚ c → Join ParallelReduction a'✝ c ⊢ Join ParallelReduction (a'✝ ⬝ b'✝) b✝",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:55:38Z"
+  },
+  {
+   "sha": "50064796bee5",
+   "tokens": 141,
+   "heartbeats": 565,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:55:52Z"
+  },
+  {
+   "sha": "3369720e52d8",
+   "tokens": 157,
+   "heartbeats": 543,
+   "ok": false,
+   "error": "172:4: Tactic `constructor` failed: no applicable constructor found case par.red_S.a.a a b b✝¹ … [hypotheses omitted] ⊢ a✝ ⭢ₚ S ⬝ w✝¹",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:55:53Z"
+  },
+  {
+   "sha": "0a3f4dd25be0",
+   "tokens": 132,
+   "heartbeats": 524,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:56:15Z",
+   "score": 76.91
+  },
+  {
+   "sha": "d2b478c05726",
+   "tokens": 136,
+   "heartbeats": 459,
+   "ok": false,
+   "error": "174:6: Tactic `constructor` failed: no applicable constructor found case par.red_I.refl.h.right a b b✝ b'✝ : SKI a✝¹ : b✝ ⭢ₚ b'✝ a_ih✝¹ : ∀ {c : SKI}, b✝ ⭢ₚ c → Join ParallelReduction b'✝ c a✝ : I ⭢ₚ I a_ih✝ : ∀ {c : SKI}, I ⭢ₚ c → Join ParallelReduction I c ⊢ b✝ ⭢ₚ I ⬝ b'✝",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:56:20Z"
+  },
+  {
+   "sha": "8593c0181ce0",
+   "tokens": 134,
+   "heartbeats": 449,
+   "ok": false,
+   "error": "172:6: Tactic `constructor` failed: no applicable constructor found case red_I.par.refl.h.right a b a✝² b'✝ : SKI a✝¹ : a✝² ⭢ₚ b'✝ a✝ : I ⭢ₚ I ⊢ (I ⬝ b'✝) ⭢ₚ a✝²",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:56:21Z"
+  },
+  {
+   "sha": "8fcc9556b0b5",
+   "tokens": 130,
+   "heartbeats": 863,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:56:39Z"
+  },
+  {
+   "sha": "041deeb21b68",
+   "tokens": 132,
+   "heartbeats": 188,
+   "ok": false,
+   "error": "156:39: unsolved goals a b a✝ a'✝ b✝ … [hypotheses omitted] ⊢ Join ParallelReduction (a'✝ ⬝ b'✝) (d ⬝ e)",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:56:40Z"
+  },
+  {
+   "sha": "213e4c3c4e93",
+   "tokens": 162,
+   "heartbeats": 493,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:56:42Z"
+  },
+  {
+   "sha": "b8d920285612",
+   "tokens": 138,
+   "heartbeats": 568,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:46:19Z"
+  },
+  {
+   "sha": "eeff31794956",
+   "tokens": 140,
+   "heartbeats": 908,
+   "ok": false,
+   "error": "171:14: `repeat1'` made no progress",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:46:20Z"
+  },
+  {
+   "sha": "b82d70e80d26",
+   "tokens": 135,
+   "heartbeats": 579,
+   "ok": false,
+   "error": "151:65: unsolved goals case red_S.par.h.right.a.a a b a✝² b✝ c✝ … [hypotheses omitted] ⊢ (S ⬝ w✝¹) ⭢ₚ w✝¹ ‖ ⊢ w✝ ⭢ₚ b'✝ ‖ ⊢ b'✝ ⭢ₚ w✝ ⬝ b'✝ ‖ ⊢ b✝ ⭢ₚ I ⬝ b'✝ ‖ ⊢ c ⭢ₚ K ⬝ w✝ ⬝ b'✝ ‖ ⊢ a✝¹ ⭢ₚ S ⬝ w✝¹ ‖ ⊢ b✝¹ ⭢ₚ w✝ ‖ ⊢ (b✝ ⬝ b✝¹) ⭢ₚ b'✝",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:46:42Z"
+  },
+  {
+   "sha": "e540043f47d7",
+   "tokens": 138,
+   "heartbeats": 1051,
+   "ok": false,
+   "error": "171:35: failed",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:46:44Z"
+  },
+  {
+   "sha": "a4b57d4fa802",
+   "tokens": 138,
+   "heartbeats": 463,
+   "ok": false,
+   "error": "175:8: Tactic `constructor` failed: no applicable constructor found case par.red_I.refl.h.right a b b✝ b'✝ : SKI a✝¹ : b✝ ⭢ₚ b'✝ a_ih✝¹ : ∀ {c : SKI}, b✝ ⭢ₚ c → Join ParallelReduction b'✝ c a✝ : I ⭢ₚ I a_ih✝ : ∀ {c : SKI}, I ⭢ₚ c → Join ParallelReduction I c ⊢ b✝ ⭢ₚ I ⬝ b'✝",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:46:45Z"
+  },
+  {
+   "sha": "43b7d0930ce4",
+   "tokens": 141,
+   "heartbeats": 427,
+   "ok": false,
+   "error": "169:11: don't know how to synthesize implicit argument `b` @And.intro (a✝² ⭢ₚ ?m.957) ((I ⬝ b'✝) ⭢ₚ ?m.957) ?m.960 ?m.961 context: a b a✝² b'✝ : SKI a✝¹ : a✝² ⭢ₚ b'✝ a✝ : I ⭢ₚ I ⊢ Prop",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:47:03Z"
+  },
+  {
+   "sha": "e3739ef3d473",
+   "tokens": 130,
+   "heartbeats": 546,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:47:05Z"
+  },
+  {
+   "sha": "1cc869e78c8a",
+   "tokens": 140,
+   "heartbeats": 6866,
+   "ok": false,
+   "error": "165:57: Tactic `assumption` failed a b a✝² a'✝ b✝ b'✝ : SKI a✝¹ : a✝² ⭢ₚ a'✝ a✝ : b✝ ⭢ₚ b'✝ a_ih✝¹ : ∀ {c : SKI}, a✝² ⭢ₚ c → Join ParallelReduction a'✝ c a_ih✝ : ∀ {c : SKI}, b✝ ⭢ₚ c → Join ParallelReduction b'✝ c ⊢ (S ⬝ ?m.1366 ⬝ ?m.1367) ⭢ₚ ?m.1368",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:47:06Z"
+  },
+  {
+   "sha": "b92ca82f58ef",
+   "tokens": 139,
+   "heartbeats": 4728,
+   "ok": false,
+   "error": "168:4: failed",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:47:27Z"
+  },
+  {
+   "sha": "47307ecaf86a",
+   "tokens": 138,
+   "heartbeats": 4569,
+   "ok": false,
+   "error": "169:4: Tactic `exfalso` failed: The metavariable below has already been assigned … [hypotheses omitted] ⊢ (a✝² ⬝ c✝ ⬝ (b✝ ⬝ c✝)) ⭢ₚ a✝² ⬝ c✝ ⬝ (b✝ ⬝ c✝) ∧ (S ⬝ w✝¹ ⬝ w✝ ⬝ b'✝) ⭢ₚ a✝² ⬝ c✝ ⬝ (b✝ ⬝ c✝)",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:47:29Z"
+  },
+  {
+   "sha": "65afd944d4cd",
+   "tokens": 132,
+   "heartbeats": 863,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:48:27Z"
+  },
+  {
+   "sha": "09d57d90b271",
+   "tokens": 138,
+   "heartbeats": 530,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:48:28Z"
+  },
+  {
+   "sha": "6640e9d6ea34",
+   "tokens": 132,
+   "heartbeats": 479,
+   "ok": false,
+   "error": "151:65: unsolved goals case red_I.par.refl.h.right a b a✝² … [hypotheses omitted] ⊢ (I ⬝ b'✝) ⭢ₚ a✝² ‖ ⊢ (K ⬝ w✝ ⬝ b'✝) ⭢ₚ a✝² ‖ ⊢ (S ⬝ w✝¹) ⭢ₚ a✝² ‖ ⊢ w✝ ⭢ₚ c✝ ‖ ⊢ b'✝ ⭢ₚ b✝ ⬝ c✝ ‖ ⊢ b✝ ⭢ₚ I ⬝ b'✝ ‖ ⊢ c ⭢ₚ K ⬝ w✝ ⬝ b'✝ ‖ ⊢ a✝¹ ⭢ₚ S ⬝ w✝¹ ‖ ⊢ b✝¹ ⭢ₚ w✝ ‖ ⊢ (b✝ ⬝ b✝¹) ⭢ₚ b'✝",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:49:03Z"
+  },
+  {
+   "sha": "423ae29e44b9",
+   "tokens": 134,
+   "heartbeats": 497,
+   "ok": false,
+   "error": "175:14: Tactic `constructor` failed: no applicable constructor found case red_S.par.h.left a b a✝² b✝ c✝ b'✝ : SKI a✝¹ : c✝ ⭢ₚ b'✝ w✝¹ w✝ : SKI h : a✝² ⭢ₚ w✝¹ h' : b✝ ⭢ₚ w✝ a✝ : (S ⬝ a✝² ⬝ b✝) ⭢ₚ S ⬝ w✝¹ ⬝ w✝ ⊢ (a✝² ⬝ c✝ ⬝ (b✝ ⬝ c✝)) ⭢ₚ w✝",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:49:04Z"
+  },
+  {
+   "sha": "7c5defb100f6",
+   "tokens": 133,
+   "heartbeats": 517,
+   "ok": false,
+   "error": "151:65: unsolved goals case red_I.par.refl.h.right a b a✝¹ … [hypotheses omitted] ⊢ (I ⬝ b'✝) ⭢ₚ a✝¹ ‖ ⊢ (K ⬝ w✝ ⬝ b'✝) ⭢ₚ a✝² ‖ ⊢ (S ⬝ w✝¹) ⭢ₚ a✝² ‖ ⊢ w✝ ⭢ₚ c✝ ‖ ⊢ b'✝ ⭢ₚ b✝ ⬝ c✝ ‖ ⊢ b✝ ⭢ₚ I ⬝ b'✝ ‖ ⊢ c ⭢ₚ K ⬝ w✝ ⬝ b'✝ ‖ ⊢ a✝¹ ⭢ₚ S ⬝ w✝¹ ‖ ⊢ b✝¹ ⭢ₚ w✝ ‖ ⊢ (b✝ ⬝ b✝¹) ⭢ₚ b'✝",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:49:06Z"
+  },
+  {
+   "sha": "2b486c7c7e16",
+   "tokens": 167,
+   "heartbeats": 270,
+   "ok": false,
+   "error": "162:8: unsolved goals case par.red_I a b a'✝ b✝ b'✝ : SKI hb : b✝ ⭢ₚ b'✝ ib : ∀ {c : SKI}, b✝ ⭢ₚ c → Join ParallelReduction b'✝ c ha : I ⭢ₚ a'✝ ia : ∀ {c : SKI}, I ⭢ₚ c → Join ParallelReduction a'✝ c ⊢ Join ParallelReduction (a'✝ ⬝ b'✝) b✝",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:49:22Z"
+  },
+  {
+   "sha": "967a0207bd72",
+   "tokens": 125,
+   "heartbeats": 737,
+   "ok": false,
+   "error": "172:14: Tactic `constructor` failed: no applicable constructor found case red_K.refl.h.left a b a✝ b✝ : SKI ⊢ a✝ ⭢ₚ b✝",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:49:44Z"
+  },
+  {
+   "sha": "a931ceb3faa7",
+   "tokens": 134,
+   "heartbeats": 524,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:50:07Z"
+  },
+  {
+   "sha": "2cf5869f46b3",
+   "tokens": 134,
+   "heartbeats": 26,
+   "ok": false,
+   "error": "155:12: Invalid target: Index in target's type is not a variable (consider using the `cases` tactic instead) I ⬝ a✝",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:50:09Z"
+  },
+  {
+   "sha": "2c8037e74420",
+   "tokens": 132,
+   "heartbeats": 547,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:50:25Z"
+  },
+  {
+   "sha": "9ae6387af2ff",
+   "tokens": 133,
+   "heartbeats": 537,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:50:27Z"
+  },
+  {
+   "sha": "9302b87132ca",
+   "tokens": 136,
+   "heartbeats": 525,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:50:59Z"
+  },
+  {
+   "sha": "a7379c718fd6",
+   "tokens": 137,
+   "heartbeats": 541,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:51:00Z"
+  },
+  {
+   "sha": "48c69b894622",
+   "tokens": 137,
+   "heartbeats": 540,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:51:20Z"
+  },
+  {
+   "sha": "5e0c880f156b",
+   "tokens": 140,
+   "heartbeats": 657,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:51:54Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T20:15:02Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r4",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:48:35Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r9",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:52:52Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:45:34Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r14",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T01:15:36Z"
+  }
+ ],
+ "api_spend": 2.074811,
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 1,
+    "d_score": 33.82,
+    "d_tokens": -139,
+    "d_heartbeats": 465,
+    "diff": "+theorem parallelReduction_diamond : Diamond ParallelReduction := by\n+  intro a b c h₁ h₂\n+  induction h₁ generalizing c with\n+  | refl => exact ⟨_, h₂, .refl _⟩\n+  | par ha hb iha ihb =>\n+    cases h₂ with\n+    | par ha' hb' =>\n+      obtain ⟨_, ha₁, ha₂⟩ := iha ha'\n+      obtain ⟨_, hb₁, hb₂⟩ := ihb hb'\n+      exact ⟨_, .par ha₁ hb₁, .par ha₂ hb₂⟩\n+    | refl => exact ⟨_, .refl _, .par ha hb⟩\n+    | red_I =>\n+      cases I_irreducible _ ha\n+      exact ⟨_, .red_I _, hb⟩\n+    | red_K =>\n+      obtain ⟨_, h, rfl⟩ := Ka_irreducible _ _ ha\n+      exact ⟨_, .red_K .., h⟩\n+    | red_S =>\n+      obtain ⟨_, _, h, h', rfl⟩ := Sab_irreducible _ _ _ ha\n+      exact ⟨_, .red_S .., .par (.par h hb) (.p"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 4,
+    "d_score": 0.35,
+    "d_tokens": -4,
+    "d_heartbeats": -1,
+    "diff": "-      obtain ⟨d, hd, kd⟩ := iha ka\n-      obtain ⟨e, he, ke⟩ := ihb kb\n-      exact ⟨_, .par hd he, .par kd ke⟩\n+      obtain ⟨d, hd⟩ := iha ka\n+      obtain ⟨e, he⟩ := ihb kb\n+      exact ⟨_, .par hd.1 he.1, .par hd.2 he.2⟩"
+   },
+   {
+    "run_id": "wu-hx-sol-r9",
+    "check": 4,
+    "d_score": 0.16,
+    "d_tokens": -3,
+    "d_heartbeats": 4,
+    "diff": "-    | cases I_irreducible _ (by assumption)\n-    | obtain ⟨_, h, rfl⟩ := Ka_irreducible _ _ (by assumption)\n-    | obtain ⟨_, _, h, h', rfl⟩ := Sab_irreducible _ _ _ (by assumption)\n+    | cases I_irreducible _ ‹_›\n+    | obtain ⟨_, h, rfl⟩ := Ka_irreducible _ _ ‹_›\n+    | obtain ⟨_, _, h, h', rfl⟩ := Sab_irreducible _ _ _ ‹_›"
+   }
+  ]
+ },
+ "fresh_lineages": [
+  {
+   "run_id": "wu-hx-sol-f2",
+   "spend": 0.105251,
+   "score": 71.09,
+   "adopted": true,
+   "restructure": false,
+   "t": "2026-10-11T21:06:33Z"
+  },
+  {
+   "run_id": "wu-hx-sol-f8",
+   "spend": 0.40194,
+   "score": 76.75,
+   "adopted": true,
+   "restructure": false,
+   "t": "2026-10-11T23:47:51Z"
+  }
+ ],
+ "profile_cache": {
+  "5917798e748f": {
+   "ok": true,
+   "total": 742,
+   "floor": 4,
+   "reference": 1422,
+   "max_heartbeat_score": 33.24,
+   "blocks": [
+    {
+     "lines": "8-11",
+     "depth_indent": 2,
+     "text": "all_goals first | solve | refine ⟨_, .refl _, ?_⟩; constructor <;> assumption | solve | refine ⟨_, ?",
+     "heartbeats": 326
+    },
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "induction h generalizing c <;> cases k",
+     "heartbeats": 243
+    },
+    {
+     "lines": "12-18",
+     "depth_indent": 2,
+     "text": "all_goals first | cases I_irreducible _ (by assumption) | obtain ⟨_, hh, rfl⟩ := Ka_irreducible _ _ ",
+     "heartbeats": 146
+    },
+    {
+     "lines": "4-7",
+     "depth_indent": 2,
+     "text": "case par.par ha hb iha ihb _ _ ka kb => obtain ⟨d, hd⟩ := iha ka obtain ⟨e, he⟩ := ihb kb exact ⟨_, ",
+     "heartbeats": 22
+    },
+    {
+     "lines": "2-2",
+     "depth_indent": 2,
+     "text": "intro a b c h k",
+     "heartbeats": 0
+    }
+   ],
+   "points_left_heartbeats": 17.3,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "0a3f4dd25be0": {
+   "ok": true,
+   "total": 524,
+   "floor": 4,
+   "reference": 1422,
+   "max_heartbeat_score": 33.24,
+   "blocks": [
+    {
+     "lines": "14-25",
+     "depth_indent": 2,
+     "text": "all_goals first | cases I_irreducible _ ‹_› | obtain ⟨_, h, rfl⟩ := Ka_irreducible _ _ ‹_› | obtain ",
+     "heartbeats": 193
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "all_goals cases h₂",
+     "heartbeats": 192
+    },
+    {
+     "lines": "15-18",
+     "depth_indent": 4,
+     "text": "first | cases I_irreducible _ ‹_› | obtain ⟨_, h, rfl⟩ := Ka_irreducible _ _ ‹_› | obtain ⟨_, _, h, ",
+     "heartbeats": 103
+    },
+    {
+     "lines": "10-13",
+     "depth_indent": 2,
+     "text": "all_goals try constructor constructor <;> constructor <;> assumption",
+     "heartbeats": 93
+    },
+    {
+     "lines": "21-24",
+     "depth_indent": 4,
+     "text": "all_goals try repeat' apply ParallelReduction.par all_goals assumption",
+     "heartbeats": 90
+    },
+    {
+     "lines": "6-9",
+     "depth_indent": 2,
+     "text": "case par.par ha hb iha ihb d e hc hd => obtain ⟨_, hx⟩ := iha hc obtain ⟨_, hy⟩ := ihb hd exact ⟨_, ",
+     "heartbeats": 22
+    },
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "induction h₁ generalizing c",
+     "heartbeats": 13
+    },
+    {
+     "lines": "19-19",
+     "depth_indent": 4,
+     "text": "constructor",
+     "heartbeats": 12
+    },
+    {
+     "lines": "20-20",
+     "depth_indent": 4,
+     "text": "constructor",
+     "heartbeats": 11
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "case refl => exact ⟨_, h₂, .refl _⟩",
+     "heartbeats": 6
+    },
+    {
+     "lines": "2-2",
+     "depth_indent": 2,
+     "text": "intro a b c h₁ h₂",
+     "heartbeats": 0
+    },
+    {
+     "lines": "25-25",
+     "depth_indent": 4,
+     "text": "all_goals constructor",
+     "heartbeats": -24
+    }
+   ],
+   "points_left_heartbeats": 12.19,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "hb_floor": 4,
+ "budget_milestones": {
+  "2": {
+   "spend": 2.002866,
+   "best": 76.91,
+   "run_id": "wu-hx-sol-r13",
+   "turn": 22,
+   "t": "2026-10-12T00:51:08Z"
+  }
+ }
+}

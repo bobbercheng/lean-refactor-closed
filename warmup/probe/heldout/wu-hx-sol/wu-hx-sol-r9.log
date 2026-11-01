@@ -1,0 +1,110 @@
+run wu-hx-sol-r9: 13 problems, model=gpt-6.1-sol, turns≤40
+fundamental_theore technique cards: analysis, sets
+Core.InitsUpdatesC technique cards: inductive, sets, corollary
+CallElimCorrect.su technique cards: sets
+CallElimCorrect.ex technique cards: sets
+[memgate] HOLD LRAScratch/m_527a4c099e.lean: need 8000+8000 MB, have 8754 MB (40000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_8d7680bc1a.lean: need 8000+8000 MB, have 8752 MB (40000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_1ee0cf0cd5.lean: need 8000+8000 MB, have 8751 MB (40000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_435706c563.lean: need 8000+8000 MB, have 15568 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 10s hold (22580 MB free after ramping grants)
+[memgate] admitted after 10s hold (23153 MB free after ramping grants)
+Core.InitsUpdatesC library leads: 10 (13.3 s, 7 compiles)
+Core.InitsUpdatesC knowledge brief: Core.InitsUpdatesComm.md
+CallElimCorrect.ex library leads: 10 (15.2 s, 5 compiles)
+CallElimCorrect.ex knowledge brief: CallElimCorrect.extractedOldExprInVars.md
+[memgate] admitted after 20s hold (30280 MB free after ramping grants)
+[memgate] admitted after 20s hold (22279 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_98ddbeb09c.lean: need 8000+8000 MB, have 13872 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/c_f8406eec6809.lean: need 8000+8000 MB, have 13446 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 15s hold (40734 MB free after ramping grants)
+[memgate] admitted after 20s hold (31711 MB free after ramping grants)
+CallElimCorrect.su library leads: 10 (43.5 s, 7 compiles)
+CallElimCorrect.su knowledge brief: CallElimCorrect.substOldPostSubset.md
+fundamental_theore library leads: 10 (46.5 s, 9 compiles)
+fundamental_theore knowledge brief: fundamental_theorem_of_variational_calculus_.md
+CallElimCorrect.su check 4: NEW BEST tok=40 (+87.2%) hb=599 (+88.4%) Z=100 score=91.88
+fundamental_theore budget reached: $1.739 + reserve $0.272 > $2.00; session ends
+fundamental_theore DONE best=91.58 checks=1 tool_calls=9 turns=9 out_tok=2157 65s
+FieldSpecification technique cards: sets
+CallElimCorrect.su check 10: NEW BEST tok=39 (+87.5%) hb=597 (+88.5%) Z=100 score=92.0
+FieldSpecification library leads: 10 (35.6 s, 9 compiles)
+FieldSpecification knowledge brief: FieldSpecification.WickAlgebra.__timeOrderF_superCommuteF_eq_time.md
+CallElimCorrect.ex check 17: NEW BEST tok=20 (+91.0%) hb=318 (+88.2%) Z=100 score=93.07
+CallElimCorrect.ex check 18: NEW BEST tok=20 (+91.0%) hb=257 (+90.5%) Z=100 score=93.82
+CallElimCorrect.su budget reached: $1.719 + reserve $0.296 > $2.00; session ends
+CallElimCorrect.su DONE best=92.0 checks=20 tool_calls=8 turns=8 out_tok=6448 205s
+Cslib.LambdaCalcul technique cards: inductive
+Cslib.LambdaCalcul library leads: 10 (15.6 s, 7 compiles)
+Cslib.LambdaCalcul knowledge brief: Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress.md
+Core.InitsUpdatesC budget reached: $1.727 + reserve $0.332 > $2.00; session ends
+Core.InitsUpdatesC DONE best=89.14 checks=2 tool_calls=4 turns=4 out_tok=24882 285s
+Cslib.SKI.parallel technique cards: inductive
+[memgate] HOLD LRAScratch/c_c403f1c879af.lean: need 8000+8000 MB, have 15380 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (32462 MB free after ramping grants)
+Cslib.SKI.parallel library leads: 4 (12.4 s, 8 compiles)
+Cslib.SKI.parallel knowledge brief: Cslib.SKI.parallelReduction_diamond.md
+CallElimCorrect.ex check 33: NEW BEST tok=20 (+91.0%) hb=250 (+90.7%) Z=100 score=93.91
+CallElimCorrect.ex check 38: NEW BEST tok=20 (+91.0%) hb=241 (+91.1%) Z=100 score=94.02
+CallElimCorrect.ex check 41: NEW BEST tok=18 (+91.9%) hb=239 (+91.1%) Z=100 score=94.34
+FieldSpecification check 10: NEW BEST tok=307 (+74.8%) hb=9972 (+76.3%) Z=100 score=83.7
+FieldSpecification check 11: NEW BEST tok=304 (+75.0%) hb=9970 (+76.3%) Z=100 score=83.78
+Cslib.LambdaCalcul budget reached: $1.722 + reserve $0.282 > $2.00; session ends
+Cslib.LambdaCalcul DONE best=85.55 checks=5 tool_calls=9 turns=8 out_tok=3941 154s
+Cslib.CCS.bisimila technique cards: inductive
+Cslib.CCS.bisimila library leads: 10 (11.4 s, 7 compiles)
+Cslib.CCS.bisimila knowledge brief: Cslib.CCS.bisimilarity_congr_choice.md
+CallElimCorrect.ex budget reached: $1.628 + reserve $0.392 > $2.00; session ends
+CallElimCorrect.ex DONE best=94.34 checks=47 tool_calls=20 turns=20 out_tok=10549 429s
+Binius.BinaryBasef technique cards: sets, corollary
+Binius.BinaryBasef library leads: 10 (56.6 s, 7 compiles)
+Binius.BinaryBasef knowledge brief: Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius.md
+Cslib.SKI.parallel check 4: NEW BEST tok=132 (+67.6%) hb=524 (+63.2%) Z=100 score=76.91
+FieldSpecification check 17: NEW BEST tok=291 (+76.1%) hb=9704 (+77.0%) Z=100 score=84.35
+Cslib.SKI.parallel budget reached: $1.721 + reserve $0.291 > $2.00; session ends
+Cslib.SKI.parallel DONE best=76.91 checks=9 tool_calls=7 turns=7 out_tok=16006 212s
+Binius.BinaryBasef technique cards: sets, corollary
+[memgate] HOLD LRAScratch/c_3407a35e27b0.lean: need 8000+8000 MB, have 13351 MB (40000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 10s hold (20770 MB free after ramping grants)
+Cslib.CCS.bisimila budget reached: $1.748 + reserve $0.264 > $2.00; session ends
+Cslib.CCS.bisimila DONE best=87.03 checks=11 tool_calls=8 turns=8 out_tok=3673 106s
+interleaved_affine technique cards: sets
+[memgate] HOLD LRAScratch/m_86e3f94f26.lean: need 8000+8000 MB, have 13098 MB (40000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/c_79a3cb9875ac.lean: need 8000+8000 MB, have 14821 MB (40000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (21034 MB free after ramping grants)
+[memgate] admitted after 20s hold (21452 MB free after ramping grants)
+Binius.BinaryBasef library leads: 10 (48.3 s, 8 compiles)
+Binius.BinaryBasef knowledge brief: Binius.BinaryBasefold.fold_advances_evaluation_poly.md
+[memgate] HOLD LRAScratch/c_ef08334f63dc.lean: need 8000+8000 MB, have 13539 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 55s hold (20676 MB free after ramping grants)
+[memgate] HOLD LRAScratch/s_7083c82989.lean: need 8000+8000 MB, have 12955 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+FieldSpecification check 20: NEW BEST tok=274 (+77.5%) hb=8680 (+79.4%) Z=100 score=85.62
+[memgate] admitted after 5s hold (21087 MB free after ramping grants)
+interleaved_affine library leads: 10 (100.4 s, 6 compiles)
+interleaved_affine knowledge brief: interleaved_affine_gaps_imply_tensor_gaps.md
+FieldSpecification check 21: NEW BEST tok=264 (+78.3%) hb=8149 (+80.6%) Z=100 score=86.32
+FieldSpecification check 22: NEW BEST tok=260 (+78.6%) hb=8142 (+80.7%) Z=100 score=86.43
+FieldSpecification DONE best=86.43 checks=26 tool_calls=48 turns=35 out_tok=9642 576s
+putnam_1964_a4     technique cards: sets, inductive
+[memgate] HOLD LRAScratch/m_4c9413cfbc.lean: need 8000+8000 MB, have 14420 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 10s hold (23209 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_b2a80c2db6.lean: need 8000+8000 MB, have 11937 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (31328 MB free after ramping grants)
+putnam_1964_a4     library leads: 10 (43.8 s, 10 compiles)
+putnam_1964_a4     knowledge brief: putnam_1964_a4.md
+Binius.BinaryBasef budget reached: $1.540 + reserve $0.479 > $2.00; session ends
+Binius.BinaryBasef DONE best=90.97 checks=8 tool_calls=18 turns=11 out_tok=14418 405s
+putnam_1964_b2     technique cards: sets
+Binius.BinaryBasef budget reached: $1.591 + reserve $0.412 > $2.00; session ends
+Binius.BinaryBasef DONE best=93.62 checks=25 tool_calls=43 turns=27 out_tok=6224 354s
+interleaved_affine check 8: NEW BEST tok=100 (+92.6%) hb=1308 (+86.1%) Z=100 score=92.89
+putnam_1964_b2     library leads: 10 (23.8 s, 6 compiles)
+putnam_1964_b2     knowledge brief: putnam_1964_b2.md
+interleaved_affine check 9: NEW BEST tok=100 (+92.6%) hb=1303 (+86.1%) Z=100 score=92.91
+putnam_1964_a4     budget reached: $1.863 + reserve $0.401 > $2.00; session ends
+putnam_1964_a4     DONE best=96.82 checks=8 tool_calls=7 turns=7 out_tok=17286 247s
+interleaved_affine budget reached: $1.612 + reserve $0.407 > $2.00; session ends
+interleaved_affine DONE best=92.91 checks=16 tool_calls=30 turns=25 out_tok=9899 489s
+putnam_1964_b2     budget reached: $1.631 + reserve $0.379 > $2.00; session ends
+putnam_1964_b2     DONE best=99.26 checks=29 tool_calls=19 turns=19 out_tok=12230 358s
+done

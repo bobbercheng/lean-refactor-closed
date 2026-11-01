@@ -1,0 +1,2123 @@
+{
+ "problem": "interleaved_affine_gaps_imply_tensor_gaps",
+ "best": {
+  "score": 92.08,
+  "proof": "theorem interleaved_affine_gaps_imply_tensor_gaps\n    (hC_proximityGapAffineLines : e_ε_correlatedAgreementAffineLinesNat\n      (F := F) (A := A) (ι := ι) (C := MC) (e := e) (ε := ε))\n    (h_interleaved_gaps : ∀ m : ℕ, m ≥ 1 →\n      e_ε_correlatedAgreementAffineLinesNat (F := F)\n        (A := InterleavedSymbol A (Fin m)) (ι := ι) (C := MC ^⋈ (Fin m)) e ε) :\n    ∀ (ϑ : ℕ), (hϑ_gt_0 : ϑ > 0) → δ_ε_multilinearCorrelatedAgreement_Nat (F := F) (A := A)\n      (ι := ι) (C := MC) (ϑ := ϑ) (e := e) (ε := ε) := by\n  apply Nat.le_induction\n  · intro u hp\n    rw [show u = finMapTwoWords (u 0) (u 1) from funext (Fin.forall_fin_two.2 ⟨rfl, rfl⟩)]\n    apply hC_proximityGapAffineLines\n    rw [← @prob_uniform_singleton_finFun_eq F _ ⟨0⟩]\n    simpa only [multilinearCombine₁_eq_affineLineEvaluation,\n      Nat.cast_one, ENNReal.coe_one, one_mul, ENNReal.coe_natCast] using hp\n  · intro n hn ih u hp\n    apply CA_split_rowwise_implies_CA _ u\n    apply h_interleaved_gaps _ Nat.one_le_two_pow\n    refine lt_of_le_of_lt' ?_ (prob_R_star_gt_threshold MC u e ?_)\n    · apply Pr_le_Pr_of_implies\n      intro r hmem\n      exact correlatedAgreement_of_mem_R_star_tensor MC ih u ⟨r, hmem⟩\n    · simp only [← prob_split_last_uniform_sampling_of_finFun,\n        multilinearCombine_affineComb_split_last_close, ← Fin.init_def,\n        ← multilinearCombine_recursive_form, ENNReal.coe_mul, ENNReal.coe_natCast]\n      exact hp",
+  "tokens": 122,
+  "heartbeats": 1384,
+  "L": 90.98,
+  "H": 85.25,
+  "Z": 100.0,
+  "compat": {
+   "v4.31.0": true,
+   "v4.30.0": true,
+   "v4.29.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "0e8ad0d5461e",
+   "tokens": 1327,
+   "heartbeats": 9055,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:21:01Z",
+   "score": 35.13
+  },
+  {
+   "sha": "884f0adb597d",
+   "tokens": 200,
+   "heartbeats": 1683,
+   "ok": false,
+   "error": "1231:6: `simp` made no progress",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:22:49Z"
+  },
+  {
+   "sha": "320659aada63",
+   "tokens": 258,
+   "heartbeats": 2511,
+   "ok": false,
+   "error": "1232:6: `simp` made no progress",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:23:14Z"
+  },
+  {
+   "sha": "627ad983c992",
+   "tokens": 260,
+   "heartbeats": 2623,
+   "ok": false,
+   "error": "1237:49: Application type mismatch: The argument hp has type (do let r ← $ᵖ (Fin 1 → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0), ↑MC) ≤ ↑e)) True > ↑ε / ↑↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ F pure (Δ₀(affineLineEvaluation (u 0) (u 1) r, ↑MC) ≤ ↑e)) True > ↑↑ε / ↑↑(F",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:23:33Z"
+  },
+  {
+   "sha": "6c95d7e86cef",
+   "tokens": 282,
+   "heartbeats": 3300,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:23:52Z",
+   "score": 81.33
+  },
+  {
+   "sha": "d753aad48ab6",
+   "tokens": 289,
+   "heartbeats": 3310,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:26:12Z"
+  },
+  {
+   "sha": "2f21f6e53bb2",
+   "tokens": 241,
+   "heartbeats": 3074,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:26:32Z",
+   "score": 83.14
+  },
+  {
+   "sha": "54035f4cff35",
+   "tokens": 215,
+   "heartbeats": 3059,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:28:28Z",
+   "score": 83.83
+  },
+  {
+   "sha": "551adab41fa5",
+   "tokens": 206,
+   "heartbeats": 3018,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:29:18Z",
+   "score": 84.2
+  },
+  {
+   "sha": "316f909a7db7",
+   "tokens": 166,
+   "heartbeats": 2667,
+   "ok": false,
+   "error": "1241:6: Type mismatch: After simplification, term hp has type @GT.gt ENNReal ENNReal.instPartialOrder.toLT ((do let r ← $ᵖ (Fin (n + 1) → F) pure (Δ₀(multilinearCombine (affineLineEvaluation (splitHalfRowWiseInterleavedWords u).1 (splitHalfRowWiseInterleavedWords u).2 (r (Fin.last n))) fun k => r k.",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:30:43Z"
+  },
+  {
+   "sha": "34dd071381cd",
+   "tokens": 168,
+   "heartbeats": 2665,
+   "ok": false,
+   "error": "1241:6: Type mismatch: After simplification, term hp has type @GT.gt ENNReal ENNReal.instPartialOrder.toLT ((do let r ← $ᵖ (Fin (n + 1) → F) pure (Δ₀(multilinearCombine (affineLineEvaluation (splitHalfRowWiseInterleavedWords u).1 (splitHalfRowWiseInterleavedWords u).2 (r (Fin.last n))) fun k => r k.",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:31:00Z"
+  },
+  {
+   "sha": "7ad70a4a0e12",
+   "tokens": 170,
+   "heartbeats": 2671,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:31:23Z",
+   "score": 86.32
+  },
+  {
+   "sha": "b522bffc905b",
+   "tokens": 154,
+   "heartbeats": 2736,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:03:38Z",
+   "score": 86.48
+  },
+  {
+   "sha": "61c97bb18cc3",
+   "tokens": 152,
+   "heartbeats": 3416,
+   "ok": false,
+   "error": "1234:4: failed to synthesize Fintype ℕ Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:04:28Z"
+  },
+  {
+   "sha": "f0d6d057ee0d",
+   "tokens": 136,
+   "heartbeats": 1710,
+   "ok": false,
+   "error": "1232:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern (do l … [hypotheses omitted] ⊢ jointProximityNat (↑MC) u e Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:05:35Z"
+  },
+  {
+   "sha": "4d5c5e4615f6",
+   "tokens": 136,
+   "heartbeats": 2322,
+   "ok": false,
+   "error": "1232:9: Tactic `rewrite` failed: Did not find an occurrence of the pattern (do l … [hypotheses omitted] ⊢ jointProximityNat (↑MC) u e Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:06:02Z"
+  },
+  {
+   "sha": "6f52e8bb3fd6",
+   "tokens": 146,
+   "heartbeats": 1719,
+   "ok": false,
+   "error": "1233:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern (do l … [hypotheses omitted] ⊢ jointProximityNat (↑MC) u e Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:07:28Z"
+  },
+  {
+   "sha": "a05787523005",
+   "tokens": 158,
+   "heartbeats": 2580,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:08:27Z",
+   "score": 86.94
+  },
+  {
+   "sha": "96efb1d5a19d",
+   "tokens": 170,
+   "heartbeats": 2502,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:09:00Z"
+  },
+  {
+   "sha": "618e18167986",
+   "tokens": 150,
+   "heartbeats": 2520,
+   "ok": false,
+   "error": "1244:30: Application type mismatch: The argument fun r hmem => correlatedAgreement_of_mem_R_star_tensor MC ih u ⟨r, hmem⟩ has type ∀ (r : F) (hmem : r ∈ R_star_tensor MC (fun rowIdx => u ⟨↑rowIdx, ⋯⟩) fun rowIdx => u ⟨↑rowIdx + 2 ^ n, ⋯⟩), jointProximityNat (↑MC) (affineLineEvaluation (fun rowIdx =>",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:09:27Z"
+  },
+  {
+   "sha": "ada9218af4a2",
+   "tokens": 153,
+   "heartbeats": 2649,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:09:51Z"
+  },
+  {
+   "sha": "4087946c54ae",
+   "tokens": 150,
+   "heartbeats": 2580,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:10:12Z",
+   "score": 87.14
+  },
+  {
+   "sha": "4e1171cc1577",
+   "tokens": 134,
+   "heartbeats": 2208,
+   "ok": false,
+   "error": "1232:51: Application type mismatch: The argument hp has type (do let r ← $ᵖ (Fin (Nat.succ 0) → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0), ↑MC) ≤ ↑e)) True > ↑ε / ↑↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ F pure (Δ₀(affineLineEvaluation (u 0) (u 1) r, ↑MC) ≤ ↑e)) True >",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:11:01Z"
+  },
+  {
+   "sha": "53e60b968e65",
+   "tokens": 155,
+   "heartbeats": 3982,
+   "ok": false,
+   "error": "1233:38: Application type mismatch: The argument MC has type ModuleCode ι F A but is expected to have type Set (?m.132 → ?m.135) in the application @jointProximityNat (Fin 2) ?m.132 ?m.133 (Fin.fintype 2) ?m.135 MC",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:11:27Z"
+  },
+  {
+   "sha": "0f5bee6f595f",
+   "tokens": 149,
+   "heartbeats": 2579,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:11:47Z",
+   "score": 87.17
+  },
+  {
+   "sha": "667df95140ba",
+   "tokens": 149,
+   "heartbeats": 2536,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:12:30Z",
+   "score": 87.32
+  },
+  {
+   "sha": "dde81b296e7f",
+   "tokens": 167,
+   "heartbeats": 2546,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:31:41Z"
+  },
+  {
+   "sha": "1727ce38d00b",
+   "tokens": 148,
+   "heartbeats": 2602,
+   "ok": false,
+   "error": "1238:6: Type mismatch: After simplification, term hp has type (do let r ← $ᵖ (Fin (n + 1) → F) pure (Δ₀(multilinearCombine (affineLineEvaluation (splitHalfRowWiseInterleavedWords u).1 (splitHalfRowWiseInterleavedWords u).2 (r (Fin.last n))) fun k => r k.castSucc, ↑MC) ≤ ↑e)) True > ↑↑(n + 1) * ↑ε / ",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:31:52Z"
+  },
+  {
+   "sha": "5b2d7691c993",
+   "tokens": 147,
+   "heartbeats": 2500,
+   "ok": false,
+   "error": "1238:6: Type mismatch: After simplification, term hp has type @GT.gt ENNReal ENNReal.instPartialOrder.toLT ((do let r ← $ᵖ (Fin (n + 1) → F) pure (Δ₀(multilinearCombine (affineLineEvaluation (splitHalfRowWiseInterleavedWords u).1 (splitHalfRowWiseInterleavedWords u).2 (r (Fin.last n))) fun k => r k.",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:32:02Z"
+  },
+  {
+   "sha": "b228f382a7db",
+   "tokens": 154,
+   "heartbeats": 2535,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:32:39Z"
+  },
+  {
+   "sha": "1229cd27475a",
+   "tokens": 150,
+   "heartbeats": 2652,
+   "ok": false,
+   "error": "1245:72: Application type mismatch: The argument u has type WordStack A (Fin (2 ^ (n + 1))) ι but is expected to have type Fin (2 ^ (n + 1)) → Word A ι in the application correlatedAgreement_of_mem_R_star_tensor MC ih u",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:32:50Z"
+  },
+  {
+   "sha": "018b763631f0",
+   "tokens": 151,
+   "heartbeats": 2540,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:33:01Z"
+  },
+  {
+   "sha": "03a354948b48",
+   "tokens": 137,
+   "heartbeats": 2529,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:33:47Z",
+   "score": 87.64
+  },
+  {
+   "sha": "940348929f66",
+   "tokens": 135,
+   "heartbeats": 2574,
+   "ok": false,
+   "error": "1242:16: failed to synthesize instance of type class DecidablePred fun r_affine_combine => R_star_tensor_filter MC (splitHalfRowWiseInterleavedWords u).1 (splitHalfRowWiseInterleavedWords u).2 r_affine_combine Hint: Type class instance resolution failures can be inspected with the `set_option trace.",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:36:12Z"
+  },
+  {
+   "sha": "ab7d332672c4",
+   "tokens": 123,
+   "heartbeats": 2160,
+   "ok": false,
+   "error": "1229:51: Application type mismatch: The argument hp has type (do let r ← $ᵖ (Fin (Nat.succ 0) → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0), ↑MC) ≤ ↑e)) True > ↑ε / ↑↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ F pure (Δ₀(affineLineEvaluation (u 0) (u 1) r, ↑MC) ≤ ↑e)) True >",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:36:23Z"
+  },
+  {
+   "sha": "75c9db5a66fc",
+   "tokens": 139,
+   "heartbeats": 2537,
+   "ok": false,
+   "error": "1228:6: Type mismatch: After simplification, term hp has type @GT.gt ENNReal ENNReal.instPartialOrder.toLT ((do let r ← $ᵖ F pure (Δ₀(affineLineEvaluation (u 0) (u 1) r, ↑MC) ≤ ↑e)) True) (↑ε / ↑↑(Fintype.card F)) but is expected to have type @GT.gt ENNReal ENNReal.instPartialOrder.toLT ((do let r ←",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:36:33Z"
+  },
+  {
+   "sha": "9d393e16a07f",
+   "tokens": 136,
+   "heartbeats": 2581,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:37:38Z"
+  },
+  {
+   "sha": "26cfa549c882",
+   "tokens": 137,
+   "heartbeats": 2288,
+   "ok": false,
+   "error": "1229:51: Application type mismatch: The argument hp has type (do let r ← $ᵖ (Fin (Nat.succ 0) → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0), ↑MC) ≤ ↑e)) True > ↑ε / ↑↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ F pure (Δ₀(affineLineEvaluation (u 0) (u 1) r, ↑MC) ≤ ↑e)) True >",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:37:48Z"
+  },
+  {
+   "sha": "672510dd1d6f",
+   "tokens": 141,
+   "heartbeats": 2548,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:37:59Z"
+  },
+  {
+   "sha": "33f89f3bbb09",
+   "tokens": 139,
+   "heartbeats": 2533,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:47:29Z"
+  },
+  {
+   "sha": "a89312d01800",
+   "tokens": 118,
+   "heartbeats": 1670,
+   "ok": false,
+   "error": "1228:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern (do l … [hypotheses omitted] ⊢ jointProximityNat (↑MC) u e Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of",
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:48:20Z"
+  },
+  {
+   "sha": "a2fa6eb4c76b",
+   "tokens": 135,
+   "heartbeats": 2627,
+   "ok": false,
+   "error": "1229:51: Application type mismatch: The argument hp has type (do let r ← $ᵖ F pure (Δ₀(affineLineEvaluation (u 0) (u 1) r, ↑MC) ≤ ↑e)) True > ↑1 * ↑ε / ↑↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ F pure (Δ₀(affineLineEvaluation (u 0) (u 1) r, ↑MC) ≤ ↑e)) True > ↑↑ε / ↑↑(Fintype.ca",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:11:41Z"
+  },
+  {
+   "sha": "b9724bffc912",
+   "tokens": 135,
+   "heartbeats": 2595,
+   "ok": false,
+   "error": "1229:51: Application type mismatch: The argument hp has type (do let r ← $ᵖ F pure (Δ₀(affineLineEvaluation (u 0) (u 1) r, ↑MC) ≤ ↑e)) True > ↑↑(Nat.succ 0) * ↑ε / ↑↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ F pure (Δ₀(affineLineEvaluation (u 0) (u 1) r, ↑MC) ≤ ↑e)) True > ↑↑ε / ↑",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:11:52Z"
+  },
+  {
+   "sha": "19924249f1c2",
+   "tokens": 133,
+   "heartbeats": 2594,
+   "ok": false,
+   "error": "1229:51: Application type mismatch: The argument hp has type (do let r ← $ᵖ F pure (Δ₀(affineLineEvaluation (u 0) (u 1) r, ↑MC) ≤ ↑e)) True > ↑↑(Nat.succ 0) * ↑ε / ↑↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ F pure (Δ₀(affineLineEvaluation (u 0) (u 1) r, ↑MC) ≤ ↑e)) True > ↑↑ε / ↑",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:12:02Z"
+  },
+  {
+   "sha": "4a2774c7e740",
+   "tokens": 135,
+   "heartbeats": 2493,
+   "ok": false,
+   "error": "1235:6: Type mismatch: After simplification, term hp has type @GT.gt ENNReal ENNReal.instPartialOrder.toLT ((do let r ← $ᵖ (Fin (n + 1) → F) pure (Δ₀(multilinearCombine (affineLineEvaluation (splitHalfRowWiseInterleavedWords u).1 (splitHalfRowWiseInterleavedWords u).2 (r (Fin.last n))) fun k => r k.",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:12:34Z"
+  },
+  {
+   "sha": "b9440e352c2a",
+   "tokens": 135,
+   "heartbeats": 2514,
+   "ok": false,
+   "error": "1235:6: Type mismatch: After simplification, term hp has type @GT.gt ENNReal ENNReal.instPartialOrder.toLT ((do let r ← $ᵖ (Fin (n + 1) → F) pure (Δ₀(multilinearCombine (affineLineEvaluation (splitHalfRowWiseInterleavedWords u).1 (splitHalfRowWiseInterleavedWords u).2 (r (Fin.last n))) (Fin.init r),",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:12:45Z"
+  },
+  {
+   "sha": "3033a3a52f49",
+   "tokens": 142,
+   "heartbeats": 2528,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:14:24Z"
+  },
+  {
+   "sha": "e834af05e1ef",
+   "tokens": 142,
+   "heartbeats": 2529,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:14:34Z"
+  },
+  {
+   "sha": "bcf32e941473",
+   "tokens": 137,
+   "heartbeats": 2628,
+   "ok": false,
+   "error": "1229:51: Application type mismatch: The argument hp has type (do let r ← $ᵖ F pure (Δ₀(affineLineEvaluation (u 0) (u 1) r, ↑MC) ≤ ↑e)) True > ↑1 * ↑ε / ↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ F pure (Δ₀(affineLineEvaluation (u 0) (u 1) r, ↑MC) ≤ ↑e)) True > ↑↑ε / ↑↑(Fintype.car",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:14:44Z"
+  },
+  {
+   "sha": "06ccb92d9da8",
+   "tokens": 136,
+   "heartbeats": 2525,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:18:45Z",
+   "score": 87.68
+  },
+  {
+   "sha": "dec735553ccf",
+   "tokens": 130,
+   "heartbeats": 2341,
+   "ok": false,
+   "error": "1229:49: Ambiguous term Δ₀(affineLineEvaluation _ _ r, MC) Possible interpretations: Δ₀(affineLineEvaluation ?m.71 ?m.72 r, ?m.73) : ℕ∞ Δ₀(affineLineEvaluation ?m.71 ?m.72 r, ?m.75) : ℕ",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:19:26Z"
+  },
+  {
+   "sha": "f25a143033e2",
+   "tokens": 133,
+   "heartbeats": 2264,
+   "ok": false,
+   "error": "1230:51: Application type mismatch: The argument hp has type (do let r ← $ᵖ (Fin (Nat.succ 0) → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0), ↑MC) ≤ ↑e)) True > ↑ε / ↑↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ F pure (Δ₀(affineLineEvaluation (u 0) (u 1) r, ↑MC) ≤ ↑e)) True >",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:19:50Z"
+  },
+  {
+   "sha": "98e462c38281",
+   "tokens": 137,
+   "heartbeats": 2214,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:20:12Z",
+   "score": 88.76
+  },
+  {
+   "sha": "1d5f19110a99",
+   "tokens": 135,
+   "heartbeats": 2147,
+   "ok": false,
+   "error": "1229:51: Ambiguous term Δ₀(affineLineEvaluation _ _ r, ↑MC) Possible interpretations: Δ₀(affineLineEvaluation ?m.75 ?m.76 r, ?m.77) : ℕ∞ Δ₀(affineLineEvaluation ?m.75 ?m.76 r, ?m.79) : ℕ",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:21:02Z"
+  },
+  {
+   "sha": "8ebc21df0f42",
+   "tokens": 139,
+   "heartbeats": 2220,
+   "ok": false,
+   "error": "1229:52: Ambiguous term Δ₀(affineLineEvaluation _ _ r, MC) Possible interpretations: Δ₀(affineLineEvaluation ?m.75 ?m.76 r, ?m.77) : ℕ∞ ↑Δ₀(affineLineEvaluation ?m.75 ?m.76 r, ?m.79) : ℕ∞",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:21:12Z"
+  },
+  {
+   "sha": "d2b71cc2f245",
+   "tokens": 137,
+   "heartbeats": 1721,
+   "ok": false,
+   "error": "1229:52: overloaded, errors 1229:55 A placeholder `_` cannot be used where a function is expected 1229:55 A placeholder `_` cannot be used where a function is expected",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:21:22Z"
+  },
+  {
+   "sha": "968f11309841",
+   "tokens": 133,
+   "heartbeats": 1447,
+   "ok": false,
+   "error": "1229:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern (do l … [hypotheses omitted] ⊢ jointProximityNat (↑MC) u e Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:22:59Z"
+  },
+  {
+   "sha": "dcd474d9cf21",
+   "tokens": 134,
+   "heartbeats": 1446,
+   "ok": false,
+   "error": "1229:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern (do l … [hypotheses omitted] ⊢ jointProximityNat (↑MC) u e Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:23:58Z"
+  },
+  {
+   "sha": "6c3ed011a38f",
+   "tokens": 142,
+   "heartbeats": 2237,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:49:58Z"
+  },
+  {
+   "sha": "70bf8b275b84",
+   "tokens": 141,
+   "heartbeats": 2313,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:50:08Z"
+  },
+  {
+   "sha": "8e0f9679b267",
+   "tokens": 138,
+   "heartbeats": 2225,
+   "ok": false,
+   "error": "1231:47: Type mismatch Fin.elim0 has type Fin 0 → ?m.165 but is expected to have type ∀ (i : Fin 0), u i.succ.succ = finMapTwoWords (u 0) (u 1) i.succ.succ",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:50:18Z"
+  },
+  {
+   "sha": "5666d76f47b1",
+   "tokens": 135,
+   "heartbeats": 2175,
+   "ok": false,
+   "error": "1238:6: Type mismatch: After simplification, term hp has type @GT.gt ENNReal ENNReal.instPartialOrder.toLT ((do let r ← $ᵖ (Fin (n + 1) → F) pure (Δ₀(multilinearCombine (affineLineEvaluation (splitHalfRowWiseInterleavedWords u).1 (splitHalfRowWiseInterleavedWords u).2 (r (Fin.last n))) fun k => r k.",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:50:38Z"
+  },
+  {
+   "sha": "72a21ddf5940",
+   "tokens": 119,
+   "heartbeats": 2137,
+   "ok": false,
+   "error": "1232:6: Type mismatch: After simplification, term hp has type @GT.gt ENNReal ENNReal.instPartialOrder.toLT ((do let r ← $ᵖ (Fin (Nat.succ 0) → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0), ↑MC) ≤ ↑e)) True) (↑ε / ↑↑(Fintype.card F)) but is expected to have type @GT.gt ENNReal ENNReal.instParti",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:51:18Z"
+  },
+  {
+   "sha": "2d9e47a75af3",
+   "tokens": 121,
+   "heartbeats": 2148,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:51:33Z",
+   "score": 89.39
+  },
+  {
+   "sha": "a529d7046499",
+   "tokens": 119,
+   "heartbeats": 2158,
+   "ok": false,
+   "error": "1232:6: Type mismatch: After simplification, term hp has type (do let r ← $ᵖ (Fin (Nat.succ 0) → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0), ↑MC) ≤ ↑e)) True > ↑1 * ↑ε / ↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ (Fin 1 → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0),",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:52:23Z"
+  },
+  {
+   "sha": "4e71cc645dc7",
+   "tokens": 117,
+   "heartbeats": 2153,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:52:33Z",
+   "score": 89.47
+  },
+  {
+   "sha": "21f690492cc7",
+   "tokens": 119,
+   "heartbeats": 2173,
+   "ok": false,
+   "error": "1235:4: Tactic `apply` failed: could not unify the conclusion of `CA_split_rowwi … [hypotheses omitted] ⊢ jointProximityNat (↑MC) u e",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:53:04Z"
+  },
+  {
+   "sha": "ab0a2550ffde",
+   "tokens": 119,
+   "heartbeats": 2126,
+   "ok": false,
+   "error": "1239:6: Type mismatch: After simplification, term hp has type @GT.gt ENNReal ENNReal.instPartialOrder.toLT ((do let r ← $ᵖ (Fin (n + 1) → F) pure (Δ₀(multilinearCombine (affineLineEvaluation (splitHalfRowWiseInterleavedWords u).1 (splitHalfRowWiseInterleavedWords u).2 (r (Fin.last n))) (Fin.init r),",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:53:24Z"
+  },
+  {
+   "sha": "cea0d5e5e4b1",
+   "tokens": 118,
+   "heartbeats": 2172,
+   "ok": false,
+   "error": "1235:4: Tactic `apply` failed: could not unify the conclusion of `CA_split_rowwi … [hypotheses omitted] ⊢ jointProximityNat (↑MC) u e",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:53:49Z"
+  },
+  {
+   "sha": "737686a2f42a",
+   "tokens": 117,
+   "heartbeats": 2116,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:53:59Z",
+   "score": 89.6
+  },
+  {
+   "sha": "197dfda3fd69",
+   "tokens": 120,
+   "heartbeats": 2221,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:30Z"
+  },
+  {
+   "sha": "d8aa55a0f62a",
+   "tokens": 120,
+   "heartbeats": 2158,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:40Z"
+  },
+  {
+   "sha": "4d605ad37b15",
+   "tokens": 116,
+   "heartbeats": 2116,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:55:09Z",
+   "score": 89.62
+  },
+  {
+   "sha": "1056bfd79ef8",
+   "tokens": 122,
+   "heartbeats": 2102,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:55:40Z"
+  },
+  {
+   "sha": "3ac812a59f1b",
+   "tokens": 118,
+   "heartbeats": 2155,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:55:51Z"
+  },
+  {
+   "sha": "1890a51ade97",
+   "tokens": 117,
+   "heartbeats": 2115,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:56:01Z"
+  },
+  {
+   "sha": "40593fc4ba52",
+   "tokens": 118,
+   "heartbeats": 2119,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:56:30Z"
+  },
+  {
+   "sha": "932d476649e6",
+   "tokens": 118,
+   "heartbeats": 2115,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:56:40Z"
+  },
+  {
+   "sha": "b1501695ce28",
+   "tokens": 119,
+   "heartbeats": 2121,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:56:50Z"
+  },
+  {
+   "sha": "3b60172272db",
+   "tokens": 121,
+   "heartbeats": 2114,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:57:00Z"
+  },
+  {
+   "sha": "b316ba736fb1",
+   "tokens": 116,
+   "heartbeats": 2115,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:57:21Z",
+   "score": 89.63
+  },
+  {
+   "sha": "ac674115302a",
+   "tokens": 127,
+   "heartbeats": 2087,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:58:25Z"
+  },
+  {
+   "sha": "ee3826b1241d",
+   "tokens": 126,
+   "heartbeats": 2077,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:58:47Z"
+  },
+  {
+   "sha": "994229926450",
+   "tokens": 118,
+   "heartbeats": 2118,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:26:13Z"
+  },
+  {
+   "sha": "bb2e79b46b26",
+   "tokens": 118,
+   "heartbeats": 2115,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:26:23Z"
+  },
+  {
+   "sha": "f04a46ce8931",
+   "tokens": 117,
+   "heartbeats": 198394,
+   "ok": false,
+   "error": "1231:6: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:26:40Z"
+  },
+  {
+   "sha": "a51cf4d00b2f",
+   "tokens": 117,
+   "heartbeats": 1832,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:26:50Z",
+   "score": 90.61
+  },
+  {
+   "sha": "687000b08228",
+   "tokens": 116,
+   "heartbeats": 2156,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:27:21Z"
+  },
+  {
+   "sha": "2b58e5038162",
+   "tokens": 114,
+   "heartbeats": 1833,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:27:46Z",
+   "score": 90.68
+  },
+  {
+   "sha": "631cba2a9660",
+   "tokens": 117,
+   "heartbeats": 1832,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:28:18Z"
+  },
+  {
+   "sha": "c26be7fff53b",
+   "tokens": 122,
+   "heartbeats": 2136,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:28:28Z"
+  },
+  {
+   "sha": "19204e362790",
+   "tokens": 122,
+   "heartbeats": 1872,
+   "ok": false,
+   "error": "1231:50: Type mismatch Fin.elim0 has type Fin 0 → ?m.142 but is expected to have type ∀ (i : Fin 0), u i.succ.succ = finMapTwoWords (u 0) (u 1) i.succ.succ",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:28:38Z"
+  },
+  {
+   "sha": "803866655493",
+   "tokens": 114,
+   "heartbeats": 1832,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:29:38Z"
+  },
+  {
+   "sha": "b61a80018d16",
+   "tokens": 114,
+   "heartbeats": 1870,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:29:48Z"
+  },
+  {
+   "sha": "48079d186382",
+   "tokens": 118,
+   "heartbeats": 1828,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:29:57Z"
+  },
+  {
+   "sha": "5264bbf29bf9",
+   "tokens": 114,
+   "heartbeats": 1375,
+   "ok": false,
+   "error": "1237:11: don't know how to synthesize implicit argument `b` @lt_of_lt_of_le ENNR … [hypotheses omitted] ⊢ ENNReal",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:30:08Z"
+  },
+  {
+   "sha": "4788d05c1b72",
+   "tokens": 118,
+   "heartbeats": 1839,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:30:17Z"
+  },
+  {
+   "sha": "d4cd61b2cffd",
+   "tokens": 112,
+   "heartbeats": 1993,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:30:28Z"
+  },
+  {
+   "sha": "d832beb67d5e",
+   "tokens": 117,
+   "heartbeats": 1805,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r9",
+   "t": "2026-10-14T11:56:46Z",
+   "score": 90.7
+  },
+  {
+   "sha": "cecbd0bf8531",
+   "tokens": 126,
+   "heartbeats": 1806,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r9",
+   "t": "2026-10-14T11:57:17Z"
+  },
+  {
+   "sha": "341cef5e0308",
+   "tokens": 114,
+   "heartbeats": 1832,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r9",
+   "t": "2026-10-14T11:57:29Z"
+  },
+  {
+   "sha": "c4cead92792a",
+   "tokens": 118,
+   "heartbeats": 1800,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:22:30Z"
+  },
+  {
+   "sha": "ad0d1cee596f",
+   "tokens": 117,
+   "heartbeats": 1842,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:22:40Z"
+  },
+  {
+   "sha": "db05cc765a6b",
+   "tokens": 120,
+   "heartbeats": 1873,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:22:50Z"
+  },
+  {
+   "sha": "6a12850b20a8",
+   "tokens": 120,
+   "heartbeats": 1833,
+   "ok": false,
+   "error": "1238:6: Type mismatch: After simplification, term hp has type @GT.gt ENNReal ENNReal.instPartialOrder.toLT ((do let r ← $ᵖ (Fin (n + 1) → F) pure (Δ₀(multilinearCombine (affineLineEvaluation (splitHalfRowWiseInterleavedWords u).1 (splitHalfRowWiseInterleavedWords u).2 (r (Fin.last n))) fun k => r k.",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:23:00Z"
+  },
+  {
+   "sha": "f8c5bdb6f66f",
+   "tokens": 114,
+   "heartbeats": 1804,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:23:10Z",
+   "score": 90.78
+  },
+  {
+   "sha": "ce6df147e7ed",
+   "tokens": 119,
+   "heartbeats": 1722,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:24:18Z",
+   "score": 90.95
+  },
+  {
+   "sha": "d5a4e266a351",
+   "tokens": 116,
+   "heartbeats": 1871,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:24:49Z"
+  },
+  {
+   "sha": "fa803f6f96cc",
+   "tokens": 123,
+   "heartbeats": 1841,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:25:00Z"
+  },
+  {
+   "sha": "51dc7737cf29",
+   "tokens": 116,
+   "heartbeats": 1708,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:25:21Z",
+   "score": 91.07
+  },
+  {
+   "sha": "045c8c338cb4",
+   "tokens": 116,
+   "heartbeats": 3761,
+   "ok": false,
+   "error": "1239:6: Type mismatch: After simplification, term hp has type (do let r ← $ᵖ (Fin (n + 1) → F) pure (Δ₀(multilinearCombine u r, ↑MC) ≤ ↑e)) True > ↑(n + 1) * ↑ε / ↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ (Fin (n + 1) → F) pure (Δ₀(multilinearCombine (affineLineEvaluation (splitH",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:25:52Z"
+  },
+  {
+   "sha": "fef6b2dc86a4",
+   "tokens": 121,
+   "heartbeats": 2026,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:26:03Z"
+  },
+  {
+   "sha": "2f746cb92242",
+   "tokens": 119,
+   "heartbeats": 1690,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:26:32Z"
+  },
+  {
+   "sha": "8340aa9565b8",
+   "tokens": 122,
+   "heartbeats": 1788,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:26:42Z"
+  },
+  {
+   "sha": "6ac8a32e1f7e",
+   "tokens": 125,
+   "heartbeats": 1774,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:26:52Z"
+  },
+  {
+   "sha": "25e3a022cf9d",
+   "tokens": 116,
+   "heartbeats": 1706,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:27:18Z",
+   "score": 91.08
+  },
+  {
+   "sha": "43a62a6c848d",
+   "tokens": 116,
+   "heartbeats": 1699,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:27:49Z",
+   "score": 91.11
+  },
+  {
+   "sha": "f3e9d0627ebd",
+   "tokens": 118,
+   "heartbeats": 1711,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:28:19Z"
+  },
+  {
+   "sha": "aa244dca5daf",
+   "tokens": 120,
+   "heartbeats": 1713,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:28:30Z"
+  },
+  {
+   "sha": "eb4e15718400",
+   "tokens": 116,
+   "heartbeats": 1729,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:29:27Z"
+  },
+  {
+   "sha": "83922c457c30",
+   "tokens": 116,
+   "heartbeats": 1702,
+   "ok": false,
+   "error": "1230:4: Type mismatch: After simplification, term hp has type (do let r ← $ᵖ (Fin (Nat.succ 0) → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0), ↑MC) ≤ ↑e)) True > ↑1 * ↑ε / ↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ (Fin 1 → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0),",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:29:37Z"
+  },
+  {
+   "sha": "4d91763742d4",
+   "tokens": 134,
+   "heartbeats": 1367,
+   "ok": false,
+   "error": "1227:61: Unknown identifier `Code`",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:29:47Z"
+  },
+  {
+   "sha": "bfa9ec66627f",
+   "tokens": 133,
+   "heartbeats": 1768,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:30:14Z"
+  },
+  {
+   "sha": "29b070d2a103",
+   "tokens": 119,
+   "heartbeats": 784,
+   "ok": false,
+   "error": "1228:19: Tactic `apply` failed: could not unify the conclusion of `hC_proximityG … [hypotheses omitted] ⊢ jointProximityNat (↑MC) (finMapTwoWords (u 0) (u 1)) e",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:30:24Z"
+  },
+  {
+   "sha": "b6f291a1074f",
+   "tokens": 123,
+   "heartbeats": 1293,
+   "ok": false,
+   "error": "1233:15: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce case succ … [hypotheses omitted] ⊢ jointProximityNat (↑MC) n e",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:30:34Z"
+  },
+  {
+   "sha": "c550788397cd",
+   "tokens": 118,
+   "heartbeats": 2000,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:55:52Z"
+  },
+  {
+   "sha": "cd1b666da28b",
+   "tokens": 116,
+   "heartbeats": 1681,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:56:02Z",
+   "score": 91.17
+  },
+  {
+   "sha": "779210dd9d80",
+   "tokens": 119,
+   "heartbeats": 1718,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:56:32Z"
+  },
+  {
+   "sha": "1418d00066d8",
+   "tokens": 121,
+   "heartbeats": 1704,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:56:42Z"
+  },
+  {
+   "sha": "d9aadd17c020",
+   "tokens": 121,
+   "heartbeats": 1701,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:56:52Z"
+  },
+  {
+   "sha": "e30b725a2c63",
+   "tokens": 118,
+   "heartbeats": 1679,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:57:18Z"
+  },
+  {
+   "sha": "2145bb5b95ef",
+   "tokens": 117,
+   "heartbeats": 200237,
+   "ok": false,
+   "error": "1229:4: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:57:35Z"
+  },
+  {
+   "sha": "fe1f319dced7",
+   "tokens": 125,
+   "heartbeats": 1706,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:57:45Z"
+  },
+  {
+   "sha": "ae7689c0eaca",
+   "tokens": 120,
+   "heartbeats": 1677,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:57:55Z"
+  },
+  {
+   "sha": "7e73b759b429",
+   "tokens": 121,
+   "heartbeats": 1681,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:58:05Z"
+  },
+  {
+   "sha": "fb3325f746c7",
+   "tokens": 119,
+   "heartbeats": 1749,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:58:15Z"
+  },
+  {
+   "sha": "e3ffa8f57119",
+   "tokens": 120,
+   "heartbeats": 1717,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:59:34Z"
+  },
+  {
+   "sha": "c2fd2f7c0694",
+   "tokens": 117,
+   "heartbeats": 1193,
+   "ok": false,
+   "error": "1227:86: Type mismatch Fin.elim0 has type Fin 0 → ?m.81 but is expected to have type ∀ (i : Fin 0), u i.succ.succ = finMapTwoWords (u 0) (u 1) i.succ.succ",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:37Z"
+  },
+  {
+   "sha": "91a5a66c8746",
+   "tokens": 122,
+   "heartbeats": 1811,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:47Z"
+  },
+  {
+   "sha": "02ccfd2a1c49",
+   "tokens": 115,
+   "heartbeats": 1847,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:57Z"
+  },
+  {
+   "sha": "35517ce6ce9f",
+   "tokens": 116,
+   "heartbeats": 1683,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:01:07Z"
+  },
+  {
+   "sha": "1cb65bca8184",
+   "tokens": 112,
+   "heartbeats": 1652,
+   "ok": false,
+   "error": "1230:4: Type mismatch: After simplification, term hp has type (do let r ← $ᵖ (Fin (Nat.succ 0) → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0), ↑MC) ≤ ↑e)) True > ↑(Nat.succ 0) * ↑ε / ↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ (Fin 1 → F) pure (Δ₀(affineLineEvaluation (u 0) (",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:03:39Z"
+  },
+  {
+   "sha": "ddc3310426c3",
+   "tokens": 114,
+   "heartbeats": 1683,
+   "ok": false,
+   "error": "1230:4: Type mismatch: After simplification, term hp has type (do let r ← $ᵖ (Fin (Nat.succ 0) → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0), ↑MC) ≤ ↑e)) True > ↑1 * ↑ε / ↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ (Fin 1 → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0),",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:03:49Z"
+  },
+  {
+   "sha": "d668c45340b3",
+   "tokens": 114,
+   "heartbeats": 1653,
+   "ok": false,
+   "error": "1230:4: Type mismatch: After simplification, term hp has type (do let r ← $ᵖ (Fin (Nat.succ 0) → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0), ↑MC) ≤ ↑e)) True > ↑(Nat.succ 0) * ↑ε / ↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ (Fin 1 → F) pure (Δ₀(affineLineEvaluation (u 0) (",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:03:59Z"
+  },
+  {
+   "sha": "25daf7bb5720",
+   "tokens": 114,
+   "heartbeats": 1683,
+   "ok": false,
+   "error": "1230:4: Type mismatch: After simplification, term hp has type (do let r ← $ᵖ (Fin (Nat.succ 0) → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0), ↑MC) ≤ ↑e)) True > ↑1 * ↑ε / ↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ (Fin 1 → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0),",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:04:10Z"
+  },
+  {
+   "sha": "5d9cc8a4ac95",
+   "tokens": 122,
+   "heartbeats": 1709,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:04:20Z"
+  },
+  {
+   "sha": "f012d25c9053",
+   "tokens": 107,
+   "heartbeats": 3154,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:04:44Z"
+  },
+  {
+   "sha": "30e12390e3b1",
+   "tokens": 113,
+   "heartbeats": 1822,
+   "ok": false,
+   "error": "1231:4: Type mismatch hp has type (do let r ← $ᵖ (Fin (Nat.succ 0) → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0), ↑MC) ≤ ↑e)) True > ↑1 * ↑ε / ↑(Fintype.card F) but is expected to have type (do let r ← $ᵖ (Fin 1 → F) pure (Δ₀(affineLineEvaluation (u 0) (u 1) (r 0), ↑MC) ≤ ↑e)) True > ↑ε / ↑(F",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:04:54Z"
+  },
+  {
+   "sha": "11a4cb22dac3",
+   "tokens": 117,
+   "heartbeats": 1681,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:05:04Z"
+  },
+  {
+   "sha": "3893fd9fba29",
+   "tokens": 118,
+   "heartbeats": 1673,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:05:45Z"
+  },
+  {
+   "sha": "1a4bb5eb2ee9",
+   "tokens": 119,
+   "heartbeats": 1696,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:05Z"
+  },
+  {
+   "sha": "1d342a69d0c8",
+   "tokens": 121,
+   "heartbeats": 1701,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:15Z"
+  },
+  {
+   "sha": "5bca6f2118f3",
+   "tokens": 124,
+   "heartbeats": 1401,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:25Z",
+   "score": 91.97
+  },
+  {
+   "sha": "76977632a95d",
+   "tokens": 121,
+   "heartbeats": 1686,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:56Z"
+  },
+  {
+   "sha": "bd4e297f7851",
+   "tokens": 121,
+   "heartbeats": 1748,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:29:06Z"
+  },
+  {
+   "sha": "d5e6fb1387ae",
+   "tokens": 124,
+   "heartbeats": 1401,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:29:39Z"
+  },
+  {
+   "sha": "38fc6dd58019",
+   "tokens": 124,
+   "heartbeats": 1401,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:29:50Z"
+  },
+  {
+   "sha": "cd7b6160f5be",
+   "tokens": 124,
+   "heartbeats": 1402,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:30:00Z"
+  },
+  {
+   "sha": "c3893682752d",
+   "tokens": 131,
+   "heartbeats": 1393,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:30:11Z"
+  },
+  {
+   "sha": "8e49c2570d60",
+   "tokens": 132,
+   "heartbeats": 1482,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:30:21Z"
+  },
+  {
+   "sha": "3a6f0b940083",
+   "tokens": 122,
+   "heartbeats": 1384,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:31:00Z",
+   "score": 92.08
+  },
+  {
+   "sha": "3b7335e05ea7",
+   "tokens": 123,
+   "heartbeats": 1190,
+   "ok": false,
+   "error": "1229:43: Invalid argument name `inst_1` for function `prob_uniform_singleton_finFun_eq` Hint: Perhaps you meant one of the following parameter names: • `F`: i̵n̵s̵t̵_̵1̵F̲ • `P`: i̵n̵s̵t̵_̵1̵P̲",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:31:31Z"
+  },
+  {
+   "sha": "7afa836a1e80",
+   "tokens": 126,
+   "heartbeats": 1562,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:31:41Z"
+  },
+  {
+   "sha": "0e2ca299983c",
+   "tokens": 127,
+   "heartbeats": 1402,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:31:51Z"
+  },
+  {
+   "sha": "40847e785962",
+   "tokens": 125,
+   "heartbeats": 1462,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:32:01Z"
+  },
+  {
+   "sha": "41114ac91601",
+   "tokens": 129,
+   "heartbeats": 1402,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:32:42Z"
+  },
+  {
+   "sha": "7d50d003a94a",
+   "tokens": 127,
+   "heartbeats": 1391,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:32:53Z"
+  },
+  {
+   "sha": "5e24663ebbb1",
+   "tokens": 129,
+   "heartbeats": 1391,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:33:02Z"
+  },
+  {
+   "sha": "b264de5ada26",
+   "tokens": 123,
+   "heartbeats": 1398,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:33:12Z"
+  },
+  {
+   "sha": "b7084992ebcd",
+   "tokens": 127,
+   "heartbeats": 1389,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:33:22Z"
+  },
+  {
+   "sha": "9afc3a76de04",
+   "tokens": 127,
+   "heartbeats": 1452,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:42:52Z"
+  },
+  {
+   "sha": "5f6f8c2f2fd0",
+   "tokens": 122,
+   "heartbeats": 1401,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:43:02Z"
+  },
+  {
+   "sha": "ddc392648712",
+   "tokens": 122,
+   "heartbeats": 1392,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:43:13Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wuclean-hx-solab1-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:18:26Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:59:08Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:28:14Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r4",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:44:55Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r5",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:08:59Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r6",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:45:56Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r7",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:22:01Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:45:17Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r9",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T11:53:30Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r10",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:17:48Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r11",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:52:04Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r12",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:23:38Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:38:46Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  }
+ ],
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 1,
+    "d_score": 1.8,
+    "d_tokens": -26,
+    "d_heartbeats": 9055,
+    "diff": "+theorem interleaved_affine_gaps_imply_tensor_gaps\n+    (hC_proximityGapAffineLines : e_ε_correlatedAgreementAffineLinesNat\n+      (F := F) (A := A) (ι := ι) (C := MC) (e := e) (ε := ε))\n+    (h_interleaved_gaps : ∀ m : ℕ, m ≥ 1 →\n+      e_ε_correlatedAgreementAffineLinesNat (F := F)\n+        (A := InterleavedSymbol A (Fin m)) (ι := ι) (C := MC ^⋈ (Fin m)) e ε) :\n+    ∀ (ϑ : ℕ), (hϑ_gt_0 : ϑ > 0) → δ_ε_multilinearCorrelatedAgreement_Nat (F := F) (A := A)\n+      (ι := ι) (C := MC) (ϑ := ϑ) (e := e) (ε := ε) := by\n+    classical\n+    intro ϑ\n+    induction ϑ with\n+    | zero =>\n+      intro u\n+      contradiction\n+    | succ ϑ_sub_1 ih =>\n+      cases ϑ_sub_1 with\n+      | zero =>\n+        -- "
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 5,
+    "d_score": 46.2,
+    "d_tokens": -1045,
+    "d_heartbeats": -5755,
+    "diff": "-    classical\n-    intro ϑ\n-    induction ϑ with\n-    | zero =>\n-      intro u\n-      contradiction\n-    | succ ϑ_sub_1 ih =>\n-      cases ϑ_sub_1 with\n-      | zero =>\n-        -- `ϑ = 1`\n-        simp only [zero_add, zero_lt_one, forall_const]\n-        intro u\n-        let toAffineLineEval := multilinearCombine₁_eq_affineLineEvaluation (F := F) (u := u)\n-        intro hprob_gt\n-        simp only [toAffineLineEval] at hprob_gt\n-        let prob_eq := prob_uniform_singleton_finFun_eq (F := F)\n-          (P := λr => Δ₀(affineLineEvaluation (u 0) (u 1) r, MC) ≤ e)\n-        -- Convert sampling (r ← (Fin 1 → F)) into sampling (r ← F)\n-        simp only [prob_eq, Nat.cast_one, ENNReal.coe_one, o"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 7,
+    "d_score": 1.81,
+    "d_tokens": -41,
+    "d_heartbeats": -226,
+    "diff": "-    have heq (r : Fin n → F) (s : F) :\n-        multilinearCombine u (Fin.snoc r s) =\n-          multilinearCombine (affineLineEvaluation U₀ U₁ s) r := by\n-      rw [multilinearCombine_recursive_form]\n-      simp only [Fin.snoc_last, Fin.init_snoc]\n-      rfl\n-    simp_rw [heq] at hp\n+    simp only [multilinearCombine_recursive_form, Fin.snoc_last, Fin.init_snoc] at hp"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 8,
+    "d_score": 0.69,
+    "d_tokens": -26,
+    "d_heartbeats": -15,
+    "diff": "-    let U₀ := (splitHalfRowWiseInterleavedWords (ϑ := n) u).1\n-    let U₁ := (splitHalfRowWiseInterleavedWords (ϑ := n) u).2"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 9,
+    "d_score": 0.37,
+    "d_tokens": -9,
+    "d_heartbeats": -41,
+    "diff": "-    simp only [Nat.succ_eq_add_one, zero_add, ModuleCode]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 12,
+    "d_score": 2.12,
+    "d_tokens": -36,
+    "d_heartbeats": -347,
+    "diff": "-    have hs := prob_split_last_uniform_sampling_of_finFun (F := F)\n-      (P := fun s r => Δ₀(multilinearCombine u (Fin.snoc r s), MC) ≤ e)\n-    simp only [← Fin.init_def, Fin.snoc_init_self] at hs\n-    rw [hs] at hp\n-    simp only [multilinearCombine_recursive_form, Fin.snoc_last, Fin.init_snoc] at hp\n-    have hr := prob_R_star_gt_threshold (MC := MC) u e hp\n+    have hr := prob_R_star_gt_threshold (MC := MC) u e (by\n+      rw [← prob_split_last_uniform_sampling_of_finFun]\n+      simpa only [multilinearCombine_affineComb_split_last_close,\n+        multilinearCombine_recursive_form, Fin.init_def, ENNReal.coe_mul, ENNReal.coe_natCast] using hp)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 1,
+    "d_score": 0.16,
+    "d_tokens": -16,
+    "d_heartbeats": 65,
+    "diff": "-    have hu : u = finMapTwoWords (u 0) (u 1) := by\n-      funext i\n-      fin_cases i <;> rfl\n-    rw [hu]\n-    exact hC_proximityGapAffineLines (u 0) (u 1) hp\n+    convert hC_proximityGapAffineLines (u 0) (u 1) hp using 1\n+    congr 1\n+    funext i\n+    fin_cases i <;> rfl"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 6,
+    "d_score": 0.46,
+    "d_tokens": 4,
+    "d_heartbeats": -156,
+    "diff": "-    funext i\n-    fin_cases i <;> rfl\n+    exact funext (Fin.forall_fin_two.mpr ⟨rfl, rfl⟩)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 10,
+    "d_score": 0.2,
+    "d_tokens": -8,
+    "d_heartbeats": 0,
+    "diff": "-    have hr := prob_R_star_gt_threshold (MC := MC) u e (by\n+    have hr := prob_R_star_gt_threshold MC u e (by\n-    apply CA_split_rowwise_implies_CA (C := MC) u e\n+    apply CA_split_rowwise_implies_CA MC u e"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 13,
+    "d_score": 0.03,
+    "d_tokens": -1,
+    "d_heartbeats": -1,
+    "diff": "-  classical"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 14,
+    "d_score": 0.15,
+    "d_tokens": 0,
+    "d_heartbeats": -43,
+    "diff": "-    congr 1\n+    apply congrArg"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 7,
+    "d_score": 0.32,
+    "d_tokens": -12,
+    "d_heartbeats": -7,
+    "diff": "-  intro n hn\n-  induction n, hn using Nat.le_induction with\n-  | base =>\n+  apply Nat.le_induction\n+  ·\n-  | succ n hn ih =>\n-    intro u hp\n+  · intro n hn ih u hp"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 9,
+    "d_score": 0.04,
+    "d_tokens": -1,
+    "d_heartbeats": -4,
+    "diff": "-    have hr := prob_R_star_gt_threshold MC u e (by\n-      rw [← prob_split_last_uniform_sampling_of_finFun]\n-      simpa only [multilinearCombine_affineComb_split_last_close,\n-        multilinearCombine_recursive_form, Fin.init_def, ENNReal.coe_mul, ENNReal.coe_natCast] using hp)\n-    apply lt_of_lt_of_le hr\n-    apply Pr_le_Pr_of_implies\n-    intro r hmem\n-    exact correlatedAgreement_of_mem_R_star_tensor MC ih u ⟨r, hmem⟩\n+    refine lt_of_lt_of_le (prob_R_star_gt_threshold MC u e ?_) ?_\n+    · rw [← prob_split_last_uniform_sampling_of_finFun]\n+      simpa only [multilinearCombine_affineComb_split_last_close,\n+        multilinearCombine_recursive_form, Fin.init_def, ENNReal.coe_mul, ENNR"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 12,
+    "d_score": 1.08,
+    "d_tokens": 1,
+    "d_heartbeats": -311,
+    "diff": "-    simp only [multilinearCombine₁_eq_affineLineEvaluation,\n-      prob_uniform_singleton_finFun_eq (fun r => Δ₀(affineLineEvaluation (u 0) (u 1) r, MC) ≤ e), Nat.cast_one, ENNReal.coe_one, one_mul] at hp\n+    simp only [multilinearCombine₁_eq_affineLineEvaluation, Nat.cast_one, ENNReal.coe_one, one_mul] at hp\n+    rw [prob_uniform_singleton_finFun_eq (fun r => Δ₀(affineLineEvaluation (u 0) _ r, MC) ≤ e)] at hp"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 6,
+    "d_score": 0.63,
+    "d_tokens": -16,
+    "d_heartbeats": -66,
+    "diff": "-    simp only [multilinearCombine₁_eq_affineLineEvaluation, Nat.cast_one, ENNReal.coe_one, one_mul] at hp\n-    rw [prob_uniform_singleton_finFun_eq (fun r => Δ₀(affineLineEvaluation (u 0) _ r, MC) ≤ e)] at hp\n-    convert hC_proximityGapAffineLines (u 0) (u 1) hp using 1\n-    apply congrArg\n-    exact funext (Fin.forall_fin_two.mpr ⟨rfl, rfl⟩)\n+    convert hC_proximityGapAffineLines (u 0) (u 1) ?_ using 1\n+    · apply congrArg\n+      exact funext (Fin.forall_fin_two.mpr ⟨rfl, rfl⟩)\n+    · rw [← prob_uniform_singleton_finFun_eq]\n+      simpa only [multilinearCombine₁_eq_affineLineEvaluation,\n+        Nat.cast_one, ENNReal.coe_one, one_mul, ENNReal.coe_natCast] using hp"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 8,
+    "d_score": 0.08,
+    "d_tokens": -4,
+    "d_heartbeats": 5,
+    "diff": "-    apply h_interleaved_gaps (2 ^ n) Nat.one_le_two_pow\n+    apply h_interleaved_gaps _ Nat.one_le_two_pow"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 12,
+    "d_score": 0.13,
+    "d_tokens": 0,
+    "d_heartbeats": -37,
+    "diff": "-    apply CA_split_rowwise_implies_CA MC u e\n+    apply CA_split_rowwise_implies_CA _ u e"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 15,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": 0,
+    "diff": "-    apply CA_split_rowwise_implies_CA _ u e\n+    apply CA_split_rowwise_implies_CA _ u"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 23,
+    "d_score": 0.01,
+    "d_tokens": 0,
+    "d_heartbeats": -1,
+    "diff": "-      exact funext (Fin.forall_fin_two.mpr ⟨rfl, rfl⟩)\n+      exact funext (Fin.forall_fin_two.2 ⟨rfl, rfl⟩)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r7",
+    "check": 4,
+    "d_score": 0.98,
+    "d_tokens": 1,
+    "d_heartbeats": -283,
+    "diff": "-    · rw [← prob_split_last_uniform_sampling_of_finFun]\n+    · simp only [← prob_split_last_uniform_sampling_of_finFun]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r7",
+    "check": 6,
+    "d_score": 0.07,
+    "d_tokens": -3,
+    "d_heartbeats": 1,
+    "diff": "-    · simp only [← prob_split_last_uniform_sampling_of_finFun]\n-      simpa only [multilinearCombine_affineComb_split_last_close,\n+    · simpa only [← prob_split_last_uniform_sampling_of_finFun,\n+        multilinearCombine_affineComb_split_last_close,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r9",
+    "check": 1,
+    "d_score": 0.02,
+    "d_tokens": 3,
+    "d_heartbeats": -28,
+    "diff": "-  ·\n-    intro u hp\n-    convert hC_proximityGapAffineLines (u 0) (u 1) ?_ using 1\n-    · apply congrArg\n-      exact funext (Fin.forall_fin_two.2 ⟨rfl, rfl⟩)\n-    · rw [← prob_uniform_singleton_finFun_eq]\n-      simpa only [multilinearCombine₁_eq_affineLineEvaluation,\n-        Nat.cast_one, ENNReal.coe_one, one_mul, ENNReal.coe_natCast] using hp\n+  · intro u hp\n+    have hu : u = finMapTwoWords (u 0) (u 1) := funext (Fin.forall_fin_two.2 ⟨rfl, rfl⟩)\n+    rw [hu]\n+    apply hC_proximityGapAffineLines\n+    rw [← prob_uniform_singleton_finFun_eq]\n+    simpa only [multilinearCombine₁_eq_affineLineEvaluation,\n+      Nat.cast_one, ENNReal.coe_one, one_mul, ENNReal.coe_natCast] using hp"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 5,
+    "d_score": 0.08,
+    "d_tokens": -3,
+    "d_heartbeats": -1,
+    "diff": "-    have hu : u = finMapTwoWords (u 0) (u 1) := funext (Fin.forall_fin_two.2 ⟨rfl, rfl⟩)\n-    rw [hu]\n+    rw [show u = finMapTwoWords (u 0) (u 1) from funext (Fin.forall_fin_two.2 ⟨rfl, rfl⟩)]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 6,
+    "d_score": 0.17,
+    "d_tokens": 5,
+    "d_heartbeats": -82,
+    "diff": "-    · simpa only [← prob_split_last_uniform_sampling_of_finFun,\n-        multilinearCombine_affineComb_split_last_close,\n-        multilinearCombine_recursive_form, Fin.init_def, ENNReal.coe_mul, ENNReal.coe_natCast] using hp\n+    · simp only [← prob_split_last_uniform_sampling_of_finFun,\n+        multilinearCombine_affineComb_split_last_close, ← Fin.init_def,\n+        ← multilinearCombine_recursive_form]\n+      simpa only [ENNReal.coe_mul, ENNReal.coe_natCast] using hp"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 9,
+    "d_score": 0.12,
+    "d_tokens": -3,
+    "d_heartbeats": -14,
+    "diff": "-    · simp only [← prob_split_last_uniform_sampling_of_finFun,\n+    · simpa only [← prob_split_last_uniform_sampling_of_finFun,\n-        ← multilinearCombine_recursive_form]\n-      simpa only [ENNReal.coe_mul, ENNReal.coe_natCast] using hp\n+        ← multilinearCombine_recursive_form, ENNReal.coe_mul, ENNReal.coe_natCast] using hp"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 15,
+    "d_score": 0.01,
+    "d_tokens": 0,
+    "d_heartbeats": -2,
+    "diff": "-    refine lt_of_lt_of_le (prob_R_star_gt_threshold MC u e ?_) ?_\n+    refine (prob_R_star_gt_threshold MC u e ?_).trans_le ?_"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 16,
+    "d_score": 0.03,
+    "d_tokens": 0,
+    "d_heartbeats": -7,
+    "diff": "-    refine (prob_R_star_gt_threshold MC u e ?_).trans_le ?_\n+    refine lt_of_le_of_lt' ?_ (prob_R_star_gt_threshold MC u e ?_)\n+    · apply Pr_le_Pr_of_implies\n+      intro r hmem\n+      exact correlatedAgreement_of_mem_R_star_tensor MC ih u ⟨r, hmem⟩\n-    · apply Pr_le_Pr_of_implies\n-      intro r hmem\n-      exact correlatedAgreement_of_mem_R_star_tensor MC ih u ⟨r, hmem⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 2,
+    "d_score": 0.06,
+    "d_tokens": 0,
+    "d_heartbeats": -18,
+    "diff": "-    · simpa only [← prob_split_last_uniform_sampling_of_finFun,\n+    · simp only [← prob_split_last_uniform_sampling_of_finFun,\n-        ← multilinearCombine_recursive_form, ENNReal.coe_mul, ENNReal.coe_natCast] using hp\n+        ← multilinearCombine_recursive_form, ENNReal.coe_mul, ENNReal.coe_natCast]\n+      exact hp"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r12",
+    "check": 3,
+    "d_score": 0.8,
+    "d_tokens": 8,
+    "d_heartbeats": -280,
+    "diff": "+  letI : Nonempty F := ⟨0⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r12",
+    "check": 11,
+    "d_score": 0.11,
+    "d_tokens": -2,
+    "d_heartbeats": -17,
+    "diff": "-  letI : Nonempty F := ⟨0⟩\n-    rw [← prob_uniform_singleton_finFun_eq]\n+    rw [← @prob_uniform_singleton_finFun_eq F _ ⟨0⟩]"
+   }
+  ]
+ },
+ "api_spend": 2.578948,
+ "profile_cache": {
+  "b316ba736fb1": {
+   "ok": true,
+   "total": 2115,
+   "floor": null,
+   "reference": 9381,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "apply Nat.le_induction",
+     "heartbeats": null
+    },
+    {
+     "lines": "10-17",
+     "depth_indent": 2,
+     "text": "· intro u hp convert hC_proximityGapAffineLines (u 0) (u 1) ?_ using 1 · apply congrArg exact funext",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-27",
+     "depth_indent": 2,
+     "text": "· intro n hn ih u hp apply CA_split_rowwise_implies_CA _ u apply h_interleaved_gaps _ Nat.one_le_two",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "2b58e5038162": {
+   "ok": true,
+   "total": 1833,
+   "floor": null,
+   "reference": 9381,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "apply Nat.le_induction",
+     "heartbeats": null
+    },
+    {
+     "lines": "10-17",
+     "depth_indent": 2,
+     "text": "· intro u hp convert hC_proximityGapAffineLines (u 0) (u 1) ?_ using 1 · apply congrArg exact funext",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-27",
+     "depth_indent": 2,
+     "text": "· intro n hn ih u hp apply CA_split_rowwise_implies_CA _ u apply h_interleaved_gaps _ Nat.one_le_two",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "d832beb67d5e": {
+   "ok": true,
+   "total": 1805,
+   "floor": null,
+   "reference": 9381,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "apply Nat.le_induction",
+     "heartbeats": null
+    },
+    {
+     "lines": "10-16",
+     "depth_indent": 2,
+     "text": "· intro u hp have hu : u = finMapTwoWords (u 0) (u 1) := funext (Fin.forall_fin_two.2 ⟨rfl, rfl⟩) rw",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-26",
+     "depth_indent": 2,
+     "text": "· intro n hn ih u hp apply CA_split_rowwise_implies_CA _ u apply h_interleaved_gaps _ Nat.one_le_two",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "43a62a6c848d": {
+   "ok": true,
+   "total": 1699,
+   "floor": null,
+   "reference": 9381,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "apply Nat.le_induction",
+     "heartbeats": null
+    },
+    {
+     "lines": "10-15",
+     "depth_indent": 2,
+     "text": "· intro u hp rw [show u = finMapTwoWords (u 0) (u 1) from funext (Fin.forall_fin_two.2 ⟨rfl, rfl⟩)] ",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-25",
+     "depth_indent": 2,
+     "text": "· intro n hn ih u hp apply CA_split_rowwise_implies_CA _ u apply h_interleaved_gaps _ Nat.one_le_two",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "cd1b666da28b": {
+   "ok": true,
+   "total": 1681,
+   "floor": null,
+   "reference": 9381,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "apply Nat.le_induction",
+     "heartbeats": null
+    },
+    {
+     "lines": "10-15",
+     "depth_indent": 2,
+     "text": "· intro u hp rw [show u = finMapTwoWords (u 0) (u 1) from funext (Fin.forall_fin_two.2 ⟨rfl, rfl⟩)] ",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-26",
+     "depth_indent": 2,
+     "text": "· intro n hn ih u hp apply CA_split_rowwise_implies_CA _ u apply h_interleaved_gaps _ Nat.one_le_two",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "3a6f0b940083": {
+   "ok": true,
+   "total": 1384,
+   "floor": null,
+   "reference": 9381,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "apply Nat.le_induction",
+     "heartbeats": null
+    },
+    {
+     "lines": "10-15",
+     "depth_indent": 2,
+     "text": "· intro u hp rw [show u = finMapTwoWords (u 0) (u 1) from funext (Fin.forall_fin_two.2 ⟨rfl, rfl⟩)] ",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-26",
+     "depth_indent": 2,
+     "text": "· intro n hn ih u hp apply CA_split_rowwise_implies_CA _ u apply h_interleaved_gaps _ Nat.one_le_two",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "budget_milestones": {
+  "2": {
+   "spend": 2.010736,
+   "best": 91.11,
+   "run_id": "wuclean-hx-solab1-r10",
+   "turn": 24,
+   "t": "2026-10-14T12:31:44Z"
+  }
+ }
+}

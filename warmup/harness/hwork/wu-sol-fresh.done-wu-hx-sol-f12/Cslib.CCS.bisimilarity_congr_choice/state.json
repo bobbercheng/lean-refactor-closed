@@ -1,0 +1,554 @@
+{
+ "problem": "Cslib.CCS.bisimilarity_congr_choice",
+ "best": {
+  "score": 85.42,
+  "proof": "theorem bisimilarity_congr_choice :\n    (p ~[lts (defs := defs)] q) → (choice p r) ~[lts (defs := defs)] (choice q r) := by\n  refine (⟨_, ChoiceBisim.choice ·, ?_⟩)\n  rintro _ _ (h | h) μ <;> constructor <;> intro s t\n  case' choice.left | choice.right => cases t <;> rename_i t\n  case' choice.left.choiceR | choice.right.choiceR => exact ⟨_, .choiceR t, .bisim (.refl _)⟩\n  all_goals\n    apply Exists.imp fun _ => And.imp ?_ ChoiceBisim.bisim\n    first | exact h.follow_fst t | exact h.follow_snd t\n    first | exact id | exact Tr.choiceL",
+  "tokens": 80,
+  "heartbeats": 460,
+  "L": 68.13,
+  "H": 88.14,
+  "Z": 100.0,
+  "compat": {
+   "v4.33.0-rc2": true,
+   "v4.32.0": true,
+   "v4.31.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "f2b7356d1bee",
+   "tokens": 94,
+   "heartbeats": 311,
+   "ok": false,
+   "error": "332:4: unsolved goals case choice.right.choiceR … [hypotheses omitted] ⊢ ∃ a, Tr p✝ μ a ∧ a ~[lts] s",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:24:47Z"
+  },
+  {
+   "sha": "377efe0a4d82",
+   "tokens": 92,
+   "heartbeats": 346,
+   "ok": false,
+   "error": "328:33: Application type mismatch: The argument t has type Tr p✝ μ s but is expected to have type Tr r✝ μ s in the application Tr.choiceR t",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:02Z"
+  },
+  {
+   "sha": "2508312624e8",
+   "tokens": 97,
+   "heartbeats": 365,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:06Z",
+   "score": 83.98
+  },
+  {
+   "sha": "bf7ceee0c2ac",
+   "tokens": 85,
+   "heartbeats": 176,
+   "ok": false,
+   "error": "327:24: Unknown identifier `t`",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:12Z"
+  },
+  {
+   "sha": "a5711eaf0cf2",
+   "tokens": 88,
+   "heartbeats": 584,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:26:16Z"
+  },
+  {
+   "sha": "7cbbad913282",
+   "tokens": 92,
+   "heartbeats": 464,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:26:18Z"
+  },
+  {
+   "sha": "b1263d936b65",
+   "tokens": 85,
+   "heartbeats": 1064,
+   "ok": false,
+   "error": "332:57: Application type mismatch: The argument h has type s₂'✝ ~[lts,lts] a✝ but is expected to have type a✝ ~[lts] s₂'✝ in the application ChoiceBisim.bisim h",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:27:15Z"
+  },
+  {
+   "sha": "f5f0d1cd487d",
+   "tokens": 78,
+   "heartbeats": 1334,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:27:19Z"
+  },
+  {
+   "sha": "ae87ef84a8d5",
+   "tokens": 81,
+   "heartbeats": 691,
+   "ok": false,
+   "error": "331:11: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce case choice.left.choiceL.a.htr … [hypotheses omitted] ⊢ lts.Tr p μ p",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:27:22Z"
+  },
+  {
+   "sha": "190edf357f1f",
+   "tokens": 76,
+   "heartbeats": 729,
+   "ok": false,
+   "error": "330:4: failed",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:27:39Z"
+  },
+  {
+   "sha": "50cab2ccab61",
+   "tokens": 83,
+   "heartbeats": 513,
+   "ok": false,
+   "error": "331:54: Application type mismatch: The argument t has type Tr p✝ μ s but is expected to have type lts.Tr q✝ ?m.589 ?m.590 in the application Bisimilarity.follow_snd h t",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:27:41Z"
+  },
+  {
+   "sha": "a15eb750f12f",
+   "tokens": 77,
+   "heartbeats": 827,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:27:45Z"
+  },
+  {
+   "sha": "a656414fbdf0",
+   "tokens": 93,
+   "heartbeats": 401,
+   "ok": false,
+   "error": "327:53: Unknown identifier `h.follow_snd`",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:28:28Z"
+  },
+  {
+   "sha": "f1f7e2c75aed",
+   "tokens": 88,
+   "heartbeats": 390,
+   "ok": false,
+   "error": "329:41: Unknown identifier `h.follow_snd`",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:28:30Z"
+  },
+  {
+   "sha": "7219a5f3c382",
+   "tokens": 93,
+   "heartbeats": 355,
+   "ok": false,
+   "error": "328:10: Unknown identifier `h.follow_fst`",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:28:32Z"
+  },
+  {
+   "sha": "c03902104d70",
+   "tokens": 90,
+   "heartbeats": 456,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:28:43Z",
+   "score": 84.13
+  },
+  {
+   "sha": "0e54d42fecac",
+   "tokens": 95,
+   "heartbeats": 365,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:28:49Z",
+   "score": 84.25
+  },
+  {
+   "sha": "fbcc55e32c15",
+   "tokens": 83,
+   "heartbeats": 364,
+   "ok": false,
+   "error": "327:11: don't know how to synthesize implicit argument `p` @Exists.imp (Process  … [hypotheses omitted] ⊢ Process Name Constant → Prop",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:28:55Z"
+  },
+  {
+   "sha": "85af0c6a393f",
+   "tokens": 80,
+   "heartbeats": 460,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:29:15Z",
+   "score": 85.42
+  },
+  {
+   "sha": "d10145d6c100",
+   "tokens": 77,
+   "heartbeats": 795,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:29:21Z"
+  },
+  {
+   "sha": "e282d896b23d",
+   "tokens": 89,
+   "heartbeats": 463,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:29:23Z"
+  },
+  {
+   "sha": "059bff51575b",
+   "tokens": 27,
+   "heartbeats": 174,
+   "ok": false,
+   "error": "324:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[lts,lts] q [prop] ¬lts.IsBisimulation lts ChoiceBisim [eqc] True propositions [prop] p ~[lts,lts] q [eqc] False propositions [prop] lts.IsBisimulation lts ChoiceBisim [ematch] E",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:29:42Z"
+  },
+  {
+   "sha": "3d5d4d79622e",
+   "tokens": 43,
+   "heartbeats": 995,
+   "ok": false,
+   "error": "324:12: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[lts,lts] q [prop] p_1 ~[lts,lts] q_1 [prop] lts.Tr (p_1.choice r_1) μ s [prop] ∀ (a : Process Name Constant), lts.Tr (q_1.choice r_1) μ a → ¬ChoiceBisim s a [eqc] True proposit",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:29:44Z"
+  },
+  {
+   "sha": "4b5b3f4f80da",
+   "tokens": 47,
+   "heartbeats": 173,
+   "ok": false,
+   "error": "324:12: duplicate rule 'Bisimilarity.follow_snd'; rule 'Bisimilarity.follow_fst' was already given. Use [<term>,...] to give multiple rules.",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:29:46Z"
+  },
+  {
+   "sha": "dbaff1f46fb4",
+   "tokens": 52,
+   "heartbeats": 2036,
+   "ok": false,
+   "error": "325:12: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[lts,lts] q [prop] p_1 ~[lts,lts] q_1 [prop] Tr p_1 μ s [prop] ∀ (a : Process Name Constant), lts.Tr (q_1.choice r_1) μ a → ¬ChoiceBisim s a [prop] p_1 = Process.pre μ_1 p_2 [",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:29:49Z"
+  },
+  {
+   "sha": "52b0b10c6052",
+   "tokens": 56,
+   "heartbeats": 1987,
+   "ok": false,
+   "error": "327:4: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[{ Tr := Tr },{ Tr := Tr }] q [prop] p_1 ~[{ Tr := Tr },{ Tr := Tr }] q_1 [prop] Tr p_1 μ s [prop] ∀ (a : Process Name Constant), Tr (q_1.choice r_1) μ a → ¬ChoiceBisim s a [pr",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:30:06Z"
+  },
+  {
+   "sha": "641cd084ef2c",
+   "tokens": 58,
+   "heartbeats": 200014,
+   "ok": false,
+   "error": "325:12: Tactic `aesop` failed, made no progress Initial goal: case choice.left.choiceL … [hypotheses omitted] ⊢ ∃ s₂', lts.Tr (q✝.choice r✝) μ s₂' ∧ ChoiceBisim s s₂'",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:30:13Z"
+  },
+  {
+   "sha": "ea14bff4c298",
+   "tokens": 30,
+   "heartbeats": 408,
+   "ok": false,
+   "error": "324:2: `grind` failed case grind.1.1.5.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[lts,lts] q [prop] ChoiceBisim s₁ s₂ [prop] (¬∀ (s₁' : Process Name Constant), Tr s₁ μ s₁' → ∃ s₂', Tr s₂ μ s₂' ∧ ChoiceBisim s₁' s₂') ∨ ¬∀ (s₂' : Process Name Constant),",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:30:15Z"
+  },
+  {
+   "sha": "f6308f514389",
+   "tokens": 52,
+   "heartbeats": 2032,
+   "ok": false,
+   "error": "325:12: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[lts,lts] q [prop] p_1 ~[lts,lts] q_1 [prop] Tr p_1 μ s [prop] ∀ (a : Process Name Constant), lts.Tr (q_1.choice r_1) μ a → ¬ChoiceBisim s a [prop] p_1 = Process.pre μ_1 p_2 [",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:30:27Z"
+  },
+  {
+   "sha": "f2ba24df74c6",
+   "tokens": 56,
+   "heartbeats": 3332,
+   "ok": false,
+   "error": "327:4: `grind` failed case grind.1.1.1.1.1.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[{ Tr := Tr },{ Tr := Tr }] q [prop] p_1 ~[{ Tr := Tr },{ Tr := Tr }] q_1 [prop] Tr p_1 μ s [prop] ∀ (a : Process Name Constant), Tr (q_1.choice r_1) μ a → ¬Cho",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:30:30Z"
+  },
+  {
+   "sha": "7f2dd4114e8c",
+   "tokens": 58,
+   "heartbeats": 4495,
+   "ok": false,
+   "error": "325:12: Tactic `aesop` failed, made no progress Initial goal: case choice.left.choiceL … [hypotheses omitted] ⊢ ∃ s₂', lts.Tr (q✝.choice r✝) μ s₂' ∧ ChoiceBisim s s₂'",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:30:32Z"
+  },
+  {
+   "sha": "c3844e406baa",
+   "tokens": 86,
+   "heartbeats": 322,
+   "ok": false,
+   "error": "326:43: don't know how to synthesize placeholder for argument `f` context: … [hypotheses omitted] ⊢ lts.Tr s₁✝ μ x✝ → lts.Tr s₁✝ μ x✝",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:52Z"
+  },
+  {
+   "sha": "057ab16a362a",
+   "tokens": 87,
+   "heartbeats": 434,
+   "ok": false,
+   "error": "331:31: No goals to be solved",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:54Z"
+  },
+  {
+   "sha": "03ab08d48ddb",
+   "tokens": 89,
+   "heartbeats": 462,
+   "ok": false,
+   "error": "329:31: No goals to be solved",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:56Z"
+  },
+  {
+   "sha": "c3bfa08e07d4",
+   "tokens": 86,
+   "heartbeats": 357,
+   "ok": false,
+   "error": "327:39: Application type mismatch: The argument t has type Tr p✝ μ s but is expected to have type lts.Tr q✝ ?m.671 ?m.672 in the application Bisimilarity.follow_snd h t",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:13Z"
+  },
+  {
+   "sha": "805b5d7b785f",
+   "tokens": 80,
+   "heartbeats": 464,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:15Z"
+  },
+  {
+   "sha": "d27b6d0e161c",
+   "tokens": 89,
+   "heartbeats": 495,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:17Z"
+  },
+  {
+   "sha": "9d5611f578e5",
+   "tokens": 82,
+   "heartbeats": 460,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:35Z"
+  },
+  {
+   "sha": "f9a0f03eab7c",
+   "tokens": 86,
+   "heartbeats": 204,
+   "ok": false,
+   "error": "325:41: unsolved goals case choice.left.choiceL … [hypotheses omitted] ⊢ ∃ s₂', lts.Tr (q✝.choice r✝) μ s₂' ∧ ChoiceBisim s s₂'",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:37Z"
+  },
+  {
+   "sha": "df907870c988",
+   "tokens": 87,
+   "heartbeats": 463,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:39Z"
+  },
+  {
+   "sha": "5889705f5d43",
+   "tokens": 61,
+   "heartbeats": 1857,
+   "ok": false,
+   "error": "327:4: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[{ Tr := Tr },{ Tr := Tr }] q [prop] p_1 ~[{ Tr := Tr },{ Tr := Tr }] q_1 [prop] Tr p_1 μ s [prop] ∀ (a : Process Name Constant), Tr (q_1.choice r_1) μ a → ¬ChoiceBisim s a [prop",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:55Z"
+  },
+  {
+   "sha": "08ac5a9ae874",
+   "tokens": 73,
+   "heartbeats": 946,
+   "ok": false,
+   "error": "327:4: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[{ Tr := Tr },{ Tr := Tr }] q [prop] p_1 ~[{ Tr := Tr },{ Tr := Tr }] q_1 [prop] Tr p_1 μ s [prop] ∀ (a : Process Name Constant), Tr (q_1.choice r_1) μ a → ¬ChoiceBisim s a [prop",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:57Z"
+  },
+  {
+   "sha": "6a74518f75cd",
+   "tokens": 59,
+   "heartbeats": 2379,
+   "ok": false,
+   "error": "327:4: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[{ Tr := Tr },{ Tr := Tr }] q [prop] p_1 ~[{ Tr := Tr },{ Tr := Tr }] q_1 [prop] Tr p_1 μ s [prop] ∀ (a : Process Name Constant), Tr (q_1.choice r_1) μ a → ¬ChoiceBisim s a [prop",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:33:13Z"
+  },
+  {
+   "sha": "9ff52dce5480",
+   "tokens": 81,
+   "heartbeats": 565,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:33:15Z"
+  },
+  {
+   "sha": "de5c450c29db",
+   "tokens": 82,
+   "heartbeats": 464,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:33:35Z"
+  },
+  {
+   "sha": "4f1c824beffb",
+   "tokens": 82,
+   "heartbeats": 457,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:33:37Z"
+  },
+  {
+   "sha": "4e312b4c5bf6",
+   "tokens": 80,
+   "heartbeats": 615,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:34:01Z"
+  },
+  {
+   "sha": "1e8b118d3181",
+   "tokens": 82,
+   "heartbeats": 605,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:34:03Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-f12",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:23:56Z",
+   "mode": "scout"
+  }
+ ],
+ "api_spend": 2.227206,
+ "lineage": "fresh",
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 3,
+    "d_score": 50.65,
+    "d_tokens": -154,
+    "d_heartbeats": 365,
+    "diff": "+theorem bisimilarity_congr_choice :\n+    (p ~[lts (defs := defs)] q) → (choice p r) ~[lts (defs := defs)] (choice q r) := by\n+  intro h\n+  refine ⟨_, ChoiceBisim.choice h, ?_⟩\n+  intro s₁ s₂ hr μ\n+  cases hr with\n+  | choice h =>\n+    constructor <;> intro s t <;> cases t\n+    case' left.choiceR | right.choiceR => exact ⟨s, .choiceR ‹_›, .bisim (.refl s)⟩\n+    all_goals\n+      rename_i t\n+      apply Exists.imp fun _ => .imp .choiceL .bisim\n+    exacts [h.follow_fst t, h.follow_snd t]\n+  | bisim h =>\n+    constructor <;> intro s t\n+    all_goals apply Exists.imp fun _ => .imp id .bisim\n+    exacts [h.follow_fst t, h.follow_snd t]"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 16,
+    "d_score": 0.15,
+    "d_tokens": -7,
+    "d_heartbeats": 91,
+    "diff": "-  intro h\n-  refine ⟨_, ChoiceBisim.choice h, ?_⟩\n-  intro s₁ s₂ hr μ\n-  cases hr with\n-  | choice h =>\n-    constructor <;> intro s t <;> cases t\n-    case' left.choiceR | right.choiceR => exact ⟨s, .choiceR ‹_›, .bisim (.refl s)⟩\n-    all_goals\n-      rename_i t\n-      apply Exists.imp fun _ => .imp .choiceL .bisim\n-    exacts [h.follow_fst t, h.follow_snd t]\n-  | bisim h =>\n-    constructor <;> intro s t\n-    all_goals apply Exists.imp fun _ => .imp id .bisim\n-    exacts [h.follow_fst t, h.follow_snd t]\n+  refine (⟨_, ChoiceBisim.choice ·, ?_⟩)\n+  rintro _ _ (h | h) μ <;> constructor <;> intro s t\n+  case' choice.left | choice.right => cases t <;> rename_i t\n+  case' choice.left.choiceR "
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 17,
+    "d_score": 0.12,
+    "d_tokens": 5,
+    "d_heartbeats": -91,
+    "diff": "-  all_goals\n-    apply Exists.imp\n-    rotate_left\n-    first | exact h.follow_fst t | exact h.follow_snd t\n-    rintro _ ⟨t, h⟩\n-    exact ⟨by first | exact t | exact .choiceL t, .bisim h⟩\n+  case' choice.left.choiceL | choice.right.choiceL => apply Exists.imp fun _ => .imp .choiceL .bisim\n+  case' bisim.left | bisim.right => apply Exists.imp fun _ => .imp id .bisim\n+  exacts [h.follow_fst t, h.follow_snd t, h.follow_fst t, h.follow_snd t]"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 19,
+    "d_score": 1.17,
+    "d_tokens": -15,
+    "d_heartbeats": 95,
+    "diff": "-  case' choice.left.choiceL | choice.right.choiceL => apply Exists.imp fun _ => .imp .choiceL .bisim\n-  case' bisim.left | bisim.right => apply Exists.imp fun _ => .imp id .bisim\n-  exacts [h.follow_fst t, h.follow_snd t, h.follow_fst t, h.follow_snd t]\n+  all_goals\n+    apply Exists.imp fun _ => And.imp ?_ ChoiceBisim.bisim\n+    first | exact h.follow_fst t | exact h.follow_snd t\n+    first | exact id | exact Tr.choiceL"
+   }
+  ]
+ },
+ "budget_milestones": {
+  "2": {
+   "spend": 2.005132,
+   "best": 85.42,
+   "run_id": "wu-hx-sol-f12",
+   "turn": 18,
+   "t": "2026-10-12T00:29:40Z"
+  }
+ },
+ "profile_cache": {
+  "85af0c6a393f": {
+   "ok": true,
+   "total": 460,
+   "floor": 37,
+   "reference": 3879,
+   "max_heartbeat_score": 33.02,
+   "blocks": [
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "case' choice.left | choice.right => cases t <;> rename_i t",
+     "heartbeats": 169
+    },
+    {
+     "lines": "7-10",
+     "depth_indent": 2,
+     "text": "all_goals apply Exists.imp fun _ => And.imp ?_ ChoiceBisim.bisim first | exact h.follow_fst t | exac",
+     "heartbeats": 152
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "rintro _ _ (h | h) μ <;> constructor <;> intro s t",
+     "heartbeats": 54
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "case' choice.left.choiceR | choice.right.choiceR => exact ⟨_, .choiceR t, .bisim (.refl _)⟩",
+     "heartbeats": 33
+    },
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "refine (⟨_, ChoiceBisim.choice ·, ?_⟩)",
+     "heartbeats": 15
+    }
+   ],
+   "points_left_heartbeats": 3.63,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "hb_floor": 37
+}

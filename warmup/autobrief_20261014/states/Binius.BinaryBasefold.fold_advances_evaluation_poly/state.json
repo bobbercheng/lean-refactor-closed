@@ -1,0 +1,2122 @@
+{
+ "problem": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+ "best": {
+  "score": 94.34,
+  "proof": "theorem fold_advances_evaluation_poly\n  (i : Fin (ℓ)) (h_i_succ_lt : i + 1 < ℓ + 𝓡)\n  (coeffs : Fin (2 ^ (ℓ - ↑i)) → L) (r_chal : L) :\n  let P_i : L[X] := intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i, by\n    exact Nat.lt_trans (n := i) (k := ℓ+1) (m := ℓ) (h₁ := i.isLt) (by exact Nat.lt_add_one ℓ)\n  ⟩) coeffs\n  let f_i := fun (x : (sDomain 𝔽q β h_ℓ_add_R_rate)\n      ⟨i, by exact Nat.lt_trans (n := i) (k := r) (m := ℓ) (h₁ := by omega) (by omega)⟩) =>\n    P_i.eval (x.val : L)\n  let f_i_plus_1 := fold (i := ⟨i, by omega⟩) (h_i := by omega) (f := f_i) (r_chal := r_chal)\n  let new_coeffs := fun j : Fin (2^(ℓ - (i + 1))) =>\n    (1 - r_chal) * (coeffs ⟨j.val * 2, by\n      rw [←Nat.add_zero (j.val * 2)]\n      apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))\n        (i := 0) (by omega) (by omega)\n    ⟩) +\n    r_chal * (coeffs ⟨j.val * 2 + 1, by\n      apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))\n        (i := 1) (by omega) (by omega)\n    ⟩)\n  let P_i_plus_1 :=\n    intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i+1, by omega⟩) new_coeffs\n  ∀ (y : (sDomain 𝔽q β h_ℓ_add_R_rate)\n    ⟨i+1, by omega⟩), f_i_plus_1 y = P_i_plus_1.eval y.val := fun y => by\n  have h_eval_qMap k :=\n    Subtype.ext_iff.mp (generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.2\n      _ y ⟨k, rfl⟩).symm\n  unfold fold\n  simp_all only [iteratedQuotientMap_k_eq_1_is_qMap, evaluation_poly_split_identity, Polynomial.eval_add, eval_comp, Polynomial.eval_mul, Polynomial.eval_X]\n  simp only [qMap_total_fiber_one_level_eq 𝔽q β i i.2, Fin2ToF2, one_ne_zero, ↓reduceIte, one_smul, Submodule.coe_add,\n    get_sDomain_first_basis_eq_1, zero_smul, zero_add, evenRefinement, oddRefinement, intermediateEvaluationPoly,\n    Polynomial.eval_finset_sum, Polynomial.eval_C_mul, Finset.mul_sum,\n    Finset.sum_mul, ← Finset.sum_add_distrib]\n  apply Finset.sum_congr rfl\n  intros\n  ring1",
+  "tokens": 90,
+  "heartbeats": 5653,
+  "L": 95.28,
+  "H": 87.73,
+  "Z": 100.0,
+  "compat": {
+   "v4.31.0": true,
+   "v4.30.0": true,
+   "v4.29.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "e493ed589396",
+   "tokens": 1901,
+   "heartbeats": 45878,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:18:58Z",
+   "score": 33.56
+  },
+  {
+   "sha": "af1ec08a8fc7",
+   "tokens": 431,
+   "heartbeats": 8103,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:19:59Z",
+   "score": 75.49
+  },
+  {
+   "sha": "c0aefca1a235",
+   "tokens": 431,
+   "heartbeats": 8103,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:20:37Z",
+   "score": 86.6
+  },
+  {
+   "sha": "a51d2e1a7fdc",
+   "tokens": 398,
+   "heartbeats": 7907,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:21:37Z",
+   "score": 87.32
+  },
+  {
+   "sha": "977c7d51b1ba",
+   "tokens": 390,
+   "heartbeats": 6489,
+   "ok": false,
+   "error": "864:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern fiberMap 0 in the target expression ↑x₁ - ↑x₀ = 1 … [hypotheses omitted] ⊢ ↑x₁ - ↑x₀ = 1",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:22:34Z"
+  },
+  {
+   "sha": "62fdaf339cfa",
+   "tokens": 397,
+   "heartbeats": 7828,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:22:56Z",
+   "score": 87.39
+  },
+  {
+   "sha": "77cfdb15eb28",
+   "tokens": 396,
+   "heartbeats": 7824,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:23:27Z",
+   "score": 87.41
+  },
+  {
+   "sha": "184f28d8d4e4",
+   "tokens": 382,
+   "heartbeats": 7730,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:24:34Z",
+   "score": 87.73
+  },
+  {
+   "sha": "b0f2315406fb",
+   "tokens": 373,
+   "heartbeats": 7586,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:25:33Z",
+   "score": 87.99
+  },
+  {
+   "sha": "1ea7b7e2bb53",
+   "tokens": 349,
+   "heartbeats": 7377,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:26:06Z",
+   "score": 88.56
+  },
+  {
+   "sha": "38c7ca9a0d92",
+   "tokens": 345,
+   "heartbeats": 7308,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:26:37Z",
+   "score": 88.68
+  },
+  {
+   "sha": "1a9d212d5c38",
+   "tokens": 312,
+   "heartbeats": 6695,
+   "ok": false,
+   "error": "872:2: unsolved goals … [hypotheses omitted] ⊢ ∑ x, (coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ x) * (1 - r_chal) + coeffs ⟨↑x * 2 + 1, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ x) * r_chal) = ∑ x, ((1 -",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:00:50Z"
+  },
+  {
+   "sha": "6c0bc0f35798",
+   "tokens": 312,
+   "heartbeats": 7140,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:01:05Z",
+   "score": 89.38
+  },
+  {
+   "sha": "e4ee4ea06a5d",
+   "tokens": 305,
+   "heartbeats": 6823,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:01:57Z",
+   "score": 89.73
+  },
+  {
+   "sha": "60d643d0772a",
+   "tokens": 299,
+   "heartbeats": 6153,
+   "ok": false,
+   "error": "871:16: redundant parameter `h_fiber_diff`, `grind` uses local hypotheses automatically",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:02:20Z"
+  },
+  {
+   "sha": "8a716337074d",
+   "tokens": 294,
+   "heartbeats": 8012,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:02:30Z"
+  },
+  {
+   "sha": "7e3f3dd222c1",
+   "tokens": 296,
+   "heartbeats": 11952,
+   "ok": false,
+   "error": "871:4: (kernel) application type mismatch eq_false_of_decide (eagerReduce (Eq.refl false)) argument has type false = false but function has type decide (1 = 1) = false → (1 = 1) = False",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:02:45Z"
+  },
+  {
+   "sha": "bee8de5082b3",
+   "tokens": 267,
+   "heartbeats": 11624,
+   "ok": false,
+   "error": "865:2: unsolved goals … [hypotheses omitted] ⊢ Polynomial.eval (Polynomial.eval (↑(qMap_total_fiber 𝔽q β ⟨↑i, ⋯⟩ 1 h_i_succ_lt y 0)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) - Polynomial.eval (Polynomial.eval (↑(qMap_total_fiber 𝔽q β ⟨↑i, ⋯⟩ 1 h_i_succ_lt y 0)) (qMap 𝔽q β ⟨",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:03:07Z"
+  },
+  {
+   "sha": "59c23fd89a9f",
+   "tokens": 274,
+   "heartbeats": 6642,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:03:26Z",
+   "score": 90.4
+  },
+  {
+   "sha": "5b5dadc058ca",
+   "tokens": 262,
+   "heartbeats": 32638,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:04:17Z"
+  },
+  {
+   "sha": "f9ba4e2058b4",
+   "tokens": 268,
+   "heartbeats": 32641,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:04:37Z"
+  },
+  {
+   "sha": "459551451d45",
+   "tokens": 248,
+   "heartbeats": 6409,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:05:07Z",
+   "score": 91.03
+  },
+  {
+   "sha": "e1600b4afe8a",
+   "tokens": 247,
+   "heartbeats": 82836,
+   "ok": false,
+   "error": "870:2: unsolved goals … [hypotheses omitted] ⊢ (1 - r_chal) * ∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ x) + r_chal * ∑ x, Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ x) * coeffs ⟨↑x * 2 + 1, ⋯⟩ = ∑ x, Po",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:05:39Z"
+  },
+  {
+   "sha": "e2d9b3ca3c93",
+   "tokens": 248,
+   "heartbeats": 6407,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:05:48Z"
+  },
+  {
+   "sha": "5bd116f7e2d6",
+   "tokens": 245,
+   "heartbeats": 6414,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:06:11Z",
+   "score": 91.08
+  },
+  {
+   "sha": "124e43873f26",
+   "tokens": 242,
+   "heartbeats": 6407,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:06:32Z",
+   "score": 91.13
+  },
+  {
+   "sha": "1b1060e03c20",
+   "tokens": 238,
+   "heartbeats": 6293,
+   "ok": false,
+   "error": "856:65: unsolved goals … [hypotheses omitted] ⊢ 1 + ↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y) - 1 = ↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:07:00Z"
+  },
+  {
+   "sha": "cda1bd482d9d",
+   "tokens": 238,
+   "heartbeats": 6368,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:07:47Z",
+   "score": 91.23
+  },
+  {
+   "sha": "564d5fea2add",
+   "tokens": 234,
+   "heartbeats": 6292,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:08:14Z",
+   "score": 91.36
+  },
+  {
+   "sha": "7d9abf6e5d27",
+   "tokens": 224,
+   "heartbeats": 6247,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:29:46Z",
+   "score": 91.56
+  },
+  {
+   "sha": "9c6d28e1eebe",
+   "tokens": 208,
+   "heartbeats": 7128,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:31:03Z"
+  },
+  {
+   "sha": "5d939735d23c",
+   "tokens": 222,
+   "heartbeats": 6245,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:31:12Z",
+   "score": 91.6
+  },
+  {
+   "sha": "b76a64a856ff",
+   "tokens": 221,
+   "heartbeats": 5882,
+   "ok": false,
+   "error": "856:65: unsolved goals … [hypotheses omitted] ⊢ ↑((if 1 = 0 then 0 else 1) • (sDomain_basis 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⋯) ⟨0, ⋯⟩) + ↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y) = 1 + ↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:31:28Z"
+  },
+  {
+   "sha": "3e4b62220670",
+   "tokens": 198,
+   "heartbeats": 6038,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:31:59Z",
+   "score": 92.17
+  },
+  {
+   "sha": "a4d8e6f70f22",
+   "tokens": 162,
+   "heartbeats": 5897,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:32:40Z",
+   "score": 92.9
+  },
+  {
+   "sha": "3bc5ab9402a7",
+   "tokens": 149,
+   "heartbeats": 5923,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:33:17Z",
+   "score": 93.11
+  },
+  {
+   "sha": "a45f899b6603",
+   "tokens": 159,
+   "heartbeats": 5897,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:33:37Z"
+  },
+  {
+   "sha": "f263df5c4a16",
+   "tokens": 146,
+   "heartbeats": 5918,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:34:15Z",
+   "score": 93.17
+  },
+  {
+   "sha": "f9a2a151e356",
+   "tokens": 144,
+   "heartbeats": 5894,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:35:06Z",
+   "score": 93.22
+  },
+  {
+   "sha": "585c1e765ab2",
+   "tokens": 132,
+   "heartbeats": 7651,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:35:26Z"
+  },
+  {
+   "sha": "82e0414e6b7d",
+   "tokens": 144,
+   "heartbeats": 5893,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:43:52Z"
+  },
+  {
+   "sha": "517ef3e55180",
+   "tokens": 144,
+   "heartbeats": 9964,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:44:02Z"
+  },
+  {
+   "sha": "077461f35fb8",
+   "tokens": 142,
+   "heartbeats": 5689,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:44:12Z",
+   "score": 93.4
+  },
+  {
+   "sha": "820676f2adfc",
+   "tokens": 144,
+   "heartbeats": 5894,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:44:31Z"
+  },
+  {
+   "sha": "e639d5430fa0",
+   "tokens": 141,
+   "heartbeats": 10830,
+   "ok": false,
+   "error": "857:2: unsolved goals … [hypotheses omitted] ⊢ Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) + Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯",
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:44:37Z"
+  },
+  {
+   "sha": "32fd532770a8",
+   "tokens": 111,
+   "heartbeats": 5746,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:45:07Z",
+   "score": 93.9
+  },
+  {
+   "sha": "e6a8756b5909",
+   "tokens": 108,
+   "heartbeats": 13484,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ coeffs ⟨↑j * 2, ⋯⟩ * Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑j, ⋯⟩) + coeffs ⟨↑j * 2, ⋯⟩ * Polynomial.eval (Polynom",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:10:49Z"
+  },
+  {
+   "sha": "3ed0f31d9a4a",
+   "tokens": 108,
+   "heartbeats": 5696,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:10:59Z",
+   "score": 93.99
+  },
+  {
+   "sha": "a37936d96327",
+   "tokens": 105,
+   "heartbeats": 5424,
+   "ok": false,
+   "error": "860:9: typeclass instance problem is stuck AddCommMonoid ?m.562 Note: Lean will not try to resolve this typeclass instance problem because the type argument to `AddCommMonoid` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass. Hint: Adding type a",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:11:14Z"
+  },
+  {
+   "sha": "d4ff02ccc983",
+   "tokens": 108,
+   "heartbeats": 5696,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:11:37Z"
+  },
+  {
+   "sha": "418e862a4358",
+   "tokens": 108,
+   "heartbeats": 5693,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:11:47Z"
+  },
+  {
+   "sha": "9d9926942482",
+   "tokens": 108,
+   "heartbeats": 9653,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:11:56Z"
+  },
+  {
+   "sha": "05e269cc6999",
+   "tokens": 106,
+   "heartbeats": 5658,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:12:05Z",
+   "score": 94.05
+  },
+  {
+   "sha": "0facd99d22a9",
+   "tokens": 105,
+   "heartbeats": 6751,
+   "ok": false,
+   "error": "863:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ coeffs ⟨↑j * 2, ⋯⟩ * Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑j, ⋯⟩) + coeffs ⟨↑j * 2, ⋯⟩ * ",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:12:37Z"
+  },
+  {
+   "sha": "5171eb2f966f",
+   "tokens": 106,
+   "heartbeats": 5655,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:12:46Z",
+   "score": 94.06
+  },
+  {
+   "sha": "07e804573f62",
+   "tokens": 106,
+   "heartbeats": 5650,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:13:06Z"
+  },
+  {
+   "sha": "e7a801a22232",
+   "tokens": 107,
+   "heartbeats": 5671,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:13:16Z"
+  },
+  {
+   "sha": "e82be9ad13a0",
+   "tokens": 106,
+   "heartbeats": 5655,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:13:27Z"
+  },
+  {
+   "sha": "0bf20cfd8b63",
+   "tokens": 101,
+   "heartbeats": 5630,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:13:58Z",
+   "score": 94.16
+  },
+  {
+   "sha": "6ed963821f3d",
+   "tokens": 106,
+   "heartbeats": 5650,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:14:18Z"
+  },
+  {
+   "sha": "e221850fea23",
+   "tokens": 103,
+   "heartbeats": 2629,
+   "ok": false,
+   "error": "852:13: cannot coerce x to type ?m.558 k",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:14:22Z"
+  },
+  {
+   "sha": "0c393afea51f",
+   "tokens": 87,
+   "heartbeats": 13260,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:14:55Z"
+  },
+  {
+   "sha": "09a2dbebd618",
+   "tokens": 100,
+   "heartbeats": 6340,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:15:04Z"
+  },
+  {
+   "sha": "620134fbd53e",
+   "tokens": 100,
+   "heartbeats": 5645,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:15:13Z",
+   "score": 94.17
+  },
+  {
+   "sha": "1e490e94464b",
+   "tokens": 98,
+   "heartbeats": 5644,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:16:08Z",
+   "score": 94.2
+  },
+  {
+   "sha": "620134fbd53e",
+   "tokens": 100,
+   "heartbeats": 5645,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:16:37Z"
+  },
+  {
+   "sha": "47d793075ccd",
+   "tokens": 98,
+   "heartbeats": 5719,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:16:46Z"
+  },
+  {
+   "sha": "a0a906e6ae7d",
+   "tokens": 134,
+   "heartbeats": 5659,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:17:47Z"
+  },
+  {
+   "sha": "aca746ad20d5",
+   "tokens": 97,
+   "heartbeats": 5597,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:18:11Z",
+   "score": 94.25
+  },
+  {
+   "sha": "e2fe3d205c6f",
+   "tokens": 97,
+   "heartbeats": 5597,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:18:53Z"
+  },
+  {
+   "sha": "753716a11188",
+   "tokens": 98,
+   "heartbeats": 5587,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:19:02Z"
+  },
+  {
+   "sha": "a0038d516c40",
+   "tokens": 96,
+   "heartbeats": 4664,
+   "ok": false,
+   "error": "859:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`  … [hypotheses omitted] ⊢ (∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) + ↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y) * Polynomial.eva",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:19:07Z"
+  },
+  {
+   "sha": "6de85ceaeca8",
+   "tokens": 97,
+   "heartbeats": 5593,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:48:19Z",
+   "score": 94.26
+  },
+  {
+   "sha": "2380ed511414",
+   "tokens": 99,
+   "heartbeats": 5585,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:48:38Z"
+  },
+  {
+   "sha": "d7ab61214f51",
+   "tokens": 98,
+   "heartbeats": 5582,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:48:47Z"
+  },
+  {
+   "sha": "6bc9ba9fb8de",
+   "tokens": 98,
+   "heartbeats": 5620,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:48:56Z"
+  },
+  {
+   "sha": "3a5eadcc0ba7",
+   "tokens": 96,
+   "heartbeats": 5683,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:49:05Z"
+  },
+  {
+   "sha": "7174ea9eed84",
+   "tokens": 106,
+   "heartbeats": 4184,
+   "ok": false,
+   "error": "859:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`  … [hypotheses omitted] ⊢ (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) ((∑ x, Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩).comp ",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:49:42Z"
+  },
+  {
+   "sha": "24dbe911b588",
+   "tokens": 106,
+   "heartbeats": 4522,
+   "ok": false,
+   "error": "861:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ -(Polynomial.eval (↑y) (Polynomial.C (coeffs ⟨↑x✝ * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x✝, ⋯⟩) * ↑(Fin2ToF2 𝔽q 0 • (sDomain_basis 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⋯) ⟨0, ⋯⟩)) + Polynomial.eval (↑y) (Po",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:49:46Z"
+  },
+  {
+   "sha": "d42636b131bd",
+   "tokens": 106,
+   "heartbeats": 5601,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:49:55Z"
+  },
+  {
+   "sha": "a7b67936a1e5",
+   "tokens": 106,
+   "heartbeats": 5604,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:50:04Z"
+  },
+  {
+   "sha": "217c92089003",
+   "tokens": 106,
+   "heartbeats": 4909,
+   "ok": false,
+   "error": "861:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ -(coeffs ⟨↑x✝ * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x✝, ⋯⟩) * ↑(qMap_total_fiber 𝔽q β ⟨↑i, ⋯⟩ 1 h_i_succ_lt y 0)) + coeffs ⟨↑x✝ * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNove",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:50:09Z"
+  },
+  {
+   "sha": "9663e8406d05",
+   "tokens": 193,
+   "heartbeats": 6435,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:51:04Z"
+  },
+  {
+   "sha": "a652b3a9414c",
+   "tokens": 96,
+   "heartbeats": null,
+   "ok": false,
+   "error": "855:75: unexpected token '↓'; expected ']'",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:51:24Z"
+  },
+  {
+   "sha": "8f154ead0c84",
+   "tokens": 97,
+   "heartbeats": 10894,
+   "ok": false,
+   "error": "848:71: unsolved goals … [hypotheses omitted] ⊢ coeffs ⟨2 • ↑x✝, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x✝, ⋯⟩) + (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y) * (coeffs ⟨2 • ↑x✝ + 1, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:51:29Z"
+  },
+  {
+   "sha": "afff03e47dc8",
+   "tokens": 97,
+   "heartbeats": 5866,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:51:39Z"
+  },
+  {
+   "sha": "d2c586218c98",
+   "tokens": 98,
+   "heartbeats": 5969,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:51:48Z"
+  },
+  {
+   "sha": "94178df865e0",
+   "tokens": 112,
+   "heartbeats": 8711,
+   "ok": false,
+   "error": "848:71: unsolved goals … [hypotheses omitted] ⊢ coeffs ⟨↑x✝ * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x✝, ⋯⟩) + (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y) * (coeffs ⟨↑x✝ * 2 + 1, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:51:53Z"
+  },
+  {
+   "sha": "e8aa8a106480",
+   "tokens": 98,
+   "heartbeats": 5596,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:52:04Z"
+  },
+  {
+   "sha": "5e2f4776d98c",
+   "tokens": 136,
+   "heartbeats": 7038,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:53:18Z"
+  },
+  {
+   "sha": "e6009f83e805",
+   "tokens": 97,
+   "heartbeats": 4257,
+   "ok": false,
+   "error": "856:45: `simp` made no progress Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:04Z"
+  },
+  {
+   "sha": "69c183e6fffd",
+   "tokens": 99,
+   "heartbeats": 2581,
+   "ok": false,
+   "error": "850:13: cannot coerce x to type ?m.557 k",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:12Z"
+  },
+  {
+   "sha": "6dfe3259d3c0",
+   "tokens": 102,
+   "heartbeats": 5592,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:21Z"
+  },
+  {
+   "sha": "de987a40ece0",
+   "tokens": 99,
+   "heartbeats": 2553,
+   "ok": false,
+   "error": "850:4: failed to synthesize instance of type class Setoid L Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:26Z"
+  },
+  {
+   "sha": "9242f4e460f3",
+   "tokens": 97,
+   "heartbeats": 4982,
+   "ok": false,
+   "error": "860:2: No applicable extensionality theorem found for type L Note: Extensionality theorems can be registered by marking them with the `[ext]` attribute",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:30Z"
+  },
+  {
+   "sha": "c0b507356b35",
+   "tokens": 96,
+   "heartbeats": 5714,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:49Z"
+  },
+  {
+   "sha": "cdd6a4b01c55",
+   "tokens": 99,
+   "heartbeats": 5594,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:22:55Z"
+  },
+  {
+   "sha": "f3dacf000740",
+   "tokens": 103,
+   "heartbeats": 6705,
+   "ok": false,
+   "error": "860:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ coeffs ⟨↑x✝ * 2, ⋯⟩ * Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x✝, ⋯⟩) + coeffs ⟨↑x✝ * 2, ⋯⟩",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:23:36Z"
+  },
+  {
+   "sha": "c1d21251768d",
+   "tokens": 107,
+   "heartbeats": 5557,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:24:08Z"
+  },
+  {
+   "sha": "66e7c03dfe20",
+   "tokens": 102,
+   "heartbeats": 5748,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:24:37Z"
+  },
+  {
+   "sha": "645644d9e996",
+   "tokens": 98,
+   "heartbeats": 5579,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:24:55Z"
+  },
+  {
+   "sha": "62fa42aae195",
+   "tokens": 102,
+   "heartbeats": 5590,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:26:38Z"
+  },
+  {
+   "sha": "5629d193947e",
+   "tokens": 100,
+   "heartbeats": 5601,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:26:48Z"
+  },
+  {
+   "sha": "825305698c0b",
+   "tokens": 102,
+   "heartbeats": 5604,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:26:57Z"
+  },
+  {
+   "sha": "06f21968d78d",
+   "tokens": 95,
+   "heartbeats": 5661,
+   "ok": false,
+   "error": "860:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ (fun x => (coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) + ↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y) * coeffs ⟨↑x * 2 + 1, ⋯⟩ * Polynomial.eval (↑",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:27:38Z"
+  },
+  {
+   "sha": "0808637f4889",
+   "tokens": 97,
+   "heartbeats": 5596,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:44:36Z"
+  },
+  {
+   "sha": "d36d92b727df",
+   "tokens": 97,
+   "heartbeats": 9553,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:44:46Z"
+  },
+  {
+   "sha": "75524d14ea4b",
+   "tokens": 94,
+   "heartbeats": 4847,
+   "ok": false,
+   "error": "858:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`  … [hypotheses omitted] ⊢ ∑ x, (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (Polynomial.C (coeffs ⟨↑x, ⋯⟩)) * Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:44:50Z"
+  },
+  {
+   "sha": "0a7da9c68554",
+   "tokens": 96,
+   "heartbeats": 3040,
+   "ok": false,
+   "error": "852:8: Application type mismatch: The argument y has type L[X] but is expected to have type ↥(sDomain 𝔽q β ?m.546 ⟨↑i + 1, ⋯⟩) in the application generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.isLt ?m.550 y",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:44:55Z"
+  },
+  {
+   "sha": "694021cd7b68",
+   "tokens": 98,
+   "heartbeats": 5641,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:45:09Z"
+  },
+  {
+   "sha": "49f057ae3056",
+   "tokens": 99,
+   "heartbeats": 4902,
+   "ok": false,
+   "error": "861:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ -(coeffs ⟨↑x✝ * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x✝, ⋯⟩) * ↑(qMap_total_fiber 𝔽q β ⟨↑i, ⋯⟩ 1 h_i_succ_lt y 0)) + coeffs ⟨↑x✝ * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNove",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:47:24Z"
+  },
+  {
+   "sha": "9d9ec6d96e4a",
+   "tokens": 102,
+   "heartbeats": 5653,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:20:06Z"
+  },
+  {
+   "sha": "41f167824eb8",
+   "tokens": 134,
+   "heartbeats": 6809,
+   "ok": false,
+   "error": "861:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ coeffs ⟨↑x✝ * 2, ⋯⟩ * Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x✝, ⋯⟩) + coeffs ⟨↑x✝ * 2, ⋯⟩",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:20:48Z"
+  },
+  {
+   "sha": "80bbef914a19",
+   "tokens": 96,
+   "heartbeats": 5680,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:21:55Z"
+  },
+  {
+   "sha": "5fd3e6819c94",
+   "tokens": 99,
+   "heartbeats": 5582,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:22:04Z"
+  },
+  {
+   "sha": "a5bf83e289c9",
+   "tokens": 100,
+   "heartbeats": 5644,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:22:36Z"
+  },
+  {
+   "sha": "d3b7424609a9",
+   "tokens": 100,
+   "heartbeats": 5668,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:22:45Z"
+  },
+  {
+   "sha": "a3ab50034487",
+   "tokens": 106,
+   "heartbeats": 2584,
+   "ok": false,
+   "error": "861:8: Invalid argument name `config` for function Hint: Perhaps you meant one of the following parameter names: • `y`: c̵o̵n̵f̵i̵g̵y̲",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:22:50Z"
+  },
+  {
+   "sha": "0dcaf85a4426",
+   "tokens": 96,
+   "heartbeats": 2662,
+   "ok": false,
+   "error": "852:11: `simp` made no progress",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:23:23Z"
+  },
+  {
+   "sha": "738d12c39b89",
+   "tokens": 96,
+   "heartbeats": 5595,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:23:32Z",
+   "score": 94.27
+  },
+  {
+   "sha": "7470b944fb44",
+   "tokens": 96,
+   "heartbeats": 5594,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:23:51Z"
+  },
+  {
+   "sha": "cb8c828b720f",
+   "tokens": 96,
+   "heartbeats": 5594,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:24:35Z"
+  },
+  {
+   "sha": "7bc4d77cc738",
+   "tokens": 95,
+   "heartbeats": 3041,
+   "ok": false,
+   "error": "852:8: Application type mismatch: The argument y has type L[X] but is expected to have type ↥(sDomain 𝔽q β ?m.546 ⟨↑i + 1, ⋯⟩) in the application generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.isLt ?m.550 y",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:52:03Z"
+  },
+  {
+   "sha": "9dec7beccd58",
+   "tokens": 97,
+   "heartbeats": 5643,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:53:12Z"
+  },
+  {
+   "sha": "cbdabcc9a137",
+   "tokens": 97,
+   "heartbeats": 5971,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:55:07Z"
+  },
+  {
+   "sha": "6a6f9be1cfb8",
+   "tokens": 96,
+   "heartbeats": 9556,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:55:16Z"
+  },
+  {
+   "sha": "d2c6a1c72d1a",
+   "tokens": 96,
+   "heartbeats": 12469,
+   "ok": false,
+   "error": "861:2: `grind` failed case grind.1.1.1.1.1.1.1.1.1.2.2.1.1.1.2.2.1.1.2.2.2.2.1.1.1.1.1.1.1.2 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] NeZero r [prop] CharP L 2 [prop] Fact (Nat.Prime (ringChar 𝔽q)) [prop] Fact (Fintype.card 𝔽q = 2) [prop] Fact (LinearInde",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:55:21Z"
+  },
+  {
+   "sha": "1abec9937bfa",
+   "tokens": 105,
+   "heartbeats": 2585,
+   "ok": false,
+   "error": "861:8: Invalid argument name `config` for function Hint: Perhaps you meant one of the following parameter names: • `y`: c̵o̵n̵f̵i̵g̵y̲",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:55:26Z"
+  },
+  {
+   "sha": "133b27765027",
+   "tokens": 172,
+   "heartbeats": 6047,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:55:53Z"
+  },
+  {
+   "sha": "ef8f05d4fe83",
+   "tokens": 93,
+   "heartbeats": 4849,
+   "ok": false,
+   "error": "858:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`  … [hypotheses omitted] ⊢ ∑ x, (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (Polynomial.C (coeffs ⟨↑x, ⋯⟩)) * Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:56:18Z"
+  },
+  {
+   "sha": "4d1ef90a4f0b",
+   "tokens": 97,
+   "heartbeats": 5580,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:56:27Z"
+  },
+  {
+   "sha": "c3421ba752dc",
+   "tokens": 96,
+   "heartbeats": 2620,
+   "ok": false,
+   "error": "850:23: Application type mismatch: The argument Eq.symm (generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.isLt (qMap_total_fiber 𝔽q β ⟨↑i, Decidable.byContradiction fun a => qMap_total_fiber_repr_coeff._proof_2 i 1 a⟩ 1 (id (fin_ℓ_steps_lt_ℓ_add_R i 1 i.isLt)) y k) y (Exists.intro k rfl)) has ty",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:56:32Z"
+  },
+  {
+   "sha": "7a4bc3b00ccd",
+   "tokens": 102,
+   "heartbeats": 6709,
+   "ok": false,
+   "error": "860:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ coeffs ⟨↑x✝ * 2, ⋯⟩ * Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x✝, ⋯⟩) + coeffs ⟨↑x✝ * 2, ⋯⟩",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:57:05Z"
+  },
+  {
+   "sha": "4da8e61557b9",
+   "tokens": 96,
+   "heartbeats": 5685,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:57:54Z"
+  },
+  {
+   "sha": "4e3afb6ee38a",
+   "tokens": 95,
+   "heartbeats": 5682,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:58:03Z"
+  },
+  {
+   "sha": "0728c9733b10",
+   "tokens": 95,
+   "heartbeats": 5716,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:58:12Z"
+  },
+  {
+   "sha": "d8fbfd576de9",
+   "tokens": 99,
+   "heartbeats": 5602,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:58:53Z"
+  },
+  {
+   "sha": "9203e0b51017",
+   "tokens": 96,
+   "heartbeats": 5590,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:59:02Z",
+   "score": 94.28
+  },
+  {
+   "sha": "da3bd6c7ae7a",
+   "tokens": 105,
+   "heartbeats": 5869,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:59:21Z"
+  },
+  {
+   "sha": "d9ef39c52aa8",
+   "tokens": 112,
+   "heartbeats": 5220,
+   "ok": false,
+   "error": "863:13: typeclass instance problem is stuck Semiring ?m.586 Note: Lean will not try to resolve this typeclass instance problem because the type argument to `Semiring` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass. Hint: Adding type annotation",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:59:26Z"
+  },
+  {
+   "sha": "4c9909e5f6ad",
+   "tokens": 128,
+   "heartbeats": 5940,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:26:14Z"
+  },
+  {
+   "sha": "b67d0641745c",
+   "tokens": 90,
+   "heartbeats": 5658,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:26:47Z",
+   "score": 94.33
+  },
+  {
+   "sha": "9d8a5ed9734b",
+   "tokens": 98,
+   "heartbeats": 5595,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:27:06Z"
+  },
+  {
+   "sha": "8fb586dc95ca",
+   "tokens": 98,
+   "heartbeats": 5650,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:27:15Z"
+  },
+  {
+   "sha": "fa2bbab88f5e",
+   "tokens": 105,
+   "heartbeats": 5598,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:27:24Z"
+  },
+  {
+   "sha": "8cbec4b7fc8f",
+   "tokens": 87,
+   "heartbeats": 5411,
+   "ok": false,
+   "error": "856:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`  … [hypotheses omitted] ⊢ ∑ x, (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (Polynomial.C (coeffs ⟨↑x, ⋯⟩)) * Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:27:37Z"
+  },
+  {
+   "sha": "ed4e4e2b14d8",
+   "tokens": 90,
+   "heartbeats": 5653,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:27:46Z",
+   "score": 94.34
+  },
+  {
+   "sha": "72cf626258c1",
+   "tokens": 89,
+   "heartbeats": 6807,
+   "ok": false,
+   "error": "859:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ coeffs ⟨↑x✝ * 2, ⋯⟩ * Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x✝, ⋯⟩) + coeffs ⟨↑x✝ * 2, ⋯⟩",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:01Z"
+  },
+  {
+   "sha": "ef3222a7bd01",
+   "tokens": 90,
+   "heartbeats": 5657,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:10Z"
+  },
+  {
+   "sha": "f480d554685b",
+   "tokens": 91,
+   "heartbeats": 5655,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:40Z"
+  },
+  {
+   "sha": "12d661486829",
+   "tokens": 91,
+   "heartbeats": 6798,
+   "ok": false,
+   "error": "860:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ coeffs ⟨↑x✝ * 2, ⋯⟩ * Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x✝, ⋯⟩) + coeffs ⟨↑x✝ * 2, ⋯⟩",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:45Z"
+  },
+  {
+   "sha": "06846501cc49",
+   "tokens": 94,
+   "heartbeats": 6727,
+   "ok": false,
+   "error": "860:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ coeffs ⟨↑x✝ * 2, ⋯⟩ * Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x✝, ⋯⟩) + coeffs ⟨↑x✝ * 2, ⋯⟩",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:49Z"
+  },
+  {
+   "sha": "38f35fd2249c",
+   "tokens": 89,
+   "heartbeats": 5740,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:58Z"
+  },
+  {
+   "sha": "d4b3d975f729",
+   "tokens": 90,
+   "heartbeats": 6964,
+   "ok": false,
+   "error": "860:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ coeffs ⟨↑x✝ * 2, ⋯⟩ * Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x✝, ⋯⟩) + coeffs ⟨↑x✝ * 2, ⋯⟩",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:29:19Z"
+  },
+  {
+   "sha": "a9ee3ae85f0d",
+   "tokens": 90,
+   "heartbeats": 5791,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:29:29Z"
+  },
+  {
+   "sha": "82cc041ac730",
+   "tokens": 90,
+   "heartbeats": 5543,
+   "ok": false,
+   "error": "860:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (Polynomial.C (coeffs ⟨↑x✝ * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x✝, ⋯⟩) - Polynomial.eval (↑y) (Polynomial.C (coeffs ⟨↑x✝ * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rat",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:29:33Z"
+  },
+  {
+   "sha": "7927b489e183",
+   "tokens": 141,
+   "heartbeats": 6188,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:31:22Z"
+  },
+  {
+   "sha": "ff53f74ca3fc",
+   "tokens": 92,
+   "heartbeats": 5653,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:40:33Z"
+  },
+  {
+   "sha": "5315464c3d77",
+   "tokens": 97,
+   "heartbeats": 5575,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:42:18Z"
+  },
+  {
+   "sha": "581d9ccccd4c",
+   "tokens": 91,
+   "heartbeats": 5651,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:42:28Z"
+  },
+  {
+   "sha": "6ea37bd9c97f",
+   "tokens": 99,
+   "heartbeats": 2585,
+   "ok": false,
+   "error": "860:8: Invalid argument name `config` for function Hint: Perhaps you meant one of the following parameter names: • `y`: c̵o̵n̵f̵i̵g̵y̲",
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:42:33Z"
+  },
+  {
+   "sha": "ecb1374bb3c2",
+   "tokens": 90,
+   "heartbeats": 2620,
+   "ok": false,
+   "error": "850:23: Application type mismatch: The argument Eq.symm (generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.isLt (qMap_total_fiber 𝔽q β ⟨↑i, Decidable.byContradiction fun a => qMap_total_fiber_repr_coeff._proof_2 i 1 a⟩ 1 (id (fin_ℓ_steps_lt_ℓ_add_R i 1 i.isLt)) y k) y (Exists.intro k rfl)) has ty",
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:42:37Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wuclean-hx-solab1-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:16:23Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:57:51Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:27:02Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r4",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:40:55Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r5",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:08:10Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r6",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:45:20Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r7",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:19:42Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:43:50Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r10",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:17:20Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r11",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:50:58Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r12",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:23:05Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:38:28Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  }
+ ],
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 11,
+    "d_score": 0.12,
+    "d_tokens": -4,
+    "d_heartbeats": -69,
+    "diff": "-    rw [iteratedQuotientMap_k_eq_1_is_qMap] at h\n-    exact (congrArg Subtype.val h).symm\n+    simpa only [iteratedQuotientMap_k_eq_1_is_qMap, Subtype.eq_iff] using h.symm"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 2,
+    "d_score": 0.7,
+    "d_tokens": -33,
+    "d_heartbeats": -168,
+    "diff": "-  calc f_i_plus_1 y\n-    = P_i.eval x₀.val * ((1 - r_chal) * x₁.val - r_chal) +\n-        P_i.eval x₁.val * (r_chal - (1 - r_chal) * x₀.val) := rfl\n-    _ = P₀.eval y.val * (1 - r_chal) + P₁.eval y.val * r_chal := by\n-      rw [h_equation 0, h_equation 1]\n-      linear_combination (P₀.eval y.val * (1 - r_chal) + P₁.eval y.val * r_chal) * h_fiber_diff\n-    _ = P_i_plus_1.eval y.val := by\n-      simp only [P_i_plus_1, P₀, P₁, new_coeffs, evenRefinement, oddRefinement,\n+  trans P₀.eval y.val * (1 - r_chal) + P₁.eval y.val * r_chal\n+  · dsimp only [f_i_plus_1, fold, f_i]\n+    rw [h_equation 0, h_equation 1]\n+    linear_combination (P₀.eval y.val * (1 - r_chal) + P₁.eval y.val * r_chal) * h_fiber"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 3,
+    "d_score": 0.35,
+    "d_tokens": -7,
+    "d_heartbeats": -317,
+    "diff": "-    linear_combination (P₀.eval y.val * (1 - r_chal) + P₁.eval y.val * r_chal) * h_fiber_diff\n+    rw [sub_eq_iff_eq_add] at h_fiber_diff\n+    rw [h_fiber_diff]\n+    ring"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 8,
+    "d_score": 0.67,
+    "d_tokens": -31,
+    "d_heartbeats": -181,
+    "diff": "-  have h_equation (k : Fin 2) :\n-      P_i.eval (fiberMap k).val = P₀.eval y.val + (fiberMap k).val * P₁.eval y.val := by\n-    simp only [P_i, evaluation_poly_split_identity, Polynomial.eval_add, eval_comp,\n-      h_eval_qMap k, Polynomial.eval_mul, Polynomial.eval_X, P₀, P₁]\n-    rw [h_equation 0, h_equation 1]\n+    dsimp only [fiberMap] at h_eval_qMap\n+    simp only [P_i, evaluation_poly_split_identity, Polynomial.eval_add, eval_comp,\n+      h_eval_qMap, Polynomial.eval_mul, Polynomial.eval_X, P₀, P₁]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 11,
+    "d_score": 0.63,
+    "d_tokens": -26,
+    "d_heartbeats": -233,
+    "diff": "-  have h_eval_qMap (k : Fin 2) :\n-      (AdditiveNTT.qMap 𝔽q β ⟨i, by omega⟩).eval (fiberMap k).val = y := by\n-    have h := generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.isLt\n-      (fiberMap k) y ⟨k, rfl⟩\n-    simpa only [iteratedQuotientMap_k_eq_1_is_qMap, Subtype.eq_iff] using h.symm\n+  have h_eval_qMap (k : Fin 2) :=\n+    (generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.isLt\n+      (fiberMap k) y ⟨k, rfl⟩).symm\n+  simp only [iteratedQuotientMap_k_eq_1_is_qMap, Subtype.eq_iff, fiberMap] at h_eval_qMap\n-    dsimp only [fiberMap] at h_eval_qMap"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 14,
+    "d_score": 0.05,
+    "d_tokens": -3,
+    "d_heartbeats": 5,
+    "diff": "-  let x₁ := fiberMap 1\n-  have h_fiber_diff : x₁.val - x₀.val = 1 := by\n-    simp only [x₁, x₀, fiberMap, qMap_total_fiber_one_level_eq 𝔽q β i i.isLt, Fin2ToF2, Fin.isValue, one_ne_zero, ↓reduceIte, one_smul, Submodule.coe_add,\n+  have h_fiber_diff : (fiberMap 1).val - x₀.val = 1 := by\n+    simp only [x₀, fiberMap, qMap_total_fiber_one_level_eq 𝔽q β i i.isLt, Fin2ToF2, Fin.isValue, one_ne_zero, ↓reduceIte, one_smul, Submodule.coe_add,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 15,
+    "d_score": 0.05,
+    "d_tokens": -3,
+    "d_heartbeats": -7,
+    "diff": "-  let x₀ := fiberMap 0\n-  have h_fiber_diff : (fiberMap 1).val - x₀.val = 1 := by\n-    simp only [x₀, fiberMap, qMap_total_fiber_one_level_eq 𝔽q β i i.isLt, Fin2ToF2, Fin.isValue, one_ne_zero, ↓reduceIte, one_smul, Submodule.coe_add,\n+  have h_fiber_diff : (fiberMap 1).val - (fiberMap 0).val = 1 := by\n+    simp only [fiberMap, qMap_total_fiber_one_level_eq 𝔽q β i i.isLt, Fin2ToF2, Fin.isValue, one_ne_zero, ↓reduceIte, one_smul, Submodule.coe_add,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 17,
+    "d_score": 0.1,
+    "d_tokens": -4,
+    "d_heartbeats": -39,
+    "diff": "-  have h_fiber_diff : (fiberMap 1).val - (fiberMap 0).val = 1 := by\n+  have h_fiber_diff : (fiberMap 1).val = 1 + (fiberMap 0).val := by\n+    apply sub_eq_iff_eq_add.mp\n-    rw [sub_eq_iff_eq_add] at h_fiber_diff"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 18,
+    "d_score": 0.13,
+    "d_tokens": -4,
+    "d_heartbeats": -76,
+    "diff": "-    apply sub_eq_iff_eq_add.mp\n-      get_sDomain_first_basis_eq_1, zero_smul, zero_add, add_sub_cancel_right]\n+      get_sDomain_first_basis_eq_1, zero_smul, zero_add]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 1,
+    "d_score": 0.2,
+    "d_tokens": -10,
+    "d_heartbeats": -45,
+    "diff": "-  let P₀ := evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs\n-  let P₁ := oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs\n-  trans P₀.eval y.val * (1 - r_chal) + P₁.eval y.val * r_chal\n+  trans (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs).eval y.val * (1 - r_chal) +\n+    (oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs).eval y.val * r_chal\n-      h_eval_qMap, Polynomial.eval_mul, Polynomial.eval_X, P₀, P₁]\n+      h_eval_qMap, Polynomial.eval_mul, Polynomial.eval_X]\n-  · simp only [P_i_plus_1, P₀, P₁, new_coeffs, evenRefinement, oddRefinement,\n+  · simp only [P_i_plus_1, new_coeffs, evenRefinement, oddRefinement,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 3,
+    "d_score": 0.04,
+    "d_tokens": -2,
+    "d_heartbeats": -2,
+    "diff": "-    simp only [fiberMap, qMap_total_fiber_one_level_eq 𝔽q β i i.isLt, Fin2ToF2, Fin.isValue, one_ne_zero, ↓reduceIte, one_smul, Submodule.coe_add,\n+    simp only [fiberMap, qMap_total_fiber_one_level_eq 𝔽q β i i.isLt, Fin2ToF2, one_ne_zero, ↓reduceIte, one_smul, Submodule.coe_add,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 5,
+    "d_score": 0.57,
+    "d_tokens": -24,
+    "d_heartbeats": -207,
+    "diff": "-  have h_fiber_diff : (fiberMap 1).val = 1 + (fiberMap 0).val := by\n-    simp only [fiberMap, qMap_total_fiber_one_level_eq 𝔽q β i i.isLt, Fin2ToF2, one_ne_zero, ↓reduceIte, one_smul, Submodule.coe_add,\n-      get_sDomain_first_basis_eq_1, zero_smul, zero_add]\n-    rw [h_fiber_diff]\n+    simp only [qMap_total_fiber_one_level_eq 𝔽q β i i.isLt, Fin2ToF2, one_ne_zero, ↓reduceIte, one_smul, Submodule.coe_add,\n+      get_sDomain_first_basis_eq_1, zero_smul, zero_add]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 6,
+    "d_score": 0.73,
+    "d_tokens": -36,
+    "d_heartbeats": -141,
+    "diff": "-  let fiberMap := qMap_total_fiber 𝔽q β (i := ⟨i, by omega⟩) (steps := 1)\n-    (h_i_add_steps := h_i_succ_lt) (y := y)\n-      (fiberMap k) y ⟨k, rfl⟩).symm\n-  simp only [iteratedQuotientMap_k_eq_1_is_qMap, Subtype.eq_iff, fiberMap] at h_eval_qMap\n+      _ y ⟨k, rfl⟩).symm\n+  simp only [iteratedQuotientMap_k_eq_1_is_qMap, Subtype.eq_iff] at h_eval_qMap"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 7,
+    "d_score": 0.21,
+    "d_tokens": -13,
+    "d_heartbeats": 26,
+    "diff": "-  intro P_i f_i f_i_plus_1 new_coeffs P_i_plus_1 y\n+  dsimp only\n+  intro y\n-  · dsimp only [f_i_plus_1, fold, f_i]\n-    simp only [P_i, evaluation_poly_split_identity, Polynomial.eval_add, eval_comp,\n+  · dsimp only [fold]\n+    simp only [evaluation_poly_split_identity, Polynomial.eval_add, eval_comp,\n-  · simp only [P_i_plus_1, new_coeffs, evenRefinement, oddRefinement,\n+  · simp only [evenRefinement, oddRefinement,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 9,
+    "d_score": 0.06,
+    "d_tokens": -3,
+    "d_heartbeats": -5,
+    "diff": "-  · dsimp only [fold]\n-    simp only [evaluation_poly_split_identity, Polynomial.eval_add, eval_comp,\n+  · simp only [fold, evaluation_poly_split_identity, Polynomial.eval_add, eval_comp,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 10,
+    "d_score": 0.05,
+    "d_tokens": -2,
+    "d_heartbeats": -24,
+    "diff": "-        intermediateEvaluationPoly, Fin.eta, Polynomial.eval_finset_sum, Polynomial.eval_mul,\n+        intermediateEvaluationPoly, Polynomial.eval_finset_sum, Polynomial.eval_mul,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r4",
+    "check": 3,
+    "d_score": 0.18,
+    "d_tokens": -2,
+    "d_heartbeats": -205,
+    "diff": "-        intermediateEvaluationPoly, Polynomial.eval_finset_sum, Polynomial.eval_mul,\n-        Polynomial.eval_C, Finset.sum_mul, ← Finset.sum_add_distrib]\n+        intermediateEvaluationPoly, Polynomial.eval_finset_sum, Polynomial.eval_C_mul, Finset.sum_mul, ← Finset.sum_add_distrib]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r4",
+    "check": 6,
+    "d_score": 0.5,
+    "d_tokens": -31,
+    "d_heartbeats": 57,
+    "diff": "-  trans (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs).eval y.val * (1 - r_chal) +\n-    (oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs).eval y.val * r_chal\n-  · simp only [fold, evaluation_poly_split_identity, Polynomial.eval_add, eval_comp,\n-      h_eval_qMap, Polynomial.eval_mul, Polynomial.eval_X]\n-    simp only [qMap_total_fiber_one_level_eq 𝔽q β i i.isLt, Fin2ToF2, one_ne_zero, ↓reduceIte, one_smul, Submodule.coe_add,\n-      get_sDomain_first_basis_eq_1, zero_smul, zero_add]\n-    ring\n-  · simp only [evenRefinement, oddRefinement,\n-        intermediateEvaluationPoly, Polynomial.eval_finset_sum, Polynomial.eval_C_mul, Finset.sum_mul, ← Finset.sum_add_distrib]\n-    refine Finset.sum_congr rf"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 2,
+    "d_score": 0.09,
+    "d_tokens": -3,
+    "d_heartbeats": -50,
+    "diff": "-    get_sDomain_first_basis_eq_1, zero_smul, zero_add]\n-  simp only [evenRefinement, oddRefinement, intermediateEvaluationPoly,\n+    get_sDomain_first_basis_eq_1, zero_smul, zero_add, evenRefinement, oddRefinement, intermediateEvaluationPoly,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 7,
+    "d_score": 0.06,
+    "d_tokens": -2,
+    "d_heartbeats": -38,
+    "diff": "-  refine Finset.sum_congr rfl fun j _ => ?_\n+  apply Finset.sum_congr rfl\n+  intro j _"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 9,
+    "d_score": 0.01,
+    "d_tokens": 0,
+    "d_heartbeats": -3,
+    "diff": "-  simp only [iteratedQuotientMap_k_eq_1_is_qMap, Subtype.eq_iff] at h_eval_qMap\n+  simp only [iteratedQuotientMap_k_eq_1_is_qMap, Subtype.ext_iff] at h_eval_qMap\n-  ring\n+  ring1"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 13,
+    "d_score": 0.1,
+    "d_tokens": -5,
+    "d_heartbeats": -25,
+    "diff": "-  have h_eval_qMap (k : Fin 2) :=\n-    (generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.isLt\n+  have h_eval_qMap k :=\n+    congrArg Subtype.val (generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.isLt\n-  simp only [iteratedQuotientMap_k_eq_1_is_qMap, Subtype.ext_iff] at h_eval_qMap\n+  simp only [iteratedQuotientMap_k_eq_1_is_qMap] at h_eval_qMap"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 18,
+    "d_score": 0.01,
+    "d_tokens": -1,
+    "d_heartbeats": 15,
+    "diff": "-  simp only [iteratedQuotientMap_k_eq_1_is_qMap] at h_eval_qMap\n+  simp_rw [iteratedQuotientMap_k_eq_1_is_qMap] at h_eval_qMap"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 19,
+    "d_score": 0.03,
+    "d_tokens": -2,
+    "d_heartbeats": -1,
+    "diff": "-  intro j _\n+  intros"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 23,
+    "d_score": 0.05,
+    "d_tokens": -1,
+    "d_heartbeats": -47,
+    "diff": "-    ⟨i+1, by omega⟩), f_i_plus_1 y = P_i_plus_1.eval y.val := by\n-  dsimp only\n-  intro y\n+    ⟨i+1, by omega⟩), f_i_plus_1 y = P_i_plus_1.eval y.val := fun y => by"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 1,
+    "d_score": 0.01,
+    "d_tokens": 0,
+    "d_heartbeats": -4,
+    "diff": "-    congrArg Subtype.val (generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.isLt\n+    congrArg Subtype.val (generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.2\n-  simp only [qMap_total_fiber_one_level_eq 𝔽q β i i.isLt, Fin2ToF2, one_ne_zero, ↓reduceIte, one_smul, Submodule.coe_add,\n+  simp only [qMap_total_fiber_one_level_eq 𝔽q β i i.2, Fin2ToF2, one_ne_zero, ↓reduceIte, one_smul, Submodule.coe_add,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 9,
+    "d_score": 0.01,
+    "d_tokens": -1,
+    "d_heartbeats": 2,
+    "diff": "-    congrArg Subtype.val (generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.2\n+    Subtype.ext_iff.mp (generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.2"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 16,
+    "d_score": 0.01,
+    "d_tokens": 0,
+    "d_heartbeats": -5,
+    "diff": "-  simp only [fold, evaluation_poly_split_identity, Polynomial.eval_add, eval_comp,\n+  unfold fold\n+  simp only [ evaluation_poly_split_identity, Polynomial.eval_add, eval_comp,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r12",
+    "check": 2,
+    "d_score": 0.05,
+    "d_tokens": -6,
+    "d_heartbeats": 68,
+    "diff": "-  simp_rw [iteratedQuotientMap_k_eq_1_is_qMap] at h_eval_qMap\n-  unfold fold\n-  simp only [ evaluation_poly_split_identity, Polynomial.eval_add, eval_comp,\n-    h_eval_qMap, Polynomial.eval_mul, Polynomial.eval_X]\n+  simp_all only [iteratedQuotientMap_k_eq_1_is_qMap, fold, evaluation_poly_split_identity, Polynomial.eval_add, eval_comp, Polynomial.eval_mul, Polynomial.eval_X]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r12",
+    "check": 7,
+    "d_score": 0.01,
+    "d_tokens": 0,
+    "d_heartbeats": -5,
+    "diff": "-  simp_all only [iteratedQuotientMap_k_eq_1_is_qMap, fold, evaluation_poly_split_identity, Polynomial.eval_add, eval_comp, Polynomial.eval_mul, Polynomial.eval_X]\n+  unfold fold\n+  simp_all only [iteratedQuotientMap_k_eq_1_is_qMap, evaluation_poly_split_identity, Polynomial.eval_add, eval_comp, Polynomial.eval_mul, Polynomial.eval_X]"
+   }
+  ]
+ },
+ "api_spend": 2.553299,
+ "profile_cache": {
+  "0a7da9c68554": {
+   "ok": false,
+   "total": null,
+   "floor": null,
+   "reference": 46076,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "let f_i_plus_1 := fold (i := ⟨i, by omega⟩) (h_i := by omega) (f := f_i) (r_chal := r_chal)",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-20",
+     "depth_indent": 2,
+     "text": "let new_coeffs := fun j : Fin (2^(ℓ - (i + 1))) => (1 - r_chal) * (coeffs ⟨j.val * 2, by rw [←Nat.ad",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-22",
+     "depth_indent": 2,
+     "text": "let P_i_plus_1 := intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i+1, by omega⟩) new_coeffs",
+     "heartbeats": null
+    },
+    {
+     "lines": "23-24",
+     "depth_indent": 2,
+     "text": "∀ (y : (sDomain 𝔽q β h_ℓ_add_R_rate) ⟨i+1, by omega⟩), f_i_plus_1 y = P_i_plus_1.eval y.val := by",
+     "heartbeats": null
+    },
+    {
+     "lines": "25-25",
+     "depth_indent": 2,
+     "text": "intro y",
+     "heartbeats": null
+    },
+    {
+     "lines": "26-28",
+     "depth_indent": 2,
+     "text": "have h_eval_qMap k := congrArg Subtype.val (generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.2 _",
+     "heartbeats": null
+    },
+    {
+     "lines": "29-29",
+     "depth_indent": 2,
+     "text": "simp_rw [iteratedQuotientMap_k_eq_1_is_qMap] at h_eval_qMap",
+     "heartbeats": null
+    },
+    {
+     "lines": "30-31",
+     "depth_indent": 2,
+     "text": "simp only [fold, evaluation_poly_split_identity, Polynomial.eval_add, eval_comp, h_eval_qMap, Polyno",
+     "heartbeats": null
+    },
+    {
+     "lines": "32-35",
+     "depth_indent": 2,
+     "text": "simp only [qMap_total_fiber_one_level_eq 𝔽q β i i.2, Fin2ToF2, one_ne_zero, ↓reduceIte, one_smul, Su",
+     "heartbeats": null
+    },
+    {
+     "lines": "36-36",
+     "depth_indent": 2,
+     "text": "apply Finset.sum_congr rfl",
+     "heartbeats": null
+    },
+    {
+     "lines": "37-37",
+     "depth_indent": 2,
+     "text": "intros",
+     "heartbeats": null
+    },
+    {
+     "lines": "38-38",
+     "depth_indent": 2,
+     "text": "ring1",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "738d12c39b89": {
+   "ok": false,
+   "note": "term-mode proof (no `:= by` block): only the total and the floor are measured.",
+   "total": 5595,
+   "floor": null
+  },
+  "9dec7beccd58": {
+   "ok": true,
+   "total": 5643,
+   "floor": null,
+   "reference": 46076,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "let f_i_plus_1 := fold (i := ⟨i, by omega⟩) (h_i := by omega) (f := f_i) (r_chal := r_chal)",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-20",
+     "depth_indent": 2,
+     "text": "let new_coeffs := fun j : Fin (2^(ℓ - (i + 1))) => (1 - r_chal) * (coeffs ⟨j.val * 2, by rw [←Nat.ad",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-22",
+     "depth_indent": 2,
+     "text": "let P_i_plus_1 := intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i+1, by omega⟩) new_coeffs",
+     "heartbeats": null
+    },
+    {
+     "lines": "23-24",
+     "depth_indent": 2,
+     "text": "∀ (y : (sDomain 𝔽q β h_ℓ_add_R_rate) ⟨i+1, by omega⟩), f_i_plus_1 y = P_i_plus_1.eval y.val := by",
+     "heartbeats": null
+    },
+    {
+     "lines": "25-25",
+     "depth_indent": 2,
+     "text": "dsimp only",
+     "heartbeats": null
+    },
+    {
+     "lines": "26-26",
+     "depth_indent": 2,
+     "text": "intro y",
+     "heartbeats": null
+    },
+    {
+     "lines": "27-29",
+     "depth_indent": 2,
+     "text": "have h_eval_qMap k := Subtype.ext_iff.mp (generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.2 _ y",
+     "heartbeats": null
+    },
+    {
+     "lines": "30-30",
+     "depth_indent": 2,
+     "text": "simp_rw [iteratedQuotientMap_k_eq_1_is_qMap] at h_eval_qMap",
+     "heartbeats": null
+    },
+    {
+     "lines": "31-32",
+     "depth_indent": 2,
+     "text": "simp only [fold, evaluation_poly_split_identity, Polynomial.eval_add, eval_comp, h_eval_qMap, Polyno",
+     "heartbeats": null
+    },
+    {
+     "lines": "33-36",
+     "depth_indent": 2,
+     "text": "simp only [qMap_total_fiber_one_level_eq 𝔽q β i i.2, Fin2ToF2, one_ne_zero, ↓reduceIte, one_smul, Su",
+     "heartbeats": null
+    },
+    {
+     "lines": "37-37",
+     "depth_indent": 2,
+     "text": "apply Finset.sum_congr rfl",
+     "heartbeats": null
+    },
+    {
+     "lines": "38-38",
+     "depth_indent": 2,
+     "text": "intros",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "9203e0b51017": {
+   "ok": false,
+   "note": "term-mode proof (no `:= by` block): only the total and the floor are measured.",
+   "total": 5590,
+   "floor": null
+  },
+  "ed4e4e2b14d8": {
+   "ok": false,
+   "note": "term-mode proof (no `:= by` block): only the total and the floor are measured.",
+   "total": 5653,
+   "floor": null
+  },
+  "ff53f74ca3fc": {
+   "ok": true,
+   "total": 5653,
+   "floor": null,
+   "reference": 46076,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "let f_i_plus_1 := fold (i := ⟨i, by omega⟩) (h_i := by omega) (f := f_i) (r_chal := r_chal)",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-20",
+     "depth_indent": 2,
+     "text": "let new_coeffs := fun j : Fin (2^(ℓ - (i + 1))) => (1 - r_chal) * (coeffs ⟨j.val * 2, by rw [←Nat.ad",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-22",
+     "depth_indent": 2,
+     "text": "let P_i_plus_1 := intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i+1, by omega⟩) new_coeffs",
+     "heartbeats": null
+    },
+    {
+     "lines": "23-24",
+     "depth_indent": 2,
+     "text": "∀ (y : (sDomain 𝔽q β h_ℓ_add_R_rate) ⟨i+1, by omega⟩), f_i_plus_1 y = P_i_plus_1.eval y.val := by",
+     "heartbeats": null
+    },
+    {
+     "lines": "25-25",
+     "depth_indent": 2,
+     "text": "refine fun y => ?_",
+     "heartbeats": null
+    },
+    {
+     "lines": "26-28",
+     "depth_indent": 2,
+     "text": "have h_eval_qMap k := Subtype.ext_iff.mp (generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.2 _ y",
+     "heartbeats": null
+    },
+    {
+     "lines": "29-29",
+     "depth_indent": 2,
+     "text": "unfold fold",
+     "heartbeats": null
+    },
+    {
+     "lines": "30-30",
+     "depth_indent": 2,
+     "text": "simp_all only [iteratedQuotientMap_k_eq_1_is_qMap, evaluation_poly_split_identity, Polynomial.eval_a",
+     "heartbeats": null
+    },
+    {
+     "lines": "31-34",
+     "depth_indent": 2,
+     "text": "simp only [qMap_total_fiber_one_level_eq 𝔽q β i i.2, Fin2ToF2, one_ne_zero, ↓reduceIte, one_smul, Su",
+     "heartbeats": null
+    },
+    {
+     "lines": "35-35",
+     "depth_indent": 2,
+     "text": "apply Finset.sum_congr rfl",
+     "heartbeats": null
+    },
+    {
+     "lines": "36-36",
+     "depth_indent": 2,
+     "text": "intros",
+     "heartbeats": null
+    },
+    {
+     "lines": "37-37",
+     "depth_indent": 2,
+     "text": "ring1",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "budget_milestones": {
+  "2": {
+   "spend": 2.024209,
+   "best": 94.27,
+   "run_id": "wuclean-hx-solab1-r11",
+   "turn": 0,
+   "t": "2026-10-14T12:51:25Z"
+  }
+ }
+}

@@ -1,0 +1,494 @@
+{
+ "problem": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+ "seed": {
+  "ok": true,
+  "tokens": 90,
+  "heartbeats": 5653,
+  "L": 95.28,
+  "H": 87.73,
+  "Z": 100.0,
+  "score": 94.34
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 90,
+    "heartbeats": 5653,
+    "Z": 100.0,
+    "score": 94.34
+   },
+   "after": {
+    "ok": true,
+    "tokens": 89,
+    "heartbeats": 5653,
+    "Z": 100.0,
+    "score": 94.35
+   },
+   "gain": 0.01,
+   "applied": {
+    "lam": 1
+   },
+   "compiles": 7,
+   "seconds": 45.7
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 89,
+    "heartbeats": 5653,
+    "Z": 100.0,
+    "score": 94.35
+   },
+   "after": {
+    "ok": true,
+    "tokens": 89,
+    "heartbeats": 5653,
+    "Z": 100.0,
+    "score": 94.35
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 2,
+   "seconds": 22.9
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 89,
+    "heartbeats": 5653,
+    "Z": 100.0,
+    "score": 94.35
+   },
+   "after": {
+    "ok": true,
+    "tokens": 89,
+    "heartbeats": 5653,
+    "Z": 100.0,
+    "score": 94.35
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 2,
+   "seconds": 26.8
+  },
+  {
+   "pass": "lint_delete",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 89,
+    "heartbeats": 5653,
+    "Z": 100.0,
+    "score": 94.35
+   },
+   "after": {
+    "ok": true,
+    "tokens": 89,
+    "heartbeats": 5653,
+    "Z": 100.0,
+    "score": 94.35
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 23,
+   "seconds": 115.0
+  }
+ ],
+ "free_applied": [
+  "normalize"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 89,
+  "heartbeats": 5653,
+  "L": 95.33,
+  "H": 87.73,
+  "Z": 100.0,
+  "score": 94.35
+ },
+ "s0": "theorem fold_advances_evaluation_poly\n  (i : Fin (ℓ)) (h_i_succ_lt : i + 1 < ℓ + 𝓡)\n  (coeffs : Fin (2 ^ (ℓ - ↑i)) → L) (r_chal : L) :\n  let P_i : L[X] := intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i, by\n    exact Nat.lt_trans (n := i) (k := ℓ+1) (m := ℓ) (h₁ := i.isLt) (by exact Nat.lt_add_one ℓ)\n  ⟩) coeffs\n  let f_i := fun (x : (sDomain 𝔽q β h_ℓ_add_R_rate)\n      ⟨i, by exact Nat.lt_trans (n := i) (k := r) (m := ℓ) (h₁ := by omega) (by omega)⟩) =>\n    P_i.eval (x.val : L)\n  let f_i_plus_1 := fold (i := ⟨i, by omega⟩) (h_i := by omega) (f := f_i) (r_chal := r_chal)\n  let new_coeffs := fun j : Fin (2^(ℓ - (i + 1))) =>\n    (1 - r_chal) * (coeffs ⟨j.val * 2, by\n      rw [←Nat.add_zero (j.val * 2)]\n      apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))\n        (i := 0) (by omega) (by omega)\n    ⟩) +\n    r_chal * (coeffs ⟨j.val * 2 + 1, by\n      apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))\n        (i := 1) (by omega) (by omega)\n    ⟩)\n  let P_i_plus_1 :=\n    intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i+1, by omega⟩) new_coeffs\n  ∀ (y : (sDomain 𝔽q β h_ℓ_add_R_rate)\n    ⟨i+1, by omega⟩), f_i_plus_1 y = P_i_plus_1.eval y.val := λy => by\n  have h_eval_qMap k :=\n    Subtype.ext_iff.mp (generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.2\n      _ y ⟨k, rfl⟩).symm\n  unfold fold\n  simp_all only [iteratedQuotientMap_k_eq_1_is_qMap, evaluation_poly_split_identity, Polynomial.eval_add, eval_comp, Polynomial.eval_mul, Polynomial.eval_X]\n  simp only [qMap_total_fiber_one_level_eq 𝔽q β i i.2, Fin2ToF2, one_ne_zero, ↓reduceIte, one_smul, Submodule.coe_add,\n    get_sDomain_first_basis_eq_1, zero_smul, zero_add, evenRefinement, oddRefinement, intermediateEvaluationPoly,\n    Polynomial.eval_finset_sum, Polynomial.eval_C_mul, Finset.mul_sum,\n    Finset.sum_mul, ← Finset.sum_add_distrib]\n  apply Finset.sum_congr rfl\n  intros\n  ring1",
+ "exchange": [
+  0.017,
+  0.072
+ ],
+ "profile": {
+  "ok": false,
+  "note": "term-mode proof (no `:= by` block): only the total and the floor are measured.",
+  "total": 5653,
+  "floor": null
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 89,
+  "heartbeats": 5653,
+  "score": 94.35
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 10,
+   "label": "replace the closing tactic at line 10 (`Finset.sum_mul, ← Finset.sum_add_distri…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 85,
+   "heartbeats": null,
+   "score": null,
+   "error": "861:0: unexpected end of input; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 10,
+   "label": "replace the closing tactic at line 10 (`Finset.sum_mul, ← Finset.sum_add_distri…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 85,
+   "heartbeats": null,
+   "score": null,
+   "error": "861:0: unexpected end of input; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 10,
+   "label": "replace the closing tactic at line 10 (`Finset.sum_mul, ← Finset.sum_add_distri…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 85,
+   "heartbeats": null,
+   "score": null,
+   "error": "861:0: unexpected end of input; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 4,
+   "label": "replace the closing tactic at line 4 (`_ y ⟨k, rfl⟩).symm`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 81,
+   "heartbeats": null,
+   "score": null,
+   "error": "854:77: unexpected token '↓'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 4,
+   "label": "replace the closing tactic at line 4 (`_ y ⟨k, rfl⟩).symm`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 81,
+   "heartbeats": null,
+   "score": null,
+   "error": "854:77: unexpected token '↓'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 4,
+   "label": "replace the closing tactic at line 4 (`_ y ⟨k, rfl⟩).symm`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 81,
+   "heartbeats": null,
+   "score": null,
+   "error": "854:77: unexpected token '↓'; expected ']'"
+  },
+  {
+   "kind": "del-arg",
+   "line": 6,
+   "label": "delete `iteratedQuotientMap_k_eq_1_is_qMap` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 6742,
+   "score": null,
+   "error": "860:2: ring failed, ring expressions not equal\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽"
+  },
+  {
+   "kind": "del-arg",
+   "line": 6,
+   "label": "delete `evaluation_poly_split_identity` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 4768,
+   "score": null,
+   "error": "858:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`\n  Finset.sum ?m.575 ?m.572 = Finset.sum ?m.575 ?m.573\nwith the goal\n  ∑ x,\n     "
+  },
+  {
+   "kind": "del-arg",
+   "line": 6,
+   "label": "delete `Polynomial.eval_add` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 4231,
+   "score": null,
+   "error": "858:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`\n  Finset.sum ?m.575 ?m.572 = Finset.sum ?m.575 ?m.573\nwith the goal\n  Polynomial"
+  },
+  {
+   "kind": "del-arg",
+   "line": 6,
+   "label": "delete `eval_comp` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 4284,
+   "score": null,
+   "error": "858:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`\n  Finset.sum ?m.575 ?m.572 = Finset.sum ?m.575 ?m.573\nwith the goal\n  (Polynomia"
+  },
+  {
+   "kind": "del-arg",
+   "line": 6,
+   "label": "delete `Polynomial.eval_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 4425,
+   "score": null,
+   "error": "858:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`\n  Finset.sum ?m.575 ?m.572 = Finset.sum ?m.575 ?m.573\nwith the goal\n  (∑ x, coef"
+  },
+  {
+   "kind": "del-arg",
+   "line": 6,
+   "label": "delete `Polynomial.eval_X` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 6071,
+   "score": null,
+   "error": "860:2: ring failed, ring expressions not equal\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽"
+  },
+  {
+   "kind": "del-arg",
+   "line": 7,
+   "label": "delete `Fin2ToF2` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 5253,
+   "score": null,
+   "error": "860:2: ring failed, ring expressions not equal\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽"
+  },
+  {
+   "kind": "del-arg",
+   "line": 7,
+   "label": "delete `one_ne_zero` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 5525,
+   "score": null,
+   "error": "860:2: ring failed, ring expressions not equal\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽"
+  },
+  {
+   "kind": "del-arg",
+   "line": 7,
+   "label": "delete `↓reduceIte` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 86,
+   "heartbeats": 5445,
+   "score": null,
+   "error": "860:2: ring failed, ring expressions not equal\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽"
+  },
+  {
+   "kind": "del-arg",
+   "line": 7,
+   "label": "delete `one_smul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 5668,
+   "score": null,
+   "error": "860:2: ring failed, ring expressions not equal\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽"
+  },
+  {
+   "kind": "del-arg",
+   "line": 7,
+   "label": "delete `Submodule.coe_add` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 5948,
+   "score": null,
+   "error": "860:2: ring failed, ring expressions not equal\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽"
+  },
+  {
+   "kind": "del-arg",
+   "line": 8,
+   "label": "delete `get_sDomain_first_basis_eq_1` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 5764,
+   "score": null,
+   "error": "859:2: ring failed, ring expressions not equal\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽"
+  },
+  {
+   "kind": "del-arg",
+   "line": 8,
+   "label": "delete `zero_smul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 5443,
+   "score": null,
+   "error": "860:2: ring failed, ring expressions not equal\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽"
+  },
+  {
+   "kind": "del-arg",
+   "line": 8,
+   "label": "delete `zero_add` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 5574,
+   "score": null,
+   "error": "860:2: ring failed, ring expressions not equal\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽"
+  },
+  {
+   "kind": "del-arg",
+   "line": 8,
+   "label": "delete `evenRefinement` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 4481,
+   "score": null,
+   "error": "858:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`\n  Finset.sum ?m.575 ?m.572 = Finset.sum ?m.575 ?m.573\nwith the goal\n  (Polynomia"
+  },
+  {
+   "kind": "del-arg",
+   "line": 8,
+   "label": "delete `oddRefinement` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 4404,
+   "score": null,
+   "error": "858:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`\n  Finset.sum ?m.575 ?m.572 = Finset.sum ?m.575 ?m.573\nwith the goal\n  (∑ x, coef"
+  },
+  {
+   "kind": "del-arg",
+   "line": 8,
+   "label": "delete `intermediateEvaluationPoly` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 4696,
+   "score": null,
+   "error": "858:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`\n  Finset.sum ?m.575 ?m.572 = Finset.sum ?m.575 ?m.573\nwith the goal\n  ∑ x,\n     "
+  },
+  {
+   "kind": "del-arg",
+   "line": 9,
+   "label": "delete `Polynomial.eval_finset_sum` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 4269,
+   "score": null,
+   "error": "857:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`\n  Finset.sum ?m.575 ?m.572 = Finset.sum ?m.575 ?m.573\nwith the goal\n  (Polynomia"
+  },
+  {
+   "kind": "del-arg",
+   "line": 9,
+   "label": "delete `Polynomial.eval_C_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 5541,
+   "score": null,
+   "error": "860:2: ring failed, ring expressions not equal\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽"
+  },
+  {
+   "kind": "del-arg",
+   "line": 9,
+   "label": "delete `Finset.mul_sum` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 4593,
+   "score": null,
+   "error": "858:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`\n  Finset.sum ?m.575 ?m.572 = Finset.sum ?m.575 ?m.573\nwith the goal\n  (∑ x, coef"
+  },
+  {
+   "kind": "del-arg",
+   "line": 10,
+   "label": "delete `Finset.sum_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 4749,
+   "score": null,
+   "error": "857:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`\n  Finset.sum ?m.575 ?m.572 = Finset.sum ?m.575 ?m.573\nwith the goal\n  (∑ x,\n    "
+  },
+  {
+   "kind": "del-arg",
+   "line": 10,
+   "label": "delete `← Finset.sum_add_distrib` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 86,
+   "heartbeats": 4666,
+   "score": null,
+   "error": "858:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`\n  Finset.sum ?m.575 ?m.572 = Finset.sum ?m.575 ?m.573\nwith the goal\n  (∑ x, coef"
+  },
+  {
+   "kind": "del-tac",
+   "line": 5,
+   "label": "delete the tactic `unfold fold`",
+   "closer": "",
+   "ok": false,
+   "tokens": 87,
+   "heartbeats": 3654,
+   "score": null,
+   "error": "857:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`\n  Finset.sum ?m.574 ?m.571 = Finset.sum ?m.574 ?m.572\nwith the goal\n  fold 𝔽q β "
+  },
+  {
+   "kind": "del-tac",
+   "line": 6,
+   "label": "delete the tactic `simp_all only [iteratedQuotientMap_k_eq_1_is_qMap…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 74,
+   "heartbeats": 4595,
+   "score": null,
+   "error": "857:2: Tactic `apply` failed: could not unify the conclusion of `sum_congr rfl`\n  Finset.sum ?m.570 ?m.567 = Finset.sum ?m.570 ?m.568\nwith the goal\n  ∑ x,\n     "
+  },
+  {
+   "kind": "del-tac",
+   "line": 11,
+   "label": "delete the tactic `apply Finset.sum_congr rfl`",
+   "closer": "",
+   "ok": false,
+   "tokens": 86,
+   "heartbeats": 5282,
+   "score": null,
+   "error": "859:2: ring failed, ring expressions not equal\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽"
+  },
+  {
+   "kind": "del-tac",
+   "line": 12,
+   "label": "delete the tactic `intros`",
+   "closer": "",
+   "ok": false,
+   "tokens": 88,
+   "heartbeats": 4914,
+   "score": null,
+   "error": "859:2: ring failed: not an equality"
+  }
+ ],
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 90 tokens, 5653 heartbeats, score 94.34. Free passes applied (normalize): start candidate 89 tokens, 5653 heartbeats, score 94.35.\n- Exchange rate here: 1 token = 0.017 points, 100 heartbeats = 0.072 points.\n- Deletions that FAIL (needed as they stand): line 6 `iteratedQuotientMap_k_eq_1_is_qMap` from the simp list; line 6 `evaluation_poly_split_identity` from the simp list; line 6 `Polynomial.eval_add` from the simp list; line 6 `eval_comp` from the simp list; line 6 `Polynomial.eval_mul` from the simp list; line 6 `Polynomial.eval_X` from the simp list.\n- Closers that do NOT close: the closing tactic at line 10 (`Finset.sum_mul, ← Finset.sum_add_distri…`) (grind/simp_all/aesop); the closing tactic at line 4 (`_ y ⟨k, rfl⟩).symm`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 94.35,
+ "gain": 0.01,
+ "compiles_sweep": 32,
+ "seconds": 320.2,
+ "source": "best:ed4e4e2b14d8"
+}

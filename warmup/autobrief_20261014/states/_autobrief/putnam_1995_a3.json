@@ -1,0 +1,1080 @@
+{
+ "problem": "putnam_1995_a3",
+ "seed": {
+  "ok": true,
+  "tokens": 4085,
+  "heartbeats": 14249,
+  "L": 0.0,
+  "H": -0.01,
+  "Z": 100.0,
+  "score": 33.33
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 4085,
+    "heartbeats": 14248,
+    "Z": 100.0,
+    "score": 33.33
+   },
+   "after": {
+    "ok": true,
+    "tokens": 4074,
+    "heartbeats": 14248,
+    "Z": 100.0,
+    "score": 33.42
+   },
+   "gain": 0.09,
+   "applied": {
+    "lam": 10,
+    "dollar": 1
+   },
+   "compiles": 7,
+   "seconds": 32.7
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 4074,
+    "heartbeats": 14249,
+    "Z": 100.0,
+    "score": 33.42
+   },
+   "after": {
+    "ok": true,
+    "tokens": 4078,
+    "heartbeats": 14190,
+    "Z": 100.0,
+    "score": 33.53
+   },
+   "gain": 0.11,
+   "applied": {
+    "use2refine": 1
+   },
+   "compiles": 18,
+   "seconds": 101.7
+  },
+  {
+   "pass": "hb_polish",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 4078,
+    "heartbeats": 14191,
+    "Z": 100.0,
+    "score": 33.52
+   },
+   "after": {
+    "ok": true,
+    "tokens": 4141,
+    "heartbeats": 11538,
+    "Z": 100.0,
+    "score": 39.22
+   },
+   "gain": 5.7,
+   "applied": {
+    "simp only": 15
+   },
+   "compiles": 4,
+   "seconds": 35.4
+  },
+  {
+   "pass": "lint_delete",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 4141,
+    "heartbeats": 11538,
+    "Z": 100.0,
+    "score": 39.22
+   },
+   "after": {
+    "ok": true,
+    "tokens": 4110,
+    "heartbeats": 11468,
+    "Z": 100.0,
+    "score": 39.63
+   },
+   "gain": 0.41,
+   "applied": {
+    "lint-tac": 8,
+    "delsearch-arg": 2
+   },
+   "compiles": 24,
+   "seconds": 132.6
+  }
+ ],
+ "free_applied": [
+  "normalize",
+  "hb_rewrite",
+  "hb_polish",
+  "lint_delete"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 4110,
+  "heartbeats": 11468,
+  "L": -0.61,
+  "H": 19.51,
+  "Z": 100.0,
+  "score": 39.63
+ },
+ "s0": "theorem putnam_1995_a3\n(relation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop)\n(digits_to_num : (Fin 9 → ℤ) → ℤ)\n(hdigits_to_num : digits_to_num = fun dig => ∑ i : Fin 9, (dig i) * 10^i.1)\n(hrelation : ∀ d e : (Fin 9 → ℤ), relation d e ↔ (∀ i : Fin 9, d i < 10 ∧ d i ≥ 0 ∧ e i < 10 ∧ e i ≥ 0) ∧ (∀ i : Fin 9, 7 ∣ (digits_to_num (fun j : Fin 9 => if j = i then e j else d j))))\n: ∀ d e f : (Fin 9 → ℤ), ((relation d e) ∧ (relation e f)) → (∀ i : Fin 9, 7 ∣ d i - f i) := by \n  have h_main : ∀ (d e f : (Fin 9 → ℤ)), ((relation d e) ∧ (relation e f)) → (∀ i : Fin 9, 7 ∣ d i - f i) := by\n    intro d e f h\n    have h₁ : relation d e := h.1\n    have h₂ : relation e f := h.2\n    have h₃ : ∀ (i : Fin 9), 7 ∣ (digits_to_num (λj : Fin 9 => if j = i then e j else d j)) := by\n      have h₄ : (∀ i : Fin 9, 7 ∣ (digits_to_num (λj : Fin 9 => if j = i then e j else d j))) := (hrelation d e).mp h₁ |>.2\n      exact h₄\n    have h₄ : ∀ (i : Fin 9), 7 ∣ (digits_to_num (λj : Fin 9 => if j = i then f j else e j)) := by\n      have h₅ : (∀ i : Fin 9, 7 ∣ (digits_to_num (λj : Fin 9 => if j = i then f j else e j))) := (hrelation e f).mp h₂ |>.2\n      exact h₅\n    \n    have h₅ : ∀ (i : Fin 9), 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d := by\n      intro i\n      have h₆ : 7 ∣ (digits_to_num (λj : Fin 9 => if j = i then e j else d j)) := h₃ i\n      have h₇ : (digits_to_num (λj : Fin 9 => if j = i then e j else d j)) = digits_to_num d + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n        calc\n          (digits_to_num (λj : Fin 9 => if j = i then e j else d j)) = ∑ j : Fin 9, (if j = i then e j else d j) * (10 : ℤ) ^ (j : ℕ) := by\n            simp only [hdigits_to_num]\n            <;>\n            rfl\n          _ = ∑ j : Fin 9, (if j = i then e j else d j) * (10 : ℤ) ^ (j : ℕ) := rfl\n          _ = (∑ j : Fin 9, d j * (10 : ℤ) ^ (j : ℕ)) + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n            calc\n              (∑ j : Fin 9, (if j = i then e j else d j) * (10 : ℤ) ^ (j : ℕ)) = ∑ j : Fin 9, (d j * (10 : ℤ) ^ (j : ℕ) + (if j = i then (e j - d j) else 0) * (10 : ℤ) ^ (j : ℕ)) := by\n                apply Finset.sum_congr rfl\n                intro j _\n                by_cases h : j = i\n                · simp only [h, ↓reduceIte]\n                  <;> ring\n                · simp only [h, ↓reduceIte, zero_mul, add_zero]\n              _ = (∑ j : Fin 9, d j * (10 : ℤ) ^ (j : ℕ)) + ∑ j : Fin 9, (if j = i then (e j - d j) else 0) * (10 : ℤ) ^ (j : ℕ) := by\n                rw [Finset.sum_add_distrib]\n              _ = (∑ j : Fin 9, d j * (10 : ℤ) ^ (j : ℕ)) + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n                have h₈ : ∑ j : Fin 9, (if j = i then (e j - d j) else 0) * (10 : ℤ) ^ (j : ℕ) = (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n                  calc\n                    _ = ∑ j : Fin 9, (if j = i then (e j - d j) else 0) * (10 : ℤ) ^ (j : ℕ) := rfl\n                    _ = (if i = i then (e i - d i) else 0) * (10 : ℤ) ^ (i : ℕ) := by\n                      \n                      simp only [ite_mul, zero_mul, Finset.sum_ite_eq', Finset.mem_univ, ↓reduceIte]\n                    _ = (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by simp only [↓reduceIte]\n                rw [h₈]\n                <;>\n                rfl\n          _ = digits_to_num d + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n            simp only [hdigits_to_num]\n            <;>\n            rfl\n      have h₈ : 7 ∣ digits_to_num d + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n        rw [h₇] at h₆\n        exact h₆\n      \n      have h₉ : 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d := by\n        \n        have h₁₀ : (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d = digits_to_num d + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by ring\n        rw [h₁₀]\n        exact h₈\n      exact h₉\n    \n    have h₆ : ∀ (i : Fin 9), 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e := by\n      intro i\n      have h₇ : 7 ∣ (digits_to_num (λj : Fin 9 => if j = i then f j else e j)) := h₄ i\n      have h₈ : (digits_to_num (λj : Fin 9 => if j = i then f j else e j)) = digits_to_num e + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by\n        calc\n          (digits_to_num (λj : Fin 9 => if j = i then f j else e j)) = ∑ j : Fin 9, (if j = i then f j else e j) * (10 : ℤ) ^ (j : ℕ) := by\n            simp only [hdigits_to_num]\n            <;>\n            rfl\n          _ = ∑ j : Fin 9, (if j = i then f j else e j) * (10 : ℤ) ^ (j : ℕ) := rfl\n          _ = (∑ j : Fin 9, e j * (10 : ℤ) ^ (j : ℕ)) + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by\n            calc\n              (∑ j : Fin 9, (if j = i then f j else e j) * (10 : ℤ) ^ (j : ℕ)) = ∑ j : Fin 9, (e j * (10 : ℤ) ^ (j : ℕ) + (if j = i then (f j - e j) else 0) * (10 : ℤ) ^ (j : ℕ)) := by\n                apply Finset.sum_congr rfl\n                intro j _\n                by_cases h : j = i\n                · simp only [h, ↓reduceIte]\n                  <;> ring\n                · simp only [h, ↓reduceIte, zero_mul, add_zero]\n              _ = (∑ j : Fin 9, e j * (10 : ℤ) ^ (j : ℕ)) + ∑ j : Fin 9, (if j = i then (f j - e j) else 0) * (10 : ℤ) ^ (j : ℕ) := by\n                rw [Finset.sum_add_distrib]\n              _ = (∑ j : Fin 9, e j * (10 : ℤ) ^ (j : ℕ)) + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by\n                have h₉ : ∑ j : Fin 9, (if j = i then (f j - e j) else 0) * (10 : ℤ) ^ (j : ℕ) = (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by\n                  calc\n                    _ = ∑ j : Fin 9, (if j = i then (f j - e j) else 0) * (10 : ℤ) ^ (j : ℕ) := rfl\n                    _ = (if i = i then (f i - e i) else 0) * (10 : ℤ) ^ (i : ℕ) := by\n                      \n                      simp only [ite_mul, zero_mul, Finset.sum_ite_eq', Finset.mem_univ, ↓reduceIte]\n                    _ = (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by simp only [↓reduceIte]\n                rw [h₉]\n                <;>\n                rfl\n          _ = digits_to_num e + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by\n            simp only [hdigits_to_num]\n            <;>\n            rfl\n      have h₉ : 7 ∣ digits_to_num e + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by\n        rw [h₈] at h₇\n        exact h₇\n      \n      have h₁₀ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e := by\n        \n        have h₁₁ : (f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e = digits_to_num e + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by ring\n        rw [h₁₁]\n        exact h₉\n      exact h₁₀\n    \n    have h₇ : 7 ∣ digits_to_num e + digits_to_num d := by\n      have h₈ : digits_to_num e = digits_to_num d + ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n        calc\n          digits_to_num e = ∑ i : Fin 9, e i * (10 : ℤ) ^ (i : ℕ) := by simp only [hdigits_to_num]\n          _ = ∑ i : Fin 9, (d i + (e i - d i)) * (10 : ℤ) ^ (i : ℕ) := by\n            apply Finset.sum_congr rfl\n            intro i _\n            ring\n          _ = ∑ i : Fin 9, (d i * (10 : ℤ) ^ (i : ℕ) + (e i - d i) * (10 : ℤ) ^ (i : ℕ)) := by\n            apply Finset.sum_congr rfl\n            intro i _\n            ring\n          _ = (∑ i : Fin 9, d i * (10 : ℤ) ^ (i : ℕ)) + ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n            rw [Finset.sum_add_distrib]\n          _ = digits_to_num d + ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n            simp only [hdigits_to_num]\n            <;>\n            rfl\n      have h₉ : ∀ i : Fin 9, 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d := h₅\n      have h₁₀ : 7 ∣ ∑ i : Fin 9, ((e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d) := by\n        apply Finset.dvd_sum\n        intro i _\n        exact h₉ i\n      have h₁₁ : ∑ i : Fin 9, ((e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d) = ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) + 9 * digits_to_num d := by\n        calc\n          ∑ i : Fin 9, ((e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d) = ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) + ∑ i : Fin 9, digits_to_num d := by\n            rw [Finset.sum_add_distrib]\n          _ = ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) + 9 * digits_to_num d := by\n            simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, Int.nsmul_eq_mul, Nat.cast_ofNat]\n      have h₁₂ : 7 ∣ ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) + 9 * digits_to_num d := by\n        rw [h₁₁] at h₁₀\n        exact h₁₀\n      have h₁₃ : 7 ∣ digits_to_num e + digits_to_num d := by\n        have h₁₄ : digits_to_num e + digits_to_num d = 2 * digits_to_num d + ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n          linarith\n        rw [h₁₄]\n        have h₁₅ : 7 ∣ 2 * digits_to_num d + ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n          have h₁₆ : 7 ∣ ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) + 9 * digits_to_num d := h₁₂\n          have h₁₇ : 7 ∣ 2 * digits_to_num d + ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n            \n            have h₁₈ : (∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) + 9 * digits_to_num d) = (∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ)) + 9 * digits_to_num d := by ring\n            rw [h₁₈] at h₁₆\n            \n            \n            \n            \n            \n            \n            have h₁₉ : 7 ∣ (∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ)) + 2 * digits_to_num d := by\n              \n              \n              \n              have h₂₀ : 7 ∣ (∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ)) + 9 * digits_to_num d := h₁₆\n              have h₂₁ : 7 ∣ 7 * digits_to_num d := by\n                refine ⟨digits_to_num d, ?_⟩\n                <;> ring\n              have h₂₂ : 7 ∣ (∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ)) + 2 * digits_to_num d := by\n                \n                have h₂₃ : (∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ)) + 2 * digits_to_num d = ((∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ)) + 9 * digits_to_num d) - 7 * digits_to_num d := by ring\n                rw [h₂₃]\n                exact dvd_sub h₂₀ h₂₁\n              exact h₂₂\n            \n            have h₂₀ : 7 ∣ 2 * digits_to_num d + ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n              \n              have h₂₁ : 2 * digits_to_num d + ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) = (∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ)) + 2 * digits_to_num d := by ring\n              rw [h₂₁]\n              exact h₁₉\n            exact h₂₀\n          exact h₁₇\n        exact h₁₅\n      exact h₁₃\n    \n    have h₈ : ∀ (i : Fin 9), 7 ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n      intro i\n      have h₉ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e := h₆ i\n      have h₁₀ : 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d := h₅ i\n      have h₁₁ : 7 ∣ digits_to_num e + digits_to_num d := h₇\n      \n      have h₁₂ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) - digits_to_num d := by\n        \n        \n        have h₁₃ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e := h₆ i\n        have h₁₄ : 7 ∣ digits_to_num e + digits_to_num d := h₇\n        \n        have h₁₅ : 7 ∣ ((f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e) - (digits_to_num e + digits_to_num d) := by\n          exact dvd_sub h₁₃ h₁₄\n        \n        have h₁₆ : ((f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e) - (digits_to_num e + digits_to_num d) = (f i - e i) * (10 : ℤ) ^ (i : ℕ) - digits_to_num d := by\n          ring\n        rw [h₁₆] at h₁₅\n        exact h₁₅\n      \n      have h₁₃ : 7 ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n        have h₁₄ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) - digits_to_num d := h₁₂\n        have h₁₅ : 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d := h₅ i\n        \n        have h₁₆ : 7 ∣ ((f i - e i) * (10 : ℤ) ^ (i : ℕ) - digits_to_num d) + ((e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d) := by\n          exact dvd_add h₁₄ h₁₅\n        \n        have h₁₇ : ((f i - e i) * (10 : ℤ) ^ (i : ℕ) - digits_to_num d) + ((e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d) = (f i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n          ring\n        rw [h₁₇] at h₁₆\n        exact h₁₆\n      exact h₁₃\n    \n    have h₉ : ∀ (i : Fin 9), 7 ∣ d i - f i := by\n      intro i\n      have h₁₀ : 7 ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := h₈ i\n      have h₁₁ : 7 ∣ (f i - d i) := by\n        \n        have h₁₂ : (7 : ℤ) ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := h₁₀\n        \n        have h₁₃ : (7 : ℕ).Prime := by decide\n        have h₁₄ : ¬(7 : ℤ) ∣ (10 : ℤ) ^ (i : ℕ) := by\n          \n          intro h\n          have h₁₅ : (7 : ℕ) ∣ (10 : ℕ) ^ (i : ℕ) := by\n            norm_cast at h ⊢\n          have h₁₆ : (7 : ℕ) ∣ 10 := by\n            \n            exact Nat.Prime.dvd_of_dvd_pow h₁₃ h₁₅\n          norm_num at h₁₆\n        \n        have h₁₅ : (7 : ℤ) ∣ (f i - d i) := by\n          \n          have h₁₆ : (7 : ℤ) ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := h₁₂\n          have h₁₇ : ¬(7 : ℤ) ∣ (10 : ℤ) ^ (i : ℕ) := h₁₄\n          \n          have h₁₈ : (7 : ℤ) ∣ (f i - d i) := by\n            \n            have h₁₉ : (7 : ℤ) ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := h₁₂\n            have h₂₀ : (7 : ℕ).Prime := by decide\n            have h₂₁ : (7 : ℤ) ∣ (f i - d i) ∨ (7 : ℤ) ∣ (10 : ℤ) ^ (i : ℕ) := by\n              \n              have h₂₂ : (7 : ℤ) ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := h₁₂\n              have h₂₃ : (7 : ℤ) ∣ (f i - d i) ∨ (7 : ℤ) ∣ (10 : ℤ) ^ (i : ℕ) := by\n                \n                apply (Int.prime_iff_natAbs_prime.mpr $ by decide).dvd_mul.mp\n                exact h₂₂\n              exact h₂₃\n            cases h₂₁ with\n            | inl h₂₁ =>\n              exact h₂₁\n            | inr h₂₁ =>\n              exfalso\n              exact h₁₄ h₂₁\n          exact h₁₈\n        exact h₁₅\n      \n      have h₁₂ : 7 ∣ d i - f i := by\n        have h₁₃ : 7 ∣ (f i - d i) := h₁₁\n        have h₁₄ : 7 ∣ -(f i - d i) := by\n          exact dvd_neg.mpr h₁₃\n        have h₁₅ : -(f i - d i) = d i - f i := by ring\n        rw [h₁₅] at h₁₄\n        exact h₁₄\n      exact h₁₂\n    \n    intro i\n    have h₁₀ : 7 ∣ d i - f i := h₉ i\n    exact h₁₀\n  exact h_main",
+ "exchange": [
+  0.008,
+  0.234
+ ],
+ "profile": {
+  "ok": true,
+  "total": 11468,
+  "floor": null,
+  "reference": 14248,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "7-273",
+    "depth_indent": 2,
+    "text": "have h_main : ∀ (d e f : (Fin 9 → ℤ)), ((relation d e) ∧ (relation e f)) → (∀ i : Fin 9, 7 ∣ d i - f",
+    "heartbeats": null
+   },
+   {
+    "lines": "274-274",
+    "depth_indent": 2,
+    "text": "exact h_main",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 4110,
+  "heartbeats": 11468,
+  "score": 39.63
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 1679,
+   "score": null,
+   "error": "22:96: `grind` failed\ncase grind\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, di"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 68549,
+   "score": null,
+   "error": "22:93: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^ "
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 23261,
+   "score": null,
+   "error": "22:93: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\nd e f : Fin 9 → ℤ\ni : Fin 9\nhrelation :\n  ∀ (d e : Fin 9 → ℤ),\n    relation d e ↔\n      (∀ (i "
+  },
+  {
+   "kind": "closer",
+   "line": 2,
+   "label": "replace the proof of `have h_main : ∀ (d e f : (Fin 9 → ℤ)), …` (line 2) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 52,
+   "heartbeats": 1716,
+   "score": null,
+   "error": "23:112: `grind` failed\ncase grind\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, d"
+  },
+  {
+   "kind": "closer",
+   "line": 2,
+   "label": "replace the proof of `have h_main : ∀ (d e f : (Fin 9 → ℤ)), …` (line 2) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 52,
+   "heartbeats": 68517,
+   "score": null,
+   "error": "23:109: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "closer",
+   "line": 2,
+   "label": "replace the proof of `have h_main : ∀ (d e f : (Fin 9 → ℤ)), …` (line 2) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 52,
+   "heartbeats": 23267,
+   "score": null,
+   "error": "23:109: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\nd e f : Fin 9 → ℤ\ni : Fin 9\nhrelation :\n  ∀ (d e : Fin 9 → ℤ),\n    relation d e ↔\n      (∀ (i"
+  },
+  {
+   "kind": "closer",
+   "line": 107,
+   "label": "replace the proof of `have h₇ : 7 ∣ digits_to_num e + digits_…` (line 107) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2954,
+   "heartbeats": 8692,
+   "score": null,
+   "error": "128:58: `grind` failed\ncase grind.1\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i,"
+  },
+  {
+   "kind": "closer",
+   "line": 107,
+   "label": "replace the proof of `have h₇ : 7 ∣ digits_to_num e + digits_…` (line 107) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2954,
+   "heartbeats": 20160,
+   "score": null,
+   "error": "128:55: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "closer",
+   "line": 107,
+   "label": "replace the proof of `have h₇ : 7 ∣ digits_to_num e + digits_…` (line 107) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2954,
+   "heartbeats": 32791,
+   "score": null,
+   "error": "128:55: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\nd e f : Fin 9 → ℤ\nhrelation :\n  ∀ (d e : Fin 9 → ℤ),\n    relation d e ↔\n      (∀ (i : Fin 9),"
+  },
+  {
+   "kind": "closer",
+   "line": 60,
+   "label": "replace the proof of `have h₆ : ∀ (i : Fin 9), 7 ∣ (f i - e i…` (line 60) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 3321,
+   "heartbeats": 11391,
+   "score": null,
+   "error": "81:90: `grind` failed\ncase grind.1.1.1.2.2.1.2\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun "
+  },
+  {
+   "kind": "closer",
+   "line": 60,
+   "label": "replace the proof of `have h₆ : ∀ (i : Fin 9), 7 ∣ (f i - e i…` (line 60) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 3321,
+   "heartbeats": 21116,
+   "score": null,
+   "error": "81:87: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^ "
+  },
+  {
+   "kind": "closer",
+   "line": 60,
+   "label": "replace the proof of `have h₆ : ∀ (i : Fin 9), 7 ∣ (f i - e i…` (line 60) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 3321,
+   "heartbeats": 31742,
+   "score": null,
+   "error": "81:87: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\nd e f : Fin 9 → ℤ\ni : Fin 9\nhrelation :\n  ∀ (d e : Fin 9 → ℤ),\n    relation d e ↔\n      (∀ (i "
+  },
+  {
+   "kind": "closer",
+   "line": 13,
+   "label": "replace the proof of `have h₅ : ∀ (i : Fin 9), 7 ∣ (e i - d i…` (line 13) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 3321,
+   "heartbeats": 10967,
+   "score": null,
+   "error": "34:90: `grind` failed\ncase grind.1.1\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i"
+  },
+  {
+   "kind": "closer",
+   "line": 13,
+   "label": "replace the proof of `have h₅ : ∀ (i : Fin 9), 7 ∣ (e i - d i…` (line 13) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 3321,
+   "heartbeats": 19750,
+   "score": null,
+   "error": "34:87: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^ "
+  },
+  {
+   "kind": "closer",
+   "line": 13,
+   "label": "replace the proof of `have h₅ : ∀ (i : Fin 9), 7 ∣ (e i - d i…` (line 13) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 3321,
+   "heartbeats": 29030,
+   "score": null,
+   "error": "34:87: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\nd e f : Fin 9 → ℤ\ni : Fin 9\nhrelation :\n  ∀ (d e : Fin 9 → ℤ),\n    relation d e ↔\n      (∀ (i "
+  },
+  {
+   "kind": "closer",
+   "line": 139,
+   "label": "replace the proof of `have h₁₃ : 7 ∣ digits_to_num e + digits…` (line 139) by `grind`",
+   "closer": "grind",
+   "ok": true,
+   "tokens": 3534,
+   "heartbeats": 10916,
+   "score": 45.62,
+   "error": "",
+   "d_tokens": -576,
+   "d_hb": -552,
+   "d_score": 5.99
+  },
+  {
+   "kind": "closer",
+   "line": 139,
+   "label": "replace the proof of `have h₁₃ : 7 ∣ digits_to_num e + digits…` (line 139) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 3534,
+   "heartbeats": 34520,
+   "score": null,
+   "error": "160:58: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "closer",
+   "line": 139,
+   "label": "replace the proof of `have h₁₃ : 7 ∣ digits_to_num e + digits…` (line 139) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 3534,
+   "heartbeats": 44982,
+   "score": null,
+   "error": "160:58: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\nd e f : Fin 9 → ℤ\nhrelation :\n  ∀ (d e : Fin 9 → ℤ),\n    relation d e ↔\n      (∀ (i : Fin 9),"
+  },
+  {
+   "kind": "closer",
+   "line": 16,
+   "label": "replace the proof of `have h₇ : (digits_to_num (λj : Fin 9 =>…` (line 16) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 3524,
+   "heartbeats": 11390,
+   "score": null,
+   "error": "37:134: `grind` failed\ncase grind.1.1.2\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => "
+  },
+  {
+   "kind": "closer",
+   "line": 16,
+   "label": "replace the proof of `have h₇ : (digits_to_num (λj : Fin 9 =>…` (line 16) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 3524,
+   "heartbeats": 20943,
+   "score": null,
+   "error": "37:131: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "closer",
+   "line": 16,
+   "label": "replace the proof of `have h₇ : (digits_to_num (λj : Fin 9 =>…` (line 16) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 3524,
+   "heartbeats": 30438,
+   "score": null,
+   "error": "37:131: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\nd e f : Fin 9 → ℤ\ni : Fin 9\nhrelation :\n  ∀ (d e : Fin 9 → ℤ),\n    relation d e ↔\n      (∀ (i"
+  },
+  {
+   "kind": "closer",
+   "line": 63,
+   "label": "replace the proof of `have h₈ : (digits_to_num (λj : Fin 9 =>…` (line 63) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 3524,
+   "heartbeats": 11685,
+   "score": null,
+   "error": "84:134: `grind` failed\ncase grind.1.1.1.2.1.1.2\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun"
+  },
+  {
+   "kind": "closer",
+   "line": 63,
+   "label": "replace the proof of `have h₈ : (digits_to_num (λj : Fin 9 =>…` (line 63) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 3524,
+   "heartbeats": 22268,
+   "score": null,
+   "error": "84:131: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "closer",
+   "line": 63,
+   "label": "replace the proof of `have h₈ : (digits_to_num (λj : Fin 9 =>…` (line 63) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 3524,
+   "heartbeats": 32668,
+   "score": null,
+   "error": "84:131: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\nd e f : Fin 9 → ℤ\ni : Fin 9\nhrelation :\n  ∀ (d e : Fin 9 → ℤ),\n    relation d e ↔\n      (∀ (i"
+  },
+  {
+   "kind": "closer",
+   "line": 213,
+   "label": "replace the proof of `have h₉ : ∀ (i : Fin 9), 7 ∣ d i - f i …` (line 213) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 3616,
+   "heartbeats": 12673,
+   "score": null,
+   "error": "234:49: `grind` failed\ncase grind.1.1.2.1\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig ="
+  },
+  {
+   "kind": "closer",
+   "line": 213,
+   "label": "replace the proof of `have h₉ : ∀ (i : Fin 9), 7 ∣ d i - f i …` (line 213) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 3616,
+   "heartbeats": 24792,
+   "score": null,
+   "error": "234:46: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "closer",
+   "line": 213,
+   "label": "replace the proof of `have h₉ : ∀ (i : Fin 9), 7 ∣ d i - f i …` (line 213) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 3616,
+   "heartbeats": 37844,
+   "score": null,
+   "error": "234:46: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\nd e f : Fin 9 → ℤ\ni : Fin 9\nh₈ : ∀ (i : Fin 9), 7 ∣ (f i - d i) * 10 ^ ↑i\nhrelation :\n  ∀ (d "
+  },
+  {
+   "kind": "closer",
+   "line": 143,
+   "label": "replace the proof of `have h₁₅ : 7 ∣ 2 * digits_to_num d + ∑ …` (line 143) by `grind`",
+   "closer": "grind",
+   "ok": true,
+   "tokens": 3619,
+   "heartbeats": 11822,
+   "score": 42.81,
+   "error": "",
+   "d_tokens": -491,
+   "d_hb": 354,
+   "d_score": 3.18
+  },
+  {
+   "kind": "closer",
+   "line": 143,
+   "label": "replace the proof of `have h₁₅ : 7 ∣ 2 * digits_to_num d + ∑ …` (line 143) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 3619,
+   "heartbeats": 37102,
+   "score": null,
+   "error": "164:94: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "closer",
+   "line": 143,
+   "label": "replace the proof of `have h₁₅ : 7 ∣ 2 * digits_to_num d + ∑ …` (line 143) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 3619,
+   "heartbeats": 47937,
+   "score": null,
+   "error": "164:94: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\nd e f : Fin 9 → ℤ\nhrelation :\n  ∀ (d e : Fin 9 → ℤ),\n    relation d e ↔\n      (∀ (i : Fin 9),"
+  },
+  {
+   "kind": "closer",
+   "line": 180,
+   "label": "replace the proof of `have h₈ : ∀ (i : Fin 9), 7 ∣ (f i - d i…` (line 180) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 3624,
+   "heartbeats": null,
+   "score": null,
+   "error": "lean exit 137: "
+  },
+  {
+   "kind": "closer",
+   "line": 180,
+   "label": "replace the proof of `have h₈ : ∀ (i : Fin 9), 7 ∣ (f i - d i…` (line 180) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 3624,
+   "heartbeats": 24582,
+   "score": null,
+   "error": "201:69: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "closer",
+   "line": 180,
+   "label": "replace the proof of `have h₈ : ∀ (i : Fin 9), 7 ∣ (f i - d i…` (line 180) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 3624,
+   "heartbeats": 37286,
+   "score": null,
+   "error": "201:69: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\nd e f : Fin 9 → ℤ\ni : Fin 9\nhrelation :\n  ∀ (d e : Fin 9 → ℤ),\n    relation d e ↔\n      (∀ (i"
+  },
+  {
+   "kind": "closer",
+   "line": 145,
+   "label": "replace the proof of `have h₁₇ : 7 ∣ 2 * digits_to_num d + ∑ …` (line 145) by `grind`",
+   "closer": "grind",
+   "ok": true,
+   "tokens": 3695,
+   "heartbeats": 12045,
+   "score": 41.67,
+   "error": "",
+   "d_tokens": -415,
+   "d_hb": 577,
+   "d_score": 2.04
+  },
+  {
+   "kind": "closer",
+   "line": 145,
+   "label": "replace the proof of `have h₁₇ : 7 ∣ 2 * digits_to_num d + ∑ …` (line 145) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 3695,
+   "heartbeats": 37980,
+   "score": null,
+   "error": "166:96: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "closer",
+   "line": 145,
+   "label": "replace the proof of `have h₁₇ : 7 ∣ 2 * digits_to_num d + ∑ …` (line 145) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 3695,
+   "heartbeats": 48720,
+   "score": null,
+   "error": "166:96: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\nd e f : Fin 9 → ℤ\nhrelation :\n  ∀ (d e : Fin 9 → ℤ),\n    relation d e ↔\n      (∀ (i : Fin 9),"
+  },
+  {
+   "kind": "closer",
+   "line": 216,
+   "label": "replace the proof of `have h₁₁ : 7 ∣ (f i - d i) :=` (line 216) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 3733,
+   "heartbeats": 13023,
+   "score": null,
+   "error": "237:39: `grind` failed\ncase grind.1.1.1.2.1.2\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun d"
+  },
+  {
+   "kind": "closer",
+   "line": 216,
+   "label": "replace the proof of `have h₁₁ : 7 ∣ (f i - d i) :=` (line 216) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 3733,
+   "heartbeats": 25273,
+   "score": null,
+   "error": "237:36: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "closer",
+   "line": 216,
+   "label": "replace the proof of `have h₁₁ : 7 ∣ (f i - d i) :=` (line 216) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 3733,
+   "heartbeats": 38302,
+   "score": null,
+   "error": "237:36: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\nd e f : Fin 9 → ℤ\ni : Fin 9\nh₈ : ∀ (i : Fin 9), 7 ∣ (f i - d i) * 10 ^ ↑i\nhrelation :\n  ∀ (d "
+  },
+  {
+   "kind": "closer",
+   "line": 231,
+   "label": "replace the proof of `have h₁₅ : (7 : ℤ) ∣ (f i - d i) :=` (line 231) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 3865,
+   "heartbeats": 13496,
+   "score": null,
+   "error": "252:47: `grind` failed\ncase grind.1.1.1.2.1.2\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun d"
+  },
+  {
+   "kind": "del-arg",
+   "line": 19,
+   "label": "delete `hdigits_to_num` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4107,
+   "heartbeats": 11444,
+   "score": null,
+   "error": "40:12: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 29,
+   "label": "delete `h` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11357,
+   "score": null,
+   "error": "50:18: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 29,
+   "label": "delete `↓reduceIte` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4107,
+   "heartbeats": 12268,
+   "score": null,
+   "error": "50:16: unsolved goals\ncase pos\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig "
+  },
+  {
+   "kind": "del-arg",
+   "line": 31,
+   "label": "delete `h` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11438,
+   "score": null,
+   "error": "52:18: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 31,
+   "label": "delete `↓reduceIte` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4107,
+   "heartbeats": 11452,
+   "score": null,
+   "error": "52:16: unsolved goals\ncase neg\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig "
+  },
+  {
+   "kind": "del-arg",
+   "line": 31,
+   "label": "delete `zero_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11432,
+   "score": null,
+   "error": "52:16: unsolved goals\ncase neg\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig "
+  },
+  {
+   "kind": "del-arg",
+   "line": 31,
+   "label": "delete `add_zero` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11459,
+   "score": null,
+   "error": "52:16: unsolved goals\ncase neg\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig "
+  },
+  {
+   "kind": "del-arg",
+   "line": 40,
+   "label": "delete `ite_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11410,
+   "score": null,
+   "error": "59:83: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^ "
+  },
+  {
+   "kind": "del-arg",
+   "line": 40,
+   "label": "delete `zero_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11440,
+   "score": null,
+   "error": "59:83: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^ "
+  },
+  {
+   "kind": "del-arg",
+   "line": 40,
+   "label": "delete `Finset.sum_ite_eq'` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11473,
+   "score": null,
+   "error": "59:83: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^ "
+  },
+  {
+   "kind": "del-arg",
+   "line": 40,
+   "label": "delete `Finset.mem_univ` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11473,
+   "score": null,
+   "error": "59:83: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^ "
+  },
+  {
+   "kind": "del-arg",
+   "line": 40,
+   "label": "delete `↓reduceIte` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 4107,
+   "heartbeats": 11509,
+   "score": 39.56,
+   "error": "",
+   "d_tokens": -3,
+   "d_hb": 41,
+   "d_score": -0.07
+  },
+  {
+   "kind": "del-arg",
+   "line": 41,
+   "label": "delete `↓reduceIte` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4106,
+   "heartbeats": 11486,
+   "score": null,
+   "error": "62:60: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^ "
+  },
+  {
+   "kind": "del-arg",
+   "line": 46,
+   "label": "delete `hdigits_to_num` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4107,
+   "heartbeats": 11459,
+   "score": null,
+   "error": "67:12: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 66,
+   "label": "delete `hdigits_to_num` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4107,
+   "heartbeats": 11442,
+   "score": null,
+   "error": "87:12: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 76,
+   "label": "delete `h` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11353,
+   "score": null,
+   "error": "97:18: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 76,
+   "label": "delete `↓reduceIte` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4107,
+   "heartbeats": 12259,
+   "score": null,
+   "error": "97:16: unsolved goals\ncase pos\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig "
+  },
+  {
+   "kind": "del-arg",
+   "line": 78,
+   "label": "delete `h` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11437,
+   "score": null,
+   "error": "99:18: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 78,
+   "label": "delete `↓reduceIte` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4107,
+   "heartbeats": 11452,
+   "score": null,
+   "error": "99:16: unsolved goals\ncase neg\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig "
+  },
+  {
+   "kind": "del-arg",
+   "line": 78,
+   "label": "delete `zero_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11432,
+   "score": null,
+   "error": "99:16: unsolved goals\ncase neg\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig "
+  },
+  {
+   "kind": "del-arg",
+   "line": 78,
+   "label": "delete `add_zero` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11459,
+   "score": null,
+   "error": "99:16: unsolved goals\ncase neg\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig "
+  },
+  {
+   "kind": "del-arg",
+   "line": 87,
+   "label": "delete `ite_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11410,
+   "score": null,
+   "error": "106:83: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "del-arg",
+   "line": 87,
+   "label": "delete `zero_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11440,
+   "score": null,
+   "error": "106:83: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "del-arg",
+   "line": 87,
+   "label": "delete `Finset.sum_ite_eq'` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11474,
+   "score": null,
+   "error": "106:83: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "del-arg",
+   "line": 87,
+   "label": "delete `Finset.mem_univ` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11471,
+   "score": null,
+   "error": "106:83: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "del-arg",
+   "line": 87,
+   "label": "delete `↓reduceIte` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 4107,
+   "heartbeats": 11507,
+   "score": 39.57,
+   "error": "",
+   "d_tokens": -3,
+   "d_hb": 39,
+   "d_score": -0.06
+  },
+  {
+   "kind": "del-arg",
+   "line": 88,
+   "label": "delete `↓reduceIte` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4106,
+   "heartbeats": 11483,
+   "score": null,
+   "error": "109:60: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "del-arg",
+   "line": 93,
+   "label": "delete `hdigits_to_num` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4107,
+   "heartbeats": 11459,
+   "score": null,
+   "error": "114:12: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 110,
+   "label": "delete `hdigits_to_num` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4107,
+   "heartbeats": 11459,
+   "score": null,
+   "error": "131:72: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 122,
+   "label": "delete `hdigits_to_num` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4107,
+   "heartbeats": 11460,
+   "score": null,
+   "error": "143:12: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 135,
+   "label": "delete `Finset.sum_const` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11436,
+   "score": null,
+   "error": "156:12: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 135,
+   "label": "delete `Finset.card_univ` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11462,
+   "score": null,
+   "error": "155:85: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "del-arg",
+   "line": 135,
+   "label": "delete `Fintype.card_fin` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11467,
+   "score": null,
+   "error": "155:85: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "del-arg",
+   "line": 135,
+   "label": "delete `Int.nsmul_eq_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11458,
+   "score": null,
+   "error": "155:85: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "del-arg",
+   "line": 135,
+   "label": "delete `Nat.cast_ofNat` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 4108,
+   "heartbeats": 11462,
+   "score": null,
+   "error": "155:85: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^"
+  },
+  {
+   "kind": "del-tac",
+   "line": 4,
+   "label": "delete the tactic `have h₁ : relation d e := h.1`",
+   "closer": "",
+   "ok": false,
+   "tokens": 4102,
+   "heartbeats": 11468,
+   "score": null,
+   "error": "27:116: Unknown identifier `h₁`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 5,
+   "label": "delete the tactic `have h₂ : relation e f := h.2`",
+   "closer": "",
+   "ok": false,
+   "tokens": 4102,
+   "heartbeats": 11468,
+   "score": null,
+   "error": "30:116: Unknown identifier `h₂`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 7,
+   "label": "delete the tactic `have h₄ : (∀ i : Fin 9, 7 ∣ (digits_to_num (λj : …`",
+   "closer": "",
+   "ok": false,
+   "tokens": 4066,
+   "heartbeats": 11446,
+   "score": null,
+   "error": "28:12: Unknown identifier `h₄`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 10,
+   "label": "delete the tactic `have h₅ : (∀ i : Fin 9, 7 ∣ (digits_to_num (λj : …`",
+   "closer": "",
+   "ok": false,
+   "tokens": 4066,
+   "heartbeats": 11446,
+   "score": null,
+   "error": "31:12: Unknown identifier `h₅`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 15,
+   "label": "delete the tactic `have h₆ : 7 ∣ (digits_to_num (λj : Fin 9 => if j …`",
+   "closer": "",
+   "ok": false,
+   "tokens": 4082,
+   "heartbeats": 11442,
+   "score": null,
+   "error": "70:19: Unknown identifier `h₆`"
+  }
+ ],
+ "s1": {
+  "proof": "theorem putnam_1995_a3\n(relation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop)\n(digits_to_num : (Fin 9 → ℤ) → ℤ)\n(hdigits_to_num : digits_to_num = fun dig => ∑ i : Fin 9, (dig i) * 10^i.1)\n(hrelation : ∀ d e : (Fin 9 → ℤ), relation d e ↔ (∀ i : Fin 9, d i < 10 ∧ d i ≥ 0 ∧ e i < 10 ∧ e i ≥ 0) ∧ (∀ i : Fin 9, 7 ∣ (digits_to_num (fun j : Fin 9 => if j = i then e j else d j))))\n: ∀ d e f : (Fin 9 → ℤ), ((relation d e) ∧ (relation e f)) → (∀ i : Fin 9, 7 ∣ d i - f i) := by \n  have h_main : ∀ (d e f : (Fin 9 → ℤ)), ((relation d e) ∧ (relation e f)) → (∀ i : Fin 9, 7 ∣ d i - f i) := by\n    intro d e f h\n    have h₁ : relation d e := h.1\n    have h₂ : relation e f := h.2\n    have h₃ : ∀ (i : Fin 9), 7 ∣ (digits_to_num (λj : Fin 9 => if j = i then e j else d j)) := by\n      have h₄ : (∀ i : Fin 9, 7 ∣ (digits_to_num (λj : Fin 9 => if j = i then e j else d j))) := (hrelation d e).mp h₁ |>.2\n      exact h₄\n    have h₄ : ∀ (i : Fin 9), 7 ∣ (digits_to_num (λj : Fin 9 => if j = i then f j else e j)) := by\n      have h₅ : (∀ i : Fin 9, 7 ∣ (digits_to_num (λj : Fin 9 => if j = i then f j else e j))) := (hrelation e f).mp h₂ |>.2\n      exact h₅\n    \n    have h₅ : ∀ (i : Fin 9), 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d := by\n      intro i\n      have h₆ : 7 ∣ (digits_to_num (λj : Fin 9 => if j = i then e j else d j)) := h₃ i\n      have h₇ : (digits_to_num (λj : Fin 9 => if j = i then e j else d j)) = digits_to_num d + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n        calc\n          (digits_to_num (λj : Fin 9 => if j = i then e j else d j)) = ∑ j : Fin 9, (if j = i then e j else d j) * (10 : ℤ) ^ (j : ℕ) := by\n            simp only [hdigits_to_num]\n            <;>\n            rfl\n          _ = ∑ j : Fin 9, (if j = i then e j else d j) * (10 : ℤ) ^ (j : ℕ) := rfl\n          _ = (∑ j : Fin 9, d j * (10 : ℤ) ^ (j : ℕ)) + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n            calc\n              (∑ j : Fin 9, (if j = i then e j else d j) * (10 : ℤ) ^ (j : ℕ)) = ∑ j : Fin 9, (d j * (10 : ℤ) ^ (j : ℕ) + (if j = i then (e j - d j) else 0) * (10 : ℤ) ^ (j : ℕ)) := by\n                apply Finset.sum_congr rfl\n                intro j _\n                by_cases h : j = i\n                · simp only [h, ↓reduceIte]\n                  <;> ring\n                · simp only [h, ↓reduceIte, zero_mul, add_zero]\n              _ = (∑ j : Fin 9, d j * (10 : ℤ) ^ (j : ℕ)) + ∑ j : Fin 9, (if j = i then (e j - d j) else 0) * (10 : ℤ) ^ (j : ℕ) := by\n                rw [Finset.sum_add_distrib]\n              _ = (∑ j : Fin 9, d j * (10 : ℤ) ^ (j : ℕ)) + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n                have h₈ : ∑ j : Fin 9, (if j = i then (e j - d j) else 0) * (10 : ℤ) ^ (j : ℕ) = (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n                  calc\n                    _ = ∑ j : Fin 9, (if j = i then (e j - d j) else 0) * (10 : ℤ) ^ (j : ℕ) := rfl\n                    _ = (if i = i then (e i - d i) else 0) * (10 : ℤ) ^ (i : ℕ) := by\n                      \n                      simp only [ite_mul, zero_mul, Finset.sum_ite_eq', Finset.mem_univ, ↓reduceIte]\n                    _ = (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by simp only [↓reduceIte]\n                rw [h₈]\n                <;>\n                rfl\n          _ = digits_to_num d + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n            simp only [hdigits_to_num]\n            <;>\n            rfl\n      have h₈ : 7 ∣ digits_to_num d + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n        rw [h₇] at h₆\n        exact h₆\n      \n      have h₉ : 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d := by\n        \n        have h₁₀ : (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d = digits_to_num d + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by ring\n        rw [h₁₀]\n        exact h₈\n      exact h₉\n    \n    have h₆ : ∀ (i : Fin 9), 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e := by\n      intro i\n      have h₇ : 7 ∣ (digits_to_num (λj : Fin 9 => if j = i then f j else e j)) := h₄ i\n      have h₈ : (digits_to_num (λj : Fin 9 => if j = i then f j else e j)) = digits_to_num e + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by\n        calc\n          (digits_to_num (λj : Fin 9 => if j = i then f j else e j)) = ∑ j : Fin 9, (if j = i then f j else e j) * (10 : ℤ) ^ (j : ℕ) := by\n            simp only [hdigits_to_num]\n            <;>\n            rfl\n          _ = ∑ j : Fin 9, (if j = i then f j else e j) * (10 : ℤ) ^ (j : ℕ) := rfl\n          _ = (∑ j : Fin 9, e j * (10 : ℤ) ^ (j : ℕ)) + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by\n            calc\n              (∑ j : Fin 9, (if j = i then f j else e j) * (10 : ℤ) ^ (j : ℕ)) = ∑ j : Fin 9, (e j * (10 : ℤ) ^ (j : ℕ) + (if j = i then (f j - e j) else 0) * (10 : ℤ) ^ (j : ℕ)) := by\n                apply Finset.sum_congr rfl\n                intro j _\n                by_cases h : j = i\n                · simp only [h, ↓reduceIte]\n                  <;> ring\n                · simp only [h, ↓reduceIte, zero_mul, add_zero]\n              _ = (∑ j : Fin 9, e j * (10 : ℤ) ^ (j : ℕ)) + ∑ j : Fin 9, (if j = i then (f j - e j) else 0) * (10 : ℤ) ^ (j : ℕ) := by\n                rw [Finset.sum_add_distrib]\n              _ = (∑ j : Fin 9, e j * (10 : ℤ) ^ (j : ℕ)) + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by\n                have h₉ : ∑ j : Fin 9, (if j = i then (f j - e j) else 0) * (10 : ℤ) ^ (j : ℕ) = (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by\n                  calc\n                    _ = ∑ j : Fin 9, (if j = i then (f j - e j) else 0) * (10 : ℤ) ^ (j : ℕ) := rfl\n                    _ = (if i = i then (f i - e i) else 0) * (10 : ℤ) ^ (i : ℕ) := by\n                      \n                      simp only [ite_mul, zero_mul, Finset.sum_ite_eq', Finset.mem_univ, ↓reduceIte]\n                    _ = (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by simp only [↓reduceIte]\n                rw [h₉]\n                <;>\n                rfl\n          _ = digits_to_num e + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by\n            simp only [hdigits_to_num]\n            <;>\n            rfl\n      have h₉ : 7 ∣ digits_to_num e + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by\n        rw [h₈] at h₇\n        exact h₇\n      \n      have h₁₀ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e := by\n        \n        have h₁₁ : (f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e = digits_to_num e + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by ring\n        rw [h₁₁]\n        exact h₉\n      exact h₁₀\n    \n    have h₇ : 7 ∣ digits_to_num e + digits_to_num d := by\n      have h₈ : digits_to_num e = digits_to_num d + ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n        calc\n          digits_to_num e = ∑ i : Fin 9, e i * (10 : ℤ) ^ (i : ℕ) := by simp only [hdigits_to_num]\n          _ = ∑ i : Fin 9, (d i + (e i - d i)) * (10 : ℤ) ^ (i : ℕ) := by\n            apply Finset.sum_congr rfl\n            intro i _\n            ring\n          _ = ∑ i : Fin 9, (d i * (10 : ℤ) ^ (i : ℕ) + (e i - d i) * (10 : ℤ) ^ (i : ℕ)) := by\n            apply Finset.sum_congr rfl\n            intro i _\n            ring\n          _ = (∑ i : Fin 9, d i * (10 : ℤ) ^ (i : ℕ)) + ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n            rw [Finset.sum_add_distrib]\n          _ = digits_to_num d + ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n            simp only [hdigits_to_num]\n            <;>\n            rfl\n      have h₉ : ∀ i : Fin 9, 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d := h₅\n      have h₁₀ : 7 ∣ ∑ i : Fin 9, ((e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d) := by\n        apply Finset.dvd_sum\n        intro i _\n        exact h₉ i\n      have h₁₁ : ∑ i : Fin 9, ((e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d) = ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) + 9 * digits_to_num d := by\n        calc\n          ∑ i : Fin 9, ((e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d) = ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) + ∑ i : Fin 9, digits_to_num d := by\n            rw [Finset.sum_add_distrib]\n          _ = ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) + 9 * digits_to_num d := by\n            simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, Int.nsmul_eq_mul, Nat.cast_ofNat]\n      have h₁₂ : 7 ∣ ∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) + 9 * digits_to_num d := by\n        rw [h₁₁] at h₁₀\n        exact h₁₀\n      have h₁₃ : 7 ∣ digits_to_num e + digits_to_num d := by grind\n      exact h₁₃\n    \n    have h₈ : ∀ (i : Fin 9), 7 ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n      intro i\n      have h₉ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e := h₆ i\n      have h₁₀ : 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d := h₅ i\n      have h₁₁ : 7 ∣ digits_to_num e + digits_to_num d := h₇\n      \n      have h₁₂ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) - digits_to_num d := by\n        \n        \n        have h₁₃ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e := h₆ i\n        have h₁₄ : 7 ∣ digits_to_num e + digits_to_num d := h₇\n        \n        have h₁₅ : 7 ∣ ((f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e) - (digits_to_num e + digits_to_num d) := by\n          exact dvd_sub h₁₃ h₁₄\n        \n        have h₁₆ : ((f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e) - (digits_to_num e + digits_to_num d) = (f i - e i) * (10 : ℤ) ^ (i : ℕ) - digits_to_num d := by\n          ring\n        rw [h₁₆] at h₁₅\n        exact h₁₅\n      \n      have h₁₃ : 7 ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n        have h₁₄ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) - digits_to_num d := h₁₂\n        have h₁₅ : 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d := h₅ i\n        \n        have h₁₆ : 7 ∣ ((f i - e i) * (10 : ℤ) ^ (i : ℕ) - digits_to_num d) + ((e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d) := by\n          exact dvd_add h₁₄ h₁₅\n        \n        have h₁₇ : ((f i - e i) * (10 : ℤ) ^ (i : ℕ) - digits_to_num d) + ((e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d) = (f i - d i) * (10 : ℤ) ^ (i : ℕ) := by\n          ring\n        rw [h₁₇] at h₁₆\n        exact h₁₆\n      exact h₁₃\n    \n    have h₉ : ∀ (i : Fin 9), 7 ∣ d i - f i := by\n      intro i\n      have h₁₀ : 7 ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := h₈ i\n      have h₁₁ : 7 ∣ (f i - d i) := by\n        \n        have h₁₂ : (7 : ℤ) ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := h₁₀\n        \n        have h₁₃ : (7 : ℕ).Prime := by decide\n        have h₁₄ : ¬(7 : ℤ) ∣ (10 : ℤ) ^ (i : ℕ) := by\n          \n          intro h\n          have h₁₅ : (7 : ℕ) ∣ (10 : ℕ) ^ (i : ℕ) := by\n            norm_cast at h ⊢\n          have h₁₆ : (7 : ℕ) ∣ 10 := by\n            \n            exact Nat.Prime.dvd_of_dvd_pow h₁₃ h₁₅\n          norm_num at h₁₆\n        \n        have h₁₅ : (7 : ℤ) ∣ (f i - d i) := by\n          \n          have h₁₆ : (7 : ℤ) ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := h₁₂\n          have h₁₇ : ¬(7 : ℤ) ∣ (10 : ℤ) ^ (i : ℕ) := h₁₄\n          \n          have h₁₈ : (7 : ℤ) ∣ (f i - d i) := by\n            \n            have h₁₉ : (7 : ℤ) ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := h₁₂\n            have h₂₀ : (7 : ℕ).Prime := by decide\n            have h₂₁ : (7 : ℤ) ∣ (f i - d i) ∨ (7 : ℤ) ∣ (10 : ℤ) ^ (i : ℕ) := by\n              \n              have h₂₂ : (7 : ℤ) ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := h₁₂\n              have h₂₃ : (7 : ℤ) ∣ (f i - d i) ∨ (7 : ℤ) ∣ (10 : ℤ) ^ (i : ℕ) := by\n                \n                apply (Int.prime_iff_natAbs_prime.mpr $ by decide).dvd_mul.mp\n                exact h₂₂\n              exact h₂₃\n            cases h₂₁ with\n            | inl h₂₁ =>\n              exact h₂₁\n            | inr h₂₁ =>\n              exfalso\n              exact h₁₄ h₂₁\n          exact h₁₈\n        exact h₁₅\n      \n      have h₁₂ : 7 ∣ d i - f i := by\n        have h₁₃ : 7 ∣ (f i - d i) := h₁₁\n        have h₁₄ : 7 ∣ -(f i - d i) := by\n          exact dvd_neg.mpr h₁₃\n        have h₁₅ : -(f i - d i) = d i - f i := by ring\n        rw [h₁₅] at h₁₄\n        exact h₁₄\n      exact h₁₂\n    \n    intro i\n    have h₁₀ : 7 ∣ d i - f i := h₉ i\n    exact h₁₀\n  exact h_main",
+  "labels": [
+   "replace the proof of `have h₁₃ : 7 ∣ digits_to_num e + digits…` (line 139) by `grind`"
+  ],
+  "primary_score": 45.62,
+  "full": {
+   "ok": true,
+   "tokens": 3534,
+   "heartbeats": 10916,
+   "L": 13.49,
+   "H": 23.39,
+   "Z": 100.0,
+   "score": 45.62
+  }
+ },
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 4085 tokens, 14249 heartbeats, score 33.33. Free passes applied (normalize, hb_rewrite, hb_polish, lint_delete): start candidate 4110 tokens, 11468 heartbeats, score 39.63.\n- Best combination of the paying single edits below: 3534 tokens, 10916 heartbeats, score 45.62 (Z 100.0); your workspace starts from it.\n- Exchange rate here: 1 token = 0.008 points, 100 heartbeats = 0.234 points.\n- Single edits that PAY:\n  - line 139: replace the proof of `have h₁₃ : 7 ∣ digits_to_num e + digits…` (line 139) by `grind`: -576 tokens, -552 hb, score +5.99\n  - line 143: replace the proof of `have h₁₅ : 7 ∣ 2 * digits_to_num d + ∑ …` (line 143) by `grind`: -491 tokens, +354 hb, score +3.18\n  - line 145: replace the proof of `have h₁₇ : 7 ∣ 2 * digits_to_num d + ∑ …` (line 145) by `grind`: -415 tokens, +577 hb, score +2.04\n- Deletions that FAIL (needed as they stand): line 19 `hdigits_to_num` from the simp list; line 29 `h` from the simp list; line 29 `↓reduceIte` from the simp list; line 31 `h` from the simp list; line 31 `↓reduceIte` from the simp list; line 31 `zero_mul` from the simp list.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the proof of `have h_main : ∀ (d e f : (Fin 9 → ℤ)), …` (line 2) (grind/simp_all/aesop); the proof of `have h₇ : 7 ∣ digits_to_num e + digits_…` (line 107) (grind/simp_all/aesop); the proof of `have h₆ : ∀ (i : Fin 9), 7 ∣ (f i - e i…` (line 60) (grind/simp_all/aesop); the proof of `have h₅ : ∀ (i : Fin 9), 7 ∣ (e i - d i…` (line 13) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 45.62,
+ "gain": 12.29,
+ "compiles_sweep": 80,
+ "seconds": 1260.0,
+ "source": "seed"
+}

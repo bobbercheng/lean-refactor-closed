@@ -1,0 +1,2263 @@
+{
+ "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+ "best": {
+  "score": 91.13,
+  "proof": "lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t' := by\n  let := der.wf.2.1\n  generalize eq : [] = Γ at der\n  induction der <;> subst_vars\n  all_goals grind (gen := 2) [→ canonical_form_abs, → Red.abs, → Red.appₗ, → Red.appᵣ, → canonical_form_tabs, → Red.tapp, → Red.tabs, → Red.let_bind, → Red.let_body, → Red.inl, → Red.inr, → canonical_form_sum, → Red.case_inl, → Red.case_inr, → Red.case]",
+  "tokens": 70,
+  "heartbeats": 5663,
+  "L": 82.84,
+  "H": 90.54,
+  "Z": 100.0,
+  "compat": {
+   "v4.33.0-rc2": true,
+   "v4.32.0": true,
+   "v4.31.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "49a0512fa6f2",
+   "tokens": 254,
+   "heartbeats": 2035,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:53:18Z",
+   "score": 78.12
+  },
+  {
+   "sha": "97f3757c28cf",
+   "tokens": 239,
+   "heartbeats": 27175,
+   "ok": false,
+   "error": "115:4: `grind` failed case grind.1.3.1.1.10.10.11.10.8.10.10 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.case t₂ t₃).LC [prop] Typing [] t₁ (σ.sum τ_1) [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) δ [prop] ∀ x ∉ L, Typing [⟨x, Binding.",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:54:08Z"
+  },
+  {
+   "sha": "181cd2c71b09",
+   "tokens": 247,
+   "heartbeats": 2548,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:54:22Z",
+   "score": 78.4
+  },
+  {
+   "sha": "0882ea54ffb9",
+   "tokens": 241,
+   "heartbeats": 2684,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:54:54Z",
+   "score": 78.82
+  },
+  {
+   "sha": "532d2e2a9433",
+   "tokens": 247,
+   "heartbeats": 2521,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:55:05Z"
+  },
+  {
+   "sha": "3e6c3ef80bd8",
+   "tokens": 234,
+   "heartbeats": 3337,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:55:20Z",
+   "score": 79.02
+  },
+  {
+   "sha": "32452be7a854",
+   "tokens": 222,
+   "heartbeats": 3004,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:56:00Z",
+   "score": 80.19
+  },
+  {
+   "sha": "ec17fde20175",
+   "tokens": 221,
+   "heartbeats": 2928,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:56:28Z",
+   "score": 80.31
+  },
+  {
+   "sha": "f8a384447b53",
+   "tokens": 211,
+   "heartbeats": 48496,
+   "ok": false,
+   "error": "105:4: `grind` failed case grind.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.let' t₂).LC [prop] Typing [] t₁ σ [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) τ_1 [prop] t₁.LC → t₁.Value ∨ E",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:56:58Z"
+  },
+  {
+   "sha": "b081a05663a8",
+   "tokens": 218,
+   "heartbeats": 7523,
+   "ok": false,
+   "error": "97:6: `grind` failed case grind.1.1.2.4.4.2.2.1.2.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] t₁.V",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:57:12Z"
+  },
+  {
+   "sha": "7ed9937e01e1",
+   "tokens": 217,
+   "heartbeats": 3168,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:57:27Z",
+   "score": 80.51
+  },
+  {
+   "sha": "1bf90fb02d68",
+   "tokens": 211,
+   "heartbeats": 3179,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:23:54Z",
+   "score": 80.99
+  },
+  {
+   "sha": "803e8e1b99af",
+   "tokens": 210,
+   "heartbeats": 3183,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:24:04Z",
+   "score": 81.07
+  },
+  {
+   "sha": "ce4441142b21",
+   "tokens": 208,
+   "heartbeats": 3194,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:24:15Z",
+   "score": 81.23
+  },
+  {
+   "sha": "7d8f16150d51",
+   "tokens": 214,
+   "heartbeats": 3193,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:24:25Z"
+  },
+  {
+   "sha": "d9e6ed71edb8",
+   "tokens": 192,
+   "heartbeats": 3241,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:24:29Z",
+   "score": 82.51
+  },
+  {
+   "sha": "070c77862e16",
+   "tokens": 170,
+   "heartbeats": 58636,
+   "ok": false,
+   "error": "93:68: Invalid field `wf`: The environment does not contain `Function.wf`, so it is not possible to project the field `wf` from an expression r of type t₂✝.LC → [] = [] → t₂✝.Value ∨ ∃ t', t₂✝ ⭢βᵛ t'",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:25:13Z"
+  },
+  {
+   "sha": "a74c2f263e87",
+   "tokens": 168,
+   "heartbeats": 19498,
+   "ok": false,
+   "error": "105:4: `grind` failed case grind.1.1.3.1.10.10.1.1.1.10.10.1.1.3.3.1.8 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.case t₂ t₃).LC [prop] Typing [] t₁ (σ.sum τ_1) [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) δ [prop] ∀ x ∉ L, Typing [⟨x",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:25:23Z"
+  },
+  {
+   "sha": "10403c4049d7",
+   "tokens": 185,
+   "heartbeats": 48544,
+   "ok": false,
+   "error": "101:4: `grind` failed case grind.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.let' t₂).LC [prop] Typing [] t₁ σ [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) τ_1 [prop] t₁.LC → t₁.Value ∨ E",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:25:34Z"
+  },
+  {
+   "sha": "3d92110eab1b",
+   "tokens": 173,
+   "heartbeats": 19493,
+   "ok": false,
+   "error": "105:4: `grind` failed case grind.1.1.3.1.10.10.1.1.1.10.10.1.1.3.3.1.8 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.case t₂ t₃).LC [prop] Typing [] t₁ (σ.sum τ_1) [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) δ [prop] ∀ x ∉ L, Typing [⟨x",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:59:48Z"
+  },
+  {
+   "sha": "89c48f063279",
+   "tokens": 186,
+   "heartbeats": 3575,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:59:52Z",
+   "score": 82.81
+  },
+  {
+   "sha": "c3d1e4aecb79",
+   "tokens": 167,
+   "heartbeats": 3841,
+   "ok": false,
+   "error": "105:4: `grind` failed case grind.2.1.1.1.1.1.1.1.1.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.case t₂ t₃).LC [prop] Typing [] t₁ (σ.sum τ_1) [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) δ [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:00:30Z"
+  },
+  {
+   "sha": "d5541b770e30",
+   "tokens": 175,
+   "heartbeats": 2069,
+   "ok": false,
+   "error": "86:74: unsolved goals case case … [hypotheses omitted] ⊢ (t₁✝.case t₂✝ t₃✝).Value ∨ ∃ t', t₁✝.case t₂✝ t₃✝ ⭢βᵛ t'",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:00:34Z"
+  },
+  {
+   "sha": "6bae59606db1",
+   "tokens": 173,
+   "heartbeats": 5836,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:00:37Z"
+  },
+  {
+   "sha": "2a8e46ae6f1e",
+   "tokens": 173,
+   "heartbeats": 2967,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:01:09Z",
+   "score": 84.21
+  },
+  {
+   "sha": "22f01dba4973",
+   "tokens": 174,
+   "heartbeats": 5673,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:01:19Z"
+  },
+  {
+   "sha": "53ee091ea333",
+   "tokens": 173,
+   "heartbeats": 7605,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:01:23Z"
+  },
+  {
+   "sha": "8cf7f5770217",
+   "tokens": 173,
+   "heartbeats": 2617,
+   "ok": false,
+   "error": "105:4: `grind` failed case grind.1.3.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.case t₂ t₃).LC [prop] Typing [] t₁ (σ.sum τ_1) [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) δ [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty τ_1⟩] (t₃ ^ᵗᵗ Ter",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:01:47Z"
+  },
+  {
+   "sha": "ac8cd11866d3",
+   "tokens": 151,
+   "heartbeats": 4295,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:01:51Z",
+   "score": 85.27
+  },
+  {
+   "sha": "c77c6eb6290f",
+   "tokens": 162,
+   "heartbeats": 3305,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:02:01Z"
+  },
+  {
+   "sha": "bd6fa6a8faea",
+   "tokens": 145,
+   "heartbeats": 5017,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:02:24Z",
+   "score": 85.36
+  },
+  {
+   "sha": "7ac3bb2e5dd9",
+   "tokens": 143,
+   "heartbeats": 1061,
+   "ok": false,
+   "error": "97:47: ambiguous identifier ``LC`, possible interpretations: [Cslib.LambdaCalculus.LocallyNameless.Fsub.Term.LC, Cslib.LambdaCalculus.LocallyNameless.Fsub.Ty.LC]",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:02:34Z"
+  },
+  {
+   "sha": "740872e4e604",
+   "tokens": 109,
+   "heartbeats": 7158,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:02:38Z",
+   "score": 87.11
+  },
+  {
+   "sha": "be0202fa9d8d",
+   "tokens": 92,
+   "heartbeats": 6362,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:03:12Z",
+   "score": 88.94
+  },
+  {
+   "sha": "1880ce06c133",
+   "tokens": 107,
+   "heartbeats": 17288,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:03:23Z"
+  },
+  {
+   "sha": "c38d5dabf37c",
+   "tokens": 110,
+   "heartbeats": 6210,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:03:27Z"
+  },
+  {
+   "sha": "9b1e808eaafb",
+   "tokens": 70,
+   "heartbeats": 6631,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.2 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.all τ_1) [prop] Sub [] σ' σ [prop] Typing [] t₁ (σ.all τ_1) → t₁.Value ∨ Exists t₁.Red [prop] Typing [] (t₁.tapp σ') (τ_1 ^ᵞ σ') [prop] ¬(t₁.tapp σ').Value [prop",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:04:08Z"
+  },
+  {
+   "sha": "c4f0445cdc01",
+   "tokens": 80,
+   "heartbeats": 6777,
+   "ok": false,
+   "error": "91:12: `grind` failed case grind.1.1.4 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ σ [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) τ_1 [prop] Typing [] t₁ σ → t₁.Value ∨ Exists t₁.Red [prop] ∀ (x : Var), True [prop] Typing [] (",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:04:12Z"
+  },
+  {
+   "sha": "052b4e0a2ffd",
+   "tokens": 87,
+   "heartbeats": 6328,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:04:15Z",
+   "score": 89.37
+  },
+  {
+   "sha": "e9dc6b0f7a23",
+   "tokens": 70,
+   "heartbeats": 7389,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:04:35Z",
+   "score": 90.17
+  },
+  {
+   "sha": "a146c3622da4",
+   "tokens": 70,
+   "heartbeats": 12524,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:04:45Z"
+  },
+  {
+   "sha": "e08eda917abc",
+   "tokens": 88,
+   "heartbeats": 5377,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:04:49Z"
+  },
+  {
+   "sha": "55309d48a5e0",
+   "tokens": 71,
+   "heartbeats": 5819,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:05:15Z",
+   "score": 90.96
+  },
+  {
+   "sha": "bd4880e81a32",
+   "tokens": 71,
+   "heartbeats": 2815,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.app t₂).Va",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:05:26Z"
+  },
+  {
+   "sha": "2be9a44aaa63",
+   "tokens": 38,
+   "heartbeats": 608,
+   "ok": false,
+   "error": "90:97: invalid `grind` parameter, `Red` is not a theorem, definition, or inductive type",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:05:29Z"
+  },
+  {
+   "sha": "9efe94287815",
+   "tokens": 68,
+   "heartbeats": 6145,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.2.1.4.4 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.app t₂",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:06:34Z"
+  },
+  {
+   "sha": "98f0461464f7",
+   "tokens": 74,
+   "heartbeats": 301,
+   "ok": false,
+   "error": "90:12: `sub` is not marked with the `[grind]` attribute",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:06:38Z"
+  },
+  {
+   "sha": "b153a85e4361",
+   "tokens": 74,
+   "heartbeats": 300,
+   "ok": false,
+   "error": "90:12: `Sub.refl` is not marked with the `[grind]` attribute",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:06:41Z"
+  },
+  {
+   "sha": "3a23249e05f4",
+   "tokens": 71,
+   "heartbeats": 5820,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:07:07Z"
+  },
+  {
+   "sha": "78084ea366b8",
+   "tokens": 71,
+   "heartbeats": 5819,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:07:10Z"
+  },
+  {
+   "sha": "e39e1b7058d8",
+   "tokens": 70,
+   "heartbeats": 7547,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.2.1.4.4 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.app t₂",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:07:14Z"
+  },
+  {
+   "sha": "9625e6e5f7ea",
+   "tokens": 70,
+   "heartbeats": 7246,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.4 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.tapp σ').LC [prop] Typing [] t₁ (σ.all τ_1) [prop] Sub [] σ' σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] ¬(t₁.tapp σ').Value [prop] ∀ (a : Term Var), ¬t₁.tapp σ' ⭢βᵛ ",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:07:18Z"
+  },
+  {
+   "sha": "cc14e2c8a302",
+   "tokens": 75,
+   "heartbeats": 6190,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:07:42Z"
+  },
+  {
+   "sha": "e67bdf6ae472",
+   "tokens": 72,
+   "heartbeats": 5736,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:07:46Z"
+  },
+  {
+   "sha": "be341c412097",
+   "tokens": 69,
+   "heartbeats": 9617,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Γ_1.Wf [prop] Binding.ty σ ∈ dlookup x Γ_1 [prop] (Term.fvar x).LC [prop] ¬(Term.fvar x).Value [prop] ∀ (a : Term Var), ¬Term.fvar x ⭢βᵛ a [prop] Γ_1.Wf → HasWellFormed.wf Γ_1 [prop",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:38:04Z"
+  },
+  {
+   "sha": "bd432b973b21",
+   "tokens": 69,
+   "heartbeats": 7466,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.1.1.1.1.1.1.3 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] t₁.inl.LC [prop] Typing [] t₁ σ [prop] Wf [] τ_1 [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] ¬t₁.inl.Value [prop] ∀ (a : Term Var), ¬t₁.inl ⭢βᵛ a [prop] t₁.LC →",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:38:08Z"
+  },
+  {
+   "sha": "56f9132a1249",
+   "tokens": 69,
+   "heartbeats": 9616,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Γ_1.Wf [prop] Binding.ty σ ∈ dlookup x Γ_1 [prop] (Term.fvar x).LC [prop] ¬(Term.fvar x).Value [prop] ∀ (a : Term Var), ¬Term.fvar x ⭢βᵛ a [prop] Γ_1.Wf → HasWellFormed.wf Γ_1 [prop",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:38:12Z"
+  },
+  {
+   "sha": "b5d3722eb4f0",
+   "tokens": 69,
+   "heartbeats": 6944,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:38:27Z"
+  },
+  {
+   "sha": "879e8113bf57",
+   "tokens": 72,
+   "heartbeats": 5835,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:38:30Z"
+  },
+  {
+   "sha": "43b7151c1131",
+   "tokens": 72,
+   "heartbeats": 138,
+   "ok": false,
+   "error": "89:20: Tactic `subst` failed: did not find equation for eliminating 'Γ' case var … [hypotheses omitted] ⊢ (Term.fvar x✝).Value ∨ ∃ t', Term.fvar x✝ ⭢βᵛ t'",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:38:33Z"
+  },
+  {
+   "sha": "736f7757970c",
+   "tokens": 71,
+   "heartbeats": 6802,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:39:30Z"
+  },
+  {
+   "sha": "637c214690bc",
+   "tokens": 71,
+   "heartbeats": 6688,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:39:34Z"
+  },
+  {
+   "sha": "1ae9bbee2035",
+   "tokens": 73,
+   "heartbeats": 5821,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:39:37Z"
+  },
+  {
+   "sha": "cf25e81d31e0",
+   "tokens": 95,
+   "heartbeats": 9249,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:39:41Z"
+  },
+  {
+   "sha": "7ade10c25811",
+   "tokens": 105,
+   "heartbeats": 2847,
+   "ok": false,
+   "error": "94:12: `grind` failed case grind.1.3.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.case t₂ t₃).LC [prop] Typing [] t₁ (σ.sum τ_1) [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) δ [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty τ_1⟩] (t₃ ^ᵗᵗ Ter",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:40:55Z"
+  },
+  {
+   "sha": "d13c8d99fac6",
+   "tokens": 105,
+   "heartbeats": 5846,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:40:58Z"
+  },
+  {
+   "sha": "d64016bf7e71",
+   "tokens": 110,
+   "heartbeats": 5328,
+   "ok": false,
+   "error": "96:12: `grind` failed case grind.1.3.1.1.10.11.10.10.10.7.8 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.case t₂ t₃).LC [prop] Typing [] t₁ (σ.sum τ_1) [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) δ [prop] ∀ x ∉ L, Typing [⟨x, Binding.t",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:41:21Z"
+  },
+  {
+   "sha": "4b831dbe953a",
+   "tokens": 79,
+   "heartbeats": 5298,
+   "ok": false,
+   "error": "91:12: `grind` failed case grind.1.3.1.1.10.11.10.10.10.7.8 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.case t₂ t₃).LC [prop] Typing [] t₁ (σ.sum τ_1) [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) δ [prop] ∀ x ∉ L, Typing [⟨x, Binding.t",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:41:24Z"
+  },
+  {
+   "sha": "26436356593d",
+   "tokens": 91,
+   "heartbeats": 5308,
+   "ok": false,
+   "error": "93:12: `grind` failed case grind.1.3.1.1.10.11.10.10.10.7.8 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.case t₂ t₃).LC [prop] Typing [] t₁ (σ.sum τ_1) [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) δ [prop] ∀ x ∉ L, Typing [⟨x, Binding.t",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:41:28Z"
+  },
+  {
+   "sha": "812e90a39412",
+   "tokens": 81,
+   "heartbeats": 3079,
+   "ok": false,
+   "error": "91:12: `grind` failed case grind.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.app t₂).Va",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:41:47Z"
+  },
+  {
+   "sha": "adf302dfa594",
+   "tokens": 87,
+   "heartbeats": 2740,
+   "ok": false,
+   "error": "91:12: `grind` failed case grind.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.app t₂).Va",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:41:50Z"
+  },
+  {
+   "sha": "8bf1a0716de6",
+   "tokens": 81,
+   "heartbeats": 5101,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:41:54Z"
+  },
+  {
+   "sha": "cb6a2e4f59b1",
+   "tokens": 76,
+   "heartbeats": 5801,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:42:43Z"
+  },
+  {
+   "sha": "9799324bf6f9",
+   "tokens": 86,
+   "heartbeats": 3116,
+   "ok": false,
+   "error": "92:12: `grind` failed case grind.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] t₁.LC [prop] t₂.LC [prop] ¬(t₁.app t₂",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:42:46Z"
+  },
+  {
+   "sha": "0022f943ae9d",
+   "tokens": 76,
+   "heartbeats": 5102,
+   "ok": false,
+   "error": "91:12: `grind` failed case grind.1.1.3.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.sum τ_1) [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) δ [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty τ_1⟩] (t₃ ^ᵗᵗ Term.fvar x) δ [prop] t₁.LC",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:42:49Z"
+  },
+  {
+   "sha": "4626fcec696f",
+   "tokens": 76,
+   "heartbeats": 15553,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:14Z"
+  },
+  {
+   "sha": "1d44f90c0a95",
+   "tokens": 76,
+   "heartbeats": 5544,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:17Z"
+  },
+  {
+   "sha": "805e642f66a8",
+   "tokens": 76,
+   "heartbeats": 5819,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:21Z"
+  },
+  {
+   "sha": "09a14b7cc230",
+   "tokens": 76,
+   "heartbeats": 25872,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.1.1.4.4.4.4 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.ap",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:26Z"
+  },
+  {
+   "sha": "71f51776de87",
+   "tokens": 73,
+   "heartbeats": 5808,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:30Z"
+  },
+  {
+   "sha": "6d1c91de8384",
+   "tokens": 73,
+   "heartbeats": 5823,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:48Z"
+  },
+  {
+   "sha": "dbde79e649b4",
+   "tokens": 73,
+   "heartbeats": 5821,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:51Z"
+  },
+  {
+   "sha": "4c37870551ed",
+   "tokens": 73,
+   "heartbeats": 5821,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:55Z"
+  },
+  {
+   "sha": "e5f4ac37b144",
+   "tokens": 73,
+   "heartbeats": 5819,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:58Z"
+  },
+  {
+   "sha": "1d833d984c03",
+   "tokens": 76,
+   "heartbeats": 5821,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:02Z"
+  },
+  {
+   "sha": "19a15a7b112b",
+   "tokens": 132,
+   "heartbeats": 3516,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:36Z"
+  },
+  {
+   "sha": "4c8a2584b601",
+   "tokens": 52,
+   "heartbeats": 649,
+   "ok": false,
+   "error": "90:12: duplicate rule 'canonical_form_tabs'; rule 'canonical_form_abs' was already given. Use [<term>,...] to give multiple rules.",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:39Z"
+  },
+  {
+   "sha": "f52426fdf849",
+   "tokens": 55,
+   "heartbeats": 519,
+   "ok": false,
+   "error": "90:12: duplicate rule 'Sub.wf'; rule 'wf' was already given. Use [<term>,...] to give multiple rules.",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:43Z"
+  },
+  {
+   "sha": "b7dcd158f9db",
+   "tokens": 55,
+   "heartbeats": 55229,
+   "ok": false,
+   "error": "86:74: unsolved goals case inl … [hypotheses omitted] ⊢ ((Term.tabs w w_1).tapp σ').Value ∨ ∃ t', (Term.tabs w w_1).tapp σ' ⭢βᵛ t' ‖ ⊢ (t₁.tapp σ').Value ∨ ∃ t', t₁.tapp σ' ⭢βᵛ t' ‖ ⊢ (w.inl.case t₂ t₃).Value ∨ ∃ t', w.inl.case t₂ t₃ ⭢βᵛ t' ‖ ⊢ (w.inr.case t₂ t₃).Value ∨ ∃ t', w.inr.case t₂ t₃ ⭢βᵛ t",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:58Z"
+  },
+  {
+   "sha": "4d60f35361c8",
+   "tokens": 61,
+   "heartbeats": 60672,
+   "ok": false,
+   "error": "86:74: unsolved goals case inl.inl … [hypotheses omitted] ⊢ (w.inl.case t₂ t₃).Value ∨ ∃ t', w.inl.case t₂ t₃ ⭢βᵛ t' ‖ ⊢ (w.inr.case t₂ t₃).Value ∨ ∃ t', w.inr.case t₂ t₃ ⭢βᵛ t' ‖ ⊢ (t₁.case t₂ t₃).Value ∨ ∃ t', t₁.case t₂ t₃ ⭢βᵛ t'",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:45:03Z"
+  },
+  {
+   "sha": "6a244ef3f3de",
+   "tokens": 67,
+   "heartbeats": 200033,
+   "ok": false,
+   "error": "90:12: aesop: internal error during proof reconstruction: goal 187 was not normalised.",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:45:13Z"
+  },
+  {
+   "sha": "3779b17bdbb6",
+   "tokens": 70,
+   "heartbeats": 5819,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:45:34Z",
+   "score": 91.04
+  },
+  {
+   "sha": "7634e85824dc",
+   "tokens": 70,
+   "heartbeats": null,
+   "ok": false,
+   "error": "88:22: unexpected token '_'; expected identifier",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:45:44Z"
+  },
+  {
+   "sha": "b3e706ea7b1e",
+   "tokens": 75,
+   "heartbeats": 22355,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:15:27Z"
+  },
+  {
+   "sha": "0bf37ba7d738",
+   "tokens": 70,
+   "heartbeats": 5081,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.2 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] (t₁.tapp σ') (τ_1 ^ᵞ σ') [prop] Typing [] t₁ (σ.all τ_1) [prop] Sub [] σ' σ [prop] Typing [] t₁ (σ.all τ_1) → t₁.Value ∨ Exists t₁.Red [prop] ¬(t₁.tapp σ').Value [prop",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:15:30Z"
+  },
+  {
+   "sha": "c892e4e1684b",
+   "tokens": 72,
+   "heartbeats": 5821,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:15:34Z"
+  },
+  {
+   "sha": "14f160481579",
+   "tokens": 75,
+   "heartbeats": 15552,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:16:01Z"
+  },
+  {
+   "sha": "d9b905160f4b",
+   "tokens": 75,
+   "heartbeats": 5545,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:16:05Z"
+  },
+  {
+   "sha": "66dad17c0cfb",
+   "tokens": 72,
+   "heartbeats": 5820,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:16:08Z"
+  },
+  {
+   "sha": "2b9da716593a",
+   "tokens": 72,
+   "heartbeats": 5821,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:16:12Z"
+  },
+  {
+   "sha": "d3f87478e905",
+   "tokens": 58,
+   "heartbeats": 12176,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.2.1.1.1.1.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:16:16Z"
+  },
+  {
+   "sha": "74c8dca69ae7",
+   "tokens": 103,
+   "heartbeats": 5163,
+   "ok": false,
+   "error": "96:12: `grind` failed case grind.1.1.4 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ σ [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) τ_1 [prop] Typing [] t₁ σ → t₁.Value ∨ Exists t₁.Red [prop] ∀ (x : Var), True [prop] Typing [] (",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:17:15Z"
+  },
+  {
+   "sha": "001ed2c04474",
+   "tokens": 62,
+   "heartbeats": 200049,
+   "ok": false,
+   "error": "86:74: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached Note: Use `set_option maxHeartbeats <num>` to set the limit. Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:17:46Z"
+  },
+  {
+   "sha": "b82c59d01061",
+   "tokens": 64,
+   "heartbeats": 200024,
+   "ok": false,
+   "error": "86:74: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached Note: Use `set_option maxHeartbeats <num>` to set the limit. Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:17:57Z"
+  },
+  {
+   "sha": "7637e9078647",
+   "tokens": 73,
+   "heartbeats": 5832,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:18:26Z"
+  },
+  {
+   "sha": "6273eaf3b558",
+   "tokens": 82,
+   "heartbeats": 5819,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:18:30Z"
+  },
+  {
+   "sha": "7787ebe38168",
+   "tokens": 70,
+   "heartbeats": 10974,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:18:33Z"
+  },
+  {
+   "sha": "08fefe10e424",
+   "tokens": 99,
+   "heartbeats": 6471,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:19:12Z"
+  },
+  {
+   "sha": "c6fb81e6498f",
+   "tokens": 75,
+   "heartbeats": 27852,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.1.1.4.4.4.4 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.ap",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:19:18Z"
+  },
+  {
+   "sha": "ef81829c4cd6",
+   "tokens": 72,
+   "heartbeats": 5820,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:41:05Z"
+  },
+  {
+   "sha": "a4fe5e3fe1cb",
+   "tokens": 80,
+   "heartbeats": 6012,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:41:09Z"
+  },
+  {
+   "sha": "94820a482554",
+   "tokens": 74,
+   "heartbeats": 5809,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:41:12Z"
+  },
+  {
+   "sha": "f17d6b4bb227",
+   "tokens": 69,
+   "heartbeats": 6392,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:41:46Z"
+  },
+  {
+   "sha": "d6a88a17a470",
+   "tokens": 68,
+   "heartbeats": 6267,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.2.1.1.1.8.9.4.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:41:50Z"
+  },
+  {
+   "sha": "e19c97f7b0c7",
+   "tokens": 68,
+   "heartbeats": 7300,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.2.1.1.8.1.1.9.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.tapp σ').LC [prop] Typing [] t₁ (σ.all τ_1) [prop] Sub [] σ' σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] ¬(t₁.tapp σ').Value [prop] ∀ (a : Term Var), ¬t₁.",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:41:54Z"
+  },
+  {
+   "sha": "e286cf4b7947",
+   "tokens": 68,
+   "heartbeats": 8266,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.1.1.9.8.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.let' t₂).LC [prop] Typing [] t₁ σ [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) τ_1 [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] ∀ (x : Var",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:41:57Z"
+  },
+  {
+   "sha": "128b81042754",
+   "tokens": 67,
+   "heartbeats": 8201,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.2.1.1.6.1.1.9.8.6 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.case t₂ t₃).LC [prop] Typing [] t₁ (σ.sum τ_1) [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) δ [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty τ_1⟩] (",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:42:01Z"
+  },
+  {
+   "sha": "7a950583e9ab",
+   "tokens": 36,
+   "heartbeats": 3419,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.app t₂).Va",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:42:24Z"
+  },
+  {
+   "sha": "31cc1968148e",
+   "tokens": 37,
+   "heartbeats": 608,
+   "ok": false,
+   "error": "90:97: invalid `grind` parameter, `Red` is not a theorem, definition, or inductive type",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:42:27Z"
+  },
+  {
+   "sha": "d376686ad2c3",
+   "tokens": 67,
+   "heartbeats": 4478,
+   "ok": false,
+   "error": "89:12: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₁ ^ᵗᵗ Term.fvar x) τ_1 [prop] ∀ (x : Var), True [prop] ¬(Term.abs σ t₁).Value [prop] ∀ (a : Term Var), ¬Term.abs σ t₁ ⭢βᵛ a [prop] (Term.abs σ ",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:42:31Z"
+  },
+  {
+   "sha": "7f0f1350bedd",
+   "tokens": 73,
+   "heartbeats": 5625,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.2 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.tapp σ').LC [prop] Typing [] t₁ (σ.all τ_1) [prop] Sub [] σ' σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] ¬(t₁.tapp σ').Value [prop] ∀ (a : Term Var), ¬t₁.tapp σ' ⭢βᵛ a ",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:09:51Z"
+  },
+  {
+   "sha": "26f26b48b150",
+   "tokens": 73,
+   "heartbeats": 5585,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.2 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.tapp σ').LC [prop] Typing [] t₁ (σ.all τ_1) [prop] Sub [] σ' σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] ¬(t₁.tapp σ').Value [prop] ∀ (a : Term Var), ¬t₁.tapp σ' ⭢βᵛ a ",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:09:54Z"
+  },
+  {
+   "sha": "6b72e3af7039",
+   "tokens": 73,
+   "heartbeats": 3888,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.app t₂).Value [pro",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:09:57Z"
+  },
+  {
+   "sha": "ff8a369c9fd4",
+   "tokens": 73,
+   "heartbeats": 1496,
+   "ok": false,
+   "error": "90:12: `Typing` is not marked with the `[grind]` attribute",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:10:01Z"
+  },
+  {
+   "sha": "6629e3c541a5",
+   "tokens": 73,
+   "heartbeats": 1501,
+   "ok": false,
+   "error": "90:12: `LC.tapp` is not marked with the `[grind]` attribute",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:10:04Z"
+  },
+  {
+   "sha": "6fbf1ac81d81",
+   "tokens": 81,
+   "heartbeats": 8566,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:10:45Z"
+  },
+  {
+   "sha": "6600713b47ab",
+   "tokens": 77,
+   "heartbeats": 5834,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:10:48Z"
+  },
+  {
+   "sha": "753d2e43bd3f",
+   "tokens": 87,
+   "heartbeats": 8099,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:10:51Z"
+  },
+  {
+   "sha": "991bb4d1cf44",
+   "tokens": 39,
+   "heartbeats": 3138,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.app t₂).Valu",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:12:10Z"
+  },
+  {
+   "sha": "c875b535367e",
+   "tokens": 37,
+   "heartbeats": 4277,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.app t₂).Va",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:12:14Z"
+  },
+  {
+   "sha": "83b3c818087d",
+   "tokens": 63,
+   "heartbeats": 34214,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.2.1.4.4 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.app t₂",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:12:19Z"
+  },
+  {
+   "sha": "a01ca3694a8a",
+   "tokens": 39,
+   "heartbeats": 27291,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.app t₂).Va",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:12:25Z"
+  },
+  {
+   "sha": "ac2e5196ed67",
+   "tokens": 63,
+   "heartbeats": null,
+   "ok": false,
+   "error": "91:29: unexpected token '*'; expected Aesop.builder_name, Aesop.builder_option, Aesop.phase or Aesop.priority",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:12:52Z"
+  },
+  {
+   "sha": "8f7a6729457c",
+   "tokens": 61,
+   "heartbeats": 60663,
+   "ok": false,
+   "error": "86:74: unsolved goals case inl.inl … [hypotheses omitted] ⊢ (w.inl.case t₂ t₃).Value ∨ ∃ t', w.inl.case t₂ t₃ ⭢βᵛ t' ‖ ⊢ (w.inr.case t₂ t₃).Value ∨ ∃ t', w.inr.case t₂ t₃ ⭢βᵛ t' ‖ ⊢ (t₁.case t₂ t₃).Value ∨ ∃ t', t₁.case t₂ t₃ ⭢βᵛ t'",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:13:42Z"
+  },
+  {
+   "sha": "ec5640c4d36a",
+   "tokens": 84,
+   "heartbeats": 58931,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:14:06Z"
+  },
+  {
+   "sha": "d4d834dc5a5e",
+   "tokens": 84,
+   "heartbeats": 53951,
+   "ok": false,
+   "error": "86:74: unsolved goals case inl.inl … [hypotheses omitted] ⊢ ((Term.abs w w_1).app t₂).Value ∨ ∃ t', (Term.abs w w_1).app t₂ ⭢βᵛ t' ‖ ⊢ ((Term.abs w_1 w_2).app t₂).Value ∨ ∃ t', (Term.abs w_1 w_2).app t₂ ⭢βᵛ t' ‖ ⊢ (t₁.app t₂).Value ∨ ∃ t', t₁.app t₂ ⭢βᵛ t' ‖ ⊢ (t₁.app t₂).Value ∨ ∃ t', t₁.app t₂ ⭢βᵛ",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:14:11Z"
+  },
+  {
+   "sha": "d18485d8df94",
+   "tokens": 85,
+   "heartbeats": 19483,
+   "ok": false,
+   "error": "86:74: unsolved goals … [hypotheses omitted] ⊢ (Term.abs σ t₁).Value ∨ ∃ t', Term.abs σ t₁ ⭢βᵛ t' Var : Type u_1 inst : HasFresh Var inst_1 : DecidableEq Var t : Term Var τ : Ty Var Γ : List ((_ : Var) × Binding Var) t₁ : Term Var σ τ_1 : Ty Var t₂ : Term Var this : (t₁.app t₂).LC a : Typing [] t₁ (",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:14:38Z"
+  },
+  {
+   "sha": "03979f2099a8",
+   "tokens": 93,
+   "heartbeats": 13425,
+   "ok": false,
+   "error": "90:12: Tactic `aesop` failed, made no progress Initial goal: case var … [hypotheses omitted] ⊢ (Term.fvar x✝).Value ∨ ∃ t', Term.fvar x✝ ⭢βᵛ t'",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:14:41Z"
+  },
+  {
+   "sha": "0abb289ca32e",
+   "tokens": 93,
+   "heartbeats": 37928,
+   "ok": false,
+   "error": "86:74: unsolved goals … [hypotheses omitted] ⊢ (t₁.app t₂).Value ∨ ∃ t', t₁.app t₂ ⭢βᵛ t' Var : Type u_1 inst : HasFresh Var inst_1 : DecidableEq Var t : Term Var τ : Ty Var Γ : List ((_ : Var) × Binding Var) t₁ : Term Var σ τ_1 σ' : Ty Var this : (t₁.tapp σ').LC a : Typing [] t₁ (σ.all τ_1) a_1 : S",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:14:46Z"
+  },
+  {
+   "sha": "87172bca979f",
+   "tokens": 70,
+   "heartbeats": 5663,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:15:36Z",
+   "score": 91.13
+  },
+  {
+   "sha": "f0b47dfb18ff",
+   "tokens": 70,
+   "heartbeats": 5820,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:15:46Z"
+  },
+  {
+   "sha": "abd926a43fe2",
+   "tokens": 70,
+   "heartbeats": 2846,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.Value ∨ Exists t₁.Red [prop] t₂.Value ∨ Exists t₂.Red [prop] (t₁.app t₂).LC [prop] ¬(t₁.app t₂).Value [prop] ∀ (a ",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:16:12Z"
+  },
+  {
+   "sha": "b4bc96a384e3",
+   "tokens": 70,
+   "heartbeats": 6144,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:16:16Z"
+  },
+  {
+   "sha": "6ef66c0213d2",
+   "tokens": 70,
+   "heartbeats": 5055,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.2 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.all τ_1) [prop] Sub [] σ' σ [prop] t₁.Value ∨ Exists t₁.Red [prop] Typing [] (t₁.tapp σ') (τ_1 ^ᵞ σ') [prop] ¬(t₁.tapp σ').Value [prop] ∀ (a : Term Var), ¬t₁.tap",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:16:20Z"
+  },
+  {
+   "sha": "77009c1b9af3",
+   "tokens": 70,
+   "heartbeats": 28707,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:16:24Z"
+  },
+  {
+   "sha": "d7a0fa5d5ce6",
+   "tokens": 68,
+   "heartbeats": 6754,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:16:40Z"
+  },
+  {
+   "sha": "b11957b0707f",
+   "tokens": 70,
+   "heartbeats": 10959,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:16:44Z"
+  },
+  {
+   "sha": "c5c18faf7c80",
+   "tokens": 71,
+   "heartbeats": 5584,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:16:47Z"
+  },
+  {
+   "sha": "439975bbf70b",
+   "tokens": 69,
+   "heartbeats": 6234,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:16:51Z"
+  },
+  {
+   "sha": "d566dd1a1075",
+   "tokens": 72,
+   "heartbeats": 5668,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:17:12Z"
+  },
+  {
+   "sha": "440c46d35248",
+   "tokens": 72,
+   "heartbeats": 5581,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:17:15Z"
+  },
+  {
+   "sha": "eb6dc8c832bb",
+   "tokens": 75,
+   "heartbeats": 5432,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:17:19Z"
+  },
+  {
+   "sha": "b1edabdceb02",
+   "tokens": 70,
+   "heartbeats": 6069,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:45:09Z"
+  },
+  {
+   "sha": "98e51b72f915",
+   "tokens": 71,
+   "heartbeats": 5691,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:45:12Z"
+  },
+  {
+   "sha": "55520891d8f2",
+   "tokens": 71,
+   "heartbeats": 5664,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:45:16Z"
+  },
+  {
+   "sha": "861080323a40",
+   "tokens": 68,
+   "heartbeats": 9537,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Γ_1.Wf [prop] Binding.ty σ ∈ dlookup x Γ_1 [prop] (Term.fvar x).LC [prop] ¬(Term.fvar x).Value [prop] ∀ (a : Term Var), ¬Term.fvar x ⭢βᵛ a [prop] Γ_1.Wf → HasWellFormed.wf Γ_1 [prop",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:45:20Z"
+  },
+  {
+   "sha": "e142eb4c4f94",
+   "tokens": 67,
+   "heartbeats": 10474,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.2.1.4.4 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.Value ∨ Exists t₁.Red [prop] t₂.Value ∨ Exists t₂.Red [prop] (t₁.app t₂).LC [prop] ¬(t₁.app t₂).Value [prop] ∀",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:45:23Z"
+  },
+  {
+   "sha": "81a538fd8296",
+   "tokens": 72,
+   "heartbeats": 5665,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:46:09Z"
+  },
+  {
+   "sha": "84212f70ffa2",
+   "tokens": 72,
+   "heartbeats": 5666,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:46:13Z"
+  },
+  {
+   "sha": "351816f46e14",
+   "tokens": 72,
+   "heartbeats": 5665,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:46:16Z"
+  },
+  {
+   "sha": "373508107a4f",
+   "tokens": 72,
+   "heartbeats": 5665,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:46:19Z"
+  },
+  {
+   "sha": "d14512112cc0",
+   "tokens": 72,
+   "heartbeats": 5969,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.10.10.10.11.7.9.8.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.sum τ_1) [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) δ [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty τ_1⟩] (t₃ ^ᵗᵗ Term.fvar x",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:46:23Z"
+  },
+  {
+   "sha": "5f08b05404d0",
+   "tokens": 72,
+   "heartbeats": 5666,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:46:26Z"
+  },
+  {
+   "sha": "0cb0f137a62f",
+   "tokens": 93,
+   "heartbeats": 40447,
+   "ok": false,
+   "error": "90:12: Tactic `aesop` failed, made no progress Initial goal: case var … [hypotheses omitted] ⊢ (Term.fvar x✝).Value ∨ ∃ t', Term.fvar x✝ ⭢βᵛ t'",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:47:46Z"
+  },
+  {
+   "sha": "5b1b837f1dcc",
+   "tokens": 94,
+   "heartbeats": 59248,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:48:02Z"
+  },
+  {
+   "sha": "1a0998a527e8",
+   "tokens": 97,
+   "heartbeats": 382,
+   "ok": false,
+   "error": "90:12: `dsimp` made no progress",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:48:06Z"
+  },
+  {
+   "sha": "9676ae2f16ba",
+   "tokens": 85,
+   "heartbeats": 58931,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:48:11Z"
+  },
+  {
+   "sha": "df4183ae631d",
+   "tokens": 70,
+   "heartbeats": 5665,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:48:32Z"
+  },
+  {
+   "sha": "38ab1512e1a3",
+   "tokens": 70,
+   "heartbeats": 5664,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:48:35Z"
+  },
+  {
+   "sha": "c6f8727705b9",
+   "tokens": 70,
+   "heartbeats": 5663,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:48:39Z"
+  },
+  {
+   "sha": "0c672f02392b",
+   "tokens": 70,
+   "heartbeats": 5663,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:48:42Z"
+  },
+  {
+   "sha": "3f992f847405",
+   "tokens": 70,
+   "heartbeats": 5664,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:48:46Z"
+  },
+  {
+   "sha": "f3c10d642cc9",
+   "tokens": 70,
+   "heartbeats": 5664,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:48:49Z"
+  },
+  {
+   "sha": "1494f0cb0da6",
+   "tokens": 41,
+   "heartbeats": 373,
+   "ok": false,
+   "error": "90:37: priority expected",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:19Z"
+  },
+  {
+   "sha": "103619855bba",
+   "tokens": 41,
+   "heartbeats": 5159,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.1.1.4 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.Value ∨ Exists t₁.Red [prop] t₂.Value ∨ Exists t₂.Red [prop] (t₁.app t₂).LC [prop] ¬(t₁.app t₂).Value [prop] ∀ (",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:23Z"
+  },
+  {
+   "sha": "5694f6ec348c",
+   "tokens": 37,
+   "heartbeats": 4951,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.2.1.1.1.1.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.Value ∨ Exists t₁.Red [prop] t₂.Value ∨ Exists t₂.Red [prop] (t₁.app t₂).LC [prop] ¬(t₁.app t₂).Value ",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:27Z"
+  },
+  {
+   "sha": "fa0cc0180094",
+   "tokens": 41,
+   "heartbeats": 5293,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.2.1.1.1.1.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.Value ∨ Exists t₁.Red [prop] t₂.Value ∨ Exists t₂.Red [prop] (t₁.app t₂).LC [prop] ¬(t₁.app t₂).Value ",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:48Z"
+  },
+  {
+   "sha": "062273d15f7a",
+   "tokens": 41,
+   "heartbeats": 5301,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.2.1.1.1.1.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.Value ∨ Exists t₁.Red [prop] t₂.Value ∨ Exists t₂.Red [prop] (t₁.app t₂).LC [prop] ¬(t₁.app t₂).Value ",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:52Z"
+  },
+  {
+   "sha": "822a7e06dc37",
+   "tokens": 52,
+   "heartbeats": 6679,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.2.1.1.1.4.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.Value ∨ Exists t₁.Red [prop] t₂.Value ∨ Exists t₂.Red [prop] (t₁.app t₂).LC [prop] ¬(t₁.app t₂).Value ",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:56Z"
+  },
+  {
+   "sha": "9104a10a14c9",
+   "tokens": 69,
+   "heartbeats": 6344,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:50:30Z"
+  },
+  {
+   "sha": "d6a34fab2be0",
+   "tokens": 69,
+   "heartbeats": 6271,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:50:34Z"
+  },
+  {
+   "sha": "dbafbcf606bc",
+   "tokens": 69,
+   "heartbeats": 6224,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:50:37Z"
+  },
+  {
+   "sha": "257618ea5328",
+   "tokens": 69,
+   "heartbeats": 6224,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:50:41Z"
+  },
+  {
+   "sha": "e13887305e63",
+   "tokens": 69,
+   "heartbeats": 6571,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.1.9.1.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ σ [prop] Wf [] τ_1 [prop] t₁.Value ∨ Exists t₁.Red [prop] t₁.inl.LC [prop] ¬t₁.inl.Value [prop] ∀ (a : Term Var), ¬t₁.inl ⭢βᵛ a [prop] (Typing [] t₁ σ",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:50:45Z"
+  },
+  {
+   "sha": "e8f84704e378",
+   "tokens": 65,
+   "heartbeats": 8627,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:50:48Z"
+  },
+  {
+   "sha": "a2eec1731e76",
+   "tokens": 63,
+   "heartbeats": 9885,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.2.1.1.1.4.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.Value ∨ Exists t₁.Red [prop] t₂.Value ∨ Exists t₂.Red [prop] (t₁.app t₂).LC [prop] ¬(t₁.app t₂).Value ",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:18:45Z"
+  },
+  {
+   "sha": "9c3b659c680d",
+   "tokens": 55,
+   "heartbeats": 15548,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.2.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.Value ∨ Exists t₁.Red [prop] t₂.Value ∨ Exists t₂.Red [prop] (t₁.app t₂).LC [prop] ¬(t₁.app t₂).Value [prop] ∀ (a ",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:18:49Z"
+  },
+  {
+   "sha": "72361103cd51",
+   "tokens": 68,
+   "heartbeats": 7277,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.1.1.1.1.1.1.1.3.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ σ [prop] Wf [] τ_1 [prop] t₁.Value ∨ Exists t₁.Red [prop] t₁.inl.LC [prop] ¬t₁.inl.Value [prop] ∀ (a : Term Var), ¬t₁.inl ⭢βᵛ a [prop] (Typing [] t₁ σ",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:18:53Z"
+  },
+  {
+   "sha": "751b3e415e42",
+   "tokens": 70,
+   "heartbeats": 4534,
+   "ok": false,
+   "error": "89:12: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₁ ^ᵗᵗ Term.fvar x) τ_1 [prop] ∀ (x : Var), True [prop] ¬(Term.abs σ t₁).Value [prop] ∀ (a : Term Var), ¬Term.abs σ t₁ ⭢βᵛ a [prop] (Term.abs σ ",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:18:56Z"
+  },
+  {
+   "sha": "b041475fcf9f",
+   "tokens": 71,
+   "heartbeats": 160,
+   "ok": false,
+   "error": "89:20: Tactic `subst` failed: did not find equation for eliminating 'Γ' case var … [hypotheses omitted] ⊢ (Term.fvar x✝).Value ∨ ∃ t', Term.fvar x✝ ⭢βᵛ t'",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:19:11Z"
+  },
+  {
+   "sha": "be6210b81c2f",
+   "tokens": 73,
+   "heartbeats": 364,
+   "ok": false,
+   "error": "90:12: `sub` is not marked with the `[grind]` attribute",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:19:37Z"
+  },
+  {
+   "sha": "a85c02e7ac19",
+   "tokens": 73,
+   "heartbeats": 364,
+   "ok": false,
+   "error": "90:12: `app` is not marked with the `[grind]` attribute",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:19:40Z"
+  },
+  {
+   "sha": "19cfc20518ec",
+   "tokens": 73,
+   "heartbeats": 7491,
+   "ok": false,
+   "error": "90:12: `grind` failed case grind.2.1.1.1.8.1.9.8.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.Value ∨ Exists t₁.Red [prop] t₂.Value ∨ Exists t₂.Red [prop] (t₁.app t₂).LC [prop] ¬(t₁.app t₂).Value [p",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:19:44Z"
+  },
+  {
+   "sha": "16d297f09a15",
+   "tokens": 73,
+   "heartbeats": 5632,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:19:47Z"
+  },
+  {
+   "sha": "10e87930f31f",
+   "tokens": 70,
+   "heartbeats": 5665,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:20:09Z"
+  },
+  {
+   "sha": "099ba08f647b",
+   "tokens": 70,
+   "heartbeats": null,
+   "ok": false,
+   "error": "88:21: unexpected token '['; expected identifier",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:20:12Z"
+  },
+  {
+   "sha": "1f4a1e18c9b0",
+   "tokens": 72,
+   "heartbeats": 5665,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:20:15Z"
+  },
+  {
+   "sha": "279a1a095f4d",
+   "tokens": 72,
+   "heartbeats": 5665,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:20:19Z"
+  },
+  {
+   "sha": "47c945f76012",
+   "tokens": 70,
+   "heartbeats": null,
+   "ok": false,
+   "error": "88:14: unexpected token ':'; expected '='",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:20:40Z"
+  },
+  {
+   "sha": "a704414434b6",
+   "tokens": 70,
+   "heartbeats": 5664,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:20:56Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wuclean-hx-solab1-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:08:01Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:50:03Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:22:03Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r5",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:58:20Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r6",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:36:45Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r7",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:14:10Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:39:38Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r10",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:08:50Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r11",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:43:35Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r12",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:17:50Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  }
+ ],
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 1,
+    "d_score": 17.05,
+    "d_tokens": 30,
+    "d_heartbeats": 24855,
+    "diff": "+lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t' := by\n+  generalize eq : [] = Γ at der\n+  have der' : Typing Γ t τ := der\n+  induction der <;> subst eq\n+  case var mem => grind\n+  case app t₁ _ _ t₂ l r ih_l ih_r =>\n+    right\n+    cases ih_l rfl l with\n+    | inl val_l =>\n+        cases ih_r rfl r with\n+        | inl val_r =>\n+            have ⟨σ, t₁, eq⟩ := l.canonical_form_abs val_l\n+            refine ⟨t₁ ^ᵗᵗ t₂, ?_⟩\n+            grind\n+        | inr red_r =>\n+            obtain ⟨t₂', _⟩ := red_r\n+            refine ⟨t₁.app t₂', ?_⟩\n+            grind\n+    | inr red_l =>\n+        obtain ⟨t₁', _⟩ := red_l\n+        refine ⟨t₁'.app t₂, ?_⟩\n+        grind\n+  case tapp"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 4,
+    "d_score": 17.23,
+    "d_tokens": -52,
+    "d_heartbeats": -23327,
+    "diff": "-  have der' : Typing Γ t τ := der\n+  have der' := der\n-  case var mem => grind\n+  all_goals have lc := der'.wf.2.1\n+  case var => grind\n+  case abs => exact Or.inl (.abs lc)\n+  case tabs => exact Or.inl (.tabs lc)\n+  case sub => grind\n-    cases ih_l rfl l with\n-    | inl val_l =>\n-        cases ih_r rfl r with\n-        | inl val_r =>\n-            have ⟨σ, t₁, eq⟩ := l.canonical_form_abs val_l\n-            refine ⟨t₁ ^ᵗᵗ t₂, ?_⟩\n-            grind\n-        | inr red_r =>\n-            obtain ⟨t₂', _⟩ := red_r\n-            refine ⟨t₁.app t₂', ?_⟩\n-            grind\n-    | inr red_l =>\n-        obtain ⟨t₁', _⟩ := red_l\n-        refine ⟨t₁'.app t₂, ?_⟩\n-        grind\n-  case tapp σ' der _ ih =>"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 6,
+    "d_score": 4.55,
+    "d_tokens": -58,
+    "d_heartbeats": 339,
+    "diff": "-  case app t₁ _ _ t₂ l r ih_l ih_r =>\n+  case app l r ih_l ih_r =>\n-  case let' t₁ σ t₂ τ L der _ ih _ =>\n-    right\n+  case let' der _ ih _ =>\n+    have ht := ih rfl der\n-    rcases ih rfl der with val | ⟨t', red⟩\n-    · exact ⟨_, .let_body val body⟩\n-    · exact ⟨_, .let_bind red body⟩\n+    grind only [→ Red.let_bind, → Red.let_body]\n-    rcases ih rfl der with val | ⟨t', red⟩\n-    · exact Or.inl (.inl val)\n-    · exact Or.inr ⟨_, .inl red⟩\n+    have ht := ih rfl der\n+    grind only [→ Red.inl, → Value.inl]\n-    rcases ih rfl der with val | ⟨t', red⟩\n-    · exact Or.inl (.inr val)\n-    · exact Or.inr ⟨_, .inr red⟩\n-  case case t₁ _ _ t₂ _ t₃ _ der _ _ ih _ _ =>\n+    have ht := ih rfl der\n"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 9,
+    "d_score": 2.44,
+    "d_tokens": -30,
+    "d_heartbeats": 26,
+    "diff": "-  case tapp σ' der sub ih =>\n-    right\n-    rcases ih rfl der with val | ⟨t', red⟩\n-    · obtain ⟨σ, b, rfl⟩ := der.canonical_form_tabs val\n-      refine ⟨_, .tabs val.lc ?_⟩\n-      grind\n-    · refine ⟨_, .tapp ?_ red⟩\n-      grind\n+  case tapp der sub ih =>\n+    have ht := ih rfl der\n+    cases lc\n+    grind only [→ canonical_form_tabs, → Red.tapp, → Red.tabs, → Value.lc]\n-      rcases lr with rfl | rfl\n-      · refine ⟨_, .case_inl ?_ bodies.1 bodies.2⟩\n-        cases val; assumption\n-      · refine ⟨_, .case_inr ?_ bodies.1 bodies.2⟩\n-        cases val; assumption\n+      rcases lr with rfl | rfl <;> cases val <;>\n+        exact ⟨_, by solve_by_elim [Red.case_inl, Red.case_inr, bodies.1"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 12,
+    "d_score": 0.57,
+    "d_tokens": -7,
+    "d_heartbeats": -2,
+    "diff": "-  induction der <;> subst eq\n-  all_goals have lc := der'.wf.2.1\n+  induction der <;> subst eq <;> have lc := der'.wf.2.1\n-  case abs => exact Or.inl (.abs lc)\n-  case tabs => exact Or.inl (.tabs lc)\n+  case abs | tabs => left; constructor; exact lc"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 14,
+    "d_score": 0.49,
+    "d_tokens": -5,
+    "d_heartbeats": -147,
+    "diff": "+  have lc := der.wf.2.1\n-  have der' := der\n-  induction der <;> subst eq <;> have lc := der'.wf.2.1\n+  induction der <;> subst eq\n-    rcases ih_l rfl l with vl | ⟨t', red⟩\n-    · rcases ih_r rfl r with vr | ⟨t', red⟩\n+    rcases ih_l l.wf.2.1 rfl with vl | ⟨t', red⟩\n+    · rcases ih_r r.wf.2.1 rfl with vr | ⟨t', red⟩\n-    have ht := ih rfl der\n+    have ht := ih der.wf.2.1 rfl\n-    have ht := ih rfl der\n+    have ht := ih der.wf.2.1 rfl\n-    have ht := ih rfl der\n+    have ht := ih der.wf.2.1 rfl\n-    have ht := ih rfl der\n+    have ht := ih der.wf.2.1 rfl\n-    rcases ih rfl der with val | ⟨t', red⟩\n+    rcases ih der.wf.2.1 rfl with val | ⟨t', red⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 3,
+    "d_score": 0.9,
+    "d_tokens": -12,
+    "d_heartbeats": 148,
+    "diff": "-  case inl der _ ih =>\n+  case inl der _ ih | inr der _ ih =>\n-    grind only [→ Red.inl, → Value.inl]\n-  case inr der _ ih =>\n-    have ht := ih der.wf.2.1 rfl\n-    grind only [→ Red.inr, → Value.inr]\n+    grind only [→ Red.inl, Value.inl, → Red.inr, Value.inr]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 7,
+    "d_score": 1.56,
+    "d_tokens": -20,
+    "d_heartbeats": 143,
+    "diff": "-    · obtain ⟨b, lr⟩ := der.canonical_form_sum val\n-      rcases lr with rfl | rfl <;> cases val <;>\n-        exact ⟨_, by solve_by_elim [Red.case_inl, Red.case_inr, bodies.1, bodies.2]⟩\n+    · grind only [→ canonical_form_sum, cases Value, → Red.case_inl, → Red.case_inr]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 9,
+    "d_score": 0.28,
+    "d_tokens": -7,
+    "d_heartbeats": 513,
+    "diff": "-      · obtain ⟨σ, b, rfl⟩ := l.canonical_form_abs vl\n-        exact ⟨_, .abs vl.lc vr⟩\n+      · grind only [→ canonical_form_abs, → Red.abs, → Value.lc]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 10,
+    "d_score": 0.42,
+    "d_tokens": -6,
+    "d_heartbeats": 136,
+    "diff": "-    have body := (body_let.mp lc).2\n-    grind only [→ Red.let_bind, → Red.let_body]\n+    grind only [body_let, → Red.let_bind, → Red.let_body]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 12,
+    "d_score": 0.2,
+    "d_tokens": -7,
+    "d_heartbeats": 653,
+    "diff": "-    have bodies := (body_case.mp lc).2\n-    · grind only [→ canonical_form_sum, cases Value, → Red.case_inl, → Red.case_inr]\n-    · exact ⟨_, .case red bodies.1 bodies.2⟩\n+    · grind only [body_case, → canonical_form_sum, cases Value, → Red.case_inl, → Red.case_inr]\n+    · grind only [body_case, → Red.case]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 13,
+    "d_score": 1.17,
+    "d_tokens": -12,
+    "d_heartbeats": -333,
+    "diff": "-    · rcases ih_r r.wf.2.1 rfl with vr | ⟨t', red⟩\n-      · grind only [→ canonical_form_abs, → Red.abs, → Value.lc]\n-      · exact ⟨_, .appᵣ vl red⟩\n+    · have hr := ih_r r.wf.2.1 rfl\n+      grind only [→ canonical_form_abs, → Red.abs, → Red.appᵣ vl, → Value.lc]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 14,
+    "d_score": 0.12,
+    "d_tokens": -1,
+    "d_heartbeats": -76,
+    "diff": "-      grind only [→ canonical_form_abs, → Red.abs, → Red.appᵣ vl, → Value.lc]\n+      grind only [→ canonical_form_abs, → Red.abs, → Red.appᵣ vl, Value.lc]\n-    grind only [→ canonical_form_tabs, → Red.tapp, → Red.tabs, → Value.lc]\n+    grind only [→ canonical_form_tabs, → Red.tapp, → Red.tabs, Value.lc]\n-    · grind only [body_case, → Red.case]\n+    · grind only [body_case, → Red.case red]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 17,
+    "d_score": 0.2,
+    "d_tokens": -4,
+    "d_heartbeats": 240,
+    "diff": "-  induction der <;> subst eq\n-  case var => grind\n+  induction der <;> subst_vars\n-  case sub => grind\n+  case var | sub => grind\n-    · grind only [body_case, → canonical_form_sum, cases Value, → Red.case_inl, → Red.case_inr]\n+    · grind only [body_case, canonical_form_sum, cases Value, → Red.case_inl, → Red.case_inr]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 1,
+    "d_score": 0.48,
+    "d_tokens": -6,
+    "d_heartbeats": 11,
+    "diff": "-  case tapp der sub ih =>\n-    have ht := ih der.wf.2.1 rfl\n+  case tapp =>\n-    grind only [→ canonical_form_tabs, → Red.tapp, → Red.tabs, Value.lc]\n+    grind only [→ wf, → canonical_form_tabs, → Red.tapp, → Red.tabs, Value.lc]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 2,
+    "d_score": 0.08,
+    "d_tokens": -1,
+    "d_heartbeats": 4,
+    "diff": "-  case tapp =>\n+  case tapp der sub ih =>\n+    have ht := ih der.wf.2.1 rfl\n-    grind only [→ wf, → canonical_form_tabs, → Red.tapp, → Red.tabs, Value.lc]\n-  case let' der _ ih _ =>\n-    have ht := ih der.wf.2.1 rfl\n-    grind only [body_let, → Red.let_bind, → Red.let_body]\n+    grind only [→ canonical_form_tabs, → Red.tapp, → Red.tabs, Value.lc]\n+  case let' =>\n+    grind only [→ wf, body_let, → Red.let_bind, → Red.let_body]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 3,
+    "d_score": 0.16,
+    "d_tokens": -2,
+    "d_heartbeats": 11,
+    "diff": "-  case let' =>\n-    grind only [→ wf, body_let, → Red.let_bind, → Red.let_body]\n-  case inl der _ ih | inr der _ ih =>\n+  case let' der _ ih _ =>\n-    grind only [→ Red.inl, Value.inl, → Red.inr, Value.inr]\n+    grind only [body_let, → Red.let_bind, → Red.let_body]\n+  case inl | inr =>\n+    grind only [→ wf, → Red.inl, Value.inl, → Red.inr, Value.inr]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 5,
+    "d_score": 1.28,
+    "d_tokens": -16,
+    "d_heartbeats": 47,
+    "diff": "-    · have hr := ih_r r.wf.2.1 rfl\n-      grind only [→ canonical_form_abs, → Red.abs, → Red.appᵣ vl, Value.lc]\n+    · grind only [→ wf, → canonical_form_abs, → Red.abs, → Red.appᵣ vl, Value.lc]\n-  case tapp der sub ih =>\n-    have ht := ih der.wf.2.1 rfl\n+  case tapp =>\n-    grind only [→ canonical_form_tabs, → Red.tapp, → Red.tabs, Value.lc]\n-  case let' der _ ih _ =>\n-    have ht := ih der.wf.2.1 rfl\n-    grind only [body_let, → Red.let_bind, → Red.let_body]\n+    grind only [→ wf, → canonical_form_tabs, → Red.tapp, → Red.tabs, Value.lc]\n+  case let' =>\n+    grind only [→ wf, body_let, → Red.let_bind, → Red.let_body]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 2,
+    "d_score": 0.3,
+    "d_tokens": -6,
+    "d_heartbeats": 334,
+    "diff": "-  case case der _ _ ih _ _ =>\n-    right\n-    rcases ih der.wf.2.1 rfl with val | ⟨t', red⟩\n-    · grind only [body_case, canonical_form_sum, cases Value, → Red.case_inl, → Red.case_inr]\n-    · grind only [body_case, → Red.case red]\n+  case case t₁ _ _ _ _ _ _ _ _ _ _ _ _ =>\n+    grind only [→ wf, body_case, canonical_form_sum, cases Value, → Red.case_inl, → Red.case_inr, → Red.case (t₁ := t₁)]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 6,
+    "d_score": 1.4,
+    "d_tokens": -13,
+    "d_heartbeats": -608,
+    "diff": "-  case case t₁ _ _ _ _ _ _ _ _ _ _ _ _ =>\n-    grind only [→ wf, body_case, canonical_form_sum, cases Value, → Red.case_inl, → Red.case_inr, → Red.case (t₁ := t₁)]\n+  case case =>\n+    grind (gen := 2) only [→ wf, body_case, canonical_form_sum, cases Value, → Red.case_inl, → Red.case_inr, → Red.case]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 10,
+    "d_score": 1.06,
+    "d_tokens": -22,
+    "d_heartbeats": 1328,
+    "diff": "-  case let' =>\n-    grind only [→ wf, body_let, → Red.let_bind, → Red.let_body]\n-  case inl | inr =>\n-    grind only [→ wf, → Red.inl, Value.inl, → Red.inr, Value.inr]\n-  case case =>\n-    grind (gen := 2) only [→ wf, body_case, canonical_form_sum, cases Value, → Red.case_inl, → Red.case_inr, → Red.case]\n+  all_goals grind (gen := 2) only [→ wf, body_let, → Red.let_bind, → Red.let_body, → Red.inl, Value.inl, → Red.inr, Value.inr, body_case, canonical_form_sum, cases Value, → Red.case_inl, → Red.case_inr, → Red.case]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 12,
+    "d_score": 0.09,
+    "d_tokens": -6,
+    "d_heartbeats": 722,
+    "diff": "-  case tapp =>\n-    cases lc\n-    grind only [→ wf, → canonical_form_tabs, → Red.tapp, → Red.tabs, Value.lc]\n-  all_goals grind (gen := 2) only [→ wf, body_let, → Red.let_bind, → Red.let_body, → Red.inl, Value.inl, → Red.inr, Value.inr, body_case, canonical_form_sum, cases Value, → Red.case_inl, → Red.case_inr, → Red.case]\n+  case' tapp => cases lc\n+  all_goals grind (gen := 2) only [→ wf, → canonical_form_tabs, → Red.tapp, → Red.tabs, Value.lc, body_let, → Red.let_bind, → Red.let_body, → Red.inl, Value.inl, → Red.inr, Value.inr, body_case, canonical_form_sum, cases Value, → Red.case_inl, → Red.case_inr, → Red.case]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 14,
+    "d_score": 1.75,
+    "d_tokens": -36,
+    "d_heartbeats": 2141,
+    "diff": "-  case app l r ih_l ih_r =>\n-    right\n-    rcases ih_l l.wf.2.1 rfl with vl | ⟨t', red⟩\n-    · grind only [→ wf, → canonical_form_abs, → Red.abs, → Red.appᵣ vl, Value.lc]\n-    · exact ⟨_, .appₗ r.wf.2.1 red⟩\n-  all_goals grind (gen := 2) only [→ wf, → canonical_form_tabs, → Red.tapp, → Red.tabs, Value.lc, body_let, → Red.let_bind, → Red.let_body, → Red.inl, Value.inl, → Red.inr, Value.inr, body_case, canonical_form_sum, cases Value, → Red.case_inl, → Red.case_inr, → Red.case]\n+  all_goals grind (gen := 2) only [→ wf, → canonical_form_abs, → Red.abs, → Red.appₗ, → Red.appᵣ, → canonical_form_tabs, → Red.tapp, → Red.tabs, Value.lc, body_let, → Red.let_bind, → Red.let_body, → Red.inl, Value.in"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 15,
+    "d_score": 1.83,
+    "d_tokens": -17,
+    "d_heartbeats": -796,
+    "diff": "-  all_goals grind (gen := 2) only [→ wf, → canonical_form_abs, → Red.abs, → Red.appₗ, → Red.appᵣ, → canonical_form_tabs, → Red.tapp, → Red.tabs, Value.lc, body_let, → Red.let_bind, → Red.let_body, → Red.inl, Value.inl, → Red.inr, Value.inr, body_case, canonical_form_sum, cases Value, → Red.case_inl, → Red.case_inr, → Red.case]\n+  all_goals grind (gen := 2) [→ canonical_form_abs, → Red.abs, → Red.appₗ, → Red.appᵣ, → canonical_form_tabs, → Red.tapp, → Red.tabs, → Red.let_bind, → Red.let_body, → Red.inl, → Red.inr, canonical_form_sum, → Red.case_inl, → Red.case_inr, → Red.case]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 20,
+    "d_score": 0.43,
+    "d_tokens": -5,
+    "d_heartbeats": -34,
+    "diff": "-  case' tapp => cases lc"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 21,
+    "d_score": 0.8,
+    "d_tokens": -17,
+    "d_heartbeats": 1061,
+    "diff": "-  case abs | tabs => left; constructor; exact lc\n-  case var | sub => grind"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 24,
+    "d_score": 0.79,
+    "d_tokens": 1,
+    "d_heartbeats": -1570,
+    "diff": "-  all_goals grind (gen := 2) [→ canonical_form_abs, → Red.abs, → Red.appₗ, → Red.appᵣ, → canonical_form_tabs, → Red.tapp, → Red.tabs, → Red.let_bind, → Red.let_body, → Red.inl, → Red.inr, canonical_form_sum, → Red.case_inl, → Red.case_inr, → Red.case]\n+  all_goals grind (gen := 2) [→ canonical_form_abs, → Red.abs, → Red.appₗ, → Red.appᵣ, → canonical_form_tabs, → Red.tapp, → Red.tabs, → Red.let_bind, → Red.let_body, → Red.inl, → Red.inr, → canonical_form_sum, → Red.case_inl, → Red.case_inr, → Red.case]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 38,
+    "d_score": 0.08,
+    "d_tokens": -1,
+    "d_heartbeats": 0,
+    "diff": "-  have lc := der.wf.2.1\n+  have := der.wf.2.1"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 20,
+    "d_score": 0.09,
+    "d_tokens": 0,
+    "d_heartbeats": -156,
+    "diff": "-  have := der.wf.2.1\n+  let := der.wf.2.1"
+   }
+  ]
+ },
+ "api_spend": 2.556769,
+ "profile_cache": {
+  "55309d48a5e0": {
+   "ok": true,
+   "total": 5819,
+   "floor": null,
+   "reference": 59873,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "2-2",
+     "depth_indent": 2,
+     "text": "have lc := der.wf.2.1",
+     "heartbeats": null
+    },
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "generalize eq : [] = Γ at der",
+     "heartbeats": null
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "induction der <;> subst_vars",
+     "heartbeats": null
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "all_goals grind (gen := 2) [→ canonical_form_abs, → Red.abs, → Red.appₗ, → Red.appᵣ, → canonical_for",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "3779b17bdbb6": {
+   "ok": true,
+   "total": 5819,
+   "floor": null,
+   "reference": 59873,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "2-2",
+     "depth_indent": 2,
+     "text": "have := der.wf.2.1",
+     "heartbeats": null
+    },
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "generalize eq : [] = Γ at der",
+     "heartbeats": null
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "induction der <;> subst_vars",
+     "heartbeats": null
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "all_goals grind (gen := 2) [→ canonical_form_abs, → Red.abs, → Red.appₗ, → Red.appᵣ, → canonical_for",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "87172bca979f": {
+   "ok": true,
+   "total": 5664,
+   "floor": null,
+   "reference": 59873,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "2-2",
+     "depth_indent": 2,
+     "text": "let := der.wf.2.1",
+     "heartbeats": null
+    },
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "generalize eq : [] = Γ at der",
+     "heartbeats": null
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "induction der <;> subst_vars",
+     "heartbeats": null
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "all_goals grind (gen := 2) [→ canonical_form_abs, → Red.abs, → Red.appₗ, → Red.appᵣ, → canonical_for",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "budget_milestones": {
+  "2": {
+   "spend": 2.010315,
+   "best": 91.04,
+   "run_id": "wuclean-hx-solab1-r10",
+   "turn": 27,
+   "t": "2026-10-14T12:14:56Z"
+  }
+ }
+}

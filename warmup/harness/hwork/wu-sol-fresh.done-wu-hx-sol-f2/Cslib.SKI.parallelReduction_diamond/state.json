@@ -1,0 +1,123 @@
+{
+ "problem": "Cslib.SKI.parallelReduction_diamond",
+ "best": {
+  "score": 71.09,
+  "proof": "theorem parallelReduction_diamond : Diamond ParallelReduction := by\n  intro a b c h k\n  induction h generalizing c\n  case refl => exact ⟨_, k, .refl _⟩\n  case' par ha hb iha ihb =>\n    cases k\n    case par ka kb =>\n      obtain ⟨d, hd, kd⟩ := iha ka\n      obtain ⟨e, he, ke⟩ := ihb kb\n      exact ⟨_, .par hd he, .par kd ke⟩\n    case refl => exact ⟨_, .refl _, .par ha hb⟩\n  case' red_I | red_K | red_S =>\n    cases k\n    case' par ha hb => skip\n    any_goals solve | refine ⟨_, .refl _, ?_⟩; constructor\n  all_goals\n    first\n    | cases I_irreducible _ ha\n    | obtain ⟨_, hh, rfl⟩ := Ka_irreducible _ _ ha\n    | obtain ⟨_, _, hh, hh', rfl⟩ := Sab_irreducible _ _ _ ha\n    constructor\n    constructor <;> first | assumption | apply ParallelReduction.red_I | apply ParallelReduction.red_K | apply ParallelReduction.red_S | apply ParallelReduction.par <;> apply ParallelReduction.par <;> assumption",
+  "tokens": 177,
+  "heartbeats": 615,
+  "L": 56.51,
+  "H": 56.75,
+  "Z": 100.0,
+  "compat": {
+   "v4.33.0-rc2": true,
+   "v4.32.0": true,
+   "v4.31.0": true,
+   "v4.30.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "425fa618384d",
+   "tokens": 170,
+   "heartbeats": 439,
+   "ok": false,
+   "error": "165:36: Tactic `constructor` failed: no applicable constructor found a b a✝ a'✝ b'✝ : SKI ha : I ⭢ₚ a'✝ hb : a✝ ⭢ₚ b'✝ ⊢ (a'✝ ⬝ b'✝) ⭢ₚ a✝",
+   "run_id": "wu-hx-sol-f2",
+   "t": "2026-10-11T20:55:30Z"
+  },
+  {
+   "sha": "561fd323b874",
+   "tokens": 170,
+   "heartbeats": 439,
+   "ok": false,
+   "error": "165:36: Tactic `constructor` failed: no applicable constructor found a b a✝ a'✝ b'✝ : SKI ha : I ⭢ₚ a'✝ hb : a✝ ⭢ₚ b'✝ ⊢ (a'✝ ⬝ b'✝) ⭢ₚ a✝",
+   "run_id": "wu-hx-sol-f2",
+   "t": "2026-10-11T20:55:51Z"
+  },
+  {
+   "sha": "ae4fad4493da",
+   "tokens": 173,
+   "heartbeats": 573,
+   "ok": false,
+   "error": "171:19: don't know how to synthesize implicit argument `b` @And.intro (a✝ ⭢ₚ ?m.1116) ((I ⬝ b'✝) ⭢ₚ ?m.1116) ?m.1119 ?m.1120 context: a b a✝ b'✝ : SKI hb : a✝ ⭢ₚ b'✝ ha : I ⭢ₚ I ⊢ Prop",
+   "run_id": "wu-hx-sol-f2",
+   "t": "2026-10-11T20:55:59Z"
+  },
+  {
+   "sha": "bd604056bd67",
+   "tokens": 172,
+   "heartbeats": 564,
+   "ok": false,
+   "error": "171:11: don't know how to synthesize implicit argument `b` @And.intro (a✝ ⭢ₚ ?m.941) ((I ⬝ b'✝) ⭢ₚ ?m.941) ?m.944 ?m.945 context: a b a✝ b'✝ : SKI hb : a✝ ⭢ₚ b'✝ ha : I ⭢ₚ I ⊢ Prop",
+   "run_id": "wu-hx-sol-f2",
+   "t": "2026-10-11T20:56:25Z"
+  },
+  {
+   "sha": "a2d0823a5f57",
+   "tokens": 166,
+   "heartbeats": 619,
+   "ok": false,
+   "error": "172:57: Tactic `constructor` failed: no applicable constructor found case red_S.h.right.a a b a✝ b✝ c✝ b'✝ : SKI hb : c✝ ⭢ₚ b'✝ w✝¹ w✝ : SKI hh : a✝ ⭢ₚ w✝¹ hh' : b✝ ⭢ₚ w✝ ha : (S ⬝ a✝ ⬝ b✝) ⭢ₚ S ⬝ w✝¹ ⬝ w✝ ⊢ b'✝ ⭢ₚ b✝ ⬝ c✝",
+   "run_id": "wu-hx-sol-f2",
+   "t": "2026-10-11T20:56:27Z"
+  },
+  {
+   "sha": "e87379002534",
+   "tokens": 167,
+   "heartbeats": 1168,
+   "ok": false,
+   "error": "172:20: failed",
+   "run_id": "wu-hx-sol-f2",
+   "t": "2026-10-11T20:57:09Z"
+  },
+  {
+   "sha": "0b83943580b8",
+   "tokens": 177,
+   "heartbeats": 615,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f2",
+   "t": "2026-10-11T20:57:10Z",
+   "score": 71.09
+  },
+  {
+   "sha": "c342b9ca78a8",
+   "tokens": 195,
+   "heartbeats": 653,
+   "ok": false,
+   "error": "177:23: Type mismatch ParallelReduction.red_S ?m.1036 ?m.1037 ?m.1038 has type (S ⬝ ?m.1036 ⬝ ?m.1037 ⬝ ?m.1038) ⭢ₚ ?m.1036 ⬝ ?m.1038 ⬝ (?m.1037 ⬝ ?m.1038) but is expected to have type (a✝ ⬝ c✝ ⬝ (b✝ ⬝ c✝)) ⭢ₚ ?red_S.w",
+   "run_id": "wu-hx-sol-f2",
+   "t": "2026-10-11T20:57:56Z"
+  },
+  {
+   "sha": "a6ba6b31c6ea",
+   "tokens": 167,
+   "heartbeats": 571,
+   "ok": false,
+   "error": "174:4: Tactic failed on all goals: apply ParallelReduction.red_S",
+   "run_id": "wu-hx-sol-f2",
+   "t": "2026-10-11T20:57:57Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-f2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T20:50:55Z"
+  }
+ ],
+ "api_spend": 0.724423,
+ "lineage": "fresh",
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-f2",
+    "check": 7,
+    "d_score": 37.76,
+    "d_tokens": -230,
+    "d_heartbeats": 615,
+    "diff": "+theorem parallelReduction_diamond : Diamond ParallelReduction := by\n+  intro a b c h k\n+  induction h generalizing c\n+  case refl => exact ⟨_, k, .refl _⟩\n+  case' par ha hb iha ihb =>\n+    cases k\n+    case par ka kb =>\n+      obtain ⟨d, hd, kd⟩ := iha ka\n+      obtain ⟨e, he, ke⟩ := ihb kb\n+      exact ⟨_, .par hd he, .par kd ke⟩\n+    case refl => exact ⟨_, .refl _, .par ha hb⟩\n+  case' red_I | red_K | red_S =>\n+    cases k\n+    case' par ha hb => skip\n+    any_goals solve | refine ⟨_, .refl _, ?_⟩; constructor\n+  all_goals\n+    first\n+    | cases I_irreducible _ ha\n+    | obtain ⟨_, hh, rfl⟩ := Ka_irreducible _ _ ha\n+    | obtain ⟨_, _, hh, hh', rfl⟩ := Sab_irreducible _ _ _ ha\n+    cons"
+   }
+  ]
+ }
+}

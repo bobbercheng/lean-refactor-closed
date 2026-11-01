@@ -1,0 +1,10 @@
+Run continuation: best remains 132 tokens / 524 hb / score76.91, restored in candidate.lean. No improvement this run.
+Profile: all_goals cases h2 costs192hb; normalization+final closure193hb (normalization103, repeated par90); trivial try93hb; induction13hb; par.par22hb.
+Tested: explicit refl trivial refine adds6tokens44hb. any_goals replacing all_goals try saves2tokens but adds22hb (130/546). recursive cases architecture132/863. case-prime par before shared h2 cases138/530. rcases h2 instead cases132/547. cases using ParallelReduction.casesOn134/524, no savings. with_reducible apply par133/537.
+Whole-join solve_by_elim maxDepth8 fails and costs4728hb; whole conjunction variant4569hb fails (bad witnesses plus assigned metavariable internal error). Assumption-first final closer fails because original partial-head reduction picks wrong witness. Need entire repeated par decomposition before assumptions and delay remaining constructors until all parallel sides fixed witnesses.
+Removing early trivial closer and try-normalizing all cases fails: deferred existential witness SKI goals are accidentally solved by all_goals assumption using any source term, setting wrong endpoints. Could explicitly restrict assumption to reduction goal to avoid that but normalization tries on trivial cells also cost much more.
+constructor 5 does NOT select constructor number5; it chooses earliest applicable among bounded candidates, so cannot replace apply ParallelReduction.par. repeat refine .par ?_ ?_ fails due altered metavariable witness assignments.
+Induction with branches | _ => skip cannot leave unfinished goals for later all_goals: branch closure reports errors. Need case' architecture to defer goals.
+Upstream unchanged; do not spend on git. Union higher benchmarks exist but not reproduced; best this line unchanged.
+
+Final extra rewrites: induction on second reduction with explicit right-refl trivial handler137/540 (no gain). Compact source-term induction with shared normalization140/657 (better than prior206/770 but still worse). Trivial constructor then apply And.intro (.refl _)136/525; refine tuple137/541. Original best restored again.

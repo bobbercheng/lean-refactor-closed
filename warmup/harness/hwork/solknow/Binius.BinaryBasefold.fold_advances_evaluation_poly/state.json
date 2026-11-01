@@ -1,0 +1,41 @@
+{
+ "note": "runner input only: first-session scores of an earlier Sol + briefs line (no proofs, no notes)",
+ "problem": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+ "runs": [
+  {
+   "run_id": "hx-solknow-x10a"
+  }
+ ],
+ "attempts": [
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 91.98
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 92.38
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 92.7
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 92.85
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 92.87
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 92.96
+  }
+ ]
+}

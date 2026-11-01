@@ -1,0 +1,402 @@
+{
+ "problem": "Cslib.SKI.parallelReduction_diamond",
+ "best": {
+  "score": 76.75,
+  "proof": "theorem parallelReduction_diamond : Diamond ParallelReduction := by\n  intro a b c h₁ h₂\n  induction h₁ generalizing c\n  case refl => exact ⟨_, h₂, .refl _⟩\n  all_goals cases h₂\n  case par.par ha hb iha ihb d e hc hd =>\n    obtain ⟨_, hx⟩ := iha hc\n    obtain ⟨_, hy⟩ := ihb hd\n    exact ⟨_, .par hx.1 hy.1, .par hx.2 hy.2⟩\n  all_goals\n    try\n      constructor\n      constructor <;> constructor <;> assumption\n  all_goals\n    first\n    | cases I_irreducible _ (by assumption)\n    | obtain ⟨_, h, rfl⟩ := Ka_irreducible _ _ (by assumption)\n    | obtain ⟨_, _, h, h', rfl⟩ := Sab_irreducible _ _ _ (by assumption)\n    constructor\n    constructor\n    all_goals\n      try\n        repeat' apply ParallelReduction.par\n        all_goals assumption\n    all_goals constructor",
+  "tokens": 135,
+  "heartbeats": 520,
+  "L": 66.83,
+  "H": 63.43,
+  "Z": 100.0,
+  "compat": {
+   "v4.33.0-rc2": true,
+   "v4.32.0": true,
+   "v4.31.0": true,
+   "v4.30.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "d51001c04708",
+   "tokens": 268,
+   "heartbeats": 465,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:22:52Z",
+   "score": 67.15
+  },
+  {
+   "sha": "ed19acb72609",
+   "tokens": 175,
+   "heartbeats": 272,
+   "ok": false,
+   "error": "162:8: unsolved goals case par.red_I a b a'✝ b✝ b'✝ : SKI hb : b✝ ⭢ₚ b'✝ ihb : ∀ {c : SKI}, b✝ ⭢ₚ c → Join ParallelReduction b'✝ c ha : I ⭢ₚ a'✝ iha : ∀ {c : SKI}, I ⭢ₚ c → Join ParallelReduction a'✝ c ⊢ Join ParallelReduction (a'✝ ⬝ b'✝) b✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:23:17Z"
+  },
+  {
+   "sha": "c2a5ef1c7037",
+   "tokens": 185,
+   "heartbeats": 272,
+   "ok": false,
+   "error": "162:8: unsolved goals case par.red_I a b a'✝ b✝ b'✝ : SKI hb : b✝ ⭢ₚ b'✝ ihb : ∀ {c : SKI}, b✝ ⭢ₚ c → Join ParallelReduction b'✝ c ha : I ⭢ₚ a'✝ iha : ∀ {c : SKI}, I ⭢ₚ c → Join ParallelReduction a'✝ c ⊢ Join ParallelReduction (a'✝ ⬝ b'✝) b✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:23:19Z"
+  },
+  {
+   "sha": "7d5bcc6f90a4",
+   "tokens": 178,
+   "heartbeats": 271,
+   "ok": false,
+   "error": "162:8: unsolved goals case par.red_I a b a'✝ b✝ b'✝ : SKI hb : b✝ ⭢ₚ b'✝ ihb : ∀ {c : SKI}, b✝ ⭢ₚ c → Join ParallelReduction b'✝ c ha : I ⭢ₚ a'✝ iha : ∀ {c : SKI}, I ⭢ₚ c → Join ParallelReduction a'✝ c ⊢ Join ParallelReduction (a'✝ ⬝ b'✝) b✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:23:33Z"
+  },
+  {
+   "sha": "0008c9fb56a8",
+   "tokens": 155,
+   "heartbeats": 555,
+   "ok": false,
+   "error": "155:27: Function expected at iha but this term has type SKI Note: Expected a function because this term is being applied to the argument hc",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:23:48Z"
+  },
+  {
+   "sha": "f7c6b75a4b8a",
+   "tokens": 177,
+   "heartbeats": 404,
+   "ok": false,
+   "error": "163:25: unsolved goals case a a b a✝² b✝ c✝ a'✝ b'✝ : SKI a✝¹ : (S ⬝ a✝² ⬝ b✝) ⭢ₚ a'✝ a✝ : c✝ ⭢ₚ b'✝ ⊢ a'✝ ⭢ₚ a✝² ⬝ c✝ case a a b a✝² b✝ c✝ a'✝ b'✝ : SKI a✝¹ : (S ⬝ a✝² ⬝ b✝) ⭢ₚ a'✝ a✝ : c✝ ⭢ₚ b'✝ ⊢ b'✝ ⭢ₚ b✝ ⬝ c✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:23:50Z"
+  },
+  {
+   "sha": "74715aeae96f",
+   "tokens": 165,
+   "heartbeats": 706,
+   "ok": false,
+   "error": "165:11: don't know how to synthesize implicit argument `b` @And.intro (a✝² ⭢ₚ ?m.1184) ((I ⬝ b'✝) ⭢ₚ ?m.1184) ?m.1187 ?m.1188 context: a b a✝² b'✝ : SKI a✝¹ : a✝² ⭢ₚ b'✝ a✝ : I ⭢ₚ I ⊢ Prop",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:24:04Z"
+  },
+  {
+   "sha": "5dc7a1355275",
+   "tokens": 159,
+   "heartbeats": 1375,
+   "ok": false,
+   "error": "166:20: failed",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:24:37Z"
+  },
+  {
+   "sha": "874f5480aced",
+   "tokens": 169,
+   "heartbeats": 755,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:24:38Z",
+   "score": 68.46
+  },
+  {
+   "sha": "5dcb15a42eb2",
+   "tokens": 152,
+   "heartbeats": 494,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:14Z",
+   "score": 75.97
+  },
+  {
+   "sha": "209a4fbf76cc",
+   "tokens": 152,
+   "heartbeats": 432,
+   "ok": false,
+   "error": "169:8: Tactic `constructor` failed: no applicable constructor found case par.red_I.refl.h.right a b b✝ b'✝ : SKI a✝¹ : b✝ ⭢ₚ b'✝ a_ih✝¹ : ∀ {c : SKI}, b✝ ⭢ₚ c → Join ParallelReduction b'✝ c a✝ : I ⭢ₚ I a_ih✝ : ∀ {c : SKI}, I ⭢ₚ c → Join ParallelReduction I c ⊢ b✝ ⭢ₚ I ⬝ b'✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:19Z"
+  },
+  {
+   "sha": "be3052c37903",
+   "tokens": 152,
+   "heartbeats": 513,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:39Z"
+  },
+  {
+   "sha": "79cbe3244759",
+   "tokens": 147,
+   "heartbeats": 1116,
+   "ok": false,
+   "error": "167:20: failed",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:40Z"
+  },
+  {
+   "sha": "fa657b546563",
+   "tokens": 150,
+   "heartbeats": 526,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:26:07Z"
+  },
+  {
+   "sha": "9681c26817d7",
+   "tokens": 147,
+   "heartbeats": 465,
+   "ok": false,
+   "error": "169:4: Tactic failed on all goals: (solve | apply ParallelReduction.par <;> apply ParallelReduction.par <;> assumption)",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:26:08Z"
+  },
+  {
+   "sha": "0b959ac18aad",
+   "tokens": 146,
+   "heartbeats": 625,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:26:35Z"
+  },
+  {
+   "sha": "e1b8d94f5bb4",
+   "tokens": 144,
+   "heartbeats": 657,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:26:37Z"
+  },
+  {
+   "sha": "a07aae497887",
+   "tokens": 35,
+   "heartbeats": 5431,
+   "ok": false,
+   "error": "154:4: `grind` failed case grind a b … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] ¬Join ParallelReduction a_1 a_1 [eqc] False propositions [prop] Join ParallelReduction a_1 a_1 [ematch] E-matching patterns [thm] Ka_irreducible: [ParallelReduction (app `[K] #2",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:26:54Z"
+  },
+  {
+   "sha": "5d813ea5c9d3",
+   "tokens": 30,
+   "heartbeats": 427,
+   "ok": false,
+   "error": "154:4: duplicate rule 'Sab_irreducible'; rule 'Ka_irreducible' was already given. Use [<term>,...] to give multiple rules.",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:26:56Z"
+  },
+  {
+   "sha": "51b06410ec44",
+   "tokens": 147,
+   "heartbeats": 963,
+   "ok": false,
+   "error": "167:20: failed",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:27:21Z"
+  },
+  {
+   "sha": "4bb6f816b6af",
+   "tokens": 34,
+   "heartbeats": 5786,
+   "ok": false,
+   "error": "154:4: Tactic `aesop` failed, made no progress Initial goal: case refl.refl a b a✝ : SKI ⊢ Join ParallelReduction a✝ a✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:27:23Z"
+  },
+  {
+   "sha": "9c702230123e",
+   "tokens": 141,
+   "heartbeats": 727,
+   "ok": false,
+   "error": "169:14: Tactic `constructor` failed: no applicable constructor found case red_K.refl.h.left a b a✝ b✝ : SKI ⊢ a✝ ⭢ₚ b✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:27:48Z"
+  },
+  {
+   "sha": "e845b46ebf45",
+   "tokens": 140,
+   "heartbeats": 703,
+   "ok": false,
+   "error": "169:14: Tactic `constructor` failed: no applicable constructor found case red_I.refl.h.left a b a✝ : SKI ⊢ a✝ ⭢ₚ I ⬝ a✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:27:50Z"
+  },
+  {
+   "sha": "44e4974e1735",
+   "tokens": 147,
+   "heartbeats": 481,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:28:30Z",
+   "score": 76.69
+  },
+  {
+   "sha": "d02c5e490f28",
+   "tokens": 141,
+   "heartbeats": 500,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:28:37Z",
+   "score": 76.73
+  },
+  {
+   "sha": "13fcd245377a",
+   "tokens": 136,
+   "heartbeats": 864,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:29:28Z"
+  },
+  {
+   "sha": "2eacc515dd66",
+   "tokens": 139,
+   "heartbeats": 898,
+   "ok": false,
+   "error": "172:14: Tactic `constructor` failed: no applicable constructor found case par.red_I.refl.h.right a b b✝ b'✝ : SKI a✝¹ : b✝ ⭢ₚ b'✝ a_ih✝¹ : ∀ {c : SKI}, b✝ ⭢ₚ c → Join ParallelReduction b'✝ c a✝ : I ⭢ₚ I a_ih✝ : ∀ {c : SKI}, I ⭢ₚ c → Join ParallelReduction I c ⊢ b✝ ⭢ₚ I ⬝ b'✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:29:30Z"
+  },
+  {
+   "sha": "9fd2c0a07678",
+   "tokens": 139,
+   "heartbeats": 541,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:30:06Z"
+  },
+  {
+   "sha": "ecb0a584a289",
+   "tokens": 132,
+   "heartbeats": 505,
+   "ok": false,
+   "error": "168:61: Tactic `assumption` failed a b a✝² b✝ a'✝ b'✝ : SKI a✝¹ : (K ⬝ a✝²) ⭢ₚ a'✝ a✝ : b✝ ⭢ₚ b'✝ ⊢ (S ⬝ ?m.964 ⬝ ?m.965) ⭢ₚ ?m.966",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:30:08Z"
+  },
+  {
+   "sha": "4bc4ed826dbe",
+   "tokens": 135,
+   "heartbeats": 520,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:30:49Z",
+   "score": 76.75
+  },
+  {
+   "sha": "4e14b9762ced",
+   "tokens": 135,
+   "heartbeats": 501,
+   "ok": false,
+   "error": "175:14: Tactic `constructor` failed: no applicable constructor found case red_S.par.h.left a b a✝² b✝ c✝ b'✝ : SKI a✝¹ : c✝ ⭢ₚ b'✝ w✝¹ w✝ : SKI h : a✝² ⭢ₚ w✝¹ h' : b✝ ⭢ₚ w✝ a✝ : (S ⬝ a✝² ⬝ b✝) ⭢ₚ S ⬝ w✝¹ ⬝ w✝ ⊢ (a✝² ⬝ c✝ ⬝ (b✝ ⬝ c✝)) ⭢ₚ w✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:30:54Z"
+  },
+  {
+   "sha": "38737e2d4e30",
+   "tokens": 133,
+   "heartbeats": 860,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:31:44Z"
+  },
+  {
+   "sha": "a2877520feb1",
+   "tokens": 140,
+   "heartbeats": 479,
+   "ok": false,
+   "error": "174:14: Tactic `constructor` failed: no applicable constructor found case red_S.par.h.left a b a✝² b✝ c✝ b'✝ : SKI a✝¹ : c✝ ⭢ₚ b'✝ w✝¹ w✝ : SKI h : a✝² ⭢ₚ w✝¹ h' : b✝ ⭢ₚ w✝ a✝ : (S ⬝ a✝² ⬝ b✝) ⭢ₚ S ⬝ w✝¹ ⬝ w✝ ⊢ (a✝² ⬝ c✝ ⬝ (b✝ ⬝ c✝)) ⭢ₚ w✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:31:46Z"
+  },
+  {
+   "sha": "b4fad47ba3f0",
+   "tokens": 142,
+   "heartbeats": 486,
+   "ok": false,
+   "error": "175:14: Tactic `constructor` failed: no applicable constructor found case red_S.par.h.left a b a✝² b✝ c✝ b'✝ : SKI a✝¹ : c✝ ⭢ₚ b'✝ w✝¹ w✝ : SKI h : a✝² ⭢ₚ w✝¹ h' : b✝ ⭢ₚ w✝ a✝ : (S ⬝ a✝² ⬝ b✝) ⭢ₚ S ⬝ w✝¹ ⬝ w✝ ⊢ (a✝² ⬝ c✝ ⬝ (b✝ ⬝ c✝)) ⭢ₚ w✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:32:07Z"
+  },
+  {
+   "sha": "1dd17e3f9c52",
+   "tokens": 140,
+   "heartbeats": 483,
+   "ok": false,
+   "error": "175:14: Tactic `constructor` failed: no applicable constructor found case red_S.par.h.left a b a✝² b✝ c✝ b'✝ : SKI a✝¹ : c✝ ⭢ₚ b'✝ w✝¹ w✝ : SKI h : a✝² ⭢ₚ w✝¹ h' : b✝ ⭢ₚ w✝ a✝ : (S ⬝ a✝² ⬝ b✝) ⭢ₚ S ⬝ w✝¹ ⬝ w✝ ⊢ (a✝² ⬝ c✝ ⬝ (b✝ ⬝ c✝)) ⭢ₚ w✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:32:09Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-f8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:20:14Z"
+  }
+ ],
+ "api_spend": 1.472578,
+ "lineage": "fresh",
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 1,
+    "d_score": 33.82,
+    "d_tokens": -139,
+    "d_heartbeats": 465,
+    "diff": "+theorem parallelReduction_diamond : Diamond ParallelReduction := by\n+  intro a b c h₁ h₂\n+  induction h₁ generalizing c with\n+  | refl => exact ⟨_, h₂, .refl _⟩\n+  | par ha hb iha ihb =>\n+    cases h₂ with\n+    | par hc hd =>\n+      obtain ⟨x, hx, hx'⟩ := iha hc\n+      obtain ⟨y, hy, hy'⟩ := ihb hd\n+      exact ⟨_, .par hx hy, .par hx' hy'⟩\n+    | refl => exact ⟨_, .refl _, .par ha hb⟩\n+    | red_I =>\n+      cases I_irreducible _ ha\n+      exact ⟨_, .red_I _, hb⟩\n+    | red_K =>\n+      obtain ⟨_, h, rfl⟩ := Ka_irreducible _ _ ha\n+      exact ⟨_, .red_K .., h⟩\n+    | red_S =>\n+      obtain ⟨_, _, h, h', rfl⟩ := Sab_irreducible _ _ _ ha\n+      exact ⟨_, .red_S .., .par (.par h hb) (.par h' hb"
+   },
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 9,
+    "d_score": 1.31,
+    "d_tokens": -99,
+    "d_heartbeats": 290,
+    "diff": "-  induction h₁ generalizing c with\n-  | refl => exact ⟨_, h₂, .refl _⟩\n-  | par ha hb iha ihb =>\n-    cases h₂ with\n-    | par hc hd =>\n-      obtain ⟨x, hx, hx'⟩ := iha hc\n-      obtain ⟨y, hy, hy'⟩ := ihb hd\n-      exact ⟨_, .par hx hy, .par hx' hy'⟩\n-    | refl => exact ⟨_, .refl _, .par ha hb⟩\n-    | red_I =>\n-      cases I_irreducible _ ha\n-      exact ⟨_, .red_I _, hb⟩\n-    | red_K =>\n-      obtain ⟨_, h, rfl⟩ := Ka_irreducible _ _ ha\n-      exact ⟨_, .red_K .., h⟩\n-    | red_S =>\n-      obtain ⟨_, _, h, h', rfl⟩ := Sab_irreducible _ _ _ ha\n-      exact ⟨_, .red_S .., .par (.par h hb) (.par h' hb)⟩\n-  | _ =>\n-    cases h₂ with\n-    | par ha hb =>\n-      first\n-      | cases I_irreduci"
+   },
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 10,
+    "d_score": 7.51,
+    "d_tokens": -17,
+    "d_heartbeats": -261,
+    "diff": "-  induction h₁ generalizing c <;> cases h₂\n+  induction h₁ generalizing c\n+  case refl => exact ⟨_, h₂, .refl _⟩\n+  all_goals cases h₂\n-    obtain ⟨x, hx, hx'⟩ := iha hc\n-    obtain ⟨y, hy, hy'⟩ := ihb hd\n-    exact ⟨_, .par hx hy, .par hx' hy'⟩\n-  all_goals try (solve | refine ⟨_, .refl _, ?_⟩; constructor <;> assumption)\n-  all_goals try (solve | refine ⟨_, ?_, .refl _⟩; constructor <;> assumption)\n+    obtain ⟨_, hx⟩ := iha hc\n+    obtain ⟨_, hy⟩ := ihb hd\n+    exact ⟨_, .par hx.1 hy.1, .par hx.2 hy.2⟩\n+  all_goals try (solve | constructor; constructor <;> constructor <;> assumption)"
+   },
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 24,
+    "d_score": 0.72,
+    "d_tokens": -5,
+    "d_heartbeats": -13,
+    "diff": "-  all_goals try (solve | constructor; constructor <;> constructor <;> assumption)\n+  all_goals\n+    try\n+      constructor\n+      constructor <;> constructor <;> assumption"
+   },
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 25,
+    "d_score": 0.04,
+    "d_tokens": -6,
+    "d_heartbeats": 19,
+    "diff": "-    constructor <;> first\n-      | assumption\n-      | apply ParallelReduction.red_I\n-      | apply ParallelReduction.red_K\n-      | apply ParallelReduction.red_S\n-      | apply ParallelReduction.par <;> apply ParallelReduction.par <;> assumption\n+    constructor\n+    all_goals\n+      try\n+        first\n+        | assumption\n+        | apply ParallelReduction.par <;> apply ParallelReduction.par <;> assumption\n+    all_goals constructor"
+   },
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 30,
+    "d_score": 0.02,
+    "d_tokens": -6,
+    "d_heartbeats": 20,
+    "diff": "-        first\n-        | assumption\n-        | apply ParallelReduction.par <;> apply ParallelReduction.par <;> assumption\n+        repeat' apply ParallelReduction.par\n+        all_goals assumption"
+   }
+  ]
+ }
+}

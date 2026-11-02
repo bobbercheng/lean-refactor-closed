@@ -1,0 +1,101 @@
+[
+ {
+  "problem": "CallElimCorrect.substOldPostSubset",
+  "best_score": 91.77,
+  "checks": 27,
+  "tool_calls": 23,
+  "turns": 23,
+  "out_tokens": 10614,
+  "seconds": 431
+ },
+ {
+  "problem": "Core.InitsUpdatesComm",
+  "best_score": 89.14,
+  "checks": 16,
+  "tool_calls": 28,
+  "turns": 28,
+  "out_tokens": 13643,
+  "seconds": 288
+ },
+ {
+  "problem": "fundamental_theorem_of_variational_calculus'",
+  "best_score": 91.58,
+  "checks": 11,
+  "tool_calls": 14,
+  "turns": 14,
+  "out_tokens": 30706,
+  "seconds": 496
+ },
+ {
+  "problem": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+  "best_score": 73.89,
+  "checks": 0,
+  "tool_calls": 4,
+  "turns": 4,
+  "out_tokens": 24129,
+  "seconds": 318
+ },
+ {
+  "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+  "best_score": 85.55,
+  "checks": 24,
+  "tool_calls": 23,
+  "turns": 23,
+  "out_tokens": 11696,
+  "seconds": 468
+ },
+ {
+  "problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+  "best_score": 90.97,
+  "checks": 13,
+  "tool_calls": 31,
+  "turns": 31,
+  "out_tokens": 8888,
+  "seconds": 591
+ },
+ {
+  "problem": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+  "best_score": 93.62,
+  "checks": 27,
+  "tool_calls": 54,
+  "turns": 40,
+  "out_tokens": 8253,
+  "seconds": 426
+ },
+ {
+  "problem": "interleaved_affine_gaps_imply_tensor_gaps",
+  "best_score": 92.88,
+  "checks": 15,
+  "tool_calls": 36,
+  "turns": 32,
+  "out_tokens": 9251,
+  "seconds": 443
+ },
+ {
+  "problem": "putnam_1964_a4",
+  "best_score": 96.82,
+  "checks": 16,
+  "tool_calls": 17,
+  "turns": 17,
+  "out_tokens": 22997,
+  "seconds": 443
+ },
+ {
+  "problem": "putnam_1964_b2",
+  "best_score": 99.26,
+  "checks": 36,
+  "tool_calls": 28,
+  "turns": 28,
+  "out_tokens": 13996,
+  "seconds": 380
+ },
+ {
+  "problem": "putnam_1995_a3",
+  "best_score": 95.88,
+  "checks": 10,
+  "tool_calls": 14,
+  "turns": 9,
+  "out_tokens": 15140,
+  "seconds": 272
+ }
+]

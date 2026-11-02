@@ -1,0 +1,38 @@
+[
+ {
+  "problem": "Cslib.CCS.bisimilarity_congr_choice",
+  "best_score": 85.42,
+  "checks": 48,
+  "tool_calls": 39,
+  "turns": 34,
+  "out_tokens": 22736,
+  "seconds": 604
+ },
+ {
+  "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+  "best_score": 83.76,
+  "checks": 38,
+  "tool_calls": 36,
+  "turns": 34,
+  "out_tokens": 23422,
+  "seconds": 689
+ },
+ {
+  "problem": "Core.InitsUpdatesComm",
+  "best_score": 89.14,
+  "checks": 32,
+  "tool_calls": 26,
+  "turns": 26,
+  "out_tokens": 23558,
+  "seconds": 508
+ },
+ {
+  "problem": "fundamental_theorem_of_variational_calculus'",
+  "best_score": 91.31,
+  "checks": 39,
+  "tool_calls": 32,
+  "turns": 29,
+  "out_tokens": 27912,
+  "seconds": 622
+ }
+]

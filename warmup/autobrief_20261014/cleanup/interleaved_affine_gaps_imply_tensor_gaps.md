@@ -1,0 +1,5 @@
+AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)
+- Seed: 122 tokens, 1384 heartbeats, score 92.08. Free passes applied (normalize, hb_rewrite, lint_delete): start candidate 119 tokens, 1354 heartbeats, score 92.26.
+- Exchange rate here: 1 token = 0.025 points, 100 heartbeats = 0.355 points.
+- Deletions that FAIL (needed as they stand): line 7 `multilinearCombine₁_eq_affineLineEvaluation` from the simp list; line 8 `Nat.cast_one` from the simp list; line 8 `ENNReal.coe_one` from the simp list; line 8 `one_mul` from the simp list; line 8 `ENNReal.coe_natCast` from the simp list; line 16 `← prob_split_last_uniform_sampling_of_finFun` from the simp list.
+- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 9 (`· intro n hn ih u hp`) (grind/simp_all/aesop); the bullet at line 3 (`· intro u hp`) (grind/simp_all/aesop); the bullet at line 16 (`· simp only [← prob_split_last_uniform_…`) (grind/simp_all/aesop); the bullet at line 13 (`· apply Pr_le_Pr_of_implies`) (grind/simp_all/aesop).

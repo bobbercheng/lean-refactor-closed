@@ -1,0 +1,5 @@
+AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)
+- Seed: 194 tokens, 2092 heartbeats, score 91.22. Free passes applied (normalize): start candidate 184 tokens, 2092 heartbeats, score 91.45.
+- Exchange rate here: 1 token = 0.023 points, 100 heartbeats = 0.208 points.
+- Deletions that FAIL (needed as they stand): line 8 `fiberwiseDistance` from the simp list; line 8 `Set.image_univ` from the simp list; line 8 `←hd` from the simp list; line 8 `Nat.mul_assoc` from the simp list; line 8 `Nat.sub_mul` from the simp list; line 9 `←Nat.pow_add` from the simp list.
+- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the closing tactic at line 4 (`(λg : BBF_Code 𝔽q β _ => (fiberwiseDisa…`) (grind/simp_all/aesop); the closing tactic at line 10 (`←Nat.sub_add_comm h_i_add_steps, Nat.ad…`) (grind/simp_all/aesop); the closing tactic at line 16 (`(Nat.lt_add_of_pos_right_of_le _ _ _ h_…`) (grind/simp_all/aesop); the closing tactic at line 20 (`⟨x, rfl, (Finset.mem_filter.mp hx).2⟩, …`) (grind/simp_all/aesop).

@@ -1,0 +1,1128 @@
+{
+ "problem": "fundamental_theorem_of_variational_calculus'",
+ "best": {
+  "score": 91.61,
+  "proof": "lemma fundamental_theorem_of_variational_calculus' {f : Y → V}\n    (μ : Measure Y) [IsFiniteMeasureOnCompacts μ] [μ.IsOpenPosMeasure]\n    [OpensMeasurableSpace Y]\n    (hf : Continuous f) (hg : ∀ g, IsTestFunction g → ∫ x, ⟪f x, g x⟫_ℝ ∂μ = 0) :\n    f = 0 := by\n  funext x\n  false_or_by_contra\n  rename_i hx\n  have hc := Continuous.inner' (𝕜 := ℝ) f (λ_ => f x) hf continuous_const\n  have hp := real_inner_self_nonneg'.lt_of_ne' $ inner_self_eq_zero'.not.mpr hx\n  obtain ⟨φ, hs, hk, hd, hn, hφ⟩ := exists_contDiff_tsupport_subset $ hc.continuousAt.eventually_const_lt hp\n  refine' ((hd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_ $ by rewrite [hφ, one_mul]; apply hp.ne').ne' $ by\n    simpa only [inner_smul_right'] using hg _ $ IsTestFunction.smul_right ⟨hd, hk⟩ contDiff_const\n  intro y\n  by_cases hy : y ∈ tsupport φ\n  · apply mul_nonneg (Set.range_subset_iff.1 hn y).1 (hs hy).le\n  · simp [image_eq_zero_of_notMem_tsupport hy]",
+  "tokens": 119,
+  "heartbeats": 1337,
+  "L": 86.02,
+  "H": 88.82,
+  "Z": 100.0,
+  "compat": {
+   "v4.32.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "473fd0dcb8d6",
+   "tokens": 192,
+   "heartbeats": 1879,
+   "ok": false,
+   "error": "129:10: Tactic `rewrite` failed: Did not find an occurrence of the pattern φ x in the target expression (φ * fun y => ⟪f y, f x⟫_ℝ) ?m.244 ≠ 0 case f_x … [hypotheses omitted] ⊢ (φ * fun y => ⟪f y, f x⟫_ℝ) ?m.244 ≠ 0",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:01:40Z"
+  },
+  {
+   "sha": "6b0e77d001ed",
+   "tokens": 216,
+   "heartbeats": 1915,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:01:49Z",
+   "score": 86.2
+  },
+  {
+   "sha": "e75e0f7dcf8f",
+   "tokens": 163,
+   "heartbeats": 1190,
+   "ok": false,
+   "error": "116:75: Type mismatch: After simplification, term hx has type ¬f x = 0 x but is expected to have type 0 ≠ ⟪f x, f x⟫_ℝ",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:02:04Z"
+  },
+  {
+   "sha": "d4483570d0e8",
+   "tokens": 169,
+   "heartbeats": 1395,
+   "ok": false,
+   "error": "126:4: Type mismatch: After simplification, term hg (fun x_1 => φ x_1 • f x) (IsTestFunction.smul_right { smooth := hd, supp := hk } contDiff_const) has type @Eq ℝ (∫ (x_1 : Y), φ x_1 * ⟪f x_1, f x⟫_ℝ ∂μ) 0 but is expected to have type @Eq ℝ (∫ (x_1 : Y), (φ * fun a => ⟪f a, f x⟫_ℝ) x_1 ∂μ) 0",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:02:26Z"
+  },
+  {
+   "sha": "abd95e100739",
+   "tokens": 171,
+   "heartbeats": 1443,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:02:40Z",
+   "score": 89.28
+  },
+  {
+   "sha": "d35d31a5a7b6",
+   "tokens": 135,
+   "heartbeats": 1022,
+   "ok": false,
+   "error": "118:10: typeclass instance problem is stuck IsFiniteMeasureOnCompacts ?m.193 Note: Lean will not try to resolve this typeclass instance problem because the fourth type argument to `IsFiniteMeasureOnCompacts` is a metavariable. This argument must be fully determined before Lean will try to resolve th",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:03:07Z"
+  },
+  {
+   "sha": "8bd0f8fd0e5f",
+   "tokens": 137,
+   "heartbeats": 1494,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:03:08Z",
+   "score": 90.47
+  },
+  {
+   "sha": "e31f9c5511ee",
+   "tokens": 147,
+   "heartbeats": 1473,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:03:10Z"
+  },
+  {
+   "sha": "989b3c3d173d",
+   "tokens": 135,
+   "heartbeats": 1493,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:03:40Z",
+   "score": 90.55
+  },
+  {
+   "sha": "f71b48cde60c",
+   "tokens": 132,
+   "heartbeats": 1513,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:03:41Z",
+   "score": 90.61
+  },
+  {
+   "sha": "77c04ea69291",
+   "tokens": 132,
+   "heartbeats": 1581,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:03:43Z"
+  },
+  {
+   "sha": "ef0cf63280be",
+   "tokens": 129,
+   "heartbeats": 1510,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:04:52Z",
+   "score": 90.74
+  },
+  {
+   "sha": "7e11264b7874",
+   "tokens": 129,
+   "heartbeats": 1512,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:04:54Z"
+  },
+  {
+   "sha": "64e54568686c",
+   "tokens": 137,
+   "heartbeats": 1497,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:04:55Z"
+  },
+  {
+   "sha": "493578b58faf",
+   "tokens": 127,
+   "heartbeats": 1484,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:05:41Z",
+   "score": 90.89
+  },
+  {
+   "sha": "f83555612f70",
+   "tokens": 130,
+   "heartbeats": 1423,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:05:43Z",
+   "score": 90.94
+  },
+  {
+   "sha": "c8f9a9ce15bb",
+   "tokens": 133,
+   "heartbeats": 1403,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:05:45Z"
+  },
+  {
+   "sha": "76a091d2e07c",
+   "tokens": 126,
+   "heartbeats": 1423,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:06:25Z",
+   "score": 91.1
+  },
+  {
+   "sha": "f06a9e0c98de",
+   "tokens": 126,
+   "heartbeats": 1421,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:06:27Z"
+  },
+  {
+   "sha": "1a44d26bf68d",
+   "tokens": 121,
+   "heartbeats": 1392,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:06:29Z",
+   "score": 91.38
+  },
+  {
+   "sha": "23046bf17f70",
+   "tokens": 121,
+   "heartbeats": 1387,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:07:10Z",
+   "score": 91.39
+  },
+  {
+   "sha": "71be09b00d58",
+   "tokens": 122,
+   "heartbeats": 1376,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:07:11Z"
+  },
+  {
+   "sha": "960ebdd1796d",
+   "tokens": 116,
+   "heartbeats": 645,
+   "ok": false,
+   "error": "115:12: typeclass instance problem is stuck InnerProductSpace' ?m.69 V Note: Lean will not try to resolve this typeclass instance problem because the first, third, and fifth type arguments to `InnerProductSpace'` are metavariables. These arguments must be fully determined before Lean will try to res",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:07:13Z"
+  },
+  {
+   "sha": "a93016949e64",
+   "tokens": 120,
+   "heartbeats": 1388,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:07:38Z",
+   "score": 91.43
+  },
+  {
+   "sha": "07d2a309a07f",
+   "tokens": 119,
+   "heartbeats": 1391,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:07:40Z",
+   "score": 91.46
+  },
+  {
+   "sha": "9e54bec06919",
+   "tokens": 121,
+   "heartbeats": 1371,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:51:59Z"
+  },
+  {
+   "sha": "8e15c910d654",
+   "tokens": 124,
+   "heartbeats": 1358,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:52:01Z"
+  },
+  {
+   "sha": "ea895d060806",
+   "tokens": 119,
+   "heartbeats": 1389,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:52:41Z",
+   "score": 91.47
+  },
+  {
+   "sha": "25fcde15c368",
+   "tokens": 120,
+   "heartbeats": 1371,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:52:42Z",
+   "score": 91.48
+  },
+  {
+   "sha": "805783cbe0ad",
+   "tokens": 119,
+   "heartbeats": 573,
+   "ok": false,
+   "error": "114:8: typeclass instance problem is stuck InnerProductSpace' ?m.64 V Note: Lean will not try to resolve this typeclass instance problem because the first, third, and fifth type arguments to `InnerProductSpace'` are metavariables. These arguments must be fully determined before Lean will try to reso",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:52:44Z"
+  },
+  {
+   "sha": "f19d303eac01",
+   "tokens": 123,
+   "heartbeats": 1397,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:52:50Z"
+  },
+  {
+   "sha": "fc5e94be71b0",
+   "tokens": 121,
+   "heartbeats": 1371,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:53:35Z"
+  },
+  {
+   "sha": "77a81c06756f",
+   "tokens": 128,
+   "heartbeats": 1369,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:53:37Z"
+  },
+  {
+   "sha": "fe4498259d99",
+   "tokens": 120,
+   "heartbeats": 1376,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:53:38Z"
+  },
+  {
+   "sha": "df4982eb725e",
+   "tokens": 125,
+   "heartbeats": 1366,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:54:12Z"
+  },
+  {
+   "sha": "ae6ee48644fa",
+   "tokens": 125,
+   "heartbeats": 1371,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:54:14Z"
+  },
+  {
+   "sha": "4c6513075690",
+   "tokens": 125,
+   "heartbeats": 1068,
+   "ok": false,
+   "error": "120:10: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce … [hypotheses omitted] ⊢ ∫ (x_1 : Y), φ x_1 * ⟪f x_1, f x⟫_ℝ ∂μ = 0",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:54:16Z"
+  },
+  {
+   "sha": "842853261892",
+   "tokens": 120,
+   "heartbeats": 1377,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:54:30Z"
+  },
+  {
+   "sha": "aa45c585569b",
+   "tokens": 122,
+   "heartbeats": 1379,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:54:32Z"
+  },
+  {
+   "sha": "d8f93742b40c",
+   "tokens": 185,
+   "heartbeats": 1595,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:55:23Z"
+  },
+  {
+   "sha": "5554bedd5623",
+   "tokens": 173,
+   "heartbeats": 2113,
+   "ok": false,
+   "error": "120:4: Type mismatch: After simplification, term HasCompactSupport.mul_right hk has type @HasCompactSupport Y ℝ PseudoMetricSpace.toUniformSpace.toTopologicalSpace instMulZeroClassOfSemiring.toZero (φ * fun y => ⟪f y, f x⟫_ℝ) but is expected to have type @HasCompactSupport Y ℝ PseudoMetricSpace.toUn",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:55:56Z"
+  },
+  {
+   "sha": "c9b1bfa3ff0d",
+   "tokens": 176,
+   "heartbeats": 2309,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:56:15Z"
+  },
+  {
+   "sha": "43ed20ce59f5",
+   "tokens": 119,
+   "heartbeats": 1364,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:58:44Z",
+   "score": 91.54
+  },
+  {
+   "sha": "51a1a1a11924",
+   "tokens": 120,
+   "heartbeats": 1355,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:58:45Z"
+  },
+  {
+   "sha": "d21c5d39b714",
+   "tokens": 124,
+   "heartbeats": 1364,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:58:47Z"
+  },
+  {
+   "sha": "2f4f65b11cb9",
+   "tokens": 120,
+   "heartbeats": 1360,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:43:50Z"
+  },
+  {
+   "sha": "6a5d7c2e5e42",
+   "tokens": 124,
+   "heartbeats": 1331,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:43:51Z"
+  },
+  {
+   "sha": "6e4d7d9c7fb2",
+   "tokens": 124,
+   "heartbeats": 1357,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:43:53Z"
+  },
+  {
+   "sha": "6c3f44d68052",
+   "tokens": 115,
+   "heartbeats": 1508,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:44:13Z"
+  },
+  {
+   "sha": "ff626c72d694",
+   "tokens": 116,
+   "heartbeats": 1512,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:44:15Z"
+  },
+  {
+   "sha": "3b5ee48440fb",
+   "tokens": 117,
+   "heartbeats": 1503,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:44:38Z"
+  },
+  {
+   "sha": "98544fd05b40",
+   "tokens": 123,
+   "heartbeats": 1425,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:44:39Z"
+  },
+  {
+   "sha": "712fb8ab8e1b",
+   "tokens": 119,
+   "heartbeats": 1366,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:44:41Z"
+  },
+  {
+   "sha": "1c8d178ec246",
+   "tokens": 118,
+   "heartbeats": 86267,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:45:11Z"
+  },
+  {
+   "sha": "a9d4ddcf16b5",
+   "tokens": 122,
+   "heartbeats": 1425,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:45:12Z"
+  },
+  {
+   "sha": "9f543c606b1d",
+   "tokens": 119,
+   "heartbeats": 1348,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:45:14Z",
+   "score": 91.58
+  },
+  {
+   "sha": "6828fc959430",
+   "tokens": 119,
+   "heartbeats": 1348,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:45:34Z"
+  },
+  {
+   "sha": "746ed875481a",
+   "tokens": 119,
+   "heartbeats": 1350,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:45:36Z"
+  },
+  {
+   "sha": "833663311df6",
+   "tokens": 119,
+   "heartbeats": null,
+   "ok": false,
+   "error": "123:5: unknown tactic",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:45:38Z"
+  },
+  {
+   "sha": "6216e9a067f5",
+   "tokens": 185,
+   "heartbeats": 1921,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:49:27Z"
+  },
+  {
+   "sha": "49b248b2111a",
+   "tokens": 118,
+   "heartbeats": 1502,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:22:29Z"
+  },
+  {
+   "sha": "b48aa0b38bbb",
+   "tokens": 120,
+   "heartbeats": 1374,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:22:32Z"
+  },
+  {
+   "sha": "2defcdce4cec",
+   "tokens": 123,
+   "heartbeats": 1341,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:27:22Z"
+  },
+  {
+   "sha": "715896b7dc85",
+   "tokens": 126,
+   "heartbeats": 1341,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:27:23Z"
+  },
+  {
+   "sha": "b9868cf97c11",
+   "tokens": 125,
+   "heartbeats": 1342,
+   "ok": false,
+   "error": "125:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern φ y in the target expression 0 ≤ (fun i => φ i * ⟪f i, f x⟫_ℝ) y case neg … [hypotheses omitted] ⊢ 0 ≤ (fun i => φ i * ⟪f i, f x⟫_ℝ) y",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:27:36Z"
+  },
+  {
+   "sha": "925ff36c107c",
+   "tokens": 122,
+   "heartbeats": 1376,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:28:04Z"
+  },
+  {
+   "sha": "5736b94eedf3",
+   "tokens": 122,
+   "heartbeats": 1353,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:28:06Z"
+  },
+  {
+   "sha": "53235e5f3944",
+   "tokens": 124,
+   "heartbeats": 1338,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:28:07Z"
+  },
+  {
+   "sha": "c681224edee2",
+   "tokens": 120,
+   "heartbeats": 1336,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:29:04Z"
+  },
+  {
+   "sha": "6ab292a7f7a0",
+   "tokens": 120,
+   "heartbeats": 1350,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:29:06Z"
+  },
+  {
+   "sha": "d2a568e5f165",
+   "tokens": 119,
+   "heartbeats": 1350,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:29:08Z"
+  },
+  {
+   "sha": "577289159362",
+   "tokens": 117,
+   "heartbeats": 1522,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:49:13Z"
+  },
+  {
+   "sha": "383330fba892",
+   "tokens": 119,
+   "heartbeats": 1337,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-xfer1",
+   "t": "2026-10-13T17:35:40Z",
+   "score": 91.61
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T20:00:21Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T20:50:55Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:23:51Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r4",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:40:36Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:20:14Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r9",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:47:51Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:35:55Z"
+  }
+ ],
+ "api_spend": 2.621483,
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 2,
+    "d_score": 52.87,
+    "d_tokens": -635,
+    "d_heartbeats": 1915,
+    "diff": "+lemma fundamental_theorem_of_variational_calculus' {f : Y → V}\n+    (μ : Measure Y) [IsFiniteMeasureOnCompacts μ] [μ.IsOpenPosMeasure]\n+    [OpensMeasurableSpace Y]\n+    (hf : Continuous f) (hg : ∀ g, IsTestFunction g → ∫ x, ⟪f x, g x⟫_ℝ ∂μ = 0) :\n+    f = 0 := by\n+  ext x\n+  by_contra hx\n+  have hc : Continuous (fun y => ⟪f y, f x⟫_ℝ) := Continuous.inner' f (fun _ => f x) hf continuous_const\n+  have hp : 0 < ⟪f x, f x⟫_ℝ := by\n+    change 0 < ⟪toL2 ℝ (f x), toL2 ℝ (f x)⟫_ℝ\n+    apply real_inner_self_pos.mpr\n+    intro h\n+    apply hx\n+    exact congrArg (fromL2 ℝ) h\n+  obtain ⟨φ, hs, hk, hd, hn, hφ⟩ := exists_contDiff_tsupport_subset (n := ⊤) (hc.continuousAt.eventually_const_lt hp)\n+  hav"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 5,
+    "d_score": 3.08,
+    "d_tokens": -45,
+    "d_heartbeats": -472,
+    "diff": "-  have hc : Continuous (fun y => ⟪f y, f x⟫_ℝ) := Continuous.inner' f (fun _ => f x) hf continuous_const\n-  have hp : 0 < ⟪f x, f x⟫_ℝ := by\n-    change 0 < ⟪toL2 ℝ (f x), toL2 ℝ (f x)⟫_ℝ\n-    apply real_inner_self_pos.mpr\n-    intro h\n-    apply hx\n-    exact congrArg (fromL2 ℝ) h\n+  have hc := Continuous.inner' (𝕜 := ℝ) f (fun _ => f x) hf continuous_const\n+  have hp : 0 < ⟪f x, f x⟫_ℝ := lt_of_le_of_ne real_inner_self_nonneg' (Ne.symm $ mt inner_self_eq_zero'.mp hx)\n-  have hpos : 0 < ∫ y, φ y * ⟪f y, f x⟫_ℝ ∂μ := by\n-    apply (hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero (x := x) hk.mul_right\n-    · intro y\n-      by_cases hy : φ y = 0\n-      · simp [hy]\n-    "
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 7,
+    "d_score": 1.19,
+    "d_tokens": -34,
+    "d_heartbeats": 51,
+    "diff": "-  have hp : 0 < ⟪f x, f x⟫_ℝ := lt_of_le_of_ne real_inner_self_nonneg' (Ne.symm $ mt inner_self_eq_zero'.mp hx)\n+  have hp := lt_of_le_of_ne real_inner_self_nonneg' (Ne.symm $ mt inner_self_eq_zero'.mp hx)\n-  refine ((hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero (μ := μ) (x := x) hk.mul_right ?_ ?_).ne' ?_\n-  · intro y\n-    by_cases hy : φ y = 0\n-    · simp [hy]\n-    · exact mul_nonneg (Set.range_subset_iff.mp hn y).1 (hs (subset_tsupport _ hy)).le\n-  · change φ x * ⟪f x, f x⟫_ℝ ≠ 0\n-    rw [hφ, one_mul]\n-    exact hp.ne'\n-  · simpa only [inner_smul_right', Pi.mul_apply] using hg _ (IsTestFunction.smul_right ⟨hd, hk⟩ contDiff_const)\n+  apply ((hd.continuous.mul hc)"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 9,
+    "d_score": 0.08,
+    "d_tokens": -2,
+    "d_heartbeats": -1,
+    "diff": "-  have hp := lt_of_le_of_ne real_inner_self_nonneg' (Ne.symm $ mt inner_self_eq_zero'.mp hx)\n+  have hp := lt_of_le_of_ne' real_inner_self_nonneg' (mt inner_self_eq_zero'.mp hx)"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 10,
+    "d_score": 0.06,
+    "d_tokens": -3,
+    "d_heartbeats": 20,
+    "diff": "-  by_cases hy : φ y = 0\n-  · simp [hy]\n-  · exact mul_nonneg (Set.range_subset_iff.mp hn y).1 (hs (subset_tsupport _ hy)).le\n+  by_cases hy : y ∈ tsupport φ\n+  · exact mul_nonneg (Set.range_subset_iff.mp hn y).1 (hs hy).le\n+  · simp [image_eq_zero_of_notMem_tsupport hy]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 12,
+    "d_score": 0.13,
+    "d_tokens": -3,
+    "d_heartbeats": -3,
+    "diff": "-  apply ((hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right (fun y => ?_) (mul_ne_zero (hφ ▸ one_ne_zero) hp.ne')).ne' $ by\n+  refine ((hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_ (mul_ne_zero (hφ ▸ one_ne_zero) hp.ne')).ne' $ by\n+  intro y"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 15,
+    "d_score": 0.15,
+    "d_tokens": -2,
+    "d_heartbeats": -26,
+    "diff": "-  refine ((hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_ (mul_ne_zero (hφ ▸ one_ne_zero) hp.ne')).ne' $ by\n-    simpa only [inner_smul_right', Pi.mul_apply] using hg _ (IsTestFunction.smul_right ⟨hd, hk⟩ contDiff_const)\n+  refine ((hd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_ (mul_ne_zero (hφ ▸ one_ne_zero) hp.ne')).ne' $ by\n+    simpa only [inner_smul_right'] using hg _ (IsTestFunction.smul_right ⟨hd, hk⟩ contDiff_const)"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 16,
+    "d_score": 0.05,
+    "d_tokens": 3,
+    "d_heartbeats": -61,
+    "diff": "-  refine ((hd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_ (mul_ne_zero (hφ ▸ one_ne_zero) hp.ne')).ne' $ by\n+  refine ((hd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_ (by rw [hφ, one_mul]; exact hp.ne')).ne' $ by"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 18,
+    "d_score": 0.16,
+    "d_tokens": -4,
+    "d_heartbeats": 0,
+    "diff": "-  have hc := Continuous.inner' (𝕜 := ℝ) f (fun _ => f x) hf continuous_const\n-  have hp := lt_of_le_of_ne' real_inner_self_nonneg' (mt inner_self_eq_zero'.mp hx)\n-  obtain ⟨φ, hs, hk, hd, hn, hφ⟩ := exists_contDiff_tsupport_subset (n := ⊤) (hc.continuousAt.eventually_const_lt hp)\n+  have hc := Continuous.inner' (𝕜 := ℝ) f (λ_ => f x) hf continuous_const\n+  have hp := lt_of_le_of_ne' real_inner_self_nonneg' $ mt inner_self_eq_zero'.mp hx\n+  obtain ⟨φ, hs, hk, hd, hn, hφ⟩ := exists_contDiff_tsupport_subset (n := ⊤) $ hc.continuousAt.eventually_const_lt hp\n-    simpa only [inner_smul_right'] using hg _ (IsTestFunction.smul_right ⟨hd, hk⟩ contDiff_const)\n+    simpa only [inner_smul_right'] usin"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 20,
+    "d_score": 0.28,
+    "d_tokens": -5,
+    "d_heartbeats": -31,
+    "diff": "-  obtain ⟨φ, hs, hk, hd, hn, hφ⟩ := exists_contDiff_tsupport_subset (n := ⊤) $ hc.continuousAt.eventually_const_lt hp\n-  refine ((hd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_ (by rw [hφ, one_mul]; exact hp.ne')).ne' $ by\n+  obtain ⟨φ, hs, hk, hd, hn, hφ⟩ := exists_contDiff_tsupport_subset $ hc.continuousAt.eventually_const_lt hp\n+  refine ((hd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_ (by rw [hφ, one_mul]; apply hp.ne')).ne' $ by"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 21,
+    "d_score": 0.01,
+    "d_tokens": 0,
+    "d_heartbeats": -5,
+    "diff": "-  refine ((hd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_ (by rw [hφ, one_mul]; apply hp.ne')).ne' $ by\n+  refine' ((hd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_ (by rw [hφ, one_mul]; apply hp.ne')).ne' $ by\n-  · exact mul_nonneg (Set.range_subset_iff.mp hn y).1 (hs hy).le\n+  · exact mul_nonneg (Set.range_subset_iff.1 hn y).1 (hs hy).le"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 24,
+    "d_score": 0.04,
+    "d_tokens": -1,
+    "d_heartbeats": 1,
+    "diff": "-  refine' ((hd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_ (by rw [hφ, one_mul]; apply hp.ne')).ne' $ by\n+  refine' ((hd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_ $ by rw [hφ, one_mul]; apply hp.ne').ne' $ by"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 25,
+    "d_score": 0.03,
+    "d_tokens": -1,
+    "d_heartbeats": 3,
+    "diff": "-  have hp := lt_of_le_of_ne' real_inner_self_nonneg' $ mt inner_self_eq_zero'.mp hx\n+  have hp := lt_of_le_of_ne' real_inner_self_nonneg' $ inner_self_eq_zero'.not.mpr hx"
+   },
+   {
+    "run_id": "wu-hx-sol-r2",
+    "check": 3,
+    "d_score": 0.01,
+    "d_tokens": 0,
+    "d_heartbeats": -2,
+    "diff": "-  ext x\n+  funext x"
+   },
+   {
+    "run_id": "wu-hx-sol-r2",
+    "check": 4,
+    "d_score": 0.01,
+    "d_tokens": 1,
+    "d_heartbeats": -18,
+    "diff": "-  by_contra hx\n+  false_or_by_contra\n+  rename_i hx"
+   },
+   {
+    "run_id": "wu-hx-sol-r2",
+    "check": 18,
+    "d_score": 0.06,
+    "d_tokens": -1,
+    "d_heartbeats": -7,
+    "diff": "-  have hp := lt_of_le_of_ne' real_inner_self_nonneg' $ inner_self_eq_zero'.not.mpr hx\n+  have hp := real_inner_self_nonneg'.lt_of_ne' $ inner_self_eq_zero'.not.mpr hx"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 11,
+    "d_score": 0.04,
+    "d_tokens": 0,
+    "d_heartbeats": -16,
+    "diff": "-  · exact mul_nonneg (Set.range_subset_iff.1 hn y).1 (hs hy).le\n+  · apply mul_nonneg (Set.range_subset_iff.1 hn y).1 (hs hy).le"
+   },
+   {
+    "run_id": "wu-hx-sol-xfer1",
+    "check": 1,
+    "d_score": 0.03,
+    "d_tokens": 0,
+    "d_heartbeats": -11,
+    "diff": "-  refine' ((hd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_ $ by rw [hφ, one_mul]; apply hp.ne').ne' $ by\n+  refine' ((hd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_ $ by rewrite [hφ, one_mul]; apply hp.ne').ne' $ by",
+    "source": "v2-check",
+    "kind": "edit",
+    "sha": "779c5e4ad596"
+   }
+  ]
+ },
+ "profile_cache": {
+  "f71b48cde60c": {
+   "ok": true,
+   "total": 1513,
+   "floor": 536,
+   "reference": 11954,
+   "max_heartbeat_score": 31.84,
+   "blocks": [
+    {
+     "lines": "11-12",
+     "depth_indent": 2,
+     "text": "apply ((hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right (fun y =",
+     "heartbeats": 439
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "obtain ⟨φ, hs, hk, hd, hn, hφ⟩ := exists_contDiff_tsupport_subset (n := ⊤) (hc.continuousAt.eventual",
+     "heartbeats": 138
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "· exact mul_nonneg (Set.range_subset_iff.mp hn y).1 (hs hy).le",
+     "heartbeats": 130
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "have hp := lt_of_le_of_ne' real_inner_self_nonneg' (mt inner_self_eq_zero'.mp hx)",
+     "heartbeats": 73
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "have hc := Continuous.inner' (𝕜 := ℝ) f (fun _ => f x) hf continuous_const",
+     "heartbeats": 64
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "· simp [image_eq_zero_of_notMem_tsupport hy]",
+     "heartbeats": 52
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "by_cases hy : y ∈ tsupport φ",
+     "heartbeats": 45
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "by_contra hx",
+     "heartbeats": 29
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "ext x",
+     "heartbeats": 7
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 4,
+     "text": "simpa only [inner_smul_right', Pi.mul_apply] using hg _ (IsTestFunction.smul_right ⟨hd, hk⟩ contDiff",
+     "heartbeats": null
+    }
+   ],
+   "points_left_heartbeats": 2.72,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "25fcde15c368": {
+   "ok": true,
+   "total": 1371,
+   "floor": 536,
+   "reference": 11954,
+   "max_heartbeat_score": 31.84,
+   "blocks": [
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "· exact mul_nonneg (Set.range_subset_iff.1 hn y).1 (hs hy).le",
+     "heartbeats": 126
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "have hp := lt_of_le_of_ne' real_inner_self_nonneg' $ inner_self_eq_zero'.not.mpr hx",
+     "heartbeats": 77
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "have hc := Continuous.inner' (𝕜 := ℝ) f (λ_ => f x) hf continuous_const",
+     "heartbeats": 64
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "by_cases hy : y ∈ tsupport φ",
+     "heartbeats": 46
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "· simp [image_eq_zero_of_notMem_tsupport hy]",
+     "heartbeats": 42
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "false_or_by_contra",
+     "heartbeats": 12
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "funext x",
+     "heartbeats": 4
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "rename_i hx",
+     "heartbeats": 0
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "obtain ⟨φ, hs, hk, hd, hn, hφ⟩ := exists_contDiff_tsupport_subset $ hc.continuousAt.eventually_const",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-13",
+     "depth_indent": 2,
+     "text": "refine' ((hd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "intro y",
+     "heartbeats": 0
+    }
+   ],
+   "points_left_heartbeats": 2.33,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "9f543c606b1d": {
+   "ok": true,
+   "total": 1348,
+   "floor": 536,
+   "reference": 11954,
+   "max_heartbeat_score": 31.84,
+   "blocks": [
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "· apply mul_nonneg (Set.range_subset_iff.1 hn y).1 (hs hy).le",
+     "heartbeats": 110
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "have hp := real_inner_self_nonneg'.lt_of_ne' $ inner_self_eq_zero'.not.mpr hx",
+     "heartbeats": 70
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "have hc := Continuous.inner' (𝕜 := ℝ) f (λ_ => f x) hf continuous_const",
+     "heartbeats": 64
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "by_cases hy : y ∈ tsupport φ",
+     "heartbeats": 46
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "· simp [image_eq_zero_of_notMem_tsupport hy]",
+     "heartbeats": 42
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "false_or_by_contra",
+     "heartbeats": 12
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "funext x",
+     "heartbeats": 4
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "rename_i hx",
+     "heartbeats": 0
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "obtain ⟨φ, hs, hk, hd, hn, hφ⟩ := exists_contDiff_tsupport_subset $ hc.continuousAt.eventually_const",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-13",
+     "depth_indent": 2,
+     "text": "refine' ((hd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right ?_",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "intro y",
+     "heartbeats": 0
+    }
+   ],
+   "points_left_heartbeats": 2.26,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "hb_floor": 536,
+ "budget_milestones": {
+  "2": {
+   "spend": 2.001373,
+   "best": 90.7,
+   "run_id": "wu-hx-sol-f12",
+   "turn": 13,
+   "t": "2026-10-12T00:28:33Z"
+  }
+ },
+ "fresh_lineages": [
+  {
+   "run_id": "wu-hx-sol-f12",
+   "spend": 0.579993,
+   "score": 91.31,
+   "adopted": false,
+   "restructure": true,
+   "t": "2026-10-12T00:35:55Z"
+  }
+ ]
+}

@@ -1,0 +1,12 @@
+run wu-hx-sol-r11: 2 problems, model=gpt-6.1-sol, turns≤40
+FieldSpecification technique cards: sets
+Binius.BinaryBasef technique cards: sets, corollary
+FieldSpecification library leads: 10 (34.3 s, 9 compiles)
+FieldSpecification knowledge brief: FieldSpecification.WickAlgebra.__timeOrderF_superCommuteF_eq_time.md
+Binius.BinaryBasef library leads: 10 (54.0 s, 7 compiles)
+Binius.BinaryBasef knowledge brief: Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius.md
+FieldSpecification budget reached: $1.847 + reserve $0.456 > $2.00; session ends
+FieldSpecification DONE best=86.43 checks=0 tool_calls=3 turns=3 out_tok=12108 137s
+Binius.BinaryBasef budget reached: $1.757 + reserve $0.247 > $2.00; session ends
+Binius.BinaryBasef DONE best=91.02 checks=2 tool_calls=3 turns=3 out_tok=1694 131s
+done

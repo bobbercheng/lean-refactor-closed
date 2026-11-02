@@ -1,0 +1,11 @@
+transfer hit: row#0 delete +0.12
+transfer hit: row#0 span +0.01
+transfer hit: row#5 span +0.01
+transfer hit: row#8 rule +0.02
+transfer hit: row#8 span +0.02
+transfer hit: row#10 span +0.03
+transfer hit: row#11 span +0.05
+transfer hit: row#13 span +0.01
+transfer hit: row#14 span +0.02
+transfer sweep 1: 15 row(s) scanned (0 without a row or a best), 186 mechanism(s) (18 closer, 7 delete, 1 operator, 114 rule, 46 span); 427 (mechanism, best) pair(s) tried, 1163 candidate(s), 1178 compiled; 9 hit(s) banked (summed gain +0.29); 2 row slice(s) cut by time, 0 left to a live session / unused review, 0 busy, 0 infrastructure failure(s) (not recorded), 0 error(s)
+transfer done: 1 sweep(s) in 46.1 min; 9 hit(s) recorded on this root so far; 5 TRANSFER HITS entr(y/ies) -> _transfer/mechanisms.json

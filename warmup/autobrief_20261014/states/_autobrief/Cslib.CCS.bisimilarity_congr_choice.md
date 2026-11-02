@@ -1,0 +1,6 @@
+AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)
+- Seed: 251 tokens, 3879 heartbeats, score 33.33. Free passes applied (normalize, hb_rewrite): start candidate 274 tokens, 484 heartbeats, score 59.45.
+- Exchange rate here: 1 token = 0.133 points, 100 heartbeats = 0.859 points.
+- Compile but do not pay alone: line 21 the closing tactic at line 21 (`apply hb.le_bisimilarity _ _ hr2`) by `grind` (-4 tok, +74 hb); line 35 the closing tactic at line 35 (`apply hb.le_bisimilarity _ _ hr2`) by `grind` (-4 tok, +77 hb); line 48 the closing tactic at line 48 (`apply hb.le_bisimilarity _ _ hr1`) by `grind` (-4 tok, +74 hb).
+- Deletions that FAIL (needed as they stand): line 2 the tactic `intro h`; line 3 the tactic `exists @ChoiceBisim _ _ defs`; line 4 the tactic `constructor`; line 7 the tactic `intro s1 s2 r μ`; line 8 the tactic `constructor`; line 10 the tactic `intro s1' htr`.
+- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 20 (`· constructor`) (grind/simp_all/aesop); the bullet at line 47 (`· constructor`) (grind/simp_all/aesop); the bullet at line 61 (`· constructor`) (grind/simp_all/aesop); the bullet at line 26 (`· constructor`) (grind/simp_all/aesop).

@@ -1,0 +1,68 @@
+run wu-hx-sol-f12: 4 problems, model=gpt-6.1-sol, turns≤40
+Cslib.LambdaCalcul technique cards: inductive
+Cslib.CCS.bisimila technique cards: inductive
+fundamental_theore technique cards: analysis, sets, algebra
+Core.InitsUpdatesC technique cards: inductive, sets, corollary
+[memgate] HOLD LRAScratch/m_4b9338e210.lean: need 8000+8000 MB, have 8447 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_9324a08afa.lean: need 8000+8000 MB, have 8447 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_f18cc206b7.lean: need 8000+8000 MB, have 15501 MB (40000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+fundamental_theore library leads: 10 (6.7 s, 2 compiles)
+fundamental_theore knowledge brief: fundamental_theorem_of_variational_calculus_.md
+fundamental_theore scout brief: restructure
+[memgate] admitted after 10s hold (31424 MB free after ramping grants)
+[memgate] admitted after 10s hold (23424 MB free after ramping grants)
+[memgate] HOLD LRAScratch/s_f0e9ddd68f.lean: need 8000+8000 MB, have 15600 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (23398 MB free after ramping grants)
+Cslib.CCS.bisimila library leads: 10 (21.8 s, 9 compiles)
+Cslib.CCS.bisimila knowledge brief: Cslib.CCS.bisimilarity_congr_choice.md
+Cslib.CCS.bisimila scout brief: restructure
+[memgate] admitted after 20s hold (32015 MB free after ramping grants)
+Cslib.LambdaCalcul library leads: 10 (23.7 s, 6 compiles)
+Cslib.LambdaCalcul knowledge brief: Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress.md
+Cslib.LambdaCalcul scout brief: restructure
+Core.InitsUpdatesC library leads: 10 (24.8 s, 9 compiles)
+Core.InitsUpdatesC knowledge brief: Core.InitsUpdatesComm.md
+Core.InitsUpdatesC scout brief: restructure
+Core.InitsUpdatesC check 1: NEW BEST tok=107 (+52.2%) hb=311 (+92.8%) Z=100 score=81.67
+fundamental_theore check 1: NEW BEST tok=233 (+72.6%) hb=1526 (+87.2%) Z=100 score=86.62
+Cslib.CCS.bisimila check 3: NEW BEST tok=97 (+61.4%) hb=365 (+90.6%) Z=100 score=83.98
+Core.InitsUpdatesC check 2: NEW BEST tok=84 (+62.5%) hb=217 (+95.0%) Z=100 score=85.82
+Core.InitsUpdatesC check 3: NEW BEST tok=82 (+63.4%) hb=199 (+95.4%) Z=100 score=86.25
+Core.InitsUpdatesC check 8: NEW BEST tok=69 (+69.2%) hb=194 (+95.5%) Z=100 score=88.23
+Core.InitsUpdatesC check 10: NEW BEST tok=65 (+71.0%) hb=192 (+95.5%) Z=100 score=88.84
+Core.InitsUpdatesC check 11: NEW BEST tok=65 (+71.0%) hb=180 (+95.8%) Z=100 score=88.93
+Cslib.LambdaCalcul check 7: NEW BEST tok=279 (+31.6%) hb=6699 (+88.8%) Z=100 score=73.48
+Cslib.LambdaCalcul check 8: NEW BEST tok=279 (+31.6%) hb=6037 (+89.9%) Z=100 score=73.84
+fundamental_theore check 13: NEW BEST tok=148 (+82.6%) hb=1479 (+87.6%) Z=100 score=90.08
+fundamental_theore check 14: NEW BEST tok=134 (+84.3%) hb=1453 (+87.8%) Z=100 score=90.7
+fundamental_theore budget milestone $2 crossed: spend $2.001, best 90.7 (cap $2.85)
+Core.InitsUpdatesC check 19: NEW BEST tok=64 (+71.4%) hb=193 (+95.5%) Z=100 score=88.98
+fundamental_theore check 16: NEW BEST tok=131 (+84.6%) hb=1448 (+87.9%) Z=100 score=90.83
+Core.InitsUpdatesC check 20: NEW BEST tok=64 (+71.4%) hb=180 (+95.8%) Z=100 score=89.08
+fundamental_theore check 18: NEW BEST tok=132 (+84.5%) hb=1430 (+88.0%) Z=100 score=90.84
+Cslib.CCS.bisimila check 16: NEW BEST tok=90 (+64.1%) hb=456 (+88.2%) Z=100 score=84.13
+Cslib.CCS.bisimila check 17: NEW BEST tok=95 (+62.2%) hb=365 (+90.6%) Z=100 score=84.25
+Cslib.CCS.bisimila check 19: NEW BEST tok=80 (+68.1%) hb=460 (+88.1%) Z=100 score=85.42
+Core.InitsUpdatesC budget milestone $2 crossed: spend $2.007, best 89.08 (cap $2.85)
+Core.InitsUpdatesC check 21: NEW BEST tok=63 (+71.9%) hb=192 (+95.5%) Z=100 score=89.14
+Cslib.CCS.bisimila budget milestone $2 crossed: spend $2.005, best 85.42 (cap $2.85)
+Cslib.LambdaCalcul check 11: NEW BEST tok=183 (+55.1%) hb=6819 (+88.6%) Z=100 score=81.25
+Cslib.LambdaCalcul budget milestone $2 crossed: spend $2.007, best 81.25 (cap $2.85)
+fundamental_theore check 23: NEW BEST tok=126 (+85.2%) hb=1432 (+88.0%) Z=100 score=91.07
+fundamental_theore check 24: NEW BEST tok=126 (+85.2%) hb=1427 (+88.1%) Z=100 score=91.09
+fundamental_theore check 25: NEW BEST tok=128 (+85.0%) hb=1346 (+88.7%) Z=100 score=91.23
+fundamental_theore check 27: NEW BEST tok=124 (+85.4%) hb=1400 (+88.3%) Z=100 score=91.24
+Cslib.LambdaCalcul check 20: NEW BEST tok=174 (+57.4%) hb=6655 (+88.9%) Z=100 score=82.08
+Core.InitsUpdatesC budget reached: $2.280 + reserve $0.578 > $2.85; session ends
+Core.InitsUpdatesC DONE best=89.14 checks=32 tool_calls=26 turns=26 out_tok=23558 508s
+fundamental_theore check 31: NEW BEST tok=123 (+85.5%) hb=1393 (+88.3%) Z=100 score=91.3
+Cslib.LambdaCalcul check 25: NEW BEST tok=164 (+59.8%) hb=6912 (+88.5%) Z=100 score=82.75
+fundamental_theore check 36: NEW BEST tok=127 (+85.1%) hb=1333 (+88.8%) Z=100 score=91.31
+Cslib.LambdaCalcul check 29: NEW BEST tok=163 (+60.0%) hb=5510 (+90.8%) Z=100 score=83.62
+Cslib.CCS.bisimila DONE best=85.42 checks=48 tool_calls=39 turns=34 out_tok=22736 604s
+fundamental_theore budget reached: $2.319 + reserve $0.546 > $2.85; session ends
+fundamental_theore DONE best=91.31 checks=39 tool_calls=32 turns=29 out_tok=27912 622s
+Cslib.LambdaCalcul check 36: NEW BEST tok=161 (+60.5%) hb=5547 (+90.7%) Z=100 score=83.76
+Cslib.LambdaCalcul budget reached: $2.325 + reserve $0.554 > $2.85; session ends
+Cslib.LambdaCalcul DONE best=83.76 checks=38 tool_calls=36 turns=34 out_tok=23422 689s
+done

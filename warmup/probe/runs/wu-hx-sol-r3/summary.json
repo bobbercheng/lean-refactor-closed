@@ -1,0 +1,92 @@
+[
+ {
+  "problem": "CallElimCorrect.substOldPostSubset",
+  "best_score": 91.68,
+  "checks": 18,
+  "tool_calls": 10,
+  "turns": 10,
+  "out_tokens": 6143,
+  "seconds": 551
+ },
+ {
+  "problem": "CallElimCorrect.extractedOldExprInVars",
+  "best_score": 90.98,
+  "checks": 10,
+  "tool_calls": 9,
+  "turns": 9,
+  "out_tokens": 3017,
+  "seconds": 208
+ },
+ {
+  "problem": "Core.InitsUpdatesComm",
+  "best_score": 89.09,
+  "checks": 2,
+  "tool_calls": 5,
+  "turns": 5,
+  "out_tokens": 14026,
+  "seconds": 224
+ },
+ {
+  "problem": "fundamental_theorem_of_variational_calculus'",
+  "best_score": 91.54,
+  "checks": 0,
+  "tool_calls": 3,
+  "turns": 3,
+  "out_tokens": 12160,
+  "seconds": 129
+ },
+ {
+  "problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+  "best_score": 83.46,
+  "checks": 0,
+  "tool_calls": 3,
+  "turns": 3,
+  "out_tokens": 12092,
+  "seconds": 196
+ },
+ {
+  "problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+  "best_score": 86.14,
+  "checks": 2,
+  "tool_calls": 11,
+  "turns": 11,
+  "out_tokens": 3447,
+  "seconds": 348
+ },
+ {
+  "problem": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+  "best_score": 93.29,
+  "checks": 5,
+  "tool_calls": 16,
+  "turns": 16,
+  "out_tokens": 13428,
+  "seconds": 428
+ },
+ {
+  "problem": "interleaved_affine_gaps_imply_tensor_gaps",
+  "best_score": 92.78,
+  "checks": 6,
+  "tool_calls": 5,
+  "turns": 5,
+  "out_tokens": 3209,
+  "seconds": 253
+ },
+ {
+  "problem": "putnam_1964_b2",
+  "best_score": 99.13,
+  "checks": 10,
+  "tool_calls": 8,
+  "turns": 8,
+  "out_tokens": 3709,
+  "seconds": 234
+ },
+ {
+  "problem": "putnam_1995_a3",
+  "best_score": 95.72,
+  "checks": 5,
+  "tool_calls": 8,
+  "turns": 8,
+  "out_tokens": 6786,
+  "seconds": 117
+ }
+]

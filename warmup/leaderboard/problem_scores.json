@@ -1,0 +1,65 @@
+{
+ "note": "runner input only: per-problem union target scores (no proofs), as of commit 280604e3, the last change before the 2026-10-11 runner launches",
+ "problems": [
+  {
+   "name": "CallElimCorrect.substOldPostSubset",
+   "union": 92.09
+  },
+  {
+   "name": "CallElimCorrect.extractedOldExprInVars",
+   "union": 94.69
+  },
+  {
+   "name": "Core.InitsUpdatesComm",
+   "union": 89.8
+  },
+  {
+   "name": "fundamental_theorem_of_variational_calculus'",
+   "union": 92.13
+  },
+  {
+   "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+   "union": 91.62
+  },
+  {
+   "name": "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time",
+   "union": 89.77
+  },
+  {
+   "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+   "union": 88.81
+  },
+  {
+   "name": "Cslib.SKI.parallelReduction_diamond",
+   "union": 82.19
+  },
+  {
+   "name": "Cslib.CCS.bisimilarity_congr_choice",
+   "union": 91.14
+  },
+  {
+   "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+   "union": 92.27
+  },
+  {
+   "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+   "union": 93.52
+  },
+  {
+   "name": "interleaved_affine_gaps_imply_tensor_gaps",
+   "union": 92.33
+  },
+  {
+   "name": "putnam_1964_a4",
+   "union": 96.32
+  },
+  {
+   "name": "putnam_1964_b2",
+   "union": 97.87
+  },
+  {
+   "name": "putnam_1995_a3",
+   "union": 96.12
+  }
+ ]
+}

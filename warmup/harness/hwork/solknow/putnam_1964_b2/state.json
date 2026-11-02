@@ -1,0 +1,116 @@
+{
+ "note": "runner input only: first-session scores of an earlier Sol + briefs line (no proofs, no notes)",
+ "problem": "putnam_1964_b2",
+ "runs": [
+  {
+   "run_id": "hx-solknow-a"
+  }
+ ],
+ "attempts": [
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 98.14
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 98.22
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 98.43
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 98.48
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 98.66
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 98.69
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 98.72
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 98.78
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 98.81
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 98.95
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 99.07
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 99.08
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 99.09
+  }
+ ]
+}

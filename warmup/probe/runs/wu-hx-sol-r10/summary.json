@@ -1,0 +1,56 @@
+[
+ {
+  "problem": "CallElimCorrect.extractedOldExprInVars",
+  "best_score": 94.34,
+  "checks": 23,
+  "tool_calls": 10,
+  "turns": 10,
+  "out_tokens": 5079,
+  "seconds": 262
+ },
+ {
+  "problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+  "best_score": 86.43,
+  "checks": 8,
+  "tool_calls": 20,
+  "turns": 16,
+  "out_tokens": 4178,
+  "seconds": 217
+ },
+ {
+  "problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+  "best_score": 91.02,
+  "checks": 6,
+  "tool_calls": 12,
+  "turns": 12,
+  "out_tokens": 7165,
+  "seconds": 224
+ },
+ {
+  "problem": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+  "best_score": 93.62,
+  "checks": 5,
+  "tool_calls": 20,
+  "turns": 15,
+  "out_tokens": 2812,
+  "seconds": 124
+ },
+ {
+  "problem": "interleaved_affine_gaps_imply_tensor_gaps",
+  "best_score": 92.91,
+  "checks": 6,
+  "tool_calls": 11,
+  "turns": 8,
+  "out_tokens": 14700,
+  "seconds": 271
+ },
+ {
+  "problem": "putnam_1964_b2",
+  "best_score": 99.26,
+  "checks": 9,
+  "tool_calls": 9,
+  "turns": 9,
+  "out_tokens": 4321,
+  "seconds": 108
+ }
+]

@@ -1,0 +1,11 @@
+[
+ {
+  "problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+  "best_score": 81.84,
+  "checks": 1,
+  "tool_calls": 8,
+  "turns": 8,
+  "out_tokens": 2232,
+  "seconds": 114
+ }
+]

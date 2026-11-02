@@ -1,0 +1,1360 @@
+{
+ "problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+ "best": {
+  "score": 91.52,
+  "proof": "theorem fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius (i : Fin ℓ) (steps : ℕ)\n    [NeZero steps] (h_i_add_steps : i.val + steps ≤ ℓ)\n    (f : OracleFunction 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩)\n  (h_fw_dist_lt : fiberwiseClose 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate)\n    (i := i) (steps := steps) (h_i_add_steps := h_i_add_steps) (f := f)) :\n  hammingClose 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩ f := by\n  classical\n  obtain ⟨g, hg⟩ := Nat.sInf_mem (Set.range_nonempty (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard))\n  dsimp only at hg\n  have hb := Nat.lt_succ_of_le (Nat.mul_le_mul_right (2 ^ steps) (Nat.le_of_lt_succ (ENat.coe_lt_coe.mp h_fw_dist_lt)))\n  simp only [fiberwiseDistance, Set.image_univ, ← hg, mul_assoc, Nat.sub_mul, ← Nat.pow_add, ← Nat.sub_add_comm (h_i_add_steps.trans (Nat.le_add_right ℓ 𝓡)), ← Nat.sub_add_comm h_i_add_steps, Nat.add_sub_add_right] at hb\n  refine (mul_le_mul_of_nonneg_left (Code.distFromCode_le_dist_to_mem f _ g.2) bot_le).trans_lt (ENat.coe_lt_coe.mpr ((Nat.mul_le_mul_left 2 ?_).trans_lt hb))\n  conv_rhs => rw [Set.ncard_eq_toFinset_card']; rhs; rw [← Finset.card_fin (2 ^ steps)]\n  conv_rhs => rw [← Finset.card_product]\n  refine Finset.card_le_card_of_surjOn (fun p => qMap_total_fiber _ _ _ _ (fin_ℓ_steps_lt_ℓ_add_R i steps h_i_add_steps) p.1 p.2) ?_\n  intro x hx\n  exact ⟨⟨_, _⟩, Finset.mem_product.mpr ⟨Set.mem_toFinset.mpr ⟨x, rfl, (Finset.mem_filter.mp hx).2⟩, Finset.mem_univ _⟩, (is_fiber_iff_generates_quotient_point _ _ i _ h_i_add_steps x _).mp rfl⟩",
+  "tokens": 207,
+  "heartbeats": 1806,
+  "L": 85.85,
+  "H": 88.72,
+  "Z": 100.0,
+  "compat": {
+   "v4.31.0": true,
+   "v4.30.0": true,
+   "v4.29.0": true,
+   "v4.28.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "439f4b4b6e62",
+   "tokens": 433,
+   "heartbeats": 5329,
+   "ok": false,
+   "error": "1288:94: omega could not prove the goal: a possible counterexample may satisfy the constraints l ≥ 0 k ≥ 0 j ≥ 0 h ≥ 0 e ≥ 0 e + j - k - l ≥ 0 d ≥ 0 c ≥ 0 b ≥ 0 b - d ≥ 1 b - d - e ≥ 0 a ≥ 0 a - b - c ≥ 1 a - j ≥ 1 where a := ↑r b := ↑ℓ c := ↑𝓡 d := ↑↑i e := ↑steps h := ↑(sInf ((fun g => (fiberwiseD",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:20:29Z"
+  },
+  {
+   "sha": "570df52fe7f0",
+   "tokens": 438,
+   "heartbeats": 18497,
+   "ok": false,
+   "error": "1288:129: omega could not prove the goal: a possible counterexample may satisfy the constraints j ≥ 0 h ≥ 0 e ≥ 0 d ≥ 0 c ≥ 0 b ≥ 0 b - d ≥ 1 b - d - e ≥ 0 b + c - e - j ≤ 0 a ≥ 0 a - b - c ≥ 1 a - j ≥ 1 where a := ↑r b := ↑ℓ c := ↑𝓡 d := ↑↑i e := ↑steps h := ↑(sInf ((fun g => (fiberwiseDisagreement",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:20:46Z"
+  },
+  {
+   "sha": "d4afa82e8c94",
+   "tokens": 445,
+   "heartbeats": 18933,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:21:10Z",
+   "score": 50.43
+  },
+  {
+   "sha": "8b3d49a4db55",
+   "tokens": 467,
+   "heartbeats": 7237,
+   "ok": false,
+   "error": "1297:4: Type mismatch hc has type {x | f x ≠ ↑g x}.ncard ≤ Y.ncard * 2 ^ steps but is expected to have type (↑{x | f x ≠ ↑g x}).ncard ≤ (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f ↑g).ncard * 2 ^ steps",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:23:56Z"
+  },
+  {
+   "sha": "8b04d2794506",
+   "tokens": 473,
+   "heartbeats": 7411,
+   "ok": false,
+   "error": "1296:51: Tactic `rewrite` failed: Did not find an occurrence of the pattern ↑uni … [hypotheses omitted] ⊢ {x | x ∈ univ ∧ f x ≠ ↑g x}.ncard ≤ (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f ↑g).ncard * 2 ^ steps",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:24:37Z"
+  },
+  {
+   "sha": "62b8732968a5",
+   "tokens": 476,
+   "heartbeats": 7551,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:25:02Z",
+   "score": 73.43
+  },
+  {
+   "sha": "54b2a717ebc1",
+   "tokens": 455,
+   "heartbeats": 7036,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:27:30Z",
+   "score": 74.98
+  },
+  {
+   "sha": "97f10df16931",
+   "tokens": 446,
+   "heartbeats": 4804,
+   "ok": false,
+   "error": "1306:68: No goals to be solved",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:28:48Z"
+  },
+  {
+   "sha": "d83d013c201f",
+   "tokens": 446,
+   "heartbeats": 7522,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:29:16Z"
+  },
+  {
+   "sha": "5cd3c78a8073",
+   "tokens": 468,
+   "heartbeats": 5243,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:29:57Z",
+   "score": 78.42
+  },
+  {
+   "sha": "1aaf2ce784f3",
+   "tokens": 271,
+   "heartbeats": 3480,
+   "ok": false,
+   "error": "1288:11: don't know how to synthesize implicit argument `b` @And.intro ((iterate … [hypotheses omitted] ⊢ Prop",
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:35:37Z"
+  },
+  {
+   "sha": "e164d899b7c7",
+   "tokens": 260,
+   "heartbeats": 3812,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:35:51Z",
+   "score": 86.14
+  },
+  {
+   "sha": "781cd55e1687",
+   "tokens": 240,
+   "heartbeats": 3438,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:55:48Z",
+   "score": 87.37
+  },
+  {
+   "sha": "25f0a4631b99",
+   "tokens": 230,
+   "heartbeats": 1452,
+   "ok": false,
+   "error": "1282:125: Application type mismatch: The argument g has type ↥(BBF_Code 𝔽q β ?m.121) but is expected to have type OracleFunction 𝔽q β ⟨↑i, ⋯⟩ in the application fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:56:56Z"
+  },
+  {
+   "sha": "b92cd1eb4ae4",
+   "tokens": 222,
+   "heartbeats": 2916,
+   "ok": false,
+   "error": "1288:41: don't know how to synthesize placeholder for argument `f` context: … [hypotheses omitted] ⊢ ↥(sDomain 𝔽q β h_ℓ_add_R_rate ⟨↑i + steps, ⋯⟩) × Fin (2 ^ steps) → ↥(sDomain 𝔽q β h_ℓ_add_R_rate ⟨↑⟨↑i, ⋯⟩, ⋯⟩)",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:57:02Z"
+  },
+  {
+   "sha": "be8640ef32cc",
+   "tokens": 242,
+   "heartbeats": 1412,
+   "ok": false,
+   "error": "1282:149: Application type mismatch: The argument g has type ↥(BBF_Code 𝔽q β ⟨↑i, ⋯⟩) but is expected to have type OracleFunction 𝔽q β ⟨↑i, ⋯⟩ in the application fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:57:34Z"
+  },
+  {
+   "sha": "3f1274dd735b",
+   "tokens": 247,
+   "heartbeats": 2962,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:57:55Z",
+   "score": 88.2
+  },
+  {
+   "sha": "19ccfc87cffa",
+   "tokens": 258,
+   "heartbeats": 3043,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:59:21Z"
+  },
+  {
+   "sha": "861b7b61691f",
+   "tokens": 227,
+   "heartbeats": 2789,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:59:37Z",
+   "score": 89.02
+  },
+  {
+   "sha": "5c80710e4465",
+   "tokens": 203,
+   "heartbeats": 2464,
+   "ok": false,
+   "error": "1291:22: Application type mismatch: The argument (is_fiber_iff_generates_quotient_point 𝔽q β i steps h_i_add_steps x (iteratedQuotientMap 𝔽q β h_ℓ_add_R_rate i steps h_i_add_steps x)).mp rfl has type qMap_total_fiber 𝔽q β ⟨↑i, ⋯⟩ steps ⋯ (iteratedQuotientMap 𝔽q β h_ℓ_add_R_rate i steps h_i_add_steps",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:00:13Z"
+  },
+  {
+   "sha": "c9820ff80b32",
+   "tokens": 223,
+   "heartbeats": 2810,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:00:49Z",
+   "score": 89.07
+  },
+  {
+   "sha": "ad555df8394e",
+   "tokens": 218,
+   "heartbeats": 1764,
+   "ok": false,
+   "error": "1288:35: Invalid rewrite argument: The pattern to be substituted is a metavariable (`?n`) in this equality ?n = Fintype.card (Fin ?n)",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:01:19Z"
+  },
+  {
+   "sha": "dcf26e0b4354",
+   "tokens": 212,
+   "heartbeats": 2647,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:02:26Z",
+   "score": 89.66
+  },
+  {
+   "sha": "5bcb78e3e516",
+   "tokens": 233,
+   "heartbeats": 200011,
+   "ok": false,
+   "error": "1280:74: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached Note: Use `set_option maxHeartbeats <num>` to set the limit. Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:05:07Z"
+  },
+  {
+   "sha": "83ba6a7dc23c",
+   "tokens": 232,
+   "heartbeats": 200011,
+   "ok": false,
+   "error": "1280:74: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached Note: Use `set_option maxHeartbeats <num>` to set the limit. Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:05:30Z"
+  },
+  {
+   "sha": "9bb3b0a9c944",
+   "tokens": 220,
+   "heartbeats": 2142,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:05:50Z",
+   "score": 90.53
+  },
+  {
+   "sha": "7c2b05464f53",
+   "tokens": 216,
+   "heartbeats": 200013,
+   "ok": false,
+   "error": "1280:74: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached Note: Use `set_option maxHeartbeats <num>` to set the limit. Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:06:50Z"
+  },
+  {
+   "sha": "4533dc896ba0",
+   "tokens": 214,
+   "heartbeats": 2350,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:07:11Z"
+  },
+  {
+   "sha": "b6ec621e3079",
+   "tokens": 218,
+   "heartbeats": 2122,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:07:18Z",
+   "score": 90.61
+  },
+  {
+   "sha": "24b3449dcf8e",
+   "tokens": 221,
+   "heartbeats": 2036,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:32:05Z",
+   "score": 90.72
+  },
+  {
+   "sha": "d11afce84643",
+   "tokens": 216,
+   "heartbeats": 1636,
+   "ok": false,
+   "error": "1290:74: don't know how to synthesize placeholder for argument `h_i_add_steps` context: … [hypotheses omitted] ⊢ ↑⟨↑⟨↑i, ⋯⟩, ⋯⟩ + steps < ℓ + 𝓡",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:32:47Z"
+  },
+  {
+   "sha": "b490b539e7f3",
+   "tokens": 226,
+   "heartbeats": 200012,
+   "ok": false,
+   "error": "1280:74: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached Note: Use `set_option maxHeartbeats <num>` to set the limit. Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:34:03Z"
+  },
+  {
+   "sha": "18f0c4361ab8",
+   "tokens": 223,
+   "heartbeats": 1941,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:34:10Z",
+   "score": 90.88
+  },
+  {
+   "sha": "c5d743f45e74",
+   "tokens": 219,
+   "heartbeats": 200012,
+   "ok": false,
+   "error": "1280:74: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached Note: Use `set_option maxHeartbeats <num>` to set the limit. Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:34:51Z"
+  },
+  {
+   "sha": "d3e6027314c0",
+   "tokens": 223,
+   "heartbeats": 2040,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:35:26Z"
+  },
+  {
+   "sha": "0b1da0ce52f7",
+   "tokens": 230,
+   "heartbeats": 1983,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:36:03Z"
+  },
+  {
+   "sha": "0bbb713b66a6",
+   "tokens": 218,
+   "heartbeats": 1486,
+   "ok": false,
+   "error": "1290:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern Fintype.card (Fin (2 ^ steps)) in the target expression #(fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f ↑g).toFinset * 2 ^ steps r : ℕ inst✝¹¹ : NeZero r L : Type inst✝¹⁰ : Field L inst✝⁹ : Fintype L inst✝⁸ : Decidabl",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:36:58Z"
+  },
+  {
+   "sha": "4970acb10b50",
+   "tokens": 211,
+   "heartbeats": 2130,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:37:31Z"
+  },
+  {
+   "sha": "904e3485149c",
+   "tokens": 220,
+   "heartbeats": 1931,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:37:42Z",
+   "score": 90.97
+  },
+  {
+   "sha": "464a11c2a652",
+   "tokens": 224,
+   "heartbeats": 1583,
+   "ok": false,
+   "error": "1292:9: don't know how to synthesize implicit argument `b` @And.intro ((?m.312,  … [hypotheses omitted] ⊢ Prop",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:38:30Z"
+  },
+  {
+   "sha": "4c9aaf04490a",
+   "tokens": 224,
+   "heartbeats": 1581,
+   "ok": false,
+   "error": "1292:9: don't know how to synthesize implicit argument `b` @And.intro ((?m.312,  … [hypotheses omitted] ⊢ Prop",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:38:46Z"
+  },
+  {
+   "sha": "3ee15a234514",
+   "tokens": 222,
+   "heartbeats": 1972,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:39:00Z"
+  },
+  {
+   "sha": "f32130256fcd",
+   "tokens": 220,
+   "heartbeats": 1800,
+   "ok": false,
+   "error": "1292:9: don't know how to synthesize implicit argument `b` @And.intro ((⟨Polynom … [hypotheses omitted] ⊢ Prop",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:59:01Z"
+  },
+  {
+   "sha": "16bbbbdd30a5",
+   "tokens": 222,
+   "heartbeats": 1926,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:59:07Z"
+  },
+  {
+   "sha": "3a72d9eee439",
+   "tokens": 229,
+   "heartbeats": 2535,
+   "ok": false,
+   "error": "1293:98: Invalid `⟨...⟩` notation: The expected type Quot.lift (fun l => (⟨Polynomial.eval (↑x) (intermediateNormVpoly 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨steps, ⋯⟩), ⋯⟩, ⟨∑ x_1, 2 ^ ↑x_1 * if ((sDomain_basis 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⋯).repr x) ⟨↑x_1, ⋯⟩ = 0 then 0 else 1, ⋯⟩) ∈ l) ⋯ ((fiberwiseDisagree",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:59:14Z"
+  },
+  {
+   "sha": "16a494f1e7cd",
+   "tokens": 220,
+   "heartbeats": 1931,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:59:21Z"
+  },
+  {
+   "sha": "6dede9d53819",
+   "tokens": 207,
+   "heartbeats": 7317,
+   "ok": false,
+   "error": "1288:14: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:59:49Z"
+  },
+  {
+   "sha": "b614f237125a",
+   "tokens": 205,
+   "heartbeats": 34223,
+   "ok": false,
+   "error": "1288:2: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:59:57Z"
+  },
+  {
+   "sha": "8ac10bb5345e",
+   "tokens": 206,
+   "heartbeats": 1320,
+   "ok": false,
+   "error": "1288:47: Invalid rewrite argument: The pattern to be substituted is a metavariable (`?n`) in this equality ?n = #univ",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:00:04Z"
+  },
+  {
+   "sha": "78436a536df3",
+   "tokens": 203,
+   "heartbeats": 1474,
+   "ok": false,
+   "error": "1288:47: Tactic `rewrite` failed: Did not find an occurrence of the pattern #?s * #?t in the target expression #(fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f ↑g).toFinset * 2 ^ steps r : ℕ inst✝¹¹ : NeZero r L : Type inst✝¹⁰ : Field L inst✝⁹ : Fintype L inst✝⁸ : DecidableEq L inst✝⁷ : CharP",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:00:47Z"
+  },
+  {
+   "sha": "dcfd9d64c944",
+   "tokens": 220,
+   "heartbeats": 1931,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:13:10Z"
+  },
+  {
+   "sha": "df9b3ec9208d",
+   "tokens": 212,
+   "heartbeats": 2394,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:13:54Z"
+  },
+  {
+   "sha": "425665f589ab",
+   "tokens": 218,
+   "heartbeats": 2188,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:14:22Z"
+  },
+  {
+   "sha": "fe9cfa3c5028",
+   "tokens": 210,
+   "heartbeats": 2392,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:14:29Z"
+  },
+  {
+   "sha": "92e7873d79ef",
+   "tokens": 218,
+   "heartbeats": 1928,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:15:03Z",
+   "score": 91.02
+  },
+  {
+   "sha": "ac081912a09d",
+   "tokens": 216,
+   "heartbeats": 1807,
+   "ok": false,
+   "error": "1292:10: don't know how to synthesize placeholder for argument `snd` context: … [hypotheses omitted] ⊢ Fin (2 ^ steps)",
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:15:36Z"
+  },
+  {
+   "sha": "5e709ba191ae",
+   "tokens": 218,
+   "heartbeats": 1962,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r11",
+   "t": "2026-10-12T00:23:49Z"
+  },
+  {
+   "sha": "2d54a6514f5e",
+   "tokens": 218,
+   "heartbeats": 2026,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r11",
+   "t": "2026-10-12T00:23:56Z"
+  },
+  {
+   "sha": "2efc572da474",
+   "tokens": 214,
+   "heartbeats": 1856,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:51:53Z",
+   "score": 91.26
+  },
+  {
+   "sha": "dc54ea6990ad",
+   "tokens": 210,
+   "heartbeats": 2035,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:52:25Z"
+  },
+  {
+   "sha": "c64dd36db919",
+   "tokens": 216,
+   "heartbeats": 1860,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:54:36Z"
+  },
+  {
+   "sha": "f6945bf0efc2",
+   "tokens": 214,
+   "heartbeats": 1845,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:54:42Z",
+   "score": 91.28
+  },
+  {
+   "sha": "ac2551557608",
+   "tokens": 218,
+   "heartbeats": 1230,
+   "ok": false,
+   "error": "1286:156: Application type mismatch: The argument hb has type 2 * ((fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f ↑g).ncard * 2 ^ steps) < (2 ^ (ℓ + 𝓡 - ↑i - steps + steps) - 2 ^ (ℓ - ↑i - steps + steps)).succ but is expected to have type 2 * ?m.223 < BBF_CodeDistance ℓ 𝓡 ⟨↑i, ⋯⟩ in the appl",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:55:17Z"
+  },
+  {
+   "sha": "68efa9d10d89",
+   "tokens": 213,
+   "heartbeats": 1811,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:56:00Z",
+   "score": 91.38
+  },
+  {
+   "sha": "102f3e6339a3",
+   "tokens": 244,
+   "heartbeats": 1230,
+   "ok": false,
+   "error": "1287:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern #?s i … [hypotheses omitted] ⊢ Δ₀(f, ↑g) ≤ (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f ↑g).ncard * 2 ^ steps",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:57:05Z"
+  },
+  {
+   "sha": "f6de7ea23eff",
+   "tokens": 207,
+   "heartbeats": 1806,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:57:35Z",
+   "score": 91.52
+  },
+  {
+   "sha": "e0eca34e3808",
+   "tokens": 199,
+   "heartbeats": 1914,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:58:07Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T20:17:34Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:28:21Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r4",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:49:55Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:27:22Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r9",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:55:20Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r10",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:10:02Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r11",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:20:22Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:49:37Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r14",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T01:20:55Z"
+  }
+ ],
+ "api_spend": 1.899628,
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 3,
+    "d_score": 17.1,
+    "d_tokens": -1018,
+    "d_heartbeats": 18933,
+    "diff": "+theorem fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius (i : Fin ℓ) (steps : ℕ)\n+    [NeZero steps] (h_i_add_steps : i.val + steps ≤ ℓ)\n+    (f : OracleFunction 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩)\n+  (h_fw_dist_lt : fiberwiseClose 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate)\n+    (i := i) (steps := steps) (h_i_add_steps := h_i_add_steps) (f := f)) :\n+  hammingClose 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩ f := by\n+  classical\n+  unfold fiberwiseClose fiberwiseDistance at h_fw_dist_lt\n+  obtain ⟨g, _, hg⟩ := Nat.sInf_mem (Set.image_nonempty.mpr Set.univ_nonempty)\n+    (s := (fun g : BBF_Code 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩ =>\n+      (fibe"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 6,
+    "d_score": 23.0,
+    "d_tokens": 31,
+    "d_heartbeats": -11382,
+    "diff": "-    simpa [Set.ncard_prod, Set.ncard_univ, Nat.card_eq_fintype_card, hammingDist, Set.ncard_eq_toFinset_card'] using hc\n+    rw [Set.ncard_prod, Set.ncard_univ, Nat.card_eq_fintype_card, Fintype.card_fin] at hc\n+    change (Finset.univ.filter (fun x => f x ≠ g.val x)).card ≤ _\n+    rw [← Set.ncard_coe_finset]\n+    simpa only [Finset.coe_filter, Finset.mem_univ, true_and] using hc"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 7,
+    "d_score": 1.55,
+    "d_tokens": -21,
+    "d_heartbeats": -515,
+    "diff": "-    congr 1 <;> congr 1 <;> omega\n+    congr 1\n+    · congr 1; omega\n+    · congr 1; omega\n-  have hd : Code.distFromCode f (BBF_Code 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩) ≤ (hammingDist f g : ℕ∞) := sInf_le ⟨g, g.property, le_rfl⟩\n-  apply lt_of_le_of_lt (mul_le_mul_of_nonneg_left hd (bot_le : (0 : ℕ∞) ≤ 2))\n+  refine lt_of_le_of_lt (mul_le_mul_of_nonneg_left\n+    (show Code.distFromCode f _ ≤ (hammingDist f g : ℕ∞) from sInf_le ⟨g, g.property, le_rfl⟩) bot_le) ?_"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 10,
+    "d_score": 3.44,
+    "d_tokens": 13,
+    "d_heartbeats": -1793,
+    "diff": "-    (s := (fun g : BBF_Code 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩ =>\n+    (s := (fun g : BBF_Code 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, fin_ℓ_lt_ℓ_add_one i⟩ =>\n+  dsimp only at hg\n-    congr 1\n-    · congr 1; omega\n-    · congr 1; omega\n+    rw [← Nat.sub_add_comm (h_i_add_steps.trans (Nat.le_add_right ℓ 𝓡)),\n+      ← Nat.sub_add_comm h_i_add_steps, Nat.add_sub_add_right, Nat.add_sub_add_right]"
+   },
+   {
+    "run_id": "wu-hx-sol-r3",
+    "check": 2,
+    "d_score": 1.07,
+    "d_tokens": -37,
+    "d_heartbeats": -106,
+    "diff": "-    rw [Set.ncard_eq_toFinset_card']\n-    refine (Finset.card_le_card ?_).trans (Finset.card_biUnion_le_card_mul _ (fun y => Finset.image (qMap_total_fiber 𝔽q β ⟨i, by omega⟩ steps (by apply Nat.lt_add_of_pos_right_of_le; exact h_i_add_steps) y) Finset.univ) _ ?_)\n-    · intro x hx\n-      have hx' : f x ≠ g.val x := (Finset.mem_filter.mp hx).2\n-      apply Finset.mem_biUnion.mpr\n-      refine ⟨iteratedQuotientMap 𝔽q β h_ℓ_add_R_rate i steps h_i_add_steps x, ?_, ?_⟩\n-      · exact Set.mem_toFinset.mpr ⟨x, rfl, hx'⟩\n-      · apply Finset.mem_image.mpr\n-        exact ⟨_, Finset.mem_univ _, (is_fiber_iff_generates_quotient_point 𝔽q β i steps h_i_add_steps x _).mp rfl⟩\n-    · intro y hy\n-      e"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 1,
+    "d_score": 1.23,
+    "d_tokens": -20,
+    "d_heartbeats": -374,
+    "diff": "-  have hd : hammingDist f g ≤ (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g).ncard * 2 ^ steps := by\n-    rw [Set.ncard_eq_toFinset_card', ← Fintype.card_fin (2 ^ steps), ← Finset.card_univ, ← Finset.card_product]\n+  refine (mul_le_mul_of_nonneg_left (Code.distFromCode_le_dist_to_mem f g g.2) bot_le).trans_lt ?_\n+  apply ENat.coe_lt_coe.mpr\n+  refine (Nat.mul_le_mul_left 2 (show hammingDist f g ≤ (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g).ncard * 2 ^ steps from ?_)).trans_lt ?_\n+  · rw [Set.ncard_eq_toFinset_card', ← Fintype.card_fin (2 ^ steps), ← Finset.card_univ, ← Finset.card_product]\n-  unfold hammingClose\n-  refine (mul_le_mul_of_nonneg_left (Code.distFromCod"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 5,
+    "d_score": 0.83,
+    "d_tokens": 7,
+    "d_heartbeats": -476,
+    "diff": "-    simpa (disch := omega) only [fiberwiseDistance, BBF_CodeDistance, Nat.add_sub_cancel, Nat.sub_mul, ← Nat.pow_add, ← Nat.sub_sub, Nat.sub_add_cancel] using Nat.lt_succ_of_le hb\n+    simpa only [fiberwiseDistance, BBF_CodeDistance, Nat.add_sub_cancel, Nat.sub_mul, ← Nat.pow_add, ← Nat.sub_add_comm (h_i_add_steps.trans (Nat.le_add_right ℓ 𝓡)), ← Nat.sub_add_comm h_i_add_steps, Nat.add_sub_add_right] using Nat.lt_succ_of_le hb"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 7,
+    "d_score": 0.82,
+    "d_tokens": -20,
+    "d_heartbeats": -173,
+    "diff": "-  refine (mul_le_mul_of_nonneg_left (Code.distFromCode_le_dist_to_mem f g g.2) bot_le).trans_lt ?_\n-  apply ENat.coe_lt_coe.mpr\n-  refine (Nat.mul_le_mul_left 2 (show hammingDist f g ≤ (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g).ncard * 2 ^ steps from ?_)).trans_lt ?_\n-  · rw [Set.ncard_eq_toFinset_card', ← Fintype.card_fin (2 ^ steps), ← Finset.card_univ, ← Finset.card_product]\n-    refine Finset.card_le_card_of_surjOn (fun p => qMap_total_fiber 𝔽q β _ _ (Nat.lt_add_of_pos_right_of_le _ _ _ h_i_add_steps) p.1 p.2) ?_\n-    intro x hx\n-    refine ⟨⟨_, _⟩, ?_, (is_fiber_iff_generates_quotient_point 𝔽q β i steps h_i_add_steps x _).mp rfl⟩\n-    exact Finset.mem_product.mpr ⟨Set.me"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 9,
+    "d_score": 0.05,
+    "d_tokens": -4,
+    "d_heartbeats": 21,
+    "diff": "-  simp only [fiberwiseDistance, BBF_CodeDistance, Nat.add_sub_cancel, Nat.sub_mul, ← Nat.pow_add, ← Nat.sub_add_comm (h_i_add_steps.trans (Nat.le_add_right ℓ 𝓡)), ← Nat.sub_add_comm h_i_add_steps, Nat.add_sub_add_right] at hb\n+  simp only [fiberwiseDistance, Nat.sub_mul, ← Nat.pow_add, ← Nat.sub_add_comm (h_i_add_steps.trans (Nat.le_add_right ℓ 𝓡)), ← Nat.sub_add_comm h_i_add_steps, Nat.add_sub_add_right] at hb\n-  refine Finset.card_le_card_of_surjOn (fun p => qMap_total_fiber 𝔽q β _ _ (Nat.lt_add_of_pos_right_of_le _ _ _ h_i_add_steps) p.1 p.2) ?_\n+  refine Finset.card_le_card_of_surjOn (fun p => qMap_total_fiber _ _ _ _ (Nat.lt_add_of_pos_right_of_le _ _ _ h_i_add_steps) p.1 p.2) ?_\n-  re"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 11,
+    "d_score": 0.59,
+    "d_tokens": -11,
+    "d_heartbeats": -163,
+    "diff": "-  obtain ⟨g, _, hg⟩ := Nat.sInf_mem (s := (fun g : BBF_Code 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, fin_ℓ_lt_ℓ_add_one i⟩ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g).ncard) '' Set.univ) (Set.image_nonempty.mpr Set.univ_nonempty)\n+  obtain ⟨g, _, hg⟩ := Nat.sInf_mem (s := (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard) '' Set.univ) (Set.image_nonempty.mpr Set.univ_nonempty)\n-  refine (mul_le_mul_of_nonneg_left (Code.distFromCode_le_dist_to_mem f g g.2) bot_le).trans_lt (ENat.coe_lt_coe.mpr ((Nat.mul_le_mul_left 2 ?_).trans_lt hb))\n+  refine (mul_le_mul_of_nonneg_left (Code.distFromCode_le_dist_to_mem f g.1 g.2) bot_le).trans"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 14,
+    "d_score": 0.87,
+    "d_tokens": 8,
+    "d_heartbeats": -505,
+    "diff": "-  rw [Set.ncard_eq_toFinset_card', ← Fintype.card_fin (2 ^ steps), ← Finset.card_univ, ← Finset.card_product]\n+  rw [Set.ncard_eq_toFinset_card']\n+  conv_rhs => rhs; rw [← Fintype.card_fin (2 ^ steps), ← Finset.card_univ]\n+  rw [← Finset.card_product]"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 17,
+    "d_score": 0.08,
+    "d_tokens": -2,
+    "d_heartbeats": -20,
+    "diff": "-  rw [Set.ncard_eq_toFinset_card']\n-  rw [← Finset.card_product]\n+  rw [Set.ncard_eq_toFinset_card', ← Finset.card_product]"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 1,
+    "d_score": 0.11,
+    "d_tokens": 3,
+    "d_heartbeats": -86,
+    "diff": "-  conv_rhs => rhs; rw [← Fintype.card_fin (2 ^ steps), ← Finset.card_univ]\n-  rw [Set.ncard_eq_toFinset_card', ← Finset.card_product]\n+  conv_rhs => rw [Set.ncard_eq_toFinset_card']; rhs; rw [← Fintype.card_fin (2 ^ steps), ← Finset.card_univ]\n+  rw [← Finset.card_product]"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 4,
+    "d_score": 0.16,
+    "d_tokens": 2,
+    "d_heartbeats": -95,
+    "diff": "-  rw [← Finset.card_product]\n+  conv_rhs => rw [← Finset.card_product]"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 10,
+    "d_score": 0.09,
+    "d_tokens": -3,
+    "d_heartbeats": -10,
+    "diff": "-  conv_rhs => rw [Set.ncard_eq_toFinset_card']; rhs; rw [← Fintype.card_fin (2 ^ steps), ← Finset.card_univ]\n+  conv_rhs => rw [Set.ncard_eq_toFinset_card']; rhs; rw [← Finset.card_fin (2 ^ steps)]"
+   },
+   {
+    "run_id": "wu-hx-sol-r10",
+    "check": 5,
+    "d_score": 0.05,
+    "d_tokens": -2,
+    "d_heartbeats": -3,
+    "diff": "-  refine ⟨⟨_, _⟩, ?_, (is_fiber_iff_generates_quotient_point _ _ i steps h_i_add_steps x _).mp rfl⟩\n-  exact Finset.mem_product.mpr ⟨Set.mem_toFinset.mpr ⟨x, rfl, (Finset.mem_filter.mp hx).2⟩, Finset.mem_univ _⟩\n+  exact ⟨⟨_, _⟩, Finset.mem_product.mpr ⟨Set.mem_toFinset.mpr ⟨x, rfl, (Finset.mem_filter.mp hx).2⟩, Finset.mem_univ _⟩, (is_fiber_iff_generates_quotient_point _ _ i steps h_i_add_steps x _).mp rfl⟩"
+   },
+   {
+    "run_id": "wu-hx-sol-r13",
+    "check": 1,
+    "d_score": 0.24,
+    "d_tokens": -4,
+    "d_heartbeats": -72,
+    "diff": "-  simp only [fiberwiseDistance, Nat.sub_mul, ← Nat.pow_add, ← Nat.sub_add_comm (h_i_add_steps.trans (Nat.le_add_right ℓ 𝓡)), ← Nat.sub_add_comm h_i_add_steps, Nat.add_sub_add_right] at hb\n-  rw [← hg, mul_assoc] at hb\n+  simp only [fiberwiseDistance, ← hg, mul_assoc, Nat.sub_mul, ← Nat.pow_add, ← Nat.sub_add_comm (h_i_add_steps.trans (Nat.le_add_right ℓ 𝓡)), ← Nat.sub_add_comm h_i_add_steps, Nat.add_sub_add_right] at hb"
+   },
+   {
+    "run_id": "wu-hx-sol-r13",
+    "check": 4,
+    "d_score": 0.02,
+    "d_tokens": 0,
+    "d_heartbeats": -11,
+    "diff": "-  refine (mul_le_mul_of_nonneg_left (Code.distFromCode_le_dist_to_mem f g.1 g.2) bot_le).trans_lt (ENat.coe_lt_coe.mpr ((Nat.mul_le_mul_left 2 ?_).trans_lt hb))\n+  refine (mul_le_mul_of_nonneg_left (Code.distFromCode_le_dist_to_mem f _ g.2) bot_le).trans_lt (ENat.coe_lt_coe.mpr ((Nat.mul_le_mul_left 2 ?_).trans_lt hb))\n-  exact ⟨⟨_, _⟩, Finset.mem_product.mpr ⟨Set.mem_toFinset.mpr ⟨x, rfl, (Finset.mem_filter.mp hx).2⟩, Finset.mem_univ _⟩, (is_fiber_iff_generates_quotient_point _ _ i steps h_i_add_steps x _).mp rfl⟩\n+  exact ⟨⟨_, _⟩, Finset.mem_product.mpr ⟨Set.mem_toFinset.mpr ⟨x, rfl, (Finset.mem_filter.mp hx).2⟩, Finset.mem_univ _⟩, (is_fiber_iff_generates_quotient_point _ _ i _ h_i_add_s"
+   },
+   {
+    "run_id": "wu-hx-sol-r13",
+    "check": 6,
+    "d_score": 0.1,
+    "d_tokens": -1,
+    "d_heartbeats": -34,
+    "diff": "-  obtain ⟨g, _, hg⟩ := Nat.sInf_mem (s := (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard) '' Set.univ) (Set.image_nonempty.mpr Set.univ_nonempty)\n+  obtain ⟨g, hg⟩ := Nat.sInf_mem (s := Set.range (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard)) (Set.range_nonempty _)\n-  simp only [fiberwiseDistance, ← hg, mul_assoc, Nat.sub_mul, ← Nat.pow_add, ← Nat.sub_add_comm (h_i_add_steps.trans (Nat.le_add_right ℓ 𝓡)), ← Nat.sub_add_comm h_i_add_steps, Nat.add_sub_add_right] at hb\n+  simp only [fiberwiseDistance, Set.image_univ, ← hg, mul_assoc, Nat.sub_mul, ← Nat.pow_add, ← Nat.sub_add_comm (h_i_add_steps.tra"
+   },
+   {
+    "run_id": "wu-hx-sol-r13",
+    "check": 8,
+    "d_score": 0.14,
+    "d_tokens": -6,
+    "d_heartbeats": -5,
+    "diff": "-  obtain ⟨g, hg⟩ := Nat.sInf_mem (s := Set.range (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard)) (Set.range_nonempty _)\n+  obtain ⟨g, hg⟩ := Nat.sInf_mem (Set.range_nonempty (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard))"
+   }
+  ]
+ },
+ "profile_cache": {
+  "e164d899b7c7": {
+   "ok": true,
+   "total": 3812,
+   "floor": 489,
+   "reference": 16006,
+   "max_heartbeat_score": 32.31,
+   "blocks": [
+    {
+     "lines": "10-15",
+     "depth_indent": 2,
+     "text": "have hd : hammingDist f g ≤ (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g).ncard * 2 ^ st",
+     "heartbeats": 1473
+    },
+    {
+     "lines": "23-23",
+     "depth_indent": 2,
+     "text": "simpa (disch := omega) only [fiberwiseDistance, BBF_CodeDistance, Nat.add_sub_cancel, Nat.sub_mul, ←",
+     "heartbeats": 787
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "obtain ⟨g, _, hg⟩ := Nat.sInf_mem (s := (fun g : BBF_Code 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i",
+     "heartbeats": 446
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "refine (mul_le_mul_of_nonneg_left (Code.distFromCode_le_dist_to_mem f g g.2) bot_le).trans_lt ?_",
+     "heartbeats": 345
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "change ((2 * hammingDist f g : ℕ) : ℕ∞) < _",
+     "heartbeats": 131
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "rw [← mul_assoc, hg]",
+     "heartbeats": 48
+    },
+    {
+     "lines": "22-22",
+     "depth_indent": 2,
+     "text": "have hb := Nat.mul_le_mul_right (2 ^ steps) (Nat.le_of_lt_succ (ENat.coe_lt_coe.mp h_fw_dist_lt))",
+     "heartbeats": 36
+    },
+    {
+     "lines": "19-19",
+     "depth_indent": 2,
+     "text": "rw [ENat.coe_lt_coe]",
+     "heartbeats": 22
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "dsimp only at hg",
+     "heartbeats": 14
+    },
+    {
+     "lines": "20-20",
+     "depth_indent": 2,
+     "text": "refine (Nat.mul_le_mul_left 2 hd).trans_lt ?_",
+     "heartbeats": 12
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "unfold hammingClose",
+     "heartbeats": 9
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": 0
+    }
+   ],
+   "points_left_heartbeats": 6.92,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "dcf26e0b4354": {
+   "ok": true,
+   "total": 2647,
+   "floor": 489,
+   "reference": 16006,
+   "max_heartbeat_score": 32.31,
+   "blocks": [
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "rw [Set.ncard_eq_toFinset_card', ← Fintype.card_fin (2 ^ steps), ← Finset.card_univ, ← Finset.card_p",
+     "heartbeats": 899
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "refine (mul_le_mul_of_nonneg_left (Code.distFromCode_le_dist_to_mem f g.1 g.2) bot_le).trans_lt (ENa",
+     "heartbeats": 260
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "obtain ⟨g, _, hg⟩ := Nat.sInf_mem (s := (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i",
+     "heartbeats": 257
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "exact Finset.mem_product.mpr ⟨Set.mem_toFinset.mpr ⟨x, rfl, (Finset.mem_filter.mp hx).2⟩, Finset.mem",
+     "heartbeats": 189
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "refine ⟨⟨_, _⟩, ?_, (is_fiber_iff_generates_quotient_point _ _ i steps h_i_add_steps x _).mp rfl⟩",
+     "heartbeats": 160
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "simp only [fiberwiseDistance, Nat.sub_mul, ← Nat.pow_add, ← Nat.sub_add_comm (h_i_add_steps.trans (N",
+     "heartbeats": 140
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "rw [← hg, mul_assoc] at hb",
+     "heartbeats": 106
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "refine Finset.card_le_card_of_surjOn (fun p => qMap_total_fiber _ _ _ _ (fin_ℓ_steps_lt_ℓ_add_R i st",
+     "heartbeats": 85
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "have hb := Nat.lt_succ_of_le (Nat.mul_le_mul_right (2 ^ steps) (Nat.le_of_lt_succ (ENat.coe_lt_coe.m",
+     "heartbeats": 42
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "dsimp only at hg",
+     "heartbeats": 14
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "intro x hx",
+     "heartbeats": 6
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": 0
+    }
+   ],
+   "points_left_heartbeats": 4.49,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "b6ec621e3079": {
+   "ok": true,
+   "total": 2122,
+   "floor": 489,
+   "reference": 16006,
+   "max_heartbeat_score": 32.31,
+   "blocks": [
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "refine ⟨⟨_, _⟩, ?_, (is_fiber_iff_generates_quotient_point _ _ i steps h_i_add_steps x _).mp rfl⟩",
+     "heartbeats": 347
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "rw [Set.ncard_eq_toFinset_card', ← Finset.card_product]",
+     "heartbeats": 318
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "refine (mul_le_mul_of_nonneg_left (Code.distFromCode_le_dist_to_mem f g.1 g.2) bot_le).trans_lt (ENa",
+     "heartbeats": 260
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "obtain ⟨g, _, hg⟩ := Nat.sInf_mem (s := (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i",
+     "heartbeats": 257
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "simp only [fiberwiseDistance, Nat.sub_mul, ← Nat.pow_add, ← Nat.sub_add_comm (h_i_add_steps.trans (N",
+     "heartbeats": 140
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "rw [← hg, mul_assoc] at hb",
+     "heartbeats": 106
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "refine Finset.card_le_card_of_surjOn (fun p => qMap_total_fiber _ _ _ _ (fin_ℓ_steps_lt_ℓ_add_R i st",
+     "heartbeats": 85
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "conv_rhs => rhs; rw [← Fintype.card_fin (2 ^ steps), ← Finset.card_univ]",
+     "heartbeats": 62
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "have hb := Nat.lt_succ_of_le (Nat.mul_le_mul_right (2 ^ steps) (Nat.le_of_lt_succ (ENat.coe_lt_coe.m",
+     "heartbeats": 42
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "dsimp only at hg",
+     "heartbeats": 14
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "intro x hx",
+     "heartbeats": 2
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": 0
+    }
+   ],
+   "points_left_heartbeats": 3.4,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "904e3485149c": {
+   "ok": true,
+   "total": 1931,
+   "floor": 489,
+   "reference": 16006,
+   "max_heartbeat_score": 32.31,
+   "blocks": [
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "refine ⟨⟨_, _⟩, ?_, (is_fiber_iff_generates_quotient_point _ _ i steps h_i_add_steps x _).mp rfl⟩",
+     "heartbeats": 349
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "refine (mul_le_mul_of_nonneg_left (Code.distFromCode_le_dist_to_mem f g.1 g.2) bot_le).trans_lt (ENa",
+     "heartbeats": 260
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "obtain ⟨g, _, hg⟩ := Nat.sInf_mem (s := (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i",
+     "heartbeats": 257
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "conv_rhs => rw [Set.ncard_eq_toFinset_card']; rhs; rw [← Finset.card_fin (2 ^ steps)]",
+     "heartbeats": 160
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "simp only [fiberwiseDistance, Nat.sub_mul, ← Nat.pow_add, ← Nat.sub_add_comm (h_i_add_steps.trans (N",
+     "heartbeats": 140
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "rw [← hg, mul_assoc] at hb",
+     "heartbeats": 106
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "refine Finset.card_le_card_of_surjOn (fun p => qMap_total_fiber _ _ _ _ (fin_ℓ_steps_lt_ℓ_add_R i st",
+     "heartbeats": 85
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "have hb := Nat.lt_succ_of_le (Nat.mul_le_mul_right (2 ^ steps) (Nat.le_of_lt_succ (ENat.coe_lt_coe.m",
+     "heartbeats": 42
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "conv_rhs => rw [← Finset.card_product]",
+     "heartbeats": 28
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "dsimp only at hg",
+     "heartbeats": 14
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "intro x hx",
+     "heartbeats": 1
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": 0
+    }
+   ],
+   "points_left_heartbeats": 3.0,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "92e7873d79ef": {
+   "ok": true,
+   "total": 1928,
+   "floor": 489,
+   "reference": 16006,
+   "max_heartbeat_score": 32.31,
+   "blocks": [
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "exact ⟨⟨_, _⟩, Finset.mem_product.mpr ⟨Set.mem_toFinset.mpr ⟨x, rfl, (Finset.mem_filter.mp hx).2⟩, F",
+     "heartbeats": 346
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "refine (mul_le_mul_of_nonneg_left (Code.distFromCode_le_dist_to_mem f g.1 g.2) bot_le).trans_lt (ENa",
+     "heartbeats": 260
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "obtain ⟨g, _, hg⟩ := Nat.sInf_mem (s := (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i",
+     "heartbeats": 257
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "conv_rhs => rw [Set.ncard_eq_toFinset_card']; rhs; rw [← Finset.card_fin (2 ^ steps)]",
+     "heartbeats": 160
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "simp only [fiberwiseDistance, Nat.sub_mul, ← Nat.pow_add, ← Nat.sub_add_comm (h_i_add_steps.trans (N",
+     "heartbeats": 140
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "rw [← hg, mul_assoc] at hb",
+     "heartbeats": 106
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "refine Finset.card_le_card_of_surjOn (fun p => qMap_total_fiber _ _ _ _ (fin_ℓ_steps_lt_ℓ_add_R i st",
+     "heartbeats": 85
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "have hb := Nat.lt_succ_of_le (Nat.mul_le_mul_right (2 ^ steps) (Nat.le_of_lt_succ (ENat.coe_lt_coe.m",
+     "heartbeats": 42
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "conv_rhs => rw [← Finset.card_product]",
+     "heartbeats": 28
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "dsimp only at hg",
+     "heartbeats": 14
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "intro x hx",
+     "heartbeats": 1
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": 0
+    }
+   ],
+   "points_left_heartbeats": 3.0,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "2efc572da474": {
+   "ok": true,
+   "total": 1856,
+   "floor": 489,
+   "reference": 16006,
+   "max_heartbeat_score": 32.31,
+   "blocks": [
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "exact ⟨⟨_, _⟩, Finset.mem_product.mpr ⟨Set.mem_toFinset.mpr ⟨x, rfl, (Finset.mem_filter.mp hx).2⟩, F",
+     "heartbeats": 345
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "refine (mul_le_mul_of_nonneg_left (Code.distFromCode_le_dist_to_mem f g.1 g.2) bot_le).trans_lt (ENa",
+     "heartbeats": 269
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "obtain ⟨g, _, hg⟩ := Nat.sInf_mem (s := (fun g : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i",
+     "heartbeats": 257
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "simp only [fiberwiseDistance, ← hg, mul_assoc, Nat.sub_mul, ← Nat.pow_add, ← Nat.sub_add_comm (h_i_a",
+     "heartbeats": 165
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "conv_rhs => rw [Set.ncard_eq_toFinset_card']; rhs; rw [← Finset.card_fin (2 ^ steps)]",
+     "heartbeats": 161
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "refine Finset.card_le_card_of_surjOn (fun p => qMap_total_fiber _ _ _ _ (fin_ℓ_steps_lt_ℓ_add_R i st",
+     "heartbeats": 84
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "have hb := Nat.lt_succ_of_le (Nat.mul_le_mul_right (2 ^ steps) (Nat.le_of_lt_succ (ENat.coe_lt_coe.m",
+     "heartbeats": 42
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "conv_rhs => rw [← Finset.card_product]",
+     "heartbeats": 29
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "dsimp only at hg",
+     "heartbeats": 14
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "intro x hx",
+     "heartbeats": 1
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": 0
+    }
+   ],
+   "points_left_heartbeats": 2.85,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "hb_floor": 489,
+ "fresh_lineages": [
+  {
+   "run_id": "wu-hx-sol-f2",
+   "spend": 0.285372,
+   "score": 85.07,
+   "adopted": true,
+   "restructure": false,
+   "t": "2026-10-11T21:06:33Z"
+  }
+ ]
+}

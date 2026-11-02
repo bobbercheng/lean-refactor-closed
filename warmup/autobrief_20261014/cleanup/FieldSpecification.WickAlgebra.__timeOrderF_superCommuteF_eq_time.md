@@ -1,0 +1,7 @@
+AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)
+- Seed: 385 tokens, 9621 heartbeats, score 81.84. Free passes applied (normalize, lint_delete): start candidate 376 tokens, 9588 heartbeats, score 82.11.
+- Exchange rate here: 1 token = 0.027 points, 100 heartbeats = 0.079 points.
+- Heartbeat hot spots: lines 13-13 ~70% (`simp only [ofListBasis_eq_ofList]`); lines 8-9 ~17% (`apply LinearMap.congr_fun₂ (f := (M…`); lines 12-12 ~5% (`dsimp [T, C, M]`).
+- Compile but do not pay alone: line 41 the closing tactic at line 41 (`simp only [map_smul, mul_smul_comm]`) by `simp_all` (-6 tok, +2346 hb); line 41 the closing tactic at line 41 (`simp only [map_smul, mul_smul_comm]`) by `aesop` (-6 tok, +2545 hb).
+- Deletions that FAIL (needed as they stand): line 9 `T` from the simp list; line 9 `C` from the simp list; line 9 `M` from the simp list; line 10 `ofListBasis_eq_ofList` from the simp list; line 13 `hφψ` from the simp list; line 13 `hψφ` from the simp list.
+- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 32 (`· simp only [map_smul, map_mul]`) (grind/simp_all/aesop); the bullet at line 23 (`· congr 1`) (grind/simp_all/aesop); the bullet at line 39 (`· rw [crAnTimeOrderSign, Wick.koszulSig…`) (grind/simp_all/aesop); the bullet at line 42 (`· simp only [ι_superCommuteF_of_diff_st…`) (grind/simp_all/aesop).

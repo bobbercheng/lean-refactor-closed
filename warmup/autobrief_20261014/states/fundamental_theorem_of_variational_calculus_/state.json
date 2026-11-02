@@ -1,0 +1,1976 @@
+{
+ "problem": "fundamental_theorem_of_variational_calculus'",
+ "best": {
+  "score": 91.19,
+  "proof": "lemma fundamental_theorem_of_variational_calculus' {f : Y → V}\n    (μ : Measure Y) [IsFiniteMeasureOnCompacts μ] [μ.IsOpenPosMeasure]\n    [OpensMeasurableSpace Y]\n    (hf : Continuous f) (hg : ∀ g, IsTestFunction g → ∫ x, ⟪f x, g x⟫_ℝ ∂μ = 0) :\n    f = 0 := by\n  ext x₀\n  by_contra hx\n  have hp := real_inner_self_nonneg'.lt_of_ne' (inner_self_eq_zero'.not.mpr hx)\n  have hc := hf.inner' (𝕜 := ℝ) f (fun _ => f x₀) continuous_const\n  obtain ⟨φ, hs, hk, hd, hr, he⟩ := exists_contDiff_tsupport_subset\n    (hc.continuousAt.preimage_mem_nhds (Ici_mem_nhds hp))\n  exact ((hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero\n    hk.mul_right (fun x => if hx : φ x = 0 then (mul_eq_zero_of_left hx _).ge\n      else mul_nonneg (hr (Set.mem_range_self x)).1 (hs (subset_closure hx)))\n    (mul_ne_zero (ne_zero_of_eq_one he) hp.ne')).ne' (by\n      simpa only [inner_smul_right', Pi.mul_apply] using hg _ ((IsTestFunction.mk hd hk).smul_right contDiff_const))",
+  "tokens": 130,
+  "heartbeats": 1334,
+  "L": 84.72,
+  "H": 88.84,
+  "Z": 100.0,
+  "compat": {
+   "v4.32.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "17c7fc094ad4",
+   "tokens": 802,
+   "heartbeats": 11757,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T04:59:06Z",
+   "score": 35.8
+  },
+  {
+   "sha": "efea6f05d676",
+   "tokens": 265,
+   "heartbeats": 2263,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:00:13Z",
+   "score": 83.31
+  },
+  {
+   "sha": "3022538e9ca6",
+   "tokens": 222,
+   "heartbeats": 1859,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:00:46Z",
+   "score": 86.12
+  },
+  {
+   "sha": "acb98c53067f",
+   "tokens": 239,
+   "heartbeats": 2174,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:00:50Z"
+  },
+  {
+   "sha": "ab9a309c9141",
+   "tokens": 218,
+   "heartbeats": 1754,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:01:17Z",
+   "score": 86.57
+  },
+  {
+   "sha": "83b9d4af486f",
+   "tokens": 213,
+   "heartbeats": 1851,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:01:20Z"
+  },
+  {
+   "sha": "59c341515ade",
+   "tokens": 191,
+   "heartbeats": 1776,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:01:41Z",
+   "score": 87.57
+  },
+  {
+   "sha": "960fc5afa37f",
+   "tokens": 186,
+   "heartbeats": 1628,
+   "ok": false,
+   "error": "116:44: Invalid argument name `𝕜` for function `real_inner_self_nonneg'` Hint: Perhaps you meant one of the following parameter names: • `F`: 𝕜̵F̲ • `x`: 𝕜̵x̲",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:01:43Z"
+  },
+  {
+   "sha": "02868067110b",
+   "tokens": 176,
+   "heartbeats": 1610,
+   "ok": false,
+   "error": "129:8: Type mismatch: After simplification, term LT.lt.ne' hp has type ¬f x₀ = 0 but is expected to have type ¬φ ?m.242 = 0 ∧ ¬⟪f ?m.242, f x₀⟫_ℝ = 0",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:02:09Z"
+  },
+  {
+   "sha": "f4005fc76dcf",
+   "tokens": 171,
+   "heartbeats": 1600,
+   "ok": false,
+   "error": "128:8: Type mismatch: After simplification, term LT.lt.ne' hp has type ¬f x₀ = 0 but is expected to have type ¬φ ?m.240 = 0 ∧ ¬⟪f ?m.240, f x₀⟫_ℝ = 0",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:02:11Z"
+  },
+  {
+   "sha": "7f1454783345",
+   "tokens": 174,
+   "heartbeats": 1624,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:02:30Z",
+   "score": 88.66
+  },
+  {
+   "sha": "bf95d14397ed",
+   "tokens": 179,
+   "heartbeats": 1431,
+   "ok": false,
+   "error": "128:8: Type mismatch: After simplification, term LT.lt.ne' hp has type ⟪f x₀, f x₀⟫_ℝ ≠ 0 but is expected to have type (φ * fun x => ⟪f x, f x₀⟫_ℝ) x₀ ≠ 0",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:02:32Z"
+  },
+  {
+   "sha": "cf7bf1813523",
+   "tokens": 164,
+   "heartbeats": 1606,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:02:52Z",
+   "score": 89.1
+  },
+  {
+   "sha": "a412a9e7f298",
+   "tokens": 182,
+   "heartbeats": 1514,
+   "ok": false,
+   "error": "126:6: unsolved goals case pos … [hypotheses omitted] ⊢ 0 x ≤ (φ * fun x => ⟪f x, f x₀⟫_ℝ) x",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:02:55Z"
+  },
+  {
+   "sha": "1d37f4c0ff5a",
+   "tokens": 153,
+   "heartbeats": 1612,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:03:17Z",
+   "score": 89.51
+  },
+  {
+   "sha": "708c2c22a05f",
+   "tokens": 148,
+   "heartbeats": 1583,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:03:35Z",
+   "score": 89.79
+  },
+  {
+   "sha": "15dbebf8c86d",
+   "tokens": 151,
+   "heartbeats": 1502,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:03:37Z",
+   "score": 89.9
+  },
+  {
+   "sha": "a48fa4113360",
+   "tokens": 146,
+   "heartbeats": 1472,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:03:47Z",
+   "score": 90.18
+  },
+  {
+   "sha": "889fdc3768c6",
+   "tokens": 144,
+   "heartbeats": 1477,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:04:34Z",
+   "score": 90.24
+  },
+  {
+   "sha": "28882d74cbf8",
+   "tokens": 146,
+   "heartbeats": 1362,
+   "ok": false,
+   "error": "126:5: invalid `▸` notation, expected result type of cast is (φ * fun a => ⟪f a, f x₀⟫_ℝ) x₀ ≠ 0 however, the equality Eq.symm he of type 1 = φ x₀ does not contain the expected result type on either the left or the right hand side",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:04:36Z"
+  },
+  {
+   "sha": "80859640e8ce",
+   "tokens": 162,
+   "heartbeats": 1663,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:05:06Z"
+  },
+  {
+   "sha": "b65122e12286",
+   "tokens": 153,
+   "heartbeats": 1466,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:05:08Z"
+  },
+  {
+   "sha": "729edf53c7a0",
+   "tokens": 143,
+   "heartbeats": 1479,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:05:46Z",
+   "score": 90.27
+  },
+  {
+   "sha": "b23dd3e1c5da",
+   "tokens": 144,
+   "heartbeats": 1464,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:05:48Z",
+   "score": 90.28
+  },
+  {
+   "sha": "dd89f3f68e43",
+   "tokens": 143,
+   "heartbeats": 1466,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:05:58Z",
+   "score": 90.31
+  },
+  {
+   "sha": "f54fb8c28fd6",
+   "tokens": 142,
+   "heartbeats": 1459,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:40:24Z",
+   "score": 90.37
+  },
+  {
+   "sha": "cd16434b71d0",
+   "tokens": 152,
+   "heartbeats": 1475,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:40:26Z"
+  },
+  {
+   "sha": "186737f0f579",
+   "tokens": 146,
+   "heartbeats": 1445,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:40:28Z"
+  },
+  {
+   "sha": "4887b916d599",
+   "tokens": 141,
+   "heartbeats": 1456,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:41:07Z",
+   "score": 90.42
+  },
+  {
+   "sha": "01d26d954194",
+   "tokens": 141,
+   "heartbeats": 1457,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:41:09Z"
+  },
+  {
+   "sha": "d62c8d6b7924",
+   "tokens": 140,
+   "heartbeats": 1448,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:41:32Z",
+   "score": 90.48
+  },
+  {
+   "sha": "a8ec62da0bc2",
+   "tokens": 140,
+   "heartbeats": 1449,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:41:35Z"
+  },
+  {
+   "sha": "4ce08bdd27c4",
+   "tokens": 140,
+   "heartbeats": 1448,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:42:13Z"
+  },
+  {
+   "sha": "b504f21f4e66",
+   "tokens": 140,
+   "heartbeats": 1492,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:42:16Z"
+  },
+  {
+   "sha": "6b68b43cf784",
+   "tokens": 141,
+   "heartbeats": 1375,
+   "ok": false,
+   "error": "118:5: Function expected at Continuous.continuousAt hc ?m.121 but this term has type ?m.120 ∈ Filter.map (fun a => ⟪f a, f x₀⟫_ℝ) (nhds ?m.119) Note: Expected a function because this term is being applied to the argument (Ioi_mem_nhds hp)",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:42:18Z"
+  },
+  {
+   "sha": "88d3173ccdbe",
+   "tokens": 139,
+   "heartbeats": 1452,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:42:41Z",
+   "score": 90.51
+  },
+  {
+   "sha": "94e8a35b0506",
+   "tokens": 142,
+   "heartbeats": 1431,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:42:43Z"
+  },
+  {
+   "sha": "12e892277a55",
+   "tokens": 140,
+   "heartbeats": 1455,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:43:28Z"
+  },
+  {
+   "sha": "870434276271",
+   "tokens": 143,
+   "heartbeats": 1418,
+   "ok": false,
+   "error": "124:14: invalid `▸` notation, expected result type of cast is 0 x ≤ (φ * fun a => ⟪f a, f x₀⟫_ℝ) x however, the equality Eq.symm hx of type 0 = φ x does not contain the expected result type on either the left or the right hand side",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:19:19Z"
+  },
+  {
+   "sha": "434c0ab8aeec",
+   "tokens": 146,
+   "heartbeats": 1441,
+   "ok": false,
+   "error": "124:8: Type mismatch: After simplification, term le_rfl has type @LE.le ℝ Real.instPreorder.toLE (0 x) (0 x) but is expected to have type @LE.le ℝ ((fun i => Real.instLE) x) (0 x) 0",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:19:21Z"
+  },
+  {
+   "sha": "2e5ef39d9c56",
+   "tokens": 139,
+   "heartbeats": 1465,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:19:23Z"
+  },
+  {
+   "sha": "f7f0e247d202",
+   "tokens": 141,
+   "heartbeats": 1423,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:19:25Z"
+  },
+  {
+   "sha": "a1c9ba21e574",
+   "tokens": 138,
+   "heartbeats": 1388,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:19:42Z",
+   "score": 90.72
+  },
+  {
+   "sha": "7bde19c7c363",
+   "tokens": 140,
+   "heartbeats": 1360,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:19:44Z"
+  },
+  {
+   "sha": "c2dc3377de67",
+   "tokens": 130,
+   "heartbeats": 1518,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:51:49Z"
+  },
+  {
+   "sha": "086b6f0f30e5",
+   "tokens": 147,
+   "heartbeats": 1438,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:51:52Z"
+  },
+  {
+   "sha": "9a2708342cf7",
+   "tokens": 141,
+   "heartbeats": 1367,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:51:54Z"
+  },
+  {
+   "sha": "d6b951e5b916",
+   "tokens": 138,
+   "heartbeats": 1401,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:51:56Z"
+  },
+  {
+   "sha": "39c28cb2985d",
+   "tokens": 138,
+   "heartbeats": 1423,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:52:35Z"
+  },
+  {
+   "sha": "69994c8be2e7",
+   "tokens": 133,
+   "heartbeats": 1549,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:52:37Z"
+  },
+  {
+   "sha": "367dcccc9f52",
+   "tokens": 132,
+   "heartbeats": 1263,
+   "ok": false,
+   "error": "123:6: Invalid `⟨...⟩` notation: The expected type of this term could not be determined",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:52:39Z"
+  },
+  {
+   "sha": "9fd70a42fdec",
+   "tokens": 130,
+   "heartbeats": 1518,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:52:41Z"
+  },
+  {
+   "sha": "0867d01751b6",
+   "tokens": 133,
+   "heartbeats": 1151,
+   "ok": false,
+   "error": "119:9: typeclass instance problem is stuck IsFiniteMeasureOnCompacts ?m.193 Note: Lean will not try to resolve this typeclass instance problem because the fourth type argument to `IsFiniteMeasureOnCompacts` is a metavariable. This argument must be fully determined before Lean will try to resolve the",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:54:14Z"
+  },
+  {
+   "sha": "630940206777",
+   "tokens": 138,
+   "heartbeats": 1290,
+   "ok": false,
+   "error": "125:2: Type mismatch: After simplification, term hg (fun x => φ x • f x₀) (IsTestFunction.smul_right { smooth := hd, supp := hk } contDiff_const) has type @Eq ℝ (∫ (x : Y), φ x * ⟪f x, f x₀⟫_ℝ ∂μ) 0 but is expected to have type @Eq ℝ (∫ (x : Y), (φ * fun a => ⟪f a, f x₀⟫_ℝ) x ∂μ) 0",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:54:21Z"
+  },
+  {
+   "sha": "f82f75b3391c",
+   "tokens": 140,
+   "heartbeats": 1373,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:54:28Z"
+  },
+  {
+   "sha": "309ce0575ba7",
+   "tokens": 145,
+   "heartbeats": 1371,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:55:52Z"
+  },
+  {
+   "sha": "4ba6caf7b423",
+   "tokens": 135,
+   "heartbeats": 1571,
+   "ok": false,
+   "error": "120:2: `simp` made no progress",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:28:01Z"
+  },
+  {
+   "sha": "060ec573b5cd",
+   "tokens": 136,
+   "heartbeats": 2355,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:28:03Z"
+  },
+  {
+   "sha": "ff452447af54",
+   "tokens": 130,
+   "heartbeats": 2055,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:28:24Z"
+  },
+  {
+   "sha": "ec59657b91b4",
+   "tokens": 132,
+   "heartbeats": 2053,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:28:26Z"
+  },
+  {
+   "sha": "57155dfe756b",
+   "tokens": 137,
+   "heartbeats": 2210,
+   "ok": false,
+   "error": "120:2: `simp` made no progress",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:28:56Z"
+  },
+  {
+   "sha": "2e0f57946592",
+   "tokens": 134,
+   "heartbeats": 2767,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:28:58Z"
+  },
+  {
+   "sha": "2ec229e95f61",
+   "tokens": 137,
+   "heartbeats": 2096,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:30:05Z"
+  },
+  {
+   "sha": "4daa62ccc741",
+   "tokens": 139,
+   "heartbeats": 1692,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:30:07Z"
+  },
+  {
+   "sha": "f13f9d68c703",
+   "tokens": 137,
+   "heartbeats": 1362,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:30:33Z",
+   "score": 90.84
+  },
+  {
+   "sha": "f98747032cd6",
+   "tokens": 138,
+   "heartbeats": 1335,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:30:35Z",
+   "score": 90.87
+  },
+  {
+   "sha": "3d0feb1ff3cc",
+   "tokens": 149,
+   "heartbeats": 1552,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:31:45Z"
+  },
+  {
+   "sha": "439774753ead",
+   "tokens": 138,
+   "heartbeats": 1349,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:32:17Z"
+  },
+  {
+   "sha": "a1d9b88d93ba",
+   "tokens": 143,
+   "heartbeats": 1365,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:32:19Z"
+  },
+  {
+   "sha": "e06db1491510",
+   "tokens": 139,
+   "heartbeats": 1338,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:32:44Z"
+  },
+  {
+   "sha": "2218a92076be",
+   "tokens": 139,
+   "heartbeats": 1324,
+   "ok": false,
+   "error": "122:48: invalid `▸` notation, expected result type of cast is 0 x ≤ (φ * fun a => ⟪f a, f x₀⟫_ℝ) x however, the equality hx of type φ x = 0 does not contain the expected result type on either the left or the right hand side",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:32:45Z"
+  },
+  {
+   "sha": "dc1e7b0ade33",
+   "tokens": 136,
+   "heartbeats": 1279,
+   "ok": false,
+   "error": "123:6: Type mismatch: After simplification, term hg (fun x => φ x • f x₀) (IsTestFunction.smul_right { smooth := hd, supp := hk } contDiff_const) has type @Eq ℝ (∫ (x : Y), φ x * ⟪f x, f x₀⟫_ℝ ∂μ) 0 but is expected to have type @Eq ℝ (∫ (x : Y), (φ * fun a => ⟪f a, f x₀⟫_ℝ) x ∂μ) 0",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:08:19Z"
+  },
+  {
+   "sha": "16ede1d9609a",
+   "tokens": 149,
+   "heartbeats": 1432,
+   "ok": false,
+   "error": "122:48: Type mismatch Eq.ge (congrArg (fun x_1 => x_1 * ⟪f x, f x₀⟫_ℝ) hx) has type 0 * ⟪f x, f x₀⟫_ℝ ≤ φ x * ⟪f x, f x₀⟫_ℝ but is expected to have type 0 x ≤ (φ * fun a => ⟪f a, f x₀⟫_ℝ) x",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:08:21Z"
+  },
+  {
+   "sha": "f1f13d4fcf8d",
+   "tokens": 141,
+   "heartbeats": 1361,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:08:24Z"
+  },
+  {
+   "sha": "a2017a5dac67",
+   "tokens": 138,
+   "heartbeats": 1335,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:08:25Z"
+  },
+  {
+   "sha": "2570658bbce9",
+   "tokens": 138,
+   "heartbeats": 1329,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:08:52Z",
+   "score": 90.89
+  },
+  {
+   "sha": "f7da473f6053",
+   "tokens": 135,
+   "heartbeats": 815,
+   "ok": false,
+   "error": "119:11: `simp` made no progress",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:08:54Z"
+  },
+  {
+   "sha": "5bb3abb8f688",
+   "tokens": 135,
+   "heartbeats": 1094,
+   "ok": false,
+   "error": "119:9: typeclass instance problem is stuck IsFiniteMeasureOnCompacts ?m.193 Note: Lean will not try to resolve this typeclass instance problem because the fourth type argument to `IsFiniteMeasureOnCompacts` is a metavariable. This argument must be fully determined before Lean will try to resolve the",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:08:56Z"
+  },
+  {
+   "sha": "4f17f04cdb50",
+   "tokens": 138,
+   "heartbeats": 1329,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:09:18Z"
+  },
+  {
+   "sha": "5d4dfef4790c",
+   "tokens": 140,
+   "heartbeats": 1320,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:09:20Z"
+  },
+  {
+   "sha": "908666f281b1",
+   "tokens": 139,
+   "heartbeats": 1335,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:09:22Z"
+  },
+  {
+   "sha": "6cec3e597a9b",
+   "tokens": 135,
+   "heartbeats": 1417,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:09:57Z"
+  },
+  {
+   "sha": "1727fee4c3d1",
+   "tokens": 138,
+   "heartbeats": 1329,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:09:58Z"
+  },
+  {
+   "sha": "3276521463d2",
+   "tokens": 96,
+   "heartbeats": 888,
+   "ok": false,
+   "error": "118:10: failed to synthesize instance of type class BorelSpace Y Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:10:40Z"
+  },
+  {
+   "sha": "ac92117797f2",
+   "tokens": 137,
+   "heartbeats": 1343,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:38:18Z"
+  },
+  {
+   "sha": "f7014f133c29",
+   "tokens": 148,
+   "heartbeats": 1493,
+   "ok": false,
+   "error": "115:60: Application type mismatch: The argument hx has type ¬f x₀ = 0 x₀ but is expected to have type (toL2 ℝ) (f x₀) ≠ 0 in the application real_inner_self_pos.mpr hx",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:38:52Z"
+  },
+  {
+   "sha": "40528fcc1ea1",
+   "tokens": 139,
+   "heartbeats": 1332,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:38:56Z"
+  },
+  {
+   "sha": "a82bd540d56a",
+   "tokens": 135,
+   "heartbeats": 1209,
+   "ok": false,
+   "error": "122:5: invalid `▸` notation, the equality Eq.symm he has type 1 = φ x₀ but neither side of the equality is mentioned in the type RCLike.re ⟪f x₀, f x₀⟫_ℝ ≠ 0",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:38:58Z"
+  },
+  {
+   "sha": "9a203c1910a6",
+   "tokens": 155,
+   "heartbeats": 1395,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:02:37Z"
+  },
+  {
+   "sha": "89f7452fd23c",
+   "tokens": 132,
+   "heartbeats": 1334,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:02:39Z",
+   "score": 91.11
+  },
+  {
+   "sha": "5388ca8e9126",
+   "tokens": 144,
+   "heartbeats": 1263,
+   "ok": false,
+   "error": "122:8: Type mismatch: After simplification, term LT.lt.ne' hp has type RCLike.re ⟪f x₀, f x₀⟫_ℝ ≠ 0 but is expected to have type φ ?m.197 * ⟪f ?m.197, f x₀⟫_ℝ ≠ 0",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:02:41Z"
+  },
+  {
+   "sha": "95fba7c2f875",
+   "tokens": 140,
+   "heartbeats": 700,
+   "ok": false,
+   "error": "116:59: Invalid argument name `α` for function `continuous_const` Hint: Perhaps you meant one of the following parameter names: • `X`: α̵X̲ • `Y`: α̵Y̲ • `y`: α̵y̲",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:02:43Z"
+  },
+  {
+   "sha": "7a8c04a23ccf",
+   "tokens": 130,
+   "heartbeats": 1334,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:03:09Z",
+   "score": 91.19
+  },
+  {
+   "sha": "b38c10b6ffd5",
+   "tokens": 130,
+   "heartbeats": 1347,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:03:11Z"
+  },
+  {
+   "sha": "b82be5d08851",
+   "tokens": 131,
+   "heartbeats": 1337,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:03:14Z"
+  },
+  {
+   "sha": "5ff2b62ab6e5",
+   "tokens": 130,
+   "heartbeats": 1387,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:03:16Z"
+  },
+  {
+   "sha": "7d7c59da2e5a",
+   "tokens": 130,
+   "heartbeats": 1335,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:03:18Z"
+  },
+  {
+   "sha": "277b2b09848e",
+   "tokens": 131,
+   "heartbeats": 1333,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:03:20Z"
+  },
+  {
+   "sha": "ba3285374093",
+   "tokens": 124,
+   "heartbeats": 701,
+   "ok": false,
+   "error": "116:36: don't know how to synthesize implicit argument `y` @continuous_const Y V … [hypotheses omitted] ⊢ V",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:03:42Z"
+  },
+  {
+   "sha": "0e569cbbf7d3",
+   "tokens": 124,
+   "heartbeats": 701,
+   "ok": false,
+   "error": "116:36: don't know how to synthesize implicit argument `y` @continuous_const Y V … [hypotheses omitted] ⊢ V",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:03:44Z"
+  },
+  {
+   "sha": "0dc781278a51",
+   "tokens": 125,
+   "heartbeats": 712,
+   "ok": false,
+   "error": "116:13: typeclass instance problem is stuck InnerProductSpace' ?m.92 V Note: Lean will not try to resolve this typeclass instance problem because the first, third, and fifth type arguments to `InnerProductSpace'` are metavariables. These arguments must be fully determined before Lean will try to res",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:03:46Z"
+  },
+  {
+   "sha": "3f1a0abf0c34",
+   "tokens": 130,
+   "heartbeats": 1335,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:03:48Z"
+  },
+  {
+   "sha": "c0ad01228a40",
+   "tokens": 134,
+   "heartbeats": 1460,
+   "ok": false,
+   "error": "120:48: Type mismatch Eq.ge (congrArg (fun x => x * ?m.226 x) hx) has type 0 * ?m.226 0 ≤ φ x * ?m.226 (φ x) but is expected to have type 0 x ≤ (φ * fun a => ⟪f a, f x₀⟫_ℝ) x",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:03:50Z"
+  },
+  {
+   "sha": "610895d2b591",
+   "tokens": 130,
+   "heartbeats": 1337,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:03:52Z"
+  },
+  {
+   "sha": "26e754c50f7e",
+   "tokens": 122,
+   "heartbeats": 1518,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:05:25Z"
+  },
+  {
+   "sha": "2530393d251e",
+   "tokens": 122,
+   "heartbeats": 1518,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:05:57Z"
+  },
+  {
+   "sha": "3865f903bb58",
+   "tokens": 130,
+   "heartbeats": 1420,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:05:59Z"
+  },
+  {
+   "sha": "da0cd2f0ce97",
+   "tokens": 130,
+   "heartbeats": 1420,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:06:01Z"
+  },
+  {
+   "sha": "06feeab8d06d",
+   "tokens": 125,
+   "heartbeats": 1549,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:06:03Z"
+  },
+  {
+   "sha": "862921dc6f3a",
+   "tokens": 129,
+   "heartbeats": 1420,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:06:33Z"
+  },
+  {
+   "sha": "090eee58efe5",
+   "tokens": 137,
+   "heartbeats": 1425,
+   "ok": false,
+   "error": "120:28: Function expected at mul_nonneg_iff_pos_imp_nonneg but this term has type 0 ≤ ?m.229 * ?m.230 ↔ (0 < ?m.229 → 0 ≤ ?m.230) ∧ (0 < ?m.230 → 0 ≤ ?m.229) Note: Expected a function because this term is being applied to the argument _",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:06:35Z"
+  },
+  {
+   "sha": "2d0b2155a152",
+   "tokens": 131,
+   "heartbeats": 1420,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:06:37Z"
+  },
+  {
+   "sha": "8a1d1b916b12",
+   "tokens": 130,
+   "heartbeats": 1334,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:07:12Z"
+  },
+  {
+   "sha": "8ddc863a6158",
+   "tokens": 130,
+   "heartbeats": 1334,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:07:14Z"
+  },
+  {
+   "sha": "047809ec33cc",
+   "tokens": 130,
+   "heartbeats": 1334,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:07:16Z"
+  },
+  {
+   "sha": "f6f55700ccf2",
+   "tokens": 130,
+   "heartbeats": 1334,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:07:18Z"
+  },
+  {
+   "sha": "ae6638e36948",
+   "tokens": 130,
+   "heartbeats": 1334,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:07:20Z"
+  },
+  {
+   "sha": "61a65f9d0ed2",
+   "tokens": 122,
+   "heartbeats": 1518,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:38:48Z"
+  },
+  {
+   "sha": "bad737e8c4b8",
+   "tokens": 128,
+   "heartbeats": 1284,
+   "ok": false,
+   "error": "123:6: Type mismatch: After simplification, term hg (fun x => φ x • f x₀) (IsTestFunction.smul_right { smooth := hd, supp := hk } contDiff_const) has type @Eq ℝ (∫ (x : Y), φ x * ⟪f x, f x₀⟫_ℝ ∂μ) 0 but is expected to have type @Eq ℝ (∫ (x : Y), (φ * fun a => ⟪f a, f x₀⟫_ℝ) x ∂μ) 0",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:38:49Z"
+  },
+  {
+   "sha": "a0ddd2d384d2",
+   "tokens": 131,
+   "heartbeats": 1330,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:38:52Z"
+  },
+  {
+   "sha": "2826b7e07f71",
+   "tokens": 131,
+   "heartbeats": 1333,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:39:23Z"
+  },
+  {
+   "sha": "931cefe07615",
+   "tokens": 131,
+   "heartbeats": 1344,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:39:25Z"
+  },
+  {
+   "sha": "98a942fdf7a4",
+   "tokens": 130,
+   "heartbeats": 1420,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:39:27Z"
+  },
+  {
+   "sha": "dce3a1349e55",
+   "tokens": 130,
+   "heartbeats": 1155,
+   "ok": false,
+   "error": "119:9: typeclass instance problem is stuck IsFiniteMeasureOnCompacts ?m.195 Note: Lean will not try to resolve this typeclass instance problem because the fourth type argument to `IsFiniteMeasureOnCompacts` is a metavariable. This argument must be fully determined before Lean will try to resolve the",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:41:41Z"
+  },
+  {
+   "sha": "ef51f3718e5c",
+   "tokens": 129,
+   "heartbeats": 1399,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:41:48Z"
+  },
+  {
+   "sha": "28e8877f69e9",
+   "tokens": 131,
+   "heartbeats": 1420,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:42:40Z"
+  },
+  {
+   "sha": "587b938ec42b",
+   "tokens": 130,
+   "heartbeats": 1334,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:13:48Z"
+  },
+  {
+   "sha": "26b3bf880437",
+   "tokens": 132,
+   "heartbeats": 683,
+   "ok": false,
+   "error": "116:54: Invalid argument name `c` for function `continuous_const` Hint: Perhaps you meant one of the following parameter names: • `X`: c̵X̲ • `Y`: c̵Y̲ • `y`: c̵y̲",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:13:50Z"
+  },
+  {
+   "sha": "f5b49cb34e76",
+   "tokens": 133,
+   "heartbeats": 1358,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:13:52Z"
+  },
+  {
+   "sha": "1011927b78d1",
+   "tokens": 135,
+   "heartbeats": 2361,
+   "ok": false,
+   "error": "123:6: Type mismatch: After simplification, term hg (φ • fun x => f x₀) { smooth := ContDiff.smul hd contDiff_const, supp := HasCompactSupport.smul_right hk } has type ∫ (x : Y), ⟪f x, (φ • fun x => f x₀) x⟫_ℝ ∂μ = 0 but is expected to have type ∫ (x : Y), φ x * ⟪f x, f x₀⟫_ℝ ∂?m.193 = 0",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:14:33Z"
+  },
+  {
+   "sha": "8d9d549d5d0d",
+   "tokens": 132,
+   "heartbeats": 1331,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:14:35Z"
+  },
+  {
+   "sha": "f5e638a35850",
+   "tokens": 127,
+   "heartbeats": 2360,
+   "ok": false,
+   "error": "123:6: Type mismatch: After simplification, term hg (φ • fun x => ?m.293) { smooth := ContDiff.smul hd contDiff_const, supp := HasCompactSupport.smul_right hk } has type ∫ (x : Y), ⟪f x, (φ • fun x => ?m.293) x⟫_ℝ ∂μ = 0 but is expected to have type ∫ (x : Y), φ x * ⟪f x, f x₀⟫_ℝ ∂?m.193 = 0",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:14:37Z"
+  },
+  {
+   "sha": "99571fa2656f",
+   "tokens": 129,
+   "heartbeats": 2934,
+   "ok": false,
+   "error": "123:6: Type mismatch: After simplification, term hg (φ • fun x => ?m.293) { smooth := ContDiff.smul hd contDiff_const, supp := HasCompactSupport.smul_right hk } has type ∫ (x : Y), ⟪f x, (φ • fun x => ?m.293) x⟫_ℝ ∂μ = 0 but is expected to have type ∫ (x : Y), φ x * ⟪f x, f x₀⟫_ℝ ∂?m.193 = 0",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:14:54Z"
+  },
+  {
+   "sha": "bea27cce2731",
+   "tokens": 137,
+   "heartbeats": 2934,
+   "ok": false,
+   "error": "123:6: Type mismatch: After simplification, term hg (φ • fun x => f x₀) { smooth := ContDiff.smul hd contDiff_const, supp := HasCompactSupport.smul_right hk } has type ∫ (x : Y), ⟪f x, (φ • fun x => f x₀) x⟫_ℝ ∂μ = 0 but is expected to have type ∫ (x : Y), φ x * ⟪f x, f x₀⟫_ℝ ∂?m.193 = 0",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:14:56Z"
+  },
+  {
+   "sha": "f8059aaec2ae",
+   "tokens": 136,
+   "heartbeats": 2316,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:14:58Z"
+  },
+  {
+   "sha": "280b7d16af3d",
+   "tokens": 136,
+   "heartbeats": 1283,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:36:43Z"
+  },
+  {
+   "sha": "6a5f4055f0fa",
+   "tokens": 129,
+   "heartbeats": 573,
+   "ok": false,
+   "error": "114:8: typeclass instance problem is stuck InnerProductSpace' ?m.64 V Note: Lean will not try to resolve this typeclass instance problem because the first, third, and fifth type arguments to `InnerProductSpace'` are metavariables. These arguments must be fully determined before Lean will try to reso",
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:37:04Z"
+  },
+  {
+   "sha": "1e340f951141",
+   "tokens": 136,
+   "heartbeats": 1268,
+   "ok": false,
+   "error": "122:8: Type mismatch: After simplification, term LT.lt.ne' hp has type RCLike.re ⟪f x₀, f x₀⟫_ℝ ≠ 0 but is expected to have type φ ?m.197 * ⟪f ?m.197, f x₀⟫_ℝ ≠ 0",
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:37:06Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wuclean-hx-solab1-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T04:58:12Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:38:16Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:17:07Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r5",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:49:38Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r6",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:26:31Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r7",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:06:20Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:36:54Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r10",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:01:09Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r11",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:37:09Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r12",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:12:13Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:35:05Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  }
+ ],
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 1,
+    "d_score": 2.47,
+    "d_tokens": -49,
+    "d_heartbeats": 11757,
+    "diff": "+lemma fundamental_theorem_of_variational_calculus' {f : Y → V}\n+    (μ : Measure Y) [IsFiniteMeasureOnCompacts μ] [μ.IsOpenPosMeasure]\n+    [OpensMeasurableSpace Y]\n+    (hf : Continuous f) (hg : ∀ g, IsTestFunction g → ∫ x, ⟪f x, g x⟫_ℝ ∂μ = 0) :\n+    f = 0 := by\n+  -- assume ¬(f = 0)\n+    rw [funext_iff]\n+    by_contra h₀\n+    obtain ⟨x₀, hx0⟩ := not_forall.1 h₀\n+\n+  -- [1] Proof that `f` is continuous at `x₀`.\n+  -- Embed into the true IP-space `WithLp 2 V`.\n+    let f₂ : Y → WithLp 2 V := toL2 ℝ ∘ f\n+    let x₂ := f₂ x₀\n+  -- x₂ ≠ 0 because `fromL2 (toL2 (f x₀)) = f x₀`\n+    have hx2 : x₂ ≠ 0 := by\n+      intro h\n+      apply hx0\n+      exact congrArg (fromL2 ℝ) h\n+  -- continuity of f₂"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 2,
+    "d_score": 47.51,
+    "d_tokens": -537,
+    "d_heartbeats": -9494,
+    "diff": "-  -- assume ¬(f = 0)\n-    rw [funext_iff]\n-    by_contra h₀\n-    obtain ⟨x₀, hx0⟩ := not_forall.1 h₀\n-\n-  -- [1] Proof that `f` is continuous at `x₀`.\n-  -- Embed into the true IP-space `WithLp 2 V`.\n-    let f₂ : Y → WithLp 2 V := toL2 ℝ ∘ f\n-    let x₂ := f₂ x₀\n-  -- x₂ ≠ 0 because `fromL2 (toL2 (f x₀)) = f x₀`\n-    have hx2 : x₂ ≠ 0 := by\n-      intro h\n-      apply hx0\n-      exact congrArg (fromL2 ℝ) h\n-  -- continuity of f₂ at x₀\n-    have hcont₂ : ContinuousAt f₂ x₀ := ((toL2 ℝ).continuous.comp hf).continuousAt\n-\n-  -- [2] find open neighborhood guaranteeing positive inner product with the center, based on\n-  -- which the test function `g` will be constructed.\n-  -- pick δ₂ so that o"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 3,
+    "d_score": 2.81,
+    "d_tokens": -43,
+    "d_heartbeats": -404,
+    "diff": "-  have hn : {x | 0 < ⟪f x, f x₀⟫_ℝ} ∈ nhds x₀ :=\n-    (isOpen_lt continuous_const hc).mem_nhds hp\n-  obtain ⟨φ, hs, hk, hd, hr, he⟩ := exists_contDiff_tsupport_subset (n := ⊤) hn\n-  have ht : IsTestFunction (fun x => φ x • f x₀) :=\n-    IsTestFunction.smul_right ⟨hd, hk⟩ contDiff_const\n-  have hz := hg _ ht\n+  obtain ⟨φ, hs, hk, hd, hr, he⟩ := exists_contDiff_tsupport_subset (n := ⊤)\n+    ((isOpen_lt continuous_const hc).mem_nhds hp)\n+  have hz := hg _ (IsTestFunction.smul_right ⟨hd, hk⟩ (contDiff_const (c := f x₀)))\n-  have hpos : 0 < ∫ x, φ x * ⟪f x, f x₀⟫_ℝ ∂μ := by\n-    apply (hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right hnon\n-    exact (mul_pos (b"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 5,
+    "d_score": 0.45,
+    "d_tokens": -4,
+    "d_heartbeats": -105,
+    "diff": "-  have hp : 0 < ⟪f x₀, f x₀⟫_ℝ := by\n-    apply (real_inner_self_pos (x := toL2 ℝ (f x₀))).2\n-    intro h\n-    exact hx (congrArg (fromL2 ℝ) h)\n+  have hp : 0 < ⟪f x₀, f x₀⟫_ℝ :=\n+    lt_of_le_of_ne (real_inner_self_nonneg (x := toL2 ℝ (f x₀)))\n+      (fun h => hx (inner_self_eq_zero'.mp h.symm))"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 7,
+    "d_score": 1.0,
+    "d_tokens": -27,
+    "d_heartbeats": 22,
+    "diff": "-  have hnon : ∀ x, 0 ≤ φ x * ⟪f x, f x₀⟫_ℝ := by\n-    intro x\n-    by_cases hx : φ x = 0\n-    · simp [hx]\n-    · exact mul_nonneg (hr (Set.mem_range_self x)).1 (hs (subset_closure hx)).le\n-  have hpos := (hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero\n-    (μ := μ) hk.mul_right hnon (mul_pos (by simpa [he]) hp).ne'\n-  exact (ne_of_gt hpos) hz\n+  exact ((hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero\n+    hk.mul_right (fun x => by\n+      by_cases hx : φ x = 0\n+      · simp [hx]\n+      · exact mul_nonneg (hr (Set.mem_range_self x)).1 (hs (subset_closure hx)).le)\n+    (mul_pos (by simpa [he]) hp).ne').ne' hz"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 11,
+    "d_score": 1.09,
+    "d_tokens": -17,
+    "d_heartbeats": -152,
+    "diff": "-    lt_of_le_of_ne (real_inner_self_nonneg (x := toL2 ℝ (f x₀)))\n-      (fun h => hx (inner_self_eq_zero'.mp h.symm))\n+    lt_of_le_of_ne' real_inner_self_nonneg' (mt inner_self_eq_zero'.mp hx)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 13,
+    "d_score": 0.44,
+    "d_tokens": -10,
+    "d_heartbeats": -18,
+    "diff": "-  have hc : Continuous (fun x => ⟪f x, f x₀⟫_ℝ) :=\n-    Continuous.inner' f (fun _ => f x₀) hf continuous_const\n+  have hc := Continuous.inner' (𝕜 := ℝ) f (fun _ => f x₀) hf continuous_const"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 15,
+    "d_score": 0.41,
+    "d_tokens": -11,
+    "d_heartbeats": 6,
+    "diff": "-  have hp : 0 < ⟪f x₀, f x₀⟫_ℝ :=\n-    lt_of_le_of_ne' real_inner_self_nonneg' (mt inner_self_eq_zero'.mp hx)\n+  have hp := lt_of_le_of_ne' real_inner_self_nonneg' (mt inner_self_eq_zero'.mp hx)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 16,
+    "d_score": 0.28,
+    "d_tokens": -5,
+    "d_heartbeats": -29,
+    "diff": "-  obtain ⟨φ, hs, hk, hd, hr, he⟩ := exists_contDiff_tsupport_subset (n := ⊤)\n+  obtain ⟨φ, hs, hk, hd, hr, he⟩ := exists_contDiff_tsupport_subset"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 17,
+    "d_score": 0.11,
+    "d_tokens": 3,
+    "d_heartbeats": -81,
+    "diff": "-  obtain ⟨φ, hs, hk, hd, hr, he⟩ := exists_contDiff_tsupport_subset\n+  obtain ⟨φ, hs, hk, hd, hr, he⟩ := exists_contDiff_tsupport_subset (n := ⊤)\n-    (mul_pos (by simpa [he]) hp).ne').ne' hz\n+    (mul_pos (he.symm ▸ zero_lt_one) hp).ne').ne' hz"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 18,
+    "d_score": 0.28,
+    "d_tokens": -5,
+    "d_heartbeats": -30,
+    "diff": "-  obtain ⟨φ, hs, hk, hd, hr, he⟩ := exists_contDiff_tsupport_subset (n := ⊤)\n+  obtain ⟨φ, hs, hk, hd, hr, he⟩ := exists_contDiff_tsupport_subset"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 19,
+    "d_score": 0.06,
+    "d_tokens": -2,
+    "d_heartbeats": 5,
+    "diff": "-    ((isOpen_lt continuous_const hc).mem_nhds hp)\n+    (hc.continuousAt.preimage_mem_nhds (Ioi_mem_nhds hp))"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 23,
+    "d_score": 0.03,
+    "d_tokens": -1,
+    "d_heartbeats": 2,
+    "diff": "-  have hc := Continuous.inner' (𝕜 := ℝ) f (fun _ => f x₀) hf continuous_const\n+  have hc := hf.inner' (𝕜 := ℝ) f (fun _ => f x₀) continuous_const"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 24,
+    "d_score": 0.01,
+    "d_tokens": 1,
+    "d_heartbeats": -15,
+    "diff": "-  have hc := hf.inner' (𝕜 := ℝ) f (fun _ => f x₀) continuous_const\n+  have hc := Continuous.inner' (𝕜 := ℝ) f (fun _ => f x₀) hf continuous_const\n-  have hz := hg _ (IsTestFunction.smul_right ⟨hd, hk⟩ (contDiff_const (c := f x₀)))\n+  have hz := hg _ ((IsTestFunction.mk hd hk).smul_right (contDiff_const (c := f x₀)))"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 25,
+    "d_score": 0.03,
+    "d_tokens": -1,
+    "d_heartbeats": 2,
+    "diff": "-  have hc := Continuous.inner' (𝕜 := ℝ) f (fun _ => f x₀) hf continuous_const\n+  have hc := hf.inner' (𝕜 := ℝ) f (fun _ => f x₀) continuous_const"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 1,
+    "d_score": 0.06,
+    "d_tokens": -1,
+    "d_heartbeats": -7,
+    "diff": "-    (mul_pos (he.symm ▸ zero_lt_one) hp).ne').ne' hz\n+    (mul_ne_zero (he.symm ▸ one_ne_zero) hp.ne')).ne' hz"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 4,
+    "d_score": 0.05,
+    "d_tokens": -1,
+    "d_heartbeats": -3,
+    "diff": "-    (mul_ne_zero (he.symm ▸ one_ne_zero) hp.ne')).ne' hz\n+    (mul_ne_zero (ne_zero_of_eq_one he) hp.ne')).ne' hz"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 6,
+    "d_score": 0.06,
+    "d_tokens": -1,
+    "d_heartbeats": -8,
+    "diff": "-  have hp := lt_of_le_of_ne' real_inner_self_nonneg' (mt inner_self_eq_zero'.mp hx)\n+  have hp := real_inner_self_nonneg'.lt_of_ne' (mt inner_self_eq_zero'.mp hx)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 11,
+    "d_score": 0.03,
+    "d_tokens": -1,
+    "d_heartbeats": 4,
+    "diff": "-  have hp := real_inner_self_nonneg'.lt_of_ne' (mt inner_self_eq_zero'.mp hx)\n+  have hp := real_inner_self_nonneg'.lt_of_ne' (inner_self_eq_zero'.not.mpr hx)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 5,
+    "d_score": 0.21,
+    "d_tokens": -1,
+    "d_heartbeats": -64,
+    "diff": "-    (hc.continuousAt.preimage_mem_nhds (Ioi_mem_nhds hp))\n+    (hc.continuousAt.preimage_mem_nhds (Ici_mem_nhds hp))\n-      · exact mul_nonneg (hr (Set.mem_range_self x)).1 (hs (subset_closure hx)).le)\n+      · exact mul_nonneg (hr (Set.mem_range_self x)).1 (hs (subset_closure hx)))"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 9,
+    "d_score": 0.12,
+    "d_tokens": -1,
+    "d_heartbeats": -26,
+    "diff": "-    hk.mul_right (fun x => by\n-      by_cases hx : φ x = 0\n-      · simp [hx]\n-      · exact mul_nonneg (hr (Set.mem_range_self x)).1 (hs (subset_closure hx)))\n+    hk.mul_right (fun x => if hx : φ x = 0 then by simp [hx]\n+      else mul_nonneg (hr (Set.mem_range_self x)).1 (hs (subset_closure hx)))"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 10,
+    "d_score": 0.03,
+    "d_tokens": 1,
+    "d_heartbeats": -27,
+    "diff": "-    hk.mul_right (fun x => if hx : φ x = 0 then by simp [hx]\n+    hk.mul_right (fun x => if hx : φ x = 0 then (mul_eq_zero_of_left hx _).ge"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r7",
+    "check": 5,
+    "d_score": 0.02,
+    "d_tokens": 0,
+    "d_heartbeats": -6,
+    "diff": "-  have hz := hg _ ((IsTestFunction.mk hd hk).smul_right (contDiff_const (c := f x₀)))\n-  simp only [inner_smul_right'] at hz\n-    (mul_ne_zero (ne_zero_of_eq_one he) hp.ne')).ne' hz\n+    (mul_ne_zero (ne_zero_of_eq_one he) hp.ne')).ne' (by\n+      simpa only [inner_smul_right', Pi.mul_apply] using hg _ ((IsTestFunction.mk hd hk).smul_right (contDiff_const (c := f x₀))))"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 2,
+    "d_score": 0.22,
+    "d_tokens": -6,
+    "d_heartbeats": 5,
+    "diff": "-      simpa only [inner_smul_right', Pi.mul_apply] using hg _ ((IsTestFunction.mk hd hk).smul_right (contDiff_const (c := f x₀))))\n+      simpa only [inner_smul_right', Pi.mul_apply] using hg _ ((IsTestFunction.mk hd hk).smul_right (contDiff_const)))"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 5,
+    "d_score": 0.08,
+    "d_tokens": -2,
+    "d_heartbeats": 0,
+    "diff": "-      simpa only [inner_smul_right', Pi.mul_apply] using hg _ ((IsTestFunction.mk hd hk).smul_right (contDiff_const)))\n+      simpa only [inner_smul_right', Pi.mul_apply] using hg _ ((IsTestFunction.mk hd hk).smul_right contDiff_const))"
+   }
+  ]
+ },
+ "api_spend": 2.593637,
+ "profile_cache": {
+  "dd89f3f68e43": {
+   "ok": true,
+   "total": 1466,
+   "floor": 533,
+   "reference": 11954,
+   "max_heartbeat_score": 31.85,
+   "blocks": [
+    {
+     "lines": "14-19",
+     "depth_indent": 2,
+     "text": "exact ((hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right (fun x =",
+     "heartbeats": 535
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "have hp := lt_of_le_of_ne' real_inner_self_nonneg' (mt inner_self_eq_zero'.mp hx)",
+     "heartbeats": 75
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "have hc := hf.inner' (𝕜 := ℝ) f (fun _ => f x₀) continuous_const",
+     "heartbeats": 61
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "simp only [inner_smul_right'] at hz",
+     "heartbeats": 32
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "by_contra hx",
+     "heartbeats": 29
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "ext x₀",
+     "heartbeats": 7
+    },
+    {
+     "lines": "10-11",
+     "depth_indent": 2,
+     "text": "obtain ⟨φ, hs, hk, hd, hr, he⟩ := exists_contDiff_tsupport_subset (hc.continuousAt.preimage_mem_nhds",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "have hz := hg _ ((IsTestFunction.mk hd hk).smul_right (contDiff_const (c := f x₀)))",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 6,
+     "text": "by_cases hx : φ x = 0",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 6,
+     "text": "· simp [hx]",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 6,
+     "text": "· exact mul_nonneg (hr (Set.mem_range_self x)).1 (hs (subset_closure hx)).le)",
+     "heartbeats": null
+    }
+   ],
+   "points_left_heartbeats": 2.6,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "88d3173ccdbe": {
+   "ok": true,
+   "total": 1452,
+   "floor": 533,
+   "reference": 11954,
+   "max_heartbeat_score": 31.85,
+   "blocks": [
+    {
+     "lines": "14-19",
+     "depth_indent": 2,
+     "text": "exact ((hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right (fun x =",
+     "heartbeats": 525
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "have hp := real_inner_self_nonneg'.lt_of_ne' (inner_self_eq_zero'.not.mpr hx)",
+     "heartbeats": 72
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "have hc := hf.inner' (𝕜 := ℝ) f (fun _ => f x₀) continuous_const",
+     "heartbeats": 61
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "simp only [inner_smul_right'] at hz",
+     "heartbeats": 32
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "by_contra hx",
+     "heartbeats": 29
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "ext x₀",
+     "heartbeats": 7
+    },
+    {
+     "lines": "10-11",
+     "depth_indent": 2,
+     "text": "obtain ⟨φ, hs, hk, hd, hr, he⟩ := exists_contDiff_tsupport_subset (hc.continuousAt.preimage_mem_nhds",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "have hz := hg _ ((IsTestFunction.mk hd hk).smul_right (contDiff_const (c := f x₀)))",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 6,
+     "text": "by_cases hx : φ x = 0",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 6,
+     "text": "· simp [hx]",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 6,
+     "text": "· exact mul_nonneg (hr (Set.mem_range_self x)).1 (hs (subset_closure hx)).le)",
+     "heartbeats": null
+    }
+   ],
+   "points_left_heartbeats": 2.56,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "a1c9ba21e574": {
+   "ok": true,
+   "total": 1388,
+   "floor": 533,
+   "reference": 11954,
+   "max_heartbeat_score": 31.85,
+   "blocks": [
+    {
+     "lines": "14-19",
+     "depth_indent": 2,
+     "text": "exact ((hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right (fun x =",
+     "heartbeats": 461
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "have hp := real_inner_self_nonneg'.lt_of_ne' (inner_self_eq_zero'.not.mpr hx)",
+     "heartbeats": 72
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "have hc := hf.inner' (𝕜 := ℝ) f (fun _ => f x₀) continuous_const",
+     "heartbeats": 61
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "simp only [inner_smul_right'] at hz",
+     "heartbeats": 32
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "by_contra hx",
+     "heartbeats": 29
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "ext x₀",
+     "heartbeats": 7
+    },
+    {
+     "lines": "10-11",
+     "depth_indent": 2,
+     "text": "obtain ⟨φ, hs, hk, hd, hr, he⟩ := exists_contDiff_tsupport_subset (hc.continuousAt.preimage_mem_nhds",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "have hz := hg _ ((IsTestFunction.mk hd hk).smul_right (contDiff_const (c := f x₀)))",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 6,
+     "text": "by_cases hx : φ x = 0",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 6,
+     "text": "· simp [hx]",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 6,
+     "text": "· exact mul_nonneg (hr (Set.mem_range_self x)).1 (hs (subset_closure hx)))",
+     "heartbeats": null
+    }
+   ],
+   "points_left_heartbeats": 2.38,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "f98747032cd6": {
+   "ok": true,
+   "total": 1335,
+   "floor": 533,
+   "reference": 11954,
+   "max_heartbeat_score": 31.85,
+   "blocks": [
+    {
+     "lines": "14-17",
+     "depth_indent": 2,
+     "text": "exact ((hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right (fun x =",
+     "heartbeats": 408
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "have hp := real_inner_self_nonneg'.lt_of_ne' (inner_self_eq_zero'.not.mpr hx)",
+     "heartbeats": 72
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "have hc := hf.inner' (𝕜 := ℝ) f (fun _ => f x₀) continuous_const",
+     "heartbeats": 61
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "simp only [inner_smul_right'] at hz",
+     "heartbeats": 32
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "by_contra hx",
+     "heartbeats": 29
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "ext x₀",
+     "heartbeats": 7
+    },
+    {
+     "lines": "10-11",
+     "depth_indent": 2,
+     "text": "obtain ⟨φ, hs, hk, hd, hr, he⟩ := exists_contDiff_tsupport_subset (hc.continuousAt.preimage_mem_nhds",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "have hz := hg _ ((IsTestFunction.mk hd hk).smul_right (contDiff_const (c := f x₀)))",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-16",
+     "depth_indent": 4,
+     "text": "hk.mul_right (fun x => if hx : φ x = 0 then (mul_eq_zero_of_left hx _).ge else mul_nonneg (hr (Set.m",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 4,
+     "text": "(mul_ne_zero (ne_zero_of_eq_one he) hp.ne')).ne' hz",
+     "heartbeats": null
+    }
+   ],
+   "points_left_heartbeats": 2.24,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "2570658bbce9": {
+   "ok": true,
+   "total": 1329,
+   "floor": 533,
+   "reference": 11954,
+   "max_heartbeat_score": 31.85,
+   "blocks": [
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "have hp := real_inner_self_nonneg'.lt_of_ne' (inner_self_eq_zero'.not.mpr hx)",
+     "heartbeats": 72
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "have hc := hf.inner' (𝕜 := ℝ) f (fun _ => f x₀) continuous_const",
+     "heartbeats": 61
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "by_contra hx",
+     "heartbeats": 29
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "ext x₀",
+     "heartbeats": 7
+    },
+    {
+     "lines": "10-11",
+     "depth_indent": 2,
+     "text": "obtain ⟨φ, hs, hk, hd, hr, he⟩ := exists_contDiff_tsupport_subset (hc.continuousAt.preimage_mem_nhds",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-16",
+     "depth_indent": 2,
+     "text": "exact ((hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right (fun x =",
+     "heartbeats": null
+    }
+   ],
+   "points_left_heartbeats": 2.22,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "7a8c04a23ccf": {
+   "ok": true,
+   "total": 1334,
+   "floor": 533,
+   "reference": 11954,
+   "max_heartbeat_score": 31.85,
+   "blocks": [
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "have hp := real_inner_self_nonneg'.lt_of_ne' (inner_self_eq_zero'.not.mpr hx)",
+     "heartbeats": 72
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "have hc := hf.inner' (𝕜 := ℝ) f (fun _ => f x₀) continuous_const",
+     "heartbeats": 61
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "by_contra hx",
+     "heartbeats": 29
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "ext x₀",
+     "heartbeats": 7
+    },
+    {
+     "lines": "10-11",
+     "depth_indent": 2,
+     "text": "obtain ⟨φ, hs, hk, hd, hr, he⟩ := exists_contDiff_tsupport_subset (hc.continuousAt.preimage_mem_nhds",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-16",
+     "depth_indent": 2,
+     "text": "exact ((hd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hk.mul_right (fun x =",
+     "heartbeats": null
+    }
+   ],
+   "points_left_heartbeats": 2.23,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "hb_floor": 533,
+ "budget_milestones": {
+  "2": {
+   "spend": 2.005749,
+   "best": 91.19,
+   "run_id": "wuclean-hx-solab1-r10",
+   "turn": 28,
+   "t": "2026-10-14T12:06:48Z"
+  }
+ }
+}

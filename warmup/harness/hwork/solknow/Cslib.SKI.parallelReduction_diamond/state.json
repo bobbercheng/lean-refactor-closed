@@ -1,0 +1,91 @@
+{
+ "note": "runner input only: first-session scores of an earlier Sol + briefs line (no proofs, no notes)",
+ "problem": "Cslib.SKI.parallelReduction_diamond",
+ "runs": [
+  {
+   "run_id": "hx-solknow-x10a"
+  }
+ ],
+ "attempts": [
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 68.1
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 73.53
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 73.74
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 75.11
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 75.46
+  }
+ ]
+}

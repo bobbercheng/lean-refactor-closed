@@ -1,0 +1,375 @@
+{
+ "Cslib.SKI.parallelReduction_diamond": {
+  "ok": true,
+  "total": 524,
+  "floor": 4,
+  "reference": 1422,
+  "max_heartbeat_score": 33.24,
+  "blocks": [
+   {
+    "lines": "14-26",
+    "depth_indent": 2,
+    "text": "all_goals first | cases I_irreducible _ \u2039_\u203a | obtain \u27e8_, h, rfl\u27e9 := Ka_irreducible _ _ \u2039_\u203a | obtain ",
+    "heartbeats": 193
+   },
+   {
+    "lines": "5-5",
+    "depth_indent": 2,
+    "text": "all_goals cases h\u2082",
+    "heartbeats": 192
+   },
+   {
+    "lines": "15-18",
+    "depth_indent": 4,
+    "text": "first | cases I_irreducible _ \u2039_\u203a | obtain \u27e8_, h, rfl\u27e9 := Ka_irreducible _ _ \u2039_\u203a | obtain \u27e8_, _, h, ",
+    "heartbeats": 103
+   },
+   {
+    "lines": "10-13",
+    "depth_indent": 2,
+    "text": "all_goals try constructor constructor <;> constructor <;> assumption",
+    "heartbeats": 93
+   },
+   {
+    "lines": "21-24",
+    "depth_indent": 4,
+    "text": "all_goals try repeat' apply ParallelReduction.par all_goals assumption",
+    "heartbeats": 90
+   },
+   {
+    "lines": "6-9",
+    "depth_indent": 2,
+    "text": "case par.par ha hb iha ihb d e hc hd => obtain \u27e8_, hx\u27e9 := iha hc obtain \u27e8_, hy\u27e9 := ihb hd exact \u27e8_, ",
+    "heartbeats": 22
+   },
+   {
+    "lines": "3-3",
+    "depth_indent": 2,
+    "text": "induction h\u2081 generalizing c",
+    "heartbeats": 13
+   },
+   {
+    "lines": "19-19",
+    "depth_indent": 4,
+    "text": "constructor",
+    "heartbeats": 12
+   },
+   {
+    "lines": "20-20",
+    "depth_indent": 4,
+    "text": "constructor",
+    "heartbeats": 11
+   },
+   {
+    "lines": "4-4",
+    "depth_indent": 2,
+    "text": "case refl => exact \u27e8_, h\u2082, .refl _\u27e9",
+    "heartbeats": 6
+   },
+   {
+    "lines": "2-2",
+    "depth_indent": 2,
+    "text": "intro a b c h\u2081 h\u2082",
+    "heartbeats": 0
+   },
+   {
+    "lines": "25-26",
+    "depth_indent": 4,
+    "text": "all_goals constructor",
+    "heartbeats": -24
+   }
+  ],
+  "points_left_heartbeats": 12.19,
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema": {
+  "ok": true,
+  "total": 6737,
+  "floor": 660,
+  "reference": 27112,
+  "max_heartbeat_score": 32.52,
+  "blocks": [
+   {
+    "lines": "30-30",
+    "depth_indent": 2,
+    "text": "simp only [Space.deriv_eq, div_eq_inv_mul] at hg",
+    "heartbeats": 3625
+   },
+   {
+    "lines": "25-27",
+    "depth_indent": 2,
+    "text": "rewrite [Time.deriv_eq, fderiv_fun_sub (hBs.const_mul _).differentiableAt (hJt.const_mul _).differen",
+    "heartbeats": 985
+   },
+   {
+    "lines": "28-29",
+    "depth_indent": 2,
+    "text": "simp only [_root_.sub_apply, _root_.smul_apply, _root_.sum_apply, smul_eq_mul, \u2190 Time.deriv_eq, Spac",
+    "heartbeats": 904
+   },
+   {
+    "lines": "10-10",
+    "depth_indent": 2,
+    "text": "have hA3 : ContDiff \u211d (2+1) A := hA.of_le $ by decide",
+    "heartbeats": 109
+   },
+   {
+    "lines": "14-14",
+    "depth_indent": 2,
+    "text": "have hBs := Differentiable.fun_sum (u := Finset.univ) \u03bbj _ => hBt j",
+    "heartbeats": 102
+   },
+   {
+    "lines": "12-13",
+    "depth_indent": 2,
+    "text": "have hBt (j : Fin d) := Space.space_deriv_differentiable_time (i := j) (magneticFieldMatrix_contDiff",
+    "heartbeats": 78
+   },
+   {
+    "lines": "16-17",
+    "depth_indent": 2,
+    "text": "have hEd (j k : Fin d) := Space.deriv_differentiable (electricField_apply_contDiff_space (c := \ud835\udcd5.c) ",
+    "heartbeats": 71
+   },
+   {
+    "lines": "21-24",
+    "depth_indent": 2,
+    "text": "conv_lhs => enter [1, s] rewrite [Time.deriv_euclid $ electricField_differentiable_time hA3.of_succ ",
+    "heartbeats": 67
+   },
+   {
+    "lines": "19-20",
+    "depth_indent": 2,
+    "text": "have hg := congrArg (\u03bbf => \u2202[i] f x) (funext \u03bby => ((isExtrema_iff_gauss_ampere_magneticFieldMatrix ",
+    "heartbeats": 61
+   },
+   {
+    "lines": "11-11",
+    "depth_indent": 2,
+    "text": "have hJd := hJ.differentiable nofun",
+    "heartbeats": 51
+   },
+   {
+    "lines": "15-15",
+    "depth_indent": 2,
+    "text": "have hJt := LorentzCurrentDensity.currentDensity_apply_differentiable_time (c := \ud835\udcd5.c) hJd x i",
+    "heartbeats": 12
+   },
+   {
+    "lines": "18-18",
+    "depth_indent": 2,
+    "text": "have hJs := LorentzCurrentDensity.chargeDensity_differentiable_space (c := \ud835\udcd5.c) hJd t",
+    "heartbeats": 12
+   }
+  ],
+  "points_left_heartbeats": 7.47,
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time": {
+  "ok": true,
+  "total": 7968,
+  "floor": 300,
+  "reference": 42111,
+  "max_heartbeat_score": 33.1,
+  "blocks": [
+   {
+    "lines": "19-29",
+    "depth_indent": 2,
+    "text": "conv_lhs => arg 2 simp [c, superCommuteF_ofCrAnOpF_ofCrAnOpF, mul_sub, sub_mul, \u2190 ofCrAnListF_single",
+    "heartbeats": 2694
+   },
+   {
+    "lines": "6-8",
+    "depth_indent": 2,
+    "text": "suffices h : (mulLinearMap.comp $ mulLinearMap.flip c).compr\u2082 (\u03b9.toLinearMap.comp timeOrderF) = mulL",
+    "heartbeats": 1482
+   },
+   {
+    "lines": "32-33",
+    "depth_indent": 2,
+    "text": "simp only [c, ofCrAnListF_append, map_mul \u03b9, map_smul \u03b9, Subalgebra.mem_center_iff.mp $ \u03b9_superCommu",
+    "heartbeats": 1438
+   },
+   {
+    "lines": "34-34",
+    "depth_indent": 2,
+    "text": "simp only [mul_assoc, mul_smul_comm, crAnTimeOrderSign]",
+    "heartbeats": 981
+   },
+   {
+    "lines": "11-11",
+    "depth_indent": 2,
+    "text": "dsimp",
+    "heartbeats": 386
+   },
+   {
+    "lines": "9-9",
+    "depth_indent": 2,
+    "text": "apply LinearMap.ext_basis ofCrAnListFBasis ofCrAnListFBasis",
+    "heartbeats": 250
+   },
+   {
+    "lines": "12-12",
+    "depth_indent": 2,
+    "text": "simp only [mulLinearMap_apply, ofListBasis_eq_ofList]",
+    "heartbeats": 206
+   },
+   {
+    "lines": "5-5",
+    "depth_indent": 2,
+    "text": "let c := [ofCrAnOpF \u03c6, ofCrAnOpF \u03c8]\u209bF",
+    "heartbeats": 95
+   },
+   {
+    "lines": "30-31",
+    "depth_indent": 2,
+    "text": "conv_rhs => rw [\u2190 ofCrAnListF_append, timeOrderF_ofCrAnListF, crAnTimeOrderList, insertionSort_of_ta",
+    "heartbeats": 82
+   },
+   {
+    "lines": "13-13",
+    "depth_indent": 2,
+    "text": "have hs x y := insertionSort_of_eq_list \ud835\udcd5.crAnTimeOrderRel \u03c6 l [x, y] r",
+    "heartbeats": 26
+   },
+   {
+    "lines": "14-18",
+    "depth_indent": 2,
+    "text": "conv at hs => intro x y h lhs rw [List.append_assoc] dsimp",
+    "heartbeats": 26
+   },
+   {
+    "lines": "10-10",
+    "depth_indent": 2,
+    "text": "intro l r",
+    "heartbeats": 2
+   }
+  ],
+  "points_left_heartbeats": 6.07,
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress": {
+  "ok": true,
+  "total": 6944,
+  "floor": 50,
+  "reference": 59873,
+  "max_heartbeat_score": 33.31,
+  "blocks": [
+   {
+    "lines": "10-10",
+    "depth_indent": 2,
+    "text": "all_goals repeat' first | simp_all only [body_let, body_case, true_implies] | casesm* And .., Or ..,",
+    "heartbeats": 3747
+   },
+   {
+    "lines": "12-13",
+    "depth_indent": 2,
+    "text": "all_goals right; solve_by_elim only [*, Exists.intro, Red.app\u1d63, Red.abs, Red.tabs, Red.let_body, Red",
+    "heartbeats": 2426
+   },
+   {
+    "lines": "6-6",
+    "depth_indent": 2,
+    "text": "any_goals solve_by_elim",
+    "heartbeats": 437
+   },
+   {
+    "lines": "4-4",
+    "depth_indent": 2,
+    "text": "induction der <;> subst eq",
+    "heartbeats": 154
+   },
+   {
+    "lines": "11-11",
+    "depth_indent": 2,
+    "text": "any_goals left; constructor; assumption",
+    "heartbeats": 70
+   },
+   {
+    "lines": "5-5",
+    "depth_indent": 2,
+    "text": "case var => simp_all",
+    "heartbeats": 19
+   },
+   {
+    "lines": "3-3",
+    "depth_indent": 2,
+    "text": "have lc := der.wf.2.1",
+    "heartbeats": 10
+   },
+   {
+    "lines": "7-7",
+    "depth_indent": 2,
+    "text": "case' app l _ _ _ => have := l.canonical_form_abs",
+    "heartbeats": 9
+   },
+   {
+    "lines": "9-9",
+    "depth_indent": 2,
+    "text": "case' case d _ _ _ _ _ => have := d.canonical_form_sum",
+    "heartbeats": 8
+   },
+   {
+    "lines": "2-2",
+    "depth_indent": 2,
+    "text": "generalize eq : [] = \u0393 at der",
+    "heartbeats": 7
+   },
+   {
+    "lines": "8-8",
+    "depth_indent": 2,
+    "text": "case' tapp d _ _ => have := d.canonical_form_tabs",
+    "heartbeats": 7
+   }
+  ],
+  "points_left_heartbeats": 3.84,
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "Cslib.CCS.bisimilarity_congr_choice": {
+  "ok": true,
+  "total": 396,
+  "floor": 37,
+  "reference": 3879,
+  "max_heartbeat_score": 33.02,
+  "blocks": [
+   {
+    "lines": "6-6",
+    "depth_indent": 2,
+    "text": "case' choice.left | choice.right => cases t",
+    "heartbeats": 166
+   },
+   {
+    "lines": "8-13",
+    "depth_indent": 2,
+    "text": "all_goals apply Exists.imp \u03bb_ => And.imp ?_ .bisim first | apply h.follow_fst | apply h.follow_snd a",
+    "heartbeats": 74
+   },
+   {
+    "lines": "5-5",
+    "depth_indent": 2,
+    "text": "rintro _ _ (h | h) _ <;> constructor <;> intro s t",
+    "heartbeats": 53
+   },
+   {
+    "lines": "4-4",
+    "depth_indent": 2,
+    "text": "exists _, ChoiceBisim.choice hpq",
+    "heartbeats": 38
+   },
+   {
+    "lines": "7-7",
+    "depth_indent": 2,
+    "text": "case choiceR | choiceR => use s, Tr.choiceR \u2039_\u203a, ChoiceBisim.bisim $ .refl s",
+    "heartbeats": 28
+   },
+   {
+    "lines": "3-3",
+    "depth_indent": 2,
+    "text": "intro hpq",
+    "heartbeats": 0
+   }
+  ],
+  "points_left_heartbeats": 3.08,
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "taken": "20261012T014625Z",
+ "tag": "paused402",
+ "mean_local": 90.47,
+ "spend_total": 31.8387,
+ "spend_max": 2.6215,
+ "problems": {
+  "CallElimCorrect.substOldPostSubset": {
+   "score": 92.0,
+   "tokens": 39,
+   "heartbeats": 597,
+   "improved": true,
+   "spend": 2.0313
+  },
+  "CallElimCorrect.extractedOldExprInVars": {
+   "score": 94.49,
+   "tokens": 17,
+   "heartbeats": 239,
+   "improved": true,
+   "spend": 1.97119
+  },
+  "Core.InitsUpdatesComm": {
+   "score": 89.14,
+   "tokens": 64,
+   "heartbeats": 173,
+   "improved": true,
+   "spend": 2.549783
+  },
+  "fundamental_theorem_of_variational_calculus'": {
+   "score": 91.58,
+   "tokens": 119,
+   "heartbeats": 1348,
+   "improved": true,
+   "spend": 2.621483
+  },
+  "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema": {
+   "score": 83.24,
+   "tokens": 347,
+   "heartbeats": 6771,
+   "improved": true,
+   "spend": 2.134476
+  },
+  "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time": {
+   "score": 86.74,
+   "tokens": 254,
+   "heartbeats": 7967,
+   "improved": true,
+   "spend": 2.264183
+  },
+  "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress": {
+   "score": 85.76,
+   "tokens": 127,
+   "heartbeats": 6942,
+   "improved": true,
+   "spend": 2.515989
+  },
+  "Cslib.SKI.parallelReduction_diamond": {
+   "score": 76.91,
+   "tokens": 132,
+   "heartbeats": 524,
+   "improved": true,
+   "spend": 2.074811
+  },
+  "Cslib.CCS.bisimilarity_congr_choice": {
+   "score": 87.03,
+   "tokens": 72,
+   "heartbeats": 397,
+   "improved": true,
+   "spend": 2.546996
+  },
+  "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius": {
+   "score": 91.52,
+   "tokens": 207,
+   "heartbeats": 1806,
+   "improved": true,
+   "spend": 1.899628
+  },
+  "Binius.BinaryBasefold.fold_advances_evaluation_poly": {
+   "score": 93.62,
+   "tokens": 142,
+   "heartbeats": 5385,
+   "improved": true,
+   "spend": 1.904402
+  },
+  "interleaved_affine_gaps_imply_tensor_gaps": {
+   "score": 92.99,
+   "tokens": 98,
+   "heartbeats": 1293,
+   "improved": true,
+   "spend": 1.902383
+  },
+  "putnam_1964_a4": {
+   "score": 96.82,
+   "tokens": 136,
+   "heartbeats": 2073,
+   "improved": true,
+   "spend": 1.977008
+  },
+  "putnam_1964_b2": {
+   "score": 99.26,
+   "tokens": 25,
+   "heartbeats": 1055,
+   "improved": true,
+   "spend": 1.727583
+  },
+  "putnam_1995_a3": {
+   "score": 95.88,
+   "tokens": 181,
+   "heartbeats": 1131,
+   "improved": true,
+   "spend": 1.717453
+  }
+ }
+}

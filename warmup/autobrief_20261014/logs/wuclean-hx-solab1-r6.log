@@ -1,0 +1,207 @@
+run wuclean-hx-solab1-r6: 15 problems, model=gpt-6.1-sol, turns≤40
+fundamental_theore technique cards: analysis, sets
+CallElimCorrect.ex technique cards: sets
+CallElimCorrect.su technique cards: sets
+Core.InitsUpdatesC technique cards: inductive, sets, corollary
+[memgate] HOLD LRAScratch/m_4bcae5b156.lean: need 8000+8000 MB, have 8811 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_969e88badf.lean: need 8000+8000 MB, have 8811 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_a526bc4263.lean: need 8000+8000 MB, have 7758 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_b4d8492fd5.lean: need 8000+8000 MB, have 7760 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_c3f7bfba7e.lean: need 8000+8000 MB, have 15259 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 15s hold (23908 MB free after ramping grants)
+CallElimCorrect.su library leads: 10 (17.3 s, 5 compiles)
+CallElimCorrect.su auto-brief: appended
+[memgate] admitted after 25s hold (24031 MB free after ramping grants)
+[memgate] admitted after 25s hold (32298 MB free after ramping grants)
+[memgate] admitted after 30s hold (24236 MB free after ramping grants)
+[memgate] admitted after 30s hold (16234 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_45577df25d.lean: need 8000+8000 MB, have 15467 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/c_682c1cf7bf73.lean: need 8000+8000 MB, have 14389 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+CallElimCorrect.ex library leads: 10 (39.6 s, 7 compiles)
+CallElimCorrect.ex auto-brief: appended
+[memgate] admitted after 10s hold (32437 MB free after ramping grants)
+fundamental_theore library leads: 10 (49.2 s, 7 compiles)
+fundamental_theore auto-brief: appended
+[memgate] admitted after 20s hold (32296 MB free after ramping grants)
+Core.InitsUpdatesC library leads: 10 (54.3 s, 7 compiles)
+Core.InitsUpdatesC auto-brief: appended
+Core.InitsUpdatesC check 3: NEW BEST tok=77 (+65.6%) hb=291 (+93.2%) Z=100 score=86.29
+Core.InitsUpdatesC turn 5: runaway lean_skeleton call cut at the output cap (3001 chars) dropped from the history
+Core.InitsUpdatesC turn 5: junk stream cut after 766 output tokens
+CallElimCorrect.su check 9: NEW BEST tok=38 (+87.9%) hb=929 (+82.0%) Z=100 score=89.97
+Core.InitsUpdatesC turn 6: runaway lean_skeleton call cut at the output cap (3001 chars) dropped from the history
+Core.InitsUpdatesC turn 6: junk stream cut after 766 output tokens
+CallElimCorrect.su check 11: NEW BEST tok=37 (+88.2%) hb=922 (+82.2%) Z=100 score=90.12
+Core.InitsUpdatesC check 8: NEW BEST tok=76 (+66.1%) hb=289 (+93.3%) Z=100 score=86.45
+CallElimCorrect.ex check 14: NEW BEST tok=21 (+90.5%) hb=206 (+92.4%) Z=100 score=94.3
+fundamental_theore check 9: NEW BEST tok=137 (+83.9%) hb=1362 (+88.6%) Z=100 score=90.84
+[memgate] HOLD LRAScratch/c_f6138b85a3b2.lean: need 8000+8000 MB, have 15966 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+fundamental_theore check 10: NEW BEST tok=138 (+83.8%) hb=1335 (+88.8%) Z=100 score=90.87
+[memgate] admitted after 5s hold (32627 MB free after ramping grants)
+CallElimCorrect.ex check 19: NEW BEST tok=20 (+91.0%) hb=206 (+92.4%) Z=100 score=94.45
+CallElimCorrect.ex check 20: NEW BEST tok=19 (+91.4%) hb=215 (+92.0%) Z=100 score=94.49
+CallElimCorrect.ex check 22: NEW BEST tok=18 (+91.9%) hb=215 (+92.0%) Z=100 score=94.64
+CallElimCorrect.su check 20: NEW BEST tok=37 (+88.2%) hb=919 (+82.2%) Z=100 score=90.14
+Core.InitsUpdatesC DONE best=86.45 checks=17 tool_calls=37 turns=30 out_tok=9715 304s
+Electromagnetism.E technique cards: analysis, sets, algebra, corollary
+[memgate] HOLD LRAScratch/s_e3196acef8.lean: need 8000+8000 MB, have 14772 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+CallElimCorrect.su check 24: NEW BEST tok=36 (+88.5%) hb=919 (+82.2%) Z=100 score=90.25
+fundamental_theore DONE best=90.87 checks=15 tool_calls=29 turns=28 out_tok=12591 335s
+FieldSpecification technique cards: sets, calc, algebra
+[memgate] HOLD LRAScratch/m_d764267220.lean: need 8000+8000 MB, have 14159 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_c1a9612fa0.lean: need 8000+8000 MB, have 14159 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 15s hold (23888 MB free after ramping grants)
+[memgate] admitted after 10s hold (23701 MB free after ramping grants)
+[memgate] admitted after 15s hold (23663 MB free after ramping grants)
+Electromagnetism.E library leads: 10 (44.1 s, 9 compiles)
+Electromagnetism.E structural mode (kept: last run gained 1.14; effort medium)
+[memgate] HOLD LRAScratch/m_6ef8fd0272.lean: need 8000+8000 MB, have 15599 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/c_961d444c4db5.lean: need 8000+8000 MB, have 14652 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+Electromagnetism.E auto-brief: appended
+[memgate] admitted after 5s hold (22407 MB free after ramping grants)
+[memgate] HOLD LRAScratch/s_6f9e96ece6.lean: need 8000+8000 MB, have 14803 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (22809 MB free after ramping grants)
+FieldSpecification library leads: 10 (40.4 s, 9 compiles)
+FieldSpecification structural mode (plateau; effort medium)
+FieldSpecification auto-brief: appended
+[memgate] admitted after 25s hold (40624 MB free after ramping grants)
+[memgate] HOLD LRAScratch/s_7bff105e14.lean: need 8000+8000 MB, have 15598 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (24127 MB free after ramping grants)
+Electromagnetism.E check 1: NEW BEST tok=379 (+72.4%) hb=5238 (+80.7%) Z=100 score=84.35
+[memgate] HOLD LRAScratch/c_5e780b22532d.lean: need 8000+8000 MB, have 15870 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (24077 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_f4e7836cade6.lean: need 8000+8000 MB, have 15350 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+Electromagnetism.E check 4: NEW BEST tok=375 (+72.7%) hb=5248 (+80.6%) Z=100 score=84.44
+[memgate] admitted after 5s hold (32229 MB free after ramping grants)
+FieldSpecification check 4: NEW BEST tok=490 (+59.7%) hb=11653 (+72.3%) Z=100 score=77.35
+CallElimCorrect.ex DONE best=94.64 checks=45 tool_calls=28 turns=28 out_tok=12884 570s
+Cslib.LambdaCalcul technique cards: inductive
+[memgate] HOLD LRAScratch/c_f1da81508511.lean: need 8000+8000 MB, have 15601 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (23848 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_0c7b5924c4.lean: need 8000+8000 MB, have 15996 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+Cslib.LambdaCalcul library leads: 5 (12.6 s, 5 compiles)
+Cslib.LambdaCalcul auto-brief: appended
+[memgate] admitted after 15s hold (24023 MB free after ramping grants)
+CallElimCorrect.su DONE best=90.25 checks=44 tool_calls=30 turns=30 out_tok=16990 629s
+Cslib.SKI.parallel technique cards: inductive
+[memgate] HOLD LRAScratch/m_267446ca5d.lean: need 8000+8000 MB, have 15658 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/s_079a741bf9.lean: need 8000+8000 MB, have 15591 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 10s hold (23416 MB free after ramping grants)
+Cslib.SKI.parallel library leads: 4 (24.3 s, 7 compiles)
+Cslib.SKI.parallel structural mode (plateau; effort medium)
+[memgate] admitted after 20s hold (23808 MB free after ramping grants)
+Cslib.SKI.parallel auto-brief: appended
+FieldSpecification check 5: NEW BEST tok=488 (+59.9%) hb=11668 (+72.3%) Z=100 score=77.4
+Electromagnetism.E check 5: NEW BEST tok=367 (+73.3%) hb=5247 (+80.6%) Z=100 score=84.63
+Electromagnetism.E check 7: NEW BEST tok=359 (+73.8%) hb=5186 (+80.9%) Z=100 score=84.9
+FieldSpecification check 10: NEW BEST tok=470 (+61.4%) hb=11764 (+72.1%) Z=100 score=77.81
+Electromagnetism.E check 8: NEW BEST tok=349 (+74.6%) hb=5059 (+81.3%) Z=100 score=85.3
+FieldSpecification check 11: NEW BEST tok=467 (+61.6%) hb=11777 (+72.0%) Z=100 score=77.89
+FieldSpecification DONE best=77.89 checks=12 tool_calls=35 turns=35 out_tok=7425 386s
+Cslib.CCS.bisimila technique cards: inductive
+Cslib.CCS.bisimila library leads: 10 (10.4 s, 6 compiles)
+Cslib.CCS.bisimila auto-brief: appended
+Electromagnetism.E check 11: NEW BEST tok=347 (+74.7%) hb=5059 (+81.3%) Z=100 score=85.35
+Electromagnetism.E check 12: NEW BEST tok=344 (+74.9%) hb=5046 (+81.4%) Z=100 score=85.44
+Electromagnetism.E DONE best=85.44 checks=12 tool_calls=33 turns=33 out_tok=10558 492s
+Binius.BinaryBasef technique cards: sets, corollary
+[memgate] HOLD LRAScratch/m_d11150248d.lean: need 8000+8000 MB, have 14007 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 10s hold (21996 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_2675b6cdb66f.lean: need 8000+8000 MB, have 12986 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/c_9eb34907034c.lean: need 8000+8000 MB, have 13034 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (21055 MB free after ramping grants)
+[memgate] admitted after 25s hold (21571 MB free after ramping grants)
+Binius.BinaryBasef library leads: 10 (86.7 s, 9 compiles)
+Cslib.SKI.parallel check 13: NEW BEST tok=153 (+62.4%) hb=426 (+70.0%) Z=100 score=77.48
+Cslib.SKI.parallel check 14: NEW BEST tok=153 (+62.4%) hb=421 (+70.4%) Z=100 score=77.6
+Binius.BinaryBasef auto-brief: appended
+[memgate] HOLD LRAScratch/c_a94d48a80c52.lean: need 8000+8000 MB, have 15761 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (23311 MB free after ramping grants)
+Cslib.CCS.bisimila check 12: NEW BEST tok=75 (+70.1%) hb=352 (+90.9%) Z=100 score=87.02
+Cslib.SKI.parallel check 25: NEW BEST tok=153 (+62.4%) hb=418 (+70.6%) Z=100 score=77.67
+Cslib.SKI.parallel DONE best=77.67 checks=26 tool_calls=40 turns=32 out_tok=15520 448s
+Binius.BinaryBasef technique cards: sets, corollary
+Binius.BinaryBasef library leads: 10 (5.5 s, 2 compiles)
+[memgate] HOLD LRAScratch/s_a1d0cd514f.lean: need 8000+8000 MB, have 14892 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+Cslib.LambdaCalcul check 38: NEW BEST tok=70 (+82.8%) hb=5819 (+90.3%) Z=100 score=91.04
+Binius.BinaryBasef auto-brief: appended
+[memgate] admitted after 15s hold (23564 MB free after ramping grants)
+Cslib.LambdaCalcul DONE best=91.04 checks=39 tool_calls=29 turns=29 out_tok=14098 528s
+interleaved_affine technique cards: token rules only
+[memgate] HOLD LRAScratch/m_ab2f3cf13b.lean: need 8000+8000 MB, have 15658 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (23087 MB free after ramping grants)
+Binius.BinaryBasef check 1: NEW BEST tok=370 (+74.7%) hb=2978 (+81.4%) Z=100 score=85.37
+[memgate] HOLD LRAScratch/c_dd6ef7adbfca.lean: need 8000+8000 MB, have 13799 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+Cslib.CCS.bisimila check 24: NEW BEST tok=70 (+72.1%) hb=415 (+89.3%) Z=100 score=87.14
+[memgate] admitted after 15s hold (22071 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_b69b0052268f.lean: need 8000+8000 MB, have 13473 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/s_a1ebc07aa6.lean: need 8000+8000 MB, have 12668 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 15s hold (22698 MB free after ramping grants)
+[memgate] admitted after 25s hold (22381 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_5af60a676ec9.lean: need 8000+8000 MB, have 13565 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+interleaved_affine library leads: 10 (90.8 s, 5 compiles)
+[memgate] admitted after 25s hold (23450 MB free after ramping grants)
+Binius.BinaryBasef check 4: NEW BEST tok=365 (+75.1%) hb=2974 (+81.4%) Z=100 score=85.49
+interleaved_affine auto-brief: appended
+Binius.BinaryBasef check 1: NEW BEST tok=97 (+94.9%) hb=5593 (+87.9%) Z=100 score=94.26
+[memgate] HOLD LRAScratch/s_e3e907c9f0.lean: need 8000+8000 MB, have 15263 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 10s hold (23715 MB free after ramping grants)
+Cslib.CCS.bisimila check 33: NEW BEST tok=74 (+70.5%) hb=348 (+91.0%) Z=100 score=87.18
+Cslib.CCS.bisimila check 35: NEW BEST tok=73 (+70.9%) hb=348 (+91.0%) Z=100 score=87.31
+[memgate] HOLD LRAScratch/m_28d2a4e955.lean: need 8000+8000 MB, have 15033 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (23346 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_3abac7de3efd.lean: need 8000+8000 MB, have 15688 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+Binius.BinaryBasef check 8: NEW BEST tok=352 (+75.9%) hb=2914 (+81.8%) Z=100 score=85.91
+[memgate] admitted after 10s hold (40347 MB free after ramping grants)
+Cslib.CCS.bisimila DONE best=87.31 checks=44 tool_calls=35 turns=35 out_tok=19277 659s
+putnam_1964_a4     technique cards: sets
+[memgate] HOLD LRAScratch/m_dbedc566af.lean: need 8000+8000 MB, have 14271 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/c_a59a84583195.lean: need 8000+8000 MB, have 14570 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+interleaved_affine check 6: NEW BEST tok=121 (+91.1%) hb=2148 (+77.1%) Z=100 score=89.39
+[memgate] admitted after 30s hold (23679 MB free after ramping grants)
+[memgate] admitted after 15s hold (16107 MB free after ramping grants)
+putnam_1964_a4     library leads: 10 (48.5 s, 8 compiles)
+putnam_1964_a4     auto-brief: appended
+[memgate] HOLD LRAScratch/m_9cf5da55ed.lean: need 8000+8000 MB, have 14738 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+Binius.BinaryBasef check 9: NEW BEST tok=353 (+75.9%) hb=2882 (+82.0%) Z=100 score=85.96
+interleaved_affine check 8: NEW BEST tok=117 (+91.4%) hb=2153 (+77.0%) Z=100 score=89.47
+[memgate] admitted after 25s hold (23488 MB free after ramping grants)
+Binius.BinaryBasef check 12: NEW BEST tok=350 (+76.1%) hb=2872 (+82.1%) Z=100 score=86.04
+interleaved_affine check 12: NEW BEST tok=117 (+91.4%) hb=2116 (+77.4%) Z=100 score=89.6
+Binius.BinaryBasef DONE best=94.26 checks=24 tool_calls=51 turns=34 out_tok=7860 554s
+putnam_1964_b2     technique cards: sets
+[memgate] HOLD LRAScratch/m_5c594a3e5a.lean: need 8000+8000 MB, have 15469 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/s_a76c5c11a0.lean: need 8000+8000 MB, have 13775 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 25s hold (23303 MB free after ramping grants)
+interleaved_affine check 15: NEW BEST tok=116 (+91.4%) hb=2116 (+77.4%) Z=100 score=89.62
+putnam_1964_b2     library leads: 10 (38.8 s, 5 compiles)
+putnam_1964_b2     auto-brief: appended
+Binius.BinaryBasef check 15: NEW BEST tok=349 (+76.1%) hb=2873 (+82.1%) Z=100 score=86.07
+[memgate] admitted after 40s hold (23456 MB free after ramping grants)
+putnam_1964_a4     turn 10: runaway lean_skeleton call cut at the output cap (3003 chars) dropped from the history
+putnam_1964_a4     turn 10: junk stream cut after 920 output tokens
+putnam_1964_b2     check 1: NEW BEST tok=25 (+98.6%) hb=2662 (+98.0%) Z=100 score=98.87
+Binius.BinaryBasef check 16: NEW BEST tok=349 (+76.1%) hb=2863 (+82.1%) Z=100 score=86.09
+putnam_1964_a4     turn 12: runaway lean_skeleton call cut at the output cap (3005 chars) dropped from the history
+putnam_1964_a4     turn 12: junk stream cut after 1316 output tokens
+[memgate] HOLD LRAScratch/c_dadf22c3a154.lean: need 8000+8000 MB, have 15075 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+interleaved_affine check 23: NEW BEST tok=116 (+91.4%) hb=2115 (+77.5%) Z=100 score=89.63
+[memgate] admitted after 5s hold (23523 MB free after ramping grants)
+Binius.BinaryBasef check 19: NEW BEST tok=347 (+76.3%) hb=2852 (+82.2%) Z=100 score=86.15
+interleaved_affine DONE best=89.63 checks=25 tool_calls=43 turns=30 out_tok=8844 662s
+putnam_1995_a3     technique cards: sets, numbertheory
+Binius.BinaryBasef check 20: NEW BEST tok=345 (+76.4%) hb=2847 (+82.2%) Z=100 score=86.21
+[memgate] HOLD LRAScratch/c_bb5f36fd13ad.lean: need 8000+8000 MB, have 14894 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 30s hold (23442 MB free after ramping grants)
+putnam_1995_a3     library leads: 10 (42.0 s, 9 compiles)
+Binius.BinaryBasef check 21: NEW BEST tok=341 (+76.7%) hb=2846 (+82.2%) Z=100 score=86.3
+putnam_1964_b2     turn 13: runaway lean_skeleton call cut at the output cap (3000 chars) dropped from the history
+putnam_1964_b2     turn 13: junk stream cut after 1409 output tokens
+putnam_1995_a3     auto-brief: appended
+Binius.BinaryBasef DONE best=86.3 checks=21 tool_calls=42 turns=31 out_tok=9244 974s
+putnam_1964_a4     DONE best=96.47 checks=16 tool_calls=35 turns=29 out_tok=11624 464s
+putnam_1995_a3     check 1: NEW BEST tok=164 (+96.0%) hb=1337 (+90.6%) Z=100 score=95.53
+putnam_1964_b2     check 24: NEW BEST tok=25 (+98.6%) hb=2575 (+98.1%) Z=100 score=98.89
+putnam_1964_b2     DONE best=98.89 checks=34 tool_calls=29 turns=29 out_tok=15009 514s
+putnam_1995_a3     DONE best=95.53 checks=15 tool_calls=34 turns=30 out_tok=10622 387s
+done

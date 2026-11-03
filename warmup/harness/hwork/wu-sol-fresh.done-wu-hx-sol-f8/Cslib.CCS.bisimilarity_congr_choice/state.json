@@ -1,0 +1,203 @@
+{
+ "problem": "Cslib.CCS.bisimilarity_congr_choice",
+ "best": {
+  "score": 84.13,
+  "proof": "theorem bisimilarity_congr_choice :\n    (p ~[lts (defs := defs)] q) → (choice p r) ~[lts (defs := defs)] (choice q r) := by\n  refine (⟨_, ChoiceBisim.choice ·, ?_⟩)\n  intro s1 s2 hr μ\n  constructor <;> (\n    intro s t\n    cases hr <;> rename_i h\n    case' choice => cases t <;> rename_i t\n    case' choiceR => exact ⟨_, .choiceR t, .bisim (.refl _)⟩\n    all_goals (\n      apply Exists.imp _\n      · first | exact h.follow_fst t | exact h.follow_snd t\n      · intro s h\n        exact ⟨by first | exact h.1 | exact .choiceL h.1, .bisim h.2⟩))",
+  "tokens": 88,
+  "heartbeats": 487,
+  "L": 64.94,
+  "H": 87.45,
+  "Z": 100.0,
+  "compat": {
+   "v4.33.0-rc2": true,
+   "v4.32.0": true,
+   "v4.31.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "411f5962cd1d",
+   "tokens": 94,
+   "heartbeats": 449,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:22:48Z",
+   "score": 83.66
+  },
+  {
+   "sha": "2180e9fec0ef",
+   "tokens": 92,
+   "heartbeats": 359,
+   "ok": false,
+   "error": "327:33: Application type mismatch: The argument t has type Tr p✝ μ s but is expected to have type Tr r✝ μ ?m.475 in the application Tr.choiceR t",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:23:05Z"
+  },
+  {
+   "sha": "e2692ea72eec",
+   "tokens": 67,
+   "heartbeats": 1617,
+   "ok": false,
+   "error": "326:31: Tactic `assumption` failed Name : Type u Constant : Type v defs : Constant → Process Name Constant → Prop p q r : Process Name Constant x✝ : p ~[lts] q μ : Act Name s p✝ q✝ r✝ : Process Name Constant a✝¹ : p✝ ~[lts] q✝ a✝ : Tr p✝ μ s ⊢ Tr r✝ μ s",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:23:10Z"
+  },
+  {
+   "sha": "2b4eb6f33c8d",
+   "tokens": 89,
+   "heartbeats": 474,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:23:37Z",
+   "score": 84.11
+  },
+  {
+   "sha": "c14a17da9890",
+   "tokens": 74,
+   "heartbeats": null,
+   "ok": false,
+   "error": "324:38: unexpected identifier; expected ')'",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:23:45Z"
+  },
+  {
+   "sha": "df3bea9178be",
+   "tokens": 73,
+   "heartbeats": 2451,
+   "ok": false,
+   "error": "330:14: failed",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:23:54Z"
+  },
+  {
+   "sha": "8ff0b8e12c7a",
+   "tokens": 77,
+   "heartbeats": 3326,
+   "ok": false,
+   "error": "330:104: Invalid dotted identifier notation: The expected type of `.imp` could not be determined Hint: Using one of these would be unambiguous: [apply] `And.imp` [apply] `Antitone.imp` [apply] `Exists.imp` [apply] `Exists₂.imp` [apply] `Exists₃.imp` [apply] `Iff.imp` [apply] `Monotone.imp` [apply] `",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:23:56Z"
+  },
+  {
+   "sha": "8f099e309967",
+   "tokens": 78,
+   "heartbeats": 1092,
+   "ok": false,
+   "error": "332:8: failed",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:24:18Z"
+  },
+  {
+   "sha": "cc375adf87ec",
+   "tokens": 95,
+   "heartbeats": 468,
+   "ok": false,
+   "error": "332:90: Tactic `assumption` failed Name : Type u Constant : Type v defs : Constant → Process Name Constant → Prop p q r : Process Name Constant x✝ : p ~[lts] q μ : Act Name s p✝ q✝ r✝ : Process Name Constant a✝¹ : p✝ ~[lts] q✝ a✝ : Tr p✝ μ s ⊢ lts.Tr q✝ ?m.345 ?m.346",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:24:20Z"
+  },
+  {
+   "sha": "f8b858c299be",
+   "tokens": 89,
+   "heartbeats": 568,
+   "ok": false,
+   "error": "332:58: Application type mismatch: The argument t has type Tr p✝ μ s but is expected to have type lts.Tr q✝ ?m.347 ?m.348 in the application Bisimilarity.follow_snd h t",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:24:42Z"
+  },
+  {
+   "sha": "6cc996fcf9be",
+   "tokens": 75,
+   "heartbeats": 88,
+   "ok": false,
+   "error": "327:10: Unknown identifier `a_1`",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:24:46Z"
+  },
+  {
+   "sha": "7b701d6b128f",
+   "tokens": 88,
+   "heartbeats": 487,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:07Z",
+   "score": 84.13
+  },
+  {
+   "sha": "1eadb57d829e",
+   "tokens": 86,
+   "heartbeats": 680,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:14Z"
+  },
+  {
+   "sha": "e17e607df3c2",
+   "tokens": 85,
+   "heartbeats": 378,
+   "ok": false,
+   "error": "325:4: Case tag `choice` not found. Hint: The only available case tag is `bisim.left`. c̵h̵o̵i̵c̵e̵b̲i̲s̲i̲m̲.̲l̲e̲f̲t̲",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:59Z"
+  },
+  {
+   "sha": "42623c0746cc",
+   "tokens": 36,
+   "heartbeats": 977,
+   "ok": false,
+   "error": "324:31: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[lts,lts] q [prop] p_1 ~[lts,lts] q_1 [prop] lts.Tr (p_1.choice r_1) μ s₁' [prop] ∀ (a : Process Name Constant), lts.Tr (q_1.choice r_1) μ a → ¬ChoiceBisim s₁' a [prop] p_1 ~[lt",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:26:02Z"
+  },
+  {
+   "sha": "1002a1077c74",
+   "tokens": 52,
+   "heartbeats": 170,
+   "ok": false,
+   "error": "325:12: duplicate rule 'Bisimilarity.follow_snd'; rule 'Bisimilarity.follow_fst' was already given. Use [<term>,...] to give multiple rules.",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:26:04Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-f8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:20:14Z"
+  }
+ ],
+ "api_spend": 1.667638,
+ "lineage": "fresh",
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 1,
+    "d_score": 50.33,
+    "d_tokens": -157,
+    "d_heartbeats": 449,
+    "diff": "+theorem bisimilarity_congr_choice :\n+    (p ~[lts (defs := defs)] q) → (choice p r) ~[lts (defs := defs)] (choice q r) := by\n+  refine (⟨_, ChoiceBisim.choice ·, ?_⟩)\n+  intro s1 s2 hr μ\n+  cases hr with\n+  | choice h =>\n+    constructor <;> intro s t <;> cases t <;> rename_i t\n+    all_goals first\n+      | exact ⟨_, .choiceR t, .bisim (.refl _)⟩\n+      | apply Exists.imp fun _ => And.imp Tr.choiceL ChoiceBisim.bisim\n+    exacts [h.follow_fst t, h.follow_snd t]\n+  | bisim h =>\n+    constructor <;> intro s t\n+    all_goals apply Exists.imp fun _ => And.imp id ChoiceBisim.bisim\n+    exacts [h.follow_fst t, h.follow_snd t]"
+   },
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 4,
+    "d_score": 0.45,
+    "d_tokens": -5,
+    "d_heartbeats": 25,
+    "diff": "-  cases hr with\n+  constructor <;> intro s t <;> cases hr with\n-    constructor <;> intro s t <;> cases t <;> rename_i t\n-    all_goals first\n-      | exact ⟨_, .choiceR t, .bisim (.refl _)⟩\n-      | apply Exists.imp fun _ => And.imp Tr.choiceL ChoiceBisim.bisim\n-    exacts [h.follow_fst t, h.follow_snd t]\n+    cases t <;> rename_i t\n+    case' choiceR => exact ⟨_, .choiceR t, .bisim (.refl _)⟩\n+    apply Exists.imp fun _ => .imp .choiceL .bisim\n+    first | exact h.follow_fst t | exact h.follow_snd t\n-    constructor <;> intro s t\n-    all_goals apply Exists.imp fun _ => And.imp id ChoiceBisim.bisim\n-    exacts [h.follow_fst t, h.follow_snd t]\n+    apply Exists.imp fun _ => .imp id .bisim\n"
+   },
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 12,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": 13,
+    "diff": "-  constructor <;> intro s t <;> cases hr with\n-  | choice h =>\n-    cases t <;> rename_i t\n+  constructor <;> (\n+    intro s t\n+    cases hr <;> rename_i h\n+    case' choice => cases t <;> rename_i t\n-    apply Exists.imp fun _ => .imp .choiceL .bisim\n-    first | exact h.follow_fst t | exact h.follow_snd t\n-  | bisim h =>\n-    apply Exists.imp fun _ => .imp id .bisim\n-    first | exact h.follow_fst t | exact h.follow_snd t\n+    all_goals (\n+      apply Exists.imp _\n+      · first | exact h.follow_fst t | exact h.follow_snd t\n+      · intro s h\n+        exact ⟨by first | exact h.1 | exact .choiceL h.1, .bisim h.2⟩))"
+   }
+  ]
+ }
+}

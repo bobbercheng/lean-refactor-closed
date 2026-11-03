@@ -1,0 +1,61 @@
+{
+ "note": "runner input only: first-session scores of an earlier Sol + briefs line (no proofs, no notes)",
+ "problem": "interleaved_affine_gaps_imply_tensor_gaps",
+ "runs": [
+  {
+   "run_id": "hx-solknow-x10a"
+  }
+ ],
+ "attempts": [
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 92.04
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 92.32
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 92.46
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 92.49
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 92.55
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  }
+ ]
+}

@@ -1,0 +1,108 @@
+{
+ "CallElimCorrect.substOldPostSubset": {
+  "L": 87.54,
+  "H_pred": 88.46,
+  "Z": 100.0,
+  "score": 92.0,
+  "hb_local": 597
+ },
+ "CallElimCorrect.extractedOldExprInVars": {
+  "L": 90.99,
+  "H_pred": 90.47,
+  "Z": 100.0,
+  "score": 93.82,
+  "hb_local": 257
+ },
+ "Core.InitsUpdatesComm": {
+  "L": 71.43,
+  "H_pred": 95.98,
+  "Z": 100.0,
+  "score": 89.14,
+  "hb_local": 173
+ },
+ "fundamental_theorem_of_variational_calculus'": {
+  "L": 86.02,
+  "H_pred": 88.72,
+  "Z": 100.0,
+  "score": 91.58,
+  "hb_local": 1348
+ },
+ "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema": {
+  "L": 67.49,
+  "H_pred": 54.17,
+  "Z": 100.0,
+  "score": 73.89,
+  "hb_local": 12426
+ },
+ "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time": {
+  "L": 75.02,
+  "H_pred": 75.35,
+  "Z": 100.0,
+  "score": 83.46,
+  "hb_local": 10379
+ },
+ "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress": {
+  "L": 68.87,
+  "H_pred": 87.76,
+  "Z": 100.0,
+  "score": 85.55,
+  "hb_local": 7326
+ },
+ "Cslib.SKI.parallelReduction_diamond": {
+  "L": 66.83,
+  "H_pred": 63.43,
+  "Z": 100.0,
+  "score": 76.75,
+  "hb_local": 520
+ },
+ "Cslib.CCS.bisimilarity_congr_choice": {
+  "L": 71.31,
+  "H_pred": 89.77,
+  "Z": 100.0,
+  "score": 87.03,
+  "hb_local": 397
+ },
+ "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius": {
+  "L": 84.96,
+  "H_pred": 87.94,
+  "Z": 100.0,
+  "score": 90.97,
+  "hb_local": 1931
+ },
+ "Binius.BinaryBasefold.fold_advances_evaluation_poly": {
+  "L": 92.55,
+  "H_pred": 88.31,
+  "Z": 100.0,
+  "score": 93.62,
+  "hb_local": 5385
+ },
+ "interleaved_affine_gaps_imply_tensor_gaps": {
+  "L": 92.61,
+  "H_pred": 86.02,
+  "Z": 100.0,
+  "score": 92.88,
+  "hb_local": 1311
+ },
+ "putnam_1964_a4": {
+  "L": 92.31,
+  "H_pred": 98.14,
+  "Z": 100.0,
+  "score": 96.82,
+  "hb_local": 2073
+ },
+ "putnam_1964_b2": {
+  "L": 98.57,
+  "H_pred": 99.22,
+  "Z": 100.0,
+  "score": 99.26,
+  "hb_local": 1055
+ },
+ "putnam_1995_a3": {
+  "L": 95.57,
+  "H_pred": 92.06,
+  "Z": 100.0,
+  "score": 95.88,
+  "hb_local": 1131
+ },
+ "_predicted_combined": 89.51
+}

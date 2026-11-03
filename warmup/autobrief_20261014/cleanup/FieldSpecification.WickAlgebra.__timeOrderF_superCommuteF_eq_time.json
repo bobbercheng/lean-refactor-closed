@@ -1,0 +1,1084 @@
+{
+ "problem": "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time",
+ "seed": {
+  "ok": true,
+  "tokens": 385,
+  "heartbeats": 9621,
+  "L": 68.36,
+  "H": 77.15,
+  "Z": 100.0,
+  "score": 81.84
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 385,
+    "heartbeats": 9621,
+    "Z": 100.0,
+    "score": 81.84
+   },
+   "after": {
+    "ok": true,
+    "tokens": 378,
+    "heartbeats": 9621,
+    "Z": 100.0,
+    "score": 82.03
+   },
+   "gain": 0.19,
+   "applied": {
+    "dollar": 7
+   },
+   "compiles": 11,
+   "seconds": 36.4
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 378,
+    "heartbeats": 9619,
+    "Z": 100.0,
+    "score": 82.03
+   },
+   "after": {
+    "ok": true,
+    "tokens": 378,
+    "heartbeats": 9619,
+    "Z": 100.0,
+    "score": 82.03
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 14,
+   "seconds": 47.8
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 378,
+    "heartbeats": 9621,
+    "Z": 100.0,
+    "score": 82.03
+   },
+   "after": {
+    "ok": true,
+    "tokens": 378,
+    "heartbeats": 9621,
+    "Z": 100.0,
+    "score": 82.03
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 6,
+   "seconds": 20.4
+  },
+  {
+   "pass": "lint_delete",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 378,
+    "heartbeats": 9621,
+    "Z": 100.0,
+    "score": 82.03
+   },
+   "after": {
+    "ok": true,
+    "tokens": 376,
+    "heartbeats": 9588,
+    "Z": 100.0,
+    "score": 82.11
+   },
+   "gain": 0.08,
+   "applied": {
+    "delsearch-arg": 1
+   },
+   "compiles": 24,
+   "seconds": 82.2
+  }
+ ],
+ "free_applied": [
+  "normalize",
+  "lint_delete"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 376,
+  "heartbeats": 9588,
+  "L": 69.1,
+  "H": 77.23,
+  "Z": 100.0,
+  "score": 82.11
+ },
+ "s0": "lemma ι_timeOrderF_superCommuteF_eq_time {φ ψ : 𝓕.CrAnFieldOp}\n    (hφψ : crAnTimeOrderRel φ ψ) (hψφ : crAnTimeOrderRel ψ φ) (a b : 𝓕.FieldOpFreeAlgebra) :\n    ι 𝓣ᶠ(a * [ofCrAnOpF φ, ofCrAnOpF ψ]ₛF * b) =\n    ι ([ofCrAnOpF φ, ofCrAnOpF ψ]ₛF * 𝓣ᶠ(a * b)) := by\n  let T := (ι (𝓕 := 𝓕)).toLinearMap.comp timeOrderF\n  let C := [ofCrAnOpF φ, ofCrAnOpF ψ]ₛF\n  let M := LinearMap.mul ℂ 𝓕.FieldOpFreeAlgebra\n  apply LinearMap.congr_fun₂ (f := (M.comp $ LinearMap.mulRight ℂ C).compr₂ T)\n    (g := M.compr₂ $ (LinearMap.mulLeft ℂ $ ι C).comp T)\n  apply LinearMap.ext_basis ofCrAnListFBasis ofCrAnListFBasis\n  intro u v\n  dsimp [T, C, M]\n  simp only [ofListBasis_eq_ofList]\n  obtain ⟨L, R, s⟩ : ∃ L R, ∀ (l : List 𝓕.CrAnFieldOp)\n      (hl : ∀ c ∈ l, crAnTimeOrderRel φ c ∧ crAnTimeOrderRel c φ :=\n        by simp [hφψ, hψφ]),\n      ofCrAnListF (crAnTimeOrderList $ u ++ (l ++ v)) =\n        L * ofCrAnListF l * R := by\n    refine ⟨?_ * ?_, ?_ * ?_, ?_⟩\n    rotate_left 4\n    intro l hl\n    rw [crAnTimeOrderList, ← List.append_assoc, insertionSort_of_eq_list crAnTimeOrderRel φ u l v hl]\n    simp only [ofCrAnListF_append, mul_assoc]\n    exact rfl\n  trans ι $ crAnTimeOrderSign (u ++ φ :: ψ :: v) • (L * C * R)\n  · congr 1\n    conv_lhs =>\n      rw [superCommuteF_ofCrAnOpF_ofCrAnOpF]\n      simp [mul_sub, sub_mul, ← ofCrAnListF_singleton, ← ofCrAnListF_append,\n        timeOrderF_ofCrAnListF]\n    erw [← crAnTimeOrderSign_swap_eq_time hφψ hψφ, s [φ, ψ], s [ψ, φ]]\n    simp only [C, superCommuteF_ofCrAnOpF_ofCrAnOpF, ofCrAnListF_cons, ofCrAnListF_nil, one_mul,\n      mul_sub, sub_mul, mul_smul_comm, smul_mul_assoc, mul_assoc]\n    rw [smul_sub, smul_comm]\n  · simp only [map_smul, map_mul]\n    rw [Subalgebra.mem_center_iff.mp $ ι_superCommuteF_ofCrAnOpF_ofCrAnOpF_mem_center φ ψ,\n      mul_assoc, ← map_mul]\n    have h := s []\n    simp only [List.nil_append, ofCrAnListF_nil, mul_one] at h\n    rw [← h]\n    by_cases hq : 𝓕.crAnStatistics ψ = 𝓕.crAnStatistics φ\n    · rw [crAnTimeOrderSign, Wick.koszulSign_eq_rel_eq_stat _ _ hφψ hψφ hq,\n        ← crAnTimeOrderSign, ← ofCrAnListF_append, timeOrderF_ofCrAnListF]\n      simp only [map_smul, mul_smul_comm]\n    · simp only [ι_superCommuteF_of_diff_statistic $ Ne.symm hq, zero_mul, smul_zero]",
+ "exchange": [
+  0.027,
+  0.079
+ ],
+ "profile": {
+  "ok": true,
+  "total": 9588,
+  "floor": 300,
+  "reference": 42111,
+  "max_heartbeat_score": 33.1,
+  "blocks": [
+   {
+    "lines": "13-13",
+    "depth_indent": 2,
+    "text": "simp only [ofListBasis_eq_ofList]",
+    "heartbeats": 6519
+   },
+   {
+    "lines": "8-9",
+    "depth_indent": 2,
+    "text": "apply LinearMap.congr_fun₂ (f := (M.comp $ LinearMap.mulRight ℂ C).compr₂ T) (g := M.compr₂ $ (Linea",
+    "heartbeats": 1549
+   },
+   {
+    "lines": "12-12",
+    "depth_indent": 2,
+    "text": "dsimp [T, C, M]",
+    "heartbeats": 496
+   },
+   {
+    "lines": "7-7",
+    "depth_indent": 2,
+    "text": "let M := LinearMap.mul ℂ 𝓕.FieldOpFreeAlgebra",
+    "heartbeats": 305
+   },
+   {
+    "lines": "10-10",
+    "depth_indent": 2,
+    "text": "apply LinearMap.ext_basis ofCrAnListFBasis ofCrAnListFBasis",
+    "heartbeats": 255
+   },
+   {
+    "lines": "6-6",
+    "depth_indent": 2,
+    "text": "let C := [ofCrAnOpF φ, ofCrAnOpF ψ]ₛF",
+    "heartbeats": 93
+   },
+   {
+    "lines": "5-5",
+    "depth_indent": 2,
+    "text": "let T := (ι (𝓕 := 𝓕)).toLinearMap.comp timeOrderF",
+    "heartbeats": 70
+   },
+   {
+    "lines": "11-11",
+    "depth_indent": 2,
+    "text": "intro u v",
+    "heartbeats": 1
+   }
+  ],
+  "points_left_heartbeats": 7.35,
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 376,
+  "heartbeats": 9589,
+  "score": 82.11
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 3298,
+   "score": null,
+   "error": "175:55: `grind` failed\ncase grind\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nh "
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 1516,
+   "score": null,
+   "error": "175:52: unsolved goals\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\n⊢ ι (timeOrde"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 2983,
+   "score": null,
+   "error": "175:52: unsolved goals\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\n⊢ ι (timeOrde"
+  },
+  {
+   "kind": "closer",
+   "line": 32,
+   "label": "replace the bullet at line 32 (`· simp only [map_smul, map_mul]`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 287,
+   "heartbeats": 10681,
+   "score": null,
+   "error": "206:4: `grind` failed\ncase grind\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT :"
+  },
+  {
+   "kind": "closer",
+   "line": 32,
+   "label": "replace the bullet at line 32 (`· simp only [map_smul, map_mul]`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 287,
+   "heartbeats": 12189,
+   "score": null,
+   "error": "206:2: unsolved goals\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕.FieldOpF"
+  },
+  {
+   "kind": "closer",
+   "line": 32,
+   "label": "replace the bullet at line 32 (`· simp only [map_smul, map_mul]`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 287,
+   "heartbeats": 15493,
+   "score": null,
+   "error": "206:2: unsolved goals\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕.FieldOpF"
+  },
+  {
+   "kind": "closer",
+   "line": 23,
+   "label": "replace the bullet at line 23 (`· congr 1`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 305,
+   "heartbeats": 9553,
+   "score": null,
+   "error": "197:4: `grind` failed\ncase grind\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT :"
+  },
+  {
+   "kind": "closer",
+   "line": 23,
+   "label": "replace the bullet at line 23 (`· congr 1`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 305,
+   "heartbeats": 12730,
+   "score": null,
+   "error": "197:2: unsolved goals\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕.FieldOpF"
+  },
+  {
+   "kind": "closer",
+   "line": 23,
+   "label": "replace the bullet at line 23 (`· congr 1`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 305,
+   "heartbeats": 16000,
+   "score": null,
+   "error": "197:2: unsolved goals\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕.FieldOpF"
+  },
+  {
+   "kind": "closer",
+   "line": 39,
+   "label": "replace the bullet at line 39 (`· rw [crAnTimeOrderSign, Wick.koszulSig…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 351,
+   "heartbeats": 13500,
+   "score": null,
+   "error": "213:6: `grind` failed\ncase grind\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT :"
+  },
+  {
+   "kind": "closer",
+   "line": 39,
+   "label": "replace the bullet at line 39 (`· rw [crAnTimeOrderSign, Wick.koszulSig…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 351,
+   "heartbeats": 13642,
+   "score": null,
+   "error": "213:4: unsolved goals\ncase pos\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "closer",
+   "line": 39,
+   "label": "replace the bullet at line 39 (`· rw [crAnTimeOrderSign, Wick.koszulSig…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 351,
+   "heartbeats": 17427,
+   "score": null,
+   "error": "213:4: unsolved goals\ncase pos\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "closer",
+   "line": 42,
+   "label": "replace the bullet at line 42 (`· simp only [ι_superCommuteF_of_diff_st…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 365,
+   "heartbeats": 14433,
+   "score": null,
+   "error": "216:6: `grind` failed\ncase grind\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT :"
+  },
+  {
+   "kind": "closer",
+   "line": 42,
+   "label": "replace the bullet at line 42 (`· simp only [ι_superCommuteF_of_diff_st…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 365,
+   "heartbeats": 14586,
+   "score": null,
+   "error": "216:4: unsolved goals\ncase neg\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "closer",
+   "line": 42,
+   "label": "replace the bullet at line 42 (`· simp only [ι_superCommuteF_of_diff_st…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 365,
+   "heartbeats": 18358,
+   "score": null,
+   "error": "216:4: unsolved goals\ncase neg\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "closer",
+   "line": 40,
+   "label": "replace the closing tactic at line 40 (`← crAnTimeOrderSign, ← ofCrAnListF_appe…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 369,
+   "heartbeats": null,
+   "score": null,
+   "error": "217:0: unexpected end of input; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 40,
+   "label": "replace the closing tactic at line 40 (`← crAnTimeOrderSign, ← ofCrAnListF_appe…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 369,
+   "heartbeats": null,
+   "score": null,
+   "error": "217:0: unexpected end of input; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 40,
+   "label": "replace the closing tactic at line 40 (`← crAnTimeOrderSign, ← ofCrAnListF_appe…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 369,
+   "heartbeats": null,
+   "score": null,
+   "error": "217:0: unexpected end of input; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 30,
+   "label": "replace the closing tactic at line 30 (`mul_sub, sub_mul, mul_smul_comm, smul_m…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 367,
+   "heartbeats": null,
+   "score": null,
+   "error": "208:27: unexpected token 'have'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 30,
+   "label": "replace the closing tactic at line 30 (`mul_sub, sub_mul, mul_smul_comm, smul_m…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 367,
+   "heartbeats": null,
+   "score": null,
+   "error": "208:27: unexpected token 'have'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 30,
+   "label": "replace the closing tactic at line 30 (`mul_sub, sub_mul, mul_smul_comm, smul_m…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 367,
+   "heartbeats": null,
+   "score": null,
+   "error": "208:27: unexpected token 'have'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 6,
+   "label": "replace the closing tactic at line 6 (`(g := M.compr₂ $ (LinearMap.mulLeft ℂ $…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 362,
+   "heartbeats": 1690,
+   "score": null,
+   "error": "180:4: Unknown identifier `grind`"
+  },
+  {
+   "kind": "closer",
+   "line": 6,
+   "label": "replace the closing tactic at line 6 (`(g := M.compr₂ $ (LinearMap.mulLeft ℂ $…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 362,
+   "heartbeats": 1690,
+   "score": null,
+   "error": "180:4: Unknown identifier `simp_all`"
+  },
+  {
+   "kind": "closer",
+   "line": 6,
+   "label": "replace the closing tactic at line 6 (`(g := M.compr₂ $ (LinearMap.mulLeft ℂ $…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 362,
+   "heartbeats": 1690,
+   "score": null,
+   "error": "180:4: Unknown identifier `aesop`"
+  },
+  {
+   "kind": "closer",
+   "line": 41,
+   "label": "replace the closing tactic at line 41 (`simp only [map_smul, mul_smul_comm]`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 370,
+   "heartbeats": 12968,
+   "score": null,
+   "error": "215:6: `grind` failed\ncase grind\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT :"
+  },
+  {
+   "kind": "closer",
+   "line": 41,
+   "label": "replace the closing tactic at line 41 (`simp only [map_smul, mul_smul_comm]`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": true,
+   "tokens": 370,
+   "heartbeats": 11935,
+   "score": 80.42,
+   "error": "",
+   "d_tokens": -6,
+   "d_hb": 2346,
+   "d_score": -1.69
+  },
+  {
+   "kind": "closer",
+   "line": 41,
+   "label": "replace the closing tactic at line 41 (`simp only [map_smul, mul_smul_comm]`) by `aesop`",
+   "closer": "aesop",
+   "ok": true,
+   "tokens": 370,
+   "heartbeats": 12134,
+   "score": 80.26,
+   "error": "",
+   "d_tokens": -6,
+   "d_hb": 2545,
+   "d_score": -1.85
+  },
+  {
+   "kind": "closer",
+   "line": 31,
+   "label": "replace the closing tactic at line 31 (`rw [smul_sub, smul_comm]`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 371,
+   "heartbeats": 10548,
+   "score": null,
+   "error": "205:4: `grind` failed\ncase grind\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT :"
+  },
+  {
+   "kind": "closer",
+   "line": 31,
+   "label": "replace the closing tactic at line 31 (`rw [smul_sub, smul_comm]`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 371,
+   "heartbeats": 11201,
+   "score": null,
+   "error": "205:4: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 31,
+   "label": "replace the closing tactic at line 31 (`rw [smul_sub, smul_comm]`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 371,
+   "heartbeats": 11592,
+   "score": null,
+   "error": "205:4: Tactic `aesop` failed, made no progress\nInitial goal:\n  case e_6\n  𝓕 : FieldSpecification\n  φ ψ : 𝓕.CrAnFieldOp\n  hφψ : crAnTimeOrderRel φ ψ\n  hψφ : crAn"
+  },
+  {
+   "kind": "closer",
+   "line": 27,
+   "label": "replace the closing tactic at line 27 (`timeOrderF_ofCrAnListF]`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 375,
+   "heartbeats": null,
+   "score": null,
+   "error": "208:27: unexpected token 'have'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 27,
+   "label": "replace the closing tactic at line 27 (`timeOrderF_ofCrAnListF]`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 375,
+   "heartbeats": null,
+   "score": null,
+   "error": "208:27: unexpected token 'have'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 27,
+   "label": "replace the closing tactic at line 27 (`timeOrderF_ofCrAnListF]`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 375,
+   "heartbeats": null,
+   "score": null,
+   "error": "208:27: unexpected token 'have'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 34,
+   "label": "replace the closing tactic at line 34 (`mul_assoc, ← map_mul]`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 372,
+   "heartbeats": null,
+   "score": null,
+   "error": "208:11: unexpected token 'have'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 34,
+   "label": "replace the closing tactic at line 34 (`mul_assoc, ← map_mul]`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 372,
+   "heartbeats": null,
+   "score": null,
+   "error": "208:14: unexpected token 'have'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 34,
+   "label": "replace the closing tactic at line 34 (`mul_assoc, ← map_mul]`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 372,
+   "heartbeats": null,
+   "score": null,
+   "error": "208:11: unexpected token 'have'; expected ']'"
+  },
+  {
+   "kind": "del-arg",
+   "line": 9,
+   "label": "delete `T` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 6385,
+   "score": null,
+   "error": "199:10: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  (superCommuteF (ofCrAnOpF ?φ)) (ofCrAnOpF ?φ')\nin the target expression\n  𝓕.FieldOp"
+  },
+  {
+   "kind": "del-arg",
+   "line": 9,
+   "label": "delete `C` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 7709,
+   "score": null,
+   "error": "199:10: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  (superCommuteF (ofCrAnOpF ?φ)) (ofCrAnOpF ?φ')\nin the target expression\n  timeOrder"
+  },
+  {
+   "kind": "del-arg",
+   "line": 9,
+   "label": "delete `M` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 8667,
+   "score": null,
+   "error": "202:9: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  crAnTimeOrderSign (?φs ++ ψ :: φ :: ?φs')\nin the target expression\n  timeOrderF ((M "
+  },
+  {
+   "kind": "del-arg",
+   "line": 10,
+   "label": "delete `ofListBasis_eq_ofList` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 373,
+   "heartbeats": 3025,
+   "score": null,
+   "error": "184:2: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 13,
+   "label": "delete `hφψ` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9564,
+   "score": null,
+   "error": "202:51: could not synthesize default value for parameter 'hl' using tactics"
+  },
+  {
+   "kind": "del-arg",
+   "line": 13,
+   "label": "delete `hψφ` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9565,
+   "score": null,
+   "error": "202:51: could not synthesize default value for parameter 'hl' using tactics"
+  },
+  {
+   "kind": "del-arg",
+   "line": 20,
+   "label": "delete `ofCrAnListF_append` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 10042,
+   "score": null,
+   "error": "195:4: Type mismatch\n  rfl\nhas type\n  ?m.316 = ?m.316\nbut is expected to have type\n  ofCrAnListF\n      (List.takeWhile (fun c => decide ¬crAnTimeOrderRel φ c) ("
+  },
+  {
+   "kind": "del-arg",
+   "line": 20,
+   "label": "delete `mul_assoc` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 10852,
+   "score": null,
+   "error": "195:4: Type mismatch\n  rfl\nhas type\n  ?m.316 = ?m.316\nbut is expected to have type\n  ofCrAnListF (List.takeWhile (fun c => decide ¬crAnTimeOrderRel φ c) (List.i"
+  },
+  {
+   "kind": "del-arg",
+   "line": 26,
+   "label": "delete `mul_sub` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 7916,
+   "score": null,
+   "error": "202:9: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  crAnTimeOrderSign (?φs ++ ψ :: φ :: ?φs')\nin the target expression\n  timeOrderF\n    "
+  },
+  {
+   "kind": "del-arg",
+   "line": 26,
+   "label": "delete `sub_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 8018,
+   "score": null,
+   "error": "202:9: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  crAnTimeOrderSign (?φs ++ ψ :: φ :: ?φs')\nin the target expression\n  timeOrderF\n    "
+  },
+  {
+   "kind": "del-arg",
+   "line": 26,
+   "label": "delete `← ofCrAnListF_singleton` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 373,
+   "heartbeats": 8649,
+   "score": null,
+   "error": "202:9: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  crAnTimeOrderSign (?φs ++ ψ :: φ :: ?φs')\nin the target expression\n  timeOrderF (ofC"
+  },
+  {
+   "kind": "del-arg",
+   "line": 26,
+   "label": "delete `← ofCrAnListF_append` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 373,
+   "heartbeats": 8667,
+   "score": null,
+   "error": "202:9: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  crAnTimeOrderSign (?φs ++ ψ :: φ :: ?φs')\nin the target expression\n  timeOrderF (ofC"
+  },
+  {
+   "kind": "del-arg",
+   "line": 27,
+   "label": "delete `timeOrderF_ofCrAnListF` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 8243,
+   "score": null,
+   "error": "201:9: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  crAnTimeOrderSign (?φs ++ ψ :: φ :: ?φs')\nin the target expression\n  timeOrderF (ofC"
+  },
+  {
+   "kind": "del-arg",
+   "line": 29,
+   "label": "delete `C` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9060,
+   "score": null,
+   "error": "205:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?r • (?x - ?y)\nin the target expression\n  crAnTimeOrderSign (u ++ φ :: ψ :: v) • (L "
+  },
+  {
+   "kind": "del-arg",
+   "line": 29,
+   "label": "delete `superCommuteF_ofCrAnOpF_ofCrAnOpF` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9110,
+   "score": null,
+   "error": "205:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?r • (?x - ?y)\nin the target expression\n  crAnTimeOrderSign (u ++ φ :: ψ :: v) • (L "
+  },
+  {
+   "kind": "del-arg",
+   "line": 29,
+   "label": "delete `ofCrAnListF_cons` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9477,
+   "score": null,
+   "error": "197:2: unsolved goals\ncase e_6\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "del-arg",
+   "line": 29,
+   "label": "delete `ofCrAnListF_nil` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9508,
+   "score": null,
+   "error": "197:2: unsolved goals\ncase e_6\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "del-arg",
+   "line": 29,
+   "label": "delete `one_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9510,
+   "score": null,
+   "error": "197:2: unsolved goals\ncase e_6\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "del-arg",
+   "line": 30,
+   "label": "delete `mul_sub` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9174,
+   "score": null,
+   "error": "204:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?r • (?x - ?y)\nin the target expression\n  crAnTimeOrderSign (u ++ φ :: ψ :: v) • (L "
+  },
+  {
+   "kind": "del-arg",
+   "line": 30,
+   "label": "delete `sub_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9152,
+   "score": null,
+   "error": "205:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?r • (?x - ?y)\nin the target expression\n  crAnTimeOrderSign (u ++ φ :: ψ :: v) • (L "
+  },
+  {
+   "kind": "del-arg",
+   "line": 30,
+   "label": "delete `mul_smul_comm` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9487,
+   "score": null,
+   "error": "197:2: unsolved goals\ncase e_6\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "del-arg",
+   "line": 30,
+   "label": "delete `smul_mul_assoc` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9433,
+   "score": null,
+   "error": "197:2: unsolved goals\ncase e_6\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "del-arg",
+   "line": 30,
+   "label": "delete `mul_assoc` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9435,
+   "score": null,
+   "error": "197:2: unsolved goals\ncase e_6\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "del-arg",
+   "line": 32,
+   "label": "delete `map_smul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 6723,
+   "score": null,
+   "error": "206:4: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 32,
+   "label": "delete `map_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 7188,
+   "score": null,
+   "error": "207:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?b * ι ((superCommuteF (ofCrAnOpF φ)) (ofCrAnOpF ψ))\nin the target expression\n  crAn"
+  },
+  {
+   "kind": "del-arg",
+   "line": 36,
+   "label": "delete `List.nil_append` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9594,
+   "score": null,
+   "error": "213:4: unsolved goals\ncase pos\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "del-arg",
+   "line": 36,
+   "label": "delete `ofCrAnListF_nil` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 8065,
+   "score": null,
+   "error": "211:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  L * ofCrAnListF [] * R\nin the target expression\n  crAnTimeOrderSign (u ++ φ :: ψ :: "
+  },
+  {
+   "kind": "del-arg",
+   "line": 36,
+   "label": "delete `mul_one` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 8064,
+   "score": null,
+   "error": "211:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  L * 1 * R\nin the target expression\n  crAnTimeOrderSign (u ++ φ :: ψ :: v) • (ι ((sup"
+  },
+  {
+   "kind": "del-arg",
+   "line": 41,
+   "label": "delete `map_smul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 8840,
+   "score": null,
+   "error": "215:6: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 41,
+   "label": "delete `mul_smul_comm` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9560,
+   "score": null,
+   "error": "213:4: unsolved goals\ncase pos\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "del-arg",
+   "line": 42,
+   "label": "delete `zero_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9430,
+   "score": null,
+   "error": "216:4: unsolved goals\ncase neg\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "del-arg",
+   "line": 42,
+   "label": "delete `smul_zero` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9443,
+   "score": null,
+   "error": "216:4: unsolved goals\ncase neg\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "del-tac",
+   "line": 9,
+   "label": "delete the tactic `dsimp [T, C, M]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 368,
+   "heartbeats": 6299,
+   "score": null,
+   "error": "198:10: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  (superCommuteF (ofCrAnOpF ?φ)) (ofCrAnOpF ?φ')\nin the target expression\n  𝓕.FieldOp"
+  },
+  {
+   "kind": "del-tac",
+   "line": 10,
+   "label": "delete the tactic `simp only [ofListBasis_eq_ofList]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 371,
+   "heartbeats": 8678,
+   "score": null,
+   "error": "213:29: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ofCrAnListF ?φs * ofCrAnListF ?φs'\nin the target expression\n  crAnTimeOrderSign (u "
+  },
+  {
+   "kind": "del-tac",
+   "line": 20,
+   "label": "delete the tactic `simp only [ofCrAnListF_append, mul_assoc]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 369,
+   "heartbeats": 9983,
+   "score": null,
+   "error": "194:4: Type mismatch\n  rfl\nhas type\n  ?m.315 = ?m.315\nbut is expected to have type\n  ofCrAnListF\n      (List.takeWhile (fun c => decide ¬crAnTimeOrderRel φ c) ("
+  },
+  {
+   "kind": "del-tac",
+   "line": 36,
+   "label": "delete the tactic `simp only [List.nil_append, ofCrAnListF_nil, mul_…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 365,
+   "heartbeats": 8051,
+   "score": null,
+   "error": "210:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  L * ofCrAnListF [] * R\nin the target expression\n  crAnTimeOrderSign (u ++ φ :: ψ :: "
+  },
+  {
+   "kind": "del-tac",
+   "line": 17,
+   "label": "delete the tactic `rotate_left 4`",
+   "closer": "",
+   "ok": false,
+   "tokens": 374,
+   "heartbeats": 9425,
+   "score": null,
+   "error": "191:10: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\ncase refine_1\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFie"
+  },
+  {
+   "kind": "del-tac",
+   "line": 19,
+   "label": "delete the tactic `rw [crAnTimeOrderList, ← List.append_assoc, inser…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 361,
+   "heartbeats": 9515,
+   "score": null,
+   "error": "194:4: Type mismatch\n  rfl\nhas type\n  ?m.302 = ?m.302\nbut is expected to have type\n  ofCrAnListF (crAnTimeOrderList (u ++ (l ++ v))) = ?refine_1 * (?refine_2 * "
+  },
+  {
+   "kind": "del-tac",
+   "line": 22,
+   "label": "delete the tactic `trans ι $ crAnTimeOrderSign (u ++ φ :: ψ :: v) • …`",
+   "closer": "",
+   "ok": false,
+   "tokens": 354,
+   "heartbeats": 7099,
+   "score": null,
+   "error": "204:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?r • (?x - ?y)\nin the target expression\n  crAnTimeOrderSign (u ++ φ :: ψ :: v) • ι ("
+  },
+  {
+   "kind": "del-tac",
+   "line": 25,
+   "label": "delete the tactic `rw [superCommuteF_ofCrAnOpF_ofCrAnOpF]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 372,
+   "heartbeats": 7855,
+   "score": null,
+   "error": "201:9: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  crAnTimeOrderSign (?φs ++ ψ :: φ :: ?φs')\nin the target expression\n  timeOrderF (ofC"
+  },
+  {
+   "kind": "del-tac",
+   "line": 28,
+   "label": "delete the tactic `erw [← crAnTimeOrderSign_swap_eq_time hφψ hψφ, s …`",
+   "closer": "",
+   "ok": false,
+   "tokens": 355,
+   "heartbeats": 8846,
+   "score": null,
+   "error": "197:2: unsolved goals\ncase e_6\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "del-tac",
+   "line": 35,
+   "label": "delete the tactic `have h := s []`",
+   "closer": "",
+   "ok": false,
+   "tokens": 370,
+   "heartbeats": 7980,
+   "score": null,
+   "error": "209:61: Unknown identifier `h`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 37,
+   "label": "delete the tactic `rw [← h]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 371,
+   "heartbeats": 9503,
+   "score": null,
+   "error": "212:4: unsolved goals\ncase pos\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAnTimeOrderRel φ ψ\nhψφ : crAnTimeOrderRel ψ φ\na b : 𝓕.FieldOpFreeAlgebra\nT : 𝓕"
+  },
+  {
+   "kind": "del-tac",
+   "line": 7,
+   "label": "delete the tactic `apply LinearMap.ext_basis ofCrAnListFBasis ofCrAn…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 372,
+   "heartbeats": 2237,
+   "score": null,
+   "error": "181:8: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\n𝓕 : FieldSpecification\nφ ψ : 𝓕.CrAnFieldOp\nhφψ : crAn"
+  }
+ ],
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 385 tokens, 9621 heartbeats, score 81.84. Free passes applied (normalize, lint_delete): start candidate 376 tokens, 9588 heartbeats, score 82.11.\n- Exchange rate here: 1 token = 0.027 points, 100 heartbeats = 0.079 points.\n- Heartbeat hot spots: lines 13-13 ~70% (`simp only [ofListBasis_eq_ofList]`); lines 8-9 ~17% (`apply LinearMap.congr_fun₂ (f := (M…`); lines 12-12 ~5% (`dsimp [T, C, M]`).\n- Compile but do not pay alone: line 41 the closing tactic at line 41 (`simp only [map_smul, mul_smul_comm]`) by `simp_all` (-6 tok, +2346 hb); line 41 the closing tactic at line 41 (`simp only [map_smul, mul_smul_comm]`) by `aesop` (-6 tok, +2545 hb).\n- Deletions that FAIL (needed as they stand): line 9 `T` from the simp list; line 9 `C` from the simp list; line 9 `M` from the simp list; line 10 `ofListBasis_eq_ofList` from the simp list; line 13 `hφψ` from the simp list; line 13 `hψφ` from the simp list.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 32 (`· simp only [map_smul, map_mul]`) (grind/simp_all/aesop); the bullet at line 23 (`· congr 1`) (grind/simp_all/aesop); the bullet at line 39 (`· rw [crAnTimeOrderSign, Wick.koszulSig…`) (grind/simp_all/aesop); the bullet at line 42 (`· simp only [ι_superCommuteF_of_diff_st…`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 82.11,
+ "gain": 0.27,
+ "compiles_sweep": 80,
+ "seconds": 360.2,
+ "source": "best:7c21f3ff055c"
+}

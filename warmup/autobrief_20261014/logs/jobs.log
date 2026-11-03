@@ -1,0 +1,48 @@
+[2026-10-14T04:04:05+00:00] worktree /home/user/source/lra-ab/wuclean-solab1-hx at 01f68158dce7a1903354b70f0dd5e1a928de5086: warm-up rows used as committed
+[2026-10-14T04:04:06+00:00] auto-brief: measuring 4 seed(s) (budget 80 compiles per row, timeout 5400s)
+[2026-10-14T04:58:12+00:00] auto-brief: 4/4 rows measured in 3246s
+[2026-10-14T04:58:12+00:00] round 1 (rung $1.00): 15 resume, 0 fresh restart (spent so far $0.00)
+[2026-10-14T05:38:16+00:00] round 1 done: mean so far 83.58
+[2026-10-14T05:38:16+00:00] round 2 (rung $1.00): 15 resume, 0 fresh restart (spent so far $4.18)
+[2026-10-14T06:17:07+00:00] round 2 done: mean so far 86.73
+[2026-10-14T06:17:07+00:00] round 3 (rung $1.00): 15 resume, 0 fresh restart (spent so far $8.28)
+[2026-10-14T06:40:55+00:00] round 3 done: mean so far 87.73
+[2026-10-14T06:40:55+00:00] round 4 (rung $1.00): 7 resume, 0 fresh restart (spent so far $10.50)
+[2026-10-14T06:49:37+00:00] round 4 done: mean so far 87.80
+[2026-10-14T06:49:37+00:00] MILESTONE $1.00 wuclean arm solab1, rung $1.00: mean 87.80 over 15
+[2026-10-14T06:49:37+00:00]   None n=15 87.80; arklib n=3 88.16; cslib n=3 81.95; physlib n=3 83.53; putnambench n=3 96.86; strata n=3 88.52
+[2026-10-14T06:49:37+00:00]   spend: total $11.05, mean $0.737, MAX $0.775 per problem (rung $1.00; past $2: 0)
+[2026-10-14T06:49:37+00:00]   score at budget: $0.50 86.08 · $1.00 87.77
+[2026-10-14T06:49:37+00:00] round 5 (rung $2.00): 15 resume, 0 fresh restart (spent so far $11.05)
+[2026-10-14T07:26:31+00:00] round 5 done: mean so far 89.11
+[2026-10-14T07:26:31+00:00] round 6 (rung $2.00): 15 resume, 0 fresh restart (spent so far $15.91)
+[2026-10-14T08:06:19+00:00] round 6 done: mean so far 89.51
+[2026-10-14T08:06:19+00:00] round 7 (rung $2.00): 15 resume, 0 fresh restart (spent so far $20.62)
+[2026-10-14T08:36:54+00:00] round 7 done: mean so far 89.77
+[2026-10-14T08:36:54+00:00] round 8 (rung $2.00): 14 resume, 0 fresh restart (spent so far $24.23)
+[2026-10-14T11:53:30+00:00] worktree /home/user/source/lra-ab/wuclean-solab1-hx at 2e73fb92fdc405ce52e2da7d905eb5324109148b: warm-up rows used as committed
+[2026-10-14T11:53:30+00:00] MILESTONE $1.00 wuclean arm solab1, rung $1.00: mean 89.82 over 15
+[2026-10-14T11:53:30+00:00]   None n=15 89.82; arklib n=3 90.96; cslib n=3 85.34; physlib n=3 85.35; putnambench n=3 96.98; strata n=3 90.46
+[2026-10-14T11:53:30+00:00]   spend: total $25.47, mean $1.698, MAX $1.757 per problem (rung $1.00; past $2: 0)
+[2026-10-14T11:53:30+00:00]   score at budget: $0.50 86.08 · $1.00 89.05
+[2026-10-14T11:53:30+00:00] round 9 (rung $2.00): 5 resume, 0 fresh restart (spent so far $25.47)
+[2026-10-14T12:01:09+00:00] round 9 done: mean so far 89.82
+[2026-10-14T12:01:09+00:00] MILESTONE $2.00 wuclean arm solab1, rung $2.00: mean 89.82 over 15
+[2026-10-14T12:01:09+00:00]   None n=15 89.82; arklib n=3 90.96; cslib n=3 85.34; physlib n=3 85.35; putnambench n=3 96.98; strata n=3 90.46
+[2026-10-14T12:01:09+00:00]   spend: total $25.93, mean $1.729, MAX $1.757 per problem (rung $2.00; past $2: 0)
+[2026-10-14T12:01:09+00:00]   score at budget: $0.50 86.08 · $1.00 89.05 · $1.50 89.65 · $2.00 89.82
+[2026-10-14T12:01:09+00:00] round 10 (rung $2.85): 15 resume, 0 fresh restart (spent so far $25.93)
+[2026-10-14T12:37:09+00:00] round 10 done: mean so far 90.21
+[2026-10-14T12:37:09+00:00] round 11 (rung $2.85): 15 resume, 0 fresh restart (spent so far $30.61)
+[2026-10-14T13:12:13+00:00] round 11 done: mean so far 90.37
+[2026-10-14T13:12:13+00:00] round 12 (rung $2.85): 15 resume, 0 fresh restart (spent so far $34.72)
+[2026-10-14T13:35:05+00:00] round 12 done: mean so far 90.46
+[2026-10-14T13:35:05+00:00] round 13 (rung $2.85): 10 resume, 0 fresh restart (spent so far $37.59)
+[2026-10-14T13:45:35+00:00] round 13 done: mean so far 90.56
+[2026-10-14T13:45:35+00:00] round 14 (rung $2.85): 1 resume, 0 fresh restart (spent so far $38.55)
+[2026-10-14T13:48:14+00:00] round 14 done: mean so far 90.56
+[2026-10-14T13:48:14+00:00] MILESTONE $2.85 wuclean arm solab1, rung $2.85: mean 90.56 over 15
+[2026-10-14T13:48:14+00:00]   None n=15 90.56; arklib n=3 92.55; cslib n=3 85.45; physlib n=3 86.71; putnambench n=3 97.23; strata n=3 90.85
+[2026-10-14T13:48:14+00:00]   spend: total $38.62, mean $2.575, MAX $2.598 per problem (rung $2.85; past $2: 15)
+[2026-10-14T13:48:14+00:00]   score at budget: $0.50 86.08 · $1.00 89.05 · $1.50 89.65 · $2.00 90.14 · $2.50 90.45 · $2.85 90.54
+[2026-10-14T13:48:14+00:00] HELDOUT DONE

@@ -1,0 +1,12 @@
+AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)
+- Seed: 1463 tokens, 15987 heartbeats, score 33.37. Free passes applied (normalize, hb_rewrite, hb_polish, lint_delete): start candidate 1437 tokens, 15489 heartbeats, score 35.0.
+- Best combination of the paying single edits below: 1427 tokens, 15427 heartbeats, score 35.36 (Z 100.0); your workspace starts from it.
+- Exchange rate here: 1 token = 0.023 points, 100 heartbeats = 0.208 points.
+- Single edits that PAY:
+  - line 99: delete `Subtype.coe_eta` from the simp list: -2 tokens, -29 hb, score +0.11
+  - line 100: delete `Subtype.coe_eta` from the simp list: -2 tokens, -14 hb, score +0.08
+  - line 96: delete `X` from the simp list: -2 tokens, -4 hb, score +0.06
+  - line 102: delete `true_and` from the simp list: -2 tokens, -4 hb, score +0.06
+  - line 122: delete `Fintype.card_ofFinset` from the simp list: -2 tokens, -7 hb, score +0.06
+- Deletions that FAIL (needed as they stand): line 12 `d_i` from the simp list; line 12 `BBF_CodeDistance` from the simp list; line 22 `nonempty_subtype` from the simp list; line 56 `hammingDist` from the simp list; line 75 `ΔH` from the simp list; line 75 `Finset.mem_filter` from the simp list.
+- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the proof of `have h_dist_le_fw_dist_times_fiber_size…` (line 47) (grind/simp_all/aesop); the bullet at line 117 (`·`) (grind/simp_all/aesop); the proof of `have h_elemenet_Y_bad : y_of_x ∈ Y_bad.…` (line 82) (grind/simp_all/aesop); the proof of `have h_algebraic_identity : (d_i_plus_s…` (line 165) (grind/simp_all/aesop).

@@ -1,0 +1,119 @@
+[
+ {
+  "problem": "CallElimCorrect.substOldPostSubset",
+  "best_score": 92.0,
+  "checks": 20,
+  "tool_calls": 8,
+  "turns": 8,
+  "out_tokens": 6448,
+  "seconds": 205
+ },
+ {
+  "problem": "CallElimCorrect.extractedOldExprInVars",
+  "best_score": 94.34,
+  "checks": 47,
+  "tool_calls": 20,
+  "turns": 20,
+  "out_tokens": 10549,
+  "seconds": 429
+ },
+ {
+  "problem": "Core.InitsUpdatesComm",
+  "best_score": 89.14,
+  "checks": 2,
+  "tool_calls": 4,
+  "turns": 4,
+  "out_tokens": 24882,
+  "seconds": 285
+ },
+ {
+  "problem": "fundamental_theorem_of_variational_calculus'",
+  "best_score": 91.58,
+  "checks": 1,
+  "tool_calls": 9,
+  "turns": 9,
+  "out_tokens": 2157,
+  "seconds": 65
+ },
+ {
+  "problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+  "best_score": 86.43,
+  "checks": 26,
+  "tool_calls": 48,
+  "turns": 35,
+  "out_tokens": 9642,
+  "seconds": 576
+ },
+ {
+  "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+  "best_score": 85.55,
+  "checks": 5,
+  "tool_calls": 9,
+  "turns": 8,
+  "out_tokens": 3941,
+  "seconds": 154
+ },
+ {
+  "problem": "Cslib.SKI.parallelReduction_diamond",
+  "best_score": 76.91,
+  "checks": 9,
+  "tool_calls": 7,
+  "turns": 7,
+  "out_tokens": 16006,
+  "seconds": 212
+ },
+ {
+  "problem": "Cslib.CCS.bisimilarity_congr_choice",
+  "best_score": 87.03,
+  "checks": 11,
+  "tool_calls": 8,
+  "turns": 8,
+  "out_tokens": 3673,
+  "seconds": 106
+ },
+ {
+  "problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+  "best_score": 90.97,
+  "checks": 8,
+  "tool_calls": 18,
+  "turns": 11,
+  "out_tokens": 14418,
+  "seconds": 405
+ },
+ {
+  "problem": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+  "best_score": 93.62,
+  "checks": 25,
+  "tool_calls": 43,
+  "turns": 27,
+  "out_tokens": 6224,
+  "seconds": 354
+ },
+ {
+  "problem": "interleaved_affine_gaps_imply_tensor_gaps",
+  "best_score": 92.91,
+  "checks": 16,
+  "tool_calls": 30,
+  "turns": 25,
+  "out_tokens": 9899,
+  "seconds": 489
+ },
+ {
+  "problem": "putnam_1964_a4",
+  "best_score": 96.82,
+  "checks": 8,
+  "tool_calls": 7,
+  "turns": 7,
+  "out_tokens": 17286,
+  "seconds": 247
+ },
+ {
+  "problem": "putnam_1964_b2",
+  "best_score": 99.26,
+  "checks": 29,
+  "tool_calls": 19,
+  "turns": 19,
+  "out_tokens": 12230,
+  "seconds": 358
+ }
+]

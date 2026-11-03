@@ -1,0 +1,77 @@
+{
+ "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+ "best": {
+  "score": 72.76,
+  "proof": "lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t' := by\n  generalize eq : [] = Γ at der\n  have lc := der.wf.2.1\n  induction der <;> subst eq\n  case var => simp_all\n  case abs => exact Or.inl (.abs lc)\n  case tabs => exact Or.inl (.tabs lc)\n  case sub => grind\n  case' app l r il ir =>\n    cases lc\n    rcases il rfl (by assumption) with v | ⟨_, red⟩\n    case' inl =>\n      rcases ir rfl (by assumption) with v' | ⟨_, red⟩\n      case' inl => obtain ⟨_, _, rfl⟩ := l.canonical_form_abs v\n  case' tapp d s ih =>\n    cases lc\n    rcases ih rfl (by assumption) with v | ⟨_, red⟩\n    case' inl => obtain ⟨_, _, rfl⟩ := d.canonical_form_tabs v\n  case' let' d h ih _ =>\n    obtain ⟨lc, body⟩ := body_let.mp lc\n    rcases ih rfl lc with v | ⟨_, red⟩\n  case' inl d h ih | inr d h ih =>\n    cases lc\n    rcases ih rfl (by assumption) with v | ⟨_, red⟩\n  case' case d h h' ih _ _ =>\n    obtain ⟨lc, b, b'⟩ := body_case.mp lc\n    rcases ih rfl lc with v | ⟨_, red⟩\n    case' inl => obtain ⟨_, h | h⟩ := d.canonical_form_sum v <;> subst h <;> cases v\n  all_goals solve_by_elim (maxDepth := 7) [Or.inl, Or.inr, Exists.intro, Value.inl, Value.inr, Red.appₗ, Red.appᵣ, Red.abs, Red.tabs, Red.tapp, Red.let_bind, Red.let_body, Red.inl, Red.inr, Red.case, Red.case_inl, Red.case_inr]",
+  "tokens": 288,
+  "heartbeats": 6672,
+  "L": 29.41,
+  "H": 88.86,
+  "Z": 100.0,
+  "compat": {
+   "v4.33.0-rc2": true,
+   "v4.32.0": true,
+   "v4.31.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "726a5a3867fc",
+   "tokens": 67,
+   "heartbeats": 36095,
+   "ok": false,
+   "error": "94:12: `grind` failed case grind.1.1.1.1.2.2.3 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.app ",
+   "run_id": "wu-hx-sol-f3",
+   "t": "2026-10-11T21:27:59Z"
+  },
+  {
+   "sha": "ac8915a6c0e6",
+   "tokens": 88,
+   "heartbeats": 36745,
+   "ok": false,
+   "error": "93:12: `grind` failed case grind.3.1.2.1.2.3.1.2.2.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t",
+   "run_id": "wu-hx-sol-f3",
+   "t": "2026-10-11T21:29:47Z"
+  },
+  {
+   "sha": "6a8fd12821f2",
+   "tokens": 280,
+   "heartbeats": 3366,
+   "ok": false,
+   "error": "98:6: unsolved goals case app.app.inl.inl … [hypotheses omitted] ⊢ ((Term.abs w✝¹ w✝).app t₂✝).Value ∨ ∃ t', (Term.abs w✝¹ w✝).app t₂✝ ⭢βᵛ t'",
+   "run_id": "wu-hx-sol-f3",
+   "t": "2026-10-11T21:29:51Z"
+  },
+  {
+   "sha": "65fa0515f0b6",
+   "tokens": 288,
+   "heartbeats": 6672,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f3",
+   "t": "2026-10-11T21:30:23Z",
+   "score": 72.76
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-f3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:23:51Z"
+  }
+ ],
+ "api_spend": 0.754419,
+ "lineage": "fresh",
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-f3",
+    "check": 4,
+    "d_score": 39.43,
+    "d_tokens": -120,
+    "d_heartbeats": 6672,
+    "diff": "+lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t' := by\n+  generalize eq : [] = Γ at der\n+  have lc := der.wf.2.1\n+  induction der <;> subst eq\n+  case var => simp_all\n+  case abs => exact Or.inl (.abs lc)\n+  case tabs => exact Or.inl (.tabs lc)\n+  case sub => grind\n+  case' app l r il ir =>\n+    cases lc\n+    rcases il rfl (by assumption) with v | ⟨_, red⟩\n+    case' inl =>\n+      rcases ir rfl (by assumption) with v' | ⟨_, red⟩\n+      case' inl => obtain ⟨_, _, rfl⟩ := l.canonical_form_abs v\n+  case' tapp d s ih =>\n+    cases lc\n+    rcases ih rfl (by assumption) with v | ⟨_, red⟩\n+    case' inl => obtain ⟨_, _, rfl⟩ := d.canonical_form_tabs v\n+  case' let' d h ih _ ="
+   }
+  ]
+ }
+}

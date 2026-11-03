@@ -1,0 +1,2241 @@
+{
+ "problem": "putnam_1964_a4",
+ "best": {
+  "score": 96.94,
+  "proof": "theorem putnam_1964_a4\n(u : ℕ → ℤ)\n(boundedu : ∃ B T : ℤ, ∀ n : ℕ, B ≤ u n ∧ u n ≤ T)\n(hu : ∀ n ≥ 4, u n = ((u (n - 1) + u (n - 2) + u (n - 3) * u (n - 4)) : ℝ) / (u (n - 1) * u (n - 2) + u (n - 3) + u (n - 4)) ∧ (u (n - 1) * u (n - 2) + u (n - 3) + u (n - 4)) ≠ 0)\n: (∃ N c : ℕ, c > 0 ∧ ∀ n ≥ N, u (n + c) = u n) := by\n  obtain ⟨B, T, hB⟩ := boundedu\n  obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ : Fin 4 => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem (by intro n k _; exact hB (n + k))\n  have :=  @Nat.strongRec _ fun m ih => by\n    by_cases hm : m < 4\n    · simpa using congrFun heq.symm ⟨m, hm⟩\n    · clear hij\n      rify\n      simp (disch := omega) only [hu, Nat.add_sub_assoc, ih]\n  use i, j - i, Nat.sub_pos_of_lt hij\n  intro n hn\n  convert this (n - i) using 2 <;> omega",
+  "tokens": 117,
+  "heartbeats": 2871,
+  "L": 93.39,
+  "H": 97.43,
+  "Z": 100.0,
+  "compat": {
+   "v4.27.0": true,
+   "v4.26.0": true,
+   "v4.25.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "d065e7731d8a",
+   "tokens": 1554,
+   "heartbeats": 97182,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:24:59Z",
+   "score": 41.68
+  },
+  {
+   "sha": "25d2810fffc0",
+   "tokens": 408,
+   "heartbeats": 25537,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:26:15Z",
+   "score": 84.68
+  },
+  {
+   "sha": "c89068fe9964",
+   "tokens": 333,
+   "heartbeats": 30255,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:26:59Z"
+  },
+  {
+   "sha": "caf11b7fca8a",
+   "tokens": 359,
+   "heartbeats": 25280,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:27:03Z",
+   "score": 85.68
+  },
+  {
+   "sha": "415802e28a92",
+   "tokens": 285,
+   "heartbeats": 29123,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:28:50Z",
+   "score": 85.93
+  },
+  {
+   "sha": "f6e175f3aa00",
+   "tokens": 303,
+   "heartbeats": 25185,
+   "ok": false,
+   "error": "24:60: unsolved goals case left … [hypotheses omitted] ⊢ B ≤ u n ∧ B ≤ u (n + 1) ∧ B ≤ u (n + 2) ∧ B ≤ u (n + 3) ‖ ⊢ u n ≤ T ∧ u (n + 1) ≤ T ∧ u (n + 2) ≤ T ∧ u (n + 3) ≤ T",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:29:05Z"
+  },
+  {
+   "sha": "e212220f7178",
+   "tokens": 288,
+   "heartbeats": 5610,
+   "ok": false,
+   "error": "21:51: unsolved goals … [hypotheses omitted] ⊢ ∃ N, ∃ c > 0, ∀ n ≥ N, u (n + c) = u n",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:29:09Z"
+  },
+  {
+   "sha": "1055f783e441",
+   "tokens": 294,
+   "heartbeats": 25237,
+   "ok": false,
+   "error": "24:60: unsolved goals … [hypotheses omitted] ⊢ True ∧ True ∧ True ∧ True ∧ True ∧ True ∧ True ∧ True",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:29:14Z"
+  },
+  {
+   "sha": "a26847a9193e",
+   "tokens": 284,
+   "heartbeats": 27156,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:29:43Z",
+   "score": 86.53
+  },
+  {
+   "sha": "ff6f874d77ae",
+   "tokens": 288,
+   "heartbeats": 6922,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:29:57Z",
+   "score": 92.5
+  },
+  {
+   "sha": "5bb9378927c5",
+   "tokens": 251,
+   "heartbeats": 7116,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:30:10Z",
+   "score": 93.14
+  },
+  {
+   "sha": "5e567b7626ab",
+   "tokens": 220,
+   "heartbeats": 3073,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:31:01Z",
+   "score": 94.94
+  },
+  {
+   "sha": "77f4a06e8f93",
+   "tokens": 211,
+   "heartbeats": 3074,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:31:30Z",
+   "score": 95.11
+  },
+  {
+   "sha": "cca2d584d850",
+   "tokens": 206,
+   "heartbeats": 3112,
+   "ok": false,
+   "error": "25:4: Application type mismatch: The argument fun n k x => hB (?m.181 n k x) has type ∀ (n : ℕ) (k : ?m.179 n) (x : ?m.180 n k), B ≤ u (?m.181 n k x) ∧ u (?m.181 n k x) ≤ T but is expected to have type ∀ (a : ℕ), f a ∈ ?m.173 in the application Finite.exists_lt_map_eq_of_forall_mem fun n k x => hB (",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:31:42Z"
+  },
+  {
+   "sha": "4769f67a08b3",
+   "tokens": 247,
+   "heartbeats": 3352,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:31:49Z"
+  },
+  {
+   "sha": "434e0d7da7f2",
+   "tokens": 200,
+   "heartbeats": 3111,
+   "ok": false,
+   "error": "24:121: Application type mismatch: The argument fun n k x => hB (?m.190 n k x) has type ∀ (n : ℕ) (k : ?m.188 n) (x : ?m.189 n k), B ≤ u (?m.190 n k x) ∧ u (?m.190 n k x) ≤ T but is expected to have type ∀ (a : ℕ), f a ∈ ?m.182 in the application Finite.exists_lt_map_eq_of_forall_mem fun n k x => hB",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:32:06Z"
+  },
+  {
+   "sha": "fc3bf7f89908",
+   "tokens": 183,
+   "heartbeats": 4267,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:32:11Z",
+   "score": 95.28
+  },
+  {
+   "sha": "1e77d85028d8",
+   "tokens": 174,
+   "heartbeats": 4217,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:32:41Z",
+   "score": 95.46
+  },
+  {
+   "sha": "9efc3510aa01",
+   "tokens": 165,
+   "heartbeats": 4200,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:33:13Z",
+   "score": 95.64
+  },
+  {
+   "sha": "069f59986eda",
+   "tokens": 170,
+   "heartbeats": 4216,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:33:24Z"
+  },
+  {
+   "sha": "44aeb3ab957c",
+   "tokens": 166,
+   "heartbeats": 224207,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:33:36Z"
+  },
+  {
+   "sha": "8e0d74c48bf8",
+   "tokens": 161,
+   "heartbeats": 4201,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:33:59Z",
+   "score": 95.71
+  },
+  {
+   "sha": "02db5b5f85de",
+   "tokens": 157,
+   "heartbeats": 1619,
+   "ok": false,
+   "error": "25:10: failed to elaborate eliminator, expected type is not available",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:34:10Z"
+  },
+  {
+   "sha": "ed90c095ff32",
+   "tokens": 158,
+   "heartbeats": 1616,
+   "ok": false,
+   "error": "25:4: Tactic `apply` failed: could not unify the conclusion of `@Nat.strong_induction_on` (∀ … [hypotheses omitted] ⊢ ∀ (m : ℕ), u (i + m) = u (j + m)",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:34:15Z"
+  },
+  {
+   "sha": "5d834b1831a0",
+   "tokens": 158,
+   "heartbeats": 4218,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:34:43Z",
+   "score": 95.76
+  },
+  {
+   "sha": "cb3710b2aa2a",
+   "tokens": 159,
+   "heartbeats": 4017,
+   "ok": false,
+   "error": "33:43: omega could not prove the goal: a possible counterexample may satisfy the constraints c ≥ 0 b ≥ 0 b - c ≤ 0 a ≥ 0 a - b ≥ 1 a - c ≥ 1 where a := ↑j b := ↑i c := ↑n",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:34:55Z"
+  },
+  {
+   "sha": "e1623581137d",
+   "tokens": 156,
+   "heartbeats": 4294,
+   "ok": false,
+   "error": "23:142: Application type mismatch: The argument fun n k x => hB (?m.187 n k x) has type ∀ (n : ℕ) (k : ?m.185 n) (x : ?m.186 n k), B ≤ u (?m.187 n k x) ∧ u (?m.187 n k x) ≤ T but is expected to have type ∀ (a : ℕ), (fun k => u (a + ↑k)) ∈ ?m.172 in the application Finite.exists_lt_map_eq_of_forall_m",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:03:49Z"
+  },
+  {
+   "sha": "b14596d3b96f",
+   "tokens": 173,
+   "heartbeats": 4281,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:03:57Z"
+  },
+  {
+   "sha": "604c9ec3b5a3",
+   "tokens": 158,
+   "heartbeats": 4218,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:04:00Z"
+  },
+  {
+   "sha": "377e7a3f2756",
+   "tokens": 157,
+   "heartbeats": 7889,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:04:04Z"
+  },
+  {
+   "sha": "0be4c7a262a2",
+   "tokens": 157,
+   "heartbeats": 4216,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:04:08Z",
+   "score": 95.78
+  },
+  {
+   "sha": "2dc1e0b6e42c",
+   "tokens": 154,
+   "heartbeats": 4215,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:05:15Z",
+   "score": 95.84
+  },
+  {
+   "sha": "42b795cbe6d6",
+   "tokens": 157,
+   "heartbeats": 4058,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:05:26Z"
+  },
+  {
+   "sha": "4ed74021335b",
+   "tokens": 170,
+   "heartbeats": 4222,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:05:30Z"
+  },
+  {
+   "sha": "4f8d77fed83e",
+   "tokens": 154,
+   "heartbeats": 4058,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:06:11Z",
+   "score": 95.89
+  },
+  {
+   "sha": "f9fd26a10349",
+   "tokens": 150,
+   "heartbeats": 4048,
+   "ok": false,
+   "error": "23:154: Tactic `apply` failed: could not unify the type of `hB` ∀ … [hypotheses omitted] ⊢ (fun n k => u (n + ↑k)) a✝ ∈ univ.pi fun x => Icc B T",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:06:22Z"
+  },
+  {
+   "sha": "8968534437e1",
+   "tokens": 147,
+   "heartbeats": 15966,
+   "ok": false,
+   "error": "23:143: unsolved goals case left … [hypotheses omitted] ⊢ (fun i => B) ≤ fun k => u (a + ↑k) ‖ ⊢ (fun k => u (a + ↑k)) ≤ fun i => T",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:06:26Z"
+  },
+  {
+   "sha": "ccf152950232",
+   "tokens": 151,
+   "heartbeats": 4048,
+   "ok": false,
+   "error": "23:154: Type mismatch hB ?m.187 has type B ≤ u ?m.187 ∧ u ?m.187 ≤ T but is expected to have type (fun n k => u (n + ↑k)) a✝ ∈ univ.pi fun x => Icc B T",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:06:30Z"
+  },
+  {
+   "sha": "882264ff1df9",
+   "tokens": 151,
+   "heartbeats": 4049,
+   "ok": false,
+   "error": "23:143: unsolved goals … [hypotheses omitted] ⊢ ∀ (a : ℕ), (fun n k => u (n + ↑k)) a ∈ univ.pi fun x => Icc B T",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:06:51Z"
+  },
+  {
+   "sha": "81a84ad81731",
+   "tokens": 155,
+   "heartbeats": null,
+   "ok": false,
+   "error": "31:3: unknown tactic",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:07:33Z"
+  },
+  {
+   "sha": "adc3dba9b52a",
+   "tokens": 153,
+   "heartbeats": 4054,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:07:57Z",
+   "score": 95.91
+  },
+  {
+   "sha": "05230da5077c",
+   "tokens": 150,
+   "heartbeats": 4054,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:08:27Z",
+   "score": 95.96
+  },
+  {
+   "sha": "24d469ad8f3d",
+   "tokens": 145,
+   "heartbeats": 4084,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:09:05Z",
+   "score": 96.05
+  },
+  {
+   "sha": "13a5ef18d218",
+   "tokens": 141,
+   "heartbeats": 4083,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:09:26Z",
+   "score": 96.12
+  },
+  {
+   "sha": "10f4a068ba53",
+   "tokens": 139,
+   "heartbeats": 4099,
+   "ok": false,
+   "error": "23:104: Application type mismatch: The argument fun n k x => hB (n + ↑k) has type ∀ (n : ℕ) (k : Fin 4) (x : ?m.183 n k), B ≤ u (n + ↑k) ∧ u (n + ↑k) ≤ T but is expected to have type ∀ (a : ℕ), ?m.173 a ∈ ?m.172 in the application Finite.exists_lt_map_eq_of_forall_mem fun n k x => hB (n + ↑k)",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:09:46Z"
+  },
+  {
+   "sha": "6f1529412e3f",
+   "tokens": 141,
+   "heartbeats": 4082,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:10:07Z"
+  },
+  {
+   "sha": "fb48d0cc0817",
+   "tokens": 138,
+   "heartbeats": 1634,
+   "ok": false,
+   "error": "28:6: `simp` made no progress",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:10:25Z"
+  },
+  {
+   "sha": "cfe1ff4aec62",
+   "tokens": 139,
+   "heartbeats": 1528,
+   "ok": false,
+   "error": "27:6: failed to synthesize CharZero ?α Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:10:37Z"
+  },
+  {
+   "sha": "d3ecb46bbb4b",
+   "tokens": 212,
+   "heartbeats": 3831,
+   "ok": false,
+   "error": "30:53: omega could not prove the goal: a possible counterexample may satisfy the constraints 0 ≤ e ≤ 3 d ≥ 0 0 ≤ c ≤ 2 c - e ≤ -2 b ≥ 0 a ≥ 0 a - b ≥ 1 where a := ↑j b := ↑i c := ↑↑k d := ↑m e := ↑↑⟨↑k + 1, ⋯⟩",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:12:39Z"
+  },
+  {
+   "sha": "8b8fbb2aab6d",
+   "tokens": 159,
+   "heartbeats": 4149,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:32:08Z"
+  },
+  {
+   "sha": "eb420d2b511a",
+   "tokens": 147,
+   "heartbeats": 1538,
+   "ok": false,
+   "error": "27:25: Invalid argument name `R` for function `Int.cast_inj` Hint: Perhaps you meant one of the following parameter names: • `α`: R̵α̲ • `m`: R̵m̲ • `n`: R̵n̲",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:32:12Z"
+  },
+  {
+   "sha": "c930388a66ab",
+   "tokens": 150,
+   "heartbeats": 3671,
+   "ok": false,
+   "error": "31:2: Type mismatch: After simplification, term Eq.symm (h (n - i)) has type u (j + (n - i)) = u n but is expected to have type u (n + (j - i)) = u n",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:32:15Z"
+  },
+  {
+   "sha": "273baf7c4172",
+   "tokens": 150,
+   "heartbeats": 4085,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:33:00Z"
+  },
+  {
+   "sha": "da0c7c79f88b",
+   "tokens": 137,
+   "heartbeats": 224070,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:33:11Z"
+  },
+  {
+   "sha": "1796e1f719dc",
+   "tokens": 140,
+   "heartbeats": 7751,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:33:15Z"
+  },
+  {
+   "sha": "70cfdd16cbff",
+   "tokens": 142,
+   "heartbeats": 3145,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:33:53Z",
+   "score": 96.38
+  },
+  {
+   "sha": "e88a02803a6d",
+   "tokens": 143,
+   "heartbeats": 4507,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:34:04Z"
+  },
+  {
+   "sha": "0fe3ce3dd7a2",
+   "tokens": 142,
+   "heartbeats": 5002,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:34:08Z"
+  },
+  {
+   "sha": "713830ed3474",
+   "tokens": 141,
+   "heartbeats": 4082,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:34:11Z"
+  },
+  {
+   "sha": "403815582cd9",
+   "tokens": 144,
+   "heartbeats": 4079,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:34:15Z"
+  },
+  {
+   "sha": "584e97741c31",
+   "tokens": 141,
+   "heartbeats": 5377,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:15:29Z"
+  },
+  {
+   "sha": "815bd98b58fd",
+   "tokens": 142,
+   "heartbeats": 3145,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:15:32Z"
+  },
+  {
+   "sha": "c6910682e0af",
+   "tokens": 146,
+   "heartbeats": 3135,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:15:35Z"
+  },
+  {
+   "sha": "17b8efb290eb",
+   "tokens": 146,
+   "heartbeats": 3143,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:15:39Z"
+  },
+  {
+   "sha": "4308e032bdbb",
+   "tokens": 142,
+   "heartbeats": 3301,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:15:42Z"
+  },
+  {
+   "sha": "ecb455c42857",
+   "tokens": 143,
+   "heartbeats": 3093,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:16:10Z"
+  },
+  {
+   "sha": "9fae82a96db8",
+   "tokens": 149,
+   "heartbeats": 3147,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:16:13Z"
+  },
+  {
+   "sha": "38c7c1d40fe1",
+   "tokens": 144,
+   "heartbeats": 3146,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:16:17Z"
+  },
+  {
+   "sha": "c42b2075ced6",
+   "tokens": 142,
+   "heartbeats": 1572,
+   "ok": false,
+   "error": "28:6: Tactic `simp_all` does not support the `discharger` option",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:16:20Z"
+  },
+  {
+   "sha": "e01e273bc38f",
+   "tokens": 153,
+   "heartbeats": 3164,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:16:24Z"
+  },
+  {
+   "sha": "fe53662c2ad9",
+   "tokens": 141,
+   "heartbeats": 3142,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:17:41Z",
+   "score": 96.4
+  },
+  {
+   "sha": "02115f70e654",
+   "tokens": 141,
+   "heartbeats": 3146,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:18:27Z"
+  },
+  {
+   "sha": "530c52fc5583",
+   "tokens": 141,
+   "heartbeats": 3142,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:18:30Z"
+  },
+  {
+   "sha": "6c6306f43d6e",
+   "tokens": 142,
+   "heartbeats": 3089,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:18:34Z"
+  },
+  {
+   "sha": "209fcc8216d1",
+   "tokens": 142,
+   "heartbeats": 3016,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:18:57Z",
+   "score": 96.42
+  },
+  {
+   "sha": "ec25e2e2173a",
+   "tokens": 142,
+   "heartbeats": 3016,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:19:36Z"
+  },
+  {
+   "sha": "331df0644210",
+   "tokens": 127,
+   "heartbeats": 4211,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:21:13Z"
+  },
+  {
+   "sha": "f8b3eb3e1ece",
+   "tokens": 128,
+   "heartbeats": 6023,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:21:38Z"
+  },
+  {
+   "sha": "2d547bc9c382",
+   "tokens": 128,
+   "heartbeats": 5956,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:21:42Z"
+  },
+  {
+   "sha": "7c541567746b",
+   "tokens": 124,
+   "heartbeats": 6052,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:21:45Z"
+  },
+  {
+   "sha": "81807a358149",
+   "tokens": 122,
+   "heartbeats": 4226,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:22:10Z",
+   "score": 96.44
+  },
+  {
+   "sha": "79699bad947b",
+   "tokens": 121,
+   "heartbeats": null,
+   "ok": false,
+   "error": "27:5: unknown tactic",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:22:21Z"
+  },
+  {
+   "sha": "4e9dd6590d64",
+   "tokens": 122,
+   "heartbeats": 4203,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:22:55Z",
+   "score": 96.45
+  },
+  {
+   "sha": "27065f21d838",
+   "tokens": 126,
+   "heartbeats": 4069,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:23:05Z"
+  },
+  {
+   "sha": "77b94bb1334b",
+   "tokens": 120,
+   "heartbeats": 3709,
+   "ok": false,
+   "error": "27:67: omega could not prove the goal: a possible counterexample may satisfy the constraints 0 ≤ c ≤ 3 b ≥ 0 b ≥ 1 a ≥ 0 a - c ≥ 0 a + b - c ≥ 0 where a := ↑n b := ↑(j - i) c := ↑(n - i)",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:23:09Z"
+  },
+  {
+   "sha": "22ae86b4fbc6",
+   "tokens": 124,
+   "heartbeats": 4002,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:23:41Z",
+   "score": 96.47
+  },
+  {
+   "sha": "110968da5894",
+   "tokens": 126,
+   "heartbeats": 3971,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:23:52Z"
+  },
+  {
+   "sha": "17e3325d04d9",
+   "tokens": 125,
+   "heartbeats": 4171,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:23:56Z"
+  },
+  {
+   "sha": "2e37361b98c8",
+   "tokens": 121,
+   "heartbeats": 5856,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:23:59Z"
+  },
+  {
+   "sha": "91f7999fb7ab",
+   "tokens": 124,
+   "heartbeats": 4003,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:53:53Z"
+  },
+  {
+   "sha": "ce24db86fbae",
+   "tokens": 123,
+   "heartbeats": 3413,
+   "ok": false,
+   "error": "30:77: omega could not prove the goal: a possible counterexample may satisfy the constraints d ≥ 1 0 ≤ c ≤ 3 b ≥ 0 a ≥ 0 -3 ≤ a - b ≤ 0 a - b + c ≥ 1 a + d ≥ 0 where a := ↑i b := ↑n c := ↑↑⟨n - i, ⋯⟩ d := ↑(j - i)",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:53:56Z"
+  },
+  {
+   "sha": "59031503a0fe",
+   "tokens": 121,
+   "heartbeats": 4222,
+   "ok": false,
+   "error": "30:4: Type mismatch: After simplification, term Eq.symm (congrFun heq ⟨n - i, Decidable.byContradiction fun a => putnam_1964_a4._proof_15 i j n hn hm a⟩) has type u (j + (n - i)) = u (i + (n - i)) but is expected to have type u (n + (j - i)) = u n",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:00Z"
+  },
+  {
+   "sha": "3591fcbf7042",
+   "tokens": 129,
+   "heartbeats": 4003,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:03Z"
+  },
+  {
+   "sha": "6ef2af1fd7e9",
+   "tokens": 123,
+   "heartbeats": 3396,
+   "ok": false,
+   "error": "23:117: Application type mismatch: The argument fun n k x => hB (n + k) has type ∀ (n k : ℕ) (x : ?m.183 n k), B ≤ u (n + k) ∧ u (n + k) ≤ T but is expected to have type ∀ (a : ℕ), ?m.174 a ∈ ?m.173 in the application Finite.exists_lt_map_eq_of_forall_mem fun n k x => hB (n + k)",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:07Z"
+  },
+  {
+   "sha": "0dfb61ffb41f",
+   "tokens": 133,
+   "heartbeats": 4005,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:35Z"
+  },
+  {
+   "sha": "686cec60914a",
+   "tokens": 124,
+   "heartbeats": 5243,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:39Z"
+  },
+  {
+   "sha": "6e695e43c101",
+   "tokens": 124,
+   "heartbeats": 4088,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:42Z"
+  },
+  {
+   "sha": "cdd78335446e",
+   "tokens": 130,
+   "heartbeats": 4013,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:46Z"
+  },
+  {
+   "sha": "35e1cb866a3f",
+   "tokens": 125,
+   "heartbeats": 4035,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:54:49Z"
+  },
+  {
+   "sha": "a97986e86cdd",
+   "tokens": 219,
+   "heartbeats": 6000,
+   "ok": false,
+   "error": "30:6: unsolved goals case neg.a … [hypotheses omitted] ⊢ (↑(u (i + (m + 3))) + ↑(u (i + (m + 2))) + ↑(u (i + (m + 1))) * ↑(u (i + (m + 0)))) / (↑(u (i + (m + 3))) * ↑(u (i + (m + 2))) + ↑(u (i + (m + 1))) + ↑(u (i + (m + 0)))) = ((↑(u (j + (m + 2))) + ↑(u (j + (m + 1))) + ↑(u (j + (m + 0))) * ↑(u (j",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:57:48Z"
+  },
+  {
+   "sha": "b7f572e220d0",
+   "tokens": 228,
+   "heartbeats": 5249,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:58:01Z"
+  },
+  {
+   "sha": "da08dfb48545",
+   "tokens": 121,
+   "heartbeats": 1883,
+   "ok": false,
+   "error": "29:4: `simp` made no progress",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:59:40Z"
+  },
+  {
+   "sha": "e829378e2606",
+   "tokens": 124,
+   "heartbeats": 1820,
+   "ok": false,
+   "error": "29:4: Tactic `simp_all` does not support the `discharger` option",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:59:43Z"
+  },
+  {
+   "sha": "c57ccd8ac06a",
+   "tokens": 123,
+   "heartbeats": 5632,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:59:47Z"
+  },
+  {
+   "sha": "7ddc8e1cfb40",
+   "tokens": 124,
+   "heartbeats": 4003,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:00:02Z"
+  },
+  {
+   "sha": "a17e7c5c9bc7",
+   "tokens": 125,
+   "heartbeats": 3427,
+   "ok": false,
+   "error": "30:74: omega could not prove the goal: a possible counterexample may satisfy the constraints d ≥ 1 0 ≤ c ≤ 3 b ≥ 0 a ≥ 0 -3 ≤ a - b ≤ 0 a - b + c ≥ 1 a + d ≥ 0 where a := ↑i b := ↑n c := ↑↑⟨n - i, ⋯⟩ d := ↑(j - i)",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:27:04Z"
+  },
+  {
+   "sha": "918d7bc739ca",
+   "tokens": 125,
+   "heartbeats": 4059,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:27:08Z"
+  },
+  {
+   "sha": "0f5356a8b5c3",
+   "tokens": 155,
+   "heartbeats": 4267,
+   "ok": false,
+   "error": "30:13: invalid `▸` notation, the equality heq has type (fun k => u (i + ↑k)) = fun k => u (j + ↑k) but neither side of the equality is mentioned in the type ?m.285 = ?m.285",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:27:11Z"
+  },
+  {
+   "sha": "3a9c4840592f",
+   "tokens": 122,
+   "heartbeats": 4203,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:27:42Z"
+  },
+  {
+   "sha": "92f869f7381e",
+   "tokens": 124,
+   "heartbeats": 4003,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:27:46Z"
+  },
+  {
+   "sha": "b00ca4f1ef3a",
+   "tokens": 126,
+   "heartbeats": 3284,
+   "ok": false,
+   "error": "27:2: unsolved goals case pos.a … [hypotheses omitted] ⊢ (↑(u (n - 1 + (j - i))) + ↑(u (n - 2 + (j - i))) + ↑(u (n - 3 + (j - i))) * ↑(u (n - 4 + (j - i)))) / (↑(u (n - 1 + (j - i))) * ↑(u (n - 2 + (j - i))) + ↑(u (n - 3 + (j - i))) + ↑(u (n - 4 + (j - i)))) = (↑(u (n - 1)) + ↑(u (n - 2)) + ↑(u (n -",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:27:49Z"
+  },
+  {
+   "sha": "7aed781c02ff",
+   "tokens": 144,
+   "heartbeats": 2718,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:29:19Z"
+  },
+  {
+   "sha": "5ffeb49eb45a",
+   "tokens": 144,
+   "heartbeats": 3157,
+   "ok": false,
+   "error": "24:95: unsolved goals case a … [hypotheses omitted] ⊢ (↑(u (i + (m - 1))) + ↑(u (i + (m - 2))) + ↑(u (i + (m - 3))) * ↑(u (i + (m - 4)))) / (↑(u (i + (m - 1))) * ↑(u (i + (m - 2))) + ↑(u (i + (m - 3))) + ↑(u (i + (m - 4)))) = (↑(u (j + (m - 1))) + ↑(u (j + (m - 2))) + ↑(u (j + (m - 3))) * ↑(u (j + (",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:29:22Z"
+  },
+  {
+   "sha": "4b61c17231dc",
+   "tokens": 141,
+   "heartbeats": 3943,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:29:26Z"
+  },
+  {
+   "sha": "9dcccd2b2fe8",
+   "tokens": 143,
+   "heartbeats": 2718,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:30:01Z",
+   "score": 96.49
+  },
+  {
+   "sha": "169fe00b78d2",
+   "tokens": 146,
+   "heartbeats": 2686,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:30:12Z"
+  },
+  {
+   "sha": "88624fe80dab",
+   "tokens": 142,
+   "heartbeats": 2827,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:30:15Z"
+  },
+  {
+   "sha": "ec119c9e2adf",
+   "tokens": 145,
+   "heartbeats": 2686,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:49:03Z"
+  },
+  {
+   "sha": "08b722727ada",
+   "tokens": 140,
+   "heartbeats": 1594,
+   "ok": false,
+   "error": "27:6: `simp` made no progress",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:49:07Z"
+  },
+  {
+   "sha": "7d0f03da6b62",
+   "tokens": 150,
+   "heartbeats": 2722,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:49:10Z"
+  },
+  {
+   "sha": "14b51467b860",
+   "tokens": 140,
+   "heartbeats": 1646,
+   "ok": false,
+   "error": "27:6: `simp` made no progress",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:49:17Z"
+  },
+  {
+   "sha": "7067718d3062",
+   "tokens": 166,
+   "heartbeats": 2830,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:49:20Z"
+  },
+  {
+   "sha": "49698abbbf86",
+   "tokens": 146,
+   "heartbeats": 1525,
+   "ok": false,
+   "error": "25:23: Unknown identifier `boundedu`",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:22:08Z"
+  },
+  {
+   "sha": "b46cc568a88b",
+   "tokens": 162,
+   "heartbeats": 2785,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:22:12Z"
+  },
+  {
+   "sha": "c3f5d88a8c22",
+   "tokens": 143,
+   "heartbeats": 1584,
+   "ok": false,
+   "error": "27:6: Tactic `simp_all` does not support the `discharger` option",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:22:15Z"
+  },
+  {
+   "sha": "04d84cde0514",
+   "tokens": 143,
+   "heartbeats": 2718,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:22:19Z"
+  },
+  {
+   "sha": "592a0aa39efb",
+   "tokens": 143,
+   "heartbeats": 2718,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:22:48Z"
+  },
+  {
+   "sha": "476fc7e6695a",
+   "tokens": 144,
+   "heartbeats": 2706,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:23:23Z"
+  },
+  {
+   "sha": "3d084970a629",
+   "tokens": 128,
+   "heartbeats": 811,
+   "ok": false,
+   "error": "25:6: Tactic `clear` failed: variable 'ih' depends on 'hij' … [hypotheses omitted] ⊢ ?m.209 m",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:23:59Z"
+  },
+  {
+   "sha": "68df122b5277",
+   "tokens": 134,
+   "heartbeats": 2797,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:24:49Z",
+   "score": 96.64
+  },
+  {
+   "sha": "785131b23ec8",
+   "tokens": 132,
+   "heartbeats": 2797,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:25:27Z",
+   "score": 96.68
+  },
+  {
+   "sha": "8430a6dd5262",
+   "tokens": 131,
+   "heartbeats": 2800,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:25:37Z",
+   "score": 96.69
+  },
+  {
+   "sha": "19abe967b1b9",
+   "tokens": 134,
+   "heartbeats": 2762,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:25:47Z"
+  },
+  {
+   "sha": "6d6c00b51b4a",
+   "tokens": 127,
+   "heartbeats": 2823,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:26:12Z",
+   "score": 96.76
+  },
+  {
+   "sha": "8d3e2f13d0f0",
+   "tokens": 127,
+   "heartbeats": 751,
+   "ok": false,
+   "error": "23:112: Application type mismatch: The argument fun n k x => hB (n + k) has type ∀ (n k : ℕ) (x : ?m.183 n k), B ≤ u (n + k) ∧ u (n + k) ≤ T but is expected to have type ∀ (a : ℕ), ?m.174 a ∈ ?m.173 in the application Finite.exists_lt_map_eq_of_forall_mem fun n k x => hB (n + k)",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:26:22Z"
+  },
+  {
+   "sha": "b6d707059fbe",
+   "tokens": 126,
+   "heartbeats": 5016,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:26:58Z"
+  },
+  {
+   "sha": "678eecebdd57",
+   "tokens": 126,
+   "heartbeats": 1979,
+   "ok": false,
+   "error": "24:60: unsolved goals case h.e'_2.h.e'_1 … [hypotheses omitted] ⊢ m = i + ↑⟨m, hm⟩ ‖ ⊢ m = j + ↑⟨m, hm⟩",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:27:01Z"
+  },
+  {
+   "sha": "9f946a3e22b0",
+   "tokens": 128,
+   "heartbeats": 2819,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:27:05Z"
+  },
+  {
+   "sha": "9adca3228044",
+   "tokens": 127,
+   "heartbeats": 2823,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:28:07Z"
+  },
+  {
+   "sha": "778165cde1d6",
+   "tokens": 126,
+   "heartbeats": 798,
+   "ok": false,
+   "error": "25:6: Type mismatch congrFun heq ⟨m, hm⟩ has type u (i + ↑⟨m, hm⟩) = u (j + ↑⟨m, hm⟩) but is expected to have type ?m.209 m",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:59:21Z"
+  },
+  {
+   "sha": "fbf75157d297",
+   "tokens": 125,
+   "heartbeats": 4070,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:59:24Z"
+  },
+  {
+   "sha": "6d870bfde1f2",
+   "tokens": 125,
+   "heartbeats": 1209,
+   "ok": false,
+   "error": "23:104: Application type mismatch: The argument fun n k x => hB (n + ↑k) has type ∀ (n : ℕ) (k : Fin 4) (x : ?m.183 n k), B ≤ u (n + ↑k) ∧ u (n + ↑k) ≤ T but is expected to have type ∀ (a : ℕ), ?m.173 a ∈ ?m.172 in the application Finite.exists_lt_map_eq_of_forall_mem fun n k x => hB (n + ↑k)",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:59:28Z"
+  },
+  {
+   "sha": "d070189c15a3",
+   "tokens": 128,
+   "heartbeats": 2824,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:09Z"
+  },
+  {
+   "sha": "8344c7df771a",
+   "tokens": 129,
+   "heartbeats": 2788,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:13Z"
+  },
+  {
+   "sha": "96106eab48ae",
+   "tokens": 124,
+   "heartbeats": 811,
+   "ok": false,
+   "error": "26:6: Tactic `clear` failed: variable 'ih' depends on 'hij' … [hypotheses omitted] ⊢ ?m.209 m",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:46Z"
+  },
+  {
+   "sha": "9a162b4ea0c2",
+   "tokens": 126,
+   "heartbeats": 797,
+   "ok": false,
+   "error": "25:6: Tactic `apply` failed: could not unify the type of `congrFun heq ⟨m, hm⟩` u (i + ↑⟨m, hm⟩) = u (j + ↑⟨m, hm⟩) with the goal ?m.209 m … [hypotheses omitted] ⊢ ?m.209 m",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:49Z"
+  },
+  {
+   "sha": "025a237e19b2",
+   "tokens": 126,
+   "heartbeats": 798,
+   "ok": false,
+   "error": "25:6: Type mismatch congrFun heq ⟨m, hm⟩ has type u (i + ↑⟨m, hm⟩) = u (j + ↑⟨m, hm⟩) but is expected to have type ?m.209 m",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:53Z"
+  },
+  {
+   "sha": "0011c8f5d7dc",
+   "tokens": 124,
+   "heartbeats": 2890,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:01:24Z",
+   "score": 96.8
+  },
+  {
+   "sha": "790366a27621",
+   "tokens": 120,
+   "heartbeats": 731,
+   "ok": false,
+   "error": "23:140: don't know how to synthesize placeholder for argument `n` context: … [hypotheses omitted] ⊢ ℕ",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:02:07Z"
+  },
+  {
+   "sha": "dcfc66c81058",
+   "tokens": 125,
+   "heartbeats": 2887,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:02:10Z"
+  },
+  {
+   "sha": "584eab1ab81b",
+   "tokens": 122,
+   "heartbeats": 4137,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:02:14Z"
+  },
+  {
+   "sha": "c025007b5ea7",
+   "tokens": 125,
+   "heartbeats": 774,
+   "ok": false,
+   "error": "24:12: failed to elaborate eliminator, expected type is not available",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:02:44Z"
+  },
+  {
+   "sha": "2843901ed648",
+   "tokens": 125,
+   "heartbeats": 941,
+   "ok": false,
+   "error": "28:11: Unknown identifier `only`",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:02:54Z"
+  },
+  {
+   "sha": "6041ea711154",
+   "tokens": 125,
+   "heartbeats": 2890,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:02:59Z"
+  },
+  {
+   "sha": "175d2959016e",
+   "tokens": 123,
+   "heartbeats": 2895,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:04:04Z",
+   "score": 96.82
+  },
+  {
+   "sha": "ba575d11d94b",
+   "tokens": 121,
+   "heartbeats": 2875,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:04:35Z",
+   "score": 96.86
+  },
+  {
+   "sha": "41144d44ac6a",
+   "tokens": 122,
+   "heartbeats": 5090,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:04:45Z"
+  },
+  {
+   "sha": "2aa8a99a9dab",
+   "tokens": 119,
+   "heartbeats": 755,
+   "ok": false,
+   "error": "23:112: Application type mismatch: The argument fun n k x => hB (n + k) has type ∀ (n k : ℕ) (x : ?m.183 n k), B ≤ u (n + k) ∧ u (n + k) ≤ T but is expected to have type ∀ (a : ℕ), ?m.174 a ∈ ?m.173 in the application Finite.exists_lt_map_eq_of_forall_mem fun n k x => hB (n + k)",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:05:12Z"
+  },
+  {
+   "sha": "8d2fc26f38f9",
+   "tokens": 121,
+   "heartbeats": 2871,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:05:16Z"
+  },
+  {
+   "sha": "30bbab0ad583",
+   "tokens": 120,
+   "heartbeats": 2871,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:05:33Z",
+   "score": 96.88
+  },
+  {
+   "sha": "7705ba30cd2d",
+   "tokens": 121,
+   "heartbeats": 2875,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:05:44Z"
+  },
+  {
+   "sha": "ad2a6ea7c525",
+   "tokens": 117,
+   "heartbeats": 2871,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:06:37Z",
+   "score": 96.94
+  },
+  {
+   "sha": "0a9a4e22adc1",
+   "tokens": 117,
+   "heartbeats": 2876,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:07:02Z"
+  },
+  {
+   "sha": "2e35c26d1b62",
+   "tokens": 115,
+   "heartbeats": 1632,
+   "ok": false,
+   "error": "29:6: Tactic `simp_all` does not support the `discharger` option",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:07:16Z"
+  },
+  {
+   "sha": "c0269f46adba",
+   "tokens": 117,
+   "heartbeats": 1541,
+   "ok": false,
+   "error": "29:6: `simp` made no progress",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:07:19Z"
+  },
+  {
+   "sha": "bd811cc5eadc",
+   "tokens": 117,
+   "heartbeats": 2871,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:07:39Z"
+  },
+  {
+   "sha": "b15f46bef9c5",
+   "tokens": 116,
+   "heartbeats": 778,
+   "ok": false,
+   "error": "26:6: Type mismatch congrFun (Eq.symm heq) ⟨m, hm⟩ has type u (j + ↑⟨m, hm⟩) = u (i + ↑⟨m, hm⟩) but is expected to have type ?m.212 m",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:26:28Z"
+  },
+  {
+   "sha": "1d29a392e6de",
+   "tokens": 115,
+   "heartbeats": 3185,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:26:31Z"
+  },
+  {
+   "sha": "8b33d25367e3",
+   "tokens": 120,
+   "heartbeats": 2804,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:26:35Z"
+  },
+  {
+   "sha": "18c1ae7988ff",
+   "tokens": 118,
+   "heartbeats": 2867,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:27:06Z"
+  },
+  {
+   "sha": "ff2e7dd773ca",
+   "tokens": 118,
+   "heartbeats": 2872,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:27:10Z"
+  },
+  {
+   "sha": "9d6aaeaa6ea8",
+   "tokens": 117,
+   "heartbeats": 2875,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:27:13Z"
+  },
+  {
+   "sha": "e528098e5f1a",
+   "tokens": 115,
+   "heartbeats": 3185,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:22Z"
+  },
+  {
+   "sha": "96098e85e47b",
+   "tokens": 117,
+   "heartbeats": 2949,
+   "ok": false,
+   "error": "26:40: Application type mismatch: The argument hm has type m ≤ 3 but is expected to have type m < 4 in the application ⟨m, hm⟩",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:26Z"
+  },
+  {
+   "sha": "b4a4777bba01",
+   "tokens": 118,
+   "heartbeats": 1579,
+   "ok": false,
+   "error": "26:6: Tactic `clear` failed: variable 'ih' depends on 'hij' case pos … [hypotheses omitted] ⊢ ?m.212 m",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:28:29Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wuclean-hx-solab1-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:23:36Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:01:29Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:30:11Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r5",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:12:58Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r6",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:51:23Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r7",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:24:59Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:46:51Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r10",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:20:39Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r11",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:57:17Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r12",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:24:27Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  }
+ ],
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 12,
+    "d_score": 1.8,
+    "d_tokens": -31,
+    "d_heartbeats": -4043,
+    "diff": "-  let f := fun n => (u n, u (n + 1), u (n + 2), u (n + 3))\n-  have hf : ∀ n, f n ∈ Set.Icc (B, B, B, B) (T, T, T, T) := by\n-    intro n\n-    simp [f, Set.mem_Icc, Prod.le_def, hB]\n-  obtain ⟨i, j, hij, heq⟩ := Set.Finite.exists_lt_map_eq_of_forall_mem hf (Set.finite_Icc _ _)\n-  simp only [f, Prod.mk.injEq] at heq\n+  let f (n : ℕ) (k : Fin 4) := u (n + k)\n+  have hf : ∀ n, f n ∈ Set.pi Set.univ (fun _ => Set.Icc B T) :=\n+    fun n k _ => hB _\n+  obtain ⟨i, j, hij, heq⟩ := Set.Finite.exists_lt_map_eq_of_forall_mem hf (Set.Finite.pi fun _ => Set.finite_Icc _ _)\n-      · interval_cases m <;> simp_all only [Nat.add_zero]\n+      · exact congrFun heq ⟨m, hm⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 13,
+    "d_score": 0.17,
+    "d_tokens": -9,
+    "d_heartbeats": 1,
+    "diff": "-      · have hm : 4 ≤ m := by omega\n-        apply Int.cast_injective (α := ℝ)\n+      · apply Int.cast_injective (α := ℝ)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 17,
+    "d_score": 0.17,
+    "d_tokens": -28,
+    "d_heartbeats": 1193,
+    "diff": "-        rw [(hu (i + m) (by omega)).1, (hu (j + m) (by omega)).1]\n-        simp (disch := omega) only [Nat.add_sub_assoc, ih]\n+        simp (disch := omega) only [hu, Nat.add_sub_assoc, ih]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 18,
+    "d_score": 0.18,
+    "d_tokens": -9,
+    "d_heartbeats": -50,
+    "diff": "-  have hf : ∀ n, f n ∈ Set.pi Set.univ (fun _ => Set.Icc B T) :=\n-    fun n k _ => hB _\n-  obtain ⟨i, j, hij, heq⟩ := Set.Finite.exists_lt_map_eq_of_forall_mem hf (Set.Finite.pi fun _ => Set.finite_Icc _ _)\n+  obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ : Fin 4 => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem (f := f) (by exact fun n k _ => hB _)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 19,
+    "d_score": 0.18,
+    "d_tokens": -9,
+    "d_heartbeats": -17,
+    "diff": "-  let f (n : ℕ) (k : Fin 4) := u (n + k)\n-  obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ : Fin 4 => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem (f := f) (by exact fun n k _ => hB _)\n+  obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem (f := fun n (k : Fin 4) => u (n + k)) (by exact fun n k _ => hB _)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 22,
+    "d_score": 0.07,
+    "d_tokens": -4,
+    "d_heartbeats": 1,
+    "diff": "-  have h : ∀ m, u (i + m) = u (j + m) := by\n-    intro m\n+  have h m : u (i + m) = u (j + m) := by"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 25,
+    "d_score": 0.05,
+    "d_tokens": -3,
+    "d_heartbeats": 17,
+    "diff": "-    induction m using Nat.strong_induction_on with\n-    | h m ih =>\n-      by_cases hm : m < 4\n-      · exact congrFun heq ⟨m, hm⟩\n-      · apply Int.cast_injective (α := ℝ)\n-        simp (disch := omega) only [hu, Nat.add_sub_assoc, ih]\n+    refine Nat.strong_induction_on m ?_\n+    intro m ih\n+    by_cases hm : m < 4\n+    · exact congrFun heq ⟨m, hm⟩\n+    · apply Int.cast_injective (α := ℝ)\n+      simp (disch := omega) only [hu, Nat.add_sub_assoc, ih]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 5,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": -2,
+    "diff": "-  have h m : u (i + m) = u (j + m) := by\n-    refine Nat.strong_induction_on m ?_\n-    intro m ih\n+  have h m : u (i + m) = u (j + m) := Nat.strong_induction_on m fun m ih => by"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 6,
+    "d_score": 0.06,
+    "d_tokens": -3,
+    "d_heartbeats": -1,
+    "diff": "-  convert (h (n - i)).symm using 1 <;> congr 1 <;> omega\n+  convert (h (n - i)).symm using 2 <;> omega"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 9,
+    "d_score": 0.05,
+    "d_tokens": 0,
+    "d_heartbeats": -157,
+    "diff": "-  refine ⟨i, j - i, by omega, ?_⟩\n+  refine ⟨i, j - i, Nat.sub_pos_of_lt hij, ?_⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 15,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": -4,
+    "diff": "-  obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem (f := fun n (k : Fin 4) => u (n + k)) (by exact fun n k _ => hB _)\n+  obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem (f := fun n (k : Fin 4) => u (n + k)) (by (repeat intro); apply hB)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 16,
+    "d_score": 0.05,
+    "d_tokens": -3,
+    "d_heartbeats": 0,
+    "diff": "-    · apply Int.cast_injective (α := ℝ)\n+    · apply @Int.cast_injective ℝ"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 17,
+    "d_score": 0.09,
+    "d_tokens": -5,
+    "d_heartbeats": 30,
+    "diff": "-  obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem (f := fun n (k : Fin 4) => u (n + k)) (by (repeat intro); apply hB)\n+  obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem (by exact fun (n : ℕ) (k : Fin 4) _ => hB (n + k))"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 18,
+    "d_score": 0.07,
+    "d_tokens": -4,
+    "d_heartbeats": -1,
+    "diff": "-  obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem (by exact fun (n : ℕ) (k : Fin 4) _ => hB (n + k))\n+  obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem (by exact fun n (k : Fin 4) _ => hB (n + k))"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 7,
+    "d_score": 0.26,
+    "d_tokens": 1,
+    "d_heartbeats": -938,
+    "diff": "-      simp (disch := omega) only [hu, Nat.add_sub_assoc, ih]\n+      simp (disch := omega) only [hu, Nat.add_sub_assoc, ← ih]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 11,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": -3,
+    "diff": "-  have h m : u (i + m) = u (j + m) := Nat.strong_induction_on m fun m ih => by\n-    by_cases hm : m < 4\n-    · exact congrFun heq ⟨m, hm⟩\n-    · apply @Int.cast_injective ℝ\n+  have h m : u (i + m) = u (j + m) := Nat.strong_induction_on m fun m ih => if hm : m < 4 then congrFun heq ⟨m, hm⟩ else by\n+      apply @Int.cast_injective ℝ"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 15,
+    "d_score": 0.02,
+    "d_tokens": 1,
+    "d_heartbeats": -126,
+    "diff": "-  have h m : u (i + m) = u (j + m) := Nat.strong_induction_on m fun m ih => if hm : m < 4 then congrFun heq ⟨m, hm⟩ else by\n+  have h m : u (i + m) = u (j + m) := Nat.strong_induction_on m fun m ih => if hm : 4 ≤ m then by\n+    else congrFun heq ⟨m, Nat.lt_of_not_ge hm⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 21,
+    "d_score": 0.02,
+    "d_tokens": -20,
+    "d_heartbeats": 1210,
+    "diff": "-  have h m : u (i + m) = u (j + m) := Nat.strong_induction_on m fun m ih => if hm : 4 ≤ m then by\n-      apply @Int.cast_injective ℝ\n-      simp (disch := omega) only [hu, Nat.add_sub_assoc, ← ih]\n-    else congrFun heq ⟨m, Nat.lt_of_not_ge hm⟩\n-  refine ⟨i, j - i, Nat.sub_pos_of_lt hij, ?_⟩\n-  intro n hn\n-  convert (h (n - i)).symm using 2 <;> omega\n+  refine ⟨i, j - i, Nat.sub_pos_of_lt hij, fun n => Nat.strong_induction_on n ?_⟩\n+  intro n ih hn\n+  by_cases hm : n < i + 4\n+  · convert (congrFun heq ⟨n - i, by omega⟩).symm using 2 <;> dsimp <;> omega\n+  · apply @Int.cast_injective ℝ\n+    simp (disch := omega) only [hu, Nat.sub_add_comm, ih]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 23,
+    "d_score": 0.01,
+    "d_tokens": 0,
+    "d_heartbeats": -23,
+    "diff": "-  by_cases hm : n < i + 4\n-  · convert (congrFun heq ⟨n - i, by omega⟩).symm using 2 <;> dsimp <;> omega\n+  by_cases hm : i + 4 ≤ n\n+  · convert (congrFun heq ⟨n - i, by omega⟩).symm using 2 <;> dsimp <;> omega"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 26,
+    "d_score": 0.02,
+    "d_tokens": 2,
+    "d_heartbeats": -201,
+    "diff": "-  · apply @Int.cast_injective ℝ\n+  · clear hij\n+    apply @Int.cast_injective ℝ"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r7",
+    "check": 10,
+    "d_score": 0.02,
+    "d_tokens": 19,
+    "d_heartbeats": -1284,
+    "diff": "-  refine ⟨i, j - i, Nat.sub_pos_of_lt hij, fun n => Nat.strong_induction_on n ?_⟩\n-  intro n ih hn\n-  by_cases hm : i + 4 ≤ n\n-  · clear hij\n-    apply @Int.cast_injective ℝ\n-    simp (disch := omega) only [hu, Nat.sub_add_comm, ih]\n-  · convert (congrFun heq ⟨n - i, by omega⟩).symm using 2 <;> dsimp <;> omega\n+  have h m : u (i + m) = u (j + m) := Nat.strong_induction_on m fun m ih => if hm : 4 ≤ m then by\n+      clear hij\n+      apply @Int.cast_injective ℝ\n+      simp (disch := omega) only [hu, Nat.add_sub_assoc, ih]\n+    else congrFun heq ⟨m, Nat.lt_of_not_ge hm⟩\n+  refine ⟨i, j - i, Nat.sub_pos_of_lt hij, ?_⟩\n+  intro n hn\n+  convert (h (n - i)).symm using 2 <;> omega"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 8,
+    "d_score": 0.15,
+    "d_tokens": -9,
+    "d_heartbeats": 79,
+    "diff": "-  have h m : u (i + m) = u (j + m) := Nat.strong_induction_on m fun m ih => if hm : 4 ≤ m then by\n+  have h := @Nat.strongRec _ fun m ih => if hm : m < 4 then (by simpa only using congrFun heq ⟨m, hm⟩) else by\n-    else congrFun heq ⟨m, Nat.lt_of_not_ge hm⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 9,
+    "d_score": 0.04,
+    "d_tokens": -2,
+    "d_heartbeats": 0,
+    "diff": "-  have h := @Nat.strongRec _ fun m ih => if hm : m < 4 then (by simpa only using congrFun heq ⟨m, hm⟩) else by\n+  have h := @Nat.strongRec _ fun m ih => if hm : m < 4 then by\n+      simpa only using congrFun heq ⟨m, hm⟩\n+    else by"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 10,
+    "d_score": 0.01,
+    "d_tokens": -1,
+    "d_heartbeats": 3,
+    "diff": "-      simpa only using congrFun heq ⟨m, hm⟩\n+      simpa using congrFun heq ⟨m, hm⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 12,
+    "d_score": 0.07,
+    "d_tokens": -4,
+    "d_heartbeats": 23,
+    "diff": "-  refine ⟨i, j - i, Nat.sub_pos_of_lt hij, ?_⟩\n+  use i, j - i, Nat.sub_pos_of_lt hij"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 9,
+    "d_score": 0.04,
+    "d_tokens": -3,
+    "d_heartbeats": 67,
+    "diff": "-      apply @Int.cast_injective ℝ\n+      rify"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 16,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": 5,
+    "diff": "-  have h := @Nat.strongRec _ fun m ih => if hm : m < 4 then by\n-      simpa using congrFun heq ⟨m, hm⟩\n-    else by\n-      clear hij\n+  have h := @Nat.strongRec _ fun m ih => by\n+    by_cases hm : m < 4\n+    · simpa using congrFun heq ⟨m, hm⟩\n+    · clear hij"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 17,
+    "d_score": 0.04,
+    "d_tokens": -2,
+    "d_heartbeats": -20,
+    "diff": "-  obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem (by exact fun n (k : Fin 4) _ => hB (n + k))\n+  obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ : Fin 4 => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem (by exact fun n k _ => hB (n + k))"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 21,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": -4,
+    "diff": "-  obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ : Fin 4 => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem (by exact fun n k _ => hB (n + k))\n-  have h := @Nat.strongRec _ fun m ih => by\n+  obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ : Fin 4 => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem (by intro n k _; exact hB (n + k))\n+  have :=  @Nat.strongRec _ fun m ih => by\n-  convert (h (n - i)).symm using 2 <;> omega\n+  convert (this (n - i)).symm using 2 <;> omega"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 23,
+    "d_score": 0.06,
+    "d_tokens": -3,
+    "d_heartbeats": 0,
+    "diff": "-    · simpa using congrFun heq ⟨m, hm⟩\n+    · simpa using congrFun heq.symm ⟨m, hm⟩\n-  convert (this (n - i)).symm using 2 <;> omega\n+  convert this (n - i) using 2 <;> omega"
+   }
+  ]
+ },
+ "api_spend": 2.575008,
+ "profile_cache": {
+  "13a5ef18d218": {
+   "ok": true,
+   "total": 4083,
+   "floor": null,
+   "reference": 111553,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "obtain ⟨B, T, hB⟩ := boundedu",
+     "heartbeats": null
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ => Set.finite_Icc B T).exists_lt_map_eq_of_forall_me",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-12",
+     "depth_indent": 2,
+     "text": "have h m : u (i + m) = u (j + m) := Nat.strong_induction_on m fun m ih => by by_cases hm : m < 4 · e",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "refine ⟨i, j - i, Nat.sub_pos_of_lt hij, ?_⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "intro n hn",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "convert (h (n - i)).symm using 2 <;> omega",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "70cfdd16cbff": {
+   "ok": true,
+   "total": 3145,
+   "floor": null,
+   "reference": 111553,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "obtain ⟨B, T, hB⟩ := boundedu",
+     "heartbeats": null
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ => Set.finite_Icc B T).exists_lt_map_eq_of_forall_me",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-12",
+     "depth_indent": 2,
+     "text": "have h m : u (i + m) = u (j + m) := Nat.strong_induction_on m fun m ih => by by_cases hm : m < 4 · e",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "refine ⟨i, j - i, Nat.sub_pos_of_lt hij, ?_⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "intro n hn",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "convert (h (n - i)).symm using 2 <;> omega",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "22ae86b4fbc6": {
+   "ok": true,
+   "total": 4002,
+   "floor": null,
+   "reference": 111553,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "obtain ⟨B, T, hB⟩ := boundedu",
+     "heartbeats": null
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ => Set.finite_Icc B T).exists_lt_map_eq_of_forall_me",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "refine ⟨i, j - i, Nat.sub_pos_of_lt hij, fun n => Nat.strong_induction_on n ?_⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "intro n ih hn",
+     "heartbeats": null
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "by_cases hm : i + 4 ≤ n",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-13",
+     "depth_indent": 2,
+     "text": "· clear hij apply @Int.cast_injective ℝ simp (disch := omega) only [hu, Nat.sub_add_comm, ih]",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "· convert (congrFun heq ⟨n - i, by omega⟩).symm using 2 <;> dsimp <;> omega",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "9dcccd2b2fe8": {
+   "ok": true,
+   "total": 2718,
+   "floor": null,
+   "reference": 111553,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "obtain ⟨B, T, hB⟩ := boundedu",
+     "heartbeats": null
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ => Set.finite_Icc B T).exists_lt_map_eq_of_forall_me",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-12",
+     "depth_indent": 2,
+     "text": "have h m : u (i + m) = u (j + m) := Nat.strong_induction_on m fun m ih => if hm : 4 ≤ m then by clea",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "refine ⟨i, j - i, Nat.sub_pos_of_lt hij, ?_⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "intro n hn",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "convert (h (n - i)).symm using 2 <;> omega",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "6d6c00b51b4a": {
+   "ok": true,
+   "total": 2823,
+   "floor": null,
+   "reference": 111553,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "obtain ⟨B, T, hB⟩ := boundedu",
+     "heartbeats": null
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ => Set.finite_Icc B T).exists_lt_map_eq_of_forall_me",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-13",
+     "depth_indent": 2,
+     "text": "have h := @Nat.strongRec _ fun m ih => if hm : m < 4 then by simpa using congrFun heq ⟨m, hm⟩ else b",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "use i, j - i, Nat.sub_pos_of_lt hij",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "intro n hn",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "convert (h (n - i)).symm using 2 <;> omega",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "ad2a6ea7c525": {
+   "ok": true,
+   "total": 2872,
+   "floor": null,
+   "reference": 111553,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "obtain ⟨B, T, hB⟩ := boundedu",
+     "heartbeats": null
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi fun _ : Fin 4 => Set.finite_Icc B T).exists_lt_map_eq_of_f",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-13",
+     "depth_indent": 2,
+     "text": "have :=  @Nat.strongRec _ fun m ih => by by_cases hm : m < 4 · simpa using congrFun heq.symm ⟨m, hm⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "use i, j - i, Nat.sub_pos_of_lt hij",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "intro n hn",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "convert this (n - i) using 2 <;> omega",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "budget_milestones": {
+  "2": {
+   "spend": 2.006679,
+   "best": 96.76,
+   "run_id": "wuclean-hx-solab1-r10",
+   "turn": 25,
+   "t": "2026-10-14T12:27:52Z"
+  }
+ }
+}

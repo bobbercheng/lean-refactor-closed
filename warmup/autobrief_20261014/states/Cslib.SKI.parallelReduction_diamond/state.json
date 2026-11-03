@@ -1,0 +1,2067 @@
+{
+ "problem": "Cslib.SKI.parallelReduction_diamond",
+ "best": {
+  "score": 77.91,
+  "proof": "theorem parallelReduction_diamond : Diamond ParallelReduction := by\n  intro a a₁ a₂ h₁ h₂\n  induction h₁ generalizing a₂\n  case refl => use a₂, h₂, ParallelReduction.refl _\n  case' par ha hb iha ihb => skip\n  all_goals cases h₂\n  case par.par ha' hb' =>\n    specialize iha ha'\n    specialize ihb hb'\n    exact ⟨_, iha.choose_spec.1.par ihb.choose_spec.1, iha.choose_spec.2.par ihb.choose_spec.2⟩\n  case' par.red_I | par.red_K | par.red_S => apply symm\n  case par.red_I | red_I.par ha hb =>\n    cases ha\n    exact ⟨_, hb, .red_I _⟩\n  case par.red_K | red_K.par ha hc =>\n    apply Ka_irreducible at ha\n    exact ha.choose_spec.2.symm ▸ ⟨_, ha.choose_spec.1, .red_K ..⟩\n  case par.red_S | red_S.par ha hb =>\n    have := (Sab_irreducible _ _ _ ha).choose_spec.choose_spec\n    apply this.2.2.symm.subst\n    exact ⟨_, (this.1.par hb).par (this.2.1.par hb), .red_S ..⟩\n  all_goals\n    refine ⟨_, .refl _, ?_⟩\n    constructor <;> assumption",
+  "tokens": 151,
+  "heartbeats": 415,
+  "L": 62.9,
+  "H": 70.82,
+  "Z": 100.0,
+  "compat": {
+   "v4.33.0-rc2": true,
+   "v4.32.0": true,
+   "v4.31.0": true,
+   "v4.30.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "1868d4ed19ae",
+   "tokens": 453,
+   "heartbeats": 894,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:08:41Z",
+   "score": 41.94
+  },
+  {
+   "sha": "08acf0f3a94f",
+   "tokens": 371,
+   "heartbeats": 382,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:11:31Z",
+   "score": 60.66
+  },
+  {
+   "sha": "2c0a99483189",
+   "tokens": 316,
+   "heartbeats": 450,
+   "ok": false,
+   "error": "165:25: Application type mismatch: The argument ha has type I ⭢ₚ a'✝ but is expected to have type I ⭢ₚ a' in the application I_irreducible a' ha",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:11:59Z"
+  },
+  {
+   "sha": "ed533ef1fc9f",
+   "tokens": 312,
+   "heartbeats": 393,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:12:18Z",
+   "score": 65.23
+  },
+  {
+   "sha": "876d16319390",
+   "tokens": 285,
+   "heartbeats": 577,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:12:55Z"
+  },
+  {
+   "sha": "c68778148960",
+   "tokens": 280,
+   "heartbeats": 679,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:12:57Z"
+  },
+  {
+   "sha": "d1bbb4e81586",
+   "tokens": 291,
+   "heartbeats": 391,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:13:02Z",
+   "score": 67.0
+  },
+  {
+   "sha": "e86a3ac61383",
+   "tokens": 280,
+   "heartbeats": 424,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:13:29Z",
+   "score": 67.13
+  },
+  {
+   "sha": "cb77dbf5686e",
+   "tokens": 275,
+   "heartbeats": 430,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:13:35Z",
+   "score": 67.4
+  },
+  {
+   "sha": "7f6d8b07ce1b",
+   "tokens": 287,
+   "heartbeats": 423,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:13:42Z"
+  },
+  {
+   "sha": "1f2de89608f3",
+   "tokens": 222,
+   "heartbeats": 272,
+   "ok": false,
+   "error": "164:45: No applicable symmetry lemma found for Join ParallelReduction (a'✝ ⬝ b'✝) b✝ Note: Additional symmetry lemmas can be registered using the `[symm]` attribute",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:14:05Z"
+  },
+  {
+   "sha": "4b4cc779fda3",
+   "tokens": 223,
+   "heartbeats": 398,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:14:26Z",
+   "score": 72.41
+  },
+  {
+   "sha": "2d558756f9e5",
+   "tokens": 212,
+   "heartbeats": 399,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:14:49Z",
+   "score": 73.28
+  },
+  {
+   "sha": "06c40ab05cba",
+   "tokens": 200,
+   "heartbeats": 405,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:15:13Z",
+   "score": 74.13
+  },
+  {
+   "sha": "d30a6a8a2591",
+   "tokens": 194,
+   "heartbeats": 440,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:15:30Z"
+  },
+  {
+   "sha": "39f4f8ab32fb",
+   "tokens": 200,
+   "heartbeats": 413,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:16:12Z"
+  },
+  {
+   "sha": "05f0a5b0c3fe",
+   "tokens": 196,
+   "heartbeats": 412,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:52:14Z",
+   "score": 74.29
+  },
+  {
+   "sha": "83bf5322aac0",
+   "tokens": 209,
+   "heartbeats": 511,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:52:30Z"
+  },
+  {
+   "sha": "f00b41da240e",
+   "tokens": 212,
+   "heartbeats": 399,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:52:32Z"
+  },
+  {
+   "sha": "6635b29063f5",
+   "tokens": 182,
+   "heartbeats": 411,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:53:07Z",
+   "score": 75.46
+  },
+  {
+   "sha": "60895daa05a6",
+   "tokens": 182,
+   "heartbeats": 414,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:53:13Z"
+  },
+  {
+   "sha": "c25f2837a7d4",
+   "tokens": 178,
+   "heartbeats": 580,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:53:39Z"
+  },
+  {
+   "sha": "5a2f28ebc8b8",
+   "tokens": 182,
+   "heartbeats": 520,
+   "ok": false,
+   "error": "165:17: Application type mismatch: The argument rfl has type ?m.989 = ?m.989 but is expected to have type a'✝ = K ⬝ x in the application ⟨hx, rfl⟩",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:53:40Z"
+  },
+  {
+   "sha": "f64f8be812d6",
+   "tokens": 182,
+   "heartbeats": 520,
+   "ok": false,
+   "error": "165:16: Application type mismatch: The argument rfl has type ?m.989 = ?m.989 but is expected to have type a'✝ = K ⬝ x in the application ⟨hx, rfl⟩",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:53:42Z"
+  },
+  {
+   "sha": "aa43a7b57223",
+   "tokens": 180,
+   "heartbeats": 410,
+   "ok": false,
+   "error": "163:8: don't know how to synthesize placeholder context: a a₁ b✝ b'✝ : SKI hb : b✝ ⭢ₚ b'✝ ihb : ∀ {a₂ : SKI}, b✝ ⭢ₚ a₂ → Join ParallelReduction b'✝ a₂ iha : ∀ {a₂ : SKI}, I ⭢ₚ a₂ → Join ParallelReduction I a₂ ⊢ SKI",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:53:43Z"
+  },
+  {
+   "sha": "54cfcb0e6623",
+   "tokens": 180,
+   "heartbeats": 408,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:53:45Z",
+   "score": 75.69
+  },
+  {
+   "sha": "ab49f9b7f4dc",
+   "tokens": 182,
+   "heartbeats": 410,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:54:14Z"
+  },
+  {
+   "sha": "cc1a6fa0abb8",
+   "tokens": 179,
+   "heartbeats": 397,
+   "ok": false,
+   "error": "171:11: don't know how to synthesize implicit argument `b` @And.intro (a✝ ⭢ₚ ?m.1192) ((I ⬝ a✝) ⭢ₚ ?m.1192) ?m.1195 ?m.1196 context: a a₁ a✝ : SKI ⊢ Prop",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:54:15Z"
+  },
+  {
+   "sha": "45f327619ccb",
+   "tokens": 178,
+   "heartbeats": 460,
+   "ok": false,
+   "error": "163:8: Unknown identifier `b'`",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:54:17Z"
+  },
+  {
+   "sha": "6af3c5ecb1b8",
+   "tokens": 180,
+   "heartbeats": 415,
+   "ok": false,
+   "error": "166:4: Invalid `⟨...⟩` notation: The expected type `(K ⬝ x ⬝ b'✝) ⭢ₚ x` has more than one constructor Note: This notation can only be used when the expected type is an inductive type with a single constructor",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:54:19Z"
+  },
+  {
+   "sha": "d9b339151d10",
+   "tokens": 180,
+   "heartbeats": 408,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:54:25Z"
+  },
+  {
+   "sha": "09d94fcb2856",
+   "tokens": 180,
+   "heartbeats": 408,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:55:14Z"
+  },
+  {
+   "sha": "8a4541f08017",
+   "tokens": 215,
+   "heartbeats": 566,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:55:56Z"
+  },
+  {
+   "sha": "9717c848dc8b",
+   "tokens": 181,
+   "heartbeats": 413,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:56:07Z"
+  },
+  {
+   "sha": "289a639de2cf",
+   "tokens": 176,
+   "heartbeats": 409,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:57:01Z",
+   "score": 76.0
+  },
+  {
+   "sha": "a339c0409033",
+   "tokens": 175,
+   "heartbeats": 409,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:57:34Z",
+   "score": 76.08
+  },
+  {
+   "sha": "4a24c2388dcf",
+   "tokens": 176,
+   "heartbeats": 409,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:57:40Z"
+  },
+  {
+   "sha": "615cb61bf463",
+   "tokens": 176,
+   "heartbeats": 409,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:57:42Z"
+  },
+  {
+   "sha": "1a3c46453345",
+   "tokens": 168,
+   "heartbeats": 485,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:58:47Z"
+  },
+  {
+   "sha": "bd5926a21f3c",
+   "tokens": 172,
+   "heartbeats": 407,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:23:44Z",
+   "score": 76.37
+  },
+  {
+   "sha": "6f94f824bb5f",
+   "tokens": 173,
+   "heartbeats": 408,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:23:49Z"
+  },
+  {
+   "sha": "fe9a40e7d7e4",
+   "tokens": 174,
+   "heartbeats": 408,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:23:51Z"
+  },
+  {
+   "sha": "33a57222a1a6",
+   "tokens": 184,
+   "heartbeats": 434,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:24:25Z"
+  },
+  {
+   "sha": "ff1efb0f96ba",
+   "tokens": 177,
+   "heartbeats": 406,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:24:26Z"
+  },
+  {
+   "sha": "272ff5a43df6",
+   "tokens": 170,
+   "heartbeats": 406,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:24:48Z",
+   "score": 76.56
+  },
+  {
+   "sha": "1af3834d446c",
+   "tokens": 168,
+   "heartbeats": 551,
+   "ok": false,
+   "error": "171:8: don't know how to synthesize placeholder context: a a₁ a✝ : SKI ⊢ SKI",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:24:54Z"
+  },
+  {
+   "sha": "c3515b4a7897",
+   "tokens": 168,
+   "heartbeats": 425,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:25:15Z"
+  },
+  {
+   "sha": "fd311abba361",
+   "tokens": 168,
+   "heartbeats": 451,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:25:17Z"
+  },
+  {
+   "sha": "0c228f25c7fc",
+   "tokens": 73,
+   "heartbeats": 3913,
+   "ok": false,
+   "error": "161:4: `grind` failed case grind a a₁ … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] ¬Join ParallelReduction a_1 a_1 [prop] Join ParallelReduction a_1 a_1 = ∃ c, a_1 ⭢ₚ c ∧ a_1 ⭢ₚ c [prop] ∀ (x : SKI), a_1 ⭢ₚ x → ¬a_1 ⭢ₚ x [eqc] True propositions [prop] Join Pa",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:01:39Z"
+  },
+  {
+   "sha": "362ee5487c89",
+   "tokens": 170,
+   "heartbeats": 408,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:02:08Z"
+  },
+  {
+   "sha": "3e29e96aa0f0",
+   "tokens": 182,
+   "heartbeats": 400,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:02:09Z"
+  },
+  {
+   "sha": "05ecc75b00fb",
+   "tokens": 98,
+   "heartbeats": 2066,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:02:11Z"
+  },
+  {
+   "sha": "fedb2c1e4f85",
+   "tokens": 165,
+   "heartbeats": 606,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:03:19Z"
+  },
+  {
+   "sha": "f2bdd6a3c958",
+   "tokens": 179,
+   "heartbeats": 464,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:03:20Z"
+  },
+  {
+   "sha": "f21033a2ae5e",
+   "tokens": 164,
+   "heartbeats": 405,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:03:58Z",
+   "score": 77.07
+  },
+  {
+   "sha": "4b698cae5ec5",
+   "tokens": 166,
+   "heartbeats": 413,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:04:03Z"
+  },
+  {
+   "sha": "7354db0aa025",
+   "tokens": 162,
+   "heartbeats": 405,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:04:24Z",
+   "score": 77.24
+  },
+  {
+   "sha": "d68b5a8a70d4",
+   "tokens": 153,
+   "heartbeats": 854,
+   "ok": false,
+   "error": "170:4: Dependent elimination failed: Failed to solve equation S ⬝ this.choose ⬝ ⋯.choose = a'✝",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:05:33Z"
+  },
+  {
+   "sha": "c67f79f50e21",
+   "tokens": 155,
+   "heartbeats": 438,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:05:35Z"
+  },
+  {
+   "sha": "c508418787fa",
+   "tokens": 160,
+   "heartbeats": 425,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:05:36Z"
+  },
+  {
+   "sha": "51f130cb86e4",
+   "tokens": 153,
+   "heartbeats": 427,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:05:55Z",
+   "score": 77.46
+  },
+  {
+   "sha": "f8707e784aed",
+   "tokens": 156,
+   "heartbeats": 482,
+   "ok": false,
+   "error": "170:4: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:06:01Z"
+  },
+  {
+   "sha": "35741b92a0e4",
+   "tokens": 153,
+   "heartbeats": 523,
+   "ok": false,
+   "error": "170:101: invalid `▸` notation, failed to compute motive for the substitution",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:06:25Z"
+  },
+  {
+   "sha": "aa9b8def4800",
+   "tokens": 150,
+   "heartbeats": 437,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:06:27Z",
+   "score": 77.47
+  },
+  {
+   "sha": "0607b6ab1ae1",
+   "tokens": 150,
+   "heartbeats": 504,
+   "ok": false,
+   "error": "167:34: invalid `▸` notation, failed to compute motive for the substitution",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:06:32Z"
+  },
+  {
+   "sha": "33ad709174b8",
+   "tokens": 150,
+   "heartbeats": 437,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:06:51Z"
+  },
+  {
+   "sha": "ae2adb5fe698",
+   "tokens": 148,
+   "heartbeats": 368,
+   "ok": false,
+   "error": "167:40: Invalid `⟨...⟩` notation: The expected type of this term could not be determined",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:07:57Z"
+  },
+  {
+   "sha": "b662d7baf131",
+   "tokens": 148,
+   "heartbeats": 379,
+   "ok": false,
+   "error": "167:10: failed to elaborate eliminator, motive is not type correct: fun x x_1 => Join ParallelReduction a₂ (x ⬝ b'✝)",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:07:59Z"
+  },
+  {
+   "sha": "6f31d1341288",
+   "tokens": 148,
+   "heartbeats": 370,
+   "ok": false,
+   "error": "162:10: Unknown identifier `ha`",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:38:47Z"
+  },
+  {
+   "sha": "af870e2bc5b8",
+   "tokens": 100,
+   "heartbeats": 2067,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:39:03Z"
+  },
+  {
+   "sha": "7600eb7c6bda",
+   "tokens": 159,
+   "heartbeats": 415,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:39:36Z"
+  },
+  {
+   "sha": "880ef8eed60e",
+   "tokens": 162,
+   "heartbeats": 405,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:39:37Z"
+  },
+  {
+   "sha": "fc45963bfe6b",
+   "tokens": 113,
+   "heartbeats": 1956,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:39:38Z"
+  },
+  {
+   "sha": "a115bf6489c8",
+   "tokens": 166,
+   "heartbeats": 434,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:39:57Z"
+  },
+  {
+   "sha": "fca8e7c1ea36",
+   "tokens": 150,
+   "heartbeats": 437,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:39:58Z"
+  },
+  {
+   "sha": "4b3abdb8a672",
+   "tokens": 154,
+   "heartbeats": 461,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:40:00Z"
+  },
+  {
+   "sha": "70fe19a38820",
+   "tokens": 205,
+   "heartbeats": 579,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:41:41Z"
+  },
+  {
+   "sha": "22a229da8d15",
+   "tokens": 150,
+   "heartbeats": 437,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:42:35Z"
+  },
+  {
+   "sha": "d0d7d8fb95a2",
+   "tokens": 150,
+   "heartbeats": 437,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:42:39Z"
+  },
+  {
+   "sha": "9ceec94d5143",
+   "tokens": 155,
+   "heartbeats": 422,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:07Z"
+  },
+  {
+   "sha": "06589291b7ad",
+   "tokens": 153,
+   "heartbeats": 426,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:09Z",
+   "score": 77.48
+  },
+  {
+   "sha": "64d8f3630602",
+   "tokens": 153,
+   "heartbeats": 421,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:14Z",
+   "score": 77.6
+  },
+  {
+   "sha": "52e72ca95f1b",
+   "tokens": 156,
+   "heartbeats": 417,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:47Z"
+  },
+  {
+   "sha": "c7bd36f0abdd",
+   "tokens": 153,
+   "heartbeats": 421,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:49Z"
+  },
+  {
+   "sha": "29e35d4297c5",
+   "tokens": 163,
+   "heartbeats": 418,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:50Z"
+  },
+  {
+   "sha": "76961a42e592",
+   "tokens": 153,
+   "heartbeats": 421,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:13Z"
+  },
+  {
+   "sha": "7a7dbcd3c468",
+   "tokens": 153,
+   "heartbeats": 421,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:14Z"
+  },
+  {
+   "sha": "b0b5331f8d0c",
+   "tokens": 157,
+   "heartbeats": 479,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:15Z"
+  },
+  {
+   "sha": "ff78c20efbe8",
+   "tokens": 152,
+   "heartbeats": 383,
+   "ok": false,
+   "error": "170:30: Invalid `⟨...⟩` notation: The expected type of this term could not be determined",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:37Z"
+  },
+  {
+   "sha": "d88f3c6ffb41",
+   "tokens": 152,
+   "heartbeats": 404,
+   "ok": false,
+   "error": "167:40: Invalid `⟨...⟩` notation: The expected type of this term could not be determined",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:38Z"
+  },
+  {
+   "sha": "87a54e976a7d",
+   "tokens": 151,
+   "heartbeats": 365,
+   "ok": false,
+   "error": "167:40: Invalid `⟨...⟩` notation: The expected type of this term could not be determined",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:39Z"
+  },
+  {
+   "sha": "d4235ff643a3",
+   "tokens": 153,
+   "heartbeats": 421,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:55Z"
+  },
+  {
+   "sha": "fe84f571dbd5",
+   "tokens": 153,
+   "heartbeats": 418,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:56Z",
+   "score": 77.67
+  },
+  {
+   "sha": "d39a502cf43e",
+   "tokens": 153,
+   "heartbeats": 418,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:45:01Z"
+  },
+  {
+   "sha": "ffb0c3b56316",
+   "tokens": 164,
+   "heartbeats": 504,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:15:44Z"
+  },
+  {
+   "sha": "fd3b75b3fc69",
+   "tokens": 155,
+   "heartbeats": 421,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:16:44Z"
+  },
+  {
+   "sha": "c50bd5b76abe",
+   "tokens": 153,
+   "heartbeats": 405,
+   "ok": false,
+   "error": "170:10: failed to elaborate eliminator, expected type is not available",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:16:45Z"
+  },
+  {
+   "sha": "abebf02a30c0",
+   "tokens": 159,
+   "heartbeats": 415,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:16:46Z"
+  },
+  {
+   "sha": "136234163864",
+   "tokens": 155,
+   "heartbeats": 418,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:16:48Z"
+  },
+  {
+   "sha": "8d90ac4f87de",
+   "tokens": 153,
+   "heartbeats": 427,
+   "ok": false,
+   "error": "167:10: failed to elaborate eliminator, expected type is not available",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:16:49Z"
+  },
+  {
+   "sha": "2c034d6ba9bd",
+   "tokens": 144,
+   "heartbeats": 539,
+   "ok": false,
+   "error": "166:4: `grind` failed case grind a a₁ a' b … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] b ⭢ₚ b' [prop] ∀ {a₂ : SKI}, b ⭢ₚ a₂ → Join ParallelReduction b' a₂ [prop] (K ⬝ a₂) ⭢ₚ a' [prop] ∀ {a₂_1 : SKI}, (K ⬝ a₂) ⭢ₚ a₂_1 → Join ParallelReduction a' a₂_1 [prop] ¬",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:18:10Z"
+  },
+  {
+   "sha": "83ff39249380",
+   "tokens": 134,
+   "heartbeats": 775,
+   "ok": false,
+   "error": "169:4: `grind` failed case grind a a₁ a' b … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] b ⭢ₚ b' [prop] ∀ {a₂ : SKI}, b ⭢ₚ a₂ → Join ParallelReduction b' a₂ [prop] (S ⬝ a_1 ⬝ b_1) ⭢ₚ a' [prop] ∀ {a₂ : SKI}, (S ⬝ a_1 ⬝ b_1) ⭢ₚ a₂ → Join ParallelReduction a' a₂ ",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:18:12Z"
+  },
+  {
+   "sha": "b529c03169bd",
+   "tokens": 151,
+   "heartbeats": 622,
+   "ok": false,
+   "error": "164:4: Tactic `aesop` failed, made no progress Initial goal: case refl a a₁ b✝ b'✝ : SKI hb : b✝ ⭢ₚ b'✝ ihb : ∀ {a₂ : SKI}, b✝ ⭢ₚ a₂ → Join ParallelReduction b'✝ a₂ iha : ∀ {a₂ : SKI}, I ⭢ₚ a₂ → Join ParallelReduction I a₂ ⊢ Join ParallelReduction b✝ (I ⬝ b'✝)",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:18:13Z"
+  },
+  {
+   "sha": "e6a234c00cb0",
+   "tokens": 146,
+   "heartbeats": 596,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:18:45Z"
+  },
+  {
+   "sha": "5dbc36a5563c",
+   "tokens": 136,
+   "heartbeats": 884,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:18:46Z"
+  },
+  {
+   "sha": "04ac10546a8c",
+   "tokens": 153,
+   "heartbeats": 1206,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:18:48Z"
+  },
+  {
+   "sha": "90c2baa6aded",
+   "tokens": 148,
+   "heartbeats": 716,
+   "ok": false,
+   "error": "157:15: Function expected at ha but this term has type SKI Note: Expected a function because this term is being applied to the argument iha",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:42:42Z"
+  },
+  {
+   "sha": "1bfafe818405",
+   "tokens": 174,
+   "heartbeats": 643,
+   "ok": false,
+   "error": "159:19: Application type mismatch: The argument ha has type SKI of sort `Type` but is expected to have type a ⭢ₚ ?m.1222 of sort `Prop` in the application iha ha",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:42:58Z"
+  },
+  {
+   "sha": "055e022b939d",
+   "tokens": 172,
+   "heartbeats": 541,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:43:06Z"
+  },
+  {
+   "sha": "07e51b0effed",
+   "tokens": 159,
+   "heartbeats": 410,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:43:29Z"
+  },
+  {
+   "sha": "68f7031535e7",
+   "tokens": 155,
+   "heartbeats": 426,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:43:31Z"
+  },
+  {
+   "sha": "74442b477b8c",
+   "tokens": 153,
+   "heartbeats": 430,
+   "ok": false,
+   "error": "157:23: don't know how to synthesize placeholder context: a a₁ a✝ a'✝ b✝ b'✝ : SKI ha : a✝ ⭢ₚ a'✝ hb : b✝ ⭢ₚ b'✝ iha : ∀ {a₂ : SKI}, a✝ ⭢ₚ a₂ → Join ParallelReduction a'✝ a₂ ihb : ∀ {a₂ : SKI}, b✝ ⭢ₚ a₂ → Join ParallelReduction b'✝ a₂ ⊢ SKI",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:43:50Z"
+  },
+  {
+   "sha": "5ee151120071",
+   "tokens": 155,
+   "heartbeats": 419,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:11:36Z"
+  },
+  {
+   "sha": "9ebf02c843d1",
+   "tokens": 153,
+   "heartbeats": 420,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:12:36Z"
+  },
+  {
+   "sha": "20b5232369e7",
+   "tokens": 164,
+   "heartbeats": 408,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:12:37Z"
+  },
+  {
+   "sha": "b08e13add22c",
+   "tokens": 151,
+   "heartbeats": 418,
+   "ok": false,
+   "error": "171:8: don't know how to synthesize placeholder context: a a₁ a'✝ b✝¹ … [hypotheses omitted] ⊢ SKI",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:12:39Z"
+  },
+  {
+   "sha": "236fd2d0ea2f",
+   "tokens": 152,
+   "heartbeats": 132,
+   "ok": false,
+   "error": "162:2: Case tag `red_I.par` not found. Hint: Available tags: • `par.red_K`: r̵e̵d̵_̵I̵.̵par.̲r̲e̲d̲_̲K̲ • `par.red_S`: r̵e̵d̵_̵I̵.̵par.̲r̲e̲d̲_̲S̲ • `par.refl`: r̵e̵d̵_̵I̵.̵par.̲r̲e̲f̲l̲",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:13:13Z"
+  },
+  {
+   "sha": "be8d43c39524",
+   "tokens": 153,
+   "heartbeats": 420,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:13:15Z"
+  },
+  {
+   "sha": "3df08509caab",
+   "tokens": 107,
+   "heartbeats": 1394,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:13:50Z"
+  },
+  {
+   "sha": "890c3f832ba8",
+   "tokens": 110,
+   "heartbeats": 1394,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:14:17Z"
+  },
+  {
+   "sha": "b23c780a4bb0",
+   "tokens": 98,
+   "heartbeats": 2150,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:14:19Z"
+  },
+  {
+   "sha": "9a36f86a51b9",
+   "tokens": 125,
+   "heartbeats": 1345,
+   "ok": false,
+   "error": "159:4: `grind` failed case grind a a₁ a' b … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] b ⭢ₚ b' [prop] ∀ {a₂ : SKI}, b ⭢ₚ a₂ → Join ParallelReduction b' a₂ [prop] I ⭢ₚ a' [prop] ∀ {a₂ : SKI}, I ⭢ₚ a₂ → Join ParallelReduction a' a₂ [prop] ¬Join ParallelReducti",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:14:20Z"
+  },
+  {
+   "sha": "7616be834cd3",
+   "tokens": 154,
+   "heartbeats": 421,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:15:56Z"
+  },
+  {
+   "sha": "9023ba7fbe62",
+   "tokens": 153,
+   "heartbeats": 419,
+   "ok": false,
+   "error": "173:11: don't know how to synthesize implicit argument `b` @And.intro ((a'✝ ⬝ b'✝) ⭢ₚ ?m.1140) ((a✝ ⬝ b✝) ⭢ₚ ?m.1140) ?m.1143 ?m.1144 context: a a₁ a✝ a'✝ b✝ … [hypotheses omitted] ⊢ Prop",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:15:57Z"
+  },
+  {
+   "sha": "2a0dfab31cbe",
+   "tokens": 155,
+   "heartbeats": 419,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:17:10Z"
+  },
+  {
+   "sha": "2653976c3c96",
+   "tokens": 156,
+   "heartbeats": 420,
+   "ok": false,
+   "error": "174:20: Type mismatch ihb has type ∀ {a₂ : SKI}, b✝ ⭢ₚ a₂ → Join ParallelReduction b'✝ a₂ but is expected to have type a✝ ⭢ₚ a'✝",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:17:11Z"
+  },
+  {
+   "sha": "35ada17f45d5",
+   "tokens": 148,
+   "heartbeats": 495,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:46:24Z"
+  },
+  {
+   "sha": "e9eaa7d1659d",
+   "tokens": 155,
+   "heartbeats": 431,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:47:18Z"
+  },
+  {
+   "sha": "2507adde39ff",
+   "tokens": 152,
+   "heartbeats": 473,
+   "ok": false,
+   "error": "171:53: Application type mismatch: The argument ParallelReduction.red_S ?m.1074 ?m.1075 ?m.1076 has type (S ⬝ ?m.1074 ⬝ ?m.1075 ⬝ ?m.1076) ⭢ₚ ?m.1074 ⬝ ?m.1076 ⬝ (?m.1075 ⬝ ?m.1076) but is expected to have type (a'✝ ⬝ b'✝) ⭢ₚ ⋯.choose ⬝ b'✝ ⬝ (⋯.choose ⬝ b'✝) in the application ⟨ParallelReduction.pa",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:47:19Z"
+  },
+  {
+   "sha": "14f6d3ff9ef1",
+   "tokens": 153,
+   "heartbeats": 420,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:47:21Z"
+  },
+  {
+   "sha": "c6a6b78d7c17",
+   "tokens": 154,
+   "heartbeats": 418,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:48:08Z"
+  },
+  {
+   "sha": "605fbe8b7517",
+   "tokens": 154,
+   "heartbeats": 418,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:48:10Z"
+  },
+  {
+   "sha": "6ac1e8ed71dd",
+   "tokens": 155,
+   "heartbeats": 418,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:48:11Z"
+  },
+  {
+   "sha": "a012bbd71b37",
+   "tokens": 153,
+   "heartbeats": 418,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:48:13Z"
+  },
+  {
+   "sha": "3b925b1ff007",
+   "tokens": 200,
+   "heartbeats": 611,
+   "ok": false,
+   "error": "170:16: Application type mismatch: The argument hb has type SKI of sort `Type` but is expected to have type b ⭢ₚ ?m.1345 of sort `Prop` in the application And.intro hb",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:48:59Z"
+  },
+  {
+   "sha": "3f01f987a8e8",
+   "tokens": 197,
+   "heartbeats": 589,
+   "ok": false,
+   "error": "177:28: Application type mismatch: The argument hb has type SKI of sort `Type` but is expected to have type ?m.1500 ⭢ₚ ?m.1501 of sort `Prop` in the application ParallelReduction.par this.left hb",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:10Z"
+  },
+  {
+   "sha": "0ccbcc619e43",
+   "tokens": 199,
+   "heartbeats": 543,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:17Z"
+  },
+  {
+   "sha": "511cc2765cff",
+   "tokens": 153,
+   "heartbeats": 455,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:42Z"
+  },
+  {
+   "sha": "9e4e180d9607",
+   "tokens": 153,
+   "heartbeats": 418,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:43Z"
+  },
+  {
+   "sha": "856bdb2c5365",
+   "tokens": 156,
+   "heartbeats": 414,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:45Z"
+  },
+  {
+   "sha": "e732f84b8415",
+   "tokens": 82,
+   "heartbeats": 2162,
+   "ok": false,
+   "error": "164:6: `grind` failed case grind.1.1 a a₁ a' b … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] b ⭢ₚ b' [prop] ∀ {a₂ : SKI}, b ⭢ₚ a₂ → Join ParallelReduction b' a₂ [prop] I ⭢ₚ a' [prop] ∀ {a₂ : SKI}, I ⭢ₚ a₂ → Join ParallelReduction a' a₂ [prop] ¬Join ParallelRed",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:50:54Z"
+  },
+  {
+   "sha": "a49f4a90c625",
+   "tokens": 91,
+   "heartbeats": 40821,
+   "ok": false,
+   "error": "164:6: `grind` failed case grind a a₁ a' b … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] b ⭢ₚ b' [prop] ∀ {a₂ : SKI}, b ⭢ₚ a₂ → Join ParallelReduction b' a₂ [prop] (K ⬝ a₂) ⭢ₚ a' [prop] ∀ {a₂_1 : SKI}, (K ⬝ a₂) ⭢ₚ a₂_1 → Join ParallelReduction a' a₂_1 [prop] ¬",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:51:43Z"
+  },
+  {
+   "sha": "540e37aa046d",
+   "tokens": 87,
+   "heartbeats": 424,
+   "ok": false,
+   "error": "165:6: duplicate rule 'Sab_irreducible'; rule 'Ka_irreducible' was already given. Use [<term>,...] to give multiple rules.",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:51:45Z"
+  },
+  {
+   "sha": "ebc29d36530c",
+   "tokens": 91,
+   "heartbeats": 19900,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:51:54Z"
+  },
+  {
+   "sha": "c04fed46022c",
+   "tokens": 191,
+   "heartbeats": 528,
+   "ok": false,
+   "error": "165:12: Unknown identifier `ha`",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:19:19Z"
+  },
+  {
+   "sha": "78db26717d73",
+   "tokens": 154,
+   "heartbeats": 191,
+   "ok": false,
+   "error": "161:56: don't know how to synthesize placeholder context: a a₁ a'✝ b✝ b'✝ : SKI hb : b✝ ⭢ₚ b'✝ ihb : ∀ {a₂ : SKI}, b✝ ⭢ₚ a₂ → Join ParallelReduction b'✝ a₂ ha : I ⭢ₚ a'✝ iha : ∀ {a₂ : SKI}, I ⭢ₚ a₂ → Join ParallelReduction a'✝ a₂ ⊢ Join ParallelReduction b✝ (a'✝ ⬝ b'✝)",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:20:08Z"
+  },
+  {
+   "sha": "3c3a1288f579",
+   "tokens": 157,
+   "heartbeats": 421,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:20:10Z"
+  },
+  {
+   "sha": "e84e4d6a0653",
+   "tokens": 157,
+   "heartbeats": 418,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:20:11Z"
+  },
+  {
+   "sha": "e5de09cfbc6d",
+   "tokens": 158,
+   "heartbeats": 421,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:20:12Z"
+  },
+  {
+   "sha": "d60c685ddb02",
+   "tokens": 151,
+   "heartbeats": 415,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:21:30Z",
+   "score": 77.91
+  },
+  {
+   "sha": "8917d26a375f",
+   "tokens": 150,
+   "heartbeats": 422,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:21:35Z"
+  },
+  {
+   "sha": "92c6c6ae47bf",
+   "tokens": 150,
+   "heartbeats": 389,
+   "ok": false,
+   "error": "166:15: Invalid field `Ka_irreducible`: The environment does not contain `Cslib.SKI.ParallelReduction.Ka_irreducible`, so it is not possible to project the field `Ka_irreducible` from an expression ha of type `(K ⬝ a₂) ⭢ₚ a'✝`",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:21:36Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wuclean-hx-solab1-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:08:09Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:50:52Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:22:43Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r5",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:00:38Z",
+   "pattern_cards": 2,
+   "mode": "structural",
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r6",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:37:22Z",
+   "pattern_cards": 2,
+   "mode": "structural",
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r7",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:14:14Z",
+   "pattern_cards": 2,
+   "mode": "structural",
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:41:22Z",
+   "pattern_cards": 2,
+   "mode": "structural",
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r10",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:10:07Z",
+   "pattern_cards": 2,
+   "mode": "structural",
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r11",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:45:20Z",
+   "pattern_cards": 2,
+   "mode": "structural",
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r12",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:17:51Z",
+   "pattern_cards": 2,
+   "mode": "structural",
+   "auto_brief": true
+  }
+ ],
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 1,
+    "d_score": 8.61,
+    "d_tokens": 46,
+    "d_heartbeats": 894,
+    "diff": "+theorem parallelReduction_diamond : Diamond ParallelReduction := by\n+  intro a a₁ a₂ h₁ h₂\n+  cases h₁\n+  case refl => exact ⟨a₂, h₂, .refl a₂⟩\n+  case par a a' b b' ha' hb' =>\n+    cases h₂\n+    case refl =>\n+      refine ⟨a' ⬝ b', ?_⟩\n+      exact ⟨.refl $ a' ⬝ b', .par ha' hb'⟩\n+    case par a'' b'' ha'' hb'' =>\n+      let ⟨a₃, ha⟩ := parallelReduction_diamond ha' ha''\n+      let ⟨b₃, hb⟩ := parallelReduction_diamond hb' hb''\n+      refine ⟨a₃ ⬝ b₃, ?_⟩\n+      constructor\n+      · exact .par ha.1 hb.1\n+      · exact .par ha.2 hb.2\n+    case red_I =>\n+      rewrite [I_irreducible a' ha']\n+      use b', .red_I b'\n+    case red_K =>\n+      let ⟨a₂', ha₂'⟩ := Ka_irreducible a₂ a' ha'\n+      "
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 2,
+    "d_score": 18.72,
+    "d_tokens": -82,
+    "d_heartbeats": -512,
+    "diff": "-  cases h₁\n-  case refl => exact ⟨a₂, h₂, .refl a₂⟩\n-  case par a a' b b' ha' hb' =>\n-    cases h₂\n-    case refl =>\n-      refine ⟨a' ⬝ b', ?_⟩\n-      exact ⟨.refl $ a' ⬝ b', .par ha' hb'⟩\n-    case par a'' b'' ha'' hb'' =>\n-      let ⟨a₃, ha⟩ := parallelReduction_diamond ha' ha''\n-      let ⟨b₃, hb⟩ := parallelReduction_diamond hb' hb''\n-      refine ⟨a₃ ⬝ b₃, ?_⟩\n-      constructor\n-      · exact .par ha.1 hb.1\n-      · exact .par ha.2 hb.2\n-    case red_I =>\n-      rewrite [I_irreducible a' ha']\n-      use b', .red_I b'\n-    case red_K =>\n-      let ⟨a₂', ha₂'⟩ := Ka_irreducible a₂ a' ha'\n-      rewrite [ha₂'.2]\n-      refine ⟨a₂', ?_⟩\n-      exact ⟨.red_K a₂' b', ha₂'.1⟩\n-    case red_"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 4,
+    "d_score": 4.57,
+    "d_tokens": -59,
+    "d_heartbeats": 11,
+    "diff": "-  induction h₁ generalizing a₂ with\n-  | refl => exact ⟨_, h₂, .refl _⟩\n-  | @par a a' b b' ha hb iha ihb =>\n-    cases h₂ with\n-    | refl => exact ⟨_, .refl _, .par ha hb⟩\n-    | par ha' hb' =>\n-      obtain ⟨x, hx, hx'⟩ := iha ha'\n-      obtain ⟨y, hy, hy'⟩ := ihb hb'\n-      exact ⟨_, .par hx hy, .par hx' hy'⟩\n-    | red_I =>\n-      rw [I_irreducible a' ha]\n-      exact ⟨_, .red_I _, hb⟩\n-    | red_K =>\n-      obtain ⟨x, hx, rfl⟩ := Ka_irreducible _ _ ha\n-      exact ⟨_, .red_K _ _, hx⟩\n-    | red_S a c =>\n-      obtain ⟨x, y, hx, hy, rfl⟩ := Sab_irreducible a c _ ha\n-      exact ⟨_, .red_S _ _ _, .par (.par hx hb) (.par hy hb)⟩\n-  | red_I =>\n-    cases h₂ with\n-    | refl => exact ⟨_, ."
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 7,
+    "d_score": 1.77,
+    "d_tokens": -21,
+    "d_heartbeats": -2,
+    "diff": "-  case par.par a a' b b' ha hb iha ihb a'' b'' ha' hb' =>\n+  case par.par iha ihb a'' b'' ha' hb' =>\n-  case par.red_K a' b b' ha hb =>\n+  case par.red_K ha ih =>\n-    exact ⟨_, .red_K _ _, hx⟩\n+    exact ⟨_, .red_K .., hx⟩\n-    exact ⟨_, .red_S _ _ _, .par (.par hx hb) (.par hy hb)⟩\n-  case red_I.par c a' hc ha =>\n+    exact ⟨_, .red_S .., .par (.par hx hb) (.par hy hb)⟩\n+  case red_I.par hc ha =>\n-  case red_K.par a' c' ha hc =>\n+  case red_K.par ha hc =>\n-    exact ⟨_, hx, .red_K _ _⟩\n-  case red_S.par d c' hd hc =>\n+    exact ⟨_, hx, .red_K ..⟩\n+  case red_S.par hd hc =>\n-    exact ⟨_, .par (.par hx hc) (.par hy hc), .red_S _ _ _⟩\n+    exact ⟨_, .par (.par hx hc) (.par hy hc), .red_S .."
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 8,
+    "d_score": 0.13,
+    "d_tokens": -11,
+    "d_heartbeats": 33,
+    "diff": "-  case par.red_K ha ih =>\n+  case par.red_K ha ih | red_K.par ha hc =>\n-    exact ⟨_, .red_K .., hx⟩\n+    first | exact ⟨_, .red_K .., hx⟩ | exact ⟨_, hx, .red_K ..⟩\n-  case red_K.par ha hc =>\n-    obtain ⟨x, hx, rfl⟩ := Ka_irreducible _ _ ha\n-    exact ⟨_, hx, .red_K ..⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 9,
+    "d_score": 0.27,
+    "d_tokens": -5,
+    "d_heartbeats": 6,
+    "diff": "-  case par.red_K ha ih | red_K.par ha hc =>\n+  case par.red_K ha ih =>\n-    first | exact ⟨_, .red_K .., hx⟩ | exact ⟨_, hx, .red_K ..⟩\n-  case par.red_S hb ihb a c ha iha =>\n-    obtain ⟨x, y, hx, hy, rfl⟩ := Sab_irreducible a c _ ha\n-    exact ⟨_, .red_S .., .par (.par hx hb) (.par hy hb)⟩\n+    exact ⟨_, .red_K .., hx⟩\n+  case par.red_S hb ihb a c ha iha | red_S.par ha hb =>\n+    obtain ⟨x, y, hx, hy, rfl⟩ := Sab_irreducible _ _ _ ha\n+    first\n+    | exact ⟨_, .red_S .., .par (.par hx hb) (.par hy hb)⟩\n+    | exact ⟨_, .par (.par hx hb) (.par hy hb), .red_S ..⟩\n-  case red_S.par hd hc =>\n-    obtain ⟨x, y, hx, hy, rfl⟩ := Sab_irreducible _ _ _ hd\n-    exact ⟨_, .par (.par hx hc) (.par hy"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 12,
+    "d_score": 5.01,
+    "d_tokens": -52,
+    "d_heartbeats": -32,
+    "diff": "-  case par.red_I hb ihb ha iha =>\n+  case' par.red_I | par.red_K | par.red_S => apply symm\n+  case par.red_I hb ihb ha iha | red_I.par ha hb =>\n-    exact ⟨_, .red_I _, hb⟩\n-  case par.red_K ha ih =>\n+    exact ⟨_, hb, .red_I _⟩\n+  case par.red_K ha ih | red_K.par ha hc =>\n-    exact ⟨_, .red_K .., hx⟩\n+    exact ⟨_, hx, .red_K ..⟩\n-    first\n-    | exact ⟨_, .red_S .., .par (.par hx hb) (.par hy hb)⟩\n-    | exact ⟨_, .par (.par hx hb) (.par hy hb), .red_S ..⟩\n-  case red_I.par hc ha =>\n-    rw [I_irreducible _ hc]\n-    exact ⟨_, ha, .red_I _⟩\n-  case red_K.par ha hc =>\n-    obtain ⟨x, hx, rfl⟩ := Ka_irreducible _ _ ha\n-    exact ⟨_, hx, .red_K ..⟩\n+    exact ⟨_, .par (.par hx hb) (.par hy "
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 13,
+    "d_score": 0.87,
+    "d_tokens": -11,
+    "d_heartbeats": 1,
+    "diff": "-  case red_I.red_I | red_K.red_K | red_S.red_S => exact ⟨_, .refl _, .refl _⟩\n-  case red_I.refl | red_K.refl | red_S.refl | par.refl =>\n+  case red_I.red_I | red_K.red_K | red_S.red_S | red_I.refl | red_K.refl | red_S.refl | par.refl =>"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 14,
+    "d_score": 0.85,
+    "d_tokens": -12,
+    "d_heartbeats": 6,
+    "diff": "-    obtain ⟨x, hx, hx'⟩ := iha ha'\n-    obtain ⟨y, hy, hy'⟩ := ihb hb'\n-    exact ⟨_, .par hx hy, .par hx' hy'⟩\n+    have hx := iha ha'\n+    have hy := ihb hb'\n+    exact ⟨_, .par hx.choose_spec.1 hy.choose_spec.1, .par hx.choose_spec.2 hy.choose_spec.2⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 1,
+    "d_score": 0.16,
+    "d_tokens": -4,
+    "d_heartbeats": 7,
+    "diff": "-    rw [I_irreducible _ ha]\n+    cases ha"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 4,
+    "d_score": 1.17,
+    "d_tokens": -14,
+    "d_heartbeats": -1,
+    "diff": "-  case red_I.red_I | red_K.red_K | red_S.red_S | red_I.refl | red_K.refl | red_S.refl | par.refl =>\n-    refine ⟨_, .refl _, ?_⟩\n-    constructor <;> assumption\n+  all_goals\n+    refine ⟨_, .refl _, ?_⟩\n+    constructor <;> assumption"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 10,
+    "d_score": 0.23,
+    "d_tokens": -2,
+    "d_heartbeats": -3,
+    "diff": "-    exact ⟨_, hx, .red_K ..⟩\n+    use x, hx, ParallelReduction.red_K .."
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 19,
+    "d_score": 0.31,
+    "d_tokens": -4,
+    "d_heartbeats": 1,
+    "diff": "-    exact ⟨_, .par hx.choose_spec.1 hy.choose_spec.1, .par hx.choose_spec.2 hy.choose_spec.2⟩\n+    exact ⟨_, hx.choose_spec.1.par hy.choose_spec.1, hx.choose_spec.2.par hy.choose_spec.2⟩\n-    exact ⟨_, .par (.par hx hb) (.par hy hb), .red_S ..⟩\n+    exact ⟨_, (hx.par hb).par (hy.par hb), .red_S ..⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 20,
+    "d_score": 0.08,
+    "d_tokens": -1,
+    "d_heartbeats": 0,
+    "diff": "-    have hy := ihb hb'\n-    exact ⟨_, hx.choose_spec.1.par hy.choose_spec.1, hx.choose_spec.2.par hy.choose_spec.2⟩\n+    have := ihb hb'\n+    exact ⟨_, hx.choose_spec.1.par this.choose_spec.1, hx.choose_spec.2.par this.choose_spec.2⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 1,
+    "d_score": 0.29,
+    "d_tokens": -3,
+    "d_heartbeats": -2,
+    "diff": "-    have hx := iha ha'\n-    have := ihb hb'\n-    exact ⟨_, hx.choose_spec.1.par this.choose_spec.1, hx.choose_spec.2.par this.choose_spec.2⟩\n+    specialize iha ha'\n+    specialize ihb hb'\n+    exact ⟨_, iha.choose_spec.1.par ihb.choose_spec.1, iha.choose_spec.2.par ihb.choose_spec.2⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 6,
+    "d_score": 0.19,
+    "d_tokens": -2,
+    "d_heartbeats": -1,
+    "diff": "-  case refl => exact ⟨_, h₂, .refl _⟩\n+  case refl => use a₂, h₂, ParallelReduction.refl _"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 7,
+    "d_score": 0.51,
+    "d_tokens": -6,
+    "d_heartbeats": -1,
+    "diff": "+  case' par ha hb iha ihb => skip\n-  case par.par iha ihb a'' b'' ha' hb' =>\n+  case par.par a'' b'' ha' hb' =>\n-  case par.red_I hb ihb ha iha | red_I.par ha hb =>\n+  case par.red_I | red_I.par ha hb =>\n-  case par.red_K ha ih | red_K.par ha hc =>\n+  case par.red_K | red_K.par ha hc =>\n-  case par.red_S hb ihb a c ha iha | red_S.par ha hb =>\n+  case par.red_S | red_S.par ha hb =>"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 9,
+    "d_score": 0.17,
+    "d_tokens": -2,
+    "d_heartbeats": 0,
+    "diff": "-  case par.par a'' b'' ha' hb' =>\n+  case par.par ha' hb' =>"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 13,
+    "d_score": 0.22,
+    "d_tokens": -9,
+    "d_heartbeats": 22,
+    "diff": "-    obtain ⟨x, y, hx, hy, rfl⟩ := Sab_irreducible _ _ _ ha\n-    exact ⟨_, (hx.par hb).par (hy.par hb), .red_S ..⟩\n+    have := Sab_irreducible _ _ _ ha\n+    exact this.choose_spec.choose_spec.2.2.symm ▸ ⟨_, (this.choose_spec.choose_spec.1.par hb).par (this.choose_spec.choose_spec.2.1.par hb), .red_S ..⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 16,
+    "d_score": 0.01,
+    "d_tokens": -3,
+    "d_heartbeats": 10,
+    "diff": "-    obtain ⟨x, hx, rfl⟩ := Ka_irreducible _ _ ha\n-    use x, hx, ParallelReduction.red_K ..\n+    have := Ka_irreducible _ _ ha\n+    exact this.choose_spec.2.symm ▸ ⟨_, this.choose_spec.1, .red_K ..⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 13,
+    "d_score": 0.01,
+    "d_tokens": 3,
+    "d_heartbeats": -11,
+    "diff": "-    have := Sab_irreducible _ _ _ ha\n-    exact this.choose_spec.choose_spec.2.2.symm ▸ ⟨_, (this.choose_spec.choose_spec.1.par hb).par (this.choose_spec.choose_spec.2.1.par hb), .red_S ..⟩\n+    have := (Sab_irreducible _ _ _ ha).choose_spec\n+    exact this.choose_spec.2.2.symm ▸ ⟨_, (this.choose_spec.1.par hb).par (this.choose_spec.2.1.par hb), .red_S ..⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 14,
+    "d_score": 0.12,
+    "d_tokens": 0,
+    "d_heartbeats": -5,
+    "diff": "-    have := (Sab_irreducible _ _ _ ha).choose_spec\n-    exact this.choose_spec.2.2.symm ▸ ⟨_, (this.choose_spec.1.par hb).par (this.choose_spec.2.1.par hb), .red_S ..⟩\n+    have := (Sab_irreducible _ _ _ ha).choose_spec.choose_spec\n+    exact this.2.2.symm ▸ ⟨_, (this.1.par hb).par (this.2.1.par hb), .red_S ..⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 25,
+    "d_score": 0.07,
+    "d_tokens": 0,
+    "d_heartbeats": -3,
+    "diff": "-    exact this.2.2.symm ▸ ⟨_, (this.1.par hb).par (this.2.1.par hb), .red_S ..⟩\n+    apply this.2.2.symm.subst\n+    exact ⟨_, (this.1.par hb).par (this.2.1.par hb), .red_S ..⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r12",
+    "check": 6,
+    "d_score": 0.24,
+    "d_tokens": -2,
+    "d_heartbeats": -3,
+    "diff": "-    have := Ka_irreducible _ _ ha\n-    exact this.choose_spec.2.symm ▸ ⟨_, this.choose_spec.1, .red_K ..⟩\n+    apply Ka_irreducible at ha\n+    exact ha.choose_spec.2.symm ▸ ⟨_, ha.choose_spec.1, .red_K ..⟩"
+   }
+  ]
+ },
+ "api_spend": 2.561334,
+ "profile_cache": {
+  "06c40ab05cba": {
+   "ok": true,
+   "total": 405,
+   "floor": null,
+   "reference": 1422,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "2-2",
+     "depth_indent": 2,
+     "text": "intro a a₁ a₂ h₁ h₂",
+     "heartbeats": null
+    },
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "induction h₁ generalizing a₂",
+     "heartbeats": null
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "case refl => exact ⟨_, h₂, .refl _⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "all_goals cases h₂",
+     "heartbeats": null
+    },
+    {
+     "lines": "6-8",
+     "depth_indent": 2,
+     "text": "case red_I.red_I | red_K.red_K | red_S.red_S | red_I.refl | red_K.refl | red_S.refl | par.refl => re",
+     "heartbeats": null
+    },
+    {
+     "lines": "9-12",
+     "depth_indent": 2,
+     "text": "case par.par iha ihb a'' b'' ha' hb' => have hx := iha ha' have hy := ihb hb' exact ⟨_, .par hx.choo",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "case' par.red_I | par.red_K | par.red_S => apply symm",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-16",
+     "depth_indent": 2,
+     "text": "case par.red_I hb ihb ha iha | red_I.par ha hb => rw [I_irreducible _ ha] exact ⟨_, hb, .red_I _⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-19",
+     "depth_indent": 2,
+     "text": "case par.red_K ha ih | red_K.par ha hc => obtain ⟨x, hx, rfl⟩ := Ka_irreducible _ _ ha exact ⟨_, hx,",
+     "heartbeats": null
+    },
+    {
+     "lines": "20-22",
+     "depth_indent": 2,
+     "text": "case par.red_S hb ihb a c ha iha | red_S.par ha hb => obtain ⟨x, y, hx, hy, rfl⟩ := Sab_irreducible ",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "a339c0409033": {
+   "ok": true,
+   "total": 409,
+   "floor": null,
+   "reference": 1422,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "2-2",
+     "depth_indent": 2,
+     "text": "intro a a₁ a₂ h₁ h₂",
+     "heartbeats": null
+    },
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "induction h₁ generalizing a₂",
+     "heartbeats": null
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "case refl => exact ⟨_, h₂, .refl _⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "all_goals cases h₂",
+     "heartbeats": null
+    },
+    {
+     "lines": "6-9",
+     "depth_indent": 2,
+     "text": "case par.par iha ihb a'' b'' ha' hb' => have hx := iha ha' have := ihb hb' exact ⟨_, hx.choose_spec.",
+     "heartbeats": null
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "case' par.red_I | par.red_K | par.red_S => apply symm",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-13",
+     "depth_indent": 2,
+     "text": "case par.red_I hb ihb ha iha | red_I.par ha hb => cases ha exact ⟨_, hb, .red_I _⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-16",
+     "depth_indent": 2,
+     "text": "case par.red_K ha ih | red_K.par ha hc => obtain ⟨x, hx, rfl⟩ := Ka_irreducible _ _ ha use x, hx, Pa",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-19",
+     "depth_indent": 2,
+     "text": "case par.red_S hb ihb a c ha iha | red_S.par ha hb => obtain ⟨x, y, hx, hy, rfl⟩ := Sab_irreducible ",
+     "heartbeats": null
+    },
+    {
+     "lines": "20-22",
+     "depth_indent": 2,
+     "text": "all_goals refine ⟨_, .refl _, ?_⟩ constructor <;> assumption",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "aa9b8def4800": {
+   "ok": true,
+   "total": 437,
+   "floor": null,
+   "reference": 1422,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "2-2",
+     "depth_indent": 2,
+     "text": "intro a a₁ a₂ h₁ h₂",
+     "heartbeats": null
+    },
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "induction h₁ generalizing a₂",
+     "heartbeats": null
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "case refl => use a₂, h₂, ParallelReduction.refl _",
+     "heartbeats": null
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "case' par ha hb iha ihb => skip",
+     "heartbeats": null
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "all_goals cases h₂",
+     "heartbeats": null
+    },
+    {
+     "lines": "7-10",
+     "depth_indent": 2,
+     "text": "case par.par ha' hb' => specialize iha ha' specialize ihb hb' exact ⟨_, iha.choose_spec.1.par ihb.ch",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "case' par.red_I | par.red_K | par.red_S => apply symm",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-14",
+     "depth_indent": 2,
+     "text": "case par.red_I | red_I.par ha hb => cases ha exact ⟨_, hb, .red_I _⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-17",
+     "depth_indent": 2,
+     "text": "case par.red_K | red_K.par ha hc => have := Ka_irreducible _ _ ha exact this.choose_spec.2.symm ▸ ⟨_",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-20",
+     "depth_indent": 2,
+     "text": "case par.red_S | red_S.par ha hb => have := Sab_irreducible _ _ _ ha exact this.choose_spec.choose_s",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-23",
+     "depth_indent": 2,
+     "text": "all_goals refine ⟨_, .refl _, ?_⟩ constructor <;> assumption",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "5ee151120071": {
+   "ok": true,
+   "total": 419,
+   "floor": null,
+   "reference": 1422,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "2-2",
+     "depth_indent": 2,
+     "text": "intro a a₁ a₂ h₁ h₂",
+     "heartbeats": null
+    },
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "induction h₁ generalizing a₂",
+     "heartbeats": null
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "case refl => exact ⟨_, h₂, .refl _⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "case' par ha hb iha ihb => skip",
+     "heartbeats": null
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "all_goals cases h₂",
+     "heartbeats": null
+    },
+    {
+     "lines": "7-10",
+     "depth_indent": 2,
+     "text": "case par.par ha' hb' => specialize iha ha' specialize ihb hb' exact ⟨_, iha.choose_spec.1.par ihb.ch",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "case' par.red_I | par.red_K | par.red_S => apply symm",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-14",
+     "depth_indent": 2,
+     "text": "case par.red_I | red_I.par ha hb => cases ha exact ⟨_, hb, .red_I _⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-17",
+     "depth_indent": 2,
+     "text": "case par.red_K | red_K.par ha hc => have := Ka_irreducible _ _ ha exact this.choose_spec.2.symm ▸ ⟨_",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-21",
+     "depth_indent": 2,
+     "text": "case par.red_S | red_S.par ha hb => have := (Sab_irreducible _ _ _ ha).choose_spec.choose_spec apply",
+     "heartbeats": null
+    },
+    {
+     "lines": "22-24",
+     "depth_indent": 2,
+     "text": "all_goals refine ⟨_, .refl _, ?_⟩ constructor <;> assumption",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "fe84f571dbd5": {
+   "ok": true,
+   "total": 418,
+   "floor": null,
+   "reference": 1422,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "2-2",
+     "depth_indent": 2,
+     "text": "intro a a₁ a₂ h₁ h₂",
+     "heartbeats": null
+    },
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "induction h₁ generalizing a₂",
+     "heartbeats": null
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "case refl => use a₂, h₂, ParallelReduction.refl _",
+     "heartbeats": null
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "case' par ha hb iha ihb => skip",
+     "heartbeats": null
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "all_goals cases h₂",
+     "heartbeats": null
+    },
+    {
+     "lines": "7-10",
+     "depth_indent": 2,
+     "text": "case par.par ha' hb' => specialize iha ha' specialize ihb hb' exact ⟨_, iha.choose_spec.1.par ihb.ch",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "case' par.red_I | par.red_K | par.red_S => apply symm",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-14",
+     "depth_indent": 2,
+     "text": "case par.red_I | red_I.par ha hb => cases ha exact ⟨_, hb, .red_I _⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-17",
+     "depth_indent": 2,
+     "text": "case par.red_K | red_K.par ha hc => have := Ka_irreducible _ _ ha exact this.choose_spec.2.symm ▸ ⟨_",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-21",
+     "depth_indent": 2,
+     "text": "case par.red_S | red_S.par ha hb => have := (Sab_irreducible _ _ _ ha).choose_spec.choose_spec apply",
+     "heartbeats": null
+    },
+    {
+     "lines": "22-24",
+     "depth_indent": 2,
+     "text": "all_goals refine ⟨_, .refl _, ?_⟩ constructor <;> assumption",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "budget_milestones": {
+  "2": {
+   "spend": 2.001991,
+   "best": 77.67,
+   "run_id": "wuclean-hx-solab1-r10",
+   "turn": 19,
+   "t": "2026-10-14T12:15:18Z"
+  }
+ }
+}

@@ -1,0 +1,497 @@
+{
+ "problem": "Core.InitsUpdatesComm",
+ "best": {
+  "score": 89.14,
+  "proof": "theorem InitsUpdatesComm\n  {P : PureExpr} {σ σ' σ'' : SemanticStore P}\n  {ks ks' : List P.Ident} {vs vs' : List P.Expr} :\n  UpdateStates σ ks vs σ' →\n  InitStates σ' ks' vs' σ'' →\n  ∃ σ₁,\n    σ₁ = (updatedStates σ ks' vs') ∧\n    InitStates σ ks' vs' σ₁ ∧\n    UpdateStates σ₁ ks vs σ'' := by\n  intro u i\n  cases UpdateStatesUpdated u ▸ InitStatesUpdated i\n  repeat constructor\n  apply updatedStatesInit\n  rotate_left\n  apply UpdateStatesNotDefMonotone' _ u\n  apply InitStatesNotDefined i\n  apply InitStatesNodup i\n  unfold updatedStates\n  rewrite [updatedStatesComm]\n  apply updatedStatesUpdate\n  any_goals simp [List.unzip_zip, UpdateStatesLength u, InitStatesLength i]\n  apply updatedStatesDefMonotone\n  apply UpdateStatesDefined' u\n  intro x hx hy\n  cases InitStatesNotDefined i x hy ▸ UpdateStatesDefined u x hx",
+  "tokens": 63,
+  "heartbeats": 192,
+  "L": 71.88,
+  "H": 95.53,
+  "Z": 100.0,
+  "compat": {
+   "v4.29.1": true,
+   "v4.27.0": true,
+   "v4.26.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "03797934e623",
+   "tokens": 107,
+   "heartbeats": 311,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:24:44Z",
+   "score": 81.67
+  },
+  {
+   "sha": "0089219e9c7e",
+   "tokens": 84,
+   "heartbeats": 217,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:08Z",
+   "score": 85.82
+  },
+  {
+   "sha": "5e6c77fa129c",
+   "tokens": 82,
+   "heartbeats": 199,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:11Z",
+   "score": 86.25
+  },
+  {
+   "sha": "591db8742299",
+   "tokens": 88,
+   "heartbeats": 257,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:14Z"
+  },
+  {
+   "sha": "9e9fcda6cdb4",
+   "tokens": 69,
+   "heartbeats": null,
+   "ok": false,
+   "error": "973:3: unknown tactic",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:26:02Z"
+  },
+  {
+   "sha": "7ec1a1733fe8",
+   "tokens": 69,
+   "heartbeats": null,
+   "ok": false,
+   "error": "973:3: unknown tactic",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:26:03Z"
+  },
+  {
+   "sha": "8950dc09e717",
+   "tokens": 72,
+   "heartbeats": null,
+   "ok": false,
+   "error": "973:3: unknown tactic",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:26:04Z"
+  },
+  {
+   "sha": "fa113153f771",
+   "tokens": 69,
+   "heartbeats": 194,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:26:14Z",
+   "score": 88.23
+  },
+  {
+   "sha": "f0c34d5a00dc",
+   "tokens": 74,
+   "heartbeats": 194,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:26:17Z"
+  },
+  {
+   "sha": "ff475675bf19",
+   "tokens": 65,
+   "heartbeats": 192,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:26:44Z",
+   "score": 88.84
+  },
+  {
+   "sha": "fb8840bfcdf5",
+   "tokens": 65,
+   "heartbeats": 180,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:26:46Z",
+   "score": 88.93
+  },
+  {
+   "sha": "79843d2eec49",
+   "tokens": 68,
+   "heartbeats": 201,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:26:49Z"
+  },
+  {
+   "sha": "899e086c4b63",
+   "tokens": 67,
+   "heartbeats": 168,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:27:37Z"
+  },
+  {
+   "sha": "a6465df75a04",
+   "tokens": 63,
+   "heartbeats": 270,
+   "ok": false,
+   "error": "982:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] UpdateStates σ ks vs σ' [prop] InitStates σ' ks' vs' (updatedStates (updatedStates σ ks vs) ks' vs') [prop] ¬ks.Disjoint ks' [prop] UpdateStates σ ks vs σ' → isDefined σ' ks [prop] ",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:27:38Z"
+  },
+  {
+   "sha": "45a12ef2f9c0",
+   "tokens": 65,
+   "heartbeats": 180,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:27:38Z"
+  },
+  {
+   "sha": "e7990f0cc653",
+   "tokens": 63,
+   "heartbeats": 161,
+   "ok": false,
+   "error": "979:12: `simp` made no progress",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:28:15Z"
+  },
+  {
+   "sha": "944027381ef2",
+   "tokens": 70,
+   "heartbeats": 106,
+   "ok": false,
+   "error": "978:32: `simp` made no progress",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:28:16Z"
+  },
+  {
+   "sha": "eeb62e104fec",
+   "tokens": 63,
+   "heartbeats": 184,
+   "ok": false,
+   "error": "979:12: simp_all made no progress",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:28:32Z"
+  },
+  {
+   "sha": "52799c3ef4dc",
+   "tokens": 64,
+   "heartbeats": 193,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:28:33Z",
+   "score": 88.98
+  },
+  {
+   "sha": "ed5b1d89568c",
+   "tokens": 64,
+   "heartbeats": 180,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:28:35Z",
+   "score": 89.08
+  },
+  {
+   "sha": "e6809907e2da",
+   "tokens": 63,
+   "heartbeats": 192,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:29:28Z",
+   "score": 89.14
+  },
+  {
+   "sha": "fbbf11c26c51",
+   "tokens": 62,
+   "heartbeats": 135,
+   "ok": false,
+   "error": "976:7: Tactic `rewrite` failed: Did not find an occurrence of the pattern update … [hypotheses omitted] ⊢ UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs')",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:29:31Z"
+  },
+  {
+   "sha": "f0293d3d9ce7",
+   "tokens": 64,
+   "heartbeats": 123,
+   "ok": false,
+   "error": "976:21: Tactic `rewrite` failed: Did not find an occurrence of the pattern updat … [hypotheses omitted] ⊢ UpdateStates (updatedStates' σ (ks'.zip vs')) ks vs (updatedStates (updatedStates σ ks vs) ks' vs')",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:29:35Z"
+  },
+  {
+   "sha": "9f50ba1fc2a3",
+   "tokens": 64,
+   "heartbeats": 191,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:30:28Z"
+  },
+  {
+   "sha": "6cd610ca725e",
+   "tokens": 67,
+   "heartbeats": 187,
+   "ok": false,
+   "error": "984:2: Dependent elimination failed: Failed to solve equation none = σ' x",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:30:29Z"
+  },
+  {
+   "sha": "3384210e32b1",
+   "tokens": 62,
+   "heartbeats": 1156,
+   "ok": false,
+   "error": "971:2: failed",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:30:30Z"
+  },
+  {
+   "sha": "0a294cd143fc",
+   "tokens": 65,
+   "heartbeats": 207,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:24Z"
+  },
+  {
+   "sha": "826a6e65e27c",
+   "tokens": 64,
+   "heartbeats": 207,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:25Z"
+  },
+  {
+   "sha": "2373c45fdab5",
+   "tokens": 63,
+   "heartbeats": 196,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:25Z"
+  },
+  {
+   "sha": "8f000f7ff2e3",
+   "tokens": 63,
+   "heartbeats": 194,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:50Z"
+  },
+  {
+   "sha": "c093c75a4e0f",
+   "tokens": 66,
+   "heartbeats": 191,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:51Z"
+  },
+  {
+   "sha": "6f6e3fd94789",
+   "tokens": 68,
+   "heartbeats": 194,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:52Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-f12",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:23:56Z",
+   "mode": "scout"
+  }
+ ],
+ "api_spend": 2.280097,
+ "lineage": "fresh",
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 1,
+    "d_score": 48.34,
+    "d_tokens": -117,
+    "d_heartbeats": 311,
+    "diff": "+theorem InitsUpdatesComm\n+  {P : PureExpr} {σ σ' σ'' : SemanticStore P}\n+  {ks ks' : List P.Ident} {vs vs' : List P.Expr} :\n+  UpdateStates σ ks vs σ' →\n+  InitStates σ' ks' vs' σ'' →\n+  ∃ σ₁,\n+    σ₁ = (updatedStates σ ks' vs') ∧\n+    InitStates σ ks' vs' σ₁ ∧\n+    UpdateStates σ₁ ks vs σ'' := by\n+  intro u i\n+  have hl := UpdateStatesLength u\n+  have hl' := InitStatesLength i\n+  have hd : ks.Disjoint ks' := by\n+    intro x hx hy\n+    have h := UpdateStatesDefined u x hx\n+    rw [InitStatesNotDefined i x hy] at h\n+    cases h\n+  refine ⟨_, rfl, ?_, ?_⟩\n+  · exact updatedStatesInit hl' (UpdateStatesNotDefMonotone' (InitStatesNotDefined i) u) (InitStatesNodup i)\n+  · rw [InitStatesUpdated i,"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 2,
+    "d_score": 4.15,
+    "d_tokens": -23,
+    "d_heartbeats": -94,
+    "diff": "-  have hl := UpdateStatesLength u\n-  have hl' := InitStatesLength i\n-  have hd : ks.Disjoint ks' := by\n-    intro x hx hy\n-    have h := UpdateStatesDefined u x hx\n-    rw [InitStatesNotDefined i x hy] at h\n-    cases h\n-  refine ⟨_, rfl, ?_, ?_⟩\n-  · exact updatedStatesInit hl' (UpdateStatesNotDefMonotone' (InitStatesNotDefined i) u) (InitStatesNodup i)\n+  repeat constructor\n+  · apply updatedStatesInit (InitStatesLength i)\n+    · exact UpdateStatesNotDefMonotone' (InitStatesNotDefined i) u\n+    · exact InitStatesNodup i\n-    · exact updatedStatesUpdate hl (updatedStatesDefMonotone (UpdateStatesDefined' u))\n-    · simp only [List.unzip_zip hl, List.unzip_zip hl']\n-      exact hd\n+    · exa"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 3,
+    "d_score": 0.43,
+    "d_tokens": -2,
+    "d_heartbeats": -18,
+    "diff": "+  cases UpdateStatesUpdated u\n+  cases InitStatesUpdated i\n-  · rw [InitStatesUpdated i, UpdateStatesUpdated u]\n-    unfold updatedStates\n+  · unfold updatedStates"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 8,
+    "d_score": 1.98,
+    "d_tokens": -13,
+    "d_heartbeats": -5,
+    "diff": "-  · apply updatedStatesInit (InitStatesLength i)\n-    · exact UpdateStatesNotDefMonotone' (InitStatesNotDefined i) u\n-    · exact InitStatesNodup i\n-  · unfold updatedStates\n-    rw [updatedStatesComm]\n-    · exact updatedStatesUpdate (UpdateStatesLength u) (updatedStatesDefMonotone (UpdateStatesDefined' u))\n-    · simp only [List.unzip_zip (UpdateStatesLength u), List.unzip_zip (InitStatesLength i)]\n-      intro x hx hy\n-      cases InitStatesNotDefined i x hy ▸ UpdateStatesDefined u x hx\n+  apply updatedStatesInit _ (UpdateStatesNotDefMonotone' (InitStatesNotDefined i) u) (InitStatesNodup i)\n+  rotate_left\n+  unfold updatedStates\n+  rewrite [updatedStatesComm]\n+  apply updatedStatesUpdate"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 10,
+    "d_score": 0.61,
+    "d_tokens": -4,
+    "d_heartbeats": -2,
+    "diff": "-  apply updatedStatesInit _ (UpdateStatesNotDefMonotone' (InitStatesNotDefined i) u) (InitStatesNodup i)\n+  apply updatedStatesInit _\n+  apply UpdateStatesNotDefMonotone' _ u\n+  apply InitStatesNotDefined i\n+  apply InitStatesNodup i\n-  apply updatedStatesUpdate _ (updatedStatesDefMonotone (UpdateStatesDefined' u))\n+  apply updatedStatesUpdate _\n+  apply updatedStatesDefMonotone\n+  apply UpdateStatesDefined' u"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 11,
+    "d_score": 0.09,
+    "d_tokens": 0,
+    "d_heartbeats": -12,
+    "diff": "-  cases UpdateStatesUpdated u\n-  cases InitStatesUpdated i\n+  cases UpdateStatesUpdated u ▸ InitStatesUpdated i"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 19,
+    "d_score": 0.05,
+    "d_tokens": -1,
+    "d_heartbeats": 13,
+    "diff": "-  apply updatedStatesInit _\n+  apply updatedStatesInit\n+  rotate_left\n-  rotate_left\n-  apply updatedStatesUpdate _\n+  apply updatedStatesUpdate\n+  all_goals try simp [List.unzip_zip, UpdateStatesLength u, InitStatesLength i]\n-  all_goals simp [List.unzip_zip, UpdateStatesLength u, InitStatesLength i]"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 20,
+    "d_score": 0.1,
+    "d_tokens": 0,
+    "d_heartbeats": -13,
+    "diff": "-  apply updatedStatesUpdate\n-  all_goals try simp [List.unzip_zip, UpdateStatesLength u, InitStatesLength i]\n+  apply updatedStatesUpdate _\n+  all_goals simp [List.unzip_zip, UpdateStatesLength u, InitStatesLength i]"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 21,
+    "d_score": 0.06,
+    "d_tokens": -1,
+    "d_heartbeats": 12,
+    "diff": "-  apply updatedStatesUpdate _\n+  apply updatedStatesUpdate\n+  any_goals simp [List.unzip_zip, UpdateStatesLength u, InitStatesLength i]\n-  all_goals simp [List.unzip_zip, UpdateStatesLength u, InitStatesLength i]"
+   }
+  ]
+ },
+ "budget_milestones": {
+  "2": {
+   "spend": 2.006888,
+   "best": 89.08,
+   "run_id": "wu-hx-sol-f12",
+   "turn": 15,
+   "t": "2026-10-12T00:29:28Z"
+  }
+ },
+ "profile_cache": {
+  "e6809907e2da": {
+   "ok": true,
+   "total": 192,
+   "floor": 33,
+   "reference": 4300,
+   "max_heartbeat_score": 33.08,
+   "blocks": [
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "any_goals simp [List.unzip_zip, UpdateStatesLength u, InitStatesLength i]",
+     "heartbeats": 100
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "cases UpdateStatesUpdated u ▸ InitStatesUpdated i",
+     "heartbeats": 25
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "repeat constructor",
+     "heartbeats": 10
+    },
+    {
+     "lines": "19-19",
+     "depth_indent": 2,
+     "text": "rewrite [updatedStatesComm]",
+     "heartbeats": 8
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "apply updatedStatesInit",
+     "heartbeats": 4
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "apply UpdateStatesNotDefMonotone' _ u",
+     "heartbeats": 4
+    },
+    {
+     "lines": "20-20",
+     "depth_indent": 2,
+     "text": "apply updatedStatesUpdate",
+     "heartbeats": 3
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "apply InitStatesNodup i",
+     "heartbeats": 2
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "apply InitStatesNotDefined i",
+     "heartbeats": 1
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "unfold updatedStates",
+     "heartbeats": 1
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "intro u i",
+     "heartbeats": 0
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "rotate_left",
+     "heartbeats": 0
+    }
+   ],
+   "points_left_heartbeats": 1.23,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "hb_floor": 33
+}

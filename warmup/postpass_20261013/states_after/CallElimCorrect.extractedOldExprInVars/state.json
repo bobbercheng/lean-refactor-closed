@@ -1,0 +1,2191 @@
+{
+ "problem": "CallElimCorrect.extractedOldExprInVars",
+ "best": {
+  "score": 94.49,
+  "proof": "open OldExpressions in\ntheorem extractedOldExprInVars :\n  NormalizedOldExpr post →\n  (extractOldExprVars post).Subset\n  (Imperative.HasVarsPure.getVars post) := by\n  rintro -\n  apply List.Sublist.subset\n  fun_induction extractOldExprVars\n  any_goals apply List.nil_sublist\n  repeat' apply List.Sublist.append\n  any_goals assumption\n  apply List.Sublist.refl",
+  "tokens": 17,
+  "heartbeats": 239,
+  "L": 92.34,
+  "H": 91.14,
+  "Z": 100.0,
+  "compat": {
+   "v4.26.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "cf0e10bfbdf7",
+   "tokens": 35,
+   "heartbeats": 1072,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:05:38Z"
+  },
+  {
+   "sha": "dd95aa1128c5",
+   "tokens": 34,
+   "heartbeats": 640,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:05:42Z",
+   "score": 86.99
+  },
+  {
+   "sha": "340f5a0f70bc",
+   "tokens": 38,
+   "heartbeats": 642,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:05:46Z"
+  },
+  {
+   "sha": "93f6f9b4ed9b",
+   "tokens": 39,
+   "heartbeats": 640,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:05:50Z"
+  },
+  {
+   "sha": "ae92b14e3403",
+   "tokens": 23,
+   "heartbeats": 3048,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case8.mk … [hypotheses omitted] ⊢ { name := name✝, metadata := metadata✝ } ∈ default → { name := name✝, metadata := metadata✝ } ∈ Lambda.LExpr.LExpr.getVars e2✝",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:06:11Z"
+  },
+  {
+   "sha": "52edfddfcd87",
+   "tokens": 32,
+   "heartbeats": 668,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:06:15Z"
+  },
+  {
+   "sha": "446a2b993422",
+   "tokens": 32,
+   "heartbeats": 743,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:06:19Z"
+  },
+  {
+   "sha": "e8592c21015b",
+   "tokens": 32,
+   "heartbeats": 803,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:06:23Z"
+  },
+  {
+   "sha": "8b56ab6a8e5f",
+   "tokens": 21,
+   "heartbeats": 2831,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6.right.a … [hypotheses omitted] ⊢ extractOldExprVars e✝ ⊆ Lambda.LExpr.LExpr.getVars tr✝ ‖ ⊢ [v✝] ⊆ Lambda.LExpr.LExpr.getVars (Lambda.LExpr.op m✝¹ { name := \"old\", metadata := Visibility.unres } ty✝¹) ‖ ⊢ extractOldExprVars e2'✝ ⊆ Lambda.LExpr.LExpr.getVars e1'✝ ‖ ",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:07:23Z"
+  },
+  {
+   "sha": "037ec50fe6dc",
+   "tokens": 30,
+   "heartbeats": 1782,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6.right.a … [hypotheses omitted] ⊢ extractOldExprVars e✝ ⊆ Lambda.LExpr.LExpr.getVars tr✝ ‖ ⊢ [v✝] ⊆ Lambda.LExpr.LExpr.getVars (Lambda.LExpr.op m✝¹ { name := \"old\", metadata := Visibility.unres } ty✝¹) ‖ ⊢ extractOldExprVars e2'✝ ⊆ Lambda.LExpr.LExpr.getVars e1'✝ ‖ ",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:07:27Z"
+  },
+  {
+   "sha": "4749e9f48728",
+   "tokens": 29,
+   "heartbeats": 12315,
+   "ok": false,
+   "error": "2876:12: failed",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:07:31Z"
+  },
+  {
+   "sha": "712609eaede7",
+   "tokens": 34,
+   "heartbeats": 627,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:07:36Z",
+   "score": 87.15
+  },
+  {
+   "sha": "37f8c7376548",
+   "tokens": 22,
+   "heartbeats": 2258,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:08:50Z"
+  },
+  {
+   "sha": "d3a8263f8192",
+   "tokens": 21,
+   "heartbeats": 2483,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:08:54Z"
+  },
+  {
+   "sha": "f2dd7d15b34c",
+   "tokens": 36,
+   "heartbeats": 1849,
+   "ok": false,
+   "error": "2876:46: Type mismatch List.Subset.refl ?m.107 has type ?m.107 ⊆ ?m.107 but is expected to have type True ∧ True",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:08:58Z"
+  },
+  {
+   "sha": "c9edc01581d4",
+   "tokens": 34,
+   "heartbeats": 1985,
+   "ok": false,
+   "error": "2875:52: Tactic `assumption` failed case case5 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars e✝ → True",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:09:03Z"
+  },
+  {
+   "sha": "bdde43531301",
+   "tokens": 24,
+   "heartbeats": 2794,
+   "ok": false,
+   "error": "2876:2: Type mismatch List.nil_subset ?m.68 has type [] ⊆ ?m.68 but is expected to have type extractOldExprVars e✝ ⊆ Lambda.LExpr.LExpr.getVars e✝",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:09:48Z"
+  },
+  {
+   "sha": "2d63695d1410",
+   "tokens": 41,
+   "heartbeats": 2327,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case5 … [hypotheses omitted] ⊢ extractOldExprVars e✝ ⊆ Lambda.LExpr.LExpr.getVars e✝ ‖ ⊢ extractOldExprVars tr✝ ⊆ Lambda.LExpr.LExpr.getVars tr✝ ++ Lambda.LExpr.LExpr.getVars e✝ ‖ ⊢ extractOldExprVars e✝ ⊆ Lambda.LExpr.LExpr.getVars tr✝ ++ Lambda.LExpr.LExpr.getVars e✝ ‖",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:09:52Z"
+  },
+  {
+   "sha": "23e9b0aff4b8",
+   "tokens": 27,
+   "heartbeats": 492,
+   "ok": false,
+   "error": "2875:46: Type mismatch List.Subset.refl ?m.69 has type ?m.69 ⊆ ?m.69 but is expected to have type extractOldExprVars e✝ ⊆ Imperative.HasVarsPure.getVars (Lambda.LExpr.abs m✝ ty✝ e✝)",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:09:57Z"
+  },
+  {
+   "sha": "8372d18b96fc",
+   "tokens": 34,
+   "heartbeats": 10777,
+   "ok": false,
+   "error": "2874:69: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:10:02Z"
+  },
+  {
+   "sha": "9d024e81371a",
+   "tokens": 30,
+   "heartbeats": 1581,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:10:18Z"
+  },
+  {
+   "sha": "10b7220361bd",
+   "tokens": 22,
+   "heartbeats": 1448,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:10:23Z"
+  },
+  {
+   "sha": "6b3fc8f8cc40",
+   "tokens": 39,
+   "heartbeats": 1443,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:10:28Z"
+  },
+  {
+   "sha": "fc240ddb26ba",
+   "tokens": 44,
+   "heartbeats": 908,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:10:33Z"
+  },
+  {
+   "sha": "e6f578852a71",
+   "tokens": 35,
+   "heartbeats": 499,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars tr✝ ++ extractOldExprVars e✝ → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.quant m✝ k✝ ty✝ tr✝ e✝) ‖ ⊢ a ∈ extractOldExprVars e1'✝ ++ extractOldExprVars e2'✝ → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.app",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:10:52Z"
+  },
+  {
+   "sha": "8a53e4090f97",
+   "tokens": 34,
+   "heartbeats": 615,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars tr✝ ++ extractOldExprVars e✝ → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.quant m✝ k✝ ty✝ tr✝ e✝) ‖ ⊢ a ∈ extractOldExprVars e1'✝ ++ extractOldExprVars e2'✝ → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.app",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:10:56Z"
+  },
+  {
+   "sha": "2e7588a42174",
+   "tokens": 35,
+   "heartbeats": 558,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars tr✝ ++ extractOldExprVars e✝ → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.quant m✝ k✝ ty✝ tr✝ e✝) ‖ ⊢ a ∈ extractOldExprVars e1'✝ ++ extractOldExprVars e2'✝ → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.app",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:11:00Z"
+  },
+  {
+   "sha": "5f48993c0611",
+   "tokens": 29,
+   "heartbeats": 620,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case3 … [hypotheses omitted] ⊢ a ∈ [] → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.fvar m✝ name✝ ty✝) ‖ ⊢ a ∈ panicWithPosWithDecl \"Strata.Languages.Core.OldExpressions\" \"Core.OldExpressions.extractOldExprVars\" 171 44 (toString \"Old expression \" ++ toString (Lambda",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:11:05Z"
+  },
+  {
+   "sha": "7df5ec20dbf3",
+   "tokens": 40,
+   "heartbeats": 689,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:11:22Z"
+  },
+  {
+   "sha": "a02893e9b809",
+   "tokens": 40,
+   "heartbeats": 769,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:11:26Z"
+  },
+  {
+   "sha": "d6d9ce1f8b8b",
+   "tokens": 40,
+   "heartbeats": 644,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:11:30Z"
+  },
+  {
+   "sha": "b9a18f99c3c6",
+   "tokens": 39,
+   "heartbeats": 623,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:11:34Z"
+  },
+  {
+   "sha": "6303e282fbb1",
+   "tokens": 44,
+   "heartbeats": 971,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case10.left.left … [hypotheses omitted] ⊢ extractOldExprVars c✝ ⊆ Lambda.LExpr.LExpr.getVars c✝ ++ Lambda.LExpr.LExpr.getVars t✝ ++ Lambda.LExpr.LExpr.getVars e✝ ‖ ⊢ extractOldExprVars t✝ ⊆ Lambda.LExpr.LExpr.getVars c✝ ++ Lambda.LExpr.LExpr.getVars t✝ ++ Lambda.LExpr.LE",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:12:00Z"
+  },
+  {
+   "sha": "a94822c33bc9",
+   "tokens": 25,
+   "heartbeats": 715,
+   "ok": false,
+   "error": "2876:2: Type mismatch List.nil_subset ?m.63 has type [] ⊆ ?m.63 but is expected to have type extractOldExprVars e✝ ⊆ Lambda.LExpr.LExpr.getVars e✝",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:12:04Z"
+  },
+  {
+   "sha": "a6d5f07694c6",
+   "tokens": 24,
+   "heartbeats": 365,
+   "ok": false,
+   "error": "2875:2: Type mismatch List.nil_subset ?m.63 has type [] ⊆ ?m.63 but is expected to have type (extractOldExprVars e✝).Subset (Lambda.LExpr.LExpr.getVars e✝)",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:12:08Z"
+  },
+  {
+   "sha": "61094a217a75",
+   "tokens": 20,
+   "heartbeats": 3977,
+   "ok": false,
+   "error": "2873:44: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (extractOldExprVars e).Subset (Imperative.HasVarsPure.getVars e) [prop] ¬(extractOldExprVars e).Subset (Imperative.HasVarsPure.getVars (Lambda.LExpr.abs m ty e)) [prop] Imperative",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:12:13Z"
+  },
+  {
+   "sha": "19cf244dab69",
+   "tokens": 35,
+   "heartbeats": 557,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:12:32Z",
+   "score": 87.86
+  },
+  {
+   "sha": "00c3c28a3060",
+   "tokens": 33,
+   "heartbeats": 637,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:12:36Z"
+  },
+  {
+   "sha": "97738ee53321",
+   "tokens": 32,
+   "heartbeats": 556,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:12:40Z",
+   "score": 88.33
+  },
+  {
+   "sha": "d4840dc0252b",
+   "tokens": 30,
+   "heartbeats": 615,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:12:44Z"
+  },
+  {
+   "sha": "18cb44ac214f",
+   "tokens": 31,
+   "heartbeats": 595,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:13:12Z"
+  },
+  {
+   "sha": "7b2064517eb3",
+   "tokens": 31,
+   "heartbeats": 543,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:13:16Z",
+   "score": 88.64
+  },
+  {
+   "sha": "d2a1845b6523",
+   "tokens": 29,
+   "heartbeats": 595,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:13:20Z"
+  },
+  {
+   "sha": "d243e2f0ad7c",
+   "tokens": 30,
+   "heartbeats": 447,
+   "ok": false,
+   "error": "2874:27: Missing cases: _",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:13:24Z"
+  },
+  {
+   "sha": "aa2e27e31878",
+   "tokens": 29,
+   "heartbeats": null,
+   "ok": false,
+   "error": "lean exit 134: Stack overflow detected. Aborting.",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:13:46Z"
+  },
+  {
+   "sha": "4769cd341ef6",
+   "tokens": 30,
+   "heartbeats": null,
+   "ok": false,
+   "error": "lean exit 134: Stack overflow detected. Aborting.",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:13:58Z"
+  },
+  {
+   "sha": "97909e73947e",
+   "tokens": 34,
+   "heartbeats": null,
+   "ok": false,
+   "error": "lean exit 134: Stack overflow detected. Aborting.",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:14:09Z"
+  },
+  {
+   "sha": "bef7e873b2e4",
+   "tokens": 37,
+   "heartbeats": null,
+   "ok": false,
+   "error": "lean exit 134: Stack overflow detected. Aborting.",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:14:20Z"
+  },
+  {
+   "sha": "19abaffbb038",
+   "tokens": 29,
+   "heartbeats": 958,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:14:38Z"
+  },
+  {
+   "sha": "7988607354b5",
+   "tokens": 30,
+   "heartbeats": 1123,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:14:42Z"
+  },
+  {
+   "sha": "4242fae6a6de",
+   "tokens": 31,
+   "heartbeats": 1029,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:14:46Z"
+  },
+  {
+   "sha": "157606d4e7bc",
+   "tokens": 39,
+   "heartbeats": 775,
+   "ok": false,
+   "error": "2875:12: `simp` made no progress",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:58:16Z"
+  },
+  {
+   "sha": "f44f8bfb91ce",
+   "tokens": 31,
+   "heartbeats": 534,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:58:20Z",
+   "score": 88.75
+  },
+  {
+   "sha": "37f0488791f2",
+   "tokens": 31,
+   "heartbeats": 599,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:58:24Z"
+  },
+  {
+   "sha": "d682a4a2cff3",
+   "tokens": 33,
+   "heartbeats": 1246,
+   "ok": false,
+   "error": "2874:12: simp_all made no progress",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:58:28Z"
+  },
+  {
+   "sha": "7aa3615983c0",
+   "tokens": 19,
+   "heartbeats": 1881,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case1 … [hypotheses omitted] ⊢ a ∈ [] → True ‖ ⊢ a ∈ [] → True ‖ ⊢ a ∈ [] → a ∈ [name✝] ‖ ⊢ a ∈ [] → True ‖ ⊢ a ∈ extractOldExprVars e✝ → True ‖ ⊢ a ∈ extractOldExprVars tr✝ ∨ a ∈ extractOldExprVars e✝ → a ∈ Lambda.LExpr.LExpr.getVars tr✝ ∨ a ∈ Lambda.LExpr.LExpr.getVars",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:59:20Z"
+  },
+  {
+   "sha": "813a8499c900",
+   "tokens": 23,
+   "heartbeats": 1962,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case5 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars e✝ → True ‖ ⊢ (a ∈ extractOldExprVars tr✝ → True ∨ a ∈ Lambda.LExpr.LExpr.getVars e✝) ∧ (a ∈ extractOldExprVars e✝ → a ∈ Lambda.LExpr.LExpr.getVars tr✝ ∨ True) ‖ ⊢ a ∈ [v✝] → False ∨ True ‖ ⊢ a ∈ panicWithPosWithDecl ",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:59:24Z"
+  },
+  {
+   "sha": "2845509bf1c8",
+   "tokens": 23,
+   "heartbeats": null,
+   "ok": false,
+   "error": "2873:121: unknown tactic",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:59:28Z"
+  },
+  {
+   "sha": "36d988575ac5",
+   "tokens": 28,
+   "heartbeats": 19466,
+   "ok": false,
+   "error": "2875:12: failed",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:59:33Z"
+  },
+  {
+   "sha": "5159b60f4256",
+   "tokens": 29,
+   "heartbeats": 1735,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case5 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars e✝ → True ‖ ⊢ a ∈ extractOldExprVars tr✝ ∨ a ∈ extractOldExprVars e✝ → a ∈ Lambda.LExpr.LExpr.getVars tr✝ ∨ a ∈ Lambda.LExpr.LExpr.getVars e✝ ‖ ⊢ a ∈ [v✝] → False ∨ True ‖ ⊢ a ∈ panicWithPosWithDecl \"Strata.Languages.",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T20:59:37Z"
+  },
+  {
+   "sha": "d2f34ae28957",
+   "tokens": 27,
+   "heartbeats": 686,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:01:14Z"
+  },
+  {
+   "sha": "028c6e779f9d",
+   "tokens": 30,
+   "heartbeats": 364,
+   "ok": false,
+   "error": "2874:2: Tactic failed on all goals: exact @List.nil_subset _ _ _ a",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:01:18Z"
+  },
+  {
+   "sha": "4e19c90046f7",
+   "tokens": 38,
+   "heartbeats": 427,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:01:22Z",
+   "score": 89.02
+  },
+  {
+   "sha": "0d1b663d1458",
+   "tokens": 24,
+   "heartbeats": 1705,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6.a.a … [hypotheses omitted] ⊢ extractOldExprVars e✝ ⊆ Lambda.LExpr.LExpr.getVars tr✝ ‖ ⊢ [v✝] ⊆ Lambda.LExpr.LExpr.getVars (Lambda.LExpr.op m✝¹ { name := \"old\", metadata := Visibility.unres } ty✝¹) ‖ ⊢ extractOldExprVars e2'✝ ⊆ Lambda.LExpr.LExpr.getVars e1'✝ ‖ ⊢ ex",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:01:26Z"
+  },
+  {
+   "sha": "79c33ce2d00d",
+   "tokens": 30,
+   "heartbeats": 574,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:01:30Z"
+  },
+  {
+   "sha": "c171163a193b",
+   "tokens": 25,
+   "heartbeats": 434,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:02:20Z",
+   "score": 90.88
+  },
+  {
+   "sha": "2bb6193ce093",
+   "tokens": 29,
+   "heartbeats": 437,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:02:24Z"
+  },
+  {
+   "sha": "6368a38dc381",
+   "tokens": 25,
+   "heartbeats": 447,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:02:29Z"
+  },
+  {
+   "sha": "aa2a95c605bb",
+   "tokens": 63,
+   "heartbeats": 470,
+   "ok": false,
+   "error": "2875:37: Application type mismatch: The argument h₁ has type A.Subset C but is expected to have type ?m.43 → a ∈ C in the application Or.imp h₁",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:02:33Z"
+  },
+  {
+   "sha": "6fc196e5e0bb",
+   "tokens": 28,
+   "heartbeats": 712,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:02:59Z"
+  },
+  {
+   "sha": "883c8934d61b",
+   "tokens": 29,
+   "heartbeats": 522,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:03:03Z"
+  },
+  {
+   "sha": "b0b41f91fcc6",
+   "tokens": 30,
+   "heartbeats": 334,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars tr✝ ++ extractOldExprVars e✝ → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.quant m✝ k✝ ty✝ tr✝ e✝) ‖ ⊢ a ∈ extractOldExprVars e1'✝ ++ extractOldExprVars e2'✝ → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.app",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:03:07Z"
+  },
+  {
+   "sha": "19714be13754",
+   "tokens": 18,
+   "heartbeats": 61404,
+   "ok": false,
+   "error": "2873:39: failed",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:03:13Z"
+  },
+  {
+   "sha": "a12f641810fd",
+   "tokens": 25,
+   "heartbeats": 518,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:03:17Z"
+  },
+  {
+   "sha": "e89f972a441f",
+   "tokens": 33,
+   "heartbeats": 425,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:04:17Z"
+  },
+  {
+   "sha": "8de3bf384068",
+   "tokens": 41,
+   "heartbeats": 417,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:04:22Z"
+  },
+  {
+   "sha": "1db0f24dd77e",
+   "tokens": 15,
+   "heartbeats": 1274,
+   "ok": false,
+   "error": "2875:12: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] a ∈ extractOldExprVars e → a ∈ Imperative.HasVarsPure.getVars e [prop] a ∈ extractOldExprVars e [prop] ¬a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.abs m ty e) [eqc] True pro",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:04:26Z"
+  },
+  {
+   "sha": "c2021218f827",
+   "tokens": 25,
+   "heartbeats": 426,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:04:30Z",
+   "score": 90.98
+  },
+  {
+   "sha": "a228697b3202",
+   "tokens": 20,
+   "heartbeats": 69,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case2 … [hypotheses omitted] ⊢ a ∈ [] → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.bvar m✝ deBruijnIndex✝) ‖ ⊢ a ∈ [] → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.fvar m✝ name✝ ty✝) ‖ ⊢ a ∈ [] → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.op m✝ o✝ ty✝) ‖",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:04:34Z"
+  },
+  {
+   "sha": "01256f1526f3",
+   "tokens": 34,
+   "heartbeats": 660,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:26:26Z"
+  },
+  {
+   "sha": "80ed23a899d3",
+   "tokens": 34,
+   "heartbeats": 497,
+   "ok": false,
+   "error": "2876:12: `simp` made no progress",
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:26:30Z"
+  },
+  {
+   "sha": "f1a5772307b9",
+   "tokens": 25,
+   "heartbeats": 477,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:26:34Z"
+  },
+  {
+   "sha": "f405ff468282",
+   "tokens": 21,
+   "heartbeats": 141,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars tr✝ ++ extractOldExprVars e✝ → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.quant m✝ k✝ ty✝ tr✝ e✝) ‖ ⊢ a ∈ [v✝] → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.app m✝² (Lambda.LExpr.op m✝¹ { name := \"old\", met",
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:26:38Z"
+  },
+  {
+   "sha": "2bac1963a11f",
+   "tokens": 26,
+   "heartbeats": 523,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:28:07Z"
+  },
+  {
+   "sha": "4ea20b19b061",
+   "tokens": 25,
+   "heartbeats": 426,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:28:11Z"
+  },
+  {
+   "sha": "1d3317ff700f",
+   "tokens": 26,
+   "heartbeats": 69,
+   "ok": false,
+   "error": "2874:2: Tactic failed on all goals: with_reducible apply List.nil_subset",
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:28:15Z"
+  },
+  {
+   "sha": "d993bc15df29",
+   "tokens": 22,
+   "heartbeats": 322,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars tr✝ ++ extractOldExprVars e✝ → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.quant m✝ k✝ ty✝ tr✝ e✝) ‖ ⊢ a ∈ extractOldExprVars e1'✝ ++ extractOldExprVars e2'✝ → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.app",
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:28:19Z"
+  },
+  {
+   "sha": "d54b419dcef1",
+   "tokens": 25,
+   "heartbeats": 475,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:28:23Z"
+  },
+  {
+   "sha": "195b69318f03",
+   "tokens": 26,
+   "heartbeats": 415,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case7 … [hypotheses omitted] ⊢ a ∈ [v✝] → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.app m✝² (Lambda.LExpr.op m✝¹ { name := \"old\", metadata := Visibility.unres } ty✝¹) (Lambda.LExpr.fvar m✝ v✝ ty✝))",
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:28:27Z"
+  },
+  {
+   "sha": "7e96285ad738",
+   "tokens": 26,
+   "heartbeats": 855,
+   "ok": false,
+   "error": "2876:12: failed",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:48:56Z"
+  },
+  {
+   "sha": "d20581e1e989",
+   "tokens": 35,
+   "heartbeats": 633,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:49:00Z"
+  },
+  {
+   "sha": "316a7556ddfe",
+   "tokens": 24,
+   "heartbeats": 491,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars tr✝ ++ extractOldExprVars e✝ → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.quant m✝ k✝ ty✝ tr✝ e✝) ‖ ⊢ a ∈ extractOldExprVars e1'✝ ++ extractOldExprVars e2'✝ → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.app",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:49:05Z"
+  },
+  {
+   "sha": "8d089e10b383",
+   "tokens": 28,
+   "heartbeats": 433,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:49:09Z"
+  },
+  {
+   "sha": "b8c0463d7bd4",
+   "tokens": 25,
+   "heartbeats": 472,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:49:23Z"
+  },
+  {
+   "sha": "cc63d9bb911e",
+   "tokens": 25,
+   "heartbeats": 630,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:49:27Z"
+  },
+  {
+   "sha": "8b425d34b079",
+   "tokens": 30,
+   "heartbeats": 426,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:49:31Z"
+  },
+  {
+   "sha": "3627be7d6336",
+   "tokens": 26,
+   "heartbeats": 75,
+   "ok": false,
+   "error": "2874:2: Tactic failed on all goals: exact List.nil_subset _",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:49:35Z"
+  },
+  {
+   "sha": "3ec2070fdb6e",
+   "tokens": 27,
+   "heartbeats": 459,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:50:14Z"
+  },
+  {
+   "sha": "3eab4efe7ec0",
+   "tokens": 28,
+   "heartbeats": 456,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:50:18Z"
+  },
+  {
+   "sha": "7a52a9d11b90",
+   "tokens": 29,
+   "heartbeats": 437,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case10 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars c✝ ++ extractOldExprVars t✝ ++ extractOldExprVars e✝ → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.ite m✝ c✝ t✝ e✝)",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:50:23Z"
+  },
+  {
+   "sha": "ccd2f379395b",
+   "tokens": 30,
+   "heartbeats": 435,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:50:26Z"
+  },
+  {
+   "sha": "864d09ddafcf",
+   "tokens": 31,
+   "heartbeats": 582,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:50:43Z"
+  },
+  {
+   "sha": "fa08d22b6f15",
+   "tokens": 31,
+   "heartbeats": 522,
+   "ok": false,
+   "error": "2871:43: unsolved goals … [hypotheses omitted] ⊢ a ∈ extractOldExprVars c✝ ∨ a ∈ extractOldExprVars t✝ → a ∈ Lambda.LExpr.LExpr.getVars c✝ ++ Lambda.LExpr.LExpr.getVars t✝",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:50:47Z"
+  },
+  {
+   "sha": "f6df6286aaff",
+   "tokens": 24,
+   "heartbeats": null,
+   "ok": false,
+   "error": "2876:13: unknown tactic",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:50:51Z"
+  },
+  {
+   "sha": "c00f5322d7b0",
+   "tokens": 28,
+   "heartbeats": 440,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:50:55Z"
+  },
+  {
+   "sha": "7e80cd6ad164",
+   "tokens": 20,
+   "heartbeats": 318,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:51:30Z",
+   "score": 93.07
+  },
+  {
+   "sha": "f54508866321",
+   "tokens": 20,
+   "heartbeats": 257,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:51:47Z",
+   "score": 93.82
+  },
+  {
+   "sha": "3d5aeb155acd",
+   "tokens": 20,
+   "heartbeats": 340,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:51:52Z"
+  },
+  {
+   "sha": "137cffb60729",
+   "tokens": 20,
+   "heartbeats": 268,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:51:56Z"
+  },
+  {
+   "sha": "3a2ff1a5b867",
+   "tokens": 19,
+   "heartbeats": 284,
+   "ok": false,
+   "error": "2871:43: unsolved goals case a.case7.a m✝² … [hypotheses omitted] ⊢ [v✝].Sublist []",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:52:00Z"
+  },
+  {
+   "sha": "a82def078b79",
+   "tokens": 16,
+   "heartbeats": 467,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:52:04Z"
+  },
+  {
+   "sha": "f90cdbddb91d",
+   "tokens": 16,
+   "heartbeats": 420,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:52:21Z"
+  },
+  {
+   "sha": "806facca75e1",
+   "tokens": 16,
+   "heartbeats": 417,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:52:25Z"
+  },
+  {
+   "sha": "ff9449dd8b8d",
+   "tokens": 20,
+   "heartbeats": 303,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:52:29Z"
+  },
+  {
+   "sha": "afdc4d608a5b",
+   "tokens": 20,
+   "heartbeats": 282,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:52:32Z"
+  },
+  {
+   "sha": "badf24cbc438",
+   "tokens": 21,
+   "heartbeats": 267,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:52:36Z"
+  },
+  {
+   "sha": "785fb9d27d7f",
+   "tokens": 21,
+   "heartbeats": 277,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:52:40Z"
+  },
+  {
+   "sha": "b68912a02f01",
+   "tokens": 20,
+   "heartbeats": 264,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:53:08Z"
+  },
+  {
+   "sha": "ad887b0b870b",
+   "tokens": 19,
+   "heartbeats": 272,
+   "ok": false,
+   "error": "2871:43: unsolved goals case a.case7 m✝² … [hypotheses omitted] ⊢ [v✝].Sublist (Imperative.HasVarsPure.getVars (Lambda.LExpr.app m✝² (Lambda.LExpr.op m✝¹ { name := \"old\", metadata := Visibility.unres } ty✝¹) (Lambda.LExpr.fvar m✝ v✝ ty✝)))",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:53:12Z"
+  },
+  {
+   "sha": "e255fddecc3c",
+   "tokens": 21,
+   "heartbeats": 321,
+   "ok": false,
+   "error": "2871:43: unsolved goals case a.case5 … [hypotheses omitted] ⊢ (extractOldExprVars e✝).Sublist (Imperative.HasVarsPure.getVars (Lambda.LExpr.abs m✝ ty✝ e✝)) ‖ ⊢ (extractOldExprVars tr✝).Sublist (Lambda.LExpr.LExpr.getVars tr✝) ‖ ⊢ (extractOldExprVars e✝).Sublist (Lambda.LExpr.LExpr.getVars e✝) ‖ ⊢ (e",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:53:16Z"
+  },
+  {
+   "sha": "d9707b5d9d99",
+   "tokens": 20,
+   "heartbeats": 275,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:53:20Z"
+  },
+  {
+   "sha": "c86eb225de70",
+   "tokens": 20,
+   "heartbeats": 250,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:53:25Z",
+   "score": 93.91
+  },
+  {
+   "sha": "b9f84f81bb32",
+   "tokens": 17,
+   "heartbeats": 359,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:53:40Z"
+  },
+  {
+   "sha": "1b72bd56a3c8",
+   "tokens": 17,
+   "heartbeats": 355,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:53:44Z"
+  },
+  {
+   "sha": "6660b778b232",
+   "tokens": 17,
+   "heartbeats": 358,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:53:48Z"
+  },
+  {
+   "sha": "cec6bf72099d",
+   "tokens": 20,
+   "heartbeats": 272,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:53:52Z"
+  },
+  {
+   "sha": "d36f59b3d7d3",
+   "tokens": 20,
+   "heartbeats": 241,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:53:56Z",
+   "score": 94.02
+  },
+  {
+   "sha": "56cc253fa2ae",
+   "tokens": 19,
+   "heartbeats": 247,
+   "ok": false,
+   "error": "2871:43: unsolved goals case a.case7 m✝² … [hypotheses omitted] ⊢ v✝ ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.app m✝² (Lambda.LExpr.op m✝¹ { name := \"old\", metadata := Visibility.unres } ty✝¹) (Lambda.LExpr.fvar m✝ v✝ ty✝))",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:54:20Z"
+  },
+  {
+   "sha": "0914376bdd7a",
+   "tokens": 19,
+   "heartbeats": 230,
+   "ok": false,
+   "error": "2877:33: Expected type must not contain free variables [v✝].Sublist (Imperative.HasVarsPure.getVars (Lambda.LExpr.app m✝² (Lambda.LExpr.op m✝¹ { name := \"old\", metadata := Visibility.unres } ty✝¹) (Lambda.LExpr.fvar m✝ v✝ ty✝))) Hint: Use the `+revert` option to automatically clean up and revert fre",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:54:24Z"
+  },
+  {
+   "sha": "0015d3d1af08",
+   "tokens": 18,
+   "heartbeats": 239,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:54:28Z",
+   "score": 94.34
+  },
+  {
+   "sha": "cc0863aaf1b1",
+   "tokens": 19,
+   "heartbeats": 291,
+   "ok": false,
+   "error": "2877:33: Tactic `apply` failed: could not unify the conclusion of `@List.Sublist … [hypotheses omitted] ⊢ (extractOldExprVars e✝).Sublist (Imperative.HasVarsPure.getVars (Lambda.LExpr.abs m✝ ty✝ e✝))",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:54:32Z"
+  },
+  {
+   "sha": "5631302d0d93",
+   "tokens": 22,
+   "heartbeats": 296,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:54:36Z"
+  },
+  {
+   "sha": "f855618dffe0",
+   "tokens": 20,
+   "heartbeats": 257,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:54:53Z"
+  },
+  {
+   "sha": "f0577e5d4158",
+   "tokens": 23,
+   "heartbeats": 211,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:54:57Z"
+  },
+  {
+   "sha": "1f0a5690ccc7",
+   "tokens": 20,
+   "heartbeats": 314,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:55:01Z"
+  },
+  {
+   "sha": "640e4452758e",
+   "tokens": 20,
+   "heartbeats": 264,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:55:05Z"
+  },
+  {
+   "sha": "2f15f1d09a1f",
+   "tokens": 18,
+   "heartbeats": 285,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:11:53Z"
+  },
+  {
+   "sha": "6ab1109b49d0",
+   "tokens": 18,
+   "heartbeats": 280,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:11:57Z"
+  },
+  {
+   "sha": "3e2b30ee8781",
+   "tokens": 20,
+   "heartbeats": 307,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:12:02Z"
+  },
+  {
+   "sha": "c209aca26d20",
+   "tokens": 19,
+   "heartbeats": 250,
+   "ok": false,
+   "error": "2878:12: Tactic `apply` failed: could not unify the conclusion of `@List.Sublist … [hypotheses omitted] ⊢ (panicWithPosWithDecl \"Strata.Languages.Core.OldExpressions\" \"Core.OldExpressions.extractOldExprVars\" 171 44 (toString \"Old expression \" ++ toString (Lambda.LExpr.app m✝¹ (Lambda.LExpr.op m✝ { n",
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:12:20Z"
+  },
+  {
+   "sha": "548359c68dc2",
+   "tokens": 19,
+   "heartbeats": 227,
+   "ok": false,
+   "error": "2878:12: Tactic `apply` failed: could not unify the conclusion of `@List.Sublist … [hypotheses omitted] ⊢ (extractOldExprVars tr✝ ++ extractOldExprVars e✝).Sublist (Imperative.HasVarsPure.getVars (Lambda.LExpr.quant m✝ k✝ ty✝ tr✝ e✝))",
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:12:24Z"
+  },
+  {
+   "sha": "d4a2f4adee04",
+   "tokens": 19,
+   "heartbeats": 262,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:12:28Z"
+  },
+  {
+   "sha": "13d4e59ac007",
+   "tokens": 21,
+   "heartbeats": 236,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:13:26Z"
+  },
+  {
+   "sha": "1b736a67ae1d",
+   "tokens": 25,
+   "heartbeats": 211,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:13:30Z"
+  },
+  {
+   "sha": "d8ef4d4cb3bb",
+   "tokens": 20,
+   "heartbeats": 240,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:13:34Z"
+  },
+  {
+   "sha": "ab84e525d24d",
+   "tokens": 16,
+   "heartbeats": 465,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:14:00Z"
+  },
+  {
+   "sha": "dbddfc05cfc8",
+   "tokens": 16,
+   "heartbeats": 419,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:14:05Z"
+  },
+  {
+   "sha": "982eb2097ce8",
+   "tokens": 20,
+   "heartbeats": 307,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:14:09Z"
+  },
+  {
+   "sha": "c732028063a7",
+   "tokens": 19,
+   "heartbeats": 200,
+   "ok": false,
+   "error": "2877:12: Tactic `apply` failed: could not unify the conclusion of `@List.Sublist … [hypotheses omitted] ⊢ (extractOldExprVars e✝).Sublist (Imperative.HasVarsPure.getVars (Lambda.LExpr.abs m✝ ty✝ e✝))",
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:14:13Z"
+  },
+  {
+   "sha": "afe13fd4fc75",
+   "tokens": 21,
+   "heartbeats": 260,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:14:25Z"
+  },
+  {
+   "sha": "6e39b6226d4c",
+   "tokens": 21,
+   "heartbeats": 266,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:14:29Z"
+  },
+  {
+   "sha": "25a7e71a0d36",
+   "tokens": 23,
+   "heartbeats": 244,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:15:08Z"
+  },
+  {
+   "sha": "a072098cb295",
+   "tokens": 21,
+   "heartbeats": 217,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:15:12Z"
+  },
+  {
+   "sha": "641c47fca637",
+   "tokens": 18,
+   "heartbeats": 201,
+   "ok": false,
+   "error": "2877:2: Tactic failed on all goals: assumption",
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:15:33Z"
+  },
+  {
+   "sha": "e489d37129f6",
+   "tokens": 19,
+   "heartbeats": 243,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:15:37Z"
+  },
+  {
+   "sha": "f54be3647fc1",
+   "tokens": 18,
+   "heartbeats": 404,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:15:42Z"
+  },
+  {
+   "sha": "1434b14ea131",
+   "tokens": 23,
+   "heartbeats": 261,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:15:57Z"
+  },
+  {
+   "sha": "27b4694cec40",
+   "tokens": 23,
+   "heartbeats": 205,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:16:01Z"
+  },
+  {
+   "sha": "9b87b900457b",
+   "tokens": 21,
+   "heartbeats": 269,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:16:06Z"
+  },
+  {
+   "sha": "3229f9325761",
+   "tokens": 18,
+   "heartbeats": 307,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:36:45Z"
+  },
+  {
+   "sha": "32ce4e182e97",
+   "tokens": 20,
+   "heartbeats": 294,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:37:05Z"
+  },
+  {
+   "sha": "65ba756b3d6b",
+   "tokens": 21,
+   "heartbeats": 210,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:37:09Z"
+  },
+  {
+   "sha": "906f7d5b64f8",
+   "tokens": 19,
+   "heartbeats": 147,
+   "ok": false,
+   "error": "2877:12: Tactic `apply` failed: could not unify the conclusion of `@List.Sublist … [hypotheses omitted] ⊢ (extractOldExprVars e✝).Sublist (Imperative.HasVarsPure.getVars (Lambda.LExpr.abs m✝ ty✝ e✝))",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:37:23Z"
+  },
+  {
+   "sha": "38d4269d43b0",
+   "tokens": 20,
+   "heartbeats": 167,
+   "ok": false,
+   "error": "2871:43: unsolved goals case a.case5 … [hypotheses omitted] ⊢ (extractOldExprVars e✝).Sublist (Imperative.HasVarsPure.getVars (Lambda.LExpr.abs m✝ ty✝ e✝)) ‖ ⊢ [v✝].Sublist (Imperative.HasVarsPure.getVars (Lambda.LExpr.app m✝² (Lambda.LExpr.op m✝¹ { name := \"old\", metadata := Visibility.unres } ty✝¹",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:37:27Z"
+  },
+  {
+   "sha": "99c4e27cf584",
+   "tokens": 22,
+   "heartbeats": 231,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:37:48Z"
+  },
+  {
+   "sha": "6dda94bdf4ba",
+   "tokens": 20,
+   "heartbeats": 225,
+   "ok": false,
+   "error": "2878:12: Tactic `apply` failed: could not unify the conclusion of `@List.Sublist … [hypotheses omitted] ⊢ (extractOldExprVars c✝ ++ extractOldExprVars t✝ ++ extractOldExprVars e✝).Sublist (Imperative.HasVarsPure.getVars (Lambda.LExpr.ite m✝ c✝ t✝ e✝))",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:37:53Z"
+  },
+  {
+   "sha": "61ed0d343087",
+   "tokens": 16,
+   "heartbeats": 419,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:38:23Z"
+  },
+  {
+   "sha": "09fed237af90",
+   "tokens": 16,
+   "heartbeats": 420,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:38:26Z"
+  },
+  {
+   "sha": "67c1a09ce362",
+   "tokens": 19,
+   "heartbeats": 207,
+   "ok": false,
+   "error": "2877:2: Tactic failed on all goals: with_reducible assumption",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:38:41Z"
+  },
+  {
+   "sha": "98f60c65b9ca",
+   "tokens": 18,
+   "heartbeats": 432,
+   "ok": false,
+   "error": "2876:12: failed",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:38:45Z"
+  },
+  {
+   "sha": "94759af0da04",
+   "tokens": 17,
+   "heartbeats": 243,
+   "ok": false,
+   "error": "2878:12: Tactic `rfl` failed: No `[refl]` lemma registered for relation List.Sub … [hypotheses omitted] ⊢ [v✝].Sublist [v✝]",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:38:57Z"
+  },
+  {
+   "sha": "c0643448d0c0",
+   "tokens": 19,
+   "heartbeats": 249,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:39:01Z"
+  },
+  {
+   "sha": "5da414afdfa2",
+   "tokens": 18,
+   "heartbeats": 248,
+   "ok": false,
+   "error": "2871:43: unsolved goals case a.case7.a m✝² … [hypotheses omitted] ⊢ [v✝].Sublist []",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:39:06Z"
+  },
+  {
+   "sha": "67289e14e928",
+   "tokens": 17,
+   "heartbeats": 229,
+   "ok": false,
+   "error": "2878:12: Expected type must not contain free variables [v✝].Sublist (Imperative.HasVarsPure.getVars (Lambda.LExpr.app m✝² (Lambda.LExpr.op m✝¹ { name := \"old\", metadata := Visibility.unres } ty✝¹) (Lambda.LExpr.fvar m✝ v✝ ty✝))) Hint: Use the `+revert` option to automatically clean up and revert fre",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:39:10Z"
+  },
+  {
+   "sha": "793af8dfad17",
+   "tokens": 18,
+   "heartbeats": 365,
+   "ok": false,
+   "error": "2876:12: `repeat1'` made no progress",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:39:24Z"
+  },
+  {
+   "sha": "3a9b6b76726e",
+   "tokens": 23,
+   "heartbeats": 269,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:39:28Z"
+  },
+  {
+   "sha": "b071f56dfd0f",
+   "tokens": 19,
+   "heartbeats": 406,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:39:32Z"
+  },
+  {
+   "sha": "d90b925761af",
+   "tokens": 17,
+   "heartbeats": 201,
+   "ok": false,
+   "error": "2877:2: Tactic failed on all goals: assumption",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:40:06Z"
+  },
+  {
+   "sha": "cc62562cc06d",
+   "tokens": 20,
+   "heartbeats": 202,
+   "ok": false,
+   "error": "2876:2: Tactic failed on all goals: assumption",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:40:11Z"
+  },
+  {
+   "sha": "def92ec282d7",
+   "tokens": 22,
+   "heartbeats": 355,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:40:42Z"
+  },
+  {
+   "sha": "88a21e510230",
+   "tokens": 23,
+   "heartbeats": 351,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:40:46Z"
+  },
+  {
+   "sha": "8eefc92b7b69",
+   "tokens": 22,
+   "heartbeats": 354,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:40:51Z"
+  },
+  {
+   "sha": "2585cde37057",
+   "tokens": 17,
+   "heartbeats": 239,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:41:40Z",
+   "score": 94.49
+  },
+  {
+   "sha": "0c11d544bcd6",
+   "tokens": 20,
+   "heartbeats": 210,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:41:45Z"
+  },
+  {
+   "sha": "b4d6104047b5",
+   "tokens": 18,
+   "heartbeats": 249,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:41:49Z"
+  },
+  {
+   "sha": "1821da9225db",
+   "tokens": 17,
+   "heartbeats": 239,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:42:05Z"
+  },
+  {
+   "sha": "0eaaef2c4fde",
+   "tokens": 19,
+   "heartbeats": 257,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:42:09Z"
+  },
+  {
+   "sha": "5a84e1203a67",
+   "tokens": 20,
+   "heartbeats": 210,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:42:14Z"
+  },
+  {
+   "sha": "09041f06e67f",
+   "tokens": 22,
+   "heartbeats": 237,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:42:28Z"
+  },
+  {
+   "sha": "c5444c824075",
+   "tokens": 23,
+   "heartbeats": null,
+   "ok": false,
+   "error": "2876:39: unknown tactic",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:42:33Z"
+  },
+  {
+   "sha": "d55337746513",
+   "tokens": 22,
+   "heartbeats": 205,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:42:37Z"
+  },
+  {
+   "sha": "ebd3f21c427d",
+   "tokens": 23,
+   "heartbeats": 211,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:42:48Z"
+  },
+  {
+   "sha": "7cffb2ff53d4",
+   "tokens": 19,
+   "heartbeats": 307,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:42:52Z"
+  },
+  {
+   "sha": "db58af3e5da4",
+   "tokens": 20,
+   "heartbeats": 205,
+   "ok": false,
+   "error": "2878:2: Tactic `apply` failed: could not unify the conclusion of `@List.Sublist. … [hypotheses omitted] ⊢ (extractOldExprVars tr✝).Sublist (Lambda.LExpr.LExpr.getVars tr✝)",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:42:57Z"
+  },
+  {
+   "sha": "5b94152bc6ac",
+   "tokens": 19,
+   "heartbeats": 236,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:43:13Z"
+  },
+  {
+   "sha": "c176eda27947",
+   "tokens": 22,
+   "heartbeats": 250,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:43:17Z"
+  },
+  {
+   "sha": "56aeed45df62",
+   "tokens": 22,
+   "heartbeats": 255,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:43:22Z"
+  },
+  {
+   "sha": "031cf3059327",
+   "tokens": 18,
+   "heartbeats": 403,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:43:37Z"
+  },
+  {
+   "sha": "8cf000089cbb",
+   "tokens": 18,
+   "heartbeats": 404,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:43:41Z"
+  },
+  {
+   "sha": "ddc66f09497e",
+   "tokens": 18,
+   "heartbeats": 402,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:43:45Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T20:00:21Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T20:50:55Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:23:51Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r9",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:47:51Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r10",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:10:02Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:35:55Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r14",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T01:09:34Z"
+  }
+ ],
+ "api_spend": 1.97119,
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 1,
+    "d_score": 33.23,
+    "d_tokens": -200,
+    "d_heartbeats": 2439,
+    "diff": "+open OldExpressions in\n+theorem extractedOldExprInVars :\n+  NormalizedOldExpr post →\n+  (extractOldExprVars post).Subset\n+  (Imperative.HasVarsPure.getVars post) := by\n+  rintro -\n+  fun_induction extractOldExprVars post <;>\n+    simp_all [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars]\n+  any_goals exact List.nil_subset _\n+  all_goals grind [List.Subset]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 16,
+    "d_score": 15.51,
+    "d_tokens": 19,
+    "d_heartbeats": -1486,
+    "diff": "-    simp_all [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars]\n+    simp only [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n-  all_goals grind [List.Subset]\n+  all_goals intro a\n+  all_goals try simp only [List.mem_append] at *\n+  all_goals solve_by_elim [Or.imp, Or.inr, id]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 23,
+    "d_score": 1.91,
+    "d_tokens": 0,
+    "d_heartbeats": -155,
+    "diff": "-  rintro -\n+  rintro - a\n-    simp only [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n-  any_goals exact List.nil_subset _\n-  all_goals intro a\n-  all_goals try simp only [List.mem_append] at *\n-  all_goals solve_by_elim [Or.imp, Or.inr, id]\n+    simp only [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars, List.mem_append] at *\n+  all_goals repeat first | apply Or.imp | assumption | exact id | apply Or.inr | (intro h; cases h)"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 28,
+    "d_score": 3.01,
+    "d_tokens": -7,
+    "d_heartbeats": -158,
+    "diff": "-  fun_induction extractOldExprVars post <;>\n-    simp only [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars, List.mem_append] at *\n-  all_goals repeat first | apply Or.imp | assumption | exact id | apply Or.inr | (intro h; cases h)\n+  fun_induction extractOldExprVars post\n+  all_goals repeat first | assumption | exact id | (apply List.mem_append.mpr ∘ Or.imp ?_ ?_ ∘ List.mem_append.mp) | (intro h; cases h)"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 38,
+    "d_score": 0.16,
+    "d_tokens": 0,
+    "d_heartbeats": -13,
+    "diff": "-  all_goals repeat first | assumption | exact id | (apply List.mem_append.mpr ∘ Or.imp ?_ ?_ ∘ List.mem_append.mp) | (intro h; cases h)\n+  all_goals repeat first | assumption | (apply List.mem_append.mpr ∘ Or.imp ?_ ?_ ∘ List.mem_append.mp) | exact id | (intro h; cases h)"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 63,
+    "d_score": 0.71,
+    "d_tokens": 1,
+    "d_heartbeats": -70,
+    "diff": "-  fun_induction extractOldExprVars post\n-  all_goals repeat first | assumption | (apply List.mem_append.mpr ∘ Or.imp ?_ ?_ ∘ List.mem_append.mp) | exact id | (intro h; cases h)\n+  fun_induction extractOldExprVars post <;> try exact id\n+  case case3 | case8 => intro h; cases h\n+  all_goals repeat first | assumption | apply List.mem_append.mpr ∘ Or.imp ?_ ?_ ∘ List.mem_append.mp"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 65,
+    "d_score": 0.47,
+    "d_tokens": -3,
+    "d_heartbeats": -1,
+    "diff": "-  fun_induction extractOldExprVars post <;> try exact id\n-  case case3 | case8 => intro h; cases h\n-  all_goals repeat first | assumption | apply List.mem_append.mpr ∘ Or.imp ?_ ?_ ∘ List.mem_append.mp\n+  fun_induction extractOldExprVars post\n+  any_goals solve | intro h; cases h\n+  all_goals repeat first | assumption | apply List.mem_append.mpr ∘ Or.imp ?_ ?_ ∘ List.mem_append.mp | exact id"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 68,
+    "d_score": 0.31,
+    "d_tokens": -1,
+    "d_heartbeats": -13,
+    "diff": "-  all_goals repeat first | assumption | apply List.mem_append.mpr ∘ Or.imp ?_ ?_ ∘ List.mem_append.mp | exact id\n+  repeat' first | assumption | apply List.mem_append.mpr ∘ Or.imp ?_ ?_ ∘ List.mem_append.mp | exact id"
+   },
+   {
+    "run_id": "wu-hx-sol-r2",
+    "check": 2,
+    "d_score": 0.11,
+    "d_tokens": 0,
+    "d_heartbeats": -9,
+    "diff": "-  repeat' first | assumption | apply List.mem_append.mpr ∘ Or.imp ?_ ?_ ∘ List.mem_append.mp | exact id\n+  repeat' first | assumption | apply List.mem_append.2 ∘ Or.imp ?_ ?_ ∘ List.mem_append.1 | exact id"
+   },
+   {
+    "run_id": "wu-hx-sol-r2",
+    "check": 12,
+    "d_score": 0.27,
+    "d_tokens": 7,
+    "d_heartbeats": -107,
+    "diff": "-  fun_induction extractOldExprVars post\n-  any_goals solve | intro h; cases h\n+  fun_induction extractOldExprVars\n+  case case1 | case2 | case3 | case4 | case8 => intro h; cases h"
+   },
+   {
+    "run_id": "wu-hx-sol-r2",
+    "check": 15,
+    "d_score": 1.86,
+    "d_tokens": -13,
+    "d_heartbeats": 7,
+    "diff": "-  case case1 | case2 | case3 | case4 | case8 => intro h; cases h\n+  any_goals apply List.nil_subset"
+   },
+   {
+    "run_id": "wu-hx-sol-r2",
+    "check": 27,
+    "d_score": 0.1,
+    "d_tokens": 0,
+    "d_heartbeats": -8,
+    "diff": "-  repeat' first | assumption | apply List.mem_append.2 ∘ Or.imp ?_ ?_ ∘ List.mem_append.1 | exact id\n+  repeat' first | assumption | apply List.mem_append.2 ∘ Or.imp ?_ ?_ ∘ List.mem_append.1 | apply List.Subset.refl"
+   },
+   {
+    "run_id": "wu-hx-sol-r9",
+    "check": 17,
+    "d_score": 2.09,
+    "d_tokens": -5,
+    "d_heartbeats": -108,
+    "diff": "-  rintro - a\n+  rintro -\n+  apply List.Sublist.subset\n-  any_goals apply List.nil_subset\n-  repeat' first | assumption | apply List.mem_append.2 ∘ Or.imp ?_ ?_ ∘ List.mem_append.1 | apply List.Subset.refl\n+  repeat' first | assumption | apply List.nil_sublist | apply List.Sublist.refl | apply List.Sublist.append"
+   },
+   {
+    "run_id": "wu-hx-sol-r9",
+    "check": 18,
+    "d_score": 0.75,
+    "d_tokens": 0,
+    "d_heartbeats": -61,
+    "diff": "-  repeat' first | assumption | apply List.nil_sublist | apply List.Sublist.refl | apply List.Sublist.append\n+  any_goals apply List.nil_sublist\n+  repeat' first | assumption | apply List.Sublist.append | apply List.Sublist.refl"
+   },
+   {
+    "run_id": "wu-hx-sol-r9",
+    "check": 33,
+    "d_score": 0.09,
+    "d_tokens": 0,
+    "d_heartbeats": -7,
+    "diff": "-  any_goals apply List.nil_sublist\n-  repeat' first | assumption | apply List.Sublist.append | apply List.Sublist.refl\n+  repeat' apply List.Sublist.append\n+  all_goals first | assumption | apply List.nil_sublist | apply List.Sublist.refl"
+   },
+   {
+    "run_id": "wu-hx-sol-r9",
+    "check": 38,
+    "d_score": 0.11,
+    "d_tokens": 0,
+    "d_heartbeats": -9,
+    "diff": "+  any_goals apply List.nil_sublist\n-  all_goals first | assumption | apply List.nil_sublist | apply List.Sublist.refl\n+  all_goals first | assumption | apply List.Sublist.refl"
+   },
+   {
+    "run_id": "wu-hx-sol-r9",
+    "check": 41,
+    "d_score": 0.32,
+    "d_tokens": -2,
+    "d_heartbeats": -2,
+    "diff": "-  all_goals first | assumption | apply List.Sublist.refl\n+  any_goals assumption\n+  all_goals apply List.Sublist.refl"
+   },
+   {
+    "run_id": "wu-hx-sol-r13",
+    "check": 24,
+    "d_score": 0.15,
+    "d_tokens": -1,
+    "d_heartbeats": 0,
+    "diff": "-  all_goals apply List.Sublist.refl\n+  apply List.Sublist.refl"
+   }
+  ]
+ },
+ "profile_cache": {
+  "712609eaede7": {
+   "ok": true,
+   "total": 627,
+   "floor": 14,
+   "reference": 2698,
+   "max_heartbeat_score": 33.16,
+   "blocks": [
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "all_goals repeat first | assumption | (apply List.mem_append.mpr ∘ Or.imp ?_ ?_ ∘ List.mem_append.mp",
+     "heartbeats": 575
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "fun_induction extractOldExprVars post",
+     "heartbeats": 36
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "rintro - a",
+     "heartbeats": 2
+    }
+   ],
+   "points_left_heartbeats": 7.57,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "f44f8bfb91ce": {
+   "ok": true,
+   "total": 534,
+   "floor": 14,
+   "reference": 2698,
+   "max_heartbeat_score": 33.16,
+   "blocks": [
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "repeat' first | assumption | apply List.mem_append.2 ∘ Or.imp ?_ ?_ ∘ List.mem_append.1 | exact id",
+     "heartbeats": 317
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "any_goals solve | intro h; cases h",
+     "heartbeats": 165
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "fun_induction extractOldExprVars post",
+     "heartbeats": 36
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "rintro - a",
+     "heartbeats": 2
+    }
+   ],
+   "points_left_heartbeats": 6.42,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "c2021218f827": {
+   "ok": true,
+   "total": 426,
+   "floor": 14,
+   "reference": 2698,
+   "max_heartbeat_score": 33.16,
+   "blocks": [
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "repeat' first | assumption | apply List.mem_append.2 ∘ Or.imp ?_ ?_ ∘ List.mem_append.1 | apply List",
+     "heartbeats": 314
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "any_goals apply List.nil_subset",
+     "heartbeats": 61
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "fun_induction extractOldExprVars",
+     "heartbeats": 35
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "rintro - a",
+     "heartbeats": 2
+    }
+   ],
+   "points_left_heartbeats": 5.09,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "0015d3d1af08": {
+   "ok": true,
+   "total": 239,
+   "floor": 14,
+   "reference": 2698,
+   "max_heartbeat_score": 33.16,
+   "blocks": [
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "repeat' apply List.Sublist.append",
+     "heartbeats": 127
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "fun_induction extractOldExprVars",
+     "heartbeats": 31
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "any_goals assumption",
+     "heartbeats": 29
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "any_goals apply List.nil_sublist",
+     "heartbeats": 27
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "all_goals apply List.Sublist.refl",
+     "heartbeats": 7
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "apply List.Sublist.subset",
+     "heartbeats": 3
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "rintro -",
+     "heartbeats": 1
+    }
+   ],
+   "points_left_heartbeats": 2.78,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "hb_floor": 14,
+ "fresh_lineages": [
+  {
+   "run_id": "wu-hx-sol-f4",
+   "spend": 0.257898,
+   "score": 90.83,
+   "adopted": false,
+   "restructure": false,
+   "t": "2026-10-11T21:59:51Z"
+  },
+  {
+   "run_id": "wu-hx-sol-f8",
+   "spend": 0.403179,
+   "score": 90.4,
+   "adopted": false,
+   "restructure": false,
+   "t": "2026-10-11T23:47:51Z"
+  }
+ ]
+}

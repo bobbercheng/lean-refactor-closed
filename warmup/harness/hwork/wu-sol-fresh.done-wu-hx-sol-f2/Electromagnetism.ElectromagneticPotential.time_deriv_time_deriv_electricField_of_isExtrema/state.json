@@ -1,0 +1,74 @@
+{
+ "problem": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+ "best": {
+  "score": 33.33,
+  "proof": null,
+  "tokens": 1372,
+  "heartbeats": null
+ },
+ "attempts": [
+  {
+   "sha": "39a65613d5f5",
+   "tokens": 366,
+   "heartbeats": 860,
+   "ok": false,
+   "error": "396:23: don't know how to synthesize implicit argument `c` @electricField_apply_contDiff_space d j 2 A (?m.189 j) hA3 t context: … [hypotheses omitted] ⊢ SpeedOfLight",
+   "run_id": "wu-hx-sol-f2",
+   "t": "2026-10-11T20:55:24Z"
+  },
+  {
+   "sha": "92e2b7a0147f",
+   "tokens": 386,
+   "heartbeats": 4039,
+   "ok": false,
+   "error": "417:2: `simp` made no progress",
+   "run_id": "wu-hx-sol-f2",
+   "t": "2026-10-11T20:55:47Z"
+  },
+  {
+   "sha": "8c45a2cacd2d",
+   "tokens": 387,
+   "heartbeats": 4039,
+   "ok": false,
+   "error": "418:2: `simp` made no progress",
+   "run_id": "wu-hx-sol-f2",
+   "t": "2026-10-11T20:56:13Z"
+  },
+  {
+   "sha": "a85b5eb2a484",
+   "tokens": 389,
+   "heartbeats": 4898,
+   "ok": false,
+   "error": "425:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern Space. … [hypotheses omitted] ⊢ 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ x_1, Space.deriv x_1 (fun x' => Space.deriv x_1 (fun x => (electricField 𝓕.c A t x).ofLp i) x' - Space.deriv i (fun x => (electricField 𝓕.c A t x).ofLp x_1) x') x - 1 / 𝓕.ε",
+   "run_id": "wu-hx-sol-f2",
+   "t": "2026-10-11T20:57:00Z"
+  },
+  {
+   "sha": "7765415f4c1a",
+   "tokens": 396,
+   "heartbeats": 5545,
+   "ok": false,
+   "error": "426:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern ∑ x_1, … [hypotheses omitted] ⊢ 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ x_1, Space.deriv x_1 (fun x' => Space.deriv x_1 (fun x => (electricField 𝓕.c A t x).ofLp i) x' - Space.deriv i (fun x => (electricField 𝓕.c A t x).ofLp x_1) x') x - 1 / 𝓕.ε",
+   "run_id": "wu-hx-sol-f2",
+   "t": "2026-10-11T20:57:46Z"
+  },
+  {
+   "sha": "fa871b2c1dfe",
+   "tokens": 480,
+   "heartbeats": 14227,
+   "ok": false,
+   "error": "420:51: unsolved goals … [hypotheses omitted] ⊢ Space.deriv j (Space.deriv j fun x => (electricField 𝓕.c A t x).ofLp i) x - Space.deriv j (Space.deriv i fun x => (electricField 𝓕.c A t x).ofLp j) x = Space.deriv j (Space.deriv j fun x => (electricField 𝓕.c A t x).ofLp i) x - Space.deriv i (Space.der",
+   "run_id": "wu-hx-sol-f2",
+   "t": "2026-10-11T20:59:44Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-f2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T20:50:55Z"
+  }
+ ],
+ "api_spend": 0.691422,
+ "lineage": "fresh"
+}

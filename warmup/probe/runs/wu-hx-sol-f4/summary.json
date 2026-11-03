@@ -1,0 +1,38 @@
+[
+ {
+  "problem": "CallElimCorrect.extractedOldExprInVars",
+  "best_score": 90.83,
+  "checks": 49,
+  "tool_calls": 30,
+  "turns": 29,
+  "out_tokens": 12770,
+  "seconds": 733
+ },
+ {
+  "problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+  "best_score": 33.33,
+  "checks": 0,
+  "tool_calls": 4,
+  "turns": 4,
+  "out_tokens": 24236,
+  "seconds": 299
+ },
+ {
+  "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+  "best_score": 73.54,
+  "checks": 26,
+  "tool_calls": 34,
+  "turns": 34,
+  "out_tokens": 24031,
+  "seconds": 1015
+ },
+ {
+  "problem": "Cslib.CCS.bisimilarity_congr_choice",
+  "best_score": 84.11,
+  "checks": 20,
+  "tool_calls": 21,
+  "turns": 21,
+  "out_tokens": 31134,
+  "seconds": 830
+ }
+]

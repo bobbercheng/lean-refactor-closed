@@ -1,0 +1,97 @@
+run wu-hx-sol-r14: 14 problems, model=gpt-6.1-sol, turns≤40
+Electromagnetism.E technique cards: analysis, sets, algebra, corollary
+CallElimCorrect.su technique cards: sets
+Core.InitsUpdatesC technique cards: inductive, sets, corollary
+CallElimCorrect.ex technique cards: sets
+[memgate] HOLD LRAScratch/m_e44e10ed30.lean: need 8000+8000 MB, have 8739 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_0abadbb976.lean: need 8000+8000 MB, have 8738 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_fb02f7f329.lean: need 8000+8000 MB, have 8735 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_95f5452522.lean: need 8000+8000 MB, have 15951 MB (40000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 15s hold (23131 MB free after ramping grants)
+CallElimCorrect.su library leads: 10 (18.1 s, 5 compiles)
+CallElimCorrect.su knowledge brief: CallElimCorrect.substOldPostSubset.md
+[memgate] admitted after 25s hold (31202 MB free after ramping grants)
+[memgate] admitted after 25s hold (23200 MB free after ramping grants)
+[memgate] admitted after 40s hold (30831 MB free after ramping grants)
+Core.InitsUpdatesC library leads: 10 (44.8 s, 7 compiles)
+Core.InitsUpdatesC knowledge brief: Core.InitsUpdatesComm.md
+CallElimCorrect.ex library leads: 10 (46.2 s, 7 compiles)
+CallElimCorrect.ex knowledge brief: CallElimCorrect.extractedOldExprInVars.md
+Electromagnetism.E library leads: 10 (50.5 s, 9 compiles)
+Electromagnetism.E knowledge brief: Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema.md
+CallElimCorrect.su turn 0: api error Error code: 402 - {"error":{"message":"This request requires more credits, or fewer max_tokens. You requested up to 1200
+CallElimCorrect.su DONE best=92.0 checks=0 tool_calls=0 turns=1 out_tok=0 311s
+FieldSpecification technique cards: sets
+Core.InitsUpdatesC turn 0: api error Error code: 402 - {"error":{"message":"This request requires more credits, or fewer max_tokens. You requested up to 1200
+Core.InitsUpdatesC DONE best=89.14 checks=0 tool_calls=0 turns=1 out_tok=0 311s
+Cslib.LambdaCalcul technique cards: inductive
+CallElimCorrect.ex turn 0: api error Error code: 402 - {"error":{"message":"This request requires more credits, or fewer max_tokens. You requested up to 1200
+CallElimCorrect.ex DONE best=94.49 checks=0 tool_calls=0 turns=1 out_tok=0 311s
+Cslib.SKI.parallel technique cards: inductive
+[memgate] HOLD LRAScratch/m_59838bca70.lean: need 8000+8000 MB, have 13927 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+FieldSpecification library leads: 10 (32.1 s, 9 compiles)
+FieldSpecification knowledge brief: FieldSpecification.WickAlgebra.__timeOrderF_superCommuteF_eq_time.md
+Electromagnetism.E turn 0: api error Error code: 402 - {"error":{"message":"This request requires more credits, or fewer max_tokens. You requested up to 1200
+Electromagnetism.E DONE best=83.24 checks=0 tool_calls=0 turns=1 out_tok=0 311s
+Cslib.CCS.bisimila technique cards: inductive
+[memgate] HOLD LRAScratch/m_5c82a920b9.lean: need 8000+8000 MB, have 15353 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_6c7e1b178d.lean: need 8000+8000 MB, have 15353 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 10s hold (39883 MB free after ramping grants)
+[memgate] admitted after 5s hold (23812 MB free after ramping grants)
+Cslib.LambdaCalcul library leads: 10 (16.4 s, 7 compiles)
+Cslib.LambdaCalcul knowledge brief: Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress.md
+[memgate] admitted after 10s hold (23573 MB free after ramping grants)
+Cslib.SKI.parallel library leads: 4 (17.5 s, 8 compiles)
+Cslib.SKI.parallel knowledge brief: Cslib.SKI.parallelReduction_diamond.md
+Cslib.CCS.bisimila library leads: 10 (19.0 s, 7 compiles)
+Cslib.CCS.bisimila knowledge brief: Cslib.CCS.bisimilarity_congr_choice.md
+FieldSpecification turn 0: api error Error code: 402 - {"error":{"message":"This request requires more credits, or fewer max_tokens. You requested up to 1200
+FieldSpecification DONE best=86.74 checks=0 tool_calls=0 turns=1 out_tok=0 311s
+Binius.BinaryBasef technique cards: sets, corollary
+Cslib.SKI.parallel turn 0: api error Error code: 402 - {"error":{"message":"This request requires more credits, or fewer max_tokens. You requested up to 1200
+Cslib.SKI.parallel DONE best=76.91 checks=0 tool_calls=0 turns=1 out_tok=0 311s
+Binius.BinaryBasef technique cards: sets, corollary
+Cslib.LambdaCalcul turn 0: api error Error code: 402 - {"error":{"message":"This request requires more credits, or fewer max_tokens. You requested up to 1200
+Cslib.LambdaCalcul DONE best=85.76 checks=0 tool_calls=0 turns=1 out_tok=0 311s
+interleaved_affine technique cards: sets
+[memgate] HOLD LRAScratch/m_9174129d15.lean: need 8000+8000 MB, have 12453 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_d5ce891145.lean: need 8000+8000 MB, have 12453 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+Cslib.CCS.bisimila turn 0: api error Error code: 402 - {"error":{"message":"This request requires more credits, or fewer max_tokens. You requested up to 1200
+Cslib.CCS.bisimila DONE best=87.03 checks=0 tool_calls=0 turns=1 out_tok=0 311s
+putnam_1964_a4     technique cards: sets, inductive
+[memgate] HOLD LRAScratch/m_f43c8d4db5.lean: need 8000+8000 MB, have 11629 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_891e9a021a.lean: need 8000+8000 MB, have 11629 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 25s hold (20227 MB free after ramping grants)
+Binius.BinaryBasef library leads: 10 (54.5 s, 7 compiles)
+Binius.BinaryBasef knowledge brief: Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius.md
+[memgate] admitted after 40s hold (20919 MB free after ramping grants)
+[memgate] admitted after 35s hold (21643 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_6905d76f3e.lean: need 8000+8000 MB, have 13503 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_891e9a021a.lean: need 8000+8000 MB, have 10443 MB (32000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 65s hold (21960 MB free after ramping grants)
+[memgate] admitted after 55s hold (19230 MB free after ramping grants)
+Binius.BinaryBasef library leads: 10 (103.6 s, 8 compiles)
+Binius.BinaryBasef knowledge brief: Binius.BinaryBasefold.fold_advances_evaluation_poly.md
+putnam_1964_a4     library leads: 10 (98.0 s, 10 compiles)
+putnam_1964_a4     knowledge brief: putnam_1964_a4.md
+interleaved_affine library leads: 10 (117.3 s, 6 compiles)
+interleaved_affine knowledge brief: interleaved_affine_gaps_imply_tensor_gaps.md
+Binius.BinaryBasef turn 0: api error Error code: 402 - {"error":{"message":"This request requires more credits, or fewer max_tokens. You requested up to 1200
+Binius.BinaryBasef DONE best=91.52 checks=0 tool_calls=0 turns=1 out_tok=0 311s
+putnam_1964_b2     technique cards: sets
+putnam_1964_b2     library leads: 10 (23.9 s, 6 compiles)
+putnam_1964_b2     knowledge brief: putnam_1964_b2.md
+putnam_1964_a4 turn 0: api error Error code: 402 - {"error":{"message":"This request requires more credits, or fewer max_tokens. You requested up to 1200
+putnam_1964_a4     DONE best=96.82 checks=0 tool_calls=0 turns=1 out_tok=0 311s
+putnam_1995_a3     technique cards: sets, numbertheory
+Binius.BinaryBasef turn 0: api error Error code: 402 - {"error":{"message":"This request requires more credits, or fewer max_tokens. You requested up to 1200
+Binius.BinaryBasef DONE best=93.62 checks=0 tool_calls=0 turns=1 out_tok=0 311s
+interleaved_affine turn 0: api error Error code: 402 - {"error":{"message":"This request requires more credits, or fewer max_tokens. You requested up to 1200
+interleaved_affine DONE best=92.99 checks=0 tool_calls=0 turns=1 out_tok=0 311s
+putnam_1995_a3     library leads: 10 (52.1 s, 9 compiles)
+putnam_1995_a3     knowledge brief: putnam_1995_a3.md
+putnam_1964_b2 turn 0: api error Error code: 402 - {"error":{"message":"This request requires more credits, or fewer max_tokens. You requested up to 1200
+putnam_1964_b2     DONE best=99.26 checks=0 tool_calls=0 turns=1 out_tok=0 311s
+putnam_1995_a3 turn 0: api error Error code: 402 - {"error":{"message":"This request requires more credits, or fewer max_tokens. You requested up to 1200
+putnam_1995_a3     DONE best=95.88 checks=0 tool_calls=0 turns=1 out_tok=0 311s
+done

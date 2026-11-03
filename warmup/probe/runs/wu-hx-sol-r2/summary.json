@@ -1,0 +1,110 @@
+[
+ {
+  "problem": "CallElimCorrect.substOldPostSubset",
+  "best_score": 91.17,
+  "checks": 52,
+  "tool_calls": 22,
+  "turns": 22,
+  "out_tokens": 15885,
+  "seconds": 796
+ },
+ {
+  "problem": "CallElimCorrect.extractedOldExprInVars",
+  "best_score": 90.98,
+  "checks": 28,
+  "tool_calls": 15,
+  "turns": 15,
+  "out_tokens": 19507,
+  "seconds": 686
+ },
+ {
+  "problem": "Core.InitsUpdatesComm",
+  "best_score": 89.09,
+  "checks": 21,
+  "tool_calls": 17,
+  "turns": 17,
+  "out_tokens": 23554,
+  "seconds": 549
+ },
+ {
+  "problem": "fundamental_theorem_of_variational_calculus'",
+  "best_score": 91.54,
+  "checks": 20,
+  "tool_calls": 24,
+  "turns": 24,
+  "out_tokens": 12629,
+  "seconds": 434
+ },
+ {
+  "problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+  "best_score": 83.46,
+  "checks": 14,
+  "tool_calls": 29,
+  "turns": 27,
+  "out_tokens": 15145,
+  "seconds": 552
+ },
+ {
+  "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+  "best_score": 85.28,
+  "checks": 9,
+  "tool_calls": 8,
+  "turns": 8,
+  "out_tokens": 15947,
+  "seconds": 347
+ },
+ {
+  "problem": "Cslib.CCS.bisimilarity_congr_choice",
+  "best_score": 87.03,
+  "checks": 0,
+  "tool_calls": 4,
+  "turns": 4,
+  "out_tokens": 24345,
+  "seconds": 264
+ },
+ {
+  "problem": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+  "best_score": 93.22,
+  "checks": 14,
+  "tool_calls": 37,
+  "turns": 37,
+  "out_tokens": 7741,
+  "seconds": 547
+ },
+ {
+  "problem": "interleaved_affine_gaps_imply_tensor_gaps",
+  "best_score": 92.56,
+  "checks": 15,
+  "tool_calls": 16,
+  "turns": 12,
+  "out_tokens": 6677,
+  "seconds": 423
+ },
+ {
+  "problem": "putnam_1964_a4",
+  "best_score": 96.53,
+  "checks": 9,
+  "tool_calls": 10,
+  "turns": 10,
+  "out_tokens": 19441,
+  "seconds": 352
+ },
+ {
+  "problem": "putnam_1964_b2",
+  "best_score": 99.09,
+  "checks": 27,
+  "tool_calls": 20,
+  "turns": 20,
+  "out_tokens": 21772,
+  "seconds": 548
+ },
+ {
+  "problem": "putnam_1995_a3",
+  "best_score": 95.72,
+  "checks": 19,
+  "tool_calls": 18,
+  "turns": 18,
+  "out_tokens": 16741,
+  "seconds": 369
+ }
+]

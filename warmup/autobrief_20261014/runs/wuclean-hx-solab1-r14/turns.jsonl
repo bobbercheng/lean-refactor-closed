@@ -1,0 +1,8 @@
+{"problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time", "turn": 0, "out_tok": 21, "stop": "tool_use", "tools": ["lean_profile"], "text": ""}
+{"problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time", "turn": 1, "out_tok": 373, "stop": "tool_use", "tools": ["lean_run"], "text": ""}
+{"problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time", "turn": 2, "out_tok": 326, "stop": "tool_use", "tools": ["shell"], "text": ""}
+{"problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time", "turn": 3, "out_tok": 24, "stop": "tool_use", "tools": ["lean_skeleton"], "text": ""}
+{"problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time", "turn": 4, "out_tok": 559, "stop": "tool_use", "tools": ["shell"], "text": ""}
+{"problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time", "turn": 5, "out_tok": 21, "stop": "tool_use", "tools": ["lean_check"], "text": ""}
+{"problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time", "turn": 6, "out_tok": 771, "stop": "tool_use", "tools": ["shell"], "text": ""}
+{"problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time", "turn": 7, "out_tok": 137, "stop": "tool_use", "tools": ["shell"], "text": ""}

@@ -1,0 +1,62 @@
+{
+ "name": "r10-candidate",
+ "description": "The closed final's end-stage configuration (frozen): tool families t1-t8 and golf (golf opt-in ops: trailarg, casewrap, dot), the sweep and crossover, per-phase budgets (600 compiles or 1800 s), per-family caps, screening and t3 rule suggestions. Documentation keys of the development copy are not included; the values the end stage reads are unchanged.",
+ "families": [
+  "t1",
+  "t2",
+  "t3",
+  "t4",
+  "t5",
+  "t6",
+  "t7",
+  "t8",
+  "golf"
+ ],
+ "sweep": true,
+ "crossover": true,
+ "k": 6,
+ "prefer": "direct",
+ "budgets": {
+  "sweep": {
+   "compiles": 600,
+   "seconds": 1800
+  },
+  "tools": {
+   "compiles": 600,
+   "seconds": 1800
+  },
+  "passes": 2,
+  "max_per_op": null
+ },
+ "caps": {
+  "t3": 200,
+  "t4": 60,
+  "t5": 60,
+  "t6": 40,
+  "t7": 40,
+  "t8": 40,
+  "golf": 40
+ },
+ "fail_cache": null,
+ "screen": {
+  "on": true,
+  "k": 24,
+  "depth": 2
+ },
+ "ops": {
+  "t1": [
+   "t1:proj",
+   "t1:projapp",
+   "t1:inline",
+   "t1:hole",
+   "t1:hole2"
+  ]
+ },
+ "opt_in": [
+  "golf:trailarg",
+  "golf:casewrap",
+  "golf:dot"
+ ],
+ "t3_suggest": "rule",
+ "ctx": {}
+}

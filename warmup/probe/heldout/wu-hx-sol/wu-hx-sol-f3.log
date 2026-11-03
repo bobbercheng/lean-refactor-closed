@@ -1,0 +1,42 @@
+run wu-hx-sol-f3: 2 problems, model=gpt-6.1-sol, turns≤40
+Cslib.LambdaCalcul technique cards: inductive
+Electromagnetism.E technique cards: analysis, sets, calc, corollary
+[memgate] HOLD LRAScratch/m_a7663486b9.lean: need 8000+8000 MB, have 15779 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_cae6f3fe48.lean: need 8000+8000 MB, have 15779 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_c10d2020e6.lean: need 8000+8000 MB, have 15779 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_6c308cb489.lean: need 8000+8000 MB, have 15777 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_a7663486b9.lean: need 8000+8000 MB, have 15529 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_6c308cb489.lean: need 8000+8000 MB, have 15528 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_c10d2020e6.lean: need 8000+8000 MB, have 15528 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_cae6f3fe48.lean: need 8000+8000 MB, have 15526 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 80s hold (23710 MB free after ramping grants)
+[memgate] admitted after 90s hold (23621 MB free after ramping grants)
+[memgate] admitted after 105s hold (23645 MB free after ramping grants)
+[memgate] admitted after 110s hold (23365 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_30aa35b212.lean: need 8000+8000 MB, have 15007 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+Electromagnetism.E library leads: 10 (118.7 s, 8 compiles)
+Electromagnetism.E knowledge brief: Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema.md
+[memgate] HOLD LRAScratch/s_c5f05df6d1.lean: need 8000+8000 MB, have 15266 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (31854 MB free after ramping grants)
+[memgate] admitted after 25s hold (31855 MB free after ramping grants)
+Cslib.LambdaCalcul library leads: 10 (143.8 s, 6 compiles)
+Cslib.LambdaCalcul knowledge brief: Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress.md
+[memgate] HOLD LRAScratch/m_6867d8d8a5.lean: need 8000+8000 MB, have 15601 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 10s hold (23780 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_fbd980692f.lean: need 8000+8000 MB, have 13312 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 30s hold (24053 MB free after ramping grants)
+[memgate] HOLD LRAScratch/s_721fef6bbf.lean: need 8000+8000 MB, have 15751 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 20s hold (23683 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_9da3e9acb9.lean: need 8000+8000 MB, have 15395 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 10s hold (23656 MB free after ramping grants)
+Electromagnetism.E budget reached: $0.855 + reserve $0.405 > $1.00; session ends
+Electromagnetism.E DONE best=33.33 checks=0 tool_calls=4 turns=4 out_tok=12252 152s
+[memgate] HOLD LRAScratch/c_71073d3ff1f1.lean: need 8000+8000 MB, have 15396 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/c_71073d3ff1f1.lean: need 8000+8000 MB, have 14801 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 70s hold (23585 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_9a5b1201a862.lean: need 8000+8000 MB, have 12464 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 15s hold (22488 MB free after ramping grants)
+Cslib.LambdaCalcul check 4: NEW BEST tok=288 (+29.4%) hb=6672 (+88.9%) Z=100 score=72.76
+Cslib.LambdaCalcul budget reached: $0.754 + reserve $0.263 > $1.00; session ends
+Cslib.LambdaCalcul DONE best=72.76 checks=4 tool_calls=8 turns=8 out_tok=2932 250s
+done

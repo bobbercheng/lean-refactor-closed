@@ -1,0 +1,340 @@
+{
+ "problem": "CallElimCorrect.substOldPostSubset",
+ "seed": {
+  "ok": true,
+  "tokens": 40,
+  "heartbeats": 757,
+  "L": 87.22,
+  "H": 85.37,
+  "Z": 100.0,
+  "score": 90.86
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "no sites",
+   "before": {
+    "ok": true,
+    "tokens": 40,
+    "heartbeats": 757,
+    "Z": 100.0,
+    "score": 90.86
+   },
+   "after": {
+    "ok": true,
+    "tokens": 40,
+    "heartbeats": 757,
+    "Z": 100.0,
+    "score": 90.86
+   },
+   "gain": null,
+   "applied": null,
+   "compiles": 1,
+   "seconds": 4.9
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 40,
+    "heartbeats": 757,
+    "Z": 100.0,
+    "score": 90.86
+   },
+   "after": {
+    "ok": true,
+    "tokens": 40,
+    "heartbeats": 757,
+    "Z": 100.0,
+    "score": 90.86
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 4,
+   "seconds": 17.7
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 40,
+    "heartbeats": 757,
+    "Z": 100.0,
+    "score": 90.86
+   },
+   "after": {
+    "ok": true,
+    "tokens": 40,
+    "heartbeats": 757,
+    "Z": 100.0,
+    "score": 90.86
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 4,
+   "seconds": 16.9
+  },
+  {
+   "pass": "lint_delete",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 40,
+    "heartbeats": 757,
+    "Z": 100.0,
+    "score": 90.86
+   },
+   "after": {
+    "ok": true,
+    "tokens": 40,
+    "heartbeats": 757,
+    "Z": 100.0,
+    "score": 90.86
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 11,
+   "seconds": 50.2
+  }
+ ],
+ "free_applied": [],
+ "start": {
+  "ok": true,
+  "tokens": 40,
+  "heartbeats": 757,
+  "L": 87.22,
+  "H": 85.37,
+  "Z": 100.0,
+  "score": 90.86
+ },
+ "s0": "open OldExpressions in\ntheorem substOldPostSubset:\n  (Imperative.HasVarsPure.getVars (P:=Expression)\n    (substOld h2 (Lambda.LExpr.fvar m h1 ty) post)).Subset\n    (Imperative.HasVarsPure.getVars (P:=Expression) post ++ [h1]) := by\n  dsimp [Imperative.HasVarsPure.getVars]\n  intro\n  rw [List.mem_append]\n  fun_induction substOld\n  with_reducible\n    any_goals apply Or.inl\n    all_goals\n      simp only [Lambda.LExpr.LExpr.getVars, List.mem_append] at *\n      repeat' first | assumption | apply Or.inr | refine or_or_distrib_right.2 ∘ Or.imp ?_ ?_",
+ "exchange": [
+  0.106,
+  0.644
+ ],
+ "profile": {
+  "ok": true,
+  "total": 757,
+  "floor": null,
+  "reference": 5174,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "6-6",
+    "depth_indent": 2,
+    "text": "dsimp [Imperative.HasVarsPure.getVars]",
+    "heartbeats": null
+   },
+   {
+    "lines": "7-7",
+    "depth_indent": 2,
+    "text": "intro",
+    "heartbeats": null
+   },
+   {
+    "lines": "8-8",
+    "depth_indent": 2,
+    "text": "rw [List.mem_append]",
+    "heartbeats": null
+   },
+   {
+    "lines": "9-9",
+    "depth_indent": 2,
+    "text": "fun_induction substOld",
+    "heartbeats": null
+   },
+   {
+    "lines": "10-14",
+    "depth_indent": 2,
+    "text": "with_reducible any_goals apply Or.inl all_goals simp only [Lambda.LExpr.LExpr.getVars, List.mem_appe",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 40,
+  "heartbeats": 757,
+  "score": 90.86
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 112,
+   "score": null,
+   "error": "3102:72: `grind` failed\ncase grind\nh2 :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lambda"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 94,
+   "score": null,
+   "error": "3102:69: unsolved goals\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": null,
+   "score": null,
+   "error": "3102:73: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 10,
+   "label": "replace the closing tactic at line 10 (`repeat' first | assumption | apply Or.i…`) by `grind`",
+   "closer": "grind",
+   "ok": true,
+   "tokens": 27,
+   "heartbeats": 1143,
+   "score": 89.76,
+   "error": "",
+   "d_tokens": -13,
+   "d_hb": 386,
+   "d_score": -1.1
+  },
+  {
+   "kind": "closer",
+   "line": 10,
+   "label": "replace the closing tactic at line 10 (`repeat' first | assumption | apply Or.i…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 27,
+   "heartbeats": 2892,
+   "score": null,
+   "error": "3102:69: unsolved goals\ncase case6\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.ba"
+  },
+  {
+   "kind": "closer",
+   "line": 10,
+   "label": "replace the closing tactic at line 10 (`repeat' first | assumption | apply Or.i…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 27,
+   "heartbeats": null,
+   "score": null,
+   "error": "3111:7: unknown tactic"
+  },
+  {
+   "kind": "del-arg",
+   "line": 2,
+   "label": "delete `Imperative.HasVarsPure.getVars` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 37,
+   "heartbeats": 850,
+   "score": null,
+   "error": "3102:69: unsolved goals\ncase case5\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.ba"
+  },
+  {
+   "kind": "del-arg",
+   "line": 9,
+   "label": "delete `Lambda.LExpr.LExpr.getVars` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 38,
+   "heartbeats": 802,
+   "score": null,
+   "error": "3102:69: unsolved goals\ncase case5\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.ba"
+  },
+  {
+   "kind": "del-arg",
+   "line": 9,
+   "label": "delete `List.mem_append` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 38,
+   "heartbeats": 852,
+   "score": null,
+   "error": "3102:69: unsolved goals\ncase case6\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.ba"
+  },
+  {
+   "kind": "del-tac",
+   "line": 2,
+   "label": "delete the tactic `dsimp [Imperative.HasVarsPure.getVars]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 36,
+   "heartbeats": 942,
+   "score": null,
+   "error": "3102:69: unsolved goals\ncase case5\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.ba"
+  },
+  {
+   "kind": "del-tac",
+   "line": 9,
+   "label": "delete the tactic `simp only [Lambda.LExpr.LExpr.getVars, List.mem_a…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 31,
+   "heartbeats": 586,
+   "score": null,
+   "error": "3102:69: unsolved goals\ncase case5\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.ba"
+  },
+  {
+   "kind": "del-tac",
+   "line": 4,
+   "label": "delete the tactic `rw [List.mem_append]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 36,
+   "heartbeats": 130,
+   "score": null,
+   "error": "3107:4: Tactic failed on all goals:\n  apply Or.inl"
+  },
+  {
+   "kind": "del-tac",
+   "line": 10,
+   "label": "delete the tactic `repeat' first | assumption | apply Or.inr | refin…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 26,
+   "heartbeats": 666,
+   "score": null,
+   "error": "3102:69: unsolved goals\ncase case5\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.ba"
+  },
+  {
+   "kind": "del-tac",
+   "line": 3,
+   "label": "delete the tactic `intro`",
+   "closer": "",
+   "ok": false,
+   "tokens": 39,
+   "heartbeats": 82,
+   "score": null,
+   "error": "3104:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?m.21 ∈ ?m.22 ++ ?m.23\nin the target expression\n  (Lambda.LExpr.LExpr.getVars (subs"
+  },
+  {
+   "kind": "del-tac",
+   "line": 5,
+   "label": "delete the tactic `fun_induction substOld`",
+   "closer": "",
+   "ok": false,
+   "tokens": 38,
+   "heartbeats": 101,
+   "score": null,
+   "error": "3107:4: Tactic failed on all goals:\n  apply Or.inl"
+  }
+ ],
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 40 tokens, 757 heartbeats, score 90.86.\n- Exchange rate here: 1 token = 0.106 points, 100 heartbeats = 0.644 points.\n- Compile but do not pay alone: line 10 the closing tactic at line 10 (`repeat' first | assumption | apply Or.i…`) by `grind` (-13 tok, +386 hb).\n- Deletions that FAIL (needed as they stand): line 2 `Imperative.HasVarsPure.getVars` from the simp list; line 9 `Lambda.LExpr.LExpr.getVars` from the simp list; line 9 `List.mem_append` from the simp list; line 2 the tactic `dsimp [Imperative.HasVarsPure.getVars]`; line 9 the tactic `simp only [Lambda.LExpr.LExpr.getVars, List.mem_a…`; line 4 the tactic `rw [List.mem_append]`.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the closing tactic at line 10 (`repeat' first | assumption | apply Or.i…`) (simp_all/aesop).",
+ "status": "ok",
+ "best_score": 90.86,
+ "gain": 0.0,
+ "compiles_sweep": 15,
+ "seconds": 165.3,
+ "source": "best:51fa55ce0b32"
+}

@@ -1,0 +1,1123 @@
+{
+ "problem": "Core.InitsUpdatesComm",
+ "seed": {
+  "ok": true,
+  "tokens": 224,
+  "heartbeats": 4300,
+  "L": 0.0,
+  "H": 0.0,
+  "Z": 100.0,
+  "score": 33.33
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "no site compiles",
+   "before": {
+    "ok": true,
+    "tokens": 224,
+    "heartbeats": 4300,
+    "Z": 100.0,
+    "score": 33.33
+   },
+   "after": {
+    "ok": true,
+    "tokens": 224,
+    "heartbeats": 4300,
+    "Z": 100.0,
+    "score": 33.33
+   },
+   "gain": null,
+   "applied": null,
+   "compiles": 6,
+   "seconds": 6.8
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 224,
+    "heartbeats": 4300,
+    "Z": 100.0,
+    "score": 33.33
+   },
+   "after": {
+    "ok": true,
+    "tokens": 228,
+    "heartbeats": 3589,
+    "Z": 100.0,
+    "score": 38.25
+   },
+   "gain": 4.92,
+   "applied": {
+    "rw2rewrite": 2,
+    "exists2refine": 1
+   },
+   "compiles": 4,
+   "seconds": 9.7
+  },
+  {
+   "pass": "hb_polish",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 228,
+    "heartbeats": 3589,
+    "Z": 100.0,
+    "score": 38.25
+   },
+   "after": {
+    "ok": true,
+    "tokens": 260,
+    "heartbeats": 2686,
+    "Z": 100.0,
+    "score": 40.49
+   },
+   "gain": 2.24,
+   "applied": {
+    "simp_all only": 3,
+    "simp only": 1
+   },
+   "compiles": 13,
+   "seconds": 19.6
+  },
+  {
+   "pass": "lint_delete",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 260,
+    "heartbeats": 2686,
+    "Z": 100.0,
+    "score": 40.49
+   },
+   "after": {
+    "ok": true,
+    "tokens": 244,
+    "heartbeats": 2431,
+    "Z": 100.0,
+    "score": 44.85
+   },
+   "gain": 4.36,
+   "applied": {
+    "delsearch-arg": 8
+   },
+   "compiles": 24,
+   "seconds": 30.7
+  }
+ ],
+ "free_applied": [
+  "hb_rewrite",
+  "hb_polish",
+  "lint_delete"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 244,
+  "heartbeats": 2431,
+  "L": -8.93,
+  "H": 43.47,
+  "Z": 100.0,
+  "score": 44.85
+ },
+ "s0": "theorem InitsUpdatesComm\n  {P : PureExpr} {σ σ' σ'' : SemanticStore P}\n  {ks ks' : List P.Ident} {vs vs' : List P.Expr} :\n  UpdateStates σ ks vs σ' →\n  InitStates σ' ks' vs' σ'' →\n  ∃ σ₁,\n    σ₁ = (updatedStates σ ks' vs') ∧\n    InitStates σ ks' vs' σ₁ ∧\n    UpdateStates σ₁ ks vs σ'' := by\n  intros Hup Hinit\n  refine ⟨(updatedStates σ ks' vs'), ?_⟩\n  have Hk : (isDefined σ' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing σ''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some σ x v σ₀ xs vs σ₁ Hup Hups ih =>\n    refine ⟨rfl, ?_, ?_⟩\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (σ':=updatedStates σ₀ ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rewrite [← updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all only [List.length_cons, Nat.add_right_cancel_iff, Bool.false_eq_true]\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all only\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rewrite [List.unzip_zip] <;> simp_all only [List.length_cons, Nat.add_right_cancel_iff]\n          have Hnd := InitStatesNotDefined Hinit\n          simp only [isDefined, List.mem_cons] at *\n          apply Not.intro\n          intros Hin\n          specialize Hnd _ Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . simp_all",
+ "exchange": [
+  0.149,
+  0.775
+ ],
+ "profile": {
+  "ok": true,
+  "total": 2431,
+  "floor": null,
+  "reference": 4300,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "10-10",
+    "depth_indent": 2,
+    "text": "intros Hup Hinit",
+    "heartbeats": null
+   },
+   {
+    "lines": "11-11",
+    "depth_indent": 2,
+    "text": "refine ⟨(updatedStates σ ks' vs'), ?_⟩",
+    "heartbeats": null
+   },
+   {
+    "lines": "12-12",
+    "depth_indent": 2,
+    "text": "have Hk : (isDefined σ' ks) := UpdateStatesDefined Hup",
+    "heartbeats": null
+   },
+   {
+    "lines": "13-13",
+    "depth_indent": 2,
+    "text": "have Hlen1 := InitStatesLength Hinit",
+    "heartbeats": null
+   },
+   {
+    "lines": "14-14",
+    "depth_indent": 2,
+    "text": "have Hlen2 := UpdateStatesLength Hup",
+    "heartbeats": null
+   },
+   {
+    "lines": "15-15",
+    "depth_indent": 2,
+    "text": "induction Hup generalizing σ''",
+    "heartbeats": null
+   },
+   {
+    "lines": "16-23",
+    "depth_indent": 2,
+    "text": "case update_none => simp_all apply And.intro refine updatedStatesInit Hlen1 ?_ ?_ exact InitStatesNo",
+    "heartbeats": null
+   },
+   {
+    "lines": "24-55",
+    "depth_indent": 2,
+    "text": "case update_some σ x v σ₀ xs vs σ₁ Hup Hups ih => refine ⟨rfl, ?_, ?_⟩ . apply updatedStatesInit Hle",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 244,
+  "heartbeats": 2431,
+  "score": 44.85
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 113,
+   "score": null,
+   "error": "967:36: `grind` failed\ncase grind\nP : PureExpr\nσ σ' σ'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nh : UpdateStates σ ks vs σ'\nh_1 : InitState"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 146,
+   "score": null,
+   "error": "967:33: unsolved goals\nP : PureExpr\nσ σ' σ'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n⊢ UpdateStates σ ks vs σ' →\n    InitStates σ' ks' vs' "
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": null,
+   "score": null,
+   "error": "967:37: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 23,
+   "label": "replace the bullet at line 23 (`. apply UpdateStates.update_some (σ':=u…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 104,
+   "heartbeats": 503,
+   "score": null,
+   "error": "989:6: `grind` failed\ncase grind\nP : PureExpr\nσ_1 σ' : SemanticStore P\nks ks' : List P.Ident\nvs_1 vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Semantic"
+  },
+  {
+   "kind": "closer",
+   "line": 23,
+   "label": "replace the bullet at line 23 (`. apply UpdateStates.update_some (σ':=u…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 104,
+   "heartbeats": 920,
+   "score": null,
+   "error": "989:4: unsolved goals\ncase refine_2\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Semanti"
+  },
+  {
+   "kind": "closer",
+   "line": 23,
+   "label": "replace the bullet at line 23 (`. apply UpdateStates.update_some (σ':=u…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 104,
+   "heartbeats": null,
+   "score": null,
+   "error": "989:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 24,
+   "label": "replace the bullet at line 24 (`. simp [UpdateStateUpdated Hup, updated…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 135,
+   "heartbeats": 1279,
+   "score": null,
+   "error": "990:8: `grind` failed\ncase grind\nP : PureExpr\nσ_1 σ' : SemanticStore P\nks ks' : List P.Ident\nvs_1 vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Semantic"
+  },
+  {
+   "kind": "closer",
+   "line": 24,
+   "label": "replace the bullet at line 24 (`. simp [UpdateStateUpdated Hup, updated…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 135,
+   "heartbeats": 1683,
+   "score": null,
+   "error": "990:6: unsolved goals\ncase refine_2.a\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Seman"
+  },
+  {
+   "kind": "closer",
+   "line": 24,
+   "label": "replace the bullet at line 24 (`. simp [UpdateStateUpdated Hup, updated…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 135,
+   "heartbeats": null,
+   "score": null,
+   "error": "990:9: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 26,
+   "label": "replace the bullet at line 26 (`. have Hdef := UpdateStateDefined' Hup`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 184,
+   "heartbeats": 2032,
+   "score": null,
+   "error": "992:10: `grind` failed\ncase grind\nP : PureExpr\nσ_1 σ' : SemanticStore P\nks ks' : List P.Ident\nvs_1 vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Semanti"
+  },
+  {
+   "kind": "closer",
+   "line": 26,
+   "label": "replace the bullet at line 26 (`. have Hdef := UpdateStateDefined' Hup`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 184,
+   "heartbeats": 2438,
+   "score": null,
+   "error": "992:8: unsolved goals\ncase refine_2.a\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Seman"
+  },
+  {
+   "kind": "closer",
+   "line": 26,
+   "label": "replace the bullet at line 26 (`. have Hdef := UpdateStateDefined' Hup`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 184,
+   "heartbeats": null,
+   "score": null,
+   "error": "992:11: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 38,
+   "label": "replace the bullet at line 38 (`. rewrite [List.unzip_zip] <;> simp_all…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 210,
+   "heartbeats": 2101,
+   "score": null,
+   "error": "1004:10: `grind` failed\ncase grind\nP : PureExpr\nσ_1 σ' : SemanticStore P\nks ks' : List P.Ident\nvs_1 vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Semant"
+  },
+  {
+   "kind": "closer",
+   "line": 38,
+   "label": "replace the bullet at line 38 (`. rewrite [List.unzip_zip] <;> simp_all…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 210,
+   "heartbeats": 2627,
+   "score": null,
+   "error": "1004:8: unsolved goals\ncase refine_2.a\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Sema"
+  },
+  {
+   "kind": "closer",
+   "line": 38,
+   "label": "replace the bullet at line 38 (`. rewrite [List.unzip_zip] <;> simp_all…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 210,
+   "heartbeats": null,
+   "score": null,
+   "error": "1004:11: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 18,
+   "label": "replace the bullet at line 18 (`. apply updatedStatesInit Hlen1`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 228,
+   "heartbeats": 2714,
+   "score": null,
+   "error": "984:6: `grind` failed\ncase grind\nP : PureExpr\nσ_1 σ' : SemanticStore P\nks ks' : List P.Ident\nvs_1 vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Semantic"
+  },
+  {
+   "kind": "closer",
+   "line": 18,
+   "label": "replace the bullet at line 18 (`. apply updatedStatesInit Hlen1`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 228,
+   "heartbeats": 3119,
+   "score": null,
+   "error": "984:4: unsolved goals\ncase refine_1\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Semanti"
+  },
+  {
+   "kind": "closer",
+   "line": 18,
+   "label": "replace the bullet at line 18 (`. apply updatedStatesInit Hlen1`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 228,
+   "heartbeats": null,
+   "score": null,
+   "error": "984:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 34,
+   "label": "replace the bullet at line 34 (`. apply UpdateStateNotDefMonotone' ?_ H…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 234,
+   "heartbeats": 2611,
+   "score": null,
+   "error": "1000:12: `grind` failed\ncase grind\nP : PureExpr\nσ_1 σ' : SemanticStore P\nks ks' : List P.Ident\nvs_1 vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Semant"
+  },
+  {
+   "kind": "closer",
+   "line": 34,
+   "label": "replace the bullet at line 34 (`. apply UpdateStateNotDefMonotone' ?_ H…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 234,
+   "heartbeats": 2650,
+   "score": null,
+   "error": "1000:10: unsolved goals\ncase a\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : SemanticStor"
+  },
+  {
+   "kind": "closer",
+   "line": 34,
+   "label": "replace the bullet at line 34 (`. apply UpdateStateNotDefMonotone' ?_ H…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 234,
+   "heartbeats": null,
+   "score": null,
+   "error": "1000:13: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 45,
+   "label": "replace the bullet at line 45 (`. apply (ih Hinit ?_ ?_).2.2`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 226,
+   "heartbeats": 1959,
+   "score": null,
+   "error": "1011:8: `grind` failed\ncase grind\nP : PureExpr\nσ_1 σ' : SemanticStore P\nks ks' : List P.Ident\nvs_1 vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Semanti"
+  },
+  {
+   "kind": "closer",
+   "line": 45,
+   "label": "replace the bullet at line 45 (`. apply (ih Hinit ?_ ?_).2.2`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 226,
+   "heartbeats": 2385,
+   "score": null,
+   "error": "1011:6: unsolved goals\ncase refine_2.a\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Sema"
+  },
+  {
+   "kind": "closer",
+   "line": 45,
+   "label": "replace the bullet at line 45 (`. apply (ih Hinit ?_ ?_).2.2`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 226,
+   "heartbeats": null,
+   "score": null,
+   "error": "1011:9: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 46,
+   "label": "replace the bullet at line 46 (`. simp [isDefined] at * <;> simp_all`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 237,
+   "heartbeats": 2242,
+   "score": null,
+   "error": "1012:10: `grind` failed\ncase grind\nP : PureExpr\nσ_1 σ' : SemanticStore P\nks ks' : List P.Ident\nvs_1 vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Semant"
+  },
+  {
+   "kind": "closer",
+   "line": 46,
+   "label": "replace the bullet at line 46 (`. simp [isDefined] at * <;> simp_all`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 237,
+   "heartbeats": 2645,
+   "score": null,
+   "error": "1012:8: unsolved goals\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : SemanticStore P\nx : "
+  },
+  {
+   "kind": "closer",
+   "line": 46,
+   "label": "replace the bullet at line 46 (`. simp [isDefined] at * <;> simp_all`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 237,
+   "heartbeats": null,
+   "score": null,
+   "error": "1012:11: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 36,
+   "label": "replace the closing tactic at line 36 (`apply InitStatesNotDefined Hinit`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 2617,
+   "score": null,
+   "error": "1002:12: `grind` failed\ncase grind\nP : PureExpr\nσ_1 σ' : SemanticStore P\nks ks' : List P.Ident\nvs_1 vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Semant"
+  },
+  {
+   "kind": "closer",
+   "line": 36,
+   "label": "replace the closing tactic at line 36 (`apply InitStatesNotDefined Hinit`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 2657,
+   "score": null,
+   "error": "1000:10: unsolved goals\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : SemanticStore P\nx :"
+  },
+  {
+   "kind": "closer",
+   "line": 36,
+   "label": "replace the closing tactic at line 36 (`apply InitStatesNotDefined Hinit`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": null,
+   "score": null,
+   "error": "1002:13: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 37,
+   "label": "replace the bullet at line 37 (`. exact InitStatesNodup Hinit`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 2636,
+   "score": null,
+   "error": "1003:12: `grind` failed\ncase grind\nP : PureExpr\nσ_1 σ' : SemanticStore P\nks ks' : List P.Ident\nvs_1 vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Semant"
+  },
+  {
+   "kind": "closer",
+   "line": 37,
+   "label": "replace the bullet at line 37 (`. exact InitStatesNodup Hinit`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 2658,
+   "score": null,
+   "error": "1003:10: unsolved goals\ncase a\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : SemanticStor"
+  },
+  {
+   "kind": "closer",
+   "line": 37,
+   "label": "replace the bullet at line 37 (`. exact InitStatesNodup Hinit`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": null,
+   "score": null,
+   "error": "1003:13: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 22,
+   "label": "replace the closing tactic at line 22 (`exact InitStatesNodup Hinit`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 2744,
+   "score": null,
+   "error": "988:6: `grind` failed\ncase grind\nP : PureExpr\nσ_1 σ' : SemanticStore P\nks ks' : List P.Ident\nvs_1 vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Semantic"
+  },
+  {
+   "kind": "closer",
+   "line": 22,
+   "label": "replace the closing tactic at line 22 (`exact InitStatesNodup Hinit`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 3125,
+   "score": null,
+   "error": "984:4: unsolved goals\ncase refine_1.a\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Seman"
+  },
+  {
+   "kind": "closer",
+   "line": 22,
+   "label": "replace the closing tactic at line 22 (`exact InitStatesNodup Hinit`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": null,
+   "score": null,
+   "error": "988:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 33,
+   "label": "replace the bullet at line 33 (`. simp_all only`) by `grind`",
+   "closer": "grind",
+   "ok": true,
+   "tokens": 243,
+   "heartbeats": 2465,
+   "score": 44.73,
+   "error": "",
+   "d_tokens": -1,
+   "d_hb": 34,
+   "d_score": -0.12
+  },
+  {
+   "kind": "closer",
+   "line": 33,
+   "label": "replace the bullet at line 33 (`. simp_all only`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": true,
+   "tokens": 243,
+   "heartbeats": 2555,
+   "score": 44.03,
+   "error": "",
+   "d_tokens": -1,
+   "d_hb": 124,
+   "d_score": -0.82
+  },
+  {
+   "kind": "closer",
+   "line": 33,
+   "label": "replace the bullet at line 33 (`. simp_all only`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 243,
+   "heartbeats": null,
+   "score": null,
+   "error": "999:13: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 47,
+   "label": "replace the bullet at line 47 (`. simp_all`) by `grind`",
+   "closer": "grind",
+   "ok": true,
+   "tokens": 244,
+   "heartbeats": 2408,
+   "score": 45.02,
+   "error": "",
+   "d_tokens": 0,
+   "d_hb": -23,
+   "d_score": 0.17
+  },
+  {
+   "kind": "closer",
+   "line": 47,
+   "label": "replace the bullet at line 47 (`. simp_all`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 244,
+   "heartbeats": null,
+   "score": null,
+   "error": "1013:11: unknown tactic"
+  },
+  {
+   "kind": "del-arg",
+   "line": 24,
+   "label": "delete `updatedStates` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 989,
+   "score": null,
+   "error": "991:17: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  updatedStates' (updatedState ?m.139 ?m.140 ?m.141) ?m.142\nin the target expression\n"
+  },
+  {
+   "kind": "del-arg",
+   "line": 27,
+   "label": "delete `isDefined` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 1739,
+   "score": null,
+   "error": "994:10: Tactic `split` failed: Could not split an `if` or `match` expression in the type `isDefined σ [x]` of `Hdef`\n\nHint: Use `set_option trace.split.failure "
+  },
+  {
+   "kind": "del-arg",
+   "line": 27,
+   "label": "delete `Option.isSome` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 1780,
+   "score": null,
+   "error": "994:10: Tactic `split` failed: Could not split an `if` or `match` expression in the type `(σ x).isSome = true` of `Hdef`\n\nHint: Use `set_option trace.split.fail"
+  },
+  {
+   "kind": "del-arg",
+   "line": 28,
+   "label": "delete `List.length_cons` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 2171,
+   "score": null,
+   "error": "994:43: This simp argument is unused:\n  Nat.add_right_cancel_iff\n\nHint: Omit it from the simp argument list.\n  simp_all only [N̵a̵t̵.̵a̵d̵d̵_̵r̵i̵g̵h̵t̵_̵c̵a̵n̵"
+  },
+  {
+   "kind": "del-arg",
+   "line": 28,
+   "label": "delete `Nat.add_right_cancel_iff` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 242,
+   "heartbeats": 2181,
+   "score": 47.08,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -250,
+   "d_score": 2.23
+  },
+  {
+   "kind": "del-arg",
+   "line": 28,
+   "label": "delete `Bool.false_eq_true` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 2680,
+   "score": null,
+   "error": "992:8: unsolved goals\ncase h_2\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : SemanticStor"
+  },
+  {
+   "kind": "del-arg",
+   "line": 38,
+   "label": "delete `List.length_cons` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 2320,
+   "score": null,
+   "error": "1004:54: This simp argument is unused:\n  Nat.add_right_cancel_iff\n\nHint: Omit it from the simp argument list.\n  simp_all only ̵[̵N̵a̵t̵.̵a̵d̵d̵_̵r̵i̵g̵h̵t̵_̵c̵a"
+  },
+  {
+   "kind": "del-arg",
+   "line": 38,
+   "label": "delete `Nat.add_right_cancel_iff` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 242,
+   "heartbeats": 2322,
+   "score": 45.99,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -109,
+   "d_score": 1.14
+  },
+  {
+   "kind": "del-arg",
+   "line": 40,
+   "label": "delete `isDefined` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 2439,
+   "score": null,
+   "error": "1004:8: unsolved goals\ncase refine_2.a.h\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Se"
+  },
+  {
+   "kind": "del-arg",
+   "line": 40,
+   "label": "delete `List.mem_cons` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 242,
+   "heartbeats": 2430,
+   "score": 45.15,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -1,
+   "d_score": 0.3
+  },
+  {
+   "kind": "del-arg",
+   "line": 46,
+   "label": "delete `isDefined` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 241,
+   "heartbeats": 2345,
+   "score": null,
+   "error": "1012:8: unsolved goals\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : SemanticStore P\nx : "
+  },
+  {
+   "kind": "del-tac",
+   "line": 9,
+   "label": "delete the tactic `simp_all`",
+   "closer": "",
+   "ok": false,
+   "tokens": 243,
+   "heartbeats": 2370,
+   "score": null,
+   "error": "976:4: Type mismatch\n  updatedStatesInit Hlen1 ?m.71 ?m.72\nhas type\n  InitStates ?m.68 ks' vs' (updatedStates ?m.68 ks' vs')\nbut is expected to have type\n  upda"
+  },
+  {
+   "kind": "del-tac",
+   "line": 14,
+   "label": "delete the tactic `simp [InitStatesUpdated Hinit]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 239,
+   "heartbeats": 2429,
+   "score": null,
+   "error": "980:4: Tactic `constructor` failed: no applicable constructor found\n\ncase right\nP : PureExpr\nσ σ' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nH"
+  },
+  {
+   "kind": "del-tac",
+   "line": 27,
+   "label": "delete the tactic `simp [isDefined, Option.isSome] at Hdef`",
+   "closer": "",
+   "ok": false,
+   "tokens": 236,
+   "heartbeats": 1733,
+   "score": null,
+   "error": "993:10: Tactic `split` failed: Could not split an `if` or `match` expression in the type `isDefined σ [x]` of `Hdef`\n\nHint: Use `set_option trace.split.failure "
+  },
+  {
+   "kind": "del-tac",
+   "line": 40,
+   "label": "delete the tactic `simp only [isDefined, List.mem_cons] at *`",
+   "closer": "",
+   "ok": false,
+   "tokens": 235,
+   "heartbeats": 2412,
+   "score": null,
+   "error": "1004:8: unsolved goals\ncase refine_2.a.h\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Se"
+  },
+  {
+   "kind": "del-tac",
+   "line": 4,
+   "label": "delete the tactic `have Hk : (isDefined σ' ks) := UpdateStatesDefine…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 233,
+   "heartbeats": 1428,
+   "score": null,
+   "error": "1003:8: unsolved goals\ncase refine_2.a.h\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Se"
+  },
+  {
+   "kind": "del-tac",
+   "line": 5,
+   "label": "delete the tactic `have Hlen1 := InitStatesLength Hinit`",
+   "closer": "",
+   "ok": false,
+   "tokens": 239,
+   "heartbeats": 2501,
+   "score": null,
+   "error": "976:29: Unknown identifier `Hlen1`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 6,
+   "label": "delete the tactic `have Hlen2 := UpdateStatesLength Hup`",
+   "closer": "",
+   "ok": false,
+   "tokens": 239,
+   "heartbeats": 1004,
+   "score": null,
+   "error": "1010:15: Function expected at\n  ih Hinit ?m.285\nbut this term has type\n  updatedStates σ₀ ks' vs' = updatedStates σ₀ ks' vs' ∧\n    InitStates σ₀ ks' vs' (update"
+  },
+  {
+   "kind": "del-tac",
+   "line": 25,
+   "label": "delete the tactic `rewrite [← updatedStateComm']`",
+   "closer": "",
+   "ok": false,
+   "tokens": 239,
+   "heartbeats": 1638,
+   "score": null,
+   "error": "995:10: Tactic `apply` failed: could not unify the conclusion of `updatedStateUpdate`\n  UpdateState P ?m.203 ?m.204 ?m.205 (updatedState ?m.203 ?m.204 ?m.205)\nw"
+  },
+  {
+   "kind": "del-tac",
+   "line": 39,
+   "label": "delete the tactic `have Hnd := InitStatesNotDefined Hinit`",
+   "closer": "",
+   "ok": false,
+   "tokens": 239,
+   "heartbeats": 2230,
+   "score": null,
+   "error": "1008:21: Unknown identifier `Hnd`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 2,
+   "label": "delete the tactic `intros Hup Hinit`",
+   "closer": "",
+   "ok": false,
+   "tokens": 241,
+   "heartbeats": 32,
+   "score": null,
+   "error": "968:9: Invalid `⟨...⟩` notation: The expected type\n  UpdateStates σ ks vs σ' →\n    InitStates σ' ks' vs' σ'' → ∃ σ₁, σ₁ = updatedStates σ ks' vs' ∧ InitStates σ"
+  },
+  {
+   "kind": "del-tac",
+   "line": 3,
+   "label": "delete the tactic `refine ⟨(updatedStates σ ks' vs'), ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 233,
+   "heartbeats": 215,
+   "score": null,
+   "error": "982:12: Application type mismatch: The argument\n  rfl\nhas type\n  ?m.88 = ?m.88\nof sort `Prop` but is expected to have type\n  SemanticStore P\nof sort `Type` in t"
+  },
+  {
+   "kind": "del-tac",
+   "line": 7,
+   "label": "delete the tactic `induction Hup generalizing σ''`",
+   "closer": "",
+   "ok": false,
+   "tokens": 240,
+   "heartbeats": 67,
+   "score": null,
+   "error": "973:2: Case tag `update_none` not found.\n\nNote: There are no cases to select."
+  },
+  {
+   "kind": "del-tac",
+   "line": 10,
+   "label": "delete the tactic `apply And.intro`",
+   "closer": "",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 2414,
+   "score": null,
+   "error": "976:4: Type mismatch\n  updatedStatesInit Hlen1 ?m.69 ?m.70\nhas type\n  InitStates ?m.66 ks' vs' (updatedStates ?m.66 ks' vs')\nbut is expected to have type\n  Init"
+  },
+  {
+   "kind": "del-tac",
+   "line": 11,
+   "label": "delete the tactic `refine updatedStatesInit Hlen1 ?_ ?_`",
+   "closer": "",
+   "ok": false,
+   "tokens": 239,
+   "heartbeats": 2417,
+   "score": null,
+   "error": "977:4: Type mismatch\n  InitStatesNotDefined Hinit\nhas type\n  isNotDefined σ✝ ks'\nbut is expected to have type\n  InitStates σ✝ ks' vs' (updatedStates σ✝ ks' vs')"
+  },
+  {
+   "kind": "del-tac",
+   "line": 12,
+   "label": "delete the tactic `exact InitStatesNotDefined Hinit`",
+   "closer": "",
+   "ok": false,
+   "tokens": 241,
+   "heartbeats": 2419,
+   "score": null,
+   "error": "978:4: Type mismatch\n  InitStatesNodup Hinit\nhas type\n  ks'.Nodup\nbut is expected to have type\n  isNotDefined σ✝ ks'"
+  },
+  {
+   "kind": "del-tac",
+   "line": 13,
+   "label": "delete the tactic `exact InitStatesNodup Hinit`",
+   "closer": "",
+   "ok": false,
+   "tokens": 241,
+   "heartbeats": 2423,
+   "score": null,
+   "error": "979:4: `simp` made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 17,
+   "label": "delete the tactic `refine ⟨rfl, ?_, ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 236,
+   "heartbeats": 155,
+   "score": null,
+   "error": "983:6: Tactic `apply` failed: could not unify the conclusion of `updatedStatesInit Hlen1`\n  InitStates ?m.90 ks' vs' (updatedStates ?m.90 ks' vs')\nwith the goal"
+  },
+  {
+   "kind": "del-tac",
+   "line": 19,
+   "label": "delete the tactic `apply UpdateStateNotDefMonotone' ?_ Hup`",
+   "closer": "",
+   "ok": false,
+   "tokens": 240,
+   "heartbeats": 2425,
+   "score": null,
+   "error": "985:6: Tactic `apply` failed: could not unify the type of `UpdateStatesNotDefMonotone' ?m.109 Hups`\n  isNotDefined σ₀ ?m.106\nwith the goal\n  isNotDefined σ ks'\n"
+  },
+  {
+   "kind": "del-tac",
+   "line": 20,
+   "label": "delete the tactic `apply UpdateStatesNotDefMonotone' ?_ Hups`",
+   "closer": "",
+   "ok": false,
+   "tokens": 240,
+   "heartbeats": 2431,
+   "score": null,
+   "error": "986:33: Application type mismatch: The argument\n  Hinit\nhas type\n  InitStates σ₁ ks' vs' σ''\nbut is expected to have type\n  InitStates σ₀ ks' ?m.113 ?m.114\nin t"
+  },
+  {
+   "kind": "del-tac",
+   "line": 21,
+   "label": "delete the tactic `exact InitStatesNotDefined Hinit`",
+   "closer": "",
+   "ok": false,
+   "tokens": 241,
+   "heartbeats": 2429,
+   "score": null,
+   "error": "987:6: Type mismatch\n  InitStatesNodup Hinit\nhas type\n  ks'.Nodup\nbut is expected to have type\n  isNotDefined σ₁ ks'"
+  },
+  {
+   "kind": "del-tac",
+   "line": 28,
+   "label": "delete the tactic `split at Hdef <;> simp_all only [List.length_cons…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 231,
+   "heartbeats": 1837,
+   "score": null,
+   "error": "995:40: Application type mismatch: The argument\n  val\nhas type\n  SemanticStore P\nbut is expected to have type\n  P.Expr\nin the application\n  @updatedStateUpdate "
+  },
+  {
+   "kind": "del-tac",
+   "line": 30,
+   "label": "delete the tactic `apply updatedStateUpdate (v':=val)`",
+   "closer": "",
+   "ok": false,
+   "tokens": 237,
+   "heartbeats": 2366,
+   "score": null,
+   "error": "996:10: Tactic `apply` failed: could not unify the conclusion of `InitStatesSomeMonotone heq`\n  ?m.211 x = some val\nwith the goal\n  UpdateState P (updatedStates"
+  },
+  {
+   "kind": "del-tac",
+   "line": 31,
+   "label": "delete the tactic `apply InitStatesSomeMonotone heq`",
+   "closer": "",
+   "ok": false,
+   "tokens": 241,
+   "heartbeats": 2368,
+   "score": null,
+   "error": "997:10: Tactic `apply` failed: could not unify the conclusion of `@updatedStatesInit`\n  InitStates ?σ ?hs ?vs (updatedStates ?σ ?hs ?vs)\nwith the goal\n  updated"
+  },
+  {
+   "kind": "del-tac",
+   "line": 32,
+   "label": "delete the tactic `apply updatedStatesInit`",
+   "closer": "",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 2419,
+   "score": null,
+   "error": "998:12: simp_all made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 35,
+   "label": "delete the tactic `apply UpdateStatesNotDefMonotone' ?_ Hups`",
+   "closer": "",
+   "ok": false,
+   "tokens": 240,
+   "heartbeats": 2431,
+   "score": null,
+   "error": "1001:12: Tactic `apply` failed: could not unify the type of `InitStatesNotDefined Hinit`\n  isNotDefined σ₁ ks'\nwith the goal\n  isNotDefined σ₀ ks'\n\nP : PureExpr"
+  },
+  {
+   "kind": "del-tac",
+   "line": 41,
+   "label": "delete the tactic `apply Not.intro`",
+   "closer": "",
+   "ok": true,
+   "tokens": 242,
+   "heartbeats": 2428,
+   "score": 45.17,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -3,
+   "d_score": 0.32
+  },
+  {
+   "kind": "del-tac",
+   "line": 42,
+   "label": "delete the tactic `intros Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 242,
+   "heartbeats": 2502,
+   "score": null,
+   "error": "1008:27: Unknown identifier `Hin`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 43,
+   "label": "delete the tactic `specialize Hnd _ Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 240,
+   "heartbeats": 2504,
+   "score": null,
+   "error": "1004:8: unsolved goals\ncase refine_2.a.h\nP : PureExpr\nσ✝ σ' : SemanticStore P\nks ks' : List P.Ident\nvs✝ vs' : List P.Expr\nHlen1 : ks'.length = vs'.length\nσ : Se"
+  }
+ ],
+ "s1": {
+  "proof": "theorem InitsUpdatesComm\n  {P : PureExpr} {σ σ' σ'' : SemanticStore P}\n  {ks ks' : List P.Ident} {vs vs' : List P.Expr} :\n  UpdateStates σ ks vs σ' →\n  InitStates σ' ks' vs' σ'' →\n  ∃ σ₁,\n    σ₁ = (updatedStates σ ks' vs') ∧\n    InitStates σ ks' vs' σ₁ ∧\n    UpdateStates σ₁ ks vs σ'' := by\n  intros Hup Hinit\n  refine ⟨(updatedStates σ ks' vs'), ?_⟩\n  have Hk : (isDefined σ' ks) := UpdateStatesDefined Hup\n  have Hlen1 := InitStatesLength Hinit\n  have Hlen2 := UpdateStatesLength Hup\n  induction Hup generalizing σ''\n  case update_none =>\n    simp_all\n    apply And.intro\n    refine updatedStatesInit Hlen1 ?_ ?_\n    exact InitStatesNotDefined Hinit\n    exact InitStatesNodup Hinit\n    simp [InitStatesUpdated Hinit]\n    constructor\n  case update_some σ x v σ₀ xs vs σ₁ Hup Hups ih =>\n    refine ⟨rfl, ?_, ?_⟩\n    . apply updatedStatesInit Hlen1\n      apply UpdateStateNotDefMonotone' ?_ Hup\n      apply UpdateStatesNotDefMonotone' ?_ Hups\n      exact InitStatesNotDefined Hinit\n      exact InitStatesNodup Hinit\n    . apply UpdateStates.update_some (σ':=updatedStates σ₀ ks' vs')\n      . simp [UpdateStateUpdated Hup, updatedStates]\n        rewrite [← updatedStateComm']\n        . have Hdef := UpdateStateDefined' Hup\n          simp [isDefined, Option.isSome] at Hdef\n          split at Hdef <;> simp_all only [List.length_cons, Bool.false_eq_true]\n          next val heq =>\n          apply updatedStateUpdate (v':=val)\n          apply InitStatesSomeMonotone heq\n          apply updatedStatesInit\n          . simp_all only\n          . apply UpdateStateNotDefMonotone' ?_ Hup\n            apply UpdateStatesNotDefMonotone' ?_ Hups\n            apply InitStatesNotDefined Hinit\n          . exact InitStatesNodup Hinit\n        . rewrite [List.unzip_zip] <;> simp_all only [List.length_cons]\n          have Hnd := InitStatesNotDefined Hinit\n          simp only [isDefined] at *\n          intros Hin\n          specialize Hnd _ Hin\n          simp_all\n      . apply (ih Hinit ?_ ?_).2.2\n        . simp [isDefined] at * <;> simp_all\n        . grind",
+  "labels": [
+   "delete `Nat.add_right_cancel_iff` from the simp list",
+   "delete `Nat.add_right_cancel_iff` from the simp list",
+   "delete the tactic `apply Not.intro`",
+   "delete `List.mem_cons` from the simp list",
+   "replace the bullet at line 47 (`. simp_all`) by `grind`"
+  ],
+  "primary_score": 49.1,
+  "full": {
+   "ok": true,
+   "tokens": 236,
+   "heartbeats": 2036,
+   "L": -5.36,
+   "H": 52.65,
+   "Z": 100.0,
+   "score": 49.1
+  }
+ },
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 224 tokens, 4300 heartbeats, score 33.33. Free passes applied (hb_rewrite, hb_polish, lint_delete): start candidate 244 tokens, 2431 heartbeats, score 44.85.\n- Best combination of the paying single edits below: 236 tokens, 2036 heartbeats, score 49.1 (Z 100.0); your workspace starts from it.\n- Exchange rate here: 1 token = 0.149 points, 100 heartbeats = 0.775 points.\n- Single edits that PAY:\n  - line 28: delete `Nat.add_right_cancel_iff` from the simp list: -2 tokens, -250 hb, score +2.23\n  - line 38: delete `Nat.add_right_cancel_iff` from the simp list: -2 tokens, -109 hb, score +1.14\n  - line 41: delete the tactic `apply Not.intro`: -2 tokens, -3 hb, score +0.32\n  - line 40: delete `List.mem_cons` from the simp list: -2 tokens, -1 hb, score +0.30\n  - line 47: replace the bullet at line 47 (`. simp_all`) by `grind`: +0 tokens, -23 hb, score +0.17\n- Compile but do not pay alone: line 33 the bullet at line 33 (`. simp_all only`) by `grind` (-1 tok, +34 hb); line 33 the bullet at line 33 (`. simp_all only`) by `simp_all` (-1 tok, +124 hb).\n- Deletions that FAIL (needed as they stand): line 24 `updatedStates` from the simp list; line 27 `isDefined` from the simp list; line 27 `Option.isSome` from the simp list; line 28 `List.length_cons` from the simp list; line 28 `Bool.false_eq_true` from the simp list; line 38 `List.length_cons` from the simp list.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 23 (`. apply UpdateStates.update_some (σ':=u…`) (grind/simp_all/aesop); the bullet at line 24 (`. simp [UpdateStateUpdated Hup, updated…`) (grind/simp_all/aesop); the bullet at line 26 (`. have Hdef := UpdateStateDefined' Hup`) (grind/simp_all/aesop); the bullet at line 38 (`. rewrite [List.unzip_zip] <;> simp_all…`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 49.1,
+ "gain": 15.77,
+ "compiles_sweep": 80,
+ "seconds": 138.7,
+ "source": "seed"
+}

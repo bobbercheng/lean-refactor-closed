@@ -1,0 +1,1109 @@
+{
+ "problem": "CallElimCorrect.substOldPostSubset",
+ "seed": {
+  "ok": true,
+  "tokens": 313,
+  "heartbeats": 5173,
+  "L": 0.0,
+  "H": 0.02,
+  "Z": 100.0,
+  "score": 33.34
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "no sites",
+   "before": {
+    "ok": true,
+    "tokens": 313,
+    "heartbeats": 5173,
+    "Z": 100.0,
+    "score": 33.34
+   },
+   "after": {
+    "ok": true,
+    "tokens": 313,
+    "heartbeats": 5173,
+    "Z": 100.0,
+    "score": 33.34
+   },
+   "gain": null,
+   "applied": null,
+   "compiles": 1,
+   "seconds": 5.7
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "no sites",
+   "before": null,
+   "after": null,
+   "gain": null,
+   "applied": {},
+   "compiles": 0,
+   "seconds": 0.0
+  },
+  {
+   "pass": "hb_polish",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 313,
+    "heartbeats": 5174,
+    "Z": 100.0,
+    "score": 33.33
+   },
+   "after": {
+    "ok": true,
+    "tokens": 316,
+    "heartbeats": 4495,
+    "Z": 100.0,
+    "score": 37.39
+   },
+   "gain": 4.06,
+   "applied": {
+    "simp only": 1
+   },
+   "compiles": 13,
+   "seconds": 72.0
+  },
+  {
+   "pass": "lint_delete",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 316,
+    "heartbeats": 4495,
+    "Z": 100.0,
+    "score": 37.39
+   },
+   "after": {
+    "ok": true,
+    "tokens": 291,
+    "heartbeats": 4463,
+    "Z": 100.0,
+    "score": 40.26
+   },
+   "gain": 2.87,
+   "applied": {
+    "delsearch-arg": 3,
+    "delsearch-tac": 6
+   },
+   "compiles": 24,
+   "seconds": 126.5
+  }
+ ],
+ "free_applied": [
+  "hb_polish",
+  "lint_delete"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 291,
+  "heartbeats": 4463,
+  "L": 7.03,
+  "H": 13.74,
+  "Z": 100.0,
+  "score": 40.26
+ },
+ "s0": "open OldExpressions in\ntheorem substOldPostSubset:\n  (Imperative.HasVarsPure.getVars (P:=Expression)\n    (substOld h2 (Lambda.LExpr.fvar m h1 ty) post)).Subset\n    (Imperative.HasVarsPure.getVars (P:=Expression) post ++ [h1]) := by\n  induction post <;> simp only [substOld]\n  case fvar =>\n    intros x Hin\n    rename_i m name ty2\n\n    simp_all\n  case op =>\n    intros x Hin\n    rename_i m name ty2\n    simp_all\n  case const =>\n    intros x Hin\n    rename_i m name\n    simp at m\n    simp_all\n  case bvar =>\n    intros x Hin\n    rename_i m d\n    simp at m\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case app ih1 ih2 =>\n    split\n    . split\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n      . simp at *\n        intros x Hin\n        simp_all\n    . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply ih1 <;> assumption\n        intros x Hin\n        simp_all\n        cases Hin <;> simp_all\n      . apply List.Subset.trans\n        apply ih2 <;> assumption\n        intros x Hin\n        simp_all\n  case quant trih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n      rename_i m1 k1 ty1 trigger1 e1\n      have assoc := List.append_assoc (Lambda.LExpr.LExpr.getVars trigger1) (Lambda.LExpr.LExpr.getVars e1) [h1]\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all",
+ "exchange": [
+  0.106,
+  0.644
+ ],
+ "profile": {
+  "ok": true,
+  "total": 4463,
+  "floor": null,
+  "reference": 5174,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "6-6",
+    "depth_indent": 2,
+    "text": "induction post <;> simp only [substOld]",
+    "heartbeats": null
+   },
+   {
+    "lines": "7-11",
+    "depth_indent": 2,
+    "text": "case fvar => intros x Hin rename_i m name ty2 simp_all",
+    "heartbeats": null
+   },
+   {
+    "lines": "12-15",
+    "depth_indent": 2,
+    "text": "case op => intros x Hin rename_i m name ty2 simp_all",
+    "heartbeats": null
+   },
+   {
+    "lines": "16-20",
+    "depth_indent": 2,
+    "text": "case const => intros x Hin rename_i m name simp at m simp_all",
+    "heartbeats": null
+   },
+   {
+    "lines": "21-25",
+    "depth_indent": 2,
+    "text": "case bvar => intros x Hin rename_i m d simp at m simp_all",
+    "heartbeats": null
+   },
+   {
+    "lines": "26-27",
+    "depth_indent": 2,
+    "text": "case abs ih => exact ih",
+    "heartbeats": null
+   },
+   {
+    "lines": "28-45",
+    "depth_indent": 2,
+    "text": "case ite cih tih eih => simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at * apply",
+    "heartbeats": null
+   },
+   {
+    "lines": "46-65",
+    "depth_indent": 2,
+    "text": "case app ih1 ih2 => split . split . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 291,
+  "heartbeats": 4463,
+  "score": 40.26
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 112,
+   "score": null,
+   "error": "3102:72: `grind` failed\ncase grind\nh2 :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lambda"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 94,
+   "score": null,
+   "error": "3102:69: unsolved goals\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": null,
+   "score": null,
+   "error": "3102:73: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 51,
+   "label": "replace the bullet at line 51 (`. simp [Imperative.HasVarsPure.getVars,…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 256,
+   "heartbeats": 3396,
+   "score": null,
+   "error": "3152:6: `grind` failed\ncase grind\nh2 :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lambda."
+  },
+  {
+   "kind": "closer",
+   "line": 51,
+   "label": "replace the bullet at line 51 (`. simp [Imperative.HasVarsPure.getVars,…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 256,
+   "heartbeats": 3843,
+   "score": null,
+   "error": "3152:4: unsolved goals\ncase h_2\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base."
+  },
+  {
+   "kind": "closer",
+   "line": 51,
+   "label": "replace the bullet at line 51 (`. simp [Imperative.HasVarsPure.getVars,…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 256,
+   "heartbeats": null,
+   "score": null,
+   "error": "3152:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 65,
+   "label": "replace the bullet at line 65 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 257,
+   "heartbeats": 4225,
+   "score": null,
+   "error": "3166:6: `grind` failed\ncase grind\nh2 :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lambda."
+  },
+  {
+   "kind": "closer",
+   "line": 65,
+   "label": "replace the bullet at line 65 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 257,
+   "heartbeats": 4192,
+   "score": null,
+   "error": "3166:6: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 65,
+   "label": "replace the bullet at line 65 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 257,
+   "heartbeats": null,
+   "score": null,
+   "error": "3166:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 44,
+   "label": "replace the bullet at line 44 (`. split`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 270,
+   "heartbeats": 4185,
+   "score": null,
+   "error": "3145:6: `grind` failed\ncase grind.1\nh2 :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lambd"
+  },
+  {
+   "kind": "closer",
+   "line": 44,
+   "label": "replace the bullet at line 44 (`. split`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 270,
+   "heartbeats": 4254,
+   "score": null,
+   "error": "3145:4: unsolved goals\ncase h_1\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base."
+  },
+  {
+   "kind": "closer",
+   "line": 44,
+   "label": "replace the bullet at line 44 (`. split`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 270,
+   "heartbeats": null,
+   "score": null,
+   "error": "3145:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 53,
+   "label": "replace the bullet at line 53 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 278,
+   "heartbeats": 4035,
+   "score": null,
+   "error": "3154:8: `grind` failed\ncase grind\nh2 :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lambda."
+  },
+  {
+   "kind": "closer",
+   "line": 53,
+   "label": "replace the bullet at line 53 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 278,
+   "heartbeats": 4024,
+   "score": null,
+   "error": "3154:8: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 53,
+   "label": "replace the bullet at line 53 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 278,
+   "heartbeats": null,
+   "score": null,
+   "error": "3154:9: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 27,
+   "label": "replace the bullet at line 27 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 278,
+   "heartbeats": 4280,
+   "score": null,
+   "error": "3128:6: `grind` failed\ncase grind\nh2 :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lambda."
+  },
+  {
+   "kind": "closer",
+   "line": 27,
+   "label": "replace the bullet at line 27 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 278,
+   "heartbeats": 4180,
+   "score": null,
+   "error": "3128:6: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 27,
+   "label": "replace the bullet at line 27 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 278,
+   "heartbeats": null,
+   "score": null,
+   "error": "3128:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 33,
+   "label": "replace the bullet at line 33 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 278,
+   "heartbeats": 4280,
+   "score": null,
+   "error": "3134:6: `grind` failed\ncase grind\nh2 :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lambda."
+  },
+  {
+   "kind": "closer",
+   "line": 33,
+   "label": "replace the bullet at line 33 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 278,
+   "heartbeats": 4181,
+   "score": null,
+   "error": "3134:6: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 33,
+   "label": "replace the bullet at line 33 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 278,
+   "heartbeats": null,
+   "score": null,
+   "error": "3134:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 79,
+   "label": "replace the bullet at line 79 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 278,
+   "heartbeats": 4288,
+   "score": null,
+   "error": "3180:6: `grind` failed\ncase grind\nh2 :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lambda."
+  },
+  {
+   "kind": "closer",
+   "line": 79,
+   "label": "replace the bullet at line 79 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 278,
+   "heartbeats": 4257,
+   "score": null,
+   "error": "3180:6: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 79,
+   "label": "replace the bullet at line 79 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 278,
+   "heartbeats": null,
+   "score": null,
+   "error": "3180:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 45,
+   "label": "replace the bullet at line 45 (`. simp [Imperative.HasVarsPure.getVars,…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 280,
+   "heartbeats": 4384,
+   "score": null,
+   "error": "3146:8: `grind` failed\ncase grind\nh2 :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lambda."
+  },
+  {
+   "kind": "closer",
+   "line": 45,
+   "label": "replace the bullet at line 45 (`. simp [Imperative.HasVarsPure.getVars,…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 280,
+   "heartbeats": 4473,
+   "score": null,
+   "error": "3146:6: unsolved goals\ncase h_1.isTrue\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy "
+  },
+  {
+   "kind": "closer",
+   "line": 45,
+   "label": "replace the bullet at line 45 (`. simp [Imperative.HasVarsPure.getVars,…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 280,
+   "heartbeats": null,
+   "score": null,
+   "error": "3146:9: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 58,
+   "label": "replace the bullet at line 58 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 282,
+   "heartbeats": 4411,
+   "score": null,
+   "error": "3159:8: `grind` failed\ncase grind\nh2 :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lambda."
+  },
+  {
+   "kind": "closer",
+   "line": 58,
+   "label": "replace the bullet at line 58 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 282,
+   "heartbeats": 4401,
+   "score": null,
+   "error": "3159:8: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 58,
+   "label": "replace the bullet at line 58 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 282,
+   "heartbeats": null,
+   "score": null,
+   "error": "3159:9: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 38,
+   "label": "replace the bullet at line 38 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 282,
+   "heartbeats": 4491,
+   "score": null,
+   "error": "3139:6: `grind` failed\ncase grind\nh2 :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lambda."
+  },
+  {
+   "kind": "closer",
+   "line": 38,
+   "label": "replace the bullet at line 38 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 282,
+   "heartbeats": 4392,
+   "score": null,
+   "error": "3139:6: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 38,
+   "label": "replace the bullet at line 38 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 282,
+   "heartbeats": null,
+   "score": null,
+   "error": "3139:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 72,
+   "label": "replace the bullet at line 72 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 282,
+   "heartbeats": 4433,
+   "score": null,
+   "error": "3173:6: `grind` failed\ncase grind\nh2 :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lambda."
+  },
+  {
+   "kind": "closer",
+   "line": 72,
+   "label": "replace the bullet at line 72 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 282,
+   "heartbeats": 4400,
+   "score": null,
+   "error": "3173:6: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 72,
+   "label": "replace the bullet at line 72 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 282,
+   "heartbeats": null,
+   "score": null,
+   "error": "3173:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 84,
+   "label": "replace the bullet at line 84 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 282,
+   "heartbeats": 4432,
+   "score": null,
+   "error": "3185:6: `grind` failed\ncase grind\nh2 :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lambda."
+  },
+  {
+   "kind": "closer",
+   "line": 84,
+   "label": "replace the bullet at line 84 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 282,
+   "heartbeats": 4400,
+   "score": null,
+   "error": "3185:6: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 84,
+   "label": "replace the bullet at line 84 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 282,
+   "heartbeats": null,
+   "score": null,
+   "error": "3185:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 48,
+   "label": "replace the bullet at line 48 (`. simp at *`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 285,
+   "heartbeats": 4415,
+   "score": null,
+   "error": "3149:8: `grind` failed\ncase grind\nh2 :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lambda."
+  },
+  {
+   "kind": "del-arg",
+   "line": 2,
+   "label": "delete `substOld` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 288,
+   "heartbeats": 1783,
+   "score": null,
+   "error": "3104:12: unsolved goals\nh2 : Expression.Ident\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadat"
+  },
+  {
+   "kind": "del-arg",
+   "line": 25,
+   "label": "delete `Imperative.HasVarsPure.getVars` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 289,
+   "heartbeats": 3651,
+   "score": null,
+   "error": "3129:6: Tactic `apply` failed: could not unify the type of `cih`\n  (Imperative.HasVarsPure.getVars (substOld h2 (Lambda.LExpr.fvar m h1 ty) c✝)).Subset\n    (Imp"
+  },
+  {
+   "kind": "del-arg",
+   "line": 25,
+   "label": "delete `Lambda.LExpr.LExpr.getVars` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 289,
+   "heartbeats": 3643,
+   "score": null,
+   "error": "3129:6: Tactic `apply` failed: could not unify the type of `cih`\n  (Lambda.LExpr.LExpr.getVars (substOld h2 (Lambda.LExpr.fvar m h1 ty) c✝)).Subset\n    (Lambda."
+  },
+  {
+   "kind": "del-arg",
+   "line": 45,
+   "label": "delete `Imperative.HasVarsPure.getVars` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 289,
+   "heartbeats": 4491,
+   "score": null,
+   "error": "3146:6: unsolved goals\ncase h_1.isTrue\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy "
+  },
+  {
+   "kind": "del-arg",
+   "line": 45,
+   "label": "delete `Lambda.LExpr.LExpr.getVars` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 289,
+   "heartbeats": 4475,
+   "score": null,
+   "error": "3146:6: unsolved goals\ncase h_1.isTrue\nh2 : Expression.Ident\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy "
+  },
+  {
+   "kind": "del-arg",
+   "line": 51,
+   "label": "delete `Imperative.HasVarsPure.getVars` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 289,
+   "heartbeats": 4527,
+   "score": null,
+   "error": "3158:22: simp_all made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 51,
+   "label": "delete `Lambda.LExpr.LExpr.getVars` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 289,
+   "heartbeats": 4494,
+   "score": null,
+   "error": "3158:22: simp_all made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 63,
+   "label": "delete `Imperative.HasVarsPure.getVars` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 289,
+   "heartbeats": 4461,
+   "score": null,
+   "error": "3172:20: simp_all made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 63,
+   "label": "delete `Lambda.LExpr.LExpr.getVars` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 289,
+   "heartbeats": 4417,
+   "score": null,
+   "error": "3172:20: simp_all made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 77,
+   "label": "delete `Imperative.HasVarsPure.getVars` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 289,
+   "heartbeats": 4462,
+   "score": null,
+   "error": "3184:20: simp_all made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 77,
+   "label": "delete `Lambda.LExpr.LExpr.getVars` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 289,
+   "heartbeats": 4418,
+   "score": null,
+   "error": "3184:20: simp_all made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 15,
+   "label": "delete the tactic `simp at m`",
+   "closer": "",
+   "ok": true,
+   "tokens": 288,
+   "heartbeats": 4462,
+   "score": 40.58,
+   "error": "",
+   "d_tokens": -3,
+   "d_hb": -1,
+   "d_score": 0.32
+  },
+  {
+   "kind": "del-tac",
+   "line": 20,
+   "label": "delete the tactic `simp at m`",
+   "closer": "",
+   "ok": true,
+   "tokens": 288,
+   "heartbeats": 4462,
+   "score": 40.58,
+   "error": "",
+   "d_tokens": -3,
+   "d_hb": -1,
+   "d_score": 0.32
+  },
+  {
+   "kind": "del-tac",
+   "line": 25,
+   "label": "delete the tactic `simp [Imperative.HasVarsPure.getVars, Lambda.LExp…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 283,
+   "heartbeats": 3581,
+   "score": null,
+   "error": "3128:6: Tactic `apply` failed: could not unify the type of `cih`\n  (Imperative.HasVarsPure.getVars (substOld h2 (Lambda.LExpr.fvar m h1 ty) c✝)).Subset\n    (Imp"
+  },
+  {
+   "kind": "del-tac",
+   "line": 30,
+   "label": "delete the tactic `simp_all`",
+   "closer": "",
+   "ok": false,
+   "tokens": 290,
+   "heartbeats": 4149,
+   "score": null,
+   "error": "3131:6: Dependent elimination failed: Failed to solve equation\n  (Lambda.LExpr.LExpr.getVars c✝).append [h1] = x :: as✝"
+  },
+  {
+   "kind": "del-tac",
+   "line": 36,
+   "label": "delete the tactic `simp_all`",
+   "closer": "",
+   "ok": false,
+   "tokens": 290,
+   "heartbeats": 4150,
+   "score": null,
+   "error": "3137:6: Dependent elimination failed: Failed to solve equation\n  (Lambda.LExpr.LExpr.getVars t✝).append [h1] = x :: as✝"
+  },
+  {
+   "kind": "del-tac",
+   "line": 56,
+   "label": "delete the tactic `simp_all`",
+   "closer": "",
+   "ok": false,
+   "tokens": 290,
+   "heartbeats": 3934,
+   "score": null,
+   "error": "3157:8: Dependent elimination failed: Failed to solve equation\n  (Lambda.LExpr.LExpr.getVars fn✝).append [h1] = x :: as✝"
+  },
+  {
+   "kind": "del-tac",
+   "line": 63,
+   "label": "delete the tactic `simp [Imperative.HasVarsPure.getVars, Lambda.LExp…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 283,
+   "heartbeats": 4466,
+   "score": null,
+   "error": "3171:20: simp_all made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 70,
+   "label": "delete the tactic `simp_all`",
+   "closer": "",
+   "ok": false,
+   "tokens": 290,
+   "heartbeats": 4192,
+   "score": null,
+   "error": "3171:6: Dependent elimination failed: Failed to solve equation\n  (Lambda.LExpr.LExpr.getVars trigger1).append [h1] = x :: as✝"
+  },
+  {
+   "kind": "del-tac",
+   "line": 77,
+   "label": "delete the tactic `simp [Imperative.HasVarsPure.getVars, Lambda.LExp…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 283,
+   "heartbeats": 4464,
+   "score": null,
+   "error": "3183:20: simp_all made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 82,
+   "label": "delete the tactic `simp_all`",
+   "closer": "",
+   "ok": false,
+   "tokens": 290,
+   "heartbeats": 4243,
+   "score": null,
+   "error": "3183:6: Dependent elimination failed: Failed to solve equation\n  (Lambda.LExpr.LExpr.getVars e1✝).append [h1] = x :: as✝"
+  },
+  {
+   "kind": "del-tac",
+   "line": 5,
+   "label": "delete the tactic `rename_i m name ty2`",
+   "closer": "",
+   "ok": true,
+   "tokens": 287,
+   "heartbeats": 4463,
+   "score": 40.68,
+   "error": "",
+   "d_tokens": -4,
+   "d_hb": 0,
+   "d_score": 0.42
+  },
+  {
+   "kind": "del-tac",
+   "line": 10,
+   "label": "delete the tactic `rename_i m name ty2`",
+   "closer": "",
+   "ok": true,
+   "tokens": 287,
+   "heartbeats": 4463,
+   "score": 40.68,
+   "error": "",
+   "d_tokens": -4,
+   "d_hb": 0,
+   "d_score": 0.42
+  },
+  {
+   "kind": "del-tac",
+   "line": 14,
+   "label": "delete the tactic `rename_i m name`",
+   "closer": "",
+   "ok": true,
+   "tokens": 288,
+   "heartbeats": 4463,
+   "score": 40.58,
+   "error": "",
+   "d_tokens": -3,
+   "d_hb": 0,
+   "d_score": 0.32
+  },
+  {
+   "kind": "del-tac",
+   "line": 19,
+   "label": "delete the tactic `rename_i m d`",
+   "closer": "",
+   "ok": true,
+   "tokens": 288,
+   "heartbeats": 4463,
+   "score": 40.58,
+   "error": "",
+   "d_tokens": -3,
+   "d_hb": 0,
+   "d_score": 0.32
+  },
+  {
+   "kind": "del-tac",
+   "line": 68,
+   "label": "delete the tactic `rename_i m1 k1 ty1 trigger1 e1`",
+   "closer": "",
+   "ok": false,
+   "tokens": 285,
+   "heartbeats": 4485,
+   "score": null,
+   "error": "3169:66: Unknown identifier `trigger1`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 69,
+   "label": "delete the tactic `have assoc := List.append_assoc (Lambda.LExpr.LEx…`",
+   "closer": "",
+   "ok": true,
+   "tokens": 276,
+   "heartbeats": 4400,
+   "score": 42.26,
+   "error": "",
+   "d_tokens": -15,
+   "d_hb": -63,
+   "d_score": 2.0
+  },
+  {
+   "kind": "del-tac",
+   "line": 2,
+   "label": "delete the tactic `induction post <;> simp only [substOld]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 283,
+   "heartbeats": 65,
+   "score": null,
+   "error": "3103:2: Case tag `fvar` not found.\n\nNote: There are no cases to select."
+  },
+  {
+   "kind": "del-tac",
+   "line": 4,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 288,
+   "heartbeats": 4435,
+   "score": null,
+   "error": "3107:4: simp_all made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 9,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 288,
+   "heartbeats": 4433,
+   "score": null,
+   "error": "3111:4: simp_all made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 13,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 288,
+   "heartbeats": 4433,
+   "score": null,
+   "error": "3116:4: simp_all made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 18,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 288,
+   "heartbeats": 4433,
+   "score": null,
+   "error": "3121:4: simp_all made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 26,
+   "label": "delete the tactic `apply List.Subset.app`",
+   "closer": "",
+   "ok": false,
+   "tokens": 289,
+   "heartbeats": 3650,
+   "score": null,
+   "error": "3128:6: Tactic `apply` failed: could not unify the type of `cih`\n  (Lambda.LExpr.LExpr.getVars (substOld h2 (Lambda.LExpr.fvar m h1 ty) c✝)).Subset\n    (Lambda."
+  },
+  {
+   "kind": "del-tac",
+   "line": 28,
+   "label": "delete the tactic `apply cih <;> assumption`",
+   "closer": "",
+   "ok": false,
+   "tokens": 287,
+   "heartbeats": 4176,
+   "score": null,
+   "error": "3130:6: simp_all made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 29,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 288,
+   "heartbeats": 4185,
+   "score": null,
+   "error": "3130:6: simp_all made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 32,
+   "label": "delete the tactic `apply List.Subset.app`",
+   "closer": "",
+   "ok": false,
+   "tokens": 289,
+   "heartbeats": 3989,
+   "score": null,
+   "error": "3134:6: Tactic `apply` failed: could not unify the type of `tih`\n  (Lambda.LExpr.LExpr.getVars (substOld h2 (Lambda.LExpr.fvar m h1 ty) t✝)).Subset\n    (Lambda."
+  },
+  {
+   "kind": "del-tac",
+   "line": 34,
+   "label": "delete the tactic `apply tih <;> assumption`",
+   "closer": "",
+   "ok": false,
+   "tokens": 287,
+   "heartbeats": 4178,
+   "score": null,
+   "error": "3136:6: simp_all made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 35,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 288,
+   "heartbeats": 4186,
+   "score": null,
+   "error": "3136:6: simp_all made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 39,
+   "label": "delete the tactic `apply eih <;> assumption`",
+   "closer": "",
+   "ok": false,
+   "tokens": 287,
+   "heartbeats": 4387,
+   "score": null,
+   "error": "3141:6: simp_all made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 40,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 288,
+   "heartbeats": 4396,
+   "score": null,
+   "error": "3141:6: simp_all made no progress"
+  }
+ ],
+ "s1": {
+  "proof": "open OldExpressions in\ntheorem substOldPostSubset:\n  (Imperative.HasVarsPure.getVars (P:=Expression)\n    (substOld h2 (Lambda.LExpr.fvar m h1 ty) post)).Subset\n    (Imperative.HasVarsPure.getVars (P:=Expression) post ++ [h1]) := by\n  induction post <;> simp only [substOld]\n  case fvar =>\n    intros x Hin\n\n    simp_all\n  case op =>\n    intros x Hin\n    simp_all\n  case const =>\n    intros x Hin\n    simp_all\n  case bvar =>\n    intros x Hin\n    simp_all\n  case abs ih =>\n    exact ih\n  case ite cih tih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case app ih1 ih2 =>\n    split\n    . split\n      . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n        intros x Hin\n        simp_all\n      . simp at *\n        intros x Hin\n        simp_all\n    . simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply ih1 <;> assumption\n        intros x Hin\n        simp_all\n        cases Hin <;> simp_all\n      . apply List.Subset.trans\n        apply ih2 <;> assumption\n        intros x Hin\n        simp_all\n  case quant trih eih =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n      rename_i m1 k1 ty1 trigger1 e1\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n      cases Hin <;> simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all",
+  "labels": [
+   "delete the tactic `have assoc := List.append_assoc (Lambda.LExpr.LEx…`",
+   "delete the tactic `rename_i m name ty2`",
+   "delete the tactic `rename_i m name ty2`",
+   "delete the tactic `simp at m`",
+   "delete the tactic `simp at m`",
+   "delete the tactic `rename_i m name`",
+   "delete the tactic `rename_i m d`"
+  ],
+  "primary_score": 44.4,
+  "full": {
+   "ok": true,
+   "tokens": 256,
+   "heartbeats": 4397,
+   "L": 18.21,
+   "H": 15.02,
+   "Z": 100.0,
+   "score": 44.41
+  }
+ },
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 313 tokens, 5173 heartbeats, score 33.34. Free passes applied (hb_polish, lint_delete): start candidate 291 tokens, 4463 heartbeats, score 40.26.\n- Best combination of the paying single edits below: 256 tokens, 4397 heartbeats, score 44.41 (Z 100.0); your workspace starts from it.\n- Exchange rate here: 1 token = 0.106 points, 100 heartbeats = 0.644 points.\n- Single edits that PAY:\n  - line 69: delete the tactic `have assoc := List.append_assoc (Lambda.LExpr.LEx…`: -15 tokens, -63 hb, score +2.00\n  - line 5: delete the tactic `rename_i m name ty2`: -4 tokens, +0 hb, score +0.42\n  - line 10: delete the tactic `rename_i m name ty2`: -4 tokens, +0 hb, score +0.42\n  - line 15: delete the tactic `simp at m`: -3 tokens, -1 hb, score +0.32\n  - line 20: delete the tactic `simp at m`: -3 tokens, -1 hb, score +0.32\n  - line 14: delete the tactic `rename_i m name`: -3 tokens, +0 hb, score +0.32\n- Deletions that FAIL (needed as they stand): line 2 `substOld` from the simp list; line 25 `Imperative.HasVarsPure.getVars` from the simp list; line 25 `Lambda.LExpr.LExpr.getVars` from the simp list; line 45 `Imperative.HasVarsPure.getVars` from the simp list; line 45 `Lambda.LExpr.LExpr.getVars` from the simp list; line 51 `Imperative.HasVarsPure.getVars` from the simp list.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 51 (`. simp [Imperative.HasVarsPure.getVars,…`) (grind/simp_all/aesop); the bullet at line 65 (`. apply List.Subset.trans`) (grind/simp_all/aesop); the bullet at line 44 (`. split`) (grind/simp_all/aesop); the bullet at line 53 (`. apply List.Subset.trans`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 44.41,
+ "gain": 11.07,
+ "compiles_sweep": 80,
+ "seconds": 570.1,
+ "source": "seed"
+}

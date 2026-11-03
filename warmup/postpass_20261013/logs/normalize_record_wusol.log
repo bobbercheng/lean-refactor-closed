@@ -1,0 +1,8 @@
+Cslib.CCS.bisimilarity_congr_choice          ok=True tok 70 hb 397 Z None score 87.03 -> 87.29  RECORDED
+Cslib.LambdaCalculus.LocallyNameless.Fsub.Ty ok=True tok 125 hb 6944 Z None score 85.76 -> 85.92  RECORDED
+Electromagnetism.ElectromagneticPotential.ti ok=True tok 341 hb 6769 Z None score 83.24 -> 83.39  RECORDED
+FieldSpecification.WickAlgebra.ι_timeOrderF_ ok=True tok 250 hb 7967 Z None score 86.74 -> 86.85  RECORDED
+interleaved_affine_gaps_imply_tensor_gaps    ok=True tok 97 hb 1291 Z None score 92.99 -> 93.02  RECORDED
+putnam_1964_a4                               ok=True tok 134 hb 2073 Z None score 96.82 -> 96.86  RECORDED
+putnam_1995_a3                               ok=True tok 173 hb 1131 Z None score 95.88 -> 95.94  RECORDED
+wu-sol normalize: summed gain +0.81 = +0.054 on the 15-row line

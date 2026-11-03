@@ -1,0 +1,16 @@
+CallElimCorrect.substOldPostSubset                 ok=True score=90.86 Z=100.0
+CallElimCorrect.extractedOldExprInVars             ok=True score=94.64 Z=100.0
+Core.InitsUpdatesComm                              ok=True score=87.38 Z=100.0
+fundamental_theorem_of_variational_calculus'       ok=True score=91.54 Z=100.0
+Electromagnetism.ElectromagneticPotential.time_der ok=True score=87.46 Z=100.0
+FieldSpecification.WickAlgebra.ι_timeOrderF_superC ok=True score=82.11 Z=100.0
+Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.p ok=True score=91.13 Z=100.0
+Cslib.SKI.parallelReduction_diamond                ok=True score=77.96 Z=100.0
+Cslib.CCS.bisimilarity_congr_choice                ok=True score=87.4 Z=100.0
+Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_l ok=True score=91.45 Z=100.0
+Binius.BinaryBasefold.fold_advances_evaluation_pol ok=True score=94.35 Z=100.0
+interleaved_affine_gaps_imply_tensor_gaps          ok=True score=92.26 Z=100.0
+putnam_1964_a4                                     ok=True score=97.03 Z=100.0
+putnam_1964_b2                                     ok=True score=98.89 Z=100.0
+putnam_1995_a3                                     ok=True score=95.88 Z=100.0
+mean 90.69; failed or Z<100: 0

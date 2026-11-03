@@ -1,0 +1,13 @@
+AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)
+- Seed: 313 tokens, 5173 heartbeats, score 33.34. Free passes applied (hb_polish, lint_delete): start candidate 291 tokens, 4463 heartbeats, score 40.26.
+- Best combination of the paying single edits below: 256 tokens, 4397 heartbeats, score 44.41 (Z 100.0); your workspace starts from it.
+- Exchange rate here: 1 token = 0.106 points, 100 heartbeats = 0.644 points.
+- Single edits that PAY:
+  - line 69: delete the tactic `have assoc := List.append_assoc (Lambda.LExpr.LEx…`: -15 tokens, -63 hb, score +2.00
+  - line 5: delete the tactic `rename_i m name ty2`: -4 tokens, +0 hb, score +0.42
+  - line 10: delete the tactic `rename_i m name ty2`: -4 tokens, +0 hb, score +0.42
+  - line 15: delete the tactic `simp at m`: -3 tokens, -1 hb, score +0.32
+  - line 20: delete the tactic `simp at m`: -3 tokens, -1 hb, score +0.32
+  - line 14: delete the tactic `rename_i m name`: -3 tokens, +0 hb, score +0.32
+- Deletions that FAIL (needed as they stand): line 2 `substOld` from the simp list; line 25 `Imperative.HasVarsPure.getVars` from the simp list; line 25 `Lambda.LExpr.LExpr.getVars` from the simp list; line 45 `Imperative.HasVarsPure.getVars` from the simp list; line 45 `Lambda.LExpr.LExpr.getVars` from the simp list; line 51 `Imperative.HasVarsPure.getVars` from the simp list.
+- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 51 (`. simp [Imperative.HasVarsPure.getVars,…`) (grind/simp_all/aesop); the bullet at line 65 (`. apply List.Subset.trans`) (grind/simp_all/aesop); the bullet at line 44 (`. split`) (grind/simp_all/aesop); the bullet at line 53 (`. apply List.Subset.trans`) (grind/simp_all/aesop).

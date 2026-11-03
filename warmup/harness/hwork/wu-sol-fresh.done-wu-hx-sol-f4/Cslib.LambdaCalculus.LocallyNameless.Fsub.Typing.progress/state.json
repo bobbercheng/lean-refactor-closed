@@ -1,0 +1,284 @@
+{
+ "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+ "best": {
+  "score": 73.54,
+  "proof": "lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t' := by\n  generalize eq : [] = Γ at der\n  have der' := der\n  induction der <;> subst eq\n  case var => simp_all\n  case abs => exact Or.inl (.abs der'.wf.2.1)\n  case tabs => exact Or.inl (.tabs der'.wf.2.1)\n  case sub h s ih => exact ih rfl h\n  case' app l r il ir => rcases il rfl l with vl | ⟨_, red⟩\n  case' app.inl => rcases ir rfl r with vr | ⟨_, red⟩\n  case' app.inl.inl => obtain ⟨_, _, rfl⟩ := l.canonical_form_abs vl\n  case' tapp h s ih => rcases ih rfl h with v | ⟨_, red⟩\n  case' tapp.inl => obtain ⟨_, _, rfl⟩ := h.canonical_form_tabs v\n  case' let' h b ih _ => rcases ih rfl h with v | ⟨_, red⟩\n  case' inl h w ih | inr h w ih => rcases ih rfl h with v | ⟨_, red⟩\n  case' case h b c ih _ _ => rcases ih rfl h with v | ⟨_, red⟩\n  case' case.inl =>\n    obtain ⟨_, rfl | rfl⟩ := h.canonical_form_sum v\n    all_goals cases v\n  all_goals\n    have lc := der'.wf.2.1\n    try apply body_let.mp at lc\n    try apply body_case.mp at lc\n    rcases lc with ⟨⟩\n    try cases_type* And\n    first\n    | solve_by_elim [Or.inl, Value.inl, Value.inr]\n    | right; solve_by_elim (maxDepth := 8) [Exists.intro, Value.lc, Red.appᵣ, Red.abs, Red.tabs, Red.let_body, Red.case, Red.case_inl, Red.case_inr]",
+  "tokens": 273,
+  "heartbeats": 7472,
+  "L": 33.09,
+  "H": 87.52,
+  "Z": 100.0,
+  "compat": {
+   "v4.33.0-rc2": true,
+   "v4.32.0": true,
+   "v4.31.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "859ef866ace9",
+   "tokens": 218,
+   "heartbeats": null,
+   "ok": false,
+   "error": "98:11: unexpected token ':'; expected '=>'",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:45:47Z"
+  },
+  {
+   "sha": "b0284823190a",
+   "tokens": 224,
+   "heartbeats": 34605,
+   "ok": false,
+   "error": "97:6: unsolved goals case app.inl.inl … [hypotheses omitted] ⊢ ((Term.abs w✝¹ w✝).app t₂✝).Value ∨ ∃ t', (Term.abs w✝¹ w✝).app t₂✝ ⭢βᵛ t'",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:46:05Z"
+  },
+  {
+   "sha": "72a06c83586d",
+   "tokens": 292,
+   "heartbeats": 9812,
+   "ok": false,
+   "error": "97:61: Unknown identifier `vl`",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:46:21Z"
+  },
+  {
+   "sha": "2953ba5a6a56",
+   "tokens": 254,
+   "heartbeats": null,
+   "ok": false,
+   "error": "96:8: unexpected token ':'; expected '=>'",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:46:50Z"
+  },
+  {
+   "sha": "eba416719c74",
+   "tokens": 250,
+   "heartbeats": null,
+   "ok": false,
+   "error": "96:8: unexpected token ':'; expected '=>'",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:47:01Z"
+  },
+  {
+   "sha": "0c4892bc4f95",
+   "tokens": 283,
+   "heartbeats": 9721,
+   "ok": false,
+   "error": "111:28: Invalid configuration option `config` for `Lean.Meta.SolveByElim.SolveByElimConfig`",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:47:23Z"
+  },
+  {
+   "sha": "573894d7a608",
+   "tokens": 283,
+   "heartbeats": 200031,
+   "ok": false,
+   "error": "86:74: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached Note: Use `set_option maxHeartbeats <num>` to set the limit. Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:47:46Z"
+  },
+  {
+   "sha": "870705b5ec45",
+   "tokens": 282,
+   "heartbeats": 4686,
+   "ok": false,
+   "error": "112:13: failed",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:48:04Z"
+  },
+  {
+   "sha": "a4ba15357aea",
+   "tokens": 78,
+   "heartbeats": 19765,
+   "ok": false,
+   "error": "92:4: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Env.Wf [] [prop] Binding.ty σ ∈ dlookup x [] [prop] Typing [] (Term.fvar x) σ [prop] (Term.fvar x).LC [prop] ¬(Term.fvar x).Value [prop] ∀ (a : Term Var), ¬Term.fvar x ⭢βᵛ a [prop]",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:49:18Z"
+  },
+  {
+   "sha": "febc5cac6d54",
+   "tokens": 296,
+   "heartbeats": 7707,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:49:21Z",
+   "score": 71.53
+  },
+  {
+   "sha": "f44b392d45b2",
+   "tokens": 82,
+   "heartbeats": 18566,
+   "ok": false,
+   "error": "93:4: `grind` failed case grind.1.2.1.3.2.3.1.1.3.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] Typing [] t₁ (σ.arrow τ_1) → t₁.Value ∨ Exists t₁.Red [prop] Typing [] t₂ σ → t₂.Value ∨ Exists t₂.Red [pr",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:50:08Z"
+  },
+  {
+   "sha": "39b6b4a17094",
+   "tokens": 43,
+   "heartbeats": 20014,
+   "ok": false,
+   "error": "93:4: `grind` failed case grind.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] Typing [] t₁ (σ.arrow τ_1) → t₁.Value ∨ Exists t₁.Red [prop] Typing [] t₂ σ → t₂.Value ∨ Exists t₂.Red [prop] Typing [",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:50:15Z"
+  },
+  {
+   "sha": "e128f698c2d8",
+   "tokens": 94,
+   "heartbeats": 50493,
+   "ok": false,
+   "error": "91:12: `grind` failed case grind.3.1.1.1.1.2.2.3.3.4.4 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:55:29Z"
+  },
+  {
+   "sha": "27213f7a264f",
+   "tokens": 51,
+   "heartbeats": 428,
+   "ok": false,
+   "error": "91:12: duplicate rule 'canonical_form_tabs'; rule 'canonical_form_abs' was already given. Use [<term>,...] to give multiple rules.",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:55:32Z"
+  },
+  {
+   "sha": "b1b270ba0df8",
+   "tokens": 58,
+   "heartbeats": 35827,
+   "ok": false,
+   "error": "86:74: unsolved goals … [hypotheses omitted] ⊢ (t₁.app t₂).Value ∨ ∃ t', t₁.app t₂ ⭢βᵛ t' Var : Type u_1 inst : HasFresh Var inst_1 : DecidableEq Var t : Term Var τ : Ty Var Γ : List ((_ : Var) × Binding Var) t₁ : Term Var σ τ_1 σ' : Ty Var lc : (t₁.tapp σ').LC a : Typing [] t₁ (σ.all τ_1) a_1 : Sub",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:56:43Z"
+  },
+  {
+   "sha": "39847e6afb2f",
+   "tokens": 65,
+   "heartbeats": 927,
+   "ok": false,
+   "error": "91:12: duplicate rule 'Value'; rule 'LC' was already given. Use [<term>,...] to give multiple rules.",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:56:46Z"
+  },
+  {
+   "sha": "348e1b01a149",
+   "tokens": 68,
+   "heartbeats": 937,
+   "ok": false,
+   "error": "91:12: aesop: cases builder: expected 'LC' to be an inductive type or structure (or to reduce to one at the given transparency)",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:57:25Z"
+  },
+  {
+   "sha": "1a2e44c21ea0",
+   "tokens": 64,
+   "heartbeats": 936,
+   "ok": false,
+   "error": "91:12: aesop: cases builder: expected 'LC' to be an inductive type or structure (or to reduce to one at the given transparency)",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:57:28Z"
+  },
+  {
+   "sha": "044767fc7fa9",
+   "tokens": 64,
+   "heartbeats": 200039,
+   "ok": false,
+   "error": "86:74: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached Note: Use `set_option maxHeartbeats <num>` to set the limit. Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:57:45Z"
+  },
+  {
+   "sha": "6a0ab5e42d9e",
+   "tokens": 68,
+   "heartbeats": 200039,
+   "ok": false,
+   "error": "86:74: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached Note: Use `set_option maxHeartbeats <num>` to set the limit. Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:57:55Z"
+  },
+  {
+   "sha": "43cfe5a9f0d8",
+   "tokens": 97,
+   "heartbeats": 292,
+   "ok": false,
+   "error": "93:4: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:58:23Z"
+  },
+  {
+   "sha": "cd7d6697450b",
+   "tokens": 99,
+   "heartbeats": 292,
+   "ok": false,
+   "error": "93:4: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:58:26Z"
+  },
+  {
+   "sha": "ad61acf9e909",
+   "tokens": 278,
+   "heartbeats": 303,
+   "ok": false,
+   "error": "100:35: Unknown identifier `ih`",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:58:58Z"
+  },
+  {
+   "sha": "5604ea23672c",
+   "tokens": 277,
+   "heartbeats": 8052,
+   "ok": false,
+   "error": "112:13: failed",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:59:12Z"
+  },
+  {
+   "sha": "e3b5e871fa48",
+   "tokens": 280,
+   "heartbeats": 11984,
+   "ok": false,
+   "error": "112:13: failed",
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:59:30Z"
+  },
+  {
+   "sha": "67f650675028",
+   "tokens": 273,
+   "heartbeats": 7472,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f4",
+   "t": "2026-10-11T21:59:44Z",
+   "score": 73.54
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-f4",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:40:36Z"
+  }
+ ],
+ "api_spend": 1.368662,
+ "lineage": "fresh",
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-f4",
+    "check": 10,
+    "d_score": 38.2,
+    "d_tokens": -112,
+    "d_heartbeats": 7707,
+    "diff": "+lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t' := by\n+  generalize eq : [] = Γ at der\n+  have der' := der\n+  induction der <;> subst eq\n+  case var => simp_all\n+  case abs => exact Or.inl (.abs der'.wf.2.1)\n+  case tabs => exact Or.inl (.tabs der'.wf.2.1)\n+  case sub h s ih => exact ih rfl h\n+  case' app l r il ir => rcases il rfl l with vl | ⟨_, red⟩\n+  case' app.inl => rcases ir rfl r with vr | ⟨_, red⟩\n+  case' app.inl.inl => obtain ⟨_, _, rfl⟩ := l.canonical_form_abs vl\n+  case' tapp h s ih => rcases ih rfl h with v | ⟨_, red⟩\n+  case' tapp.inl => obtain ⟨_, _, rfl⟩ := h.canonical_form_tabs v\n+  case' let' h b ih _ => rcases ih rfl h with v | ⟨_, red⟩\n+  case' in"
+   },
+   {
+    "run_id": "wu-hx-sol-f4",
+    "check": 26,
+    "d_score": 2.01,
+    "d_tokens": -23,
+    "d_heartbeats": -235,
+    "diff": "-  case' inl h w ih => rcases ih rfl h with v | ⟨_, red⟩\n-  case' inr h w ih => rcases ih rfl h with v | ⟨_, red⟩\n+  case' inl h w ih | inr h w ih => rcases ih rfl h with v | ⟨_, red⟩\n-    | right; solve_by_elim (maxDepth := 8) [Exists.intro, Value.lc, Red.appₗ, Red.appᵣ, Red.abs, Red.tabs, Red.tapp, Red.let_bind, Red.let_body, Red.inl, Red.inr, Red.case, Red.case_inl, Red.case_inr]\n+    | right; solve_by_elim (maxDepth := 8) [Exists.intro, Value.lc, Red.appᵣ, Red.abs, Red.tabs, Red.let_body, Red.case, Red.case_inl, Red.case_inr]"
+   }
+  ]
+ }
+}

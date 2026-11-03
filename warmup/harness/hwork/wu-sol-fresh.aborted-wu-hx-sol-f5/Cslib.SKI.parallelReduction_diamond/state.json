@@ -1,0 +1,13 @@
+{
+ "problem": "Cslib.SKI.parallelReduction_diamond",
+ "best": {
+  "score": 33.33,
+  "proof": null,
+  "tokens": 407,
+  "heartbeats": null
+ },
+ "attempts": [],
+ "runs": [],
+ "api_spend": 1.070638,
+ "lineage": "fresh"
+}

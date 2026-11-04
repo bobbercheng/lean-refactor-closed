@@ -1,0 +1,95 @@
+run wu-hx-sol-f2: 3 problems, model=gpt-6.1-sol, turns≤40
+Cslib.SKI.parallel technique cards: inductive
+Electromagnetism.E technique cards: analysis, sets, calc, corollary
+Binius.BinaryBasef technique cards: sets, inductive, calc, corollary
+[memgate] HOLD LRAScratch/m_e18eaa9190.lean: need 8000+8000 MB, have 15484 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_c74f211400.lean: need 8000+8000 MB, have 15411 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_7d5d248ed0.lean: need 8000+8000 MB, have 15411 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_199c1084a7.lean: need 8000+8000 MB, have 15411 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_f752fa9a6c.lean: need 8000+8000 MB, have 15410 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_348d050fb6.lean: need 8000+8000 MB, have 15410 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 50s hold (23277 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_c74f211400.lean: need 8000+8000 MB, have 15018 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_f752fa9a6c.lean: need 8000+8000 MB, have 15016 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_348d050fb6.lean: need 8000+8000 MB, have 15016 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_199c1084a7.lean: need 8000+8000 MB, have 15017 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_7d5d248ed0.lean: need 8000+8000 MB, have 15017 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 90s hold (21945 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_348d050fb6.lean: need 8000+8000 MB, have 13789 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_f752fa9a6c.lean: need 8000+8000 MB, have 13789 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_199c1084a7.lean: need 8000+8000 MB, have 13787 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_7d5d248ed0.lean: need 8000+8000 MB, have 13787 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+Binius.BinaryBasef library leads: 10 (130.3 s, 10 compiles)
+Binius.BinaryBasef knowledge brief: Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius.md
+[memgate] HOLD LRAScratch/s_7fabc810bf.lean: need 8000+8000 MB, have 15048 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (23366 MB free after ramping grants)
+[memgate] admitted after 155s hold (31823 MB free after ramping grants)
+[memgate] admitted after 155s hold (23822 MB free after ramping grants)
+[memgate] admitted after 160s hold (23800 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_6f71495366.lean: need 8000+8000 MB, have 15705 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/s_ca3c908847.lean: need 8000+8000 MB, have 15521 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 175s hold (23368 MB free after ramping grants)
+Electromagnetism.E library leads: 10 (196.2 s, 8 compiles)
+Electromagnetism.E knowledge brief: Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema.md
+[memgate] admitted after 40s hold (23239 MB free after ramping grants)
+Cslib.SKI.parallel library leads: 3 (202.8 s, 6 compiles)
+Cslib.SKI.parallel knowledge brief: Cslib.SKI.parallelReduction_diamond.md
+[memgate] HOLD LRAScratch/m_fc3ce2ac0f.lean: need 8000+8000 MB, have 15467 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (23728 MB free after ramping grants)
+[memgate] admitted after 55s hold (23531 MB free after ramping grants)
+[memgate] HOLD LRAScratch/s_f77d20a5d5.lean: need 8000+8000 MB, have 15239 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_ad0813fee7.lean: need 8000+8000 MB, have 14947 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (23726 MB free after ramping grants)
+[memgate] HOLD LRAScratch/s_321fb67fc4.lean: need 8000+8000 MB, have 14914 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (23390 MB free after ramping grants)
+[memgate] admitted after 20s hold (23388 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_9d6edfcd77.lean: need 8000+8000 MB, have 15214 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (23825 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_4192a370dd3d.lean: need 8000+8000 MB, have 15465 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/c_ae8a84b57490.lean: need 8000+8000 MB, have 15414 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (23496 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_3de25ce8aaa8.lean: need 8000+8000 MB, have 15744 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 20s hold (31936 MB free after ramping grants)
+[memgate] admitted after 15s hold (23836 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_b1b2aedf1b49.lean: need 8000+8000 MB, have 14920 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (23479 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_8203cf2a8b38.lean: need 8000+8000 MB, have 14976 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/c_095f9c451856.lean: need 8000+8000 MB, have 15305 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 10s hold (23847 MB free after ramping grants)
+[memgate] admitted after 15s hold (31936 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_d204d39f8846.lean: need 8000+8000 MB, have 14941 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/c_325dc3d403c5.lean: need 8000+8000 MB, have 15530 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 25s hold (23533 MB free after ramping grants)
+Cslib.SKI.parallel check 7: NEW BEST tok=177 (+56.5%) hb=615 (+56.8%) Z=100 score=71.09
+[memgate] HOLD LRAScratch/c_c41c610237f9.lean: need 8000+8000 MB, have 15154 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 20s hold (23591 MB free after ramping grants)
+Cslib.SKI.parallel budget reached: $0.724 + reserve $0.278 > $1.00; session ends
+Cslib.SKI.parallel DONE best=71.09 checks=9 tool_calls=10 turns=10 out_tok=5465 218s
+[memgate] HOLD LRAScratch/s_245627278f.lean: need 8000+8000 MB, have 15637 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 60s hold (23832 MB free after ramping grants)
+Binius.BinaryBasef check 4: NEW BEST tok=460 (+68.6%) hb=8542 (+46.6%) Z=100 score=71.73
+[memgate] admitted after 45s hold (23663 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_4c1ced6c86.lean: need 8000+8000 MB, have 14237 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/c_0db3cd20bc2d.lean: need 8000+8000 MB, have 14699 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 35s hold (23678 MB free after ramping grants)
+[memgate] admitted after 40s hold (23651 MB free after ramping grants)
+Electromagnetism.E budget reached: $0.691 + reserve $0.312 > $1.00; session ends
+Electromagnetism.E DONE best=33.33 checks=6 tool_calls=21 turns=21 out_tok=3789 325s
+[memgate] HOLD LRAScratch/c_6bce99d3f39e.lean: need 8000+8000 MB, have 15037 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 25s hold (23672 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_25edcbace2b4.lean: need 8000+8000 MB, have 15319 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 15s hold (31821 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_840c0cb376b9.lean: need 8000+8000 MB, have 15142 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (23429 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_26104fd50614.lean: need 8000+8000 MB, have 15236 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (23488 MB free after ramping grants)
+Binius.BinaryBasef check 10: NEW BEST tok=338 (+76.9%) hb=5650 (+64.7%) Z=100 score=80.53
+[memgate] HOLD LRAScratch/c_75c347afa8f0.lean: need 8000+8000 MB, have 15231 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 25s hold (23723 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_170c2291757c.lean: need 8000+8000 MB, have 15014 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 15s hold (31774 MB free after ramping grants)
+Binius.BinaryBasef check 12: NEW BEST tok=304 (+79.2%) hb=4181 (+73.9%) Z=100 score=84.37
+Binius.BinaryBasef check 13: NEW BEST tok=297 (+79.7%) hb=3918 (+75.5%) Z=100 score=85.07
+Binius.BinaryBasef budget reached: $0.604 + reserve $0.404 > $1.00; session ends
+Binius.BinaryBasef DONE best=85.07 checks=13 tool_calls=34 turns=34 out_tok=8188 800s
+done

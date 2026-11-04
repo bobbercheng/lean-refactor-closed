@@ -1,0 +1,38 @@
+[
+ {
+  "problem": "CallElimCorrect.extractedOldExprInVars",
+  "best_score": 90.4,
+  "checks": 40,
+  "tool_calls": 29,
+  "turns": 29,
+  "out_tokens": 21654,
+  "seconds": 1524
+ },
+ {
+  "problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+  "best_score": 83.29,
+  "checks": 13,
+  "tool_calls": 33,
+  "turns": 33,
+  "out_tokens": 6646,
+  "seconds": 289
+ },
+ {
+  "problem": "Cslib.SKI.parallelReduction_diamond",
+  "best_score": 76.75,
+  "checks": 35,
+  "tool_calls": 33,
+  "turns": 33,
+  "out_tokens": 22735,
+  "seconds": 614
+ },
+ {
+  "problem": "Cslib.CCS.bisimilarity_congr_choice",
+  "best_score": 84.13,
+  "checks": 16,
+  "tool_calls": 21,
+  "turns": 21,
+  "out_tokens": 7469,
+  "seconds": 233
+ }
+]

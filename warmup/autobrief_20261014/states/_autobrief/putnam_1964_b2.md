@@ -1,0 +1,13 @@
+AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)
+- Seed: 1754 tokens, 134553 heartbeats, score 33.33. Free passes applied (normalize, hb_polish, lint_delete): start candidate 1979 tokens, 45487 heartbeats, score 51.12.
+- Best combination of the paying single edits below: 872 tokens, 32568 heartbeats, score 75.36 (Z 100.0); your workspace starts from it.
+- Exchange rate here: 1 token = 0.019 points, 100 heartbeats = 0.025 points.
+- Single edits that PAY:
+  - line 9: replace the proof of `have h_subset_or_compl : ∀ (A : Set S),…` (line 9) by `grind`: -917 tokens, -13970 hb, score +20.89
+  - line 50: replace the proof of `have h₄ : ∃ (V : Set S), V ∈ P ∧ Aᶜ ∩ V…` (line 50) by `grind`: -301 tokens, -5142 hb, score +7.00
+  - line 15: replace the proof of `have h₃ : ∃ (U : Set S), U ∈ P ∧ A ∩ U …` (line 15) by `grind`: -285 tokens, -3199 hb, score +6.21
+  - line 200: replace the proof of `have h₃ : P.card + Q.card = (Finset.uni…` (line 200) by `grind`: -190 tokens, +1044 hb, score +3.35
+  - line 51: replace the proof of `have h₅ : ¬(Aᶜ ∉ P ∧ ∀ (U : Set S), U ∈…` (line 51) by `grind`: -138 tokens, -2297 hb, score +3.19
+  - line 16: replace the proof of `have h₄ : ¬(A ∉ P ∧ ∀ (U : Set S), U ∈ …` (line 16) by `grind`: -128 tokens, -1845 hb, score +2.89
+- Deletions that FAIL (needed as they stand): line 5 `inter_self` from the simp list; line 27 `mem_inter_iff` from the simp list; line 33 `inter_comm` from the simp list; line 62 `mem_inter_iff` from the simp list.
+- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the proof of `have h_card : P.card = 2 ^ (Fintype.car…` (line 126) (grind/simp_all/aesop); the proof of `have h_subset_or_compl : ∀ (A : Set S),…` (line 9) (simp_all/aesop); the proof of `have h₁ : P.card = Q.card :=` (line 131) (grind/simp_all/aesop); the proof of `have h₂ : P.card + Q.card = 2 ^ Fintype…` (line 199) (grind/simp_all/aesop).

@@ -1,0 +1,49 @@
+run wu-hx-sol-r10: 6 problems, model=gpt-6.1-sol, turns≤40
+Binius.BinaryBasef technique cards: sets, corollary
+Binius.BinaryBasef technique cards: sets, corollary
+FieldSpecification technique cards: sets
+CallElimCorrect.ex technique cards: sets
+[memgate] HOLD LRAScratch/m_fcd7674386.lean: need 8000+8000 MB, have 8455 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_10f1937c03.lean: need 8000+8000 MB, have 8452 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_09b69c3211.lean: need 8000+8000 MB, have 8448 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_1647569f94.lean: need 8000+8000 MB, have 14430 MB (40000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 25s hold (20377 MB free after ramping grants)
+[memgate] admitted after 45s hold (22046 MB free after ramping grants)
+FieldSpecification library leads: 10 (53.5 s, 9 compiles)
+FieldSpecification knowledge brief: FieldSpecification.WickAlgebra.__timeOrderF_superCommuteF_eq_time.md
+[memgate] HOLD LRAScratch/m_10f1937c03.lean: need 8000+8000 MB, have 12915 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_09b69c3211.lean: need 8000+8000 MB, have 12915 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 70s hold (23519 MB free after ramping grants)
+Binius.BinaryBasef library leads: 10 (75.2 s, 8 compiles)
+Binius.BinaryBasef knowledge brief: Binius.BinaryBasefold.fold_advances_evaluation_poly.md
+[memgate] admitted after 85s hold (22529 MB free after ramping grants)
+CallElimCorrect.ex library leads: 10 (95.8 s, 7 compiles)
+CallElimCorrect.ex knowledge brief: CallElimCorrect.extractedOldExprInVars.md
+Binius.BinaryBasef library leads: 10 (105.3 s, 7 compiles)
+Binius.BinaryBasef knowledge brief: Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius.md
+Binius.BinaryBasef budget reached: $1.705 + reserve $0.307 > $2.00; session ends
+Binius.BinaryBasef DONE best=93.62 checks=5 tool_calls=20 turns=15 out_tok=2812 124s
+interleaved_affine technique cards: sets
+[memgate] HOLD LRAScratch/c_3cb29dff98f9.lean: need 8000+8000 MB, have 13520 MB (40000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (30387 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_f2f95ca3f1.lean: need 8000+8000 MB, have 12090 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (30444 MB free after ramping grants)
+FieldSpecification budget reached: $1.692 + reserve $0.316 > $2.00; session ends
+FieldSpecification DONE best=86.43 checks=8 tool_calls=20 turns=16 out_tok=4178 217s
+putnam_1964_b2     technique cards: sets
+[memgate] HOLD LRAScratch/c_7599c2faa36c.lean: need 8000+8000 MB, have 13474 MB (40000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+putnam_1964_b2     library leads: 10 (25.6 s, 6 compiles)
+putnam_1964_b2     knowledge brief: putnam_1964_b2.md
+[memgate] admitted after 25s hold (22113 MB free after ramping grants)
+interleaved_affine library leads: 10 (100.8 s, 6 compiles)
+interleaved_affine knowledge brief: interleaved_affine_gaps_imply_tensor_gaps.md
+Binius.BinaryBasef check 5: NEW BEST tok=218 (+85.1%) hb=1928 (+88.0%) Z=100 score=91.02
+Binius.BinaryBasef budget reached: $1.698 + reserve $0.314 > $2.00; session ends
+Binius.BinaryBasef DONE best=91.02 checks=6 tool_calls=12 turns=12 out_tok=7165 224s
+CallElimCorrect.ex budget reached: $1.724 + reserve $0.282 > $2.00; session ends
+CallElimCorrect.ex DONE best=94.34 checks=23 tool_calls=10 turns=10 out_tok=5079 262s
+putnam_1964_b2     budget reached: $1.728 + reserve $0.275 > $2.00; session ends
+putnam_1964_b2     DONE best=99.26 checks=9 tool_calls=9 turns=9 out_tok=4321 108s
+interleaved_affine budget reached: $1.826 + reserve $0.338 > $2.00; session ends
+interleaved_affine DONE best=92.91 checks=6 tool_calls=11 turns=8 out_tok=14700 271s
+done

@@ -1,0 +1,65 @@
+diff --git a/harness/agent.py b/harness/agent.py
+index 3632e7e9..9e26cc07 100644
+--- a/harness/agent.py
++++ b/harness/agent.py
+@@ -57,6 +57,18 @@ Workflow (R3, operator 2026-10-08): REWRITE FIRST. Read original.lean (and conte
+ _CLAIM_RE = re.compile(r"\b(unavoidable|impossible|cannot|can't|does not exist|doesn't exist|never|not needed|no longer needed|floor|minimal|tight|must|required|only way|no way|dead end|confirmed negative)\b", re.I)
+ 
+ 
++def degenerate_tail(raw: str, window: int = 2000) -> bool:
++    """True when a tool call's raw arguments END in degenerate repetition (2026-10-11 warm-up Sol run: all 26 tool calls cut at the
++    output cap were this: 20 whitespace runs `\\t\\t\\t \\n` of varying length, 6 a short line like `\\n  all_goals sorry` repeated hundreds of
++    times; no legitimate long write). Whitespace-only tail (escaped or not), or a unit of <= 40 chars repeated >= 20 times (<= 5% mismatches)."""
++    tail = raw[-window:]
++    if len(tail) < 200:
++        return False
++    if len(re.sub(r"(\\[tnr]|\s)+", "", tail)) < 0.1 * len(tail):
++        return True
++    return any(len(tail) >= 20 * k and sum(a != b for a, b in zip(tail, tail[k:])) <= 0.05 * (len(tail) - k) for k in range(1, 41))
++
++
+ def unverified_claims(notes: str, limit: int = 8) -> list[str]:
+     """Negative / absolute claims in notes.md without a `[tested: …]` tag (cycle 36). Section headers ("What FAILED (do not retry)") and hard
+     submission rules (statement byte-identical, forbidden constructs) are skipped: those are not hypotheses."""
+@@ -1185,8 +1197,23 @@ def run_problem(name: str, args, rows, hbs, out_dir: Path) -> dict:
+             ws.save()
+             _sess_turn_max = max(_sess_turn_max, _c); _last_in_tokens = _u.input_tokens
+         last_truncated = (m.stop_reason == "max_tokens")
+-        trunc_count += 1 if last_truncated else 0
+         uses = [b for b in m.content if b.type == "tool_use"]
++        # 2026-10-11 (warm-up Sol run: 20 of 54 sessions had a turn cut at the 12k output cap, 22% of the run's spend): Sol degenerates
++        # inside a tool-call argument (an endless `\t\t\t \n` tail) until the cap. The unparseable call ({"_raw_arguments": 40k-450k chars})
++        # stayed in the conversation and was re-sent every later turn (+65k input tokens on Electromagnetism), inflating the budget gate's
++        # reserve. Drop any truncated unparseable call from the history (it cannot execute; the full text goes to the trajectory) and say
++        # so in its tool result; when its tail is degenerate repetition, also do not escalate the output cap: more room only buys more junk.
++        runaway = [u for u in uses if last_truncated and isinstance(u.input, dict) and "_raw_arguments" in u.input]
++        runaway_junk = False
++        for u in runaway:
++            _raw = str(u.input.get("_raw_arguments") or "")
++            _junk = degenerate_tail(_raw)
++            flush_traj({"type": "runaway_tool_call", "turn": turn, "tool": u.name, "chars": len(_raw), "degenerate": _junk, "raw": _raw})
++            u.input = {"_dropped": f"cut at the output cap after {len(_raw)} chars of arguments"
++                                   + (", ending in the same few characters repeated over and over" if _junk else "")}
++            runaway_junk = runaway_junk or _junk
++            print(f"{name[:18]:18s} turn {turn}: runaway {u.name} call cut at the output cap ({len(_raw)} chars) dropped from the history", flush=True)
++        trunc_count += 1 if last_truncated and not runaway_junk else 0   # a cut legitimate long write still escalates as before
+         texts = [b.text for b in m.content if b.type == "text"]
+         log_f.write(json.dumps({"problem": name, "turn": turn, "out_tok": m.usage.output_tokens, "stop": str(m.stop_reason), "tools": [u.name for u in uses], "text": "".join(texts)[:300]}) + "\n"); log_f.flush()
+         flush_traj({"type": "turn", "turn": turn, "max_tokens": cap, "stop": str(m.stop_reason), "input_tokens": m.usage.input_tokens, "output_tokens": m.usage.output_tokens,
+@@ -1224,10 +1251,14 @@ def run_problem(name: str, args, rows, hbs, out_dir: Path) -> dict:
+         n_rejected = 0
+         for u in uses:
+             tool_calls += 1; inp = u.input or {}
+-            if u.name in ("lean_check", "lean_check_variants", "lean_mine"):
++            if u.name in ("lean_check", "lean_check_variants", "lean_mine") and "_dropped" not in inp:
+                 turns_since_check = 0
+             try:
+-                if u.name == "read_file":
++                if "_dropped" in inp:   # a runaway call cut at the output cap (above): nothing is executed
++                    out = (f"Your {u.name} call was {inp['_dropped']}; it was dropped and nothing was executed. Write compactly and in smaller "
++                           "pieces: one candidate per write_file without padding or trailing whitespace, at most 3 variants per "
++                           "lean_check_variants, then continue.")
++                elif u.name == "read_file":
+                     txt = ws.path(inp["path"]).read_text(); lines = txt.split("\n")
+                     s0 = max(1, int(inp.get("start") or 1)); e0 = min(len(lines), int(inp.get("end") or min(len(lines), s0 + 199)))
+                     out = "\n".join(f"{i:5d}| {lines[i-1]}" for i in range(s0, e0 + 1)) + (f"\n... ({len(lines)} lines total)" if e0 < len(lines) else "")

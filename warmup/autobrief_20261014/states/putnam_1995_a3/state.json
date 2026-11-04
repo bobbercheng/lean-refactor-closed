@@ -1,0 +1,2195 @@
+{
+ "problem": "putnam_1995_a3",
+ "best": {
+  "score": 95.87,
+  "proof": "theorem putnam_1995_a3\n(relation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop)\n(digits_to_num : (Fin 9 → ℤ) → ℤ)\n(hdigits_to_num : digits_to_num = fun dig => ∑ i : Fin 9, (dig i) * 10^i.1)\n(hrelation : ∀ d e : (Fin 9 → ℤ), relation d e ↔ (∀ i : Fin 9, d i < 10 ∧ d i ≥ 0 ∧ e i < 10 ∧ e i ≥ 0) ∧ (∀ i : Fin 9, 7 ∣ (digits_to_num (fun j : Fin 9 => if j = i then e j else d j))))\n: ∀ d e f : (Fin 9 → ℤ), ((relation d e) ∧ (relation e f)) → (∀ i : Fin 9, 7 ∣ d i - f i) := by\n  have replace (a b : _ → _) i :\n      digits_to_num (fun j => if j = i then b j else a j) =\n        digits_to_num a + (b i * 10^i.1 - a i * 10^i.1) := by\n    apply eq_add_of_sub_eq'\n    simp only [hdigits_to_num, ← Finset.sum_sub_distrib,\n      ite_mul, ite_sub, sub_self, Fintype.sum_ite_eq']\n  intro d e f h i\n  simp only [hrelation, replace] at h\n  choose k hk using h.1.2\n  choose l hl using h.2.2\n  apply (show IsCoprime (7 : ℤ) 10 by decide).pow_right |>.dvd_of_dvd_mul_right\n  refine ⟨(∑ j, k j) - digits_to_num d - k i - l i, ?_⟩\n  simp only [mul_sub, Finset.mul_sum, ← hk, ← hl i, Finset.sum_add_distrib, Finset.sum_sub_distrib,\n    Fin.sum_const, Int.nsmul_eq_mul]\n  rw [hdigits_to_num]\n  ring1",
+  "tokens": 158,
+  "heartbeats": 1214,
+  "L": 96.13,
+  "H": 91.48,
+  "Z": 100.0,
+  "compat": {
+   "v4.27.0": true,
+   "v4.26.0": true,
+   "v4.25.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "efc77c042060",
+   "tokens": 3534,
+   "heartbeats": 10916,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:32:35Z",
+   "score": 45.62
+  },
+  {
+   "sha": "6a9e3e35e696",
+   "tokens": 362,
+   "heartbeats": 4096,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:34:33Z",
+   "score": 87.46
+  },
+  {
+   "sha": "29cb9dc261fa",
+   "tokens": 363,
+   "heartbeats": 4101,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:35:52Z"
+  },
+  {
+   "sha": "d1e665af9c40",
+   "tokens": 379,
+   "heartbeats": 2636,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:36:04Z",
+   "score": 90.74
+  },
+  {
+   "sha": "5113cc116687",
+   "tokens": 391,
+   "heartbeats": 2616,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:36:34Z"
+  },
+  {
+   "sha": "264dbeb54059",
+   "tokens": 339,
+   "heartbeats": 1817,
+   "ok": false,
+   "error": "44:4: omega could not prove the goal: a possible counterexample may satisfy the constraints 1 ≤ c + d - 7*e ≤ 6 where c := (fun dig => ∑ i, dig i * 10 ^ ↑i) a d := (fun dig => ∑ i, dig i * 10 ^ ↑i) b e := ((fun dig => ∑ i, dig i * 10 ^ ↑i) a + (fun dig => ∑ i, dig i * 10 ^ ↑i) b) / 7",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:36:46Z"
+  },
+  {
+   "sha": "ca003906c0ea",
+   "tokens": 343,
+   "heartbeats": 2503,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:36:56Z",
+   "score": 91.35
+  },
+  {
+   "sha": "e1f6443a14ba",
+   "tokens": 282,
+   "heartbeats": 2160,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:37:33Z",
+   "score": 92.65
+  },
+  {
+   "sha": "4dd9dbba2ed7",
+   "tokens": 277,
+   "heartbeats": 2186,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:38:00Z"
+  },
+  {
+   "sha": "d6d4877d3b13",
+   "tokens": 277,
+   "heartbeats": 2194,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:10:30Z"
+  },
+  {
+   "sha": "d97c011ee482",
+   "tokens": 284,
+   "heartbeats": null,
+   "ok": false,
+   "error": "47:55: unexpected token ')'; expected 'by' or 'from'",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:10:36Z"
+  },
+  {
+   "sha": "23345ee5bd3f",
+   "tokens": 284,
+   "heartbeats": null,
+   "ok": false,
+   "error": "47:53: unexpected token ')'; expected 'by' or 'from'",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:10:40Z"
+  },
+  {
+   "sha": "48cbc9dfe9b5",
+   "tokens": 290,
+   "heartbeats": 2186,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:11:39Z"
+  },
+  {
+   "sha": "96304011e3c2",
+   "tokens": 287,
+   "heartbeats": 2181,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:11:42Z"
+  },
+  {
+   "sha": "fe1851716276",
+   "tokens": 282,
+   "heartbeats": 3553,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:11:45Z"
+  },
+  {
+   "sha": "58f3e483d9a0",
+   "tokens": 305,
+   "heartbeats": 1864,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:11:49Z",
+   "score": 93.15
+  },
+  {
+   "sha": "0c4080cd75af",
+   "tokens": 282,
+   "heartbeats": 3200,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:12:00Z"
+  },
+  {
+   "sha": "a3a5922f381a",
+   "tokens": 287,
+   "heartbeats": 1851,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:12:24Z",
+   "score": 93.33
+  },
+  {
+   "sha": "0f47228e90a4",
+   "tokens": 305,
+   "heartbeats": 2095,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:12:35Z"
+  },
+  {
+   "sha": "c1b2307f236e",
+   "tokens": 305,
+   "heartbeats": 2092,
+   "ok": false,
+   "error": "30:47: unsolved goals case h.e'_4 … [hypotheses omitted] ⊢ ∑ i, a i * 10 ^ ↑i + ∑ i, b i * 10 ^ ↑i = -1 • ∑ i, a i * 10 ^ ↑i + (∑ i, b i * 10 ^ ↑i + (9 * ∑ i, a i * 10 ^ ↑i + -1 • (7 * ∑ i, a i * 10 ^ ↑i)))",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:12:39Z"
+  },
+  {
+   "sha": "9b4e8cacc162",
+   "tokens": 298,
+   "heartbeats": 1783,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:12:42Z",
+   "score": 93.4
+  },
+  {
+   "sha": "dbcd18c467c6",
+   "tokens": 273,
+   "heartbeats": 1692,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:13:16Z",
+   "score": 93.81
+  },
+  {
+   "sha": "753256ecd49a",
+   "tokens": 258,
+   "heartbeats": 1609,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:13:27Z",
+   "score": 94.13
+  },
+  {
+   "sha": "b0ca78d2d736",
+   "tokens": 277,
+   "heartbeats": 1690,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:13:38Z"
+  },
+  {
+   "sha": "5aba7a77d86d",
+   "tokens": 235,
+   "heartbeats": 1595,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:14:00Z",
+   "score": 94.35
+  },
+  {
+   "sha": "0b4732ebe2fd",
+   "tokens": 230,
+   "heartbeats": 1555,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:14:11Z",
+   "score": 94.49
+  },
+  {
+   "sha": "3e9706c38a0a",
+   "tokens": 224,
+   "heartbeats": 1585,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:14:21Z"
+  },
+  {
+   "sha": "60104e4bac4e",
+   "tokens": 207,
+   "heartbeats": 1388,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:14:58Z",
+   "score": 95.06
+  },
+  {
+   "sha": "d8008e8f4b72",
+   "tokens": 207,
+   "heartbeats": 1386,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:15:23Z",
+   "score": 95.07
+  },
+  {
+   "sha": "210f042f5200",
+   "tokens": 207,
+   "heartbeats": 3416,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:15:34Z"
+  },
+  {
+   "sha": "5be14288bb14",
+   "tokens": 212,
+   "heartbeats": 1874,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:15:37Z"
+  },
+  {
+   "sha": "111627148277",
+   "tokens": 206,
+   "heartbeats": 1396,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:15:41Z"
+  },
+  {
+   "sha": "fc359edaf34a",
+   "tokens": 205,
+   "heartbeats": 1377,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:15:57Z",
+   "score": 95.11
+  },
+  {
+   "sha": "042818d5545b",
+   "tokens": 204,
+   "heartbeats": 892,
+   "ok": false,
+   "error": "36:79: Invalid argument name `n` for function `IsCoprime.dvd_of_dvd_mul_right` Hint: Perhaps you meant one of the following parameter names: • `R`: n̵R̲ • `x`: n̵x̲ • `y`: n̵y̲ • `z`: n̵z̲ • `H1`: n̵H̲1̲ • `H2`: n̵H̲2̲",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:16:07Z"
+  },
+  {
+   "sha": "f8630b6b5861",
+   "tokens": 208,
+   "heartbeats": 1451,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:16:11Z"
+  },
+  {
+   "sha": "76481efe5923",
+   "tokens": 212,
+   "heartbeats": 1419,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:17:00Z"
+  },
+  {
+   "sha": "cef622c3efab",
+   "tokens": 208,
+   "heartbeats": 1378,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:17:04Z"
+  },
+  {
+   "sha": "6ac10641f76e",
+   "tokens": 222,
+   "heartbeats": 1516,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:38:05Z"
+  },
+  {
+   "sha": "bba4891c7e4d",
+   "tokens": 204,
+   "heartbeats": 1586,
+   "ok": false,
+   "error": "38:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = d i * 10 ^ ↑i - f i * 10 ^ ↑i + digits_to_num d + ∑ x, e x * 10 ^ ↑x + (-∑ x, d x * 10 ^ ↑x - digits_to_num e)",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:38:08Z"
+  },
+  {
+   "sha": "555b6d8517ee",
+   "tokens": 205,
+   "heartbeats": 1377,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:38:11Z"
+  },
+  {
+   "sha": "a9773a3c8727",
+   "tokens": 205,
+   "heartbeats": 1203,
+   "ok": false,
+   "error": "38:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern digits_to_num in the target expression HMul.hMul = HSub.hSub case h.e'_4.h.e … [hypotheses omitted] ⊢ HMul.hMul = HSub.hSub",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:38:28Z"
+  },
+  {
+   "sha": "5ad0da3513b8",
+   "tokens": 206,
+   "heartbeats": 1386,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:38:35Z"
+  },
+  {
+   "sha": "950a5c020e0d",
+   "tokens": 210,
+   "heartbeats": 1948,
+   "ok": false,
+   "error": "22:93: unsolved goals case h.e'_4 … [hypotheses omitted] ⊢ d i * 10 ^ ↑i + -1 • (f i * 10 ^ ↑i) = d i * 10 ^ ↑i + (-1 • (f i * 10 ^ ↑i) + (↑9 * ∑ i, d i * 10 ^ ↑i + (-2 • ∑ x, d x * 10 ^ ↑x + -1 • (7 * ∑ i, d i * 10 ^ ↑i))))",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:38:51Z"
+  },
+  {
+   "sha": "5c11e085982a",
+   "tokens": 214,
+   "heartbeats": 1377,
+   "ok": false,
+   "error": "39:8: unexpected token '('; expected command",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:38:54Z"
+  },
+  {
+   "sha": "10610c03b6cd",
+   "tokens": 214,
+   "heartbeats": 1377,
+   "ok": false,
+   "error": "39:8: unexpected token '('; expected command",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:38:57Z"
+  },
+  {
+   "sha": "6fca22a47d4e",
+   "tokens": 212,
+   "heartbeats": 1729,
+   "ok": false,
+   "error": "22:93: unsolved goals case h.e'_4 … [hypotheses omitted] ⊢ d i * 10 ^ ↑i + -1 • (f i * 10 ^ ↑i) = d i * 10 ^ ↑i + (-1 • (f i * 10 ^ ↑i) + (9 * ∑ i, d i * 10 ^ ↑i + (-2 • ∑ x, d x * 10 ^ ↑x + -1 • (7 * ∑ i, d i * 10 ^ ↑i))))",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:39:01Z"
+  },
+  {
+   "sha": "12f2514e944b",
+   "tokens": 210,
+   "heartbeats": 1527,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:39:04Z"
+  },
+  {
+   "sha": "38a7c5a6bcd9",
+   "tokens": 206,
+   "heartbeats": 1390,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:40:19Z"
+  },
+  {
+   "sha": "59ef6ecfd5ad",
+   "tokens": 202,
+   "heartbeats": 1416,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:40:33Z"
+  },
+  {
+   "sha": "80d11ea43e2e",
+   "tokens": 199,
+   "heartbeats": 1362,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:40:36Z",
+   "score": 95.19
+  },
+  {
+   "sha": "6a9a5524d5ad",
+   "tokens": 219,
+   "heartbeats": 1500,
+   "ok": false,
+   "error": "42:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = -(f i * 10 ^ ↑i) + (∑ i, 7 * k i - (∑ i, d i * 10 ^ ↑i) * 7) + (-(k i * 7) - ∑ i, e i * 10 ^ ↑i) + e i * 10 ^ ↑i",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:40:47Z"
+  },
+  {
+   "sha": "5cea48ac5fa8",
+   "tokens": 174,
+   "heartbeats": 1363,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:48:37Z",
+   "score": 95.39
+  },
+  {
+   "sha": "5a0b6f3b8436",
+   "tokens": 202,
+   "heartbeats": 1828,
+   "ok": false,
+   "error": "38:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = d i * 10 ^ ↑i - f i * 10 ^ ↑i + ∑ x, ↑9 * d x * 10 ^ ↑x + (-((∑ x, d x * 10 ^ ↑x) * 2) - ∑ x, 7 * d x * 10 ^ ↑x)",
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:49:27Z"
+  },
+  {
+   "sha": "4a65e6bbe11a",
+   "tokens": 172,
+   "heartbeats": 1769,
+   "ok": false,
+   "error": "37:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = d i * 10 ^ ↑i - f i * 10 ^ ↑i + ∑ x, ↑9 * d x * 10 ^ ↑x + (-((∑ x, d x * 10 ^ ↑x) * 2) - ∑ x, 7 * d x * 10 ^ ↑x)",
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:49:30Z"
+  },
+  {
+   "sha": "1320f0f02f34",
+   "tokens": 177,
+   "heartbeats": 1361,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:49:34Z"
+  },
+  {
+   "sha": "0835922500d5",
+   "tokens": 174,
+   "heartbeats": 1364,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:49:37Z"
+  },
+  {
+   "sha": "79092f11766d",
+   "tokens": 211,
+   "heartbeats": 1823,
+   "ok": false,
+   "error": "38:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = d i * 10 ^ ↑i - f i * 10 ^ ↑i + ∑ x, ↑9 * d x * 10 ^ ↑x + (-((∑ x, d x * 10 ^ ↑x) * 2) - ∑ x, 7 * d x * 10 ^ ↑x)",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:21:42Z"
+  },
+  {
+   "sha": "3ec26b1069a3",
+   "tokens": 167,
+   "heartbeats": 279,
+   "ok": false,
+   "error": "24:44: Function expected at b but this term has type ?m.113 Note: Expected a function because this term is being applied to the argument j",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:22:12Z"
+  },
+  {
+   "sha": "6f7f06933e68",
+   "tokens": 181,
+   "heartbeats": 1413,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:22:16Z"
+  },
+  {
+   "sha": "0efeae67a278",
+   "tokens": 169,
+   "heartbeats": 1361,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:22:33Z",
+   "score": 95.44
+  },
+  {
+   "sha": "183fa0defdb0",
+   "tokens": 169,
+   "heartbeats": 1799,
+   "ok": false,
+   "error": "22:93: unsolved goals case h … [hypotheses omitted] ⊢ d i * 10 ^ ↑i + -1 • (f i * 10 ^ ↑i) = d i * 10 ^ ↑i + (-1 • (f i * 10 ^ ↑i) + (↑9 * ∑ i, d i * 10 ^ ↑i + (-2 • ∑ x, d x * 10 ^ ↑x + -1 • (7 * ∑ i, d i * 10 ^ ↑i))))",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:23:04Z"
+  },
+  {
+   "sha": "edcfba7ab077",
+   "tokens": 165,
+   "heartbeats": 1346,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:23:30Z",
+   "score": 95.5
+  },
+  {
+   "sha": "06749987b576",
+   "tokens": 167,
+   "heartbeats": 1363,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:23:59Z"
+  },
+  {
+   "sha": "9a27082ad80e",
+   "tokens": 164,
+   "heartbeats": 1342,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:24:10Z",
+   "score": 95.52
+  },
+  {
+   "sha": "1a1cc89e4d1f",
+   "tokens": 311,
+   "heartbeats": 24235,
+   "ok": false,
+   "error": "42:4: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ -((∑ x, ↑(d x) * 10 ^ ↑x) * 7) = 0",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:25:51Z"
+  },
+  {
+   "sha": "adcb7cc2a399",
+   "tokens": 317,
+   "heartbeats": 44935,
+   "ok": false,
+   "error": "37:64: unsolved goals case a.a … [hypotheses omitted] ⊢ ∑ x, ↑(d x) * 10 ^ ↑x = 0 ∨ 7 = 0",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:26:05Z"
+  },
+  {
+   "sha": "ffcfd9a02f77",
+   "tokens": 319,
+   "heartbeats": 45051,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:26:19Z"
+  },
+  {
+   "sha": "338576fe1fa8",
+   "tokens": 164,
+   "heartbeats": 1337,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:01:03Z",
+   "score": 95.53
+  },
+  {
+   "sha": "fe93a004d486",
+   "tokens": 193,
+   "heartbeats": 1812,
+   "ok": false,
+   "error": "38:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = d i * 10 ^ ↑i - f i * 10 ^ ↑i + ∑ x, ↑9 * d x * 10 ^ ↑x + (-((∑ x, d x * 10 ^ ↑x) * 2) - ∑ x, 7 * d x * 10 ^ ↑x)",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:01:13Z"
+  },
+  {
+   "sha": "ede303f4d62b",
+   "tokens": 170,
+   "heartbeats": 1344,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:01:32Z"
+  },
+  {
+   "sha": "a17564e80f3a",
+   "tokens": 169,
+   "heartbeats": 1340,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:01:35Z"
+  },
+  {
+   "sha": "af9eaa89966c",
+   "tokens": 165,
+   "heartbeats": 1341,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:01:38Z"
+  },
+  {
+   "sha": "13a695a5bd28",
+   "tokens": 171,
+   "heartbeats": 1391,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:02:16Z"
+  },
+  {
+   "sha": "793e3a523b80",
+   "tokens": 168,
+   "heartbeats": 1369,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:02:19Z"
+  },
+  {
+   "sha": "0d45ab64c8dc",
+   "tokens": 163,
+   "heartbeats": 1100,
+   "ok": false,
+   "error": "36:6: Tactic `rewrite` failed: motive is not type correct: fun _a => d i * 10 ^  … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = ↑9 * digits_to_num d + (∑ x, e x * 10 ^ ↑x - ∑ x, d x * 10 ^ ↑x) - 7 * digits_to_num d - (digits_to_num d + (e i * 10 ^ ↑i - d i * 10 ^ ↑i)) - 7 * ⋯.choose",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:02:36Z"
+  },
+  {
+   "sha": "ff341944fb27",
+   "tokens": 118,
+   "heartbeats": 1649,
+   "ok": false,
+   "error": "32:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = ∑ x, (((∑ x_1, if x_1 = x then e x_1 * 10 ^ ↑x_1 else d x_1 * 10 ^ ↑x_1) - 7 * d x * 10 ^ ↑x - if x = i then e x * 10 ^ ↑x else d x * 10 ^ ↑x) - if x = i then f x * 10 ^ ↑x else e x * 10 ^ ↑x)",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:04:09Z"
+  },
+  {
+   "sha": "63da9082a576",
+   "tokens": 149,
+   "heartbeats": 1995,
+   "ok": false,
+   "error": "36:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = d i * 10 ^ ↑i - f i * 10 ^ ↑i + ∑ x, ↑{x}.card * e x * 10 ^ ↑x + (∑ x, (↑9 * d x * 10 ^ ↑x - d x * 10 ^ ↑x) - ∑ x, 7 * d x * 10 ^ ↑x) + (-∑ x, d x * 10 ^ ↑x - ∑ x, e x * 10 ^ ↑x)",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:05:11Z"
+  },
+  {
+   "sha": "8379dc965bfb",
+   "tokens": 152,
+   "heartbeats": 1802,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:05:25Z"
+  },
+  {
+   "sha": "efe2044c1497",
+   "tokens": 131,
+   "heartbeats": 1826,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:05:38Z"
+  },
+  {
+   "sha": "046af6286d27",
+   "tokens": 134,
+   "heartbeats": 1946,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:05:59Z"
+  },
+  {
+   "sha": "e1a35c632f4e",
+   "tokens": 137,
+   "heartbeats": 2113,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:06:02Z"
+  },
+  {
+   "sha": "a4c876215cbf",
+   "tokens": 134,
+   "heartbeats": 2021,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:06:06Z"
+  },
+  {
+   "sha": "e5002b4e441b",
+   "tokens": 189,
+   "heartbeats": 1325,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:32:20Z"
+  },
+  {
+   "sha": "3541098ab2d1",
+   "tokens": 165,
+   "heartbeats": 1402,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:32:23Z"
+  },
+  {
+   "sha": "56be7f7131c5",
+   "tokens": 164,
+   "heartbeats": 1338,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:32:26Z"
+  },
+  {
+   "sha": "4a1883c0b077",
+   "tokens": 170,
+   "heartbeats": 1359,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:32:30Z"
+  },
+  {
+   "sha": "df303abe7ebd",
+   "tokens": 164,
+   "heartbeats": 1095,
+   "ok": false,
+   "error": "38:2: omega could not prove the goal: a possible counterexample may satisfy the constraints a + b - c - g ≥ 1 where a := (fun dig => ∑ i, dig i * 10 ^ ↑i) d b := ∑ x, e x * 10 ^ ↑x c := ∑ x, d x * 10 ^ ↑x g := (fun dig => ∑ i, dig i * 10 ^ ↑i) e",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:33:01Z"
+  },
+  {
+   "sha": "19d84121823e",
+   "tokens": 164,
+   "heartbeats": 1775,
+   "ok": false,
+   "error": "22:93: unsolved goals case h … [hypotheses omitted] ⊢ d i * 10 ^ ↑i + -1 • (f i * 10 ^ ↑i) = d i * 10 ^ ↑i + (-1 • (f i * 10 ^ ↑i) + (↑9 * ∑ i, d i * 10 ^ ↑i + (-2 • ∑ x, d x * 10 ^ ↑x + -1 • (7 * ∑ i, d i * 10 ^ ↑i))))",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:33:04Z"
+  },
+  {
+   "sha": "15a3f4357d97",
+   "tokens": 169,
+   "heartbeats": 1919,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:33:08Z"
+  },
+  {
+   "sha": "8b665ccc4086",
+   "tokens": 159,
+   "heartbeats": 1343,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:33:55Z",
+   "score": 95.56
+  },
+  {
+   "sha": "09727a6f1ac4",
+   "tokens": 126,
+   "heartbeats": 1831,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:35:43Z"
+  },
+  {
+   "sha": "32eb71cd1a36",
+   "tokens": 153,
+   "heartbeats": 9258,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:36:17Z"
+  },
+  {
+   "sha": "696db6a1eaf0",
+   "tokens": 150,
+   "heartbeats": 1885,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:36:34Z"
+  },
+  {
+   "sha": "5bca26179f9b",
+   "tokens": 162,
+   "heartbeats": 2502,
+   "ok": false,
+   "error": "24:73: unsolved goals case isTrue … [hypotheses omitted] ⊢ a * c = b * c + (a * c - b * c)",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:36:38Z"
+  },
+  {
+   "sha": "b66d6aff5eae",
+   "tokens": 158,
+   "heartbeats": 1803,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:36:41Z"
+  },
+  {
+   "sha": "f2910a9c6f32",
+   "tokens": 165,
+   "heartbeats": 1351,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r9",
+   "t": "2026-10-14T11:59:57Z"
+  },
+  {
+   "sha": "37f0eedb442b",
+   "tokens": 165,
+   "heartbeats": 1365,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r9",
+   "t": "2026-10-14T12:00:01Z"
+  },
+  {
+   "sha": "4102d5ab9bd9",
+   "tokens": 176,
+   "heartbeats": 1436,
+   "ok": false,
+   "error": "39:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = -(f i * 10 ^ ↑i) + (∑ i, 7 * k i - (∑ i, d i * 10 ^ ↑i) * 7) + (-(k i * 7) - ∑ i, e i * 10 ^ ↑i) + e i * 10 ^ ↑i",
+   "run_id": "wuclean-hx-solab1-r9",
+   "t": "2026-10-14T12:00:04Z"
+  },
+  {
+   "sha": "a99eec71d94b",
+   "tokens": 159,
+   "heartbeats": 1787,
+   "ok": false,
+   "error": "22:93: unsolved goals case h … [hypotheses omitted] ⊢ d i * 10 ^ ↑i + -1 • (f i * 10 ^ ↑i) = d i * 10 ^ ↑i + (-1 • (f i * 10 ^ ↑i) + (↑9 * ∑ i, d i * 10 ^ ↑i + (-2 • ∑ x, d x * 10 ^ ↑x + -1 • (7 * ∑ i, d i * 10 ^ ↑i))))",
+   "run_id": "wuclean-hx-solab1-r9",
+   "t": "2026-10-14T12:00:07Z"
+  },
+  {
+   "sha": "8350c23d0c76",
+   "tokens": 159,
+   "heartbeats": 1350,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:30:07Z"
+  },
+  {
+   "sha": "89b8f4b489e3",
+   "tokens": 161,
+   "heartbeats": 1323,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:30:10Z",
+   "score": 95.59
+  },
+  {
+   "sha": "832cf9e66da6",
+   "tokens": 158,
+   "heartbeats": 1104,
+   "ok": false,
+   "error": "36:6: Tactic `rewrite` failed: motive is not type correct: fun _a => d i * 10 ^  … [hypotheses omitted] ⊢ d i * 10 ^ ?m.186 - f i * 10 ^ ?m.186 = ↑9 * digits_to_num d + (∑ x, e x * 10 ^ ↑x - ∑ x, d x * 10 ^ ↑x) - 7 * digits_to_num d - (digits_to_num d + (e i * 10 ^ ↑i - d i * 10 ^ ↑i)) - 7 * ⋯.choos",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:30:33Z"
+  },
+  {
+   "sha": "311447fa88b8",
+   "tokens": 158,
+   "heartbeats": 1258,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:31:05Z",
+   "score": 95.77
+  },
+  {
+   "sha": "25d5b1342b15",
+   "tokens": 162,
+   "heartbeats": 1292,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:31:15Z"
+  },
+  {
+   "sha": "377c62edca93",
+   "tokens": 156,
+   "heartbeats": 1659,
+   "ok": false,
+   "error": "37:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = d i * 10 ^ ↑i - f i * 10 ^ ↑i + ∑ x, ↑9 * d x * 10 ^ ↑x + (-((∑ i, d i * 10 ^ ↑i) * 2) - ∑ x, 7 * d x * 10 ^ ↑x)",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:31:18Z"
+  },
+  {
+   "sha": "17ec6699fd95",
+   "tokens": 156,
+   "heartbeats": 1257,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:32:00Z",
+   "score": 95.79
+  },
+  {
+   "sha": "c1e28df6d905",
+   "tokens": 164,
+   "heartbeats": 1266,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:32:11Z"
+  },
+  {
+   "sha": "70853a0150fd",
+   "tokens": 162,
+   "heartbeats": 1265,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:32:14Z"
+  },
+  {
+   "sha": "477f9fb9d5e6",
+   "tokens": 156,
+   "heartbeats": 1325,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:32:50Z"
+  },
+  {
+   "sha": "bd310791ac43",
+   "tokens": 156,
+   "heartbeats": 1245,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:32:53Z",
+   "score": 95.81
+  },
+  {
+   "sha": "e474bf76d35a",
+   "tokens": 161,
+   "heartbeats": 1241,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:35:01Z"
+  },
+  {
+   "sha": "6ecd333c82a7",
+   "tokens": 156,
+   "heartbeats": 1247,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:35:05Z"
+  },
+  {
+   "sha": "2e5cdb67dca6",
+   "tokens": 161,
+   "heartbeats": 1500,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:35:48Z"
+  },
+  {
+   "sha": "e35cdc52b98a",
+   "tokens": 155,
+   "heartbeats": 1406,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:36:16Z"
+  },
+  {
+   "sha": "5f79797f7c2a",
+   "tokens": 166,
+   "heartbeats": 1804,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:36:56Z"
+  },
+  {
+   "sha": "7f50fbc5c575",
+   "tokens": 157,
+   "heartbeats": 1451,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:36:59Z"
+  },
+  {
+   "sha": "508c4faa3aad",
+   "tokens": 196,
+   "heartbeats": 1701,
+   "ok": false,
+   "error": "38:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = d i * 10 ^ ↑i - f i * 10 ^ ↑i + ∑ x, ↑9 * d x * 10 ^ ↑x + (-((∑ j, d j * 10 ^ ↑j) * 2) - ∑ x, 7 * d x * 10 ^ ↑x)",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:08:08Z"
+  },
+  {
+   "sha": "11e1652ae895",
+   "tokens": 154,
+   "heartbeats": 1649,
+   "ok": false,
+   "error": "37:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = d i * 10 ^ ↑i - f i * 10 ^ ↑i + ∑ x, ↑9 * d x * 10 ^ ↑x + (-((∑ i, d i * 10 ^ ↑i) * 2) - ∑ x, 7 * d x * 10 ^ ↑x)",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:08:11Z"
+  },
+  {
+   "sha": "c0f809355b08",
+   "tokens": 160,
+   "heartbeats": 1218,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:08:15Z",
+   "score": 95.84
+  },
+  {
+   "sha": "a9b303ee0e94",
+   "tokens": 156,
+   "heartbeats": 1247,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:08:24Z"
+  },
+  {
+   "sha": "7ab89f47398a",
+   "tokens": 165,
+   "heartbeats": 1750,
+   "ok": false,
+   "error": "22:93: unsolved goals … [hypotheses omitted] ⊢ d i * 10 ^ ↑i + -1 • (f i * 10 ^ ↑i) = d i * 10 ^ ↑i + (-1 • (f i * 10 ^ ↑i) + (9 * ∑ i, d i * 10 ^ ↑i + (-2 • ∑ i, d i * 10 ^ ↑i + -1 • (7 * ∑ i, d i * 10 ^ ↑i))))",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:08:42Z"
+  },
+  {
+   "sha": "142e0b11e290",
+   "tokens": 165,
+   "heartbeats": 1079,
+   "ok": false,
+   "error": "39:2: omega could not prove the goal: a possible counterexample may satisfy the constraints a - b + c - g ≤ -1 where a := f i * 10 ^ ↑i b := d i * 10 ^ ↑i c := d i * 10 ^ ?m.211 g := f i * 10 ^ ?m.211",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:08:45Z"
+  },
+  {
+   "sha": "0daa4bf76ae8",
+   "tokens": 193,
+   "heartbeats": 1219,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:08:49Z"
+  },
+  {
+   "sha": "5500a4bc371a",
+   "tokens": 158,
+   "heartbeats": 619,
+   "ok": false,
+   "error": "33:9: don't know how to synthesize implicit argument `z` @IsCoprime.dvd_of_dvd_m … [hypotheses omitted] ⊢ ℤ",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:08:52Z"
+  },
+  {
+   "sha": "3b15817629ef",
+   "tokens": 156,
+   "heartbeats": 1313,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:08:55Z"
+  },
+  {
+   "sha": "dbe61bd22c23",
+   "tokens": 170,
+   "heartbeats": 1779,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:09:05Z"
+  },
+  {
+   "sha": "c35ced87d0ba",
+   "tokens": 165,
+   "heartbeats": 1215,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:09:08Z"
+  },
+  {
+   "sha": "057590223dc6",
+   "tokens": 172,
+   "heartbeats": 1878,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:09:12Z"
+  },
+  {
+   "sha": "de053d8cacfc",
+   "tokens": 342,
+   "heartbeats": 154019,
+   "ok": false,
+   "error": "41:4: Type mismatch: After simplification, term hs has type 9 * ∑ j, ↑(d j) * 10 ^ ↑j + (∑ x, ↑(e x) * 10 ^ ↑x - ∑ j, ↑(d j) * 10 ^ ↑j) = 0 but is expected to have type ∑ j, ↑(d j) * 10 ^ ↑j + ∑ j, ↑(e j) * 10 ^ ↑j = 0",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:10:26Z"
+  },
+  {
+   "sha": "73904be697c5",
+   "tokens": 360,
+   "heartbeats": 17558,
+   "ok": false,
+   "error": "45:4: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ -((∑ j, ↑(d j) * 10 ^ ↑j) * 7) = 0",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:10:37Z"
+  },
+  {
+   "sha": "a4cf8faf5f46",
+   "tokens": 375,
+   "heartbeats": 12186,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:11:03Z"
+  },
+  {
+   "sha": "a15ffb52a949",
+   "tokens": 160,
+   "heartbeats": 1218,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:11:19Z"
+  },
+  {
+   "sha": "a3383985cf8f",
+   "tokens": 161,
+   "heartbeats": 1222,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:11:22Z"
+  },
+  {
+   "sha": "295a6d1f6d8b",
+   "tokens": 159,
+   "heartbeats": 1280,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:11:25Z"
+  },
+  {
+   "sha": "05ca8796e29b",
+   "tokens": 161,
+   "heartbeats": 1229,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:11:28Z"
+  },
+  {
+   "sha": "481e76b1bee9",
+   "tokens": 160,
+   "heartbeats": 1220,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:12:06Z"
+  },
+  {
+   "sha": "02db42c99a69",
+   "tokens": 180,
+   "heartbeats": 1695,
+   "ok": false,
+   "error": "38:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = d i * 10 ^ ↑i - f i * 10 ^ ↑i + ∑ x, ↑9 * d x * 10 ^ ↑x + (-((∑ j, d j * 10 ^ ↑j) * 2) - ∑ x, 7 * d x * 10 ^ ↑x)",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:32:01Z"
+  },
+  {
+   "sha": "d4b8b3138664",
+   "tokens": 159,
+   "heartbeats": 1225,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:32:21Z"
+  },
+  {
+   "sha": "d6b9ca5550ce",
+   "tokens": 158,
+   "heartbeats": 1214,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:32:24Z",
+   "score": 95.87
+  },
+  {
+   "sha": "9030500c8e9d",
+   "tokens": 164,
+   "heartbeats": 1252,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:32:34Z"
+  },
+  {
+   "sha": "61a454ecf76e",
+   "tokens": 160,
+   "heartbeats": 1220,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:32:37Z"
+  },
+  {
+   "sha": "51c6113526ba",
+   "tokens": 162,
+   "heartbeats": 1211,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:32:41Z"
+  },
+  {
+   "sha": "a401f85e4fa9",
+   "tokens": 154,
+   "heartbeats": 662,
+   "ok": false,
+   "error": "33:9: don't know how to synthesize implicit argument `z` @IsCoprime.dvd_of_dvd_m … [hypotheses omitted] ⊢ ℤ",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:33:02Z"
+  },
+  {
+   "sha": "bed7ffffe7e1",
+   "tokens": 159,
+   "heartbeats": 1214,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:33:05Z"
+  },
+  {
+   "sha": "8431367fa5f4",
+   "tokens": 161,
+   "heartbeats": 1727,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:33:09Z"
+  },
+  {
+   "sha": "9d8516f5a332",
+   "tokens": 164,
+   "heartbeats": 1235,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:33:12Z"
+  },
+  {
+   "sha": "007cbde854b9",
+   "tokens": 159,
+   "heartbeats": 1219,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:33:15Z"
+  },
+  {
+   "sha": "f1b137deca14",
+   "tokens": 160,
+   "heartbeats": 1207,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:33:19Z"
+  },
+  {
+   "sha": "09384917e479",
+   "tokens": 162,
+   "heartbeats": 1218,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:33:59Z"
+  },
+  {
+   "sha": "53b448fb1b8b",
+   "tokens": 163,
+   "heartbeats": 1211,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:34:03Z"
+  },
+  {
+   "sha": "0761b634fb90",
+   "tokens": 161,
+   "heartbeats": 702,
+   "ok": false,
+   "error": "33:2: Type mismatch IsCoprime.dvd_of_dvd_mul_right (IsCoprime.pow_right (have this := of_decide_eq_true (id (Eq.refl true)); this)) (Exists.intro (∑ j, k j - digits_to_num d - k i - l i) ?m.237) has type 7 ∣ 10 ^ ↑i but is expected to have type 7 ∣ d i - f i",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:34:06Z"
+  },
+  {
+   "sha": "5cc71f102dae",
+   "tokens": 160,
+   "heartbeats": 1227,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:34:09Z"
+  },
+  {
+   "sha": "3270eaae94bb",
+   "tokens": 154,
+   "heartbeats": 1240,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:34:12Z"
+  },
+  {
+   "sha": "46ad7e785252",
+   "tokens": 160,
+   "heartbeats": 1233,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:45:32Z"
+  },
+  {
+   "sha": "dea6a84b5e40",
+   "tokens": 158,
+   "heartbeats": 1218,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:45:35Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wuclean-hx-solab1-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:31:56Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:08:36Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:35:08Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r4",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:46:12Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r5",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:19:15Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r6",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:59:00Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r7",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:30:15Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:48:17Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r9",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T11:57:03Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r10",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:28:10Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r11",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:05:53Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r12",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:29:20Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:42:33Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  }
+ ],
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 1,
+    "d_score": 12.29,
+    "d_tokens": -551,
+    "d_heartbeats": 10916,
+    "diff": "+theorem putnam_1995_a3\n+(relation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop)\n+(digits_to_num : (Fin 9 → ℤ) → ℤ)\n+(hdigits_to_num : digits_to_num = fun dig => ∑ i : Fin 9, (dig i) * 10^i.1)\n+(hrelation : ∀ d e : (Fin 9 → ℤ), relation d e ↔ (∀ i : Fin 9, d i < 10 ∧ d i ≥ 0 ∧ e i < 10 ∧ e i ≥ 0) ∧ (∀ i : Fin 9, 7 ∣ (digits_to_num (fun j : Fin 9 => if j = i then e j else d j))))\n+: ∀ d e f : (Fin 9 → ℤ), ((relation d e) ∧ (relation e f)) → (∀ i : Fin 9, 7 ∣ d i - f i) := by \n+  have h_main : ∀ (d e f : (Fin 9 → ℤ)), ((relation d e) ∧ (relation e f)) → (∀ i : Fin 9, 7 ∣ d i - f i) := by\n+    intro d e f h\n+    have h₁ : relation d e := h.1\n+    have h₂ : relation e f := h.2\n+    have h₃ : ∀ (i : Fin 9)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 2,
+    "d_score": 41.84,
+    "d_tokens": -3172,
+    "d_heartbeats": -6820,
+    "diff": "-: ∀ d e f : (Fin 9 → ℤ), ((relation d e) ∧ (relation e f)) → (∀ i : Fin 9, 7 ∣ d i - f i) := by \n-  have h_main : ∀ (d e f : (Fin 9 → ℤ)), ((relation d e) ∧ (relation e f)) → (∀ i : Fin 9, 7 ∣ d i - f i) := by\n-    intro d e f h\n-    have h₁ : relation d e := h.1\n-    have h₂ : relation e f := h.2\n-    have h₃ : ∀ (i : Fin 9), 7 ∣ (digits_to_num (λj : Fin 9 => if j = i then e j else d j)) := by\n-      have h₄ : (∀ i : Fin 9, 7 ∣ (digits_to_num (λj : Fin 9 => if j = i then e j else d j))) := (hrelation d e).mp h₁ |>.2\n-      exact h₄\n-    have h₄ : ∀ (i : Fin 9), 7 ∣ (digits_to_num (λj : Fin 9 => if j = i then f j else e j)) := by\n-      have h₅ : (∀ i : Fin 9, 7 ∣ (digits_to_num (λj : Fin 9"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 4,
+    "d_score": 3.28,
+    "d_tokens": 17,
+    "d_heartbeats": -1460,
+    "diff": "-    simp [Finset.sum_add_distrib]\n+    simp only [Finset.sum_add_distrib, Finset.sum_ite_eq', Finset.mem_univ, if_true]\n-      simp [sub_mul, Finset.sum_add_distrib, Finset.sum_sub_distrib, hdigits_to_num]\n+      simp only [sub_mul, Finset.sum_add_distrib, Finset.sum_sub_distrib, hdigits_to_num, Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul, Nat.cast_ofNat]\n-    convert dvd_sub h₃ (dvd_add h₁ h₂) using 1 <;> ring\n+    convert dvd_sub h₃ (dvd_add h₁ h₂) using 1\n+    ring"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 7,
+    "d_score": 0.61,
+    "d_tokens": -36,
+    "d_heartbeats": -133,
+    "diff": "-    have eq : (∑ i : Fin 9, (digits_to_num a + (b i - a i) * 10^i.1)) =\n-        8 * digits_to_num a + digits_to_num b := by\n-      simp only [sub_mul, Finset.sum_add_distrib, Finset.sum_sub_distrib, hdigits_to_num, Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul, Nat.cast_ofNat]\n-      ring\n-    rw [eq] at hs\n+    simp only [sub_mul, Finset.sum_add_distrib, Finset.sum_sub_distrib,\n+      Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul, Nat.cast_ofNat] at hs\n+    simp only [hdigits_to_num] at hs ⊢"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 8,
+    "d_score": 1.3,
+    "d_tokens": -61,
+    "d_heartbeats": -343,
+    "diff": "-    rw [hdigits_to_num]\n-    have point (j : Fin 9) : (if j = i then b j else a j) * (10 : ℤ)^j.1 =\n-        a j * 10^j.1 + if j = i then (b i - a i) * 10^i.1 else 0 := by\n-      split_ifs with h\n-      · subst j; ring\n-      · simp\n-    simp_rw [point]\n-    simp only [Finset.sum_add_distrib, Finset.sum_ite_eq', Finset.mem_univ, if_true]\n+    apply eq_add_of_sub_eq'\n+    simp only [hdigits_to_num, ← Finset.sum_sub_distrib, ← sub_mul,\n+      ite_sub, sub_self, ite_mul, Finset.sum_ite_eq', Finset.mem_univ, if_true]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 7,
+    "d_score": 0.5,
+    "d_tokens": 23,
+    "d_heartbeats": -296,
+    "diff": "-    omega\n+    convert dvd_sub hs (dvd_mul_right 7 (∑ i : Fin 9, a i * 10^i.1)) using 1\n+    ring"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 9,
+    "d_score": 0.18,
+    "d_tokens": -18,
+    "d_heartbeats": -13,
+    "diff": "-    have hs : 7 ∣ ∑ i : Fin 9, (digits_to_num a + (b i - a i) * 10^i.1) := by\n-      apply Finset.dvd_sum\n-      intro i _\n-      rw [← replace]\n-      exact ((hrelation a b).mp h).2 i\n+    have hs := Finset.dvd_sum (s := Finset.univ) (fun i _ => ((hrelation a b).mp h).2 i)\n+    simp only [replace] at hs"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 12,
+    "d_score": 0.07,
+    "d_tokens": 11,
+    "d_heartbeats": -68,
+    "diff": "-    have hs := Finset.dvd_sum (s := Finset.univ) (fun i _ => ((hrelation a b).mp h).2 i)\n-    simp only [replace] at hs\n+    have hs : 7 ∣ ∑ i : Fin 9, (digits_to_num a + (b i - a i) * 10^i.1) := by\n+      apply Finset.dvd_sum\n+      intro i _\n+      rw [← replace]\n+      exact ((hrelation a b).mp h).2 i\n-    simp only [hdigits_to_num] at hs ⊢\n-    convert dvd_sub hs (dvd_mul_right 7 (∑ i : Fin 9, a i * 10^i.1)) using 1\n+    simp only [hdigits_to_num] at hs\n+    convert dvd_sub hs (dvd_mul_right 7 (digits_to_num a)) using 1\n+    rw [hdigits_to_num]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 13,
+    "d_score": 0.41,
+    "d_tokens": -25,
+    "d_heartbeats": -91,
+    "diff": "-    have hs : 7 ∣ ∑ i : Fin 9, (digits_to_num a + (b i - a i) * 10^i.1) := by\n-      apply Finset.dvd_sum\n-      intro i _\n-      rw [← replace]\n-      exact ((hrelation a b).mp h).2 i\n+    have hs := Finset.dvd_sum (s := Finset.univ) (fun i _ => ((hrelation a b).mp h).2 i)\n+    simp only [replace] at hs\n-    simp only [hdigits_to_num] at hs"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 14,
+    "d_score": 0.32,
+    "d_tokens": -15,
+    "d_heartbeats": -83,
+    "diff": "-  have hm : 7 ∣ (d i - f i) * (10 : ℤ)^i.1 := by\n-    convert dvd_sub h₃ (dvd_add h₁ h₂) using 1\n-    ring\n-  exact (show IsCoprime (7 : ℤ) 10 by norm_num).pow_right.dvd_of_dvd_mul_right hm\n+  apply (show IsCoprime (7 : ℤ) 10 by norm_num).pow_right (n := i.1) |>.dvd_of_dvd_mul_right\n+  convert dvd_sub h₃ (dvd_add h₁ h₂) using 1\n+  ring"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 16,
+    "d_score": 0.22,
+    "d_tokens": -23,
+    "d_heartbeats": -14,
+    "diff": "-  have total (a b : Fin 9 → ℤ) (h : relation a b) :\n-      7 ∣ digits_to_num a + digits_to_num b := by\n-    have hs := Finset.dvd_sum (s := Finset.univ) (fun i _ => ((hrelation a b).mp h).2 i)\n+  intro d e f h i\n+  have h₃ : 7 ∣ digits_to_num d + digits_to_num e := by\n+    have hs := Finset.dvd_sum (s := Finset.univ) (fun i _ => ((hrelation d e).mp h.1).2 i)\n-    convert dvd_sub hs (dvd_mul_right 7 (digits_to_num a)) using 1\n+    convert dvd_sub hs (dvd_mul_right 7 (digits_to_num d)) using 1\n-  intro d e f h i\n-  have h₃ := total d e h.1"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 17,
+    "d_score": 0.14,
+    "d_tokens": -5,
+    "d_heartbeats": -40,
+    "diff": "-    simp only [replace] at hs\n-    simp only [sub_mul, Finset.sum_add_distrib, Finset.sum_sub_distrib,\n+    simp only [replace, sub_mul, Finset.sum_add_distrib, Finset.sum_sub_distrib,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 19,
+    "d_score": 0.57,
+    "d_tokens": -23,
+    "d_heartbeats": -167,
+    "diff": "-  have h₃ : 7 ∣ digits_to_num d + digits_to_num e := by\n-    have hs := Finset.dvd_sum (s := Finset.univ) (fun i _ => ((hrelation d e).mp h.1).2 i)\n-    simp only [replace, sub_mul, Finset.sum_add_distrib, Finset.sum_sub_distrib,\n-      Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul, Nat.cast_ofNat] at hs\n-    convert dvd_sub hs (dvd_mul_right 7 (digits_to_num d)) using 1\n-    rw [hdigits_to_num]\n-    ring\n-  have h₁ := (hrelation d e).mp h.1 |>.2 i\n-  have h₂ := (hrelation e f).mp h.2 |>.2 i\n-  rw [replace] at h₁ h₂\n+  have h₁ := (hrelation d e).mp h.1 |>.2\n+  have h₂ := (hrelation e f).mp h.2 |>.2\n+  simp only [replace] at h₁ h₂\n+  have hs := Finset.dvd_sum (s := Finse"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 20,
+    "d_score": 0.01,
+    "d_tokens": 0,
+    "d_heartbeats": -2,
+    "diff": "-  ring\n+  ring1"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 24,
+    "d_score": 0.04,
+    "d_tokens": -2,
+    "d_heartbeats": -9,
+    "diff": "-    Finset.sum_const, Finset.card_fin, nsmul_eq_mul, Nat.cast_ofNat] at hs\n+    Finset.sum_const, Finset.card_fin, nsmul_eq_mul] at hs"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 13,
+    "d_score": 0.08,
+    "d_tokens": -6,
+    "d_heartbeats": -15,
+    "diff": "-  have hs := Finset.dvd_sum (s := Finset.univ) (fun i _ => h₁ i)\n-  simp only [sub_mul, Finset.sum_add_distrib, Finset.sum_sub_distrib,\n-    Finset.sum_const, Finset.card_fin, nsmul_eq_mul] at hs\n+  choose k hk using h₁\n+  obtain ⟨l, hl⟩ := h₂ i\n-  convert dvd_sub (dvd_sub hs (dvd_mul_right 7 (digits_to_num d))) (dvd_add (h₁ i) (h₂ i)) using 1\n+  use (∑ j, k j) - digits_to_num d - k i - l\n+  simp only [mul_sub, Finset.mul_sum, ← hk, ← hl, sub_mul, Finset.sum_add_distrib, Finset.sum_sub_distrib,\n+    Finset.sum_const, Finset.card_fin, nsmul_eq_mul]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r4",
+    "check": 1,
+    "d_score": 0.2,
+    "d_tokens": -25,
+    "d_heartbeats": 1,
+    "diff": "-  have h₁ := (hrelation d e).mp h.1 |>.2\n-  have h₂ := (hrelation e f).mp h.2 |>.2\n-  simp only [replace] at h₁ h₂\n-  choose k hk using h₁\n-  obtain ⟨l, hl⟩ := h₂ i\n+  simp only [hrelation, replace] at h\n+  choose k hk using h.1.2\n+  obtain ⟨l, hl⟩ := h.2.2 i"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 4,
+    "d_score": 0.05,
+    "d_tokens": -5,
+    "d_heartbeats": -2,
+    "diff": "-  have replace (a b : Fin 9 → ℤ) (i : Fin 9) :\n+  have replace (a b : Fin 9 → ℤ) i :"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 6,
+    "d_score": 0.06,
+    "d_tokens": -4,
+    "d_heartbeats": -15,
+    "diff": "-      ite_sub, sub_self, ite_mul, Finset.sum_ite_eq', Finset.mem_univ, if_true]\n+      ite_sub, sub_self, ite_mul, Fintype.sum_ite_eq']"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 8,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": -4,
+    "diff": "-  have replace (a b : Fin 9 → ℤ) i :\n+  have replace (a b : _ → _) i :"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 1,
+    "d_score": 0.01,
+    "d_tokens": 0,
+    "d_heartbeats": -5,
+    "diff": "-  apply (show IsCoprime (7 : ℤ) 10 by norm_num).pow_right (n := i.1) |>.dvd_of_dvd_mul_right\n+  apply (show IsCoprime (7 : ℤ) 10 by decide).pow_right (n := i.1) |>.dvd_of_dvd_mul_right"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r7",
+    "check": 8,
+    "d_score": 0.03,
+    "d_tokens": -5,
+    "d_heartbeats": 6,
+    "diff": "-  apply (show IsCoprime (7 : ℤ) 10 by decide).pow_right (n := i.1) |>.dvd_of_dvd_mul_right\n+  apply (show IsCoprime (7 : ℤ) 10 by decide).pow_right |>.dvd_of_dvd_mul_right"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 2,
+    "d_score": 0.03,
+    "d_tokens": 2,
+    "d_heartbeats": -20,
+    "diff": "-        digits_to_num a + (b i - a i) * 10^i.1 := by\n+        digits_to_num a + (b i * 10^i.1 - a i * 10^i.1) := by\n-  simp only [mul_sub, Finset.mul_sum, ← hk, ← hl, sub_mul, Finset.sum_add_distrib, Finset.sum_sub_distrib,\n+  simp only [mul_sub, Finset.mul_sum, ← hk, ← hl, Finset.sum_add_distrib, Finset.sum_sub_distrib,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 4,
+    "d_score": 0.18,
+    "d_tokens": -3,
+    "d_heartbeats": -65,
+    "diff": "-    simp only [hdigits_to_num, ← Finset.sum_sub_distrib, ← sub_mul,\n-      ite_sub, sub_self, ite_mul, Fintype.sum_ite_eq']\n+    simp only [hdigits_to_num, ← Finset.sum_sub_distrib,\n+      ite_mul, ite_sub, sub_self, Fintype.sum_ite_eq']"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 7,
+    "d_score": 0.02,
+    "d_tokens": -2,
+    "d_heartbeats": -1,
+    "diff": "-    Finset.sum_const, Finset.card_fin, nsmul_eq_mul]\n+    Fin.sum_const, nsmul_eq_mul]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 11,
+    "d_score": 0.02,
+    "d_tokens": 0,
+    "d_heartbeats": -12,
+    "diff": "-    Fin.sum_const, nsmul_eq_mul]\n+    Fin.sum_const, Int.nsmul_eq_mul]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 3,
+    "d_score": 0.03,
+    "d_tokens": 4,
+    "d_heartbeats": -27,
+    "diff": "-  use (∑ j, k j) - digits_to_num d - k i - l\n+  refine ⟨(∑ j, k j) - digits_to_num d - k i - l, ?_⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r12",
+    "check": 3,
+    "d_score": 0.03,
+    "d_tokens": -2,
+    "d_heartbeats": -4,
+    "diff": "-  obtain ⟨l, hl⟩ := h.2.2 i\n+  choose l hl using h.2.2\n-  refine ⟨(∑ j, k j) - digits_to_num d - k i - l, ?_⟩\n-  simp only [mul_sub, Finset.mul_sum, ← hk, ← hl, Finset.sum_add_distrib, Finset.sum_sub_distrib,\n+  refine ⟨(∑ j, k j) - digits_to_num d - k i - l i, ?_⟩\n+  simp only [mul_sub, Finset.mul_sum, ← hk, ← hl i, Finset.sum_add_distrib, Finset.sum_sub_distrib,"
+   }
+  ]
+ },
+ "api_spend": 2.591544,
+ "profile_cache": {
+  "9a27082ad80e": {
+   "ok": true,
+   "total": 1341,
+   "floor": null,
+   "reference": 14248,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-12",
+     "depth_indent": 2,
+     "text": "have replace (a b : _ → _) i : digits_to_num (fun j => if j = i then b j else a j) = digits_to_num a",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "intro d e f h i",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "simp only [hrelation, replace] at h",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "choose k hk using h.1.2",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "obtain ⟨l, hl⟩ := h.2.2 i",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "apply (show IsCoprime (7 : ℤ) 10 by norm_num).pow_right (n := i.1) |>.dvd_of_dvd_mul_right",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "use (∑ j, k j) - digits_to_num d - k i - l",
+     "heartbeats": null
+    },
+    {
+     "lines": "19-20",
+     "depth_indent": 2,
+     "text": "simp only [mul_sub, Finset.mul_sum, ← hk, ← hl, sub_mul, Finset.sum_add_distrib, Finset.sum_sub_dist",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "rw [hdigits_to_num]",
+     "heartbeats": null
+    },
+    {
+     "lines": "22-22",
+     "depth_indent": 2,
+     "text": "ring1",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "338576fe1fa8": {
+   "ok": true,
+   "total": 1337,
+   "floor": null,
+   "reference": 14248,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-12",
+     "depth_indent": 2,
+     "text": "have replace (a b : _ → _) i : digits_to_num (fun j => if j = i then b j else a j) = digits_to_num a",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "intro d e f h i",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "simp only [hrelation, replace] at h",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "choose k hk using h.1.2",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "obtain ⟨l, hl⟩ := h.2.2 i",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "apply (show IsCoprime (7 : ℤ) 10 by decide).pow_right (n := i.1) |>.dvd_of_dvd_mul_right",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "use (∑ j, k j) - digits_to_num d - k i - l",
+     "heartbeats": null
+    },
+    {
+     "lines": "19-20",
+     "depth_indent": 2,
+     "text": "simp only [mul_sub, Finset.mul_sum, ← hk, ← hl, sub_mul, Finset.sum_add_distrib, Finset.sum_sub_dist",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "rw [hdigits_to_num]",
+     "heartbeats": null
+    },
+    {
+     "lines": "22-22",
+     "depth_indent": 2,
+     "text": "ring1",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "8b665ccc4086": {
+   "ok": true,
+   "total": 1343,
+   "floor": null,
+   "reference": 14248,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-12",
+     "depth_indent": 2,
+     "text": "have replace (a b : _ → _) i : digits_to_num (fun j => if j = i then b j else a j) = digits_to_num a",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "intro d e f h i",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "simp only [hrelation, replace] at h",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "choose k hk using h.1.2",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "obtain ⟨l, hl⟩ := h.2.2 i",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "apply (show IsCoprime (7 : ℤ) 10 by decide).pow_right |>.dvd_of_dvd_mul_right",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "use (∑ j, k j) - digits_to_num d - k i - l",
+     "heartbeats": null
+    },
+    {
+     "lines": "19-20",
+     "depth_indent": 2,
+     "text": "simp only [mul_sub, Finset.mul_sum, ← hk, ← hl, sub_mul, Finset.sum_add_distrib, Finset.sum_sub_dist",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "rw [hdigits_to_num]",
+     "heartbeats": null
+    },
+    {
+     "lines": "22-22",
+     "depth_indent": 2,
+     "text": "ring1",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "bd310791ac43": {
+   "ok": true,
+   "total": 1245,
+   "floor": null,
+   "reference": 14248,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-12",
+     "depth_indent": 2,
+     "text": "have replace (a b : _ → _) i : digits_to_num (fun j => if j = i then b j else a j) = digits_to_num a",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "intro d e f h i",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "simp only [hrelation, replace] at h",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "choose k hk using h.1.2",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "obtain ⟨l, hl⟩ := h.2.2 i",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "apply (show IsCoprime (7 : ℤ) 10 by decide).pow_right |>.dvd_of_dvd_mul_right",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "use (∑ j, k j) - digits_to_num d - k i - l",
+     "heartbeats": null
+    },
+    {
+     "lines": "19-20",
+     "depth_indent": 2,
+     "text": "simp only [mul_sub, Finset.mul_sum, ← hk, ← hl, Finset.sum_add_distrib, Finset.sum_sub_distrib, Fin.",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "rw [hdigits_to_num]",
+     "heartbeats": null
+    },
+    {
+     "lines": "22-22",
+     "depth_indent": 2,
+     "text": "ring1",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "c0f809355b08": {
+   "ok": true,
+   "total": 1218,
+   "floor": null,
+   "reference": 14248,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-12",
+     "depth_indent": 2,
+     "text": "have replace (a b : _ → _) i : digits_to_num (fun j => if j = i then b j else a j) = digits_to_num a",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "intro d e f h i",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "simp only [hrelation, replace] at h",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "choose k hk using h.1.2",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "obtain ⟨l, hl⟩ := h.2.2 i",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "apply (show IsCoprime (7 : ℤ) 10 by decide).pow_right |>.dvd_of_dvd_mul_right",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "refine ⟨(∑ j, k j) - digits_to_num d - k i - l, ?_⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "19-20",
+     "depth_indent": 2,
+     "text": "simp only [mul_sub, Finset.mul_sum, ← hk, ← hl, Finset.sum_add_distrib, Finset.sum_sub_distrib, Fin.",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "rw [hdigits_to_num]",
+     "heartbeats": null
+    },
+    {
+     "lines": "22-22",
+     "depth_indent": 2,
+     "text": "ring1",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "d6b9ca5550ce": {
+   "ok": true,
+   "total": 1214,
+   "floor": null,
+   "reference": 14248,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-12",
+     "depth_indent": 2,
+     "text": "have replace (a b : _ → _) i : digits_to_num (fun j => if j = i then b j else a j) = digits_to_num a",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "intro d e f h i",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "simp only [hrelation, replace] at h",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "choose k hk using h.1.2",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "choose l hl using h.2.2",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "apply (show IsCoprime (7 : ℤ) 10 by decide).pow_right |>.dvd_of_dvd_mul_right",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "refine ⟨(∑ j, k j) - digits_to_num d - k i - l i, ?_⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "19-20",
+     "depth_indent": 2,
+     "text": "simp only [mul_sub, Finset.mul_sum, ← hk, ← hl i, Finset.sum_add_distrib, Finset.sum_sub_distrib, Fi",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "rw [hdigits_to_num]",
+     "heartbeats": null
+    },
+    {
+     "lines": "22-22",
+     "depth_indent": 2,
+     "text": "ring1",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "budget_milestones": {
+  "2": {
+   "spend": 2.000347,
+   "best": 95.81,
+   "run_id": "wuclean-hx-solab1-r10",
+   "turn": 17,
+   "t": "2026-10-14T12:35:21Z"
+  }
+ }
+}

@@ -1,0 +1,237 @@
+{
+ "rows": [
+  {
+   "name": "CallElimCorrect.substOldPostSubset",
+   "ok": true,
+   "score": 90.86,
+   "L": 87.22,
+   "H": 85.37,
+   "Z": 100.0,
+   "tokens": 40,
+   "heartbeats": 757,
+   "compat": {
+    "v4.26.0": true
+   },
+   "error": null
+  },
+  {
+   "name": "CallElimCorrect.extractedOldExprInVars",
+   "ok": true,
+   "score": 94.64,
+   "L": 91.89,
+   "H": 92.03,
+   "Z": 100.0,
+   "tokens": 18,
+   "heartbeats": 215,
+   "compat": {
+    "v4.26.0": true
+   },
+   "error": null
+  },
+  {
+   "name": "Core.InitsUpdatesComm",
+   "ok": true,
+   "score": 87.38,
+   "L": 67.41,
+   "H": 94.74,
+   "Z": 100.0,
+   "tokens": 73,
+   "heartbeats": 226,
+   "compat": {
+    "v4.29.1": true,
+    "v4.27.0": true,
+    "v4.26.0": true
+   },
+   "error": null
+  },
+  {
+   "name": "fundamental_theorem_of_variational_calculus'",
+   "ok": true,
+   "score": 91.54,
+   "L": 85.78,
+   "H": 88.84,
+   "Z": 100.0,
+   "tokens": 121,
+   "heartbeats": 1334,
+   "compat": {
+    "v4.32.0": true
+   },
+   "error": null
+  },
+  {
+   "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+   "ok": true,
+   "score": 87.46,
+   "L": 80.39,
+   "H": 81.98,
+   "Z": 100.0,
+   "tokens": 269,
+   "heartbeats": 4886,
+   "compat": {
+    "v4.32.0": true
+   },
+   "error": null
+  },
+  {
+   "name": "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time",
+   "ok": true,
+   "score": 82.11,
+   "L": 69.1,
+   "H": 77.23,
+   "Z": 100.0,
+   "tokens": 376,
+   "heartbeats": 9589,
+   "compat": {
+    "v4.32.0": true
+   },
+   "error": null
+  },
+  {
+   "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+   "ok": true,
+   "score": 91.13,
+   "L": 82.84,
+   "H": 90.54,
+   "Z": 100.0,
+   "tokens": 70,
+   "heartbeats": 5664,
+   "compat": {
+    "v4.33.0-rc2": true,
+    "v4.32.0": true,
+    "v4.31.0": true
+   },
+   "error": null
+  },
+  {
+   "name": "Cslib.SKI.parallelReduction_diamond",
+   "ok": true,
+   "score": 77.96,
+   "L": 63.14,
+   "H": 70.75,
+   "Z": 100.0,
+   "tokens": 150,
+   "heartbeats": 416,
+   "compat": {
+    "v4.33.0-rc2": true,
+    "v4.32.0": true,
+    "v4.31.0": true,
+    "v4.30.0": true
+   },
+   "error": null
+  },
+  {
+   "name": "Cslib.CCS.bisimilarity_congr_choice",
+   "ok": true,
+   "score": 87.4,
+   "L": 70.92,
+   "H": 91.29,
+   "Z": 100.0,
+   "tokens": 73,
+   "heartbeats": 338,
+   "compat": {
+    "v4.33.0-rc2": true,
+    "v4.32.0": true,
+    "v4.31.0": true
+   },
+   "error": null
+  },
+  {
+   "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+   "ok": true,
+   "score": 91.45,
+   "L": 87.42,
+   "H": 86.93,
+   "Z": 100.0,
+   "tokens": 184,
+   "heartbeats": 2092,
+   "compat": {
+    "v4.31.0": true,
+    "v4.30.0": true,
+    "v4.29.0": true,
+    "v4.28.0": true
+   },
+   "error": null
+  },
+  {
+   "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+   "ok": true,
+   "score": 94.35,
+   "L": 95.33,
+   "H": 87.73,
+   "Z": 100.0,
+   "tokens": 89,
+   "heartbeats": 5653,
+   "compat": {
+    "v4.31.0": true,
+    "v4.30.0": true,
+    "v4.29.0": true
+   },
+   "error": null
+  },
+  {
+   "name": "interleaved_affine_gaps_imply_tensor_gaps",
+   "ok": true,
+   "score": 92.26,
+   "L": 91.2,
+   "H": 85.57,
+   "Z": 100.0,
+   "tokens": 119,
+   "heartbeats": 1354,
+   "compat": {
+    "v4.31.0": true,
+    "v4.30.0": true,
+    "v4.29.0": true
+   },
+   "error": null
+  },
+  {
+   "name": "putnam_1964_a4",
+   "ok": true,
+   "score": 97.03,
+   "L": 93.67,
+   "H": 97.43,
+   "Z": 100.0,
+   "tokens": 112,
+   "heartbeats": 2872,
+   "compat": {
+    "v4.27.0": true,
+    "v4.26.0": true,
+    "v4.25.0": true
+   },
+   "error": null
+  },
+  {
+   "name": "putnam_1964_b2",
+   "ok": true,
+   "score": 98.89,
+   "L": 98.57,
+   "H": 98.09,
+   "Z": 100.0,
+   "tokens": 25,
+   "heartbeats": 2576,
+   "compat": {
+    "v4.26.0": true,
+    "v4.25.0": true
+   },
+   "error": null
+  },
+  {
+   "name": "putnam_1995_a3",
+   "ok": true,
+   "score": 95.88,
+   "L": 96.16,
+   "H": 91.48,
+   "Z": 100.0,
+   "tokens": 157,
+   "heartbeats": 1214,
+   "compat": {
+    "v4.27.0": true,
+    "v4.26.0": true,
+    "v4.25.0": true
+   },
+   "error": null
+  }
+ ],
+ "mean": 90.69,
+ "failed": 0
+}

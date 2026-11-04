@@ -1,0 +1,19 @@
+{
+ "problem": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+ "best": {
+  "score": 33.33,
+  "proof": null,
+  "tokens": 1372,
+  "heartbeats": null
+ },
+ "attempts": [],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-f3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:23:51Z"
+  }
+ ],
+ "api_spend": 0.855235,
+ "lineage": "fresh"
+}

@@ -1,0 +1,86 @@
+run wu-hx-sol-f8: 4 problems, model=gpt-6.1-sol, turns≤40
+Cslib.SKI.parallel technique cards: inductive
+Cslib.CCS.bisimila technique cards: inductive
+FieldSpecification technique cards: sets, algebra, calc
+CallElimCorrect.ex technique cards: sets, inductive
+[memgate] HOLD LRAScratch/m_1d53336134.lean: need 8000+8000 MB, have 15623 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_0f45348d38.lean: need 8000+8000 MB, have 15474 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_4e2ebdc4af.lean: need 8000+8000 MB, have 15474 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_6eed608d36.lean: need 8000+8000 MB, have 15474 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_a815910789.lean: need 8000+8000 MB, have 15474 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_cad71ee1e2.lean: need 8000+8000 MB, have 15474 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_806fb2cc6b.lean: need 8000+8000 MB, have 15474 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_4b1a995937.lean: need 8000+8000 MB, have 15474 MB (24000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_6eed608d36.lean: need 8000+8000 MB, have 15315 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_cad71ee1e2.lean: need 8000+8000 MB, have 15315 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_806fb2cc6b.lean: need 8000+8000 MB, have 15314 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_1d53336134.lean: need 8000+8000 MB, have 15314 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_0f45348d38.lean: need 8000+8000 MB, have 15314 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_4e2ebdc4af.lean: need 8000+8000 MB, have 15314 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_a815910789.lean: need 8000+8000 MB, have 15313 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_4b1a995937.lean: need 8000+8000 MB, have 15314 MB (16000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 90s hold (22429 MB free after ramping grants)
+[memgate] admitted after 95s hold (31429 MB free after ramping grants)
+[memgate] admitted after 95s hold (23429 MB free after ramping grants)
+[memgate] admitted after 100s hold (40058 MB free after ramping grants)
+[memgate] admitted after 100s hold (32058 MB free after ramping grants)
+[memgate] admitted after 100s hold (24045 MB free after ramping grants)
+[memgate] admitted after 100s hold (16042 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_5b9b0e2522.lean: need 8000+8000 MB, have 14330 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+Cslib.SKI.parallel library leads: 3 (110.5 s, 6 compiles)
+Cslib.SKI.parallel knowledge brief: Cslib.SKI.parallelReduction_diamond.md
+[memgate] admitted after 115s hold (22462 MB free after ramping grants)
+[memgate] admitted after 10s hold (23529 MB free after ramping grants)
+[memgate] HOLD LRAScratch/m_2744ac3919.lean: need 8000+8000 MB, have 15528 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/m_a327c26dbb.lean: need 8000+8000 MB, have 15107 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+Cslib.CCS.bisimila library leads: 10 (119.9 s, 9 compiles)
+Cslib.CCS.bisimila knowledge brief: Cslib.CCS.bisimilarity_congr_choice.md
+[memgate] admitted after 10s hold (23682 MB free after ramping grants)
+CallElimCorrect.ex library leads: 10 (127.3 s, 6 compiles)
+CallElimCorrect.ex knowledge brief: CallElimCorrect.extractedOldExprInVars.md
+[memgate] admitted after 15s hold (40033 MB free after ramping grants)
+FieldSpecification library leads: 10 (136.1 s, 7 compiles)
+FieldSpecification knowledge brief: FieldSpecification.WickAlgebra.__timeOrderF_superCommuteF_eq_time.md
+Cslib.CCS.bisimila check 1: NEW BEST tok=94 (+62.5%) hb=449 (+88.4%) Z=100 score=83.66
+Cslib.SKI.parallel check 1: NEW BEST tok=268 (+34.2%) hb=465 (+67.3%) Z=100 score=67.15
+Cslib.CCS.bisimila check 4: NEW BEST tok=89 (+64.5%) hb=474 (+87.8%) Z=100 score=84.11
+Cslib.SKI.parallel check 9: NEW BEST tok=169 (+58.5%) hb=755 (+46.9%) Z=100 score=68.46
+Cslib.CCS.bisimila check 12: NEW BEST tok=88 (+64.9%) hb=487 (+87.4%) Z=100 score=84.13
+CallElimCorrect.ex check 5: NEW BEST tok=22 (+90.1%) hb=3950 (-46.4%) Z=100 score=47.9
+FieldSpecification check 8: NEW BEST tok=413 (+66.1%) hb=11668 (+72.3%) Z=100 score=79.45
+Cslib.SKI.parallel check 10: NEW BEST tok=152 (+62.7%) hb=494 (+65.3%) Z=100 score=75.97
+CallElimCorrect.ex check 9: NEW BEST tok=33 (+85.1%) hb=812 (+69.9%) Z=100 score=85.01
+Cslib.CCS.bisimila budget reached: $1.668 + reserve $0.347 > $2.00; session ends
+Cslib.CCS.bisimila DONE best=84.13 checks=16 tool_calls=21 turns=21 out_tok=7469 233s
+CallElimCorrect.ex check 11: NEW BEST tok=33 (+85.1%) hb=811 (+69.9%) Z=100 score=85.03
+FieldSpecification check 10: NEW BEST tok=382 (+68.6%) hb=11004 (+73.9%) Z=100 score=80.83
+[memgate] HOLD LRAScratch/s_0b2dcfa6f3.lean: need 8000+8000 MB, have 15374 MB (40000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (31536 MB free after ramping grants)
+FieldSpecification check 12: NEW BEST tok=332 (+72.7%) hb=10675 (+74.7%) Z=100 score=82.46
+FieldSpecification check 13: NEW BEST tok=319 (+73.8%) hb=10069 (+76.1%) Z=100 score=83.29
+FieldSpecification DONE best=83.29 checks=13 tool_calls=33 turns=33 out_tok=6646 289s
+[memgate] HOLD LRAScratch/c_fa0111988d2f.lean: need 8000+8000 MB, have 13787 MB (40000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 10s hold (21822 MB free after ramping grants)
+Cslib.SKI.parallel check 24: NEW BEST tok=147 (+63.9%) hb=481 (+66.2%) Z=100 score=76.69
+Cslib.SKI.parallel check 25: NEW BEST tok=141 (+65.4%) hb=500 (+64.8%) Z=100 score=76.73
+[memgate] HOLD LRAScratch/c_73b809aef4fd.lean: need 8000+8000 MB, have 14223 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/c_a8910a1bbddd.lean: need 8000+8000 MB, have 12250 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 30s hold (20451 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_aa256004f29f.lean: need 8000+8000 MB, have 13682 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 40s hold (21232 MB free after ramping grants)
+CallElimCorrect.ex check 25: NEW BEST tok=27 (+87.8%) hb=449 (+83.4%) Z=100 score=90.4
+[memgate] admitted after 20s hold (21846 MB free after ramping grants)
+[memgate] HOLD LRAScratch/s_2ae0dfbca3.lean: need 8000+8000 MB, have 13330 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] HOLD LRAScratch/c_b9d014d10e3b.lean: need 8000+8000 MB, have 13339 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 20s hold (20572 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_406bc6200429.lean: need 8000+8000 MB, have 14077 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 30s hold (23029 MB free after ramping grants)
+[memgate] admitted after 5s hold (23017 MB free after ramping grants)
+Cslib.SKI.parallel check 30: NEW BEST tok=135 (+66.8%) hb=520 (+63.4%) Z=100 score=76.75
+[memgate] HOLD LRAScratch/c_d63177eb57a3.lean: need 8000+8000 MB, have 14949 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (39730 MB free after ramping grants)
+[memgate] HOLD LRAScratch/c_a5e927446f41.lean: need 8000+8000 MB, have 14679 MB (48000 MB granted to compiles still ramping up; same-cgroup grants count against MemoryMax)
+[memgate] admitted after 5s hold (32053 MB free after ramping grants)
+Cslib.SKI.parallel DONE best=76.75 checks=35 tool_calls=33 turns=33 out_tok=22735 614s
+CallElimCorrect.ex DONE best=90.4 checks=40 tool_calls=29 turns=29 out_tok=21654 1524s
+done

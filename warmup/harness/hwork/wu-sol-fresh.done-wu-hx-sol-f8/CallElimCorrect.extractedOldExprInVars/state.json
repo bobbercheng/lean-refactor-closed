@@ -1,0 +1,426 @@
+{
+ "problem": "CallElimCorrect.extractedOldExprInVars",
+ "best": {
+  "score": 90.4,
+  "proof": "open OldExpressions in\ntheorem extractedOldExprInVars :\n  NormalizedOldExpr post →\n  (extractOldExprVars post).Subset\n  (Imperative.HasVarsPure.getVars post) := by\n  rintro - a\n  fun_induction extractOldExprVars post\n  all_goals repeat' first | assumption | apply List.nil_subset | apply List.mem_append.2 ∘ Or.imp ?_ ?_ ∘ List.mem_append.1 | exact id",
+  "tokens": 27,
+  "heartbeats": 449,
+  "L": 87.84,
+  "H": 83.36,
+  "Z": 100.0,
+  "compat": {
+   "v4.26.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "48336c474304",
+   "tokens": 17,
+   "heartbeats": 4390,
+   "ok": false,
+   "error": "2874:91: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] ∀ (m : ExpressionMetadata) (v : Lambda.Identifier Visibility) (ty : Option Lambda.LMonoTy), ¬e2 = Lambda.LExpr.fvar m v ty [prop] a ∈ default [prop] ¬a ∈ Lambda.LExpr.LExpr.getVar",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:24:50Z"
+  },
+  {
+   "sha": "4aa36d7062f1",
+   "tokens": 33,
+   "heartbeats": 4223,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6.a … [hypotheses omitted] ⊢ x ∈ extractOldExprVars tr✝ → x ∈ Lambda.LExpr.LExpr.getVars tr✝ ∨ x ∈ Lambda.LExpr.LExpr.getVars e✝ ‖ ⊢ x ∈ extractOldExprVars e✝ → x ∈ Lambda.LExpr.LExpr.getVars tr✝ ∨ x ∈ Lambda.LExpr.LExpr.getVars e✝ ‖ ⊢ x ∈ extractOldExprVars e1'✝ → x",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:24:55Z"
+  },
+  {
+   "sha": "b574c400e2a8",
+   "tokens": 15,
+   "heartbeats": 2379,
+   "ok": false,
+   "error": "2873:44: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (extractOldExprVars e).Subset (Imperative.HasVarsPure.getVars e) [prop] ¬(extractOldExprVars e).Subset (Imperative.HasVarsPure.getVars (Lambda.LExpr.abs m ty e)) [prop] Imperative",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:00Z"
+  },
+  {
+   "sha": "4204f82f6414",
+   "tokens": 35,
+   "heartbeats": 642,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6 … [hypotheses omitted] ⊢ ∀ ⦃a : CoreIdent⦄, a ∈ extractOldExprVars tr✝ ∨ a ∈ extractOldExprVars e✝ → a ∈ Lambda.LExpr.LExpr.getVars tr✝ ∨ a ∈ Lambda.LExpr.LExpr.getVars e✝ ‖ ⊢ ∀ ⦃a : CoreIdent⦄, a ∈ [v✝] → a ∈ [] ∨ a ∈ [v✝] ‖ ⊢ ∀ ⦃a : CoreIdent⦄, a ∈ extractOldExpr",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:11Z"
+  },
+  {
+   "sha": "5ccb804f97f8",
+   "tokens": 22,
+   "heartbeats": 3950,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:15Z",
+   "score": 47.9
+  },
+  {
+   "sha": "c1663d00958d",
+   "tokens": 37,
+   "heartbeats": 3985,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6.a … [hypotheses omitted] ⊢ (extractOldExprVars tr✝).Subset (Lambda.LExpr.LExpr.getVars tr✝ ++ Lambda.LExpr.LExpr.getVars e✝) ‖ ⊢ (extractOldExprVars e✝).Subset (Lambda.LExpr.LExpr.getVars tr✝ ++ Lambda.LExpr.LExpr.getVars e✝) ‖ ⊢ (extractOldExprVars e1'✝).Subset (L",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:20Z"
+  },
+  {
+   "sha": "50d99e031b16",
+   "tokens": 40,
+   "heartbeats": 814,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case5 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars e✝ → a ∈ Lambda.LExpr.LExpr.getVars e✝ ‖ ⊢ a ∈ extractOldExprVars tr✝ → a ∈ Lambda.LExpr.LExpr.getVars tr✝ ‖ ⊢ a ∈ extractOldExprVars e✝ → a ∈ Lambda.LExpr.LExpr.getVars e✝ ‖ ⊢ a ∈ extractOldExprVars e1'✝ → a ∈ Lambda",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:36Z"
+  },
+  {
+   "sha": "95713c402604",
+   "tokens": 20,
+   "heartbeats": 1231,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6 … [hypotheses omitted] ⊢ (extractOldExprVars tr✝ ++ extractOldExprVars e✝).Subset (Lambda.LExpr.LExpr.getVars tr✝ ++ Lambda.LExpr.LExpr.getVars e✝) ‖ ⊢ [v✝].Subset [v✝] ‖ ⊢ (extractOldExprVars e1'✝ ++ extractOldExprVars e2'✝).Subset (Lambda.LExpr.LExpr.getVars e1'✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:40Z"
+  },
+  {
+   "sha": "134876a2a0c8",
+   "tokens": 33,
+   "heartbeats": 812,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:44Z",
+   "score": 85.01
+  },
+  {
+   "sha": "23d4811db69c",
+   "tokens": 40,
+   "heartbeats": null,
+   "ok": false,
+   "error": "lean exit 134: Stack overflow detected. Aborting.",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:26:25Z"
+  },
+  {
+   "sha": "c6122d39461a",
+   "tokens": 33,
+   "heartbeats": 811,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:26:29Z",
+   "score": 85.03
+  },
+  {
+   "sha": "9f8f5d51705a",
+   "tokens": 22,
+   "heartbeats": 1239,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6 … [hypotheses omitted] ⊢ (extractOldExprVars tr✝ ++ extractOldExprVars e✝).Subset (Lambda.LExpr.LExpr.getVars tr✝ ++ Lambda.LExpr.LExpr.getVars e✝) ‖ ⊢ [v✝].Subset [v✝] ‖ ⊢ (extractOldExprVars e1'✝ ++ extractOldExprVars e2'✝).Subset (Lambda.LExpr.LExpr.getVars e1'✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:26:33Z"
+  },
+  {
+   "sha": "082a01fd9faa",
+   "tokens": 19,
+   "heartbeats": 2254,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case8 … [hypotheses omitted] ⊢ default ⊆ Lambda.LExpr.LExpr.getVars e2✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:27:19Z"
+  },
+  {
+   "sha": "2885484b48b7",
+   "tokens": 22,
+   "heartbeats": 186,
+   "ok": false,
+   "error": "2875:11: typeclass instance problem is stuck HasSubset ?m.65 Note: Lean will not try to resolve this typeclass instance problem because the type argument to `HasSubset` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass. Hint: Adding type annotati",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:27:23Z"
+  },
+  {
+   "sha": "602d48392ecc",
+   "tokens": 22,
+   "heartbeats": 1223,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6 … [hypotheses omitted] ⊢ (extractOldExprVars tr✝ ++ extractOldExprVars e✝).Subset (Lambda.LExpr.LExpr.getVars tr✝ ++ Lambda.LExpr.LExpr.getVars e✝) ‖ ⊢ [v✝].Subset [v✝] ‖ ⊢ (extractOldExprVars e1'✝ ++ extractOldExprVars e2'✝).Subset (Lambda.LExpr.LExpr.getVars e1'✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:27:29Z"
+  },
+  {
+   "sha": "86f118be5fb1",
+   "tokens": 23,
+   "heartbeats": 2259,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:27:45Z"
+  },
+  {
+   "sha": "b053b33948e2",
+   "tokens": 24,
+   "heartbeats": 2049,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:27:49Z"
+  },
+  {
+   "sha": "5e387c800c89",
+   "tokens": 26,
+   "heartbeats": 2590,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case5 … [hypotheses omitted] ⊢ extractOldExprVars e✝ ⊆ Lambda.LExpr.LExpr.getVars e✝ ‖ ⊢ extractOldExprVars tr✝ ⊆ Lambda.LExpr.LExpr.getVars tr✝ ++ Lambda.LExpr.LExpr.getVars e✝ ∧ extractOldExprVars e✝ ⊆ Lambda.LExpr.LExpr.getVars tr✝ ++ Lambda.LExpr.LExpr.getVars e✝ ‖ ⊢",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:27:54Z"
+  },
+  {
+   "sha": "2eaa07069d55",
+   "tokens": 25,
+   "heartbeats": 3357,
+   "ok": false,
+   "error": "2875:31: Type mismatch List.nil_subset ?m.112 has type [] ⊆ ?m.112 but is expected to have type ∀ ⦃a : CoreIdent⦄, a ∈ extractOldExprVars tr✝ ∨ a ∈ extractOldExprVars e✝ → a ∈ Lambda.LExpr.LExpr.getVars tr✝ ∨ a ∈ Lambda.LExpr.LExpr.getVars e✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:28:22Z"
+  },
+  {
+   "sha": "c4595dd0cd1c",
+   "tokens": 19,
+   "heartbeats": 3920,
+   "ok": false,
+   "error": "2874:91: Type mismatch List.nil_subset ?m.88 has type [] ⊆ ?m.88 but is expected to have type ∀ ⦃a : CoreIdent⦄, a ∈ extractOldExprVars tr✝ ∨ a ∈ extractOldExprVars e✝ → a ∈ Lambda.LExpr.LExpr.getVars tr✝ ∨ a ∈ Lambda.LExpr.LExpr.getVars e✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:28:29Z"
+  },
+  {
+   "sha": "667117ce2bce",
+   "tokens": 36,
+   "heartbeats": 3044,
+   "ok": false,
+   "error": "2877:4: failed",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:28:36Z"
+  },
+  {
+   "sha": "f047af504795",
+   "tokens": 39,
+   "heartbeats": 995,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case5 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars e✝ → a ∈ Lambda.LExpr.LExpr.getVars e✝ m✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata k✝ : Lambda.QuantifierKind ty✝ : Option { base := { Metadata :",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:28:48Z"
+  },
+  {
+   "sha": "4aab9f375f1a",
+   "tokens": 39,
+   "heartbeats": 1032,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case5 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars e✝ → a ∈ Lambda.LExpr.LExpr.getVars e✝ m✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata k✝ : Lambda.QuantifierKind ty✝ : Option { base := { Metadata :",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:28:53Z"
+  },
+  {
+   "sha": "0288a6a53a3f",
+   "tokens": 19,
+   "heartbeats": 1217,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6 … [hypotheses omitted] ⊢ (extractOldExprVars tr✝ ++ extractOldExprVars e✝).Subset (Lambda.LExpr.LExpr.getVars tr✝ ++ Lambda.LExpr.LExpr.getVars e✝) ‖ ⊢ [v✝].Subset [v✝] ‖ ⊢ (extractOldExprVars e1'✝ ++ extractOldExprVars e2'✝).Subset (Lambda.LExpr.LExpr.getVars e1'✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:28:59Z"
+  },
+  {
+   "sha": "a31170436e69",
+   "tokens": 27,
+   "heartbeats": 449,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:29:55Z",
+   "score": 90.4
+  },
+  {
+   "sha": "cd1033b930f6",
+   "tokens": 29,
+   "heartbeats": 597,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case3 … [hypotheses omitted] ⊢ a ∈ [] → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.fvar m✝ name✝ ty✝) ‖ ⊢ a ∈ panicWithPosWithDecl \"Strata.Languages.Core.OldExpressions\" \"Core.OldExpressions.extractOldExprVars\" 171 44 (toString \"Old expression \" ++ toString (Lambda",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:30:00Z"
+  },
+  {
+   "sha": "b55d1629acdd",
+   "tokens": 30,
+   "heartbeats": 955,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:30:05Z"
+  },
+  {
+   "sha": "167c0bcfc859",
+   "tokens": 17,
+   "heartbeats": 2949,
+   "ok": false,
+   "error": "2873:118: Tactic `apply` failed: could not unify the conclusion of `@List.nil_su … [hypotheses omitted] ⊢ a ∈ extractOldExprVars tr✝ ∨ a ∈ extractOldExprVars e✝ → a ∈ Lambda.LExpr.LExpr.getVars tr✝ ∨ a ∈ Lambda.LExpr.LExpr.getVars e✝",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:30:53Z"
+  },
+  {
+   "sha": "bde4aeabc948",
+   "tokens": 20,
+   "heartbeats": 2976,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars tr✝ ∨ a ∈ extractOldExprVars e✝ → a ∈ Lambda.LExpr.LExpr.getVars tr✝ ∨ a ∈ Lambda.LExpr.LExpr.getVars e✝ ‖ ⊢ a ∈ default → a ∈ Lambda.LExpr.LExpr.getVars e2✝ ‖ ⊢ a ∈ extractOldExprVars e1'✝ ∨ a ∈ extractOldExprVars e2",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:30:58Z"
+  },
+  {
+   "sha": "ee4c23f17bad",
+   "tokens": 30,
+   "heartbeats": 455,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:31:04Z"
+  },
+  {
+   "sha": "d1cc68e977f8",
+   "tokens": 33,
+   "heartbeats": 576,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:31:36Z"
+  },
+  {
+   "sha": "766ec8418fd5",
+   "tokens": 27,
+   "heartbeats": 573,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:31:41Z"
+  },
+  {
+   "sha": "4fd931a8a1b6",
+   "tokens": 27,
+   "heartbeats": 591,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:31:45Z"
+  },
+  {
+   "sha": "1104ef265748",
+   "tokens": 22,
+   "heartbeats": 11398,
+   "ok": false,
+   "error": "2871:43: unsolved goals case case6 … [hypotheses omitted] ⊢ a ∈ extractOldExprVars tr✝ ++ extractOldExprVars e✝ → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.quant m✝ k✝ ty✝ tr✝ e✝) ‖ ⊢ a ∈ [v✝] → a ∈ Imperative.HasVarsPure.getVars (Lambda.LExpr.app m✝² (Lambda.LExpr.op m✝¹ { name := \"old\", met",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:31:49Z"
+  },
+  {
+   "sha": "57464bae4a67",
+   "tokens": 27,
+   "heartbeats": 450,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:32:05Z"
+  },
+  {
+   "sha": "1d0b131e4781",
+   "tokens": 27,
+   "heartbeats": 473,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:32:11Z"
+  },
+  {
+   "sha": "d6da31d905fb",
+   "tokens": 29,
+   "heartbeats": null,
+   "ok": false,
+   "error": "timeout",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:47:11Z"
+  },
+  {
+   "sha": "47f34d362565",
+   "tokens": 19,
+   "heartbeats": 2474,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:47:26Z"
+  },
+  {
+   "sha": "a517acb8dac7",
+   "tokens": 26,
+   "heartbeats": 1710,
+   "ok": false,
+   "error": "2874:116: Type mismatch id has type ?m.77 → ?m.77 but is expected to have type a ∈ extractOldExprVars e✝ → True",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:47:30Z"
+  },
+  {
+   "sha": "99cfc7a7d808",
+   "tokens": 22,
+   "heartbeats": 2313,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:47:34Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-f8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:20:14Z"
+  }
+ ],
+ "api_spend": 1.409011,
+ "lineage": "fresh",
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 5,
+    "d_score": 14.57,
+    "d_tokens": -200,
+    "d_heartbeats": 3950,
+    "diff": "+open OldExpressions in\n+theorem extractedOldExprInVars :\n+  NormalizedOldExpr post →\n+  (extractOldExprVars post).Subset\n+  (Imperative.HasVarsPure.getVars post) := by\n+  rintro -\n+  fun_induction extractOldExprVars post <;>\n+    try exact List.nil_subset _\n+  all_goals simp_all [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars, List.Subset] <;> grind"
+   },
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 9,
+    "d_score": 37.11,
+    "d_tokens": 11,
+    "d_heartbeats": -3138,
+    "diff": "-  fun_induction extractOldExprVars post <;>\n-    try exact List.nil_subset _\n-  all_goals simp_all [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars, List.Subset] <;> grind\n+  fun_induction extractOldExprVars post <;> try exact List.nil_subset _\n+  all_goals\n+    simp only [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars, List.Subset, List.mem_append] at *\n+    intro a\n+    solve_by_elim [Or.imp, Or.inr]"
+   },
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 11,
+    "d_score": 0.02,
+    "d_tokens": 0,
+    "d_heartbeats": -1,
+    "diff": "-    solve_by_elim [Or.imp, Or.inr]\n+    apply_rules [Or.imp, Or.inr]"
+   },
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 25,
+    "d_score": 5.37,
+    "d_tokens": -6,
+    "d_heartbeats": -362,
+    "diff": "-  rintro -\n-  fun_induction extractOldExprVars post <;> try exact List.nil_subset _\n-  all_goals\n-    simp only [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars, List.Subset, List.mem_append] at *\n-    intro a\n-    apply_rules [Or.imp, Or.inr]\n+  rintro - a\n+  fun_induction extractOldExprVars post\n+  all_goals repeat' first | assumption | apply List.nil_subset | apply List.mem_append.2 ∘ Or.imp ?_ ?_ ∘ List.mem_append.1 | exact id"
+   }
+  ]
+ }
+}

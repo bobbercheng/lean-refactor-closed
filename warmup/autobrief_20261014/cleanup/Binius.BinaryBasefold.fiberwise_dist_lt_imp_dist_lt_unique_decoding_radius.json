@@ -1,0 +1,559 @@
+{
+ "problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+ "seed": {
+  "ok": true,
+  "tokens": 194,
+  "heartbeats": 2092,
+  "L": 86.74,
+  "H": 86.93,
+  "Z": 100.0,
+  "score": 91.22
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 194,
+    "heartbeats": 2092,
+    "Z": 100.0,
+    "score": 91.22
+   },
+   "after": {
+    "ok": true,
+    "tokens": 184,
+    "heartbeats": 2092,
+    "Z": 100.0,
+    "score": 91.45
+   },
+   "gain": 0.23,
+   "applied": {
+    "lam": 2,
+    "dollar": 6,
+    "bare": 1
+   },
+   "compiles": 9,
+   "seconds": 87.1
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 184,
+    "heartbeats": 2092,
+    "Z": 100.0,
+    "score": 91.45
+   },
+   "after": {
+    "ok": true,
+    "tokens": 184,
+    "heartbeats": 2092,
+    "Z": 100.0,
+    "score": 91.45
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 4,
+   "seconds": 57.1
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 184,
+    "heartbeats": 2092,
+    "Z": 100.0,
+    "score": 91.45
+   },
+   "after": {
+    "ok": true,
+    "tokens": 184,
+    "heartbeats": 2092,
+    "Z": 100.0,
+    "score": 91.45
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 2,
+   "seconds": 50.5
+  },
+  {
+   "pass": "lint_delete",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 184,
+    "heartbeats": 2092,
+    "Z": 100.0,
+    "score": 91.45
+   },
+   "after": {
+    "ok": true,
+    "tokens": 184,
+    "heartbeats": 2092,
+    "Z": 100.0,
+    "score": 91.45
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 20,
+   "seconds": 162.5
+  }
+ ],
+ "free_applied": [
+  "normalize"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 184,
+  "heartbeats": 2092,
+  "L": 87.42,
+  "H": 86.93,
+  "Z": 100.0,
+  "score": 91.45
+ },
+ "s0": "theorem fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius (i : Fin ℓ) (steps : ℕ)\n    [NeZero steps] (h_i_add_steps : i.val + steps ≤ ℓ)\n    (f : OracleFunction 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩)\n  (h_fw_dist_lt : fiberwiseClose 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate)\n    (i := i) (steps := steps) (h_i_add_steps := h_i_add_steps) (f := f)) :\n  hammingClose 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩ f := by\n  classical\n  obtain ⟨⟨g, hg⟩, hd⟩ := Nat.sInf_mem $ Set.range_nonempty\n    (λg : BBF_Code 𝔽q β _ => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g.1).ncard)\n  apply (mul_le_mul_left' (Code.distFromCode_le_dist_to_mem f g hg) 2).trans_lt\n  apply ENat.coe_lt_coe.2\n  have hh := Nat.mul_le_mul_right (2 ^ steps) $ Nat.le_of_lt_succ $ ENat.coe_lt_coe.1 h_fw_dist_lt\n  simp only [fiberwiseDistance, Set.image_univ, ←hd, Nat.mul_assoc, Nat.sub_mul,\n    ←Nat.pow_add, ←Nat.sub_add_comm $ h_i_add_steps.trans $ Nat.le_add_right ..,\n    ←Nat.sub_add_comm h_i_add_steps, Nat.add_sub_add_right] at hh\n  apply Nat.lt_succ_of_le\n  apply le_trans _ hh\n  apply Nat.mul_le_mul_left 2\n  simp only [Set.ncard_eq_toFinset_card', ←Finset.card_fin $ 2 ^ steps, ←Finset.card_product]\n  apply Finset.card_le_card_of_surjOn λp => qMap_total_fiber 𝔽q β _ steps\n    (Nat.lt_add_of_pos_right_of_le _ _ _ h_i_add_steps) p.1 p.2\n  intro x hx\n  refine ⟨(_, _), ?_, (is_fiber_iff_generates_quotient_point 𝔽q β i steps h_i_add_steps x _).mp rfl⟩\n  exact Finset.mem_product.mpr ⟨Set.mem_toFinset.mpr\n    ⟨x, rfl, (Finset.mem_filter.mp hx).2⟩, Finset.mem_univ _⟩",
+ "exchange": [
+  0.023,
+  0.208
+ ],
+ "profile": {
+  "ok": true,
+  "total": 2092,
+  "floor": null,
+  "reference": 16006,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "7-7",
+    "depth_indent": 2,
+    "text": "classical",
+    "heartbeats": null
+   },
+   {
+    "lines": "8-9",
+    "depth_indent": 2,
+    "text": "obtain ⟨⟨g, hg⟩, hd⟩ := Nat.sInf_mem $ Set.range_nonempty (λg : BBF_Code 𝔽q β _ => (fiberwiseDisagre",
+    "heartbeats": null
+   },
+   {
+    "lines": "10-10",
+    "depth_indent": 2,
+    "text": "apply (mul_le_mul_left' (Code.distFromCode_le_dist_to_mem f g hg) 2).trans_lt",
+    "heartbeats": null
+   },
+   {
+    "lines": "11-11",
+    "depth_indent": 2,
+    "text": "apply ENat.coe_lt_coe.2",
+    "heartbeats": null
+   },
+   {
+    "lines": "12-12",
+    "depth_indent": 2,
+    "text": "have hh := Nat.mul_le_mul_right (2 ^ steps) $ Nat.le_of_lt_succ $ ENat.coe_lt_coe.1 h_fw_dist_lt",
+    "heartbeats": null
+   },
+   {
+    "lines": "13-15",
+    "depth_indent": 2,
+    "text": "simp only [fiberwiseDistance, Set.image_univ, ←hd, Nat.mul_assoc, Nat.sub_mul, ←Nat.pow_add, ←Nat.su",
+    "heartbeats": null
+   },
+   {
+    "lines": "16-16",
+    "depth_indent": 2,
+    "text": "apply Nat.lt_succ_of_le",
+    "heartbeats": null
+   },
+   {
+    "lines": "17-17",
+    "depth_indent": 2,
+    "text": "apply le_trans _ hh",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 184,
+  "heartbeats": 2092,
+  "score": 91.45
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 2615,
+   "score": null,
+   "error": "1280:77: `grind` failed\ncase grind.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\nin"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 646,
+   "score": null,
+   "error": "1280:77: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 926,
+   "score": null,
+   "error": "1280:77: tactic 'aesop' failed, made no progress\nInitial goal:\n  r : ℕ\n  inst✝¹¹ : NeZero r\n  L : Type\n  inst✝¹⁰ : Field L\n  inst✝⁹ : Fintype L\n  inst✝⁸ : Decid"
+  },
+  {
+   "kind": "closer",
+   "line": 4,
+   "label": "replace the closing tactic at line 4 (`(λg : BBF_Code 𝔽q β _ => (fiberwiseDisa…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 165,
+   "heartbeats": 520,
+   "score": null,
+   "error": "1283:4: Unknown identifier `grind`"
+  },
+  {
+   "kind": "closer",
+   "line": 4,
+   "label": "replace the closing tactic at line 4 (`(λg : BBF_Code 𝔽q β _ => (fiberwiseDisa…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 165,
+   "heartbeats": 520,
+   "score": null,
+   "error": "1283:4: Unknown identifier `simp_all`"
+  },
+  {
+   "kind": "closer",
+   "line": 4,
+   "label": "replace the closing tactic at line 4 (`(λg : BBF_Code 𝔽q β _ => (fiberwiseDisa…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 165,
+   "heartbeats": 520,
+   "score": null,
+   "error": "1283:4: Unknown identifier `aesop`"
+  },
+  {
+   "kind": "closer",
+   "line": 10,
+   "label": "replace the closing tactic at line 10 (`←Nat.sub_add_comm h_i_add_steps, Nat.ad…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 177,
+   "heartbeats": null,
+   "score": null,
+   "error": "1300:0: unexpected end of input; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 10,
+   "label": "replace the closing tactic at line 10 (`←Nat.sub_add_comm h_i_add_steps, Nat.ad…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 177,
+   "heartbeats": null,
+   "score": null,
+   "error": "1300:0: unexpected end of input; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 10,
+   "label": "replace the closing tactic at line 10 (`←Nat.sub_add_comm h_i_add_steps, Nat.ad…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 177,
+   "heartbeats": null,
+   "score": null,
+   "error": "1300:0: unexpected end of input; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 16,
+   "label": "replace the closing tactic at line 16 (`(Nat.lt_add_of_pos_right_of_le _ _ _ h_…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 176,
+   "heartbeats": 1526,
+   "score": null,
+   "error": "1295:4: Unknown identifier `grind`"
+  },
+  {
+   "kind": "closer",
+   "line": 16,
+   "label": "replace the closing tactic at line 16 (`(Nat.lt_add_of_pos_right_of_le _ _ _ h_…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 176,
+   "heartbeats": 1526,
+   "score": null,
+   "error": "1295:4: Unknown identifier `simp_all`"
+  },
+  {
+   "kind": "closer",
+   "line": 16,
+   "label": "replace the closing tactic at line 16 (`(Nat.lt_add_of_pos_right_of_le _ _ _ h_…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 176,
+   "heartbeats": 1526,
+   "score": null,
+   "error": "1295:4: Unknown identifier `aesop`"
+  },
+  {
+   "kind": "closer",
+   "line": 20,
+   "label": "replace the closing tactic at line 20 (`⟨x, rfl, (Finset.mem_filter.mp hx).2⟩, …`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 170,
+   "heartbeats": null,
+   "score": null,
+   "error": "1300:0: unexpected end of input; expected ',' or '⟩'"
+  },
+  {
+   "kind": "closer",
+   "line": 20,
+   "label": "replace the closing tactic at line 20 (`⟨x, rfl, (Finset.mem_filter.mp hx).2⟩, …`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 170,
+   "heartbeats": null,
+   "score": null,
+   "error": "1300:0: unexpected end of input; expected ',' or '⟩'"
+  },
+  {
+   "kind": "closer",
+   "line": 20,
+   "label": "replace the closing tactic at line 20 (`⟨x, rfl, (Finset.mem_filter.mp hx).2⟩, …`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 170,
+   "heartbeats": null,
+   "score": null,
+   "error": "1300:0: unexpected end of input; expected ',' or '⟩'"
+  },
+  {
+   "kind": "del-arg",
+   "line": 8,
+   "label": "delete `fiberwiseDistance` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 182,
+   "heartbeats": 1424,
+   "score": null,
+   "error": "1294:2: Tactic `apply` failed: could not unify the conclusion of `card_le_card_of_surjOn fun p =>\n  qMap_total_fiber 𝔽q β ?m.246 steps (lt_add_of_pos_right_of_l"
+  },
+  {
+   "kind": "del-arg",
+   "line": 8,
+   "label": "delete `Set.image_univ` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 182,
+   "heartbeats": 1698,
+   "score": null,
+   "error": "1294:2: Tactic `apply` failed: could not unify the conclusion of `card_le_card_of_surjOn fun p =>\n  qMap_total_fiber 𝔽q β ?m.246 steps (lt_add_of_pos_right_of_l"
+  },
+  {
+   "kind": "del-arg",
+   "line": 8,
+   "label": "delete `←hd` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 181,
+   "heartbeats": 1655,
+   "score": null,
+   "error": "1294:2: Tactic `apply` failed: could not unify the conclusion of `card_le_card_of_surjOn fun p =>\n  qMap_total_fiber 𝔽q β ?m.246 steps (lt_add_of_pos_right_of_l"
+  },
+  {
+   "kind": "del-arg",
+   "line": 8,
+   "label": "delete `Nat.mul_assoc` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 182,
+   "heartbeats": 1373,
+   "score": null,
+   "error": "1292:2: Tactic `apply` failed: could not unify the conclusion of `Nat.mul_le_mul_left 2`\n  2 * ?m.217 ≤ 2 * ?m.218\nwith the goal\n  2 * Δ₀(f, g) ≤ 2 * (fiberwise"
+  },
+  {
+   "kind": "del-arg",
+   "line": 8,
+   "label": "delete `Nat.sub_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 182,
+   "heartbeats": 1341,
+   "score": null,
+   "error": "1291:2: Tactic `apply` failed: could not unify the type of `le_trans ?m.216 hh`\n  ?m.213 ≤ (2 ^ (ℓ + 𝓡 - (↑i + steps)) - 2 ^ (ℓ - (↑i + steps))) * 2 ^ steps\nwit"
+  },
+  {
+   "kind": "del-arg",
+   "line": 9,
+   "label": "delete `←Nat.pow_add` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 181,
+   "heartbeats": 1350,
+   "score": null,
+   "error": "1290:2: Tactic `apply` failed: could not unify the type of `le_trans ?m.216 hh`\n  ?m.213 ≤ 2 ^ (ℓ + 𝓡 - (↑i + steps)) * 2 ^ steps - 2 ^ (ℓ - (↑i + steps)) * 2 ^"
+  },
+  {
+   "kind": "del-arg",
+   "line": 10,
+   "label": "delete `Nat.add_sub_add_right` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 182,
+   "heartbeats": 1364,
+   "score": null,
+   "error": "1291:2: Tactic `apply` failed: could not unify the type of `le_trans ?m.216 hh`\n  ?m.213 ≤ 2 ^ (ℓ + 𝓡 + steps - (↑i + steps)) - 2 ^ (ℓ + steps - (↑i + steps))\nw"
+  },
+  {
+   "kind": "del-arg",
+   "line": 14,
+   "label": "delete `Set.ncard_eq_toFinset_card'` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 182,
+   "heartbeats": 1498,
+   "score": null,
+   "error": "1294:2: Tactic `apply` failed: could not unify the conclusion of `card_le_card_of_surjOn fun p =>\n  qMap_total_fiber 𝔽q β ?m.246 steps (lt_add_of_pos_right_of_l"
+  },
+  {
+   "kind": "del-arg",
+   "line": 14,
+   "label": "delete `←Finset.card_product` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 181,
+   "heartbeats": 1565,
+   "score": null,
+   "error": "1294:2: Tactic `apply` failed: could not unify the conclusion of `card_le_card_of_surjOn fun p =>\n  qMap_total_fiber 𝔽q β ?m.246 steps (lt_add_of_pos_right_of_l"
+  },
+  {
+   "kind": "del-tac",
+   "line": 14,
+   "label": "delete the tactic `simp only [Set.ncard_eq_toFinset_card', ←Finset.c…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 169,
+   "heartbeats": 1449,
+   "score": null,
+   "error": "1293:2: Tactic `apply` failed: could not unify the conclusion of `card_le_card_of_surjOn fun p =>\n  qMap_total_fiber 𝔽q β ?m.245 steps (lt_add_of_pos_right_of_l"
+  },
+  {
+   "kind": "del-tac",
+   "line": 7,
+   "label": "delete the tactic `have hh := Nat.mul_le_mul_right (2 ^ steps) $ Nat…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 170,
+   "heartbeats": 1210,
+   "score": null,
+   "error": "1288:63: Unknown identifier `hh`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 5,
+   "label": "delete the tactic `apply (mul_le_mul_left' (Code.distFromCode_le_dis…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 172,
+   "heartbeats": 730,
+   "score": null,
+   "error": "1284:2: Tactic `apply` failed: could not unify the conclusion of `ENat.coe_lt_coe.mpr`\n  ↑?m.163 < ↑?m.164\nwith the goal\n  hammingClose 𝔽q β ⟨↑i, ⋯⟩ f\n\nNote: Th"
+  },
+  {
+   "kind": "del-tac",
+   "line": 6,
+   "label": "delete the tactic `apply ENat.coe_lt_coe.2`",
+   "closer": "",
+   "ok": false,
+   "tokens": 182,
+   "heartbeats": 1345,
+   "score": null,
+   "error": "1289:2: Tactic `apply` failed: could not unify the conclusion of `@lt_succ_of_le`\n  ?n < succ ?m\nwith the goal\n  2 * ↑Δ₀(f, g) < ↑(BBF_CodeDistance ℓ 𝓡 ⟨↑i, ⋯⟩)"
+  },
+  {
+   "kind": "del-tac",
+   "line": 11,
+   "label": "delete the tactic `apply Nat.lt_succ_of_le`",
+   "closer": "",
+   "ok": false,
+   "tokens": 182,
+   "heartbeats": 1363,
+   "score": null,
+   "error": "1290:2: Tactic `apply` failed: could not unify the type of `le_trans ?m.213 hh`\n  ?m.210 ≤ 2 ^ (ℓ + 𝓡 - ↑i) - 2 ^ (ℓ - ↑i)\nwith the goal\n  2 * Δ₀(f, g) < BBF_Co"
+  },
+  {
+   "kind": "del-tac",
+   "line": 12,
+   "label": "delete the tactic `apply le_trans _ hh`",
+   "closer": "",
+   "ok": false,
+   "tokens": 180,
+   "heartbeats": 1362,
+   "score": null,
+   "error": "1291:2: Tactic `apply` failed: could not unify the conclusion of `Nat.mul_le_mul_left 2`\n  2 * ?m.211 ≤ 2 * ?m.212\nwith the goal\n  2 * Δ₀(f, g) ≤ 2 ^ (ℓ + 𝓡 - ↑"
+  },
+  {
+   "kind": "del-tac",
+   "line": 13,
+   "label": "delete the tactic `apply Nat.mul_le_mul_left 2`",
+   "closer": "",
+   "ok": false,
+   "tokens": 181,
+   "heartbeats": 1559,
+   "score": null,
+   "error": "1293:2: Tactic `apply` failed: could not unify the conclusion of `card_le_card_of_surjOn fun p =>\n  qMap_total_fiber 𝔽q β ?m.241 steps (lt_add_of_pos_right_of_l"
+  },
+  {
+   "kind": "del-tac",
+   "line": 17,
+   "label": "delete the tactic `intro x hx`",
+   "closer": "",
+   "ok": false,
+   "tokens": 181,
+   "heartbeats": 1660,
+   "score": null,
+   "error": "1296:9: Invalid `⟨...⟩` notation: The expected type\n  ∀ ⦃a : ↥(sDomain 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩)⦄,\n    a ∈ ↑{i_1 | f i_1 ≠ g i_1} →\n      a ∈\n        (fun p "
+  },
+  {
+   "kind": "del-tac",
+   "line": 18,
+   "label": "delete the tactic `refine ⟨(_, _), ?_, (is_fiber_iff_generates_quoti…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 161,
+   "heartbeats": 1699,
+   "score": null,
+   "error": "1298:4: Invalid `⟨...⟩` notation: The expected type of this term could not be determined"
+  }
+ ],
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 194 tokens, 2092 heartbeats, score 91.22. Free passes applied (normalize): start candidate 184 tokens, 2092 heartbeats, score 91.45.\n- Exchange rate here: 1 token = 0.023 points, 100 heartbeats = 0.208 points.\n- Deletions that FAIL (needed as they stand): line 8 `fiberwiseDistance` from the simp list; line 8 `Set.image_univ` from the simp list; line 8 `←hd` from the simp list; line 8 `Nat.mul_assoc` from the simp list; line 8 `Nat.sub_mul` from the simp list; line 9 `←Nat.pow_add` from the simp list.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the closing tactic at line 4 (`(λg : BBF_Code 𝔽q β _ => (fiberwiseDisa…`) (grind/simp_all/aesop); the closing tactic at line 10 (`←Nat.sub_add_comm h_i_add_steps, Nat.ad…`) (grind/simp_all/aesop); the closing tactic at line 16 (`(Nat.lt_add_of_pos_right_of_le _ _ _ h_…`) (grind/simp_all/aesop); the closing tactic at line 20 (`⟨x, rfl, (Finset.mem_filter.mp hx).2⟩, …`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 91.45,
+ "gain": 0.23,
+ "compiles_sweep": 33,
+ "seconds": 591.5,
+ "source": "best:ac0230d57a84"
+}

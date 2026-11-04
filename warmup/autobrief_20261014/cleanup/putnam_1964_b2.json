@@ -1,0 +1,238 @@
+{
+ "problem": "putnam_1964_b2",
+ "seed": {
+  "ok": true,
+  "tokens": 25,
+  "heartbeats": 2575,
+  "L": 98.57,
+  "H": 98.09,
+  "Z": 100.0,
+  "score": 98.89
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "no sites",
+   "before": {
+    "ok": true,
+    "tokens": 25,
+    "heartbeats": 2575,
+    "Z": 100.0,
+    "score": 98.89
+   },
+   "after": {
+    "ok": true,
+    "tokens": 25,
+    "heartbeats": 2575,
+    "Z": 100.0,
+    "score": 98.89
+   },
+   "gain": null,
+   "applied": null,
+   "compiles": 2,
+   "seconds": 6.4
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 25,
+    "heartbeats": 2575,
+    "Z": 100.0,
+    "score": 98.89
+   },
+   "after": {
+    "ok": true,
+    "tokens": 25,
+    "heartbeats": 2575,
+    "Z": 100.0,
+    "score": 98.89
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 2,
+   "seconds": 9.7
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 25,
+    "heartbeats": 2575,
+    "Z": 100.0,
+    "score": 98.89
+   },
+   "after": {
+    "ok": true,
+    "tokens": 25,
+    "heartbeats": 2575,
+    "Z": 100.0,
+    "score": 98.89
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 5,
+   "seconds": 19.7
+  },
+  {
+   "pass": "lint_delete",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 25,
+    "heartbeats": 2575,
+    "Z": 100.0,
+    "score": 98.89
+   },
+   "after": {
+    "ok": true,
+    "tokens": 25,
+    "heartbeats": 2575,
+    "Z": 100.0,
+    "score": 98.89
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 5,
+   "seconds": 19.3
+  }
+ ],
+ "free_applied": [],
+ "start": {
+  "ok": true,
+  "tokens": 25,
+  "heartbeats": 2575,
+  "L": 98.57,
+  "H": 98.09,
+  "Z": 100.0,
+  "score": 98.89
+ },
+ "s0": "theorem putnam_1964_b2\n(S : Type*) [Fintype S] [Nonempty S]\n(P : Finset (Set S))\n(hPP : ∀ T ∈ P, ∀ U ∈ P, T ∩ U ≠ ∅)\n(hPS : ¬∃ T : Set S, T ∉ P ∧ (∀ U ∈ P, T ∩ U ≠ ∅))\n: (P.card = 2 ^ (Fintype.card S - 1)) := by\n  classical\n  suffices Pᶜ.card = P.card by\n    rw [Finset.card_compl, Fintype.card_set, ← mul_pow_sub_one NeZero.out] at this\n    omega\n  apply Finset.card_equiv compl_involutive.toPerm\n  simp\n  grind",
+ "exchange": [
+  0.019,
+  0.025
+ ],
+ "profile": {
+  "ok": true,
+  "total": 2575,
+  "floor": null,
+  "reference": 134548,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "7-7",
+    "depth_indent": 2,
+    "text": "classical",
+    "heartbeats": null
+   },
+   {
+    "lines": "8-10",
+    "depth_indent": 2,
+    "text": "suffices Pᶜ.card = P.card by rw [Finset.card_compl, Fintype.card_set, ← mul_pow_sub_one NeZero.out] ",
+    "heartbeats": null
+   },
+   {
+    "lines": "11-11",
+    "depth_indent": 2,
+    "text": "apply Finset.card_equiv compl_involutive.toPerm",
+    "heartbeats": null
+   },
+   {
+    "lines": "12-12",
+    "depth_indent": 2,
+    "text": "simp",
+    "heartbeats": null
+   },
+   {
+    "lines": "13-13",
+    "depth_indent": 2,
+    "text": "grind",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 25,
+  "heartbeats": 2575,
+  "score": 98.89
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 1108,
+   "score": null,
+   "error": "22:44: `grind` failed\ncase grind.1\nS : Type u_1\ninst : Fintype S\ninst_1 : Nonempty S\nP : Finset (Set S)\nhPP : ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅\nhPS : ∀ (a : Set S), "
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 3873,
+   "score": null,
+   "error": "22:41: unsolved goals\nS : Type u_1\ninst✝¹ : Fintype S\ninst✝ : Nonempty S\nP : Finset (Set S)\nhPP : ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅\nhPS : ∀ x ∉ P, ∃ x_1 ∈ P, x ∩ x_1"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 5420,
+   "score": null,
+   "error": "22:41: unsolved goals\nS : Type u_1\ninst : Fintype S\ninst_1 : Nonempty S\nP : Finset (Set S)\nhPP : ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅\nhPS : ∀ x ∉ P, ∃ x_1 ∈ P, x ∩ x_1 "
+  },
+  {
+   "kind": "del-tac",
+   "line": 7,
+   "label": "delete the tactic `simp`",
+   "closer": "",
+   "ok": false,
+   "tokens": 24,
+   "heartbeats": 1325,
+   "score": null,
+   "error": "28:2: `grind` failed\ncase grind.1\nS : Type u_1\ninst : Fintype S\ninst_1 : Nonempty S\nP : Finset (Set S)\nhPP : ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅\nhPS : ∀ (a : Set S), ("
+  },
+  {
+   "kind": "del-tac",
+   "line": 4,
+   "label": "delete the tactic `rw [Finset.card_compl, Fintype.card_set, ← mul_po…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 13,
+   "heartbeats": 2025,
+   "score": null,
+   "error": "25:4: omega could not prove the goal:\na possible counterexample may satisfy the constraints\n  a ≥ 0\n  a - b ≤ -1\nwhere\n a := ↑P.card\n b := ↑2 ^ (Fintype.card S "
+  },
+  {
+   "kind": "del-tac",
+   "line": 6,
+   "label": "delete the tactic `apply Finset.card_equiv compl_involutive.toPerm`",
+   "closer": "",
+   "ok": false,
+   "tokens": 22,
+   "heartbeats": 760,
+   "score": null,
+   "error": "27:2: `simp` made no progress"
+  }
+ ],
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 25 tokens, 2575 heartbeats, score 98.89.\n- Exchange rate here: 1 token = 0.019 points, 100 heartbeats = 0.025 points.\n- Deletions that FAIL (needed as they stand): line 7 the tactic `simp`; line 4 the tactic `rw [Finset.card_compl, Fintype.card_set, ← mul_po…`; line 6 the tactic `apply Finset.card_equiv compl_involutive.toPerm`.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 98.89,
+ "gain": 0.0,
+ "compiles_sweep": 6,
+ "seconds": 104.0,
+ "source": "best:b7dae72d6c7f"
+}

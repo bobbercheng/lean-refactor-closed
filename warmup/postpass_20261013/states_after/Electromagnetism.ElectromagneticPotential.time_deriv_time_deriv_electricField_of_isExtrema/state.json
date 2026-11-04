@@ -1,0 +1,651 @@
+{
+ "problem": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+ "best": {
+  "score": 83.54,
+  "proof": "lemma time_deriv_time_deriv_electricField_of_isExtrema {A : ElectromagneticPotential d}\n    {𝓕 : FreeSpace}\n    (hA : ContDiff ℝ ∞ A) (J : LorentzCurrentDensity d)\n    (hJ : ContDiff ℝ ∞ J) (h : IsExtrema 𝓕 A J)\n    (t : Time) (x : Space d) (i : Fin d) :\n    ∂ₜ (∂ₜ (A.electricField 𝓕.c · x i)) t =\n      𝓕.c ^ 2 * ∑ j, (∂[j] (∂[j] (A.electricField 𝓕.c t · i)) x) -\n      𝓕.c ^ 2 / 𝓕.ε₀ * ∂[i] (J.chargeDensity 𝓕.c t ·) x -\n      𝓕.c ^ 2 * 𝓕.μ₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n  have hA3 : ContDiff ℝ (2+1) A := hA.of_le $ by decide\n  have hJd := hJ.differentiable nofun\n  have hBt (j : Fin d) := Space.space_deriv_differentiable_time (i := j)\n    (magneticFieldMatrix_contDiff (c := 𝓕.c) A hA3 (j, i)) x\n  have hBs := Differentiable.fun_sum (u := Finset.univ) λj _ => hBt j\n  have hJt := LorentzCurrentDensity.currentDensity_apply_differentiable_time (c := 𝓕.c) hJd x i\n  have hEd (j k : Fin d) := Space.deriv_differentiable\n    (electricField_apply_contDiff_space (c := 𝓕.c) (i := j) hA3 t) k\n  have hJs := LorentzCurrentDensity.chargeDensity_differentiable_space (c := 𝓕.c) hJd t\n  have hg := congrArg (λf => ∂[i] f x)\n    (funext λy => ((isExtrema_iff_gauss_ampere_magneticFieldMatrix hA J hJ).mp h t y).1)\n  conv_lhs =>\n    enter [1, s]\n    rewrite [Time.deriv_euclid $ electricField_differentiable_time hA3.of_succ _,\n      time_deriv_electricField_of_isExtrema hA J hJ h]\n  rewrite [Time.deriv_eq, fderiv_fun_sub (hBs.const_mul _).differentiableAt\n    (hJt.const_mul _).differentiableAt, fderiv_const_mul hBs.differentiableAt,\n    fderiv_const_mul hJt.differentiableAt, fderiv_fun_sum λj _ => (hBt j).differentiableAt]\n  simp only [_root_.sub_apply, _root_.smul_apply, _root_.sum_apply, smul_eq_mul, ← Time.deriv_eq, Space.time_deriv_comm_space_deriv\n    (magneticFieldMatrix_contDiff A hA3 _), time_deriv_magneticFieldMatrix _ hA3.of_succ]\n  simp only [Space.deriv_eq, div_eq_inv_mul] at hg\n  unfold Space.div at hg\n  dsimp only [Space.deriv_eq_fderiv_fun] at hEd\n  simp (disch := solve_by_elim only [hEd, hJs, Differentiable.differentiableAt]) only [Space.deriv_eq, fderiv_fun_sub, fderiv_fun_sum,\n    fderiv_const_mul, _root_.sub_apply, _root_.sum_apply, _root_.smul_apply, smul_eq_mul] at hg ⊢\n  simp only [← Space.deriv_eq, Space.deriv_commute (v := i) _\n    (electricField_apply_contDiff_space hA3 t), Finset.sum_sub_distrib] at hg ⊢\n  rewrite [hg]\n  simp only [FreeSpace.c_sq, mul_inv_rev, div_eq_mul_inv]\n  simp only [mul_right_comm (𝓕.μ₀⁻¹) (𝓕.ε₀⁻¹) 𝓕.μ₀, inv_mul_cancel₀ 𝓕.μ₀_ne_zero, one_mul]\n  ring",
+  "tokens": 341,
+  "heartbeats": 6647,
+  "L": 75.15,
+  "H": 75.48,
+  "Z": 100.0,
+  "compat": {
+   "v4.32.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "651afc434dce",
+   "tokens": 223,
+   "heartbeats": 9297,
+   "ok": false,
+   "error": "394:48: `simp` made no progress",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:11:45Z"
+  },
+  {
+   "sha": "bdd397a5397f",
+   "tokens": 212,
+   "heartbeats": 8765,
+   "ok": false,
+   "error": "393:60: unsolved goals … [hypotheses omitted] ⊢ ∂ₜ (fun s => 𝓕.ε₀⁻¹ * 𝓕.μ₀⁻¹ * ∑ x_1, Space.deriv x_1 (fun x => magneticFieldMatrix 𝓕.c A s x (x_1, i)) x - 𝓕.ε₀⁻¹ * (LorentzCurrentDensity.currentDensity 𝓕.c J s x).ofLp i) t = -(𝓕.ε₀⁻¹ * 𝓕.μ₀ * 𝓕.μ₀⁻¹ * ∂ₜ (fun x_1 => (LorentzCurrentDensity.currentDe",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:12:28Z"
+  },
+  {
+   "sha": "f015eac83cf0",
+   "tokens": 232,
+   "heartbeats": 9194,
+   "ok": false,
+   "error": "393:60: unsolved goals … [hypotheses omitted] ⊢ ∂ₜ (fun s => 𝓕.ε₀⁻¹ * 𝓕.μ₀⁻¹ * ∑ x_1, Space.deriv x_1 (fun x => magneticFieldMatrix 𝓕.c A s x (x_1, i)) x - 𝓕.ε₀⁻¹ * (LorentzCurrentDensity.currentDensity 𝓕.c J s x).ofLp i) t = -(𝓕.ε₀⁻¹ * 𝓕.μ₀ * 𝓕.μ₀⁻¹ * ∂ₜ (fun x_1 => (LorentzCurrentDensity.currentDe",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:13:30Z"
+  },
+  {
+   "sha": "489d8931a7d7",
+   "tokens": 256,
+   "heartbeats": 8979,
+   "ok": false,
+   "error": "393:60: unsolved goals … [hypotheses omitted] ⊢ ∂ₜ (fun s => 𝓕.ε₀⁻¹ * 𝓕.μ₀⁻¹ * ∑ x_1, Space.deriv x_1 (fun x => magneticFieldMatrix 𝓕.c A s x (x_1, i)) x - 𝓕.ε₀⁻¹ * (LorentzCurrentDensity.currentDensity 𝓕.c J s x).ofLp i) t = -(𝓕.ε₀⁻¹ * 𝓕.μ₀ * 𝓕.μ₀⁻¹ * ∂ₜ (fun x_1 => (LorentzCurrentDensity.currentDe",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:14:31Z"
+  },
+  {
+   "sha": "f23dea74a2b3",
+   "tokens": 294,
+   "heartbeats": 10231,
+   "ok": false,
+   "error": "393:60: unsolved goals … [hypotheses omitted] ⊢ 𝓕.ε₀⁻¹ * 𝓕.μ₀⁻¹ * ∑ x_1, ∂ₜ (fun s => Space.deriv x_1 (fun x => magneticFieldMatrix 𝓕.c A s x (x_1, i)) x) t - 𝓕.ε₀⁻¹ * ∂ₜ (fun t => (LorentzCurrentDensity.currentDensity 𝓕.c J t x).ofLp i) t = -(𝓕.ε₀⁻¹ * 𝓕.μ₀ * 𝓕.μ₀⁻¹ * ∂ₜ (fun t => (LorentzCurrentDen",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:15:07Z"
+  },
+  {
+   "sha": "81c2d79380d9",
+   "tokens": 170,
+   "heartbeats": 8649,
+   "ok": false,
+   "error": "393:60: unsolved goals … [hypotheses omitted] ⊢ ∂ₜ (fun s => 𝓕.ε₀⁻¹ * 𝓕.μ₀⁻¹ * ∑ x_1, (fderiv ℝ (fun x => magneticFieldMatrix 𝓕.c A s x (x_1, i)) x) (Space.basis x_1) - 𝓕.ε₀⁻¹ * (LorentzCurrentDensity.currentDensity 𝓕.c J s x).ofLp i) t = -(𝓕.ε₀⁻¹ * 𝓕.μ₀ * 𝓕.μ₀⁻¹ * ∂ₜ (fun x_1 => (LorentzCurrentDens",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:46:02Z"
+  },
+  {
+   "sha": "838c39deb07b",
+   "tokens": 258,
+   "heartbeats": 914,
+   "ok": false,
+   "error": "396:26: don't know how to synthesize implicit argument `f` @space_deriv_differen … [hypotheses omitted] ⊢ Time → Space d → ℝ",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:46:31Z"
+  },
+  {
+   "sha": "8e5c7a0ef9e3",
+   "tokens": 278,
+   "heartbeats": 9469,
+   "ok": false,
+   "error": "393:60: unsolved goals … [hypotheses omitted] ⊢ ∂ₜ (fun s => 𝓕.ε₀⁻¹ * 𝓕.μ₀⁻¹ * ∑ x_1, (fderiv ℝ (fun x => magneticFieldMatrix 𝓕.c A s x (x_1, i)) x) (Space.basis x_1) - 𝓕.ε₀⁻¹ * (LorentzCurrentDensity.currentDensity 𝓕.c J s x).ofLp i) t = -(𝓕.ε₀⁻¹ * 𝓕.μ₀ * 𝓕.μ₀⁻¹ * ∂ₜ (fun x_1 => (LorentzCurrentDens",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:46:43Z"
+  },
+  {
+   "sha": "e010ade2a717",
+   "tokens": 305,
+   "heartbeats": 13009,
+   "ok": false,
+   "error": "408:23: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized Time.instAddCommGroup inferred Time.instNormedAddCommGroup.toAddCommGroup",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:46:56Z"
+  },
+  {
+   "sha": "05d378230495",
+   "tokens": 287,
+   "heartbeats": 9124,
+   "ok": false,
+   "error": "393:60: unsolved goals … [hypotheses omitted] ⊢ ∂ₜ (fun s => 𝓕.ε₀⁻¹ * 𝓕.μ₀⁻¹ * ∑ x_1, (fderiv ℝ (fun x => magneticFieldMatrix 𝓕.c A s x (x_1, i)) x) (Space.basis x_1) - 𝓕.ε₀⁻¹ * (LorentzCurrentDensity.currentDensity 𝓕.c J s x).ofLp i) t = -(𝓕.ε₀⁻¹ * 𝓕.μ₀ * 𝓕.μ₀⁻¹ * ∂ₜ (fun x_1 => (LorentzCurrentDens",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:47:09Z"
+  },
+  {
+   "sha": "45d0584ff73c",
+   "tokens": 365,
+   "heartbeats": 10340,
+   "ok": false,
+   "error": "416:118: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized Real.instAddCommGroup inferred Real.normedAddCommGroup.toAddCommGroup",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:47:35Z"
+  },
+  {
+   "sha": "6228d3382eec",
+   "tokens": 342,
+   "heartbeats": 11198,
+   "ok": false,
+   "error": "393:60: unsolved goals … [hypotheses omitted] ⊢ 𝓕.ε₀⁻¹ * 𝓕.μ₀⁻¹ * ∑ x_1, Space.deriv x_1 (fun x' => Space.deriv x_1 (fun x => (electricField 𝓕.c A t x).ofLp i) x' - Space.deriv i (fun x => (electricField 𝓕.c A t x).ofLp x_1) x') x - 𝓕.ε₀⁻¹ * ∂ₜ (fun t => (LorentzCurrentDensity.currentDensity 𝓕.c J t",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:48:07Z"
+  },
+  {
+   "sha": "bec9128a3638",
+   "tokens": 442,
+   "heartbeats": 12367,
+   "ok": false,
+   "error": "419:53: unsolved goals … [hypotheses omitted] ⊢ Space.deriv j (Space.deriv j fun x => (electricField 𝓕.c A t x).ofLp i) x - Space.deriv j (Space.deriv i fun x => (electricField 𝓕.c A t x).ofLp j) x = Space.deriv j (Space.deriv j fun x => (electricField 𝓕.c A t x).ofLp i) x - Space.deriv i (Space.der",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:48:27Z"
+  },
+  {
+   "sha": "614f38f01ee7",
+   "tokens": 446,
+   "heartbeats": 12426,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:48:38Z",
+   "score": 73.89
+  },
+  {
+   "sha": "66dcfbf0c1b4",
+   "tokens": 337,
+   "heartbeats": 3608,
+   "ok": false,
+   "error": "416:2: `simp` made no progress",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:49:04Z"
+  },
+  {
+   "sha": "5f171753f642",
+   "tokens": 348,
+   "heartbeats": 3783,
+   "ok": false,
+   "error": "416:53: failed to synthesize instance of type class AddCommGroup (Fin d) Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:49:35Z"
+  },
+  {
+   "sha": "e3ca9d3569d9",
+   "tokens": 427,
+   "heartbeats": 14150,
+   "ok": false,
+   "error": "430:35: Unknown constant `Electromagnetism.FreeSpace.μ₀_neq_zero`",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:50:01Z"
+  },
+  {
+   "sha": "e418bff34dd4",
+   "tokens": 445,
+   "heartbeats": 11688,
+   "ok": false,
+   "error": "393:60: unsolved goals … [hypotheses omitted] ⊢ 𝓕.ε₀⁻¹ * 𝓕.μ₀⁻¹ * ∑ x_1, Space.deriv x_1 (Space.deriv x_1 fun x => (electricField 𝓕.c A t x).ofLp i) x - 𝓕.ε₀⁻¹ * ∂ₜ (fun t => (LorentzCurrentDensity.currentDensity 𝓕.c J t x).ofLp i) t - 𝓕.ε₀⁻¹ ^ 2 * 𝓕.μ₀⁻¹ * Space.deriv i (fun x => LorentzCurrentDens",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:51:09Z"
+  },
+  {
+   "sha": "185790dd7ced",
+   "tokens": 427,
+   "heartbeats": 14153,
+   "ok": false,
+   "error": "393:60: unsolved goals … [hypotheses omitted] ⊢ 𝓕.ε₀⁻¹ * 𝓕.μ₀⁻¹ * ∑ x_1, Space.deriv x_1 (Space.deriv x_1 fun x => (electricField 𝓕.c A t x).ofLp i) x - 𝓕.ε₀⁻¹ * ∂ₜ (fun t => (LorentzCurrentDensity.currentDensity 𝓕.c J t x).ofLp i) t - 𝓕.ε₀⁻¹ ^ 2 * 𝓕.μ₀⁻¹ * Space.deriv i (fun x => LorentzCurrentDens",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:51:28Z"
+  },
+  {
+   "sha": "e817da8429d1",
+   "tokens": 276,
+   "heartbeats": 3435,
+   "ok": false,
+   "error": "418:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern Space. … [hypotheses omitted] ⊢ ∂ₜ (fun s => 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ x_1, Space.deriv x_1 (fun x => magneticFieldMatrix 𝓕.c A s x (x_1, i)) x - 1 / 𝓕.ε₀ * (LorentzCurrentDensity.currentDensity 𝓕.c J s x).ofLp i) t = 𝓕.c.val ^ 2 ",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:46:21Z"
+  },
+  {
+   "sha": "355f7989404e",
+   "tokens": 367,
+   "heartbeats": 14282,
+   "ok": false,
+   "error": "409:229: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized Time.instAddCommGroup inferred Time.instNormedAddCommGroup.toAddCommGroup",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:46:44Z"
+  },
+  {
+   "sha": "7ed4a35c7cd2",
+   "tokens": 322,
+   "heartbeats": 5362,
+   "ok": false,
+   "error": "421:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern Space. … [hypotheses omitted] ⊢ 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ x_1, Space.deriv x_1 (fun x' => Space.deriv x_1 (fun x => (electricField 𝓕.c A t x).ofLp i) x' - Space.deriv i (fun x => (electricField 𝓕.c A t x).ofLp x_1) x') x - 1 / 𝓕.ε",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:47:25Z"
+  },
+  {
+   "sha": "66b1cb9313a0",
+   "tokens": 329,
+   "heartbeats": 5339,
+   "ok": false,
+   "error": "422:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern Space. … [hypotheses omitted] ⊢ 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ x_1, Space.deriv x_1 (fun x' => Space.deriv x_1 (fun x => (electricField 𝓕.c A t x).ofLp i) x' - Space.deriv i (fun x => (electricField 𝓕.c A t x).ofLp x_1) x') x - 1 / 𝓕.ε",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:48:26Z"
+  },
+  {
+   "sha": "5ffcf7bc15e6",
+   "tokens": 329,
+   "heartbeats": 5448,
+   "ok": false,
+   "error": "422:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern Space. … [hypotheses omitted] ⊢ 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ x_1, Space.deriv x_1 (fun x' => Space.deriv x_1 (fun x => (electricField 𝓕.c A t x).ofLp i) x' - Space.deriv i (fun x => (electricField 𝓕.c A t x).ofLp x_1) x') x - 1 / 𝓕.ε",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:49:09Z"
+  },
+  {
+   "sha": "dc56282d7272",
+   "tokens": 321,
+   "heartbeats": 12919,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:49:44Z",
+   "score": 76.32
+  },
+  {
+   "sha": "95a2c60a29de",
+   "tokens": 340,
+   "heartbeats": 5640,
+   "ok": false,
+   "error": "417:108: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized Real.instAddCommGroup inferred Real.normedAddCommGroup.toAddCommGroup",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:51:33Z"
+  },
+  {
+   "sha": "5dd555cb64a8",
+   "tokens": 323,
+   "heartbeats": 12579,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:51:47Z",
+   "score": 76.69
+  },
+  {
+   "sha": "3c828ee2b554",
+   "tokens": 349,
+   "heartbeats": 6774,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:52:36Z",
+   "score": 83.19
+  },
+  {
+   "sha": "7a7fabfd546b",
+   "tokens": 333,
+   "heartbeats": 4076,
+   "ok": false,
+   "error": "420:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern ∑ x_1, … [hypotheses omitted] ⊢ ∂ₜ (fun s => 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ x_1, Space.deriv x_1 (fun x => magneticFieldMatrix 𝓕.c A s x (x_1, i)) x - 1 / 𝓕.ε₀ * (LorentzCurrentDensity.currentDensity 𝓕.c J s x).ofLp i) t = 𝓕.c.val ^ 2 ",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:53:19Z"
+  },
+  {
+   "sha": "3e022e1e1c13",
+   "tokens": 338,
+   "heartbeats": 3926,
+   "ok": false,
+   "error": "420:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern ∑ x_1, … [hypotheses omitted] ⊢ ∂ₜ (fun s => 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ x_1, Space.deriv x_1 (fun x => magneticFieldMatrix 𝓕.c A s x (x_1, i)) x - 1 / 𝓕.ε₀ * (LorentzCurrentDensity.currentDensity 𝓕.c J s x).ofLp i) t = 𝓕.c.val ^ 2 ",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:54:02Z"
+  },
+  {
+   "sha": "3458ca6fec26",
+   "tokens": 387,
+   "heartbeats": 6643,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:54:26Z"
+  },
+  {
+   "sha": "d8f95cb97c24",
+   "tokens": 347,
+   "heartbeats": 6771,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:54:47Z",
+   "score": 83.24
+  },
+  {
+   "sha": "bdf2d8e3e4d3",
+   "tokens": 341,
+   "heartbeats": 6769,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-normalize1",
+   "t": "2026-10-13T16:59:47Z",
+   "score": 83.39
+  },
+  {
+   "sha": "2767ca5d7ab9",
+   "tokens": 341,
+   "heartbeats": 6753,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-xfer1",
+   "t": "2026-10-13T17:23:42Z",
+   "score": 83.41
+  },
+  {
+   "sha": "29f5606f7eaf",
+   "tokens": 341,
+   "heartbeats": 6737,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-xfer1",
+   "t": "2026-10-13T17:26:47Z",
+   "score": 83.43
+  },
+  {
+   "sha": "999924dbea1c",
+   "tokens": 341,
+   "heartbeats": 6647,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-hbrewrite1",
+   "t": "2026-10-13T19:09:25Z",
+   "score": 83.54
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T20:08:05Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r4",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:40:36Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:20:14Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:40:33Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r14",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T01:09:34Z"
+  }
+ ],
+ "api_spend": 2.134476,
+ "fresh_lineages": [
+  {
+   "run_id": "wu-hx-sol-f2",
+   "spend": 0.144572,
+   "score": 33.33,
+   "adopted": false,
+   "restructure": false,
+   "t": "2026-10-11T21:06:33Z"
+  },
+  {
+   "run_id": "wu-hx-sol-f3",
+   "spend": 0.163813,
+   "score": 33.33,
+   "adopted": false,
+   "restructure": false,
+   "t": "2026-10-11T21:30:30Z"
+  }
+ ],
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 9,
+    "d_score": 40.56,
+    "d_tokens": -926,
+    "d_heartbeats": 12426,
+    "diff": "+lemma time_deriv_time_deriv_electricField_of_isExtrema {A : ElectromagneticPotential d}\n+    {𝓕 : FreeSpace}\n+    (hA : ContDiff ℝ ∞ A) (J : LorentzCurrentDensity d)\n+    (hJ : ContDiff ℝ ∞ J) (h : IsExtrema 𝓕 A J)\n+    (t : Time) (x : Space d) (i : Fin d) :\n+    ∂ₜ (∂ₜ (A.electricField 𝓕.c · x i)) t =\n+      𝓕.c ^ 2 * ∑ j, (∂[j] (∂[j] (A.electricField 𝓕.c t · i)) x) -\n+      𝓕.c ^ 2 / 𝓕.ε₀ * ∂[i] (J.chargeDensity 𝓕.c t ·) x -\n+      𝓕.c ^ 2 * 𝓕.μ₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n+  have hA3 : ContDiff ℝ (2+1) A := hA.of_le (by decide)\n+  have hJd := hJ.differentiable (by simp)\n+  have hBt (j : Fin d) := Space.space_deriv_differentiable_time (i := j)\n+    (magneticFieldMatrix_cont"
+   },
+   {
+    "run_id": "wu-hx-sol-r13",
+    "check": 6,
+    "d_score": 2.43,
+    "d_tokens": -125,
+    "d_heartbeats": 493,
+    "diff": "-  have hJd := hJ.differentiable (by simp)\n+  have hJd := hJ.differentiable nofun\n-  simp only [_root_.sub_apply, _root_.smul_apply, _root_.sum_apply, smul_eq_mul,\n-    ← Time.deriv_eq, Space.time_deriv_comm_space_deriv\n+  simp only [_root_.sub_apply, _root_.smul_apply, _root_.sum_apply, smul_eq_mul]\n+  simp only [← Time.deriv_eq, Space.time_deriv_comm_space_deriv\n-  have hs (j : Fin d) :\n-      ∂[j] (fun y => ∂[j] (A.electricField 𝓕.c t · i) y -\n-        ∂[i] (A.electricField 𝓕.c t · j) y) x =\n-      ∂[j] (∂[j] (A.electricField 𝓕.c t · i)) x -\n-        ∂[i] (∂[j] (A.electricField 𝓕.c t · j)) x := by\n-    rw [Space.deriv_eq, fderiv_fun_sub (hEd i j).differentiableAt\n-      (hEd j i).differen"
+   },
+   {
+    "run_id": "wu-hx-sol-r13",
+    "check": 8,
+    "d_score": 0.37,
+    "d_tokens": 2,
+    "d_heartbeats": -340,
+    "diff": "-  simp only [_root_.sub_apply, _root_.smul_apply, _root_.sum_apply, smul_eq_mul]\n-  simp only [← Time.deriv_eq, Space.time_deriv_comm_space_deriv\n+  simp only [_root_.sub_apply, _root_.smul_apply, _root_.sum_apply, smul_eq_mul, ← Time.deriv_eq, Space.time_deriv_comm_space_deriv\n-  simp (disch := solve_by_elim [Differentiable.differentiableAt]) only [Space.deriv_eq, fderiv_fun_sub, fderiv_fun_sum,\n+  simp (disch := solve_by_elim only [hEd, hJs, Differentiable.differentiableAt]) only [Space.deriv_eq, fderiv_fun_sub, fderiv_fun_sum,"
+   },
+   {
+    "run_id": "wu-hx-sol-r13",
+    "check": 9,
+    "d_score": 6.5,
+    "d_tokens": 26,
+    "d_heartbeats": -5805,
+    "diff": "-  simp [FreeSpace.c_sq]\n-  field_simp\n+  simp only [FreeSpace.c_sq, one_div, mul_inv_rev, div_eq_mul_inv]\n+  simp only [mul_right_comm (𝓕.μ₀⁻¹) (𝓕.ε₀⁻¹) 𝓕.μ₀, inv_mul_cancel₀ 𝓕.μ₀_ne_zero, one_mul]\n+  ring"
+   },
+   {
+    "run_id": "wu-hx-sol-r13",
+    "check": 13,
+    "d_score": 0.05,
+    "d_tokens": -2,
+    "d_heartbeats": -3,
+    "diff": "-  simp only [FreeSpace.c_sq, one_div, mul_inv_rev, div_eq_mul_inv]\n+  simp only [FreeSpace.c_sq, mul_inv_rev, div_eq_mul_inv]"
+   },
+   {
+    "run_id": "wu-hx-sol-xfer1",
+    "check": 1,
+    "d_score": 0.02,
+    "d_tokens": 0,
+    "d_heartbeats": -16,
+    "diff": "-  rw [hg]\n+  rewrite [hg]",
+    "source": "v2-check",
+    "kind": "edit",
+    "sha": "a5b0a4d3fa11"
+   },
+   {
+    "run_id": "wu-hx-sol-xfer1",
+    "check": 2,
+    "d_score": 0.02,
+    "d_tokens": 0,
+    "d_heartbeats": -16,
+    "diff": "-    rw [Time.deriv_euclid $ electricField_differentiable_time hA3.of_succ _,\n+    rewrite [Time.deriv_euclid $ electricField_differentiable_time hA3.of_succ _,\n-  rw [Time.deriv_eq, fderiv_fun_sub (hBs.const_mul _).differentiableAt\n+  rewrite [Time.deriv_eq, fderiv_fun_sub (hBs.const_mul _).differentiableAt",
+    "source": "v2-check",
+    "kind": "edit",
+    "sha": "2afb319a1f0e"
+   },
+   {
+    "run_id": "wu-hx-sol-hbrewrite1",
+    "check": 1,
+    "d_score": 0.11,
+    "d_tokens": 0,
+    "d_heartbeats": -90,
+    "diff": "-  simp only [Space.deriv_eq_fderiv_fun] at hEd\n+  dsimp only [Space.deriv_eq_fderiv_fun] at hEd",
+    "source": "v2-check",
+    "kind": "edit",
+    "sha": "662cf172471e"
+   }
+  ]
+ },
+ "profile_cache": {
+  "614f38f01ee7": {
+   "ok": true,
+   "total": 12426,
+   "floor": 663,
+   "reference": 27112,
+   "max_heartbeat_score": 32.52,
+   "blocks": [
+    {
+     "lines": "31-38",
+     "depth_indent": 2,
+     "text": "have hs (j : Fin d) : ∂[j] (fun y => ∂[j] (A.electricField 𝓕.c t · i) y - ∂[i] (A.electricField 𝓕.c ",
+     "heartbeats": 9248
+    },
+    {
+     "lines": "25-27",
+     "depth_indent": 2,
+     "text": "rw [Time.deriv_eq, fderiv_fun_sub (hBs.const_mul _).differentiableAt (hJt.const_mul _).differentiabl",
+     "heartbeats": 1006
+    },
+    {
+     "lines": "28-30",
+     "depth_indent": 2,
+     "text": "simp only [_root_.sub_apply, _root_.smul_apply, _root_.sum_apply, smul_eq_mul, ← Time.deriv_eq, Spac",
+     "heartbeats": 910
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "have hA3 : ContDiff ℝ (2+1) A := hA.of_le (by decide)",
+     "heartbeats": 112
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "have hBs := Differentiable.fun_sum (u := Finset.univ) fun j _ => hBt j",
+     "heartbeats": 103
+    },
+    {
+     "lines": "12-13",
+     "depth_indent": 2,
+     "text": "have hBt (j : Fin d) := Space.space_deriv_differentiable_time (i := j) (magneticFieldMatrix_contDiff",
+     "heartbeats": 78
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "have hJd := hJ.differentiable (by simp)",
+     "heartbeats": 76
+    },
+    {
+     "lines": "16-17",
+     "depth_indent": 2,
+     "text": "have hEd (j k : Fin d) := Space.deriv_differentiable (electricField_apply_contDiff_space (c := 𝓕.c) ",
+     "heartbeats": 72
+    },
+    {
+     "lines": "21-24",
+     "depth_indent": 2,
+     "text": "conv_lhs => enter [1, s] rw [Time.deriv_euclid (electricField_differentiable_time hA3.of_succ _), ti",
+     "heartbeats": 70
+    },
+    {
+     "lines": "19-20",
+     "depth_indent": 2,
+     "text": "have hg := congrArg (fun f => ∂[i] f x) (funext fun y => ((isExtrema_iff_gauss_ampere_magneticFieldM",
+     "heartbeats": 64
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "have hJt := LorentzCurrentDensity.currentDensity_apply_differentiable_time (c := 𝓕.c) hJd x i",
+     "heartbeats": 13
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "have hJs := LorentzCurrentDensity.chargeDensity_differentiable_space (c := 𝓕.c) hJd t",
+     "heartbeats": 11
+    }
+   ],
+   "points_left_heartbeats": 14.46,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "dc56282d7272": {
+   "ok": true,
+   "total": 12919,
+   "floor": 663,
+   "reference": 27112,
+   "max_heartbeat_score": 32.52,
+   "blocks": [
+    {
+     "lines": "29-30",
+     "depth_indent": 2,
+     "text": "simp only [← Time.deriv_eq, Space.time_deriv_comm_space_deriv (magneticFieldMatrix_contDiff A hA3 _)",
+     "heartbeats": 9898
+    },
+    {
+     "lines": "25-27",
+     "depth_indent": 2,
+     "text": "rw [Time.deriv_eq, fderiv_fun_sub (hBs.const_mul _).differentiableAt (hJt.const_mul _).differentiabl",
+     "heartbeats": 1006
+    },
+    {
+     "lines": "28-28",
+     "depth_indent": 2,
+     "text": "simp only [_root_.sub_apply, _root_.smul_apply, _root_.sum_apply, smul_eq_mul]",
+     "heartbeats": 777
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "have hA3 : ContDiff ℝ (2+1) A := hA.of_le (by decide)",
+     "heartbeats": 112
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "have hBs := Differentiable.fun_sum (u := Finset.univ) fun j _ => hBt j",
+     "heartbeats": 103
+    },
+    {
+     "lines": "12-13",
+     "depth_indent": 2,
+     "text": "have hBt (j : Fin d) := Space.space_deriv_differentiable_time (i := j) (magneticFieldMatrix_contDiff",
+     "heartbeats": 78
+    },
+    {
+     "lines": "16-17",
+     "depth_indent": 2,
+     "text": "have hEd (j k : Fin d) := Space.deriv_differentiable (electricField_apply_contDiff_space (c := 𝓕.c) ",
+     "heartbeats": 73
+    },
+    {
+     "lines": "21-24",
+     "depth_indent": 2,
+     "text": "conv_lhs => enter [1, s] rw [Time.deriv_euclid (electricField_differentiable_time hA3.of_succ _), ti",
+     "heartbeats": 71
+    },
+    {
+     "lines": "19-20",
+     "depth_indent": 2,
+     "text": "have hg := congrArg (fun f => ∂[i] f x) (funext fun y => ((isExtrema_iff_gauss_ampere_magneticFieldM",
+     "heartbeats": 63
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "have hJd := hJ.differentiable nofun",
+     "heartbeats": 52
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "have hJt := LorentzCurrentDensity.currentDensity_apply_differentiable_time (c := 𝓕.c) hJd x i",
+     "heartbeats": 12
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "have hJs := LorentzCurrentDensity.chargeDensity_differentiable_space (c := 𝓕.c) hJd t",
+     "heartbeats": 11
+    }
+   ],
+   "points_left_heartbeats": 15.07,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "hb_floor": 663,
+ "budget_milestones": {
+  "2": {
+   "spend": 2.001617,
+   "best": 73.89,
+   "run_id": "wu-hx-sol-r13",
+   "turn": 16,
+   "t": "2026-10-12T00:49:35Z"
+  }
+ }
+}

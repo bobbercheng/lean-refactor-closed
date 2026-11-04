@@ -1,0 +1,183 @@
+{
+ "problem": "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time",
+ "best": {
+  "score": 83.29,
+  "proof": "lemma ι_timeOrderF_superCommuteF_eq_time {φ ψ : 𝓕.CrAnFieldOp}\n    (hφψ : crAnTimeOrderRel φ ψ) (hψφ : crAnTimeOrderRel ψ φ) (a b : 𝓕.FieldOpFreeAlgebra) :\n    ι 𝓣ᶠ(a * [ofCrAnOpF φ, ofCrAnOpF ψ]ₛF * b) =\n    ι ([ofCrAnOpF φ, ofCrAnOpF ψ]ₛF * 𝓣ᶠ(a * b)) := by\n  let m := @mulLinearMap 𝓕\n  let c := [ofCrAnOpF φ, ofCrAnOpF ψ]ₛF\n  let f := (m.flip.compl₂ (m.flip c)).flip.compr₂ (ι.toLinearMap.comp timeOrderF)\n  let g := m.compr₂ (ι.toLinearMap.comp ((m c).comp timeOrderF))\n  suffices h : f = g from congrArg (fun k => k a b) h\n  apply LinearMap.ext_basis ofCrAnListFBasis ofCrAnListFBasis\n  intro x y\n  dsimp only [f, g, m, LinearMap.compr₂_apply, LinearMap.compl₂_apply,\n    LinearMap.flip_apply, LinearMap.comp_apply, AlgHom.toLinearMap_apply]\n  simp only [mulLinearMap_apply, ofListBasis_eq_ofList]\n  conv_lhs =>\n    simp only [c, superCommuteF_ofCrAnOpF_ofCrAnOpF, mul_sub, sub_mul,\n      mul_smul_comm, smul_mul_assoc, ← ofCrAnListF_singleton, ← ofCrAnListF_append,\n      List.singleton_append, List.cons_append, List.nil_append, map_sub, map_smul,\n      timeOrderF_ofCrAnListF]\n    rw [crAnTimeOrderList,\n      insertionSort_of_eq_list 𝓕.crAnTimeOrderRel φ x [φ, ψ] y (by simp_all),\n      crAnTimeOrderList,\n      insertionSort_of_eq_list 𝓕.crAnTimeOrderRel φ x [ψ, φ] y (by simp_all)]\n    simp only [ofCrAnListF_append, map_mul]\n    simp only [List.append_assoc, List.cons_append, List.nil_append]\n    rw [← crAnTimeOrderSign_swap_eq_time hφψ hψφ, smul_comm, ← smul_sub]\n    enter [2]\n    rw [← smul_mul_assoc, ← smul_mul_assoc,\n      ← sub_mul, ← sub_mul, ← mul_smul_comm, ← mul_sub]\n    rw [← map_smul, ← map_sub]\n    simp only [ofCrAnListF_cons, ofCrAnListF_nil, mul_one, ← smul_mul_assoc,\n      ← superCommuteF_ofCrAnOpF_ofCrAnOpF]\n  rw [Subalgebra.mem_center_iff.mp (ι_superCommuteF_ofCrAnOpF_ofCrAnOpF_mem_center φ ψ)]\n  simp only [mul_assoc, ← map_mul, ← ofCrAnListF_append]\n  rw [← insertionSort_of_takeWhile_filter 𝓕.crAnTimeOrderRel φ x y]\n  by_cases hq : 𝓕.crAnStatistics φ = 𝓕.crAnStatistics ψ\n  · rw [crAnTimeOrderSign, Wick.koszulSign_eq_rel_eq_stat _ _ hφψ hψφ hq.symm,\n      ← crAnTimeOrderSign, timeOrderF_ofCrAnListF]\n    simp only [c, map_mul, map_smul, mul_smul_comm, crAnTimeOrderList]\n  · simp [c, ι_superCommuteF_of_diff_statistic hq]",
+  "tokens": 319,
+  "heartbeats": 10069,
+  "L": 73.79,
+  "H": 76.09,
+  "Z": 100.0,
+  "compat": {
+   "v4.32.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "c1b3596b546a",
+   "tokens": 405,
+   "heartbeats": 4756,
+   "ok": false,
+   "error": "191:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern crAnTimeOrderSign (?φs ++ ψ :: φ :: ?φs') in the target expression crAnTimeOrderSign (x ++ [φ, ψ] ++ y) • ι (ofCrAnListF (crAnTimeOrderList (x ++ [φ, ψ] ++ y))) - (exchangeSign (𝓕.crAnStatistics φ)) (𝓕.crAnStatistics ψ) • crAn",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:23:42Z"
+  },
+  {
+   "sha": "786da868d5b3",
+   "tokens": 407,
+   "heartbeats": 4817,
+   "ok": false,
+   "error": "191:50: Tactic `rewrite` failed: Did not find an occurrence of the pattern (?a₁ * ?a₂) • ?b in the target expression crAnTimeOrderSign (x ++ φ :: ψ :: y) • ι (ofCrAnListF (crAnTimeOrderList (x ++ φ :: ψ :: y))) - (exchangeSign (𝓕.crAnStatistics φ)) (𝓕.crAnStatistics ψ) • crAnTimeOrderSign (x ++ φ ::",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:24:08Z"
+  },
+  {
+   "sha": "c72d2357bb96",
+   "tokens": 406,
+   "heartbeats": 6914,
+   "ok": false,
+   "error": "199:61: Tactic `rewrite` failed: Did not find an occurrence of the pattern ?s • (?x * ?y) in the target expression crAnTimeOrderSign (x ++ [φ, ψ] ++ y) • (ι (ofCrAnListF (List.takeWhile (fun c => decide ¬crAnTimeOrderRel φ c) (List.insertionSort crAnTimeOrderRel (x ++ y)))) * ι (ofCrAnListF (List.fi",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:24:23Z"
+  },
+  {
+   "sha": "719ca74ee55e",
+   "tokens": 411,
+   "heartbeats": 6554,
+   "ok": false,
+   "error": "200:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern ?r • ?x * ?y in the target expression ι (ofCrAnListF (List.takeWhile (fun c => decide ¬crAnTimeOrderRel φ c) (List.insertionSort crAnTimeOrderRel (x ++ y)))) * ι (ofCrAnListF (List.filter (fun c => decide (crAnTimeOrderRel φ c",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:24:40Z"
+  },
+  {
+   "sha": "738de3cd981d",
+   "tokens": 413,
+   "heartbeats": 6911,
+   "ok": false,
+   "error": "201:45: Tactic `rewrite` failed: Did not find an occurrence of the pattern ?s • (?x * ?y) in the target expression (ι (ofCrAnListF (List.takeWhile (fun c => decide ¬crAnTimeOrderRel φ c) (List.insertionSort crAnTimeOrderRel (x ++ y)))) * ι (ofCrAnListF (List.filter (fun c => decide (crAnTimeOrderRel",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:24:51Z"
+  },
+  {
+   "sha": "d28ca0c41c0e",
+   "tokens": 407,
+   "heartbeats": 10491,
+   "ok": false,
+   "error": "212:27: Tactic `rewrite` failed: Did not find an occurrence of the pattern Wick. … [hypotheses omitted] ⊢ Wick.koszulSign 𝓕.crAnStatistics crAnTimeOrderRel (x ++ [φ, ψ] ++ y) • ι ((superCommuteF (ofCrAnOpF φ)) (ofCrAnOpF ψ) * ofCrAnListF (List.insertionSort crAnTimeOrderRel (x ++ y))) = ι (c * timeO",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:00Z"
+  },
+  {
+   "sha": "0dc4f701c3e9",
+   "tokens": 416,
+   "heartbeats": 10585,
+   "ok": false,
+   "error": "214:27: Tactic `rewrite` failed: Did not find an occurrence of the pattern ofCrA … [hypotheses omitted] ⊢ crAnTimeOrderSign (x ++ y) • ι ((superCommuteF (ofCrAnOpF φ)) (ofCrAnOpF ψ) * ofCrAnListF (List.insertionSort crAnTimeOrderRel (x ++ y))) = ι (c * timeOrderF (ofCrAnListF (x ++ y)))",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:09Z"
+  },
+  {
+   "sha": "52d463484f72",
+   "tokens": 413,
+   "heartbeats": 11668,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:25:16Z",
+   "score": 79.45
+  },
+  {
+   "sha": "ae49e4920090",
+   "tokens": 381,
+   "heartbeats": 7450,
+   "ok": false,
+   "error": "205:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern ?b * ι … [hypotheses omitted] ⊢ crAnTimeOrderSign (x ++ [φ, ψ] ++ y) • (ι (ofCrAnListF (List.takeWhile (fun c => decide ¬crAnTimeOrderRel φ c) (List.insertionSort crAnTimeOrderRel (x ++ y)))) * ι (ofCrAnListF (List.filter (fun",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:26:14Z"
+  },
+  {
+   "sha": "c397f1f77065",
+   "tokens": 382,
+   "heartbeats": 11004,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:26:29Z",
+   "score": 80.83
+  },
+  {
+   "sha": "d3967ba9e4da",
+   "tokens": 338,
+   "heartbeats": 5776,
+   "ok": false,
+   "error": "198:26: Tactic `rewrite` failed: Did not find an occurrence of the pattern ?r • (?x * ?y) in the target expression ι (ofCrAnListF (List.takeWhile (fun c => decide ¬crAnTimeOrderRel φ c) (List.insertionSort crAnTimeOrderRel (x ++ y)))) * (ι (ofCrAnListF (List.filter (fun c => decide (crAnTimeOrderRel",
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:26:45Z"
+  },
+  {
+   "sha": "363eb25d7950",
+   "tokens": 332,
+   "heartbeats": 10675,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:27:02Z",
+   "score": 82.46
+  },
+  {
+   "sha": "60192ee074ae",
+   "tokens": 319,
+   "heartbeats": 10069,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f8",
+   "t": "2026-10-11T23:27:13Z",
+   "score": 83.29
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-f8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:20:14Z"
+  }
+ ],
+ "api_spend": 1.265604,
+ "lineage": "fresh",
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 8,
+    "d_score": 46.12,
+    "d_tokens": -804,
+    "d_heartbeats": 11668,
+    "diff": "+lemma ι_timeOrderF_superCommuteF_eq_time {φ ψ : 𝓕.CrAnFieldOp}\n+    (hφψ : crAnTimeOrderRel φ ψ) (hψφ : crAnTimeOrderRel ψ φ) (a b : 𝓕.FieldOpFreeAlgebra) :\n+    ι 𝓣ᶠ(a * [ofCrAnOpF φ, ofCrAnOpF ψ]ₛF * b) =\n+    ι ([ofCrAnOpF φ, ofCrAnOpF ψ]ₛF * 𝓣ᶠ(a * b)) := by\n+  let m := @mulLinearMap 𝓕\n+  let c := [ofCrAnOpF φ, ofCrAnOpF ψ]ₛF\n+  let f := (m.flip.compl₂ (m.flip c)).flip.compr₂ (ι.toLinearMap.comp timeOrderF)\n+  let g := m.compr₂ (ι.toLinearMap.comp ((m c).comp timeOrderF))\n+  suffices h : f = g from congrArg (fun k => k a b) h\n+  apply LinearMap.ext_basis ofCrAnListFBasis ofCrAnListFBasis\n+  intro x y\n+  change ι 𝓣ᶠ(ofCrAnListFBasis x * c * ofCrAnListFBasis y) =\n+    ι (c * 𝓣ᶠ(ofCrAnList"
+   },
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 10,
+    "d_score": 1.38,
+    "d_tokens": -31,
+    "d_heartbeats": -664,
+    "diff": "-  change ι 𝓣ᶠ(ofCrAnListFBasis x * c * ofCrAnListFBasis y) =\n-    ι (c * 𝓣ᶠ(ofCrAnListFBasis x * ofCrAnListFBasis y))\n-  simp only [ofListBasis_eq_ofList]\n+  dsimp only [f, g, m, LinearMap.compr₂_apply, LinearMap.compl₂_apply,\n+    LinearMap.flip_apply, LinearMap.comp_apply, AlgHom.toLinearMap_apply]\n+  simp only [mulLinearMap_apply, ofListBasis_eq_ofList]\n-    rw [show ofCrAnListF [φ, ψ] - 𝓢(𝓕.crAnStatistics φ, 𝓕.crAnStatistics ψ) •\n-      ofCrAnListF [ψ, φ] = c by\n-        simp [c, superCommuteF_ofCrAnOpF_ofCrAnOpF, ← ofCrAnListF_singleton,\n-          ← ofCrAnListF_append]]\n+    simp only [ofCrAnListF_cons, ofCrAnListF_nil, mul_one, ← smul_mul_assoc,\n+      ← superCommuteF_ofCrAnOpF_ofCrA"
+   },
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 12,
+    "d_score": 1.63,
+    "d_tokens": -50,
+    "d_heartbeats": -329,
+    "diff": "-      List.singleton_append, List.cons_append, List.nil_append, List.append_assoc, map_sub, map_smul,\n+      List.singleton_append, List.cons_append, List.nil_append, map_sub, map_smul,\n-    rw [← crAnTimeOrderSign_swap_eq_time hφψ hψφ, smul_comm, ← smul_sub]\n-      show x ++ φ :: ψ :: y = x ++ [φ, ψ] ++ y by simp,\n-      show x ++ ψ :: φ :: y = x ++ [ψ, φ] ++ y by simp,\n+    simp only [List.append_assoc, List.cons_append, List.nil_append]\n+    rw [← crAnTimeOrderSign_swap_eq_time hφψ hψφ, smul_comm, ← smul_sub]\n-  simp only [List.append_assoc, List.cons_append, List.nil_append]"
+   },
+   {
+    "run_id": "wu-hx-sol-f8",
+    "check": 13,
+    "d_score": 0.83,
+    "d_tokens": -13,
+    "d_heartbeats": -606,
+    "diff": "-  by_cases hq : (𝓕 |>ₛ φ) ≠ (𝓕 |>ₛ ψ)\n-  · simp [c, ι_superCommuteF_of_diff_statistic hq]\n-  · rw [crAnTimeOrderSign, Wick.koszulSign_eq_rel_eq_stat _ _ hφψ hψφ (by simp_all),\n+  by_cases hq : 𝓕.crAnStatistics φ = 𝓕.crAnStatistics ψ\n+  · rw [crAnTimeOrderSign, Wick.koszulSign_eq_rel_eq_stat _ _ hφψ hψφ hq.symm,\n+  · simp [c, ι_superCommuteF_of_diff_statistic hq]"
+   }
+  ]
+ }
+}

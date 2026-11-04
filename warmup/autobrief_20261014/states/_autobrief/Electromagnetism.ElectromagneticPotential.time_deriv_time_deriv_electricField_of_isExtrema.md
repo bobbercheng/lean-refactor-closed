@@ -1,0 +1,14 @@
+AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)
+- Seed: 1372 tokens, 27101 heartbeats, score 33.35. Free passes applied (normalize, hb_polish, lint_delete): start candidate 1371 tokens, 17130 heartbeats, score 45.63.
+- Best combination of the paying single edits below: 1350 tokens, 17010 heartbeats, score 46.29 (Z 100.0); your workspace starts from it.
+- Exchange rate here: 1 token = 0.024 points, 100 heartbeats = 0.123 points.
+- Heartbeat hot spots: lines 20-126 ~86% (`calc _ _= ∂ₜ (λt => 1 / (𝓕.μ₀ * 𝓕.ε…`); lines 34-34 ~10% (`rw [fderiv_fun_sub]`); lines 14-17 ~1% (`have hBt : ∀ j, Differentiable ℝ (λ…`).
+- Single edits that PAY:
+  - line 18: delete the tactic `change λt => ∂ₜ (A.electricField 𝓕.c · x i) t`: -13 tokens, -40 hb, score +0.36
+  - line 117: delete `mul_inv_rev` from the simp list: -2 tokens, -37 hb, score +0.09
+  - line 107: delete `one_div` from the simp list: -2 tokens, -20 hb, score +0.07
+  - line 107: delete `mul_inv_rev` from the simp list: -2 tokens, -17 hb, score +0.07
+  - line 117: delete `one_div` from the simp list: -2 tokens, -20 hb, score +0.07
+- Compile but do not pay alone: line 68 the closing tactic at line 68 (`simp only [_root_.sub_apply, ← deriv_eq…`) by `aesop` (-7 tok, +7094 hb).
+- Deletions that FAIL (needed as they stand): line 11 `ne_eq` from the simp list; line 11 `WithTop.coe_eq_zero` from the simp list; line 11 `ENat.top_ne_zero` from the simp list; line 11 `not_false_eq_true` from the simp list; line 27 `FunLike.coe_sub` from the simp list; line 27 `Pi.sub_apply` from the simp list.
+- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 105 (`· rw [Space.deriv_eq_fderiv_basis]`) (grind/simp_all/aesop); the closing tactic at line 11 (`LorentzCurrentDensity.currentDensity_ap…`) (grind/simp_all/aesop); the closing tactic at line 71 (`1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x…`) (grind/simp_all/aesop); the closing tactic at line 111 (`exact hJ.differentiable $ by simp only …`) (grind/simp_all/aesop).

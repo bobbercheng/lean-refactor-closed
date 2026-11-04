@@ -1,0 +1,1473 @@
+{
+ "problem": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+ "best": {
+  "score": 93.62,
+  "proof": "theorem fold_advances_evaluation_poly\n  (i : Fin (ℓ)) (h_i_succ_lt : i + 1 < ℓ + 𝓡)\n  (coeffs : Fin (2 ^ (ℓ - ↑i)) → L) (r_chal : L) :\n  let P_i : L[X] := intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i, by\n    exact Nat.lt_trans (n := i) (k := ℓ+1) (m := ℓ) (h₁ := i.isLt) (by exact Nat.lt_add_one ℓ)\n  ⟩) coeffs\n  let f_i := fun (x : (sDomain 𝔽q β h_ℓ_add_R_rate)\n      ⟨i, by exact Nat.lt_trans (n := i) (k := r) (m := ℓ) (h₁ := by omega) (by omega)⟩) =>\n    P_i.eval (x.val : L)\n  let f_i_plus_1 := fold (i := ⟨i, by omega⟩) (h_i := by omega) (f := f_i) (r_chal := r_chal)\n  let new_coeffs := fun j : Fin (2^(ℓ - (i + 1))) =>\n    (1 - r_chal) * (coeffs ⟨j.val * 2, by\n      rw [←Nat.add_zero (j.val * 2)]\n      apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))\n        (i := 0) (by omega) (by omega)\n    ⟩) +\n    r_chal * (coeffs ⟨j.val * 2 + 1, by\n      apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))\n        (i := 1) (by omega) (by omega)\n    ⟩)\n  let P_i_plus_1 :=\n    intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i+1, by omega⟩) new_coeffs\n  ∀ (y : (sDomain 𝔽q β h_ℓ_add_R_rate)\n    ⟨i+1, by omega⟩), f_i_plus_1 y = P_i_plus_1.eval y.val := by\n  intro P f f' cs P' y\n  have : P' = Polynomial.C (1 - r_chal) * evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs + Polynomial.C r_chal * oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs := by\n    simp +zetaDelta only [ intermediateEvaluationPoly, evenRefinement, oddRefinement,\n      Polynomial.C_add, Polynomial.C_mul, Finset.mul_sum, ←Finset.sum_add_distrib,\n      add_mul, mul_assoc]\n    rfl\n  have hq k := Subtype.mk.inj\n    ((generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.2 _ y ⟨k, rfl⟩).trans\n      (iteratedQuotientMap_k_eq_1_is_qMap ..))\n  simp +zetaDelta +decide only [fold, evaluation_poly_split_identity, Polynomial.eval_add,\n    ↓Polynomial.eval_C_mul, Polynomial.eval_mul, Polynomial.eval_X, eval_comp, ↓←hq, this, qMap_total_fiber_one_level_eq 𝔽q β i i.2, Fin2ToF2,\n    reduceIte, one_smul, zero_smul, zero_add,\n    Submodule.coe_add, get_sDomain_basis, add_zero, normalizedWᵢ_eval_βᵢ_eq_1]\n  ring1",
+  "tokens": 142,
+  "heartbeats": 5385,
+  "L": 92.55,
+  "H": 88.31,
+  "Z": 100.0,
+  "compat": {
+   "v4.31.0": true,
+   "v4.30.0": true,
+   "v4.29.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "e9947147d3f3",
+   "tokens": 204,
+   "heartbeats": 9677,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ -(Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal * Polynomial.eval (β ⟨↑i, ⋯⟩) (normalizedW 𝔽q β ⟨↑i, ⋯⟩)) + Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * Polynomial.eval (β ⟨↑i, ⋯⟩) (normalizedW 𝔽q β",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:25:19Z"
+  },
+  {
+   "sha": "6d2b3c434e72",
+   "tokens": 212,
+   "heartbeats": 6045,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:25:33Z",
+   "score": 91.92
+  },
+  {
+   "sha": "fd527b524fcf",
+   "tokens": 173,
+   "heartbeats": 11042,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) + Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:26:15Z"
+  },
+  {
+   "sha": "4163d91d1183",
+   "tokens": 174,
+   "heartbeats": 11042,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) + Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:26:35Z"
+  },
+  {
+   "sha": "de3f12adb6e6",
+   "tokens": 174,
+   "heartbeats": 11042,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) + Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:27:14Z"
+  },
+  {
+   "sha": "b4dcdd01c687",
+   "tokens": 177,
+   "heartbeats": 5825,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:27:24Z",
+   "score": 92.69
+  },
+  {
+   "sha": "a56a6253dbba",
+   "tokens": 152,
+   "heartbeats": 2535,
+   "ok": false,
+   "error": "850:17: don't know how to synthesize placeholder context: … [hypotheses omitted] ⊢ L[X]",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:28:07Z"
+  },
+  {
+   "sha": "e860cf08a8ca",
+   "tokens": 152,
+   "heartbeats": 9095,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) - Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal + Polynomial.eval (↑y) (oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal = Polynomial.eval (↑y) (∑ x, P",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:28:24Z"
+  },
+  {
+   "sha": "2d0aaf4c2485",
+   "tokens": 151,
+   "heartbeats": 9081,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) - Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal + Polynomial.eval (↑y) (oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal = -(r_chal * Polynomial.eval (",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:28:39Z"
+  },
+  {
+   "sha": "594ca6d67957",
+   "tokens": 155,
+   "heartbeats": 12732,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (∑ x, Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - Polynomial.eval (↑y) (∑ x, Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:29:08Z"
+  },
+  {
+   "sha": "7da7fd560ba5",
+   "tokens": 175,
+   "heartbeats": 5775,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:29:25Z",
+   "score": 92.76
+  },
+  {
+   "sha": "aeb3c080f9e8",
+   "tokens": 175,
+   "heartbeats": 2859,
+   "ok": false,
+   "error": "850:99: typeclass instance problem is stuck Algebra ?m.563 L Note: Lean will not try to resolve this typeclass instance problem because the first and third type arguments to `Algebra` contain metavariables. These arguments must be fully determined before Lean will try to resolve the typeclass. Hint:",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:08:16Z"
+  },
+  {
+   "sha": "13a6f9c1ed5c",
+   "tokens": 144,
+   "heartbeats": 14283,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ ∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - (∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩)) * r_chal + r_chal * ∑ ",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:10:37Z"
+  },
+  {
+   "sha": "18278180df25",
+   "tokens": 143,
+   "heartbeats": 9181,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:10:47Z"
+  },
+  {
+   "sha": "56b1e4371adc",
+   "tokens": 169,
+   "heartbeats": 10482,
+   "ok": false,
+   "error": "850:159: unsolved goals … [hypotheses omitted] ⊢ ∑ x, ((1 - Polynomial.C r_chal) * (Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ x) + Polynomial.C r_chal * (Polynomial.C (coeffs ⟨↑x * 2 + 1, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:12:07Z"
+  },
+  {
+   "sha": "69aa3ba958fe",
+   "tokens": 167,
+   "heartbeats": 5758,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:12:19Z",
+   "score": 92.91
+  },
+  {
+   "sha": "5f3ebcdd2cf2",
+   "tokens": 162,
+   "heartbeats": 5749,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:13:13Z",
+   "score": 93.01
+  },
+  {
+   "sha": "bcffc05f915a",
+   "tokens": 157,
+   "heartbeats": 9426,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ -(Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal * Polynomial.eval (β ⟨↑i, ⋯⟩) (normalizedW 𝔽q β ⟨↑i, ⋯⟩)) + Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * Polynomial.eval (β ⟨↑i, ⋯⟩) (normalizedW 𝔽q β",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:13:39Z"
+  },
+  {
+   "sha": "1d8089c2696f",
+   "tokens": 159,
+   "heartbeats": 5766,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:13:50Z",
+   "score": 93.05
+  },
+  {
+   "sha": "1f477d5db57b",
+   "tokens": 153,
+   "heartbeats": 5667,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:14:42Z",
+   "score": 93.22
+  },
+  {
+   "sha": "4d23f6ac63f3",
+   "tokens": 149,
+   "heartbeats": 2693,
+   "ok": false,
+   "error": "850:92: don't know how to synthesize implicit argument `coeffs` @oddRefinement r … [hypotheses omitted] ⊢ Fin (2 ^ (?m.566 - ↑?m.569)) → L",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:15:06Z"
+  },
+  {
+   "sha": "4b429cf57ae5",
+   "tokens": 149,
+   "heartbeats": 8971,
+   "ok": false,
+   "error": "854:4: Tactic `rfl` failed: The left-hand side P' is not definitionally equal to … [hypotheses omitted] ⊢ P' = ∑ x, (Polynomial.C (1 - r_chal) * (Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) + Polynomial.C r_chal * (Polynomial.C (coeffs ⟨↑x * 2",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:15:22Z"
+  },
+  {
+   "sha": "6453f99a9043",
+   "tokens": 151,
+   "heartbeats": 9076,
+   "ok": false,
+   "error": "854:4: Tactic `rfl` failed: The left-hand side ∑ x, Polynomial.C (cs ⟨↑x, ⋯⟩) *  … [hypotheses omitted] ⊢ ∑ x, Polynomial.C (cs ⟨↑x, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩ = ∑ x, (Polynomial.C (1 - r_chal) * (Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX ",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:15:32Z"
+  },
+  {
+   "sha": "13e58947dcd5",
+   "tokens": 152,
+   "heartbeats": 5752,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:15:44Z"
+  },
+  {
+   "sha": "bcedaeb19e27",
+   "tokens": 153,
+   "heartbeats": 5702,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:15:58Z"
+  },
+  {
+   "sha": "f6f9a77a4ff5",
+   "tokens": 153,
+   "heartbeats": 8345,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) - Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal + Polynomial.eval (↑y) (oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal = Polynomial.eval (↑y) (evenRe",
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:32:52Z"
+  },
+  {
+   "sha": "51633f956179",
+   "tokens": 154,
+   "heartbeats": 5546,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:33:41Z",
+   "score": 93.29
+  },
+  {
+   "sha": "0c72fece84bc",
+   "tokens": 155,
+   "heartbeats": 8344,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) - Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal + Polynomial.eval (↑y) (oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal = Polynomial.eval (↑y) (evenRe",
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:34:06Z"
+  },
+  {
+   "sha": "71398da943ab",
+   "tokens": 155,
+   "heartbeats": 8344,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) - Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal + Polynomial.eval (↑y) (oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal = Polynomial.eval (↑y) (evenRe",
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:34:58Z"
+  },
+  {
+   "sha": "4308aeccf2d8",
+   "tokens": 158,
+   "heartbeats": 5697,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:35:42Z"
+  },
+  {
+   "sha": "ad67c24845c2",
+   "tokens": 153,
+   "heartbeats": 5667,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:54:32Z"
+  },
+  {
+   "sha": "b01788d312c6",
+   "tokens": 128,
+   "heartbeats": 9414,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:55:10Z"
+  },
+  {
+   "sha": "8d2ef84752f7",
+   "tokens": 158,
+   "heartbeats": 5697,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:56:24Z"
+  },
+  {
+   "sha": "a92459242ba7",
+   "tokens": 156,
+   "heartbeats": 5239,
+   "ok": false,
+   "error": "850:159: unsolved goals … [hypotheses omitted] ⊢ ∑ x, (Polynomial.C (1 - r_chal) * (Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) + Polynomial.C r_chal * (Polynomial.C (coeffs ⟨↑x * 2 + 1, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + ",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:57:09Z"
+  },
+  {
+   "sha": "e2d3e4173160",
+   "tokens": 152,
+   "heartbeats": 9982,
+   "ok": false,
+   "error": "860:28: Unknown constant `Polynomial.eval_X_mul`",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:57:34Z"
+  },
+  {
+   "sha": "01c7c3c292f4",
+   "tokens": 152,
+   "heartbeats": 9971,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) - Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal + Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (Polynomial.X * (oddRefin",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:58:09Z"
+  },
+  {
+   "sha": "357950d29a2c",
+   "tokens": 125,
+   "heartbeats": 14180,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ ∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - (∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩)) * r_chal + r_chal * ∑ ",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:58:44Z"
+  },
+  {
+   "sha": "f6621abff7cc",
+   "tokens": 154,
+   "heartbeats": 5320,
+   "ok": false,
+   "error": "850:159: unsolved goals … [hypotheses omitted] ⊢ ∑ x, (Polynomial.C (1 - r_chal) * (Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) + Polynomial.C r_chal * (Polynomial.C (coeffs ⟨↑x * 2 + 1, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + ",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T21:59:29Z"
+  },
+  {
+   "sha": "120706330d87",
+   "tokens": 154,
+   "heartbeats": 5545,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:00:20Z",
+   "score": 93.3
+  },
+  {
+   "sha": "a991487be02e",
+   "tokens": 154,
+   "heartbeats": 10135,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:00:40Z"
+  },
+  {
+   "sha": "c64ab002e3b2",
+   "tokens": 155,
+   "heartbeats": 10106,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:00:50Z"
+  },
+  {
+   "sha": "85611f2bb784",
+   "tokens": 153,
+   "heartbeats": 5545,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:01:17Z",
+   "score": 93.31
+  },
+  {
+   "sha": "fd8007a5f98e",
+   "tokens": 152,
+   "heartbeats": 5583,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:01:38Z"
+  },
+  {
+   "sha": "47677dc4d390",
+   "tokens": 154,
+   "heartbeats": 5325,
+   "ok": false,
+   "error": "850:156: unsolved goals … [hypotheses omitted] ⊢ ∑ x, (Polynomial.C (1 - r_chal) * (Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ x) + Polynomial.C r_chal * (Polynomial.C (coeffs ⟨↑x * 2 + 1, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:31:04Z"
+  },
+  {
+   "sha": "befa29f8a302",
+   "tokens": 152,
+   "heartbeats": 5574,
+   "ok": false,
+   "error": "863:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) - Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal + Polynomial.eval (↑y) (oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal = Poly",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:31:19Z"
+  },
+  {
+   "sha": "10eb4ea644e6",
+   "tokens": 152,
+   "heartbeats": 5666,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:31:23Z"
+  },
+  {
+   "sha": "00fb67a8fa93",
+   "tokens": 149,
+   "heartbeats": 6302,
+   "ok": false,
+   "error": "862:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) + Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:31:29Z"
+  },
+  {
+   "sha": "97ec55ddbf5b",
+   "tokens": 148,
+   "heartbeats": 6302,
+   "ok": false,
+   "error": "862:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) + Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:31:41Z"
+  },
+  {
+   "sha": "13c4fa0c838a",
+   "tokens": 148,
+   "heartbeats": 5548,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:31:46Z",
+   "score": 93.4
+  },
+  {
+   "sha": "2123513772c0",
+   "tokens": 152,
+   "heartbeats": 6293,
+   "ok": false,
+   "error": "862:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⟨↑i + 1, ⋯⟩ ⋯ ⋯ y)) (qMap 𝔽q β ⟨↑i, ⋯⟩)) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) + Polynomial.eval (Polynomial.eval (↑(sDomain.lift 𝔽q β h_ℓ_add_",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:32:02Z"
+  },
+  {
+   "sha": "e63d524699f4",
+   "tokens": 148,
+   "heartbeats": 5549,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:32:23Z"
+  },
+  {
+   "sha": "33f7c8350e10",
+   "tokens": 150,
+   "heartbeats": 5638,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:32:52Z"
+  },
+  {
+   "sha": "ef574e4bcee9",
+   "tokens": 151,
+   "heartbeats": 5611,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:32:56Z"
+  },
+  {
+   "sha": "03eaee1b36e5",
+   "tokens": 147,
+   "heartbeats": 5315,
+   "ok": false,
+   "error": "851:4: Tactic `assumption` failed … [hypotheses omitted] ⊢ ∑ x, (Polynomial.C (1 - r_chal) * (Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) + Polynomial.C r_chal * (Polynomial.C (coeffs ⟨↑x * 2 + 1, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_r",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:33:12Z"
+  },
+  {
+   "sha": "5662df3f945a",
+   "tokens": 146,
+   "heartbeats": 6239,
+   "ok": false,
+   "error": "850:156: unsolved goals … [hypotheses omitted] ⊢ ∑ x, (Polynomial.C (1 - r_chal) * (Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) + Polynomial.C r_chal * (Polynomial.C (coeffs ⟨↑x * 2 + 1, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + ",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:33:16Z"
+  },
+  {
+   "sha": "a1f3bac6e5fa",
+   "tokens": 147,
+   "heartbeats": 4824,
+   "ok": false,
+   "error": "850:156: unsolved goals … [hypotheses omitted] ⊢ ∑ x, Polynomial.C ((1 - r_chal) * coeffs ⟨↑x * 2, ⋯⟩ + r_chal * coeffs ⟨↑x * 2 + 1, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩ = Polynomial.C (1 - r_chal) * ∑ x, Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:33:21Z"
+  },
+  {
+   "sha": "c6744631def0",
+   "tokens": 146,
+   "heartbeats": 5536,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:33:36Z",
+   "score": 93.44
+  },
+  {
+   "sha": "5e47470676d2",
+   "tokens": 144,
+   "heartbeats": 5529,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:33:50Z",
+   "score": 93.48
+  },
+  {
+   "sha": "5480d8ff0626",
+   "tokens": 142,
+   "heartbeats": 5517,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:34:05Z",
+   "score": 93.53
+  },
+  {
+   "sha": "75b5f088b046",
+   "tokens": 146,
+   "heartbeats": 5671,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:34:38Z"
+  },
+  {
+   "sha": "6f79b0b569a4",
+   "tokens": 142,
+   "heartbeats": 5552,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:34:42Z"
+  },
+  {
+   "sha": "b75d17544671",
+   "tokens": 138,
+   "heartbeats": 5244,
+   "ok": false,
+   "error": "862:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ -(Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * ↑((if True then 0 else 1) • (sDomain_basis 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩ ⋯) ⟨0, ⋯⟩)) + Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * ↑((",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:35:08Z"
+  },
+  {
+   "sha": "77bc67dea1fc",
+   "tokens": 142,
+   "heartbeats": 5385,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:35:13Z",
+   "score": 93.62
+  },
+  {
+   "sha": "2eabf19fa902",
+   "tokens": 112,
+   "heartbeats": 5058,
+   "ok": false,
+   "error": "860:2: `dsimp` made no progress Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:36:19Z"
+  },
+  {
+   "sha": "00a3b078ba6f",
+   "tokens": 107,
+   "heartbeats": 6028,
+   "ok": false,
+   "error": "860:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ ∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - (∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩)",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:36:34Z"
+  },
+  {
+   "sha": "64a86b202b93",
+   "tokens": 108,
+   "heartbeats": 8943,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:36:39Z"
+  },
+  {
+   "sha": "0ef3e0a325ad",
+   "tokens": 108,
+   "heartbeats": 6028,
+   "ok": false,
+   "error": "860:17: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ ∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - (∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:36:43Z"
+  },
+  {
+   "sha": "4fe3b2eca3cf",
+   "tokens": 108,
+   "heartbeats": 12686,
+   "ok": false,
+   "error": "861:2: Tactic `rfl` failed: The left-hand side ∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynom … [hypotheses omitted] ⊢ ∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - (∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:37:09Z"
+  },
+  {
+   "sha": "605bb74accc1",
+   "tokens": 109,
+   "heartbeats": 13738,
+   "ok": false,
+   "error": "862:2: Tactic `rfl` failed: The left-hand side ∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynom … [hypotheses omitted] ⊢ ∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - (∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:37:14Z"
+  },
+  {
+   "sha": "48490559b4f6",
+   "tokens": 140,
+   "heartbeats": 5676,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:37:26Z"
+  },
+  {
+   "sha": "bea658c0dceb",
+   "tokens": 141,
+   "heartbeats": 5419,
+   "ok": false,
+   "error": "862:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) - Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal + Polynomial.eval (↑y) (oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal = Poly",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:59:10Z"
+  },
+  {
+   "sha": "e9d87ac30ba2",
+   "tokens": 142,
+   "heartbeats": 5386,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:59:17Z"
+  },
+  {
+   "sha": "4e3d2e0368fc",
+   "tokens": 142,
+   "heartbeats": 6961,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:59:22Z"
+  },
+  {
+   "sha": "7f1c50e8db38",
+   "tokens": 142,
+   "heartbeats": 9974,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:59:26Z"
+  },
+  {
+   "sha": "df829ac5ece7",
+   "tokens": 142,
+   "heartbeats": 5634,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:59:31Z"
+  },
+  {
+   "sha": "3409cacc43c2",
+   "tokens": 107,
+   "heartbeats": 6003,
+   "ok": false,
+   "error": "860:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ ∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - (∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩)",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:59:47Z"
+  },
+  {
+   "sha": "d65a9513893f",
+   "tokens": 104,
+   "heartbeats": 6000,
+   "ok": false,
+   "error": "860:17: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ ∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - (∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:59:57Z"
+  },
+  {
+   "sha": "bbd3f37a19d8",
+   "tokens": 109,
+   "heartbeats": 5049,
+   "ok": false,
+   "error": "860:2: `dsimp` made no progress Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:00:05Z"
+  },
+  {
+   "sha": "94d27dd5a13d",
+   "tokens": 117,
+   "heartbeats": 5251,
+   "ok": false,
+   "error": "861:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (∑ x, Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - Polynomial.eval (↑y) (∑ x, Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_ad",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:00:59Z"
+  },
+  {
+   "sha": "357e16e69edd",
+   "tokens": 109,
+   "heartbeats": 6324,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:01:03Z"
+  },
+  {
+   "sha": "6b597b1a9c1b",
+   "tokens": 117,
+   "heartbeats": 5396,
+   "ok": false,
+   "error": "861:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (∑ x, Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - Polynomial.eval (↑y) (∑ x, Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_ad",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:01:07Z"
+  },
+  {
+   "sha": "9f10a0d1e481",
+   "tokens": 109,
+   "heartbeats": 6323,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:01:21Z"
+  },
+  {
+   "sha": "d45bde8a02d0",
+   "tokens": 116,
+   "heartbeats": 6387,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:01:25Z"
+  },
+  {
+   "sha": "29f0481aed20",
+   "tokens": 108,
+   "heartbeats": 6449,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:01:30Z"
+  },
+  {
+   "sha": "d94126a4e5c3",
+   "tokens": 112,
+   "heartbeats": 8160,
+   "ok": false,
+   "error": "861:14: Tactic `rfl` failed: The left-hand side Polynomial.eval (↑y) (evenRefine … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) - Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal = -(r_chal * Polynomial.eval (↑y) (∑ x, Polynomia",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:02:08Z"
+  },
+  {
+   "sha": "0b4e86abe672",
+   "tokens": 119,
+   "heartbeats": 11758,
+   "ok": false,
+   "error": "862:14: Tactic `rfl` failed: The left-hand side Polynomial.eval (↑y) (∑ x, Polyn … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (∑ x, Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - Polynomial.eval (↑y) (∑ x, Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * i",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:02:12Z"
+  },
+  {
+   "sha": "307a082194ba",
+   "tokens": 116,
+   "heartbeats": 11108,
+   "ok": false,
+   "error": "862:2: Tactic `rfl` failed: The left-hand side Polynomial.eval (↑y) (∑ x, Polyno … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (∑ x, Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - Polynomial.eval (↑y) (∑ x, Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * i",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:02:17Z"
+  },
+  {
+   "sha": "ee526ef167b2",
+   "tokens": 109,
+   "heartbeats": 10787,
+   "ok": false,
+   "error": "848:62: unsolved goals … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) - Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal + Polynomial.eval (↑y) (oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal = Polynomial.eval (↑y) (evenRe",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:02:21Z"
+  },
+  {
+   "sha": "197bfd5cfa98",
+   "tokens": 111,
+   "heartbeats": 6331,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:02:35Z"
+  },
+  {
+   "sha": "9f95a795d5da",
+   "tokens": 113,
+   "heartbeats": 6342,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:02:39Z"
+  },
+  {
+   "sha": "d47f0091923e",
+   "tokens": 114,
+   "heartbeats": 6339,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:02:43Z"
+  },
+  {
+   "sha": "949945be4dbd",
+   "tokens": 109,
+   "heartbeats": 6454,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:02:47Z"
+  },
+  {
+   "sha": "4fbc395914bb",
+   "tokens": 113,
+   "heartbeats": 6452,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:03:08Z"
+  },
+  {
+   "sha": "e11098c172d7",
+   "tokens": 109,
+   "heartbeats": 6955,
+   "ok": false,
+   "error": "860:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) - Polynomial.eval (↑y) (evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal + Polynomial.eval (↑y) (oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs) * r_chal = Poly",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:03:12Z"
+  },
+  {
+   "sha": "cbacd61a2be2",
+   "tokens": 112,
+   "heartbeats": 6416,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:03:16Z"
+  },
+  {
+   "sha": "8ec713dc4aae",
+   "tokens": 144,
+   "heartbeats": 5397,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:12:02Z"
+  },
+  {
+   "sha": "cdfdc8415ee7",
+   "tokens": 142,
+   "heartbeats": 3555,
+   "ok": false,
+   "error": "856:4: Application type mismatch: The argument Eq.trans (generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.isLt (qMap_total_fiber 𝔽q β ⟨↑i, Decidable.byContradiction fun a => qMap_total_fiber_repr_coeff._proof_2 i 1 a⟩ 1 (id (fin_ℓ_steps_lt_ℓ_add_R i 1 i.isLt)) y k) y (Exists.intro k rfl)) (itera",
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:12:20Z"
+  },
+  {
+   "sha": "86f90a6b2c25",
+   "tokens": 143,
+   "heartbeats": 6216,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:12:29Z"
+  },
+  {
+   "sha": "934e6711030f",
+   "tokens": 117,
+   "heartbeats": 5375,
+   "ok": false,
+   "error": "860:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ Polynomial.eval (↑y) (∑ x, Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - Polynomial.eval (↑y) (∑ x, Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_ad",
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:13:28Z"
+  },
+  {
+   "sha": "08c8e7f5bec1",
+   "tokens": 109,
+   "heartbeats": 6290,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:13:32Z"
+  },
+  {
+   "sha": "81c8d891593d",
+   "tokens": 144,
+   "heartbeats": 5397,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:53:32Z"
+  },
+  {
+   "sha": "425f1d894675",
+   "tokens": 153,
+   "heartbeats": 5332,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:53:36Z"
+  },
+  {
+   "sha": "0a51bef740ae",
+   "tokens": 147,
+   "heartbeats": 5317,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:54:03Z"
+  },
+  {
+   "sha": "f2e874365282",
+   "tokens": 151,
+   "heartbeats": null,
+   "ok": false,
+   "error": "852:13: unexpected token ','; expected ']'",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:54:07Z"
+  },
+  {
+   "sha": "c5353dc45aeb",
+   "tokens": 146,
+   "heartbeats": 5402,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:54:11Z"
+  },
+  {
+   "sha": "9908652bb21f",
+   "tokens": 142,
+   "heartbeats": 5517,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:54:16Z"
+  },
+  {
+   "sha": "85ab9b71b95c",
+   "tokens": 143,
+   "heartbeats": 6359,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:54:20Z"
+  },
+  {
+   "sha": "dead8fe6d986",
+   "tokens": 142,
+   "heartbeats": 5419,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:54:25Z"
+  },
+  {
+   "sha": "69f66f6fd8f6",
+   "tokens": 114,
+   "heartbeats": 7319,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:55:49Z"
+  },
+  {
+   "sha": "08b894f08202",
+   "tokens": 112,
+   "heartbeats": 6549,
+   "ok": false,
+   "error": "861:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ ∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ x) - (∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ x)) * r_chal +",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:56:22Z"
+  },
+  {
+   "sha": "1a6dbbe4eecd",
+   "tokens": 112,
+   "heartbeats": 5845,
+   "ok": false,
+   "error": "861:2: `dsimp` made no progress",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:56:31Z"
+  },
+  {
+   "sha": "cec8263dd004",
+   "tokens": 111,
+   "heartbeats": 6529,
+   "ok": false,
+   "error": "861:17: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ ∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - (∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:56:36Z"
+  },
+  {
+   "sha": "94083126d9ad",
+   "tokens": 109,
+   "heartbeats": 5056,
+   "ok": false,
+   "error": "860:2: `dsimp` made no progress Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:56:45Z"
+  },
+  {
+   "sha": "6d1826a5740c",
+   "tokens": 118,
+   "heartbeats": 200031,
+   "ok": false,
+   "error": "861:2: Tactic `simp` failed with a nested error: (deterministic) timeout at `«Lean.Meta.acLt»`, maximum number of heartbeats (200000) has been reached Note: Use `set_option maxHeartbeats <num>` to set the limit. Hint: Additional diagnostic information may be available using the `set_option diagnosti",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:57:11Z"
+  },
+  {
+   "sha": "e6d9f3e40970",
+   "tokens": 116,
+   "heartbeats": 8790,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:57:16Z"
+  },
+  {
+   "sha": "cf290dcd566f",
+   "tokens": 124,
+   "heartbeats": 8410,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:57:20Z"
+  },
+  {
+   "sha": "9f7646712582",
+   "tokens": 119,
+   "heartbeats": 6529,
+   "ok": false,
+   "error": "861:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ ∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) - (∑ x, coeffs ⟨↑x * 2, ⋯⟩ * Polynomial.eval (↑y) (intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩)",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:57:24Z"
+  },
+  {
+   "sha": "0bd6aa7661c3",
+   "tokens": 141,
+   "heartbeats": 5507,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:57:48Z"
+  },
+  {
+   "sha": "afac1a719d1a",
+   "tokens": 142,
+   "heartbeats": 5506,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:57:52Z"
+  },
+  {
+   "sha": "71fb444a1ea9",
+   "tokens": 142,
+   "heartbeats": 8701,
+   "ok": false,
+   "error": "854:4: Tactic `rfl` failed: The left-hand side P' is not definitionally equal to … [hypotheses omitted] ⊢ P' = ∑ x, (Polynomial.C (1 - r_chal) * (Polynomial.C (coeffs ⟨↑x * 2, ⋯⟩) * intermediateNovelBasisX 𝔽q β h_ℓ_add_R_rate ⟨↑i + 1, ⋯⟩ ⟨↑x, ⋯⟩) + Polynomial.C r_chal * (Polynomial.C (coeffs ⟨↑x * 2",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:57:56Z"
+  },
+  {
+   "sha": "8629f230bd62",
+   "tokens": 143,
+   "heartbeats": 5374,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:58:01Z"
+  },
+  {
+   "sha": "42fc6fe6a329",
+   "tokens": 145,
+   "heartbeats": 5482,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:58:05Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T20:22:16Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:05:13Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:28:46Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r4",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:51:42Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:28:53Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r9",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:56:42Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r10",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:10:02Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:52:06Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r14",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T01:21:09Z"
+  }
+ ],
+ "api_spend": 1.904402,
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 2,
+    "d_score": 58.59,
+    "d_tokens": -1694,
+    "d_heartbeats": 6045,
+    "diff": "+theorem fold_advances_evaluation_poly\n+  (i : Fin (ℓ)) (h_i_succ_lt : i + 1 < ℓ + 𝓡)\n+  (coeffs : Fin (2 ^ (ℓ - ↑i)) → L) (r_chal : L) :\n+  let P_i : L[X] := intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i, by\n+    exact Nat.lt_trans (n := i) (k := ℓ+1) (m := ℓ) (h₁ := i.isLt) (by exact Nat.lt_add_one ℓ)\n+  ⟩) coeffs\n+  let f_i := fun (x : (sDomain 𝔽q β h_ℓ_add_R_rate)\n+      ⟨i, by exact Nat.lt_trans (n := i) (k := r) (m := ℓ) (h₁ := by omega) (by omega)⟩) =>\n+    P_i.eval (x.val : L)\n+  let f_i_plus_1 := fold (i := ⟨i, by omega⟩) (h_i := by omega) (f := f_i) (r_chal := r_chal)\n+  let new_coeffs := fun j : Fin (2^(ℓ - (i + 1))) =>\n+    (1 - r_chal) * (coeffs ⟨j.val * 2, by\n+      r"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 6,
+    "d_score": 0.77,
+    "d_tokens": -35,
+    "d_heartbeats": -220,
+    "diff": "-  have hq (k : Fin 2) : y.val = (AdditiveNTT.qMap 𝔽q β ⟨i, by omega⟩).eval (qMap_total_fiber 𝔽q β ⟨i, by omega⟩ 1 h_i_succ_lt y k).val := by\n-    exact congrArg Subtype.val ((generates_quotient_point_if_is_fiber_of_y\n-      𝔽q β i 1 (by omega) _ y ⟨k, rfl⟩).trans\n-        (iteratedQuotientMap_k_eq_1_is_qMap 𝔽q β h_ℓ_add_R_rate i (by omega) _))\n+  have hq (k : Fin 2) := congrArg Subtype.val\n+    ((generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 (by omega) _ y ⟨k, rfl⟩).trans\n+      (iteratedQuotientMap_k_eq_1_is_qMap 𝔽q β h_ℓ_add_R_rate i (by omega) _))\n+  dsimp only at hq\n-    Submodule.coe_add, get_sDomain_basis, Fin.coe_ofNat_eq_mod, zero_mod, add_zero, Fin.eta, normalizedWᵢ_eval_βᵢ_eq"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 11,
+    "d_score": 0.07,
+    "d_tokens": -2,
+    "d_heartbeats": -50,
+    "diff": "-    Polynomial.eval_mul, Polynomial.eval_X, eval_comp, ←hq, hP, Polynomial.eval_C]\n-  simp only [qMap_total_fiber_one_level_eq 𝔽q β i (by omega), Fin2ToF2,\n+    Polynomial.eval_mul, Polynomial.eval_X, eval_comp, ↓←hq, hP, Polynomial.eval_C, qMap_total_fiber_one_level_eq 𝔽q β i (by omega), Fin2ToF2,"
+   },
+   {
+    "run_id": "wu-hx-sol-r2",
+    "check": 5,
+    "d_score": 0.15,
+    "d_tokens": -8,
+    "d_heartbeats": -17,
+    "diff": "-      (iteratedQuotientMap_k_eq_1_is_qMap 𝔽q β h_ℓ_add_R_rate i (by omega) _))\n+      (iteratedQuotientMap_k_eq_1_is_qMap ..))"
+   },
+   {
+    "run_id": "wu-hx-sol-r2",
+    "check": 6,
+    "d_score": 0.1,
+    "d_tokens": -5,
+    "d_heartbeats": -9,
+    "diff": "-  have hq (k : Fin 2) := congrArg Subtype.val\n+  have hq k := congrArg Subtype.val"
+   },
+   {
+    "run_id": "wu-hx-sol-r2",
+    "check": 8,
+    "d_score": 0.04,
+    "d_tokens": -3,
+    "d_heartbeats": 17,
+    "diff": "-    Fin.isValue, one_ne_zero, ↓reduceIte, one_smul, zero_smul, zero_add,\n+    one_ne_zero, reduceIte, one_smul, zero_smul, zero_add,"
+   },
+   {
+    "run_id": "wu-hx-sol-r2",
+    "check": 9,
+    "d_score": 0.17,
+    "d_tokens": -6,
+    "d_heartbeats": -99,
+    "diff": "-    ((generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 (by omega) _ y ⟨k, rfl⟩).trans\n+    ((generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.2 _ y ⟨k, rfl⟩).trans\n-    Polynomial.eval_mul, Polynomial.eval_X, eval_comp, ↓←hq, hP, Polynomial.eval_C, qMap_total_fiber_one_level_eq 𝔽q β i (by omega), Fin2ToF2,\n+    Polynomial.eval_mul, Polynomial.eval_X, eval_comp, ↓←hq, hP, Polynomial.eval_C, qMap_total_fiber_one_level_eq 𝔽q β i i.2, Fin2ToF2,"
+   },
+   {
+    "run_id": "wu-hx-sol-r3",
+    "check": 2,
+    "d_score": 0.07,
+    "d_tokens": 1,
+    "d_heartbeats": -121,
+    "diff": "-    Polynomial.eval_mul, Polynomial.eval_X, eval_comp, ↓←hq, hP, Polynomial.eval_C, qMap_total_fiber_one_level_eq 𝔽q β i i.2, Fin2ToF2,\n+    ↓Polynomial.eval_C_mul, Polynomial.eval_mul, Polynomial.eval_X, eval_comp, ↓←hq, hP, qMap_total_fiber_one_level_eq 𝔽q β i i.2, Fin2ToF2,"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 9,
+    "d_score": 0.01,
+    "d_tokens": 0,
+    "d_heartbeats": -1,
+    "diff": "-  ring\n+  ring1"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 12,
+    "d_score": 0.01,
+    "d_tokens": -1,
+    "d_heartbeats": 0,
+    "diff": "-  have hP : P' = Polynomial.C (1 - r_chal) * evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs + Polynomial.C r_chal * oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs := by\n+  have : P' = Polynomial.C (1 - r_chal) * evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs + Polynomial.C r_chal * oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs := by\n-    ↓Polynomial.eval_C_mul, Polynomial.eval_mul, Polynomial.eval_X, eval_comp, ↓←hq, hP, qMap_total_fiber_one_level_eq 𝔽q β i i.2, Fin2ToF2,\n+    ↓Polynomial.eval_C_mul, Polynomial.eval_mul, Polynomial.eval_X, eval_comp, ↓←hq, this, qMap_total_fiber_one_level_eq 𝔽q β i i.2, Fin2ToF2,"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 6,
+    "d_score": 0.09,
+    "d_tokens": -5,
+    "d_heartbeats": 3,
+    "diff": "-  have hq k := congrArg Subtype.val\n+  have hq k := Subtype.mk.inj\n-  dsimp only at hq"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 14,
+    "d_score": 0.04,
+    "d_tokens": -2,
+    "d_heartbeats": -12,
+    "diff": "-    simp only [P', cs, intermediateEvaluationPoly, evenRefinement, oddRefinement,\n+    simp +zetaDelta only [ intermediateEvaluationPoly, evenRefinement, oddRefinement,"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 15,
+    "d_score": 0.04,
+    "d_tokens": -2,
+    "d_heartbeats": -7,
+    "diff": "-    simp +zetaDelta only [ intermediateEvaluationPoly, evenRefinement, oddRefinement,\n+    simp only [P', cs, intermediateEvaluationPoly, evenRefinement, oddRefinement,\n-  simp only [f', f, fold, P, evaluation_poly_split_identity, Polynomial.eval_add,\n+  simp +zetaDelta only [fold, evaluation_poly_split_identity, Polynomial.eval_add,"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 16,
+    "d_score": 0.05,
+    "d_tokens": -2,
+    "d_heartbeats": -12,
+    "diff": "-    simp only [P', cs, intermediateEvaluationPoly, evenRefinement, oddRefinement,\n+    simp +zetaDelta only [ intermediateEvaluationPoly, evenRefinement, oddRefinement,"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 20,
+    "d_score": 0.09,
+    "d_tokens": 0,
+    "d_heartbeats": -132,
+    "diff": "-  simp +zetaDelta only [fold, evaluation_poly_split_identity, Polynomial.eval_add,\n+  simp +zetaDelta +decide only [fold, evaluation_poly_split_identity, Polynomial.eval_add,\n-    one_ne_zero, reduceIte, one_smul, zero_smul, zero_add,\n+    reduceIte, one_smul, zero_smul, zero_add,"
+   }
+  ]
+ },
+ "profile_cache": {
+  "7da7fd560ba5": {
+   "ok": true,
+   "total": 5775,
+   "floor": 2536,
+   "reference": 46076,
+   "max_heartbeat_score": 31.5,
+   "blocks": [
+    {
+     "lines": "35-38",
+     "depth_indent": 2,
+     "text": "simp only [f', f, fold, P, evaluation_poly_split_identity, Polynomial.eval_add, Polynomial.eval_mul,",
+     "heartbeats": 1623
+    },
+    {
+     "lines": "26-30",
+     "depth_indent": 2,
+     "text": "have hP : P' = Polynomial.C (1 - r_chal) * evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs + Polynomial.",
+     "heartbeats": 995
+    },
+    {
+     "lines": "39-39",
+     "depth_indent": 2,
+     "text": "ring",
+     "heartbeats": 380
+    },
+    {
+     "lines": "31-33",
+     "depth_indent": 2,
+     "text": "have hq (k : Fin 2) := congrArg Subtype.val ((generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 (by",
+     "heartbeats": 225
+    },
+    {
+     "lines": "34-34",
+     "depth_indent": 2,
+     "text": "dsimp only at hq",
+     "heartbeats": 12
+    },
+    {
+     "lines": "25-25",
+     "depth_indent": 2,
+     "text": "intro P f f' cs P' y",
+     "heartbeats": 4
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "let f_i_plus_1 := fold (i := ⟨i, by omega⟩) (h_i := by omega) (f := f_i) (r_chal := r_chal)",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-20",
+     "depth_indent": 2,
+     "text": "let new_coeffs := fun j : Fin (2^(ℓ - (i + 1))) => (1 - r_chal) * (coeffs ⟨j.val * 2, by rw [←Nat.ad",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-22",
+     "depth_indent": 2,
+     "text": "let P_i_plus_1 := intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i+1, by omega⟩) new_coeffs",
+     "heartbeats": null
+    },
+    {
+     "lines": "23-24",
+     "depth_indent": 2,
+     "text": "∀ (y : (sDomain 𝔽q β h_ℓ_add_R_rate) ⟨i+1, by omega⟩), f_i_plus_1 y = P_i_plus_1.eval y.val := by",
+     "heartbeats": null
+    },
+    {
+     "lines": "36-36",
+     "depth_indent": 4,
+     "text": "Polynomial.eval_mul, Polynomial.eval_X, eval_comp, ↓←hq, hP, Polynomial.eval_C, qMap_total_fiber_one",
+     "heartbeats": null
+    },
+    {
+     "lines": "37-37",
+     "depth_indent": 4,
+     "text": "Fin.isValue, one_ne_zero, ↓reduceIte, one_smul, zero_smul, zero_add,",
+     "heartbeats": null
+    }
+   ],
+   "points_left_heartbeats": 2.34,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "77bc67dea1fc": {
+   "ok": true,
+   "total": 5385,
+   "floor": 2536,
+   "reference": 46076,
+   "max_heartbeat_score": 31.5,
+   "blocks": [
+    {
+     "lines": "34-37",
+     "depth_indent": 2,
+     "text": "simp +zetaDelta +decide only [fold, evaluation_poly_split_identity, Polynomial.eval_add, ↓Polynomial",
+     "heartbeats": 1289
+    },
+    {
+     "lines": "26-30",
+     "depth_indent": 2,
+     "text": "have : P' = Polynomial.C (1 - r_chal) * evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs + Polynomial.C r",
+     "heartbeats": 983
+    },
+    {
+     "lines": "38-38",
+     "depth_indent": 2,
+     "text": "ring1",
+     "heartbeats": 394
+    },
+    {
+     "lines": "31-33",
+     "depth_indent": 2,
+     "text": "have hq k := Subtype.mk.inj ((generates_quotient_point_if_is_fiber_of_y 𝔽q β i 1 i.2 _ y ⟨k, rfl⟩).t",
+     "heartbeats": 179
+    },
+    {
+     "lines": "25-25",
+     "depth_indent": 2,
+     "text": "intro P f f' cs P' y",
+     "heartbeats": 4
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "let f_i_plus_1 := fold (i := ⟨i, by omega⟩) (h_i := by omega) (f := f_i) (r_chal := r_chal)",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-20",
+     "depth_indent": 2,
+     "text": "let new_coeffs := fun j : Fin (2^(ℓ - (i + 1))) => (1 - r_chal) * (coeffs ⟨j.val * 2, by rw [←Nat.ad",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-22",
+     "depth_indent": 2,
+     "text": "let P_i_plus_1 := intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i+1, by omega⟩) new_coeffs",
+     "heartbeats": null
+    },
+    {
+     "lines": "23-24",
+     "depth_indent": 2,
+     "text": "∀ (y : (sDomain 𝔽q β h_ℓ_add_R_rate) ⟨i+1, by omega⟩), f_i_plus_1 y = P_i_plus_1.eval y.val := by",
+     "heartbeats": null
+    },
+    {
+     "lines": "35-35",
+     "depth_indent": 4,
+     "text": "↓Polynomial.eval_C_mul, Polynomial.eval_mul, Polynomial.eval_X, eval_comp, ↓←hq, this, qMap_total_fi",
+     "heartbeats": null
+    },
+    {
+     "lines": "36-36",
+     "depth_indent": 4,
+     "text": "reduceIte, one_smul, zero_smul, zero_add,",
+     "heartbeats": null
+    },
+    {
+     "lines": "37-37",
+     "depth_indent": 4,
+     "text": "Submodule.coe_add, get_sDomain_basis, add_zero, normalizedWᵢ_eval_βᵢ_eq_1]",
+     "heartbeats": null
+    }
+   ],
+   "points_left_heartbeats": 2.06,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "hb_floor": 2536
+}

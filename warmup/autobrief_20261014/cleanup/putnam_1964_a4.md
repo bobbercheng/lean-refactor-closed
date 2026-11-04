@@ -1,0 +1,5 @@
+AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)
+- Seed: 117 tokens, 2871 heartbeats, score 96.94. Free passes applied (normalize): start candidate 112 tokens, 2871 heartbeats, score 97.03.
+- Exchange rate here: 1 token = 0.019 points, 100 heartbeats = 0.03 points.
+- Deletions that FAIL (needed as they stand): line 9 `hu` from the simp list; line 9 `Nat.add_sub_assoc` from the simp list; line 9 `ih` from the simp list; line 8 the tactic `rify`; line 2 the tactic `obtain ⟨B, T, hB⟩ := boundedu`; line 3 the tactic `obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi λ_ : Fi…`.
+- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 7 (`· clear hij`) (grind/simp_all/aesop); the closing tactic at line 9 (`simp (disch := omega) only [hu, Nat.add…`) (grind/simp_all/aesop); the bullet at line 6 (`· simpa using congrFun heq.symm ⟨m, hm⟩`) (grind/simp_all/aesop); the closing tactic at line 12 (`convert this $ n - i using 2 <;> omega`) (grind/simp_all/aesop).

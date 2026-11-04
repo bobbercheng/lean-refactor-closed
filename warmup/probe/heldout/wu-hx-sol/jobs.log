@@ -1,0 +1,75 @@
+[2026-10-11T20:00:21+00:00] worktree /home/user/source/lra-ab/wu-hx at 579e3634349c9a70f43ce5a1e99252f046876b6a: warm-up rows used as committed
+[2026-10-11T20:00:21+00:00] round 1 (rung $1.00): 15 resume, 0 fresh restart (spent so far $0.00)
+[2026-10-11T20:50:55+00:00] round 1 done: mean so far 84.37
+[2026-10-11T20:50:55+00:00] round 2 (rung $1.00): 12 resume, 3 fresh restart (spent so far $5.88)
+[2026-10-11T21:06:33+00:00]   fresh lineage (restart): +$0.145, 33.33 -> main best kept
+[2026-10-11T21:06:33+00:00]   fresh lineage (restart): +$0.105, 71.09 -> ADOPTED
+[2026-10-11T21:06:33+00:00]   fresh lineage (restart): +$0.285, 85.07 -> ADOPTED
+[2026-10-11T21:23:50+00:00] round 2 done: mean so far 85.68
+[2026-10-11T21:23:50+00:00] round 3 (rung $1.00): 10 resume, 2 fresh restart (spent so far $9.78)
+[2026-10-11T21:30:30+00:00]   fresh lineage (restart): +$0.164, 33.33 -> main best kept
+[2026-10-11T21:30:30+00:00]   fresh lineage (restart): +$0.087, 72.76 -> main best kept
+[2026-10-11T21:40:36+00:00] round 3 done: mean so far 85.80
+[2026-10-11T21:40:36+00:00] MILESTONE $1.00 wu arm sol, rung $1.00: mean 85.80 over 15
+[2026-10-11T21:40:36+00:00]   None n=15 85.80; arklib n=3 90.74; cslib n=3 81.13; physlib n=3 69.44; putnambench n=3 97.13; strata n=3 90.58
+[2026-10-11T21:40:36+00:00]   spend: total $11.33, mean $0.755, MAX $0.855 per problem (rung $1.00; past $2: 0)
+[2026-10-11T21:40:36+00:00]   score at budget: $0.50 78.51 · $1.00 85.80
+[2026-10-11T21:40:36+00:00] round 4 (rung $2.00): 11 resume, 4 fresh restart (spent so far $11.33)
+[2026-10-11T21:46:00+00:00] REPORT wu arm sol, rung $2.85: mean 85.81 over 15
+[2026-10-11T21:46:00+00:00]   None n=15 85.81; arklib n=3 90.74; cslib n=3 81.13; physlib n=3 69.46; putnambench n=3 97.13; strata n=3 90.60
+[2026-10-11T21:46:00+00:00]   spend: total $12.00, mean $0.800, MAX $1.076 per problem (rung $2.85; past $2: 0)
+[2026-10-11T21:46:00+00:00]   score at budget: $0.50 78.51 · $1.00 85.81 · $1.50 85.81 · $2.00 85.81 · $2.50 85.81 · $2.85 85.81
+[2026-10-11T21:59:51+00:00]   fresh lineage (restart): +$0.258, 90.83 -> main best kept
+[2026-10-11T21:59:51+00:00]   fresh lineage (restart): +$0.320, 33.33 -> main best kept
+[2026-10-11T21:59:51+00:00]   fresh lineage (restart): +$0.614, 73.54 -> main best kept
+[2026-10-11T21:59:51+00:00]   fresh lineage (restart): +$0.720, 84.11 -> main best kept
+[2026-10-11T22:17:37+00:00] round 4 done: mean so far 88.88
+[2026-10-11T22:17:37+00:00] round 5 (rung $2.00): 11 resume, 4 fresh restart (spent so far $18.03)
+[2026-10-11T22:18:02+00:00] PAUSED by an approved deploy: stopped at round-5 launch (no API calls); round-5 fresh seeds archived as wu-sol-fresh.aborted-wu-hx-sol-f5 (no spend)
+[2026-10-11T23:20:14+00:00] worktree /home/user/source/lra-ab/wu-hx at 0672126bae0fcbac684c2221c1af9f913aa852ee: warm-up rows used as committed
+[2026-10-11T23:20:14+00:00] MILESTONE $1.00 wu arm sol, rung $1.00: mean 88.88 over 15
+[2026-10-11T23:20:14+00:00]   None n=15 88.88; arklib n=3 92.27; cslib n=3 81.25; physlib n=3 82.98; putnambench n=3 97.28; strata n=3 90.61
+[2026-10-11T23:20:14+00:00]   spend: total $18.03, mean $1.202, MAX $1.506 per problem (rung $1.00; past $2: 0)
+[2026-10-11T23:20:14+00:00]   score at budget: $0.50 78.51 · $1.00 86.09
+[2026-10-11T23:20:14+00:00] round 8 (rung $2.00): 11 resume, 4 fresh restart (spent so far $18.03)
+[2026-10-11T23:20:25+00:00] NOTE: resumed 23:20 after a 63-min pause (22:17-23:20) to deploy the rescue stuck-test (gain over the whole rung < 0.5; lineage gains backfilled with round 4 = first $2-rung round). The 'MILESTONE $1.00 ... 88.88' line above is the restart re-printing the current state; the real $1 milestone was 85.81 (21:40). Runaway-call fix (agent.py) not yet deployed: worktree still at 0672126b.
+[2026-10-11T23:37:52+00:00] DEPLOY: worktree -> 08002e91 (runaway tool-call drop + bounded memgate waits); sessions launched from now on use it, sessions already running keep the old code
+[2026-10-11T23:47:51+00:00]   fresh lineage (restart): +$0.403, 90.4 -> main best kept
+[2026-10-11T23:47:51+00:00]   fresh lineage (restart): +$0.216, 83.29 -> main best kept
+[2026-10-11T23:47:51+00:00]   fresh lineage (restart): +$0.402, 76.75 -> ADOPTED
+[2026-10-11T23:47:51+00:00]   fresh lineage (restart): +$0.164, 84.13 -> main best kept
+[2026-10-11T23:47:51+00:00] round 8 done: mean so far 89.31
+[2026-10-11T23:47:51+00:00] round 9 (rung $2.00): 13 resume, 0 fresh restart (spent so far $22.57)
+[2026-10-11T23:50:24+00:00] snapshot watcher armed: threshold 89.5, every 60 s, up to 10 h
+[2026-10-11T23:51:47+00:00] snapshot watcher armed: threshold 89.5, every 60 s, up to 10 h
+[2026-10-11T23:51:47+00:00] no-stop guard armed: relaunches lra-hx-warmup without the stop rule if it fires at the $2.00 milestone (up to 6 h)
+[2026-10-11T23:52:47+00:00] SNAPSHOT reached89.5: local mean 89.51 over 15; spend total $23.18, mean $1.545, MAX $1.739 per problem; saved probe/heldout/wu-hx-sol/snapshots/reached89.5-20261011T235247Z (run continues)
+[2026-10-12T00:05:28+00:00] BRIEF ADDENDUM (option B, 00:0x): Electromagnetism's knowledge brief in this worktree now ends with the earlier Sol line's diagnosis (landmark 339/5,593; gap mostly heartbeats) and 8 measured dead ends + non-existent names; no winning technique, no proof text (3-lens adversarial review applied). Takes effect at its next session; other 14 problems unchanged; the 89.51 snapshot (23:52:47) is the pre-change reference. Text: probe/heldout/wu-electro-addendum-B.md
+[2026-10-12T00:10:02+00:00] round 9 done: mean so far 89.76
+[2026-10-12T00:10:02+00:00] round 10 (rung $2.00): 6 resume, 0 fresh restart (spent so far $25.22)
+[2026-10-12T00:20:21+00:00] round 10 done: mean so far 89.76
+[2026-10-12T00:20:21+00:00] round 11 (rung $2.00): 2 resume, 0 fresh restart (spent so far $26.03)
+[2026-10-12T00:23:56+00:00] round 11 done: mean so far 89.76
+[2026-10-12T00:23:56+00:00] MILESTONE $2.00 wu arm sol, rung $2.00: mean 89.76 over 15
+[2026-10-12T00:23:56+00:00]   None n=15 89.76; arklib n=3 92.52; cslib n=3 83.16; physlib n=3 83.97; putnambench n=3 97.32; strata n=3 91.83
+[2026-10-12T00:23:56+00:00]   spend: total $26.24, mean $1.750, MAX $1.863 per problem (rung $2.00; past $2: 0)
+[2026-10-12T00:23:56+00:00]   score at budget: $0.50 78.51 · $1.00 86.09 · $1.50 89.34 · $2.00 89.76
+[2026-10-12T00:23:56+00:00] RESCUE: 5 candidate(s) skipped as not stuck (gained >= 0.5 on this rung, or no session yet): CallElimCorrect.extractedOldExprInVars, Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema, FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time, Cslib.SKI.parallelReduction_diamond, Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius
+[2026-10-12T00:23:56+00:00] RESCUE: one fresh RESTRUCTURE session (empty workspace, effort high) for 4 problems furthest below target
+[2026-10-12T00:23:57+00:00] no-stop guard: the $2.00 milestone passed without an early stop; exiting
+[2026-10-12T00:35:55+00:00]   fresh lineage (restructure): +$0.480, 85.42 -> main best kept
+[2026-10-12T00:35:55+00:00]   fresh lineage (restructure): +$0.603, 83.76 -> main best kept
+[2026-10-12T00:35:55+00:00]   fresh lineage (restructure): +$0.553, 89.14 -> main best kept
+[2026-10-12T00:35:55+00:00]   fresh lineage (restructure): +$0.580, 91.31 -> main best kept
+[2026-10-12T00:35:55+00:00] AFTER RESCUE wu arm sol, rung $2.00: mean 89.76 over 15
+[2026-10-12T00:35:55+00:00]   None n=15 89.76; arklib n=3 92.52; cslib n=3 83.16; physlib n=3 83.97; putnambench n=3 97.32; strata n=3 91.83
+[2026-10-12T00:35:55+00:00]   spend: total $28.46, mean $1.897, MAX $2.325 per problem (rung $2.00; past $2: 4)
+[2026-10-12T00:35:55+00:00]   score at budget: $0.50 78.51 · $1.00 86.09 · $1.50 89.34 · $2.00 89.76
+[2026-10-12T00:35:55+00:00] round 13 (rung $2.85): 15 resume, 0 fresh restart (spent so far $28.46)
+[2026-10-12T01:09:34+00:00] round 13 done: mean so far 90.47
+[2026-10-12T01:09:34+00:00] round 14 (rung $2.85): 14 resume, 0 fresh restart (spent so far $31.84)
+[2026-10-12T01:34:27+00:00] round 14: no spend recorded (API or key problem?); stopping
+[2026-10-12T01:46:26+00:00] SNAPSHOT paused402: local mean 90.47; spend total $31.84, MAX $2.621 per problem (billed); saved probe/heldout/wu-hx-sol/snapshots/paused402-20261012T014625Z. Runner stopped 01:34: OpenRouter account credits exhausted (HTTP 402 on every round-14 request, nothing billed)
+[2026-10-12T01:46:59+00:00] NOTE: round 14 never reached the API (HTTP 402, account credits exhausted); its 0-gain lineage entries were reverted so the restart rule does not read them as stalled sessions (backup lineage.json.bak-pre-402fix)
+[2026-10-12T01:47:24+00:00] resume-on-credits armed: relaunches lra-hx-warmup when the OpenRouter balance reaches $12 (every 300 s, up to 12 h)
+[2026-10-12T02:02:15+00:00] PAUSED (OpenRouter arms paused): resume-on-credits watcher stopped; the warm-up run stays paused at 90.47 (snapshot paused402) until a decision on the OpenRouter budget

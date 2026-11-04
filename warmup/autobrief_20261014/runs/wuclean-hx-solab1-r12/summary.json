@@ -1,0 +1,137 @@
+[
+ {
+  "problem": "CallElimCorrect.substOldPostSubset",
+  "best_score": 90.28,
+  "checks": 12,
+  "tool_calls": 22,
+  "turns": 22,
+  "out_tokens": 8449,
+  "seconds": 312
+ },
+ {
+  "problem": "CallElimCorrect.extractedOldExprInVars",
+  "best_score": 94.64,
+  "checks": 12,
+  "tool_calls": 24,
+  "turns": 24,
+  "out_tokens": 9323,
+  "seconds": 303
+ },
+ {
+  "problem": "Core.InitsUpdatesComm",
+  "best_score": 87.04,
+  "checks": 13,
+  "tool_calls": 13,
+  "turns": 13,
+  "out_tokens": 8667,
+  "seconds": 209
+ },
+ {
+  "problem": "fundamental_theorem_of_variational_calculus'",
+  "best_score": 91.19,
+  "checks": 9,
+  "tool_calls": 18,
+  "turns": 18,
+  "out_tokens": 7288,
+  "seconds": 201
+ },
+ {
+  "problem": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+  "best_score": 87.09,
+  "checks": 14,
+  "tool_calls": 31,
+  "turns": 22,
+  "out_tokens": 4712,
+  "seconds": 358
+ },
+ {
+  "problem": "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time",
+  "best_score": 81.07,
+  "checks": 11,
+  "tool_calls": 34,
+  "turns": 34,
+  "out_tokens": 8697,
+  "seconds": 373
+ },
+ {
+  "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+  "best_score": 91.13,
+  "checks": 15,
+  "tool_calls": 14,
+  "turns": 14,
+  "out_tokens": 6162,
+  "seconds": 179
+ },
+ {
+  "problem": "Cslib.SKI.parallelReduction_diamond",
+  "best_score": 77.91,
+  "checks": 8,
+  "tool_calls": 9,
+  "turns": 9,
+  "out_tokens": 7577,
+  "seconds": 173
+ },
+ {
+  "problem": "Cslib.CCS.bisimilarity_congr_choice",
+  "best_score": 87.31,
+  "checks": 6,
+  "tool_calls": 11,
+  "turns": 11,
+  "out_tokens": 6122,
+  "seconds": 177
+ },
+ {
+  "problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+  "best_score": 91.19,
+  "checks": 10,
+  "tool_calls": 25,
+  "turns": 17,
+  "out_tokens": 3350,
+  "seconds": 362
+ },
+ {
+  "problem": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+  "best_score": 94.34,
+  "checks": 17,
+  "tool_calls": 40,
+  "turns": 29,
+  "out_tokens": 5869,
+  "seconds": 475
+ },
+ {
+  "problem": "interleaved_affine_gaps_imply_tensor_gaps",
+  "best_score": 92.08,
+  "checks": 20,
+  "tool_calls": 35,
+  "turns": 18,
+  "out_tokens": 4387,
+  "seconds": 464
+ },
+ {
+  "problem": "putnam_1964_a4",
+  "best_score": 96.94,
+  "checks": 9,
+  "tool_calls": 17,
+  "turns": 15,
+  "out_tokens": 7284,
+  "seconds": 233
+ },
+ {
+  "problem": "putnam_1964_b2",
+  "best_score": 98.89,
+  "checks": 9,
+  "tool_calls": 16,
+  "turns": 16,
+  "out_tokens": 6066,
+  "seconds": 197
+ },
+ {
+  "problem": "putnam_1995_a3",
+  "best_score": 95.87,
+  "checks": 17,
+  "tool_calls": 31,
+  "turns": 18,
+  "out_tokens": 5720,
+  "seconds": 252
+ }
+]

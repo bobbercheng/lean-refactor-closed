@@ -1,0 +1,5 @@
+Cslib.SKI.parallelReduction_diamond: ok True total 524 floor 4 H-left 12.19 blocks 12 (19 s)
+Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema: ok True total 6737 floor 660 H-left 7.47 blocks 12 (86 s)
+FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time: ok True total 7968 floor 300 H-left 6.07 blocks 12 (48 s)
+Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress: ok True total 6944 floor 50 H-left 3.84 blocks 11 (43 s)
+Cslib.CCS.bisimilarity_congr_choice: ok True total 396 floor 37 H-left 3.08 blocks 6 (17 s)

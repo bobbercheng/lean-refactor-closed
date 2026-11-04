@@ -1,0 +1,427 @@
+{
+ "CallElimCorrect.substOldPostSubset": {
+  "sessions": 8,
+  "fresh": 0,
+  "last_gain": 0.0,
+  "gains": [
+   [
+    2.0,
+    0.03
+   ],
+   [
+    2.0,
+    0.06
+   ],
+   [
+    2.0,
+    0.23
+   ],
+   [
+    2.85,
+    0.0
+   ],
+   [
+    2.85,
+    0.0
+   ]
+  ]
+ },
+ "CallElimCorrect.extractedOldExprInVars": {
+  "sessions": 9,
+  "fresh": 2,
+  "last_gain": 0.0,
+  "gains": [
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.0,
+    3.36
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.85,
+    0.15
+   ],
+   [
+    2.85,
+    0.0
+   ]
+  ]
+ },
+ "Core.InitsUpdatesComm": {
+  "sessions": 8,
+  "fresh": 0,
+  "last_gain": 0.0,
+  "gains": [
+   [
+    2.0,
+    0.05
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.85,
+    0.0
+   ],
+   [
+    2.85,
+    0.0
+   ]
+  ]
+ },
+ "fundamental_theorem_of_variational_calculus'": {
+  "sessions": 7,
+  "fresh": 0,
+  "last_gain": 0.0,
+  "gains": [
+   [
+    2.0,
+    0.04
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.85,
+    0.0
+   ]
+  ]
+ },
+ "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema": {
+  "sessions": 7,
+  "fresh": 2,
+  "last_gain": 0.0,
+  "gains": [
+   [
+    2.0,
+    40.56
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.85,
+    9.35
+   ],
+   [
+    2.85,
+    0.0
+   ]
+  ]
+ },
+ "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time": {
+  "sessions": 10,
+  "fresh": 2,
+  "last_gain": 0.0,
+  "gains": [
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.0,
+    2.97
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.85,
+    0.31
+   ],
+   [
+    2.85,
+    0.0
+   ]
+  ]
+ },
+ "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress": {
+  "sessions": 8,
+  "fresh": 2,
+  "last_gain": 0.0,
+  "gains": [
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.0,
+    0.27
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.85,
+    0.21
+   ],
+   [
+    2.85,
+    0.0
+   ]
+  ]
+ },
+ "Cslib.SKI.parallelReduction_diamond": {
+  "sessions": 7,
+  "fresh": 2,
+  "last_gain": 0.0,
+  "gains": [
+   [
+    2.0,
+    0.35
+   ],
+   [
+    2.0,
+    5.31
+   ],
+   [
+    2.0,
+    0.16
+   ],
+   [
+    2.85,
+    0.0
+   ],
+   [
+    2.85,
+    0.0
+   ]
+  ]
+ },
+ "Cslib.CCS.bisimilarity_congr_choice": {
+  "sessions": 7,
+  "fresh": 2,
+  "last_gain": 0.0,
+  "gains": [
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.85,
+    0.0
+   ],
+   [
+    2.85,
+    0.0
+   ]
+  ]
+ },
+ "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius": {
+  "sessions": 10,
+  "fresh": 1,
+  "last_gain": 0.0,
+  "gains": [
+   [
+    2.0,
+    4.47
+   ],
+   [
+    2.0,
+    0.36
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.0,
+    0.05
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.85,
+    0.5
+   ],
+   [
+    2.85,
+    0.0
+   ]
+  ]
+ },
+ "Binius.BinaryBasefold.fold_advances_evaluation_poly": {
+  "sessions": 9,
+  "fresh": 0,
+  "last_gain": 0.0,
+  "gains": [
+   [
+    2.0,
+    0.02
+   ],
+   [
+    2.0,
+    0.31
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.85,
+    0.0
+   ],
+   [
+    2.85,
+    0.0
+   ]
+  ]
+ },
+ "interleaved_affine_gaps_imply_tensor_gaps": {
+  "sessions": 9,
+  "fresh": 0,
+  "last_gain": 0.0,
+  "gains": [
+   [
+    2.0,
+    0.1
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.0,
+    0.03
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.85,
+    0.08
+   ],
+   [
+    2.85,
+    0.0
+   ]
+  ]
+ },
+ "putnam_1964_a4": {
+  "sessions": 7,
+  "fresh": 0,
+  "last_gain": 0.0,
+  "gains": [
+   [
+    2.0,
+    0.21
+   ],
+   [
+    2.0,
+    0.08
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.85,
+    0.0
+   ],
+   [
+    2.85,
+    0.0
+   ]
+  ]
+ },
+ "putnam_1964_b2": {
+  "sessions": 9,
+  "fresh": 0,
+  "last_gain": 0.0,
+  "gains": [
+   [
+    2.0,
+    0.08
+   ],
+   [
+    2.0,
+    0.05
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.85,
+    0.0
+   ],
+   [
+    2.85,
+    0.0
+   ]
+  ]
+ },
+ "putnam_1995_a3": {
+  "sessions": 7,
+  "fresh": 0,
+  "last_gain": 0.0,
+  "gains": [
+   [
+    2.0,
+    0.16
+   ],
+   [
+    2.0,
+    0.0
+   ],
+   [
+    2.85,
+    0.0
+   ],
+   [
+    2.85,
+    0.0
+   ]
+  ]
+ }
+}

@@ -1,0 +1,2185 @@
+{
+ "problem": "putnam_1964_b2",
+ "best": {
+  "score": 99.26,
+  "proof": "theorem putnam_1964_b2\n(S : Type*) [Fintype S] [Nonempty S]\n(P : Finset (Set S))\n(hPP : ∀ T ∈ P, ∀ U ∈ P, T ∩ U ≠ ∅)\n(hPS : ¬∃ T : Set S, T ∉ P ∧ (∀ U ∈ P, T ∩ U ≠ ∅))\n: (P.card = 2 ^ (Fintype.card S - 1)) := by\n  simp_all only [Set.disjoint_iff_inter_eq_empty.not.symm]\n  apply Nat.mul_left_cancel Nat.two_pos\n  rw [mul_pow_sub_one Fintype.card_ne_zero, Fintype.card_set.symm, ← Set.Intersecting.is_max_iff_card_eq hPP]\n  clear hPP\n  unfold Set.Intersecting\n  grind",
+  "tokens": 25,
+  "heartbeats": 1055,
+  "L": 98.57,
+  "H": 99.22,
+  "Z": 100.0,
+  "compat": {
+   "v4.26.0": true,
+   "v4.25.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "da697bd498d9",
+   "tokens": 114,
+   "heartbeats": 1155,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:33:19Z",
+   "score": 97.55
+  },
+  {
+   "sha": "397ac87adac6",
+   "tokens": 81,
+   "heartbeats": 988,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:33:50Z",
+   "score": 98.22
+  },
+  {
+   "sha": "d07c8417cbc6",
+   "tokens": 68,
+   "heartbeats": 136,
+   "ok": false,
+   "error": "24:2: `simp` made no progress",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:34:00Z"
+  },
+  {
+   "sha": "5c8ad5de56f0",
+   "tokens": 77,
+   "heartbeats": 845,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:34:03Z",
+   "score": 98.33
+  },
+  {
+   "sha": "a7e45d825fe8",
+   "tokens": 41,
+   "heartbeats": 136,
+   "ok": false,
+   "error": "24:2: `simp` made no progress",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:34:12Z"
+  },
+  {
+   "sha": "1d50069c9b47",
+   "tokens": 70,
+   "heartbeats": 904,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:34:26Z",
+   "score": 98.45
+  },
+  {
+   "sha": "aff263088e99",
+   "tokens": 43,
+   "heartbeats": 8791,
+   "ok": false,
+   "error": "25:68: unsolved goals S : Type u_1 inst : Fintype S inst_1 : Nonempty S P : Finset (Set S) hPP : ∀ T ∈ P, ∀ U ∈ P, ¬Disjoint T U t : Finset (Set S) hPS : ∀ x ∉ P, ∃ x_1 ∈ P, Disjoint x x_1 a : ∀ ⦃a : Set S⦄, a ∈ t → ∀ ⦃b : Set S⦄, b ∈ t → ¬Disjoint a b a_1 : P ⊆ t ⊢ P = t",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:34:32Z"
+  },
+  {
+   "sha": "cf608c70752e",
+   "tokens": 46,
+   "heartbeats": 2196,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:34:35Z",
+   "score": 98.58
+  },
+  {
+   "sha": "cbad44d7b094",
+   "tokens": 46,
+   "heartbeats": 801,
+   "ok": false,
+   "error": "26:29: invalid `grind` theorem, failed to find an usable pattern using different modifiers",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:35:10Z"
+  },
+  {
+   "sha": "e44dcf1266f4",
+   "tokens": 51,
+   "heartbeats": 1997,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:35:14Z"
+  },
+  {
+   "sha": "3fce843d0aad",
+   "tokens": 51,
+   "heartbeats": 1400,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:35:17Z",
+   "score": 98.68
+  },
+  {
+   "sha": "3178bbbf439c",
+   "tokens": 43,
+   "heartbeats": 2307,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:35:23Z"
+  },
+  {
+   "sha": "002eed69d9a8",
+   "tokens": 48,
+   "heartbeats": 1511,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:35:36Z",
+   "score": 98.71
+  },
+  {
+   "sha": "4f53d5027d74",
+   "tokens": 53,
+   "heartbeats": 1520,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:35:42Z"
+  },
+  {
+   "sha": "d78614a61087",
+   "tokens": 49,
+   "heartbeats": 6359,
+   "ok": false,
+   "error": "25:68: unsolved goals S : Type u_1 inst : Fintype S inst_1 : Nonempty S P : Finset (Set S) hPP : ∀ T ∈ P, ∀ U ∈ P, ¬Disjoint T U Q : Finset (Set S) hPS : ∀ x ∉ P, ∃ x_1 ∈ P, Disjoint x x_1 hQ : ∀ ⦃a : Set S⦄, a ∈ Q → ∀ ⦃b : Set S⦄, b ∈ Q → ¬Disjoint a b hPQ : P ⊆ Q ⊢ Q ⊆ P",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:35:46Z"
+  },
+  {
+   "sha": "87b4d8b2875f",
+   "tokens": 47,
+   "heartbeats": 1491,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:36:00Z",
+   "score": 98.74
+  },
+  {
+   "sha": "6c5a381b56e9",
+   "tokens": 43,
+   "heartbeats": 1490,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:36:06Z",
+   "score": 98.81
+  },
+  {
+   "sha": "f46014837f59",
+   "tokens": 49,
+   "heartbeats": 1516,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:36:12Z"
+  },
+  {
+   "sha": "c74ef69bb9e5",
+   "tokens": 38,
+   "heartbeats": 1493,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:36:27Z",
+   "score": 98.91
+  },
+  {
+   "sha": "d0257dcc50c5",
+   "tokens": 45,
+   "heartbeats": 1538,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:36:33Z"
+  },
+  {
+   "sha": "6a7c65c1cf90",
+   "tokens": 48,
+   "heartbeats": 1520,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:36:36Z"
+  },
+  {
+   "sha": "455c36bf2974",
+   "tokens": 35,
+   "heartbeats": 4997,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:36:53Z"
+  },
+  {
+   "sha": "3963f24c1488",
+   "tokens": 39,
+   "heartbeats": 850,
+   "ok": false,
+   "error": "26:29: `@[grind ←] theorem Finset.ext_iff` failed to find patterns in the theorem's conclusion, consider using different options or the `grind_pattern` command",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:36:56Z"
+  },
+  {
+   "sha": "799e3b8d1f33",
+   "tokens": 39,
+   "heartbeats": 1490,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:36:59Z"
+  },
+  {
+   "sha": "c8b08f65ab3e",
+   "tokens": 39,
+   "heartbeats": 1131,
+   "ok": false,
+   "error": "28:4: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬Disjoint T U [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬Disjoint a U)) ∨ a ∈ P [prop] (↑t).Intersecting [prop] P ⊆ t [prop] (a ∈ P) = (a ∉ t) [prop",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:37:18Z"
+  },
+  {
+   "sha": "3bde9c2d261c",
+   "tokens": 40,
+   "heartbeats": 1294,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:37:21Z",
+   "score": 98.92
+  },
+  {
+   "sha": "deb3d0751fbf",
+   "tokens": 37,
+   "heartbeats": 1495,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:37:28Z",
+   "score": 98.93
+  },
+  {
+   "sha": "4f65a837a0f8",
+   "tokens": 36,
+   "heartbeats": 832,
+   "ok": false,
+   "error": "27:4: This extensionality tactic only applies to equalities, not ∀ (t : Finset (Set S)), (∀ ⦃a : Set S⦄, a ∈ ↑t → ∀ ⦃b : Set S⦄, b ∈ ↑t → ¬Disjoint a b) → P ⊆ t → P = t",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:37:47Z"
+  },
+  {
+   "sha": "93bc4aef721d",
+   "tokens": 39,
+   "heartbeats": 1311,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:37:50Z"
+  },
+  {
+   "sha": "5b0acfeca60f",
+   "tokens": 43,
+   "heartbeats": 1504,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:37:53Z"
+  },
+  {
+   "sha": "9a5d07f3a5ef",
+   "tokens": 34,
+   "heartbeats": 1159,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:38:45Z",
+   "score": 99.07
+  },
+  {
+   "sha": "31b1420dfdb8",
+   "tokens": 39,
+   "heartbeats": 1187,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:38:50Z"
+  },
+  {
+   "sha": "24c7ff03db3a",
+   "tokens": 36,
+   "heartbeats": 976,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:39:55Z"
+  },
+  {
+   "sha": "6e88ca0d7a44",
+   "tokens": 35,
+   "heartbeats": 1974,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:39:58Z"
+  },
+  {
+   "sha": "47b73c0280e4",
+   "tokens": 34,
+   "heartbeats": 1159,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:40:01Z"
+  },
+  {
+   "sha": "c5ecde401e6a",
+   "tokens": 33,
+   "heartbeats": null,
+   "ok": false,
+   "error": "28:3: unknown tactic",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:40:38Z"
+  },
+  {
+   "sha": "ec7214febd01",
+   "tokens": 35,
+   "heartbeats": null,
+   "ok": false,
+   "error": "29:3: unknown tactic",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:40:41Z"
+  },
+  {
+   "sha": "db44e3de007f",
+   "tokens": 34,
+   "heartbeats": 2361,
+   "ok": false,
+   "error": "29:2: Tactic `tauto` failed case h … [hypotheses omitted] ⊢ a✝ ∈ P ↔ a✝ ∈ t✝",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:11:59Z"
+  },
+  {
+   "sha": "59920e5860d7",
+   "tokens": 40,
+   "heartbeats": 1169,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:12:02Z"
+  },
+  {
+   "sha": "2b0ba166c133",
+   "tokens": 34,
+   "heartbeats": 8647,
+   "ok": false,
+   "error": "22:41: unsolved goals case mp … [hypotheses omitted] ⊢ a_2 ∈ t ‖ ⊢ a_2 ∈ P",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:12:06Z"
+  },
+  {
+   "sha": "414f5fce0bbc",
+   "tokens": 35,
+   "heartbeats": 1157,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:12:24Z"
+  },
+  {
+   "sha": "148e22c84726",
+   "tokens": 35,
+   "heartbeats": 1954,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:12:27Z"
+  },
+  {
+   "sha": "f13643d8298c",
+   "tokens": 35,
+   "heartbeats": 553,
+   "ok": false,
+   "error": "27:9: invalid `grind` theorem, failed to find an usable pattern using different modifiers",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:12:30Z"
+  },
+  {
+   "sha": "dbdcc13ca6f8",
+   "tokens": 33,
+   "heartbeats": 208,
+   "ok": false,
+   "error": "24:11: `simp` made no progress",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:12:55Z"
+  },
+  {
+   "sha": "cd41c5dd1019",
+   "tokens": 35,
+   "heartbeats": 1180,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:12:57Z"
+  },
+  {
+   "sha": "084672963b2d",
+   "tokens": 36,
+   "heartbeats": 1171,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:13:00Z"
+  },
+  {
+   "sha": "79c52611eb85",
+   "tokens": 36,
+   "heartbeats": 1205,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:13:52Z"
+  },
+  {
+   "sha": "cfedbf1a8fbd",
+   "tokens": 36,
+   "heartbeats": 1175,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:13:55Z"
+  },
+  {
+   "sha": "52ea9d060beb",
+   "tokens": 36,
+   "heartbeats": 1206,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:13:58Z"
+  },
+  {
+   "sha": "2d0d7c24f93c",
+   "tokens": 38,
+   "heartbeats": 1044,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind.2 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬Disjoint T U [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬Disjoint a U)) ∨ a ∈ P [prop] ∀ ⦃a : Set S⦄, a ∈ ↑t → ∀ ⦃b : Set S⦄, b ∈ ↑t → ¬Disjoint a b",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:14:15Z"
+  },
+  {
+   "sha": "5eb47ba213a3",
+   "tokens": 35,
+   "heartbeats": 779,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬Disjoint T U [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬Disjoint a U)) ∨ a ∈ P [prop] ∀ ⦃a : Set S⦄, a ∈ ↑t → ∀ ⦃b : Set S⦄, b ∈ ↑t → ¬Disjoint a b",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:14:18Z"
+  },
+  {
+   "sha": "640a7ff5434d",
+   "tokens": 38,
+   "heartbeats": 883,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬Disjoint T U [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬Disjoint a U)) ∨ a ∈ P [prop] ∀ ⦃a : Set S⦄, a ∈ ↑t → ∀ ⦃b : Set S⦄, b ∈ ↑t → ¬Disjoint a b",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:14:22Z"
+  },
+  {
+   "sha": "dc7125e62233",
+   "tokens": 43,
+   "heartbeats": 1203,
+   "ok": false,
+   "error": "30:2: Type mismatch: After simplification, term hc has type 2 * P.card = 2 ^ (Fintype.card S - 1) * 2 but is expected to have type P.card = 2 ^ (Fintype.card S - 1)",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:18:24Z"
+  },
+  {
+   "sha": "0a6f8b01e09e",
+   "tokens": 43,
+   "heartbeats": 1251,
+   "ok": false,
+   "error": "30:2: Type mismatch: After simplification, term hc has type P.card * 2 = 2 ^ (Fintype.card S - 1) * 2 but is expected to have type P.card = 2 ^ (Fintype.card S - 1)",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:18:39Z"
+  },
+  {
+   "sha": "f0be27f9f6b0",
+   "tokens": 33,
+   "heartbeats": 378,
+   "ok": false,
+   "error": "25:39: Tactic `rewrite` failed: Did not find an occurrence of the pattern 2 ^ (F … [hypotheses omitted] ⊢ 2 * P.card = 2 * 2 ^ (Fintype.card S - 1)",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:18:58Z"
+  },
+  {
+   "sha": "38c85ebf875d",
+   "tokens": 33,
+   "heartbeats": 1158,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:19:25Z",
+   "score": 99.09
+  },
+  {
+   "sha": "455f8c0390eb",
+   "tokens": 33,
+   "heartbeats": 1227,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:19:31Z"
+  },
+  {
+   "sha": "8010c03c4603",
+   "tokens": 43,
+   "heartbeats": 1257,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:19:34Z"
+  },
+  {
+   "sha": "16446b982881",
+   "tokens": 33,
+   "heartbeats": 1232,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:19:52Z"
+  },
+  {
+   "sha": "ee3c507af70e",
+   "tokens": 35,
+   "heartbeats": 974,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:19:55Z"
+  },
+  {
+   "sha": "d595bd8457df",
+   "tokens": 33,
+   "heartbeats": 1157,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:19:58Z"
+  },
+  {
+   "sha": "4ea94f2e7279",
+   "tokens": 35,
+   "heartbeats": 1048,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:20:20Z"
+  },
+  {
+   "sha": "065b3634ef54",
+   "tokens": 36,
+   "heartbeats": 958,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:20:23Z"
+  },
+  {
+   "sha": "2eafc494a4b6",
+   "tokens": 35,
+   "heartbeats": 1159,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:20:26Z"
+  },
+  {
+   "sha": "cf9df61ea55a",
+   "tokens": 34,
+   "heartbeats": 1166,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:36:30Z"
+  },
+  {
+   "sha": "29aad761410b",
+   "tokens": 34,
+   "heartbeats": 1179,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:36:33Z"
+  },
+  {
+   "sha": "865571110609",
+   "tokens": 35,
+   "heartbeats": 1158,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:36:36Z"
+  },
+  {
+   "sha": "c7d32215f4ec",
+   "tokens": 33,
+   "heartbeats": 534,
+   "ok": false,
+   "error": "25:153: Application type mismatch: The argument hPP has type ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ but is expected to have type (↑?m.72).Intersecting in the application Intersecting.is_max_iff_card_eq hPP",
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:36:39Z"
+  },
+  {
+   "sha": "19f25aa6115c",
+   "tokens": 31,
+   "heartbeats": 1158,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:38:29Z",
+   "score": 99.12
+  },
+  {
+   "sha": "abd5c4d3aae9",
+   "tokens": 32,
+   "heartbeats": 1165,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:38:35Z"
+  },
+  {
+   "sha": "7e638278d844",
+   "tokens": 33,
+   "heartbeats": 975,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:38:38Z",
+   "score": 99.13
+  },
+  {
+   "sha": "c0a5817c7d26",
+   "tokens": 34,
+   "heartbeats": 486,
+   "ok": false,
+   "error": "28:2: This extensionality tactic only applies to equalities, not ∀ (t : Finset (Set S)), (∀ ⦃a : Set S⦄, a ∈ ↑t → ∀ ⦃b : Set S⦄, b ∈ ↑t → ¬Disjoint a b) → P ⊆ t → P = t",
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:39:00Z"
+  },
+  {
+   "sha": "93b3d22be679",
+   "tokens": 34,
+   "heartbeats": 1226,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:39:03Z"
+  },
+  {
+   "sha": "f4810670734c",
+   "tokens": 35,
+   "heartbeats": 1021,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:39:06Z"
+  },
+  {
+   "sha": "d95a7325d965",
+   "tokens": 55,
+   "heartbeats": 683,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:04:31Z"
+  },
+  {
+   "sha": "adef162e99a9",
+   "tokens": 39,
+   "heartbeats": 982,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:04:34Z"
+  },
+  {
+   "sha": "823b7e21470d",
+   "tokens": 33,
+   "heartbeats": 975,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:04:37Z"
+  },
+  {
+   "sha": "d8da6fb71174",
+   "tokens": 34,
+   "heartbeats": 958,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:04:56Z"
+  },
+  {
+   "sha": "feee9ed9eaa2",
+   "tokens": 35,
+   "heartbeats": 1022,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:04:59Z"
+  },
+  {
+   "sha": "d1d3554880c9",
+   "tokens": 35,
+   "heartbeats": 875,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:05:02Z"
+  },
+  {
+   "sha": "5291182360b3",
+   "tokens": 49,
+   "heartbeats": 2870,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:05:39Z"
+  },
+  {
+   "sha": "55eacb4371e4",
+   "tokens": 32,
+   "heartbeats": 1091,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:05:42Z"
+  },
+  {
+   "sha": "4ce10d755e7f",
+   "tokens": 32,
+   "heartbeats": 1013,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:06:02Z",
+   "score": 99.14
+  },
+  {
+   "sha": "f9d2435bdf4e",
+   "tokens": 33,
+   "heartbeats": 1092,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:06:08Z"
+  },
+  {
+   "sha": "8a0584f974bd",
+   "tokens": 40,
+   "heartbeats": 1001,
+   "ok": false,
+   "error": "31:2: Type mismatch: After simplification, term this has type 2 * P.card = 2 * 2 ^ (Fintype.card S - 1) but is expected to have type P.card = 2 ^ (Fintype.card S - 1)",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:06:11Z"
+  },
+  {
+   "sha": "59c9e1e826d4",
+   "tokens": 32,
+   "heartbeats": 936,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:06:32Z",
+   "score": 99.16
+  },
+  {
+   "sha": "f35c3c338a59",
+   "tokens": 32,
+   "heartbeats": 962,
+   "ok": false,
+   "error": "25:29: Unknown constant `Nat.two_ne_zero`",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:06:38Z"
+  },
+  {
+   "sha": "a632fe458d71",
+   "tokens": 35,
+   "heartbeats": 985,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:06:41Z"
+  },
+  {
+   "sha": "484346602e52",
+   "tokens": 31,
+   "heartbeats": 935,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:07:02Z",
+   "score": 99.18
+  },
+  {
+   "sha": "e8dec63fb17d",
+   "tokens": 32,
+   "heartbeats": 936,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:07:08Z"
+  },
+  {
+   "sha": "d90d8c580535",
+   "tokens": 33,
+   "heartbeats": 936,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:07:11Z"
+  },
+  {
+   "sha": "3d4512a8f2b1",
+   "tokens": 32,
+   "heartbeats": 932,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:09:26Z"
+  },
+  {
+   "sha": "f5e97c7d0961",
+   "tokens": 32,
+   "heartbeats": 956,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:09:29Z"
+  },
+  {
+   "sha": "1d6f4872da64",
+   "tokens": 29,
+   "heartbeats": 1118,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:09:32Z"
+  },
+  {
+   "sha": "a77905774c75",
+   "tokens": 34,
+   "heartbeats": 965,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:10:13Z"
+  },
+  {
+   "sha": "a7a07fab8d0a",
+   "tokens": 31,
+   "heartbeats": 1080,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:10:22Z"
+  },
+  {
+   "sha": "d6fbda06313d",
+   "tokens": 31,
+   "heartbeats": 1163,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:10:25Z"
+  },
+  {
+   "sha": "beb50ca63296",
+   "tokens": 31,
+   "heartbeats": 1165,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:10:28Z"
+  },
+  {
+   "sha": "759168e91176",
+   "tokens": 37,
+   "heartbeats": 1864,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:10:52Z"
+  },
+  {
+   "sha": "61a3adb51315",
+   "tokens": 41,
+   "heartbeats": 1001,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:10:55Z"
+  },
+  {
+   "sha": "5f696439078e",
+   "tokens": 32,
+   "heartbeats": 988,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:10:58Z"
+  },
+  {
+   "sha": "4f2712e6c503",
+   "tokens": 31,
+   "heartbeats": 931,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:11:18Z"
+  },
+  {
+   "sha": "469d3b622495",
+   "tokens": 31,
+   "heartbeats": 935,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:11:20Z"
+  },
+  {
+   "sha": "29f424452358",
+   "tokens": 32,
+   "heartbeats": 944,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:11:23Z"
+  },
+  {
+   "sha": "9a594cbf9d4c",
+   "tokens": 29,
+   "heartbeats": 958,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:11:38Z",
+   "score": 99.21
+  },
+  {
+   "sha": "61df4c99d719",
+   "tokens": 32,
+   "heartbeats": 1182,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:11:44Z"
+  },
+  {
+   "sha": "eeebd1c68899",
+   "tokens": 32,
+   "heartbeats": 1200,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:11:47Z"
+  },
+  {
+   "sha": "49f69e46b444",
+   "tokens": 27,
+   "heartbeats": 777,
+   "ok": false,
+   "error": "27:2: `grind` failed case grind.2 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬Disjoint a U)) ∨ a ∈ P [prop] (↑t).Intersecting [prop] P ⊆ t [prop] ¬P = t [prop] ∃ a, (a ∈ P) = (a ∉ t) [prop] Injective SetLike.",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:12:03Z"
+  },
+  {
+   "sha": "b67ce89dc4d0",
+   "tokens": 27,
+   "heartbeats": 1141,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:12:06Z"
+  },
+  {
+   "sha": "8f8e3a06cc10",
+   "tokens": 30,
+   "heartbeats": 962,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:12:09Z"
+  },
+  {
+   "sha": "f1775981c418",
+   "tokens": 29,
+   "heartbeats": 1101,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:12:32Z"
+  },
+  {
+   "sha": "d45ab265fedc",
+   "tokens": 30,
+   "heartbeats": 1021,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:12:35Z"
+  },
+  {
+   "sha": "708c19ae637c",
+   "tokens": 28,
+   "heartbeats": 1160,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:12:38Z"
+  },
+  {
+   "sha": "587779749dea",
+   "tokens": 26,
+   "heartbeats": null,
+   "ok": false,
+   "error": "26:60: unexpected identifier; expected ']'",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:13:04Z"
+  },
+  {
+   "sha": "8c124db1c3e0",
+   "tokens": 30,
+   "heartbeats": 4282,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:13:06Z"
+  },
+  {
+   "sha": "8c01f9f1f5a0",
+   "tokens": 22,
+   "heartbeats": null,
+   "ok": false,
+   "error": "24:62: unexpected identifier; expected ']'",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:13:09Z"
+  },
+  {
+   "sha": "6461d26dcdb6",
+   "tokens": 28,
+   "heartbeats": null,
+   "ok": false,
+   "error": "26:44: unexpected token '('; expected '!', '#', '-' or identifier",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:13:18Z"
+  },
+  {
+   "sha": "abe84c71168c",
+   "tokens": 26,
+   "heartbeats": null,
+   "ok": false,
+   "error": "24:26: unexpected token '('; expected '!', '#', '-' or identifier",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:13:21Z"
+  },
+  {
+   "sha": "a4d1d76756d5",
+   "tokens": 31,
+   "heartbeats": 448,
+   "ok": false,
+   "error": "25:26: typeclass instance problem is stuck Nonempty ?m.60 Note: Lean will not try to resolve this typeclass instance problem because the type argument to `Nonempty` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass. Hint: Adding type annotations ",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:13:34Z"
+  },
+  {
+   "sha": "94d298a248a0",
+   "tokens": 26,
+   "heartbeats": 4921,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:13:37Z"
+  },
+  {
+   "sha": "c47098713bad",
+   "tokens": 29,
+   "heartbeats": 1187,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:38:35Z"
+  },
+  {
+   "sha": "91b0dfa2146a",
+   "tokens": 36,
+   "heartbeats": 2011,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:38:37Z"
+  },
+  {
+   "sha": "74aafb0e99cb",
+   "tokens": 31,
+   "heartbeats": 445,
+   "ok": false,
+   "error": "27:10: Unknown constant `hPP`",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:39:00Z"
+  },
+  {
+   "sha": "4538b12717b4",
+   "tokens": 31,
+   "heartbeats": 446,
+   "ok": false,
+   "error": "26:28: Unknown constant `hPP`",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:39:04Z"
+  },
+  {
+   "sha": "b3c326db0408",
+   "tokens": 30,
+   "heartbeats": 974,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:39:07Z"
+  },
+  {
+   "sha": "716def07f66d",
+   "tokens": 29,
+   "heartbeats": 1034,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:39:10Z"
+  },
+  {
+   "sha": "219800a27195",
+   "tokens": 29,
+   "heartbeats": 455,
+   "ok": false,
+   "error": "25:107: Failed to rewrite using equation theorems for `Intersecting`",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:39:27Z"
+  },
+  {
+   "sha": "2c18488b0450",
+   "tokens": 29,
+   "heartbeats": 506,
+   "ok": false,
+   "error": "25:108: Failed to rewrite using equation theorems for `Intersecting`",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:39:31Z"
+  },
+  {
+   "sha": "4c536c767b99",
+   "tokens": 27,
+   "heartbeats": 455,
+   "ok": false,
+   "error": "25:107: Failed to rewrite using equation theorems for `Intersecting`",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:39:34Z"
+  },
+  {
+   "sha": "1ecb3108c3ac",
+   "tokens": 36,
+   "heartbeats": 964,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:40:06Z"
+  },
+  {
+   "sha": "b6ec118bfb23",
+   "tokens": 29,
+   "heartbeats": 958,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:40:30Z"
+  },
+  {
+   "sha": "4b720eb761a6",
+   "tokens": 31,
+   "heartbeats": 858,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:40:34Z"
+  },
+  {
+   "sha": "cb298de58202",
+   "tokens": 29,
+   "heartbeats": 958,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:40:37Z"
+  },
+  {
+   "sha": "8fa3e8064a1c",
+   "tokens": 28,
+   "heartbeats": 777,
+   "ok": false,
+   "error": "27:17: `grind` failed case grind.2 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬Disjoint a U)) ∨ a ∈ P [prop] (↑t).Intersecting [prop] P ⊆ t [prop] ¬P = t [prop] ∃ a, (a ∈ P) = (a ∉ t) [prop] Injective SetLike",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:40:40Z"
+  },
+  {
+   "sha": "37e78fcfdfe1",
+   "tokens": 29,
+   "heartbeats": 1174,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:06Z"
+  },
+  {
+   "sha": "f38fe3a2df9c",
+   "tokens": 29,
+   "heartbeats": 1188,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:09Z"
+  },
+  {
+   "sha": "70096ea59c34",
+   "tokens": 29,
+   "heartbeats": 1188,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:12Z"
+  },
+  {
+   "sha": "534d5341e41b",
+   "tokens": 29,
+   "heartbeats": 1188,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:15Z"
+  },
+  {
+   "sha": "d3e7fe210869",
+   "tokens": 29,
+   "heartbeats": 1188,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:19Z"
+  },
+  {
+   "sha": "67ada49c68c4",
+   "tokens": 29,
+   "heartbeats": 1177,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:22Z"
+  },
+  {
+   "sha": "b3c2e10375d2",
+   "tokens": 50,
+   "heartbeats": 1010,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:47Z"
+  },
+  {
+   "sha": "fe4e9661b432",
+   "tokens": 30,
+   "heartbeats": 3644,
+   "ok": false,
+   "error": "28:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬Disjoint a U)) ∨ a ∈ P [prop] P ⊆ w [prop] 2 * w.card = Fintype.card (Set S) [prop] (↑w).Intersecting [prop] ¬2 * P.card = Fintype.c",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:42:03Z"
+  },
+  {
+   "sha": "5f8acd1dfafa",
+   "tokens": 31,
+   "heartbeats": 3629,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬Disjoint a U)) ∨ a ∈ P [prop] P ⊆ w [prop] 2 * w.card = Fintype.card (Set S) [prop] ∀ ⦃a : Set S⦄, a ∈ ↑w → ∀ ⦃b : Set S⦄, b ∈ ↑w → ",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:42:06Z"
+  },
+  {
+   "sha": "fd783f26a055",
+   "tokens": 28,
+   "heartbeats": 3693,
+   "ok": false,
+   "error": "27:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬Disjoint T U [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬Disjoint a U)) ∨ a ∈ P [prop] P ⊆ w [prop] 2 * w.card = Fintype.card (Set S) [prop] (↑w).Inte",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:42:09Z"
+  },
+  {
+   "sha": "d025aa107520",
+   "tokens": 27,
+   "heartbeats": 1044,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:42:41Z",
+   "score": 99.23
+  },
+  {
+   "sha": "cedc27487afd",
+   "tokens": 29,
+   "heartbeats": 1048,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:42:47Z"
+  },
+  {
+   "sha": "5d784b3664ec",
+   "tokens": 29,
+   "heartbeats": 476,
+   "ok": false,
+   "error": "25:102: Application type mismatch: The argument hPP has type ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ but is expected to have type (↑?m.67).Intersecting in the application Intersecting.is_max_iff_card_eq hPP",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:42:50Z"
+  },
+  {
+   "sha": "0565c237d754",
+   "tokens": 26,
+   "heartbeats": 1053,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:43:09Z",
+   "score": 99.25
+  },
+  {
+   "sha": "679813f2962e",
+   "tokens": 25,
+   "heartbeats": 1227,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:43:15Z"
+  },
+  {
+   "sha": "37f36c515cae",
+   "tokens": 28,
+   "heartbeats": 917,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:43:17Z"
+  },
+  {
+   "sha": "aed46e1a29b0",
+   "tokens": 25,
+   "heartbeats": 1055,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:43:40Z",
+   "score": 99.26
+  },
+  {
+   "sha": "e19d0d7abe5b",
+   "tokens": 23,
+   "heartbeats": 1238,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:43:46Z"
+  },
+  {
+   "sha": "3447f242e47a",
+   "tokens": 27,
+   "heartbeats": 919,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:43:49Z"
+  },
+  {
+   "sha": "97f3801839be",
+   "tokens": 25,
+   "heartbeats": 1054,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:44:06Z"
+  },
+  {
+   "sha": "34971c51584b",
+   "tokens": 23,
+   "heartbeats": 457,
+   "ok": false,
+   "error": "25:71: Invalid field `is_max_iff_card_eq`: The environment does not contain `Function.is_max_iff_card_eq` hPP has type ∀ T ∈ P, ∀ U ∈ P, ¬Disjoint T U",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:44:09Z"
+  },
+  {
+   "sha": "a785e92026c7",
+   "tokens": 24,
+   "heartbeats": 455,
+   "ok": false,
+   "error": "25:73: Invalid field `is_max_iff_card_eq`: The environment does not contain `Function.is_max_iff_card_eq` hPP has type ∀ T ∈ P, ∀ U ∈ P, ¬Disjoint T U",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:44:12Z"
+  },
+  {
+   "sha": "9f50a4c84709",
+   "tokens": 25,
+   "heartbeats": 1285,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:04:37Z"
+  },
+  {
+   "sha": "2dbc316987e0",
+   "tokens": 25,
+   "heartbeats": 1282,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:04:39Z"
+  },
+  {
+   "sha": "51013716116e",
+   "tokens": 25,
+   "heartbeats": 1283,
+   "ok": false,
+   "error": "27:8: Option is not boolean-valued, so `(splits := ...)` syntax must be used",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:04:43Z"
+  },
+  {
+   "sha": "b3f97eb45025",
+   "tokens": 27,
+   "heartbeats": 1101,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:04:46Z"
+  },
+  {
+   "sha": "dd06dcee2f01",
+   "tokens": 27,
+   "heartbeats": 1099,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:04:49Z"
+  },
+  {
+   "sha": "fe14620cf41a",
+   "tokens": 25,
+   "heartbeats": 1281,
+   "ok": false,
+   "error": "24:161: invalid `grind` theorem, failed to find an usable pattern using different modifiers",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:05:20Z"
+  },
+  {
+   "sha": "b50880e05311",
+   "tokens": 27,
+   "heartbeats": 4467,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:05:23Z"
+  },
+  {
+   "sha": "d489aebf14eb",
+   "tokens": 20,
+   "heartbeats": 5205,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:05:27Z"
+  },
+  {
+   "sha": "016c80c1bff5",
+   "tokens": 30,
+   "heartbeats": 4634,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:05:30Z"
+  },
+  {
+   "sha": "daef50c3f29b",
+   "tokens": 25,
+   "heartbeats": null,
+   "ok": false,
+   "error": "26:3: unknown tactic",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:05:51Z"
+  },
+  {
+   "sha": "0e1b0b56d05e",
+   "tokens": 27,
+   "heartbeats": 5032,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:05:55Z"
+  },
+  {
+   "sha": "6df992f1122a",
+   "tokens": 25,
+   "heartbeats": 1203,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:05:58Z"
+  },
+  {
+   "sha": "43b1128145d0",
+   "tokens": 26,
+   "heartbeats": 980,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:06:51Z"
+  },
+  {
+   "sha": "fa3008dac1b8",
+   "tokens": 24,
+   "heartbeats": 1164,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:06:54Z"
+  },
+  {
+   "sha": "4ac0c0341e85",
+   "tokens": 26,
+   "heartbeats": 980,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:07:09Z"
+  },
+  {
+   "sha": "84a141c3403a",
+   "tokens": 26,
+   "heartbeats": 975,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:07:12Z"
+  },
+  {
+   "sha": "512f70dfb211",
+   "tokens": 25,
+   "heartbeats": 1050,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:07:15Z"
+  },
+  {
+   "sha": "7ed3f56726a9",
+   "tokens": 27,
+   "heartbeats": 953,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:07:44Z"
+  },
+  {
+   "sha": "bc31ec825b15",
+   "tokens": 28,
+   "heartbeats": 903,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:07:47Z"
+  },
+  {
+   "sha": "720dc7b003f4",
+   "tokens": 25,
+   "heartbeats": 1137,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:07:50Z"
+  },
+  {
+   "sha": "d0b33c397a47",
+   "tokens": 27,
+   "heartbeats": 1023,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:08:08Z"
+  },
+  {
+   "sha": "fda3095c30f4",
+   "tokens": 26,
+   "heartbeats": 1053,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:08:11Z"
+  },
+  {
+   "sha": "9e859d7e6874",
+   "tokens": 28,
+   "heartbeats": 949,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:08:14Z"
+  },
+  {
+   "sha": "e3f3afa1b9e2",
+   "tokens": 31,
+   "heartbeats": 1107,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:08:41Z"
+  },
+  {
+   "sha": "46bcaab0b310",
+   "tokens": 29,
+   "heartbeats": 1291,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:08:44Z"
+  },
+  {
+   "sha": "65148a91394a",
+   "tokens": 26,
+   "heartbeats": 1129,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:08:47Z"
+  },
+  {
+   "sha": "5c45f277fd4e",
+   "tokens": 26,
+   "heartbeats": 1085,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:09:06Z"
+  },
+  {
+   "sha": "10fd7e07ae8e",
+   "tokens": 28,
+   "heartbeats": 947,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:09:09Z"
+  },
+  {
+   "sha": "8c8affdf094d",
+   "tokens": 26,
+   "heartbeats": 1131,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:09:12Z"
+  },
+  {
+   "sha": "21e756737d31",
+   "tokens": 24,
+   "heartbeats": 1256,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:15:17Z"
+  },
+  {
+   "sha": "045a8614bb1e",
+   "tokens": 26,
+   "heartbeats": 1071,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:15:21Z"
+  },
+  {
+   "sha": "6f4f968115e4",
+   "tokens": 27,
+   "heartbeats": 773,
+   "ok": false,
+   "error": "28:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬Disjoint a U)) ∨ a ∈ P [prop] ∀ ⦃a : Set S⦄, a ∈ ↑t → ∀ ⦃b : Set S⦄, b ∈ ↑t → ¬Disjoint a b [prop] P ⊆ t [prop] ¬P = t [prop] Inject",
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:15:42Z"
+  },
+  {
+   "sha": "eca983d61b61",
+   "tokens": 31,
+   "heartbeats": 1124,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:15:45Z"
+  },
+  {
+   "sha": "d007d48b5092",
+   "tokens": 25,
+   "heartbeats": 1256,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:16:04Z"
+  },
+  {
+   "sha": "e6fe1c30e117",
+   "tokens": 27,
+   "heartbeats": 543,
+   "ok": false,
+   "error": "26:2: `SetLike.coe_injective` is not marked with the `[grind]` attribute",
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:16:07Z"
+  },
+  {
+   "sha": "d5fe2add379b",
+   "tokens": 26,
+   "heartbeats": 1303,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:16:40Z"
+  },
+  {
+   "sha": "fdf2cd269826",
+   "tokens": 25,
+   "heartbeats": 874,
+   "ok": false,
+   "error": "26:2: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬Disjoint T U [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬Disjoint a U)) ∨ a ∈ P [prop] (↑t).Intersecting [prop] P ⊆ t [prop] ¬P = t [prop] ∃ a, (a ∈",
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:16:43Z"
+  },
+  {
+   "sha": "8244e13e2272",
+   "tokens": 26,
+   "heartbeats": 2026,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r10",
+   "t": "2026-10-12T00:16:46Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T20:31:00Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:09:29Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:34:14Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r4",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T22:02:40Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:37:39Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r9",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:03:33Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r10",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:14:36Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T01:03:12Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r14",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T01:27:33Z"
+  }
+ ],
+ "api_spend": 1.727583,
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 1,
+    "d_score": 64.22,
+    "d_tokens": -1640,
+    "d_heartbeats": 1155,
+    "diff": "+theorem putnam_1964_b2\n+(S : Type*) [Fintype S] [Nonempty S]\n+(P : Finset (Set S))\n+(hPP : ∀ T ∈ P, ∀ U ∈ P, T ∩ U ≠ ∅)\n+(hPS : ¬∃ T : Set S, T ∉ P ∧ (∀ U ∈ P, T ∩ U ≠ ∅))\n+: (P.card = 2 ^ (Fintype.card S - 1)) := by\n+  classical\n+  have hi : (P : Set (Set S)).Intersecting := by\n+    simpa only [Set.Intersecting, Finset.mem_coe, Set.disjoint_iff_inter_eq_empty] using hPP\n+  have hc := hi.is_max_iff_card_eq.mp (show ∀ Q : Finset (Set S), (Q : Set (Set S)).Intersecting → P ⊆ Q → P = Q from by\n+    intro Q hQ hPQ\n+    apply Finset.Subset.antisymm hPQ\n+    intro A hA\n+    by_contra hn\n+    apply hPS\n+    refine ⟨A, hn, ?_⟩\n+    intro U hU\n+    exact fun he => hQ hA (hPQ hU) (Set.disjoint_iff_in"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 2,
+    "d_score": 0.67,
+    "d_tokens": -33,
+    "d_heartbeats": -167,
+    "diff": "-  have hc := hi.is_max_iff_card_eq.mp (show ∀ Q : Finset (Set S), (Q : Set (Set S)).Intersecting → P ⊆ Q → P = Q from by\n+  have hc := hi.is_max_iff_card_eq.mp (by\n-    apply hPS\n-    refine ⟨A, hn, ?_⟩\n-    intro U hU\n-    exact fun he => hQ hA (hPQ hU) (Set.disjoint_iff_inter_eq_empty.mpr he))\n+    exact hPS ⟨A, hn, fun U hU he => hQ hA (hPQ hU) (Set.disjoint_iff_inter_eq_empty.mpr he)⟩)"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 4,
+    "d_score": 0.11,
+    "d_tokens": -4,
+    "d_heartbeats": -143,
+    "diff": "-  have hi : (P : Set (Set S)).Intersecting := by\n-    simpa only [Set.Intersecting, Finset.mem_coe, Set.disjoint_iff_inter_eq_empty] using hPP\n-  have hc := hi.is_max_iff_card_eq.mp (by\n+  have hc := (Set.Intersecting.is_max_iff_card_eq (s := P) (by\n+    simpa only [Set.Intersecting, Finset.mem_coe, Set.disjoint_iff_inter_eq_empty] using hPP)).mp (by"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 6,
+    "d_score": 0.12,
+    "d_tokens": -7,
+    "d_heartbeats": 59,
+    "diff": "-  have hc := (Set.Intersecting.is_max_iff_card_eq (s := P) (by\n-    simpa only [Set.Intersecting, Finset.mem_coe, Set.disjoint_iff_inter_eq_empty] using hPP)).mp (by\n+  simp only [ne_eq, ← Set.disjoint_iff_inter_eq_empty] at hPP hPS\n+  have hc := (Set.Intersecting.is_max_iff_card_eq (s := P) hPP).mp (by\n-    exact hPS ⟨A, hn, fun U hU he => hQ hA (hPQ hU) (Set.disjoint_iff_inter_eq_empty.mpr he)⟩)\n+    exact hPS ⟨A, hn, fun U hU => hQ hA (hPQ hU)⟩)"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 8,
+    "d_score": 0.13,
+    "d_tokens": -24,
+    "d_heartbeats": 1292,
+    "diff": "-    intro Q hQ hPQ\n-    apply Finset.Subset.antisymm hPQ\n-    intro A hA\n-    by_contra hn\n-    exact hPS ⟨A, hn, fun U hU => hQ hA (hPQ hU)⟩)\n+    grind [Set.Intersecting, Finset.Subset.antisymm])"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 11,
+    "d_score": 0.1,
+    "d_tokens": 5,
+    "d_heartbeats": -796,
+    "diff": "-    grind [Set.Intersecting, Finset.Subset.antisymm])\n+    intro Q hQ hPQ\n+    apply Finset.Subset.antisymm hPQ\n+    grind [Set.Intersecting])"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 13,
+    "d_score": 0.03,
+    "d_tokens": -3,
+    "d_heartbeats": 111,
+    "diff": "-  simp only [ne_eq, ← Set.disjoint_iff_inter_eq_empty] at hPP hPS\n+  simp_all only [ne_eq, ← Set.disjoint_iff_inter_eq_empty]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 16,
+    "d_score": 0.03,
+    "d_tokens": -1,
+    "d_heartbeats": -20,
+    "diff": "-    apply Finset.Subset.antisymm hPQ\n+    ext A"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 17,
+    "d_score": 0.07,
+    "d_tokens": -4,
+    "d_heartbeats": -1,
+    "diff": "-    intro Q hQ hPQ\n-    ext A\n+    intros\n+    ext"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 19,
+    "d_score": 0.1,
+    "d_tokens": -5,
+    "d_heartbeats": 3,
+    "diff": "-  have hc := (Set.Intersecting.is_max_iff_card_eq (s := P) hPP).mp (by\n+  have hc := (Set.Intersecting.is_max_iff_card_eq hPP).mp (by"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 26,
+    "d_score": 0.01,
+    "d_tokens": 2,
+    "d_heartbeats": -199,
+    "diff": "+    clear hPP"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 27,
+    "d_score": 0.01,
+    "d_tokens": -3,
+    "d_heartbeats": 201,
+    "diff": "-    clear hPP\n+    unfold Set.Intersecting\n-    grind [Set.Intersecting])\n+    grind)"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 31,
+    "d_score": 0.14,
+    "d_tokens": -3,
+    "d_heartbeats": -336,
+    "diff": "-  have hc := (Set.Intersecting.is_max_iff_card_eq hPP).mp (by\n-    unfold Set.Intersecting\n-    intros\n-    ext\n-    grind)\n-  rw [Fintype.card_set, ← Nat.two_pow_pred_mul_two Fintype.card_pos] at hc\n-  omega\n+  rw [← Nat.mul_left_inj two_ne_zero, Nat.mul_comm P.card, Nat.two_pow_pred_mul_two Fintype.card_pos, ← Fintype.card_set, ← Set.Intersecting.is_max_iff_card_eq hPP]\n+  unfold Set.Intersecting\n+  intros\n+  ext\n+  grind"
+   },
+   {
+    "run_id": "wu-hx-sol-r2",
+    "check": 19,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": -1,
+    "diff": "-  rw [← Nat.mul_left_inj two_ne_zero, Nat.mul_comm P.card, Nat.two_pow_pred_mul_two Fintype.card_pos, ← Fintype.card_set, ← Set.Intersecting.is_max_iff_card_eq hPP]\n+  rw [← Nat.mul_left_inj two_ne_zero, Nat.mul_comm, Nat.two_pow_pred_mul_two Fintype.card_pos, ← Fintype.card_set, ← Set.Intersecting.is_max_iff_card_eq hPP]"
+   },
+   {
+    "run_id": "wu-hx-sol-r3",
+    "check": 5,
+    "d_score": 0.03,
+    "d_tokens": -2,
+    "d_heartbeats": 0,
+    "diff": "-  rw [← Nat.mul_left_inj two_ne_zero, Nat.mul_comm, Nat.two_pow_pred_mul_two Fintype.card_pos, ← Fintype.card_set, ← Set.Intersecting.is_max_iff_card_eq hPP]\n+  rw [← Nat.mul_right_inj two_ne_zero, mul_pow_sub_one Fintype.card_ne_zero, ← Fintype.card_set, ← Set.Intersecting.is_max_iff_card_eq hPP]"
+   },
+   {
+    "run_id": "wu-hx-sol-r3",
+    "check": 7,
+    "d_score": 0.01,
+    "d_tokens": 2,
+    "d_heartbeats": -183,
+    "diff": "+  clear hPP"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 9,
+    "d_score": 0.01,
+    "d_tokens": -1,
+    "d_heartbeats": 38,
+    "diff": "-  rw [← Nat.mul_right_inj two_ne_zero, mul_pow_sub_one Fintype.card_ne_zero, ← Fintype.card_set, ← Set.Intersecting.is_max_iff_card_eq hPP]\n+  apply mul_left_cancel₀ two_ne_zero\n+  rw [mul_pow_sub_one Fintype.card_ne_zero, ← Fintype.card_set, ← Set.Intersecting.is_max_iff_card_eq hPP]"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 12,
+    "d_score": 0.02,
+    "d_tokens": 0,
+    "d_heartbeats": -77,
+    "diff": "-  apply mul_left_cancel₀ two_ne_zero\n+  apply Nat.mul_left_cancel Nat.two_pos"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 15,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": -1,
+    "diff": "-  classical"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 31,
+    "d_score": 0.03,
+    "d_tokens": -2,
+    "d_heartbeats": 23,
+    "diff": "-  simp_all only [ne_eq, ← Set.disjoint_iff_inter_eq_empty]\n+  simp_all only [Ne, ← Set.disjoint_iff_inter_eq_empty]\n-  intros\n-  ext"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 25,
+    "d_score": 0.02,
+    "d_tokens": -2,
+    "d_heartbeats": 86,
+    "diff": "-  simp_all only [Ne, ← Set.disjoint_iff_inter_eq_empty]\n+  simp_all only [← Set.disjoint_iff_inter_eq_empty.not]"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 28,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": 9,
+    "diff": "-  simp_all only [← Set.disjoint_iff_inter_eq_empty.not]\n+  simp_all only [Set.disjoint_iff_inter_eq_empty.not.symm]"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 31,
+    "d_score": 0.01,
+    "d_tokens": -1,
+    "d_heartbeats": 2,
+    "diff": "-  rw [mul_pow_sub_one Fintype.card_ne_zero, ← Fintype.card_set, ← Set.Intersecting.is_max_iff_card_eq hPP]\n+  rw [mul_pow_sub_one Fintype.card_ne_zero, Fintype.card_set.symm, ← Set.Intersecting.is_max_iff_card_eq hPP]"
+   }
+  ]
+ },
+ "profile_cache": {
+  "9a5d07f3a5ef": {
+   "ok": true,
+   "total": 1159,
+   "floor": 115,
+   "reference": 134548,
+   "max_heartbeat_score": 33.3,
+   "blocks": [
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "grind",
+     "heartbeats": 651
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "rw [← Nat.mul_left_inj two_ne_zero, Nat.mul_comm P.card, Nat.two_pow_pred_mul_two Fintype.card_pos, ",
+     "heartbeats": 201
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "simp_all only [ne_eq, ← Set.disjoint_iff_inter_eq_empty]",
+     "heartbeats": 184
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "ext",
+     "heartbeats": 4
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "unfold Set.Intersecting",
+     "heartbeats": 3
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": 1
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "intros",
+     "heartbeats": 0
+    }
+   ],
+   "points_left_heartbeats": 0.26,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "484346602e52": {
+   "ok": true,
+   "total": 935,
+   "floor": 115,
+   "reference": 134548,
+   "max_heartbeat_score": 33.3,
+   "blocks": [
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "grind",
+     "heartbeats": 468
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "simp_all only [ne_eq, ← Set.disjoint_iff_inter_eq_empty]",
+     "heartbeats": 185
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "rw [mul_pow_sub_one Fintype.card_ne_zero, ← Fintype.card_set, ← Set.Intersecting.is_max_iff_card_eq ",
+     "heartbeats": 157
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "ext",
+     "heartbeats": 4
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "apply Nat.mul_left_cancel Nat.two_pos",
+     "heartbeats": 3
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "unfold Set.Intersecting",
+     "heartbeats": 3
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "clear hPP",
+     "heartbeats": 0
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "intros",
+     "heartbeats": 0
+    }
+   ],
+   "points_left_heartbeats": 0.2,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "aed46e1a29b0": {
+   "ok": true,
+   "total": 1055,
+   "floor": 115,
+   "reference": 134548,
+   "max_heartbeat_score": 33.3,
+   "blocks": [
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "grind",
+     "heartbeats": 498
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "simp_all only [Set.disjoint_iff_inter_eq_empty.not.symm]",
+     "heartbeats": 272
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "rw [mul_pow_sub_one Fintype.card_ne_zero, Fintype.card_set.symm, ← Set.Intersecting.is_max_iff_card_",
+     "heartbeats": 163
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "apply Nat.mul_left_cancel Nat.two_pos",
+     "heartbeats": 4
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "unfold Set.Intersecting",
+     "heartbeats": 3
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "clear hPP",
+     "heartbeats": 0
+    }
+   ],
+   "points_left_heartbeats": 0.23,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "hb_floor": 115
+}

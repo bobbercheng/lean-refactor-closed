@@ -1,0 +1,156 @@
+{
+ "note": "runner input only: first-session scores of an earlier Sol + briefs line (no proofs, no notes)",
+ "problem": "CallElimCorrect.extractedOldExprInVars",
+ "runs": [
+  {
+   "run_id": "hx-solknow-a"
+  }
+ ],
+ "attempts": [
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 45.09
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 79.98
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 80.63
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 80.93
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 85.67
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 85.74
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 85.78
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 85.99
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 87.06
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 88.75
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 89.15
+  }
+ ]
+}

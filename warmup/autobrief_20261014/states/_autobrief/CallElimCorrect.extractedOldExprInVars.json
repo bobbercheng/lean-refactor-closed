@@ -1,0 +1,1082 @@
+{
+ "problem": "CallElimCorrect.extractedOldExprInVars",
+ "seed": {
+  "ok": true,
+  "tokens": 222,
+  "heartbeats": 2698,
+  "L": 0.0,
+  "H": 0.0,
+  "Z": 100.0,
+  "score": 33.33
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "no sites",
+   "before": {
+    "ok": true,
+    "tokens": 222,
+    "heartbeats": 2698,
+    "Z": 100.0,
+    "score": 33.33
+   },
+   "after": {
+    "ok": true,
+    "tokens": 222,
+    "heartbeats": 2698,
+    "Z": 100.0,
+    "score": 33.33
+   },
+   "gain": null,
+   "applied": null,
+   "compiles": 1,
+   "seconds": 6.3
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "no sites",
+   "before": null,
+   "after": null,
+   "gain": null,
+   "applied": {},
+   "compiles": 0,
+   "seconds": 0.0
+  },
+  {
+   "pass": "hb_polish",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 222,
+    "heartbeats": 2698,
+    "Z": 100.0,
+    "score": 33.33
+   },
+   "after": {
+    "ok": true,
+    "tokens": 227,
+    "heartbeats": 2421,
+    "Z": 100.0,
+    "score": 36.0
+   },
+   "gain": 2.67,
+   "applied": {
+    "simp only": 1
+   },
+   "compiles": 13,
+   "seconds": 83.2
+  },
+  {
+   "pass": "lint_delete",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 227,
+    "heartbeats": 2420,
+    "Z": 100.0,
+    "score": 36.02
+   },
+   "after": {
+    "ok": true,
+    "tokens": 213,
+    "heartbeats": 2433,
+    "Z": 100.0,
+    "score": 37.96
+   },
+   "gain": 1.94,
+   "applied": {
+    "delsearch-arg": 2,
+    "delsearch-tac": 3
+   },
+   "compiles": 24,
+   "seconds": 136.1
+  }
+ ],
+ "free_applied": [
+  "hb_polish",
+  "lint_delete"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 213,
+  "heartbeats": 2432,
+  "L": 4.05,
+  "H": 9.86,
+  "Z": 100.0,
+  "score": 37.97
+ },
+ "s0": "open OldExpressions in\ntheorem extractedOldExprInVars :\n  NormalizedOldExpr post →\n  (extractOldExprVars post).Subset\n  (Imperative.HasVarsPure.getVars post) := by\n  intros Hnorm\n  induction post <;>\n    simp only [extractOldExprVars, Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars, List.append_assoc] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVars\n    split\n    . simp\n      intros x Hin\n      exact Hin\n    . next Hfalse =>\n      cases Hnorm with\n      | app H1 H2 Hn =>\n      exfalso\n      specialize Hn ?_\n      constructor\n      cases Hn\n      apply Hfalse\n      rfl\n    . cases Hnorm with\n      | app H1 H2 Hn =>\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply fn_ih\n        exact H1\n        intros x Hin\n        simp_all\n      . apply List.Subset.trans\n        apply e_ih\n        exact H2\n        intros x Hin\n        simp_all\n  case abs ih =>\n    cases Hnorm\n    apply ih <;> assumption\n  case quant trih eih =>\n    cases Hnorm\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n      simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case ite cih tih eih =>\n    cases Hnorm\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    cases Hnorm\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all",
+ "exchange": [
+  0.15,
+  1.235
+ ],
+ "profile": {
+  "ok": true,
+  "total": 2432,
+  "floor": null,
+  "reference": 2698,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "6-6",
+    "depth_indent": 2,
+    "text": "intros Hnorm",
+    "heartbeats": null
+   },
+   {
+    "lines": "7-9",
+    "depth_indent": 2,
+    "text": "induction post <;> simp only [extractOldExprVars, Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr",
+    "heartbeats": null
+   },
+   {
+    "lines": "10-37",
+    "depth_indent": 2,
+    "text": "case app fn e fn_ih e_ih => unfold extractOldExprVars split . simp intros x Hin exact Hin . next Hfa",
+    "heartbeats": null
+   },
+   {
+    "lines": "38-40",
+    "depth_indent": 2,
+    "text": "case abs ih => cases Hnorm apply ih <;> assumption",
+    "heartbeats": null
+   },
+   {
+    "lines": "41-51",
+    "depth_indent": 2,
+    "text": "case quant trih eih => cases Hnorm apply List.Subset.app . apply List.Subset.trans apply trih <;> as",
+    "heartbeats": null
+   },
+   {
+    "lines": "52-67",
+    "depth_indent": 2,
+    "text": "case ite cih tih eih => cases Hnorm apply List.Subset.app . apply List.Subset.trans apply cih <;> as",
+    "heartbeats": null
+   },
+   {
+    "lines": "68-78",
+    "depth_indent": 2,
+    "text": "case eq ih1 ih2 => cases Hnorm apply List.Subset.app . apply List.Subset.trans apply ih1 <;> assumpt",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 213,
+  "heartbeats": 2433,
+  "score": 37.96
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 34,
+   "score": null,
+   "error": "2871:46: `grind` failed\ncase grind\npost :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lamb"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 68,
+   "score": null,
+   "error": "2871:43: unsolved goals\npost : Expression.Expr\n⊢ NormalizedOldExpr post → (extractOldExprVars post).Subset (Imperative.HasVarsPure.getVars post)"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": null,
+   "score": null,
+   "error": "2871:47: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 21,
+   "label": "replace the bullet at line 21 (`. cases Hnorm with`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 181,
+   "heartbeats": 2052,
+   "score": null,
+   "error": "2891:6: `grind` failed\ncase grind\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e : Lamb"
+  },
+  {
+   "kind": "closer",
+   "line": 21,
+   "label": "replace the bullet at line 21 (`. cases Hnorm with`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 181,
+   "heartbeats": 2214,
+   "score": null,
+   "error": "2891:4: unsolved goals\ncase h_3\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e : Lambd"
+  },
+  {
+   "kind": "closer",
+   "line": 21,
+   "label": "replace the bullet at line 21 (`. cases Hnorm with`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 181,
+   "heartbeats": null,
+   "score": null,
+   "error": "2891:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 12,
+   "label": "replace the bullet at line 12 (`. next Hfalse =>`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 192,
+   "heartbeats": 2598,
+   "score": null,
+   "error": "2882:6: `grind` failed\ncase grind\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ne : Lambda."
+  },
+  {
+   "kind": "closer",
+   "line": 12,
+   "label": "replace the bullet at line 12 (`. next Hfalse =>`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 192,
+   "heartbeats": 2665,
+   "score": null,
+   "error": "2882:4: unsolved goals\ncase h_2\nm✝¹ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ne : Lambda."
+  },
+  {
+   "kind": "closer",
+   "line": 12,
+   "label": "replace the bullet at line 12 (`. next Hfalse =>`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 192,
+   "heartbeats": null,
+   "score": null,
+   "error": "2882:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 24,
+   "label": "replace the bullet at line 24 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2323,
+   "score": null,
+   "error": "2894:8: `grind` failed\ncase grind\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e : Lamb"
+  },
+  {
+   "kind": "closer",
+   "line": 24,
+   "label": "replace the bullet at line 24 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2478,
+   "score": null,
+   "error": "2894:6: unsolved goals\ncase h_3.app.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e e"
+  },
+  {
+   "kind": "closer",
+   "line": 24,
+   "label": "replace the bullet at line 24 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": null,
+   "score": null,
+   "error": "2894:9: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 29,
+   "label": "replace the bullet at line 29 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2324,
+   "score": null,
+   "error": "2899:8: `grind` failed\ncase grind\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e : Lamb"
+  },
+  {
+   "kind": "closer",
+   "line": 29,
+   "label": "replace the bullet at line 29 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2478,
+   "score": null,
+   "error": "2899:6: unsolved goals\ncase h_3.app.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e e"
+  },
+  {
+   "kind": "closer",
+   "line": 29,
+   "label": "replace the bullet at line 29 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": null,
+   "score": null,
+   "error": "2899:9: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 40,
+   "label": "replace the bullet at line 40 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2401,
+   "score": null,
+   "error": "2910:6: `grind` failed\ncase grind\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nk : Lambda."
+  },
+  {
+   "kind": "closer",
+   "line": 40,
+   "label": "replace the bullet at line 40 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2432,
+   "score": null,
+   "error": "2910:4: unsolved goals\ncase quant.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nk✝ : Lam"
+  },
+  {
+   "kind": "closer",
+   "line": 40,
+   "label": "replace the bullet at line 40 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": null,
+   "score": null,
+   "error": "2910:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 44,
+   "label": "replace the bullet at line 44 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2401,
+   "score": null,
+   "error": "2914:6: `grind` failed\ncase grind\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nk : Lambda."
+  },
+  {
+   "kind": "closer",
+   "line": 44,
+   "label": "replace the bullet at line 44 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2433,
+   "score": null,
+   "error": "2914:4: unsolved goals\ncase quant.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nk✝ : Lam"
+  },
+  {
+   "kind": "closer",
+   "line": 44,
+   "label": "replace the bullet at line 44 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": null,
+   "score": null,
+   "error": "2914:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 51,
+   "label": "replace the bullet at line 51 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2385,
+   "score": null,
+   "error": "2921:6: `grind` failed\ncase grind\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc t e : Lam"
+  },
+  {
+   "kind": "closer",
+   "line": 51,
+   "label": "replace the bullet at line 51 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2435,
+   "score": null,
+   "error": "2921:4: unsolved goals\ncase ite.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc✝ t✝ e✝ :"
+  },
+  {
+   "kind": "closer",
+   "line": 51,
+   "label": "replace the bullet at line 51 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": null,
+   "score": null,
+   "error": "2921:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 56,
+   "label": "replace the bullet at line 56 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2387,
+   "score": null,
+   "error": "2926:6: `grind` failed\ncase grind\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc t e : Lam"
+  },
+  {
+   "kind": "closer",
+   "line": 56,
+   "label": "replace the bullet at line 56 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2436,
+   "score": null,
+   "error": "2926:4: unsolved goals\ncase ite.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc✝ t✝ e✝"
+  },
+  {
+   "kind": "closer",
+   "line": 56,
+   "label": "replace the bullet at line 56 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": null,
+   "score": null,
+   "error": "2926:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 60,
+   "label": "replace the bullet at line 60 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2388,
+   "score": null,
+   "error": "2930:6: `grind` failed\ncase grind\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc t e : Lam"
+  },
+  {
+   "kind": "closer",
+   "line": 60,
+   "label": "replace the bullet at line 60 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2437,
+   "score": null,
+   "error": "2930:4: unsolved goals\ncase ite.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc✝ t✝ e✝"
+  },
+  {
+   "kind": "closer",
+   "line": 60,
+   "label": "replace the bullet at line 60 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": null,
+   "score": null,
+   "error": "2930:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 67,
+   "label": "replace the bullet at line 67 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2400,
+   "score": null,
+   "error": "2937:6: `grind` failed\ncase grind\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ne1 e2 : Lam"
+  },
+  {
+   "kind": "closer",
+   "line": 67,
+   "label": "replace the bullet at line 67 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2432,
+   "score": null,
+   "error": "2937:4: unsolved goals\ncase eq.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ne1✝ e2✝ : L"
+  },
+  {
+   "kind": "closer",
+   "line": 67,
+   "label": "replace the bullet at line 67 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": null,
+   "score": null,
+   "error": "2937:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 71,
+   "label": "replace the bullet at line 71 (`. apply List.Subset.trans`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2400,
+   "score": null,
+   "error": "2941:6: `grind` failed\ncase grind\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ne1 e2 : Lam"
+  },
+  {
+   "kind": "closer",
+   "line": 71,
+   "label": "replace the bullet at line 71 (`. apply List.Subset.trans`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": 2432,
+   "score": null,
+   "error": "2941:4: unsolved goals\ncase eq.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ne1✝ e2✝ : L"
+  },
+  {
+   "kind": "closer",
+   "line": 71,
+   "label": "replace the bullet at line 71 (`. apply List.Subset.trans`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 204,
+   "heartbeats": null,
+   "score": null,
+   "error": "2941:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 9,
+   "label": "replace the bullet at line 9 (`. simp`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 208,
+   "heartbeats": 2460,
+   "score": null,
+   "error": "2879:6: `grind` failed\ncase grind\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ne1 e2 : Lam"
+  },
+  {
+   "kind": "closer",
+   "line": 9,
+   "label": "replace the bullet at line 9 (`. simp`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 208,
+   "heartbeats": 2530,
+   "score": null,
+   "error": "2879:4: unsolved goals\ncase h_1\nm✝² : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ne1✝ e2✝ : L"
+  },
+  {
+   "kind": "closer",
+   "line": 9,
+   "label": "replace the bullet at line 9 (`. simp`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 208,
+   "heartbeats": null,
+   "score": null,
+   "error": "2879:7: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 36,
+   "label": "replace the closing tactic at line 36 (`apply ih <;> assumption`) by `grind`",
+   "closer": "grind",
+   "ok": true,
+   "tokens": 210,
+   "heartbeats": 2450,
+   "score": 38.2,
+   "error": "",
+   "d_tokens": -3,
+   "d_hb": 17,
+   "d_score": 0.24
+  },
+  {
+   "kind": "del-arg",
+   "line": 4,
+   "label": "delete `extractOldExprVars` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 1862,
+   "score": null,
+   "error": "2922:6: Tactic `apply` failed: could not unify the conclusion of `cih`\n  (extractOldExprVars c✝).Subset (Lambda.LExpr.LExpr.getVars c✝)\nwith the goal\n  (extract"
+  },
+  {
+   "kind": "del-arg",
+   "line": 4,
+   "label": "delete `Imperative.HasVarsPure.getVars` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2603,
+   "score": null,
+   "error": "2894:6: unsolved goals\ncase h_3.app.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e"
+  },
+  {
+   "kind": "del-arg",
+   "line": 4,
+   "label": "delete `Lambda.LExpr.LExpr.getVars` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2437,
+   "score": null,
+   "error": "2894:6: unsolved goals\ncase h_3.app.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e"
+  },
+  {
+   "kind": "del-arg",
+   "line": 4,
+   "label": "delete `List.append_assoc` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 211,
+   "heartbeats": 2507,
+   "score": 37.34,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": 74,
+   "d_score": -0.62
+  },
+  {
+   "kind": "del-tac",
+   "line": 7,
+   "label": "delete the tactic `unfold extractOldExprVars`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 1730,
+   "score": null,
+   "error": "2877:4: Tactic `split` failed: Could not split an `if` or `match` expression in the goal\n\nHint: Use `set_option trace.split.failure true` to display additional "
+  },
+  {
+   "kind": "del-tac",
+   "line": 2,
+   "label": "delete the tactic `intros Hnorm`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 1195,
+   "score": null,
+   "error": "2880:6: Type mismatch\n  Hin\nhas type\n  CoreIdent\nof sort `Type` but is expected to have type\n  Hin ∈ [v✝] →\n    Hin ∈\n      Lambda.LExpr.LExpr.getVars (Lambda.L"
+  },
+  {
+   "kind": "del-tac",
+   "line": 8,
+   "label": "delete the tactic `split`",
+   "closer": "",
+   "ok": false,
+   "tokens": 212,
+   "heartbeats": 2705,
+   "score": null,
+   "error": "2880:6: Type mismatch\n  Hin\nhas type\n  x ∈\n    match fn, e with\n    | Lambda.LExpr.op m { name := \"old\", metadata := Visibility.unres } ty, Lambda.LExpr.fvar m_"
+  },
+  {
+   "kind": "del-tac",
+   "line": 10,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 210,
+   "heartbeats": 2415,
+   "score": null,
+   "error": "2880:12: Unknown identifier `Hin`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 15,
+   "label": "delete the tactic `exfalso`",
+   "closer": "",
+   "ok": false,
+   "tokens": 212,
+   "heartbeats": 2422,
+   "score": null,
+   "error": "2888:6: Tactic `apply` failed: could not unify the conclusion of `Hfalse`\n  ∀\n    (ty :\n      Option { base := { Metadata := ExpressionMetadata, IDMeta := Visib"
+  },
+  {
+   "kind": "del-tac",
+   "line": 16,
+   "label": "delete the tactic `specialize Hn ?_`",
+   "closer": "",
+   "ok": false,
+   "tokens": 210,
+   "heartbeats": 2412,
+   "score": null,
+   "error": "2886:6: Tactic `constructor` failed: no applicable constructor found\n\ncase app\nm✝¹ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeTyp"
+  },
+  {
+   "kind": "del-tac",
+   "line": 17,
+   "label": "delete the tactic `constructor`",
+   "closer": "",
+   "ok": false,
+   "tokens": 212,
+   "heartbeats": 2413,
+   "score": null,
+   "error": "2887:6: Tactic `cases` failed: major premise type is not an inductive type\n  IsOldPred (Lambda.LExpr.op m✝ { name := \"old\", metadata := Visibility.unres } ty✝) "
+  },
+  {
+   "kind": "del-tac",
+   "line": 18,
+   "label": "delete the tactic `cases Hn`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2422,
+   "score": null,
+   "error": "2889:6: Tactic `rfl` failed: The left-hand side\n  e\nis not definitionally equal to the right-hand side\n  Lambda.LExpr.fvar ?app.m ?app.v ?app.ty\n\ncase app.x\nm✝¹"
+  },
+  {
+   "kind": "del-tac",
+   "line": 19,
+   "label": "delete the tactic `apply Hfalse`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2427,
+   "score": null,
+   "error": "2889:6: Tactic `rfl` failed: Expected the goal to be a binary relation\n\nHint: Reflexivity tactics can only be used on goals of the form `x ~ x` or `R x x`\n\ncase"
+  },
+  {
+   "kind": "del-tac",
+   "line": 23,
+   "label": "delete the tactic `apply List.Subset.app`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 1975,
+   "score": null,
+   "error": "2894:8: Tactic `apply` failed: could not unify the conclusion of `fn_ih`\n  (extractOldExprVars fn).Subset (Lambda.LExpr.LExpr.getVars fn)\nwith the goal\n  (extra"
+  },
+  {
+   "kind": "del-tac",
+   "line": 25,
+   "label": "delete the tactic `apply fn_ih`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2205,
+   "score": null,
+   "error": "2895:8: Type mismatch\n  H1\nhas type\n  NormalizedOldExpr fn\nbut is expected to have type\n  (extractOldExprVars fn).Subset ?h_3.app.a.b"
+  },
+  {
+   "kind": "del-tac",
+   "line": 26,
+   "label": "delete the tactic `exact H1`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2206,
+   "score": null,
+   "error": "2896:8: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\ncase h_3.app.a.a\nm✝ : { base := { Metadata := Expres"
+  },
+  {
+   "kind": "del-tac",
+   "line": 27,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 210,
+   "heartbeats": 2483,
+   "score": null,
+   "error": "2894:6: unsolved goals\ncase h_3.app.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e"
+  },
+  {
+   "kind": "del-tac",
+   "line": 30,
+   "label": "delete the tactic `apply e_ih`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2205,
+   "score": null,
+   "error": "2900:8: Type mismatch\n  H2\nhas type\n  NormalizedOldExpr e\nbut is expected to have type\n  (extractOldExprVars e).Subset ?h_3.app.a.b"
+  },
+  {
+   "kind": "del-tac",
+   "line": 31,
+   "label": "delete the tactic `exact H2`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2206,
+   "score": null,
+   "error": "2901:8: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\ncase h_3.app.a.a\nm✝ : { base := { Metadata := Expres"
+  },
+  {
+   "kind": "del-tac",
+   "line": 32,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 210,
+   "heartbeats": 2483,
+   "score": null,
+   "error": "2899:6: unsolved goals\ncase h_3.app.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nfn e"
+  },
+  {
+   "kind": "del-tac",
+   "line": 35,
+   "label": "delete the tactic `cases Hnorm`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2403,
+   "score": null,
+   "error": "2905:17: Tactic `assumption` failed\n\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nty✝ : O"
+  },
+  {
+   "kind": "del-tac",
+   "line": 38,
+   "label": "delete the tactic `cases Hnorm`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2267,
+   "score": null,
+   "error": "2910:21: Tactic `assumption` failed\n\ncase a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadat"
+  },
+  {
+   "kind": "del-tac",
+   "line": 39,
+   "label": "delete the tactic `apply List.Subset.app`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2284,
+   "score": null,
+   "error": "2910:6: Tactic `apply` failed: could not unify the conclusion of `trih`\n  (extractOldExprVars trigger✝).Subset (Lambda.LExpr.LExpr.getVars trigger✝)\nwith the go"
+  },
+  {
+   "kind": "del-tac",
+   "line": 41,
+   "label": "delete the tactic `apply trih <;> assumption`",
+   "closer": "",
+   "ok": false,
+   "tokens": 209,
+   "heartbeats": 2430,
+   "score": null,
+   "error": "2910:4: unsolved goals\ncase quant.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nk✝ : L"
+  },
+  {
+   "kind": "del-tac",
+   "line": 42,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 210,
+   "heartbeats": 2438,
+   "score": null,
+   "error": "2910:4: unsolved goals\ncase quant.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nk✝ : L"
+  },
+  {
+   "kind": "del-tac",
+   "line": 45,
+   "label": "delete the tactic `apply eih <;> assumption`",
+   "closer": "",
+   "ok": false,
+   "tokens": 209,
+   "heartbeats": 2431,
+   "score": null,
+   "error": "2914:4: unsolved goals\ncase quant.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nk✝ : L"
+  },
+  {
+   "kind": "del-tac",
+   "line": 46,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 210,
+   "heartbeats": 2438,
+   "score": null,
+   "error": "2914:4: unsolved goals\ncase quant.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nk✝ : L"
+  },
+  {
+   "kind": "del-tac",
+   "line": 49,
+   "label": "delete the tactic `cases Hnorm`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2083,
+   "score": null,
+   "error": "2921:20: Tactic `assumption` failed\n\ncase a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadat"
+  },
+  {
+   "kind": "del-tac",
+   "line": 50,
+   "label": "delete the tactic `apply List.Subset.app`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2084,
+   "score": null,
+   "error": "2921:6: Tactic `apply` failed: could not unify the conclusion of `cih`\n  (extractOldExprVars c✝).Subset (Lambda.LExpr.LExpr.getVars c✝)\nwith the goal\n  (extract"
+  },
+  {
+   "kind": "del-tac",
+   "line": 52,
+   "label": "delete the tactic `apply cih <;> assumption`",
+   "closer": "",
+   "ok": false,
+   "tokens": 209,
+   "heartbeats": 2427,
+   "score": null,
+   "error": "2921:4: unsolved goals\ncase ite.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc✝ t✝ e✝"
+  },
+  {
+   "kind": "del-tac",
+   "line": 53,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 210,
+   "heartbeats": 2441,
+   "score": null,
+   "error": "2921:4: unsolved goals\ncase ite.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc✝ t✝ e✝"
+  },
+  {
+   "kind": "del-tac",
+   "line": 55,
+   "label": "delete the tactic `apply List.Subset.app`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2203,
+   "score": null,
+   "error": "2926:6: Tactic `apply` failed: could not unify the conclusion of `tih`\n  (extractOldExprVars t✝).Subset (Lambda.LExpr.LExpr.getVars t✝)\nwith the goal\n  (extract"
+  },
+  {
+   "kind": "del-tac",
+   "line": 57,
+   "label": "delete the tactic `apply tih <;> assumption`",
+   "closer": "",
+   "ok": false,
+   "tokens": 209,
+   "heartbeats": 2429,
+   "score": null,
+   "error": "2926:4: unsolved goals\ncase ite.a.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc✝ t✝ "
+  },
+  {
+   "kind": "del-tac",
+   "line": 58,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 210,
+   "heartbeats": 2442,
+   "score": null,
+   "error": "2926:4: unsolved goals\ncase ite.a.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc✝ t✝ "
+  },
+  {
+   "kind": "del-tac",
+   "line": 61,
+   "label": "delete the tactic `apply eih <;> assumption`",
+   "closer": "",
+   "ok": false,
+   "tokens": 209,
+   "heartbeats": 2430,
+   "score": null,
+   "error": "2930:4: unsolved goals\ncase ite.a.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc✝ t✝ "
+  },
+  {
+   "kind": "del-tac",
+   "line": 62,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 210,
+   "heartbeats": 2442,
+   "score": null,
+   "error": "2930:4: unsolved goals\ncase ite.a.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nc✝ t✝ "
+  },
+  {
+   "kind": "del-tac",
+   "line": 65,
+   "label": "delete the tactic `cases Hnorm`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2272,
+   "score": null,
+   "error": "2937:20: Tactic `assumption` failed\n\ncase a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadat"
+  },
+  {
+   "kind": "del-tac",
+   "line": 66,
+   "label": "delete the tactic `apply List.Subset.app`",
+   "closer": "",
+   "ok": false,
+   "tokens": 211,
+   "heartbeats": 2287,
+   "score": null,
+   "error": "2937:6: Tactic `apply` failed: could not unify the conclusion of `ih1`\n  (extractOldExprVars e1✝).Subset (Lambda.LExpr.LExpr.getVars e1✝)\nwith the goal\n  (extra"
+  },
+  {
+   "kind": "del-tac",
+   "line": 68,
+   "label": "delete the tactic `apply ih1 <;> assumption`",
+   "closer": "",
+   "ok": false,
+   "tokens": 209,
+   "heartbeats": 2430,
+   "score": null,
+   "error": "2937:4: unsolved goals\ncase eq.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ne1✝ e2✝ :"
+  },
+  {
+   "kind": "del-tac",
+   "line": 69,
+   "label": "delete the tactic `intros x Hin`",
+   "closer": "",
+   "ok": false,
+   "tokens": 210,
+   "heartbeats": 2437,
+   "score": null,
+   "error": "2937:4: unsolved goals\ncase eq.a.a\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ne1✝ e2✝ :"
+  }
+ ],
+ "s1": {
+  "proof": "open OldExpressions in\ntheorem extractedOldExprInVars :\n  NormalizedOldExpr post →\n  (extractOldExprVars post).Subset\n  (Imperative.HasVarsPure.getVars post) := by\n  intros Hnorm\n  induction post <;>\n    simp only [extractOldExprVars, Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars, List.append_assoc] at * <;>\n    try simp_all\n  case app fn e fn_ih e_ih =>\n    unfold extractOldExprVars\n    split\n    . simp\n      intros x Hin\n      exact Hin\n    . next Hfalse =>\n      cases Hnorm with\n      | app H1 H2 Hn =>\n      exfalso\n      specialize Hn ?_\n      constructor\n      cases Hn\n      apply Hfalse\n      rfl\n    . cases Hnorm with\n      | app H1 H2 Hn =>\n      apply List.Subset.app\n      . apply List.Subset.trans\n        apply fn_ih\n        exact H1\n        intros x Hin\n        simp_all\n      . apply List.Subset.trans\n        apply e_ih\n        exact H2\n        intros x Hin\n        simp_all\n  case abs ih =>\n    cases Hnorm\n    grind\n  case quant trih eih =>\n    cases Hnorm\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply trih <;> assumption\n      intros x Hin\n      simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case ite cih tih eih =>\n    cases Hnorm\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply cih <;> assumption\n      intros x Hin\n      simp_all\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply tih <;> assumption\n      intros x Hin\n      simp_all\n    . apply List.Subset.trans\n      apply eih <;> assumption\n      intros x Hin\n      simp_all\n  case eq ih1 ih2 =>\n    cases Hnorm\n    apply List.Subset.app\n    . apply List.Subset.trans\n      apply ih1 <;> assumption\n      intros x Hin\n      simp_all\n    . apply List.Subset.trans\n      apply ih2 <;> assumption\n      intros x Hin\n      simp_all",
+  "labels": [
+   "replace the closing tactic at line 36 (`apply ih <;> assumption`) by `grind`"
+  ],
+  "primary_score": 38.2,
+  "full": {
+   "ok": true,
+   "tokens": 210,
+   "heartbeats": 2450,
+   "L": 5.41,
+   "H": 9.19,
+   "Z": 100.0,
+   "score": 38.2
+  }
+ },
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 222 tokens, 2698 heartbeats, score 33.33. Free passes applied (hb_polish, lint_delete): start candidate 213 tokens, 2432 heartbeats, score 37.97.\n- Best combination of the paying single edits below: 210 tokens, 2450 heartbeats, score 38.2 (Z 100.0); your workspace starts from it.\n- Exchange rate here: 1 token = 0.15 points, 100 heartbeats = 1.235 points.\n- Single edits that PAY:\n  - line 36: replace the closing tactic at line 36 (`apply ih <;> assumption`) by `grind`: -3 tokens, +17 hb, score +0.24\n- Deletions that FAIL (needed as they stand): line 4 `extractOldExprVars` from the simp list; line 4 `Imperative.HasVarsPure.getVars` from the simp list; line 4 `Lambda.LExpr.LExpr.getVars` from the simp list; line 7 the tactic `unfold extractOldExprVars`; line 2 the tactic `intros Hnorm`; line 8 the tactic `split`.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 21 (`. cases Hnorm with`) (grind/simp_all/aesop); the bullet at line 12 (`. next Hfalse =>`) (grind/simp_all/aesop); the bullet at line 24 (`. apply List.Subset.trans`) (grind/simp_all/aesop); the bullet at line 29 (`. apply List.Subset.trans`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 38.2,
+ "gain": 4.87,
+ "compiles_sweep": 80,
+ "seconds": 584.5,
+ "source": "seed"
+}

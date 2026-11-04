@@ -1,0 +1,31 @@
+{
+ "note": "runner input only: first-session scores of an earlier Sol + briefs line (no proofs, no notes)",
+ "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+ "runs": [
+  {
+   "run_id": "hx-solknow-x10a"
+  }
+ ],
+ "attempts": [
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 73.8
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 79.8
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 84.57
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 84.98
+  }
+ ]
+}

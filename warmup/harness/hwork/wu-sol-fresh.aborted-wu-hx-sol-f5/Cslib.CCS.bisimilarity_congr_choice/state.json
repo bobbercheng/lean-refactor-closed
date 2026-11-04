@@ -1,0 +1,13 @@
+{
+ "problem": "Cslib.CCS.bisimilarity_congr_choice",
+ "best": {
+  "score": 33.33,
+  "proof": null,
+  "tokens": 251,
+  "heartbeats": null
+ },
+ "attempts": [],
+ "runs": [],
+ "api_spend": 1.503671,
+ "lineage": "fresh"
+}

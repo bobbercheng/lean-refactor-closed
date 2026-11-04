@@ -1,0 +1,63 @@
+{
+ "name": "b66-rehearsal-smoke",
+ "description": "b66 closed-package $0 rehearsal ONLY (docs/b66_package.md): probe/b63/r10_candidate.json's families, order, ops, opt-ins and t3 suggestions with tiny budgets (16 compiles / 300 s per phase, one pass, caps 8, screen k 6), so a fake-model rehearsal exercises every end-stage family's plumbing on a shared test host in minutes. Never a run's end config.",
+ "families": [
+  "t1",
+  "t2",
+  "t3",
+  "t4",
+  "t5",
+  "t6",
+  "t7",
+  "t8",
+  "golf"
+ ],
+ "sweep": true,
+ "crossover": true,
+ "k": 3,
+ "prefer": "direct",
+ "budgets": {
+  "sweep": {
+   "compiles": 16,
+   "seconds": 300
+  },
+  "tools": {
+   "compiles": 16,
+   "seconds": 300
+  },
+  "passes": 1,
+  "max_per_op": null
+ },
+ "caps": {
+  "t3": 8,
+  "t4": 8,
+  "t5": 8,
+  "t6": 8,
+  "t7": 8,
+  "t8": 8,
+  "golf": 8
+ },
+ "fail_cache": null,
+ "screen": {
+  "on": true,
+  "k": 6,
+  "depth": 1
+ },
+ "ops": {
+  "_t1": "t1 without t1:field (opt-in since R3: it compiled without a bank in R1 and R2); t2 and t3 run their default op sets",
+  "t1": [
+   "t1:proj",
+   "t1:projapp",
+   "t1:inline",
+   "t1:hole",
+   "t1:hole2"
+  ]
+ },
+ "opt_in": [
+  "golf:trailarg",
+  "golf:casewrap",
+  "golf:dot"
+ ],
+ "t3_suggest": "rule",
+ "ctx": {}
+}

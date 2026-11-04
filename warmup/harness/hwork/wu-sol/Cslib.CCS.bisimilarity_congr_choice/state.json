@@ -1,0 +1,842 @@
+{
+ "problem": "Cslib.CCS.bisimilarity_congr_choice",
+ "best": {
+  "score": 87.03,
+  "proof": "theorem bisimilarity_congr_choice :\n    (p ~[lts (defs := defs)] q) → (choice p r) ~[lts (defs := defs)] (choice q r) := by\n  intro hpq\n  exists _, ChoiceBisim.choice hpq\n  rintro _ _ (h | h) _ <;> constructor <;> intro s t\n  case' choice.left | choice.right => cases t\n  case choiceR | choiceR => use s, Tr.choiceR ‹_›, ChoiceBisim.bisim (.refl s)\n  all_goals\n    apply Exists.imp fun _ => And.imp ?_ .bisim\n    first | apply h.follow_fst | apply h.follow_snd\n    assumption\n    first | exact id | exact Tr.choiceL",
+  "tokens": 72,
+  "heartbeats": 397,
+  "L": 71.31,
+  "H": 89.77,
+  "Z": 100.0,
+  "compat": {
+   "v4.33.0-rc2": true,
+   "v4.32.0": true,
+   "v4.31.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "0911f2364042",
+   "tokens": 95,
+   "heartbeats": 590,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:16:39Z",
+   "score": 82.31
+  },
+  {
+   "sha": "996e01af51f0",
+   "tokens": 86,
+   "heartbeats": 441,
+   "ok": false,
+   "error": "327:33: Tactic `assumption` failed Name : Type u Constant : Type v defs : Constant → Process Name Constant → Prop p q r : Process Name Constant x✝ : p ~[lts] q μ : Act Name p✝ q✝ r✝ : Process Name Constant a✝¹ : p✝ ~[lts] q✝ s : Process Name Constant a✝ : Tr q✝ μ s ⊢ Tr r✝ μ s",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:17:07Z"
+  },
+  {
+   "sha": "093af3c5e177",
+   "tokens": 90,
+   "heartbeats": 382,
+   "ok": false,
+   "error": "327:35: Application type mismatch: The argument t has type Tr p✝ μ s but is expected to have type Tr r✝ μ ?m.515 in the application Tr.choiceR t",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:17:12Z"
+  },
+  {
+   "sha": "8602f0095c0b",
+   "tokens": 48,
+   "heartbeats": 175,
+   "ok": false,
+   "error": "325:12: duplicate rule 'LTS.Bisimilarity.follow_snd'; rule 'LTS.Bisimilarity.follow_fst' was already given. Use [<term>,...] to give multiple rules.",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:17:16Z"
+  },
+  {
+   "sha": "bee8500437b9",
+   "tokens": 94,
+   "heartbeats": 398,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:17:32Z",
+   "score": 84.1
+  },
+  {
+   "sha": "5fd423ae1d26",
+   "tokens": 54,
+   "heartbeats": 2972,
+   "ok": false,
+   "error": "325:12: Tactic `aesop` failed, made no progress Initial goal: case choice.left … [hypotheses omitted] ⊢ ∃ s₂', lts.Tr (q✝.choice r✝) μ s₂' ∧ ChoiceBisim s s₂'",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:17:39Z"
+  },
+  {
+   "sha": "07622aa7c086",
+   "tokens": 90,
+   "heartbeats": 562,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:17:41Z"
+  },
+  {
+   "sha": "a22854199987",
+   "tokens": 96,
+   "heartbeats": 406,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:19:37Z"
+  },
+  {
+   "sha": "2af9bbd3b038",
+   "tokens": 83,
+   "heartbeats": 1152,
+   "ok": false,
+   "error": "332:49: Application type mismatch: The argument hb has type s✝ ~[lts,lts] s but is expected to have type s ~[lts] s✝ in the application ChoiceBisim.bisim hb",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:19:39Z"
+  },
+  {
+   "sha": "adde121c14be",
+   "tokens": 84,
+   "heartbeats": 1026,
+   "ok": false,
+   "error": "331:74: Application type mismatch: The argument h.right has type s ~[lts,lts] x✝ but is expected to have type x✝ ~[lts] s in the application ChoiceBisim.bisim h.right",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:19:43Z"
+  },
+  {
+   "sha": "f722c83602bc",
+   "tokens": 83,
+   "heartbeats": 92,
+   "ok": false,
+   "error": "323:14: Tactic `rcases` failed: `w✝ : Process Name Constant → Process Name Constant → Prop` is not an inductive datatype",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:20:21Z"
+  },
+  {
+   "sha": "bbf748b37fb2",
+   "tokens": 83,
+   "heartbeats": 92,
+   "ok": false,
+   "error": "323:14: Tactic `rcases` failed: `w✝ : Process Name Constant → Process Name Constant → Prop` is not an inductive datatype",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:20:23Z"
+  },
+  {
+   "sha": "cb3b3c6f7b57",
+   "tokens": 83,
+   "heartbeats": 92,
+   "ok": false,
+   "error": "323:14: Tactic `rcases` failed: `w✝ : Process Name Constant → Process Name Constant → Prop` is not an inductive datatype",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:20:25Z"
+  },
+  {
+   "sha": "3559b2c94938",
+   "tokens": 83,
+   "heartbeats": 360,
+   "ok": false,
+   "error": "326:43: don't know how to synthesize placeholder for argument `f` context: … [hypotheses omitted] ⊢ lts.Tr s₁✝ μ✝ x✝ → lts.Tr s₁✝ μ✝ x✝",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:20:37Z"
+  },
+  {
+   "sha": "61a2a2b1df8b",
+   "tokens": 83,
+   "heartbeats": 380,
+   "ok": false,
+   "error": "329:31: No goals to be solved",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:20:39Z"
+  },
+  {
+   "sha": "d502717b8e98",
+   "tokens": 78,
+   "heartbeats": 717,
+   "ok": false,
+   "error": "326:43: don't know how to synthesize placeholder for argument `f` context: … [hypotheses omitted] ⊢ lts.Tr s₁✝ μ✝ x✝ → lts.Tr s₁✝ μ✝ x✝",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:20:41Z"
+  },
+  {
+   "sha": "671ee2dcb6d8",
+   "tokens": 83,
+   "heartbeats": 531,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:20:56Z",
+   "score": 84.41
+  },
+  {
+   "sha": "8ac0e4f034c0",
+   "tokens": 83,
+   "heartbeats": 527,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:21:03Z",
+   "score": 84.45
+  },
+  {
+   "sha": "159c657ed3a2",
+   "tokens": 84,
+   "heartbeats": 387,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:21:09Z",
+   "score": 85.52
+  },
+  {
+   "sha": "226cb13cbdbd",
+   "tokens": 44,
+   "heartbeats": 905,
+   "ok": false,
+   "error": "326:12: `grind` failed case grind.5.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[lts,lts] q [prop] p_1 ~[lts,lts] q_1 [prop] Tr (p_1.choice r_1) μ s [prop] ∀ (a : Process Name Constant), Tr (q_1.choice r_1) μ a → ¬ChoiceBisim s a [prop] p_1 ~[lts,lts] q",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:21:39Z"
+  },
+  {
+   "sha": "820e982c8049",
+   "tokens": 83,
+   "heartbeats": 413,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:21:41Z"
+  },
+  {
+   "sha": "e5ca90af9ed1",
+   "tokens": 87,
+   "heartbeats": 394,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:21:44Z"
+  },
+  {
+   "sha": "c272c799d17e",
+   "tokens": 58,
+   "heartbeats": 28727,
+   "ok": false,
+   "error": "325:12: failed",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:23:37Z"
+  },
+  {
+   "sha": "7f6a1e861580",
+   "tokens": 82,
+   "heartbeats": 875,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:23:40Z"
+  },
+  {
+   "sha": "68b62406288f",
+   "tokens": 57,
+   "heartbeats": 87420,
+   "ok": false,
+   "error": "325:12: Tactic `aesop` failed, made no progress Initial goal: case choice.left.choiceL … [hypotheses omitted] ⊢ ∃ s₂', lts.Tr (q✝.choice r✝) μ✝ s₂' ∧ ChoiceBisim s s₂'",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:23:46Z"
+  },
+  {
+   "sha": "04658d73530e",
+   "tokens": 90,
+   "heartbeats": 410,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:24:08Z"
+  },
+  {
+   "sha": "af49434f3576",
+   "tokens": 86,
+   "heartbeats": 399,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:24:10Z"
+  },
+  {
+   "sha": "61c57d030060",
+   "tokens": 83,
+   "heartbeats": 409,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:24:12Z"
+  },
+  {
+   "sha": "d18734c99e2a",
+   "tokens": 54,
+   "heartbeats": 2119,
+   "ok": false,
+   "error": "325:12: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[lts,lts] q [prop] p_1 ~[lts,lts] q_1 [prop] Tr p_1 μ s [prop] ∀ (a : Process Name Constant), lts.Tr (q_1.choice r_1) μ a → ¬ChoiceBisim s a [prop] lts = { Tr := Tr } [prop] p",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:24:50Z"
+  },
+  {
+   "sha": "97c3ebbed306",
+   "tokens": 79,
+   "heartbeats": 1163,
+   "ok": false,
+   "error": "328:4: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[lts,lts] q [prop] p_1 ~[lts,lts] q_1 [prop] Tr p_1 μ s [prop] ∃ s₂', lts.Tr q_1 μ s₂' ∧ s ~[lts,lts] s₂' [prop] ∀ (a : Process Name Constant), lts.Tr (q_1.choice r_1) μ a → ¬C",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:24:52Z"
+  },
+  {
+   "sha": "23521df65c2f",
+   "tokens": 64,
+   "heartbeats": 7602,
+   "ok": false,
+   "error": "321:85: unsolved goals … [hypotheses omitted] ⊢ ∃ s₂', Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s s₂' Name : Type u Constant : Type v defs : Constant → Process Name Constant → Prop p q r p_1 q_1 r_1 : Process Name Constant μ : Act Name s : Process Name Constant x : p ~[{ Tr := Tr }] q h : p_1 ~[{ Tr ",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:24:55Z"
+  },
+  {
+   "sha": "dde5e31df758",
+   "tokens": 81,
+   "heartbeats": 439,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:25:21Z"
+  },
+  {
+   "sha": "9b2ae4cff5df",
+   "tokens": 81,
+   "heartbeats": 440,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:25:23Z"
+  },
+  {
+   "sha": "62e3a06bd22c",
+   "tokens": 80,
+   "heartbeats": 439,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:25:26Z",
+   "score": 85.6
+  },
+  {
+   "sha": "6ed112fc582c",
+   "tokens": 80,
+   "heartbeats": 457,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:25:55Z"
+  },
+  {
+   "sha": "136097664a18",
+   "tokens": 84,
+   "heartbeats": 457,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:25:57Z"
+  },
+  {
+   "sha": "7851a1848a3b",
+   "tokens": 80,
+   "heartbeats": 476,
+   "ok": false,
+   "error": "328:29: Unknown identifier `exact`",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:25:59Z"
+  },
+  {
+   "sha": "ca5804e04789",
+   "tokens": 59,
+   "heartbeats": 3434,
+   "ok": false,
+   "error": "327:4: `grind` failed case grind.1.1.1.1.1.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[{ Tr := Tr },{ Tr := Tr }] q [prop] p_1 ~[{ Tr := Tr },{ Tr := Tr }] q_1 [prop] Tr p_1 μ s [prop] ∀ (a : Process Name Constant), Tr (q_1.choice r_1) μ a → ¬Cho",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:27:01Z"
+  },
+  {
+   "sha": "04d86df18b07",
+   "tokens": 66,
+   "heartbeats": 5649,
+   "ok": false,
+   "error": "327:4: Tactic `aesop` failed, made no progress Initial goal: case choice.left.choiceL … [hypotheses omitted] ⊢ ∃ s₂', Tr (q✝.choice r✝) μ s₂' ∧ ChoiceBisim s s₂'",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:27:04Z"
+  },
+  {
+   "sha": "1914a49cb73f",
+   "tokens": 86,
+   "heartbeats": 1311,
+   "ok": false,
+   "error": "329:4: `grind` failed case grind.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[{ Tr := Tr },{ Tr := Tr }] q [prop] p_1 ~[{ Tr := Tr },{ Tr := Tr }] q_1 [prop] Tr p_1 μ s [prop] ∃ s₂', Tr q_1 μ s₂' ∧ s ~[{ Tr := Tr },{ Tr := Tr }] s₂' [prop] ∀ (a : Proc",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:27:06Z"
+  },
+  {
+   "sha": "31b2f37e35d1",
+   "tokens": 62,
+   "heartbeats": 441,
+   "ok": false,
+   "error": "327:37: `@[grind →] theorem Tr.choiceL` failed to find patterns in the antecedents of the theorem, consider using different options or the `grind_pattern` command",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:27:18Z"
+  },
+  {
+   "sha": "94aecbdd4601",
+   "tokens": 88,
+   "heartbeats": 506,
+   "ok": false,
+   "error": "329:37: `@[grind →] theorem Tr.choiceL` failed to find patterns in the antecedents of the theorem, consider using different options or the `grind_pattern` command",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:27:20Z"
+  },
+  {
+   "sha": "1d4aae3e840a",
+   "tokens": 55,
+   "heartbeats": 315,
+   "ok": false,
+   "error": "325:45: `@[grind →] theorem Tr.choiceL` failed to find patterns in the antecedents of the theorem, consider using different options or the `grind_pattern` command",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:27:22Z"
+  },
+  {
+   "sha": "babf3765111b",
+   "tokens": 74,
+   "heartbeats": 4348,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:27:58Z"
+  },
+  {
+   "sha": "0fd8b6c192c8",
+   "tokens": 78,
+   "heartbeats": 97853,
+   "ok": false,
+   "error": "321:85: unsolved goals … [hypotheses omitted] ⊢ ∃ a, ?m.700 ∧ s ~[lts] a Name : Type u Constant : Type v defs : Constant → Process Name Constant → Prop p q r : Process Name Constant x : p ~[lts] q p_1 q_1 r_1 : Process Name Constant h : p_1 ~[lts] q_1 μ : Act Name s : Process Name Constant a : Tr p_",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:28:04Z"
+  },
+  {
+   "sha": "436ecd678074",
+   "tokens": 74,
+   "heartbeats": 1939,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:28:07Z"
+  },
+  {
+   "sha": "13d2bdf8e363",
+   "tokens": 74,
+   "heartbeats": 1224,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:28:29Z"
+  },
+  {
+   "sha": "5eb61a5e017b",
+   "tokens": 83,
+   "heartbeats": 493,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:28:31Z"
+  },
+  {
+   "sha": "ccc2b4e42b80",
+   "tokens": 75,
+   "heartbeats": 11571,
+   "ok": false,
+   "error": "327:12: Tactic `exfalso` failed: The metavariable below has already been assigne … [hypotheses omitted] ⊢ ∃ a, ?m.564 a ∧ s ~[lts] a",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:28:33Z"
+  },
+  {
+   "sha": "7f7e5d95ad86",
+   "tokens": 76,
+   "heartbeats": 461,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:28:54Z",
+   "score": 85.95
+  },
+  {
+   "sha": "0217416be277",
+   "tokens": 78,
+   "heartbeats": 36,
+   "ok": false,
+   "error": "322:9: Invalid `⟨...⟩` notation: The expected type p ~[lts] q → (p.choice r) ~[lts] (q.choice r) is not an inductive type Note: This notation can only be used when the expected type is an inductive type with a single constructor",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:29:00Z"
+  },
+  {
+   "sha": "b2025468ca42",
+   "tokens": 80,
+   "heartbeats": 437,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:29:02Z"
+  },
+  {
+   "sha": "69680235b158",
+   "tokens": 74,
+   "heartbeats": 458,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:29:16Z",
+   "score": 86.24
+  },
+  {
+   "sha": "3411cabdbd26",
+   "tokens": 74,
+   "heartbeats": 457,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:29:23Z",
+   "score": 86.25
+  },
+  {
+   "sha": "9a9def0ef8a6",
+   "tokens": 76,
+   "heartbeats": 461,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:29:29Z"
+  },
+  {
+   "sha": "e6d400c78387",
+   "tokens": 71,
+   "heartbeats": 578,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:29:45Z"
+  },
+  {
+   "sha": "fc97882898df",
+   "tokens": 76,
+   "heartbeats": 753,
+   "ok": false,
+   "error": "329:4: Tactic `exfalso` failed: The metavariable below has already been assigned … [hypotheses omitted] ⊢ ∃ a, ?m.578 a ∧ s ~[lts] a",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:29:47Z"
+  },
+  {
+   "sha": "45349930be85",
+   "tokens": 73,
+   "heartbeats": 402,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:29:49Z",
+   "score": 86.85
+  },
+  {
+   "sha": "3531712cf32f",
+   "tokens": 73,
+   "heartbeats": 398,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:30:47Z",
+   "score": 86.89
+  },
+  {
+   "sha": "9b338eb87311",
+   "tokens": 73,
+   "heartbeats": 398,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:30:53Z"
+  },
+  {
+   "sha": "296c9c024911",
+   "tokens": 72,
+   "heartbeats": 397,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:30:55Z",
+   "score": 87.03
+  },
+  {
+   "sha": "d138fd8e7498",
+   "tokens": 72,
+   "heartbeats": 372,
+   "ok": false,
+   "error": "331:23: No goals to be solved",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:55:56Z"
+  },
+  {
+   "sha": "7451dd798201",
+   "tokens": 73,
+   "heartbeats": 1771,
+   "ok": false,
+   "error": "329:41: Tactic `apply` failed: could not unify the type of `Bisimilarity.follow_ … [hypotheses omitted] ⊢ lts.Tr q✝ ?m.1792 x✝ → lts.Tr (q✝.choice r✝) μ✝ x✝",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:55:59Z"
+  },
+  {
+   "sha": "e53dc87c5896",
+   "tokens": 65,
+   "heartbeats": 346,
+   "ok": false,
+   "error": "328:35: don't know how to synthesize placeholder for argument `f` context: … [hypotheses omitted] ⊢ lts.Tr s₁✝ μ✝ x✝ → lts.Tr s₁✝ μ✝ x✝",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:56:09Z"
+  },
+  {
+   "sha": "1ed41384b4f0",
+   "tokens": 77,
+   "heartbeats": 422,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:56:11Z"
+  },
+  {
+   "sha": "7493743cd872",
+   "tokens": 73,
+   "heartbeats": 419,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:56:13Z"
+  },
+  {
+   "sha": "391a40760cda",
+   "tokens": 70,
+   "heartbeats": 572,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:56:28Z"
+  },
+  {
+   "sha": "b8e044be52ab",
+   "tokens": 70,
+   "heartbeats": 572,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:56:30Z"
+  },
+  {
+   "sha": "5887551a9819",
+   "tokens": 74,
+   "heartbeats": 389,
+   "ok": false,
+   "error": "329:33: Tactic `apply` failed: could not unify the conclusion of `Bisimilarity.f … [hypotheses omitted] ⊢ ∃ a, lts.Tr (q✝.choice r✝) μ✝ a ∧ s ~[lts] a",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:56:32Z"
+  },
+  {
+   "sha": "29a2e3a67118",
+   "tokens": 75,
+   "heartbeats": 36,
+   "ok": false,
+   "error": "322:9: Invalid `⟨...⟩` notation: The expected type p ~[lts] q → (p.choice r) ~[lts] (q.choice r) is not an inductive type Note: This notation can only be used when the expected type is an inductive type with a single constructor",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:57:04Z"
+  },
+  {
+   "sha": "c001af2ed1f3",
+   "tokens": 86,
+   "heartbeats": 36,
+   "ok": false,
+   "error": "322:9: Invalid `⟨...⟩` notation: The expected type p ~[lts] q → (p.choice r) ~[lts] (q.choice r) is not an inductive type Note: This notation can only be used when the expected type is an inductive type with a single constructor",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:57:06Z"
+  },
+  {
+   "sha": "3679f91fa35a",
+   "tokens": 73,
+   "heartbeats": 36,
+   "ok": false,
+   "error": "322:9: Invalid `⟨...⟩` notation: The expected type p ~[lts] q → (p.choice r) ~[lts] (q.choice r) is not an inductive type Note: This notation can only be used when the expected type is an inductive type with a single constructor",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:57:09Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T20:15:44Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:04:34Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r9",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:55:04Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:49:05Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r14",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T01:15:42Z"
+  }
+ ],
+ "api_spend": 2.546996,
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 1,
+    "d_score": 48.98,
+    "d_tokens": -156,
+    "d_heartbeats": 590,
+    "diff": "+theorem bisimilarity_congr_choice :\n+    (p ~[lts (defs := defs)] q) → (choice p r) ~[lts (defs := defs)] (choice q r) := by\n+  refine (⟨_, ChoiceBisim.choice ·, ?_⟩)\n+  intro s1 s2 h μ\n+  cases h <;> constructor <;> intro s t\n+  case' choice.left => cases t\n+  case' choice.right => cases t\n+  all_goals first\n+    | exact ⟨_, Tr.choiceR ‹_›, .bisim (.refl _)⟩\n+    | apply Exists.imp (fun _ => And.imp Tr.choiceL ChoiceBisim.bisim)\n+    | apply Exists.imp (fun _ => And.imp id ChoiceBisim.bisim)\n+  all_goals first | exact LTS.Bisimilarity.follow_fst ‹_› ‹_› | exact LTS.Bisimilarity.follow_snd ‹_› ‹_›"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 5,
+    "d_score": 1.79,
+    "d_tokens": -1,
+    "d_heartbeats": -192,
+    "diff": "-  intro s1 s2 h μ\n-  cases h <;> constructor <;> intro s t\n-  case' choice.left => cases t\n-  case' choice.right => cases t\n-  all_goals first\n-    | exact ⟨_, Tr.choiceR ‹_›, .bisim (.refl _)⟩\n-    | apply Exists.imp (fun _ => And.imp Tr.choiceL ChoiceBisim.bisim)\n-    | apply Exists.imp (fun _ => And.imp id ChoiceBisim.bisim)\n-  all_goals first | exact LTS.Bisimilarity.follow_fst ‹_› ‹_› | exact LTS.Bisimilarity.follow_snd ‹_› ‹_›\n+  intro s1 s2 hr μ\n+  cases hr with\n+  | choice h =>\n+    constructor <;> rintro s ⟨⟩ <;> rename_i t\n+    case choiceR | choiceR => exact ⟨_, Tr.choiceR t, .bisim (.refl _)⟩\n+    all_goals apply Exists.imp fun _ => .imp .choiceL .bisim\n+    exacts [h.follow_fst"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 17,
+    "d_score": 0.31,
+    "d_tokens": -11,
+    "d_heartbeats": 133,
+    "diff": "-  intro s1 s2 hr μ\n-  cases hr with\n-  | choice h =>\n-    constructor <;> rintro s ⟨⟩ <;> rename_i t\n-    case choiceR | choiceR => exact ⟨_, Tr.choiceR t, .bisim (.refl _)⟩\n-    all_goals apply Exists.imp fun _ => .imp .choiceL .bisim\n-    exacts [h.follow_fst t, h.follow_snd t]\n-  | bisim h =>\n-    constructor <;> intro s t <;> apply Exists.imp fun _ => .imp id .bisim\n-    exacts [h.follow_fst t, h.follow_snd t]\n+  rintro _ _ (h | h) _ <;> constructor <;> intro s t\n+  case' choice.left | choice.right => cases t\n+  case choiceR | choiceR => exact ⟨_, Tr.choiceR ‹_›, .bisim (.refl _)⟩\n+  all_goals apply Exists.imp fun _ => And.imp ?_ ChoiceBisim.bisim\n+  any_goals exact h.follow_fst ‹_›\n+  "
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 18,
+    "d_score": 0.04,
+    "d_tokens": 0,
+    "d_heartbeats": -4,
+    "diff": "-  all_goals apply Exists.imp fun _ => And.imp ?_ ChoiceBisim.bisim\n+  all_goals apply Exists.imp fun _ => And.imp ?_ .bisim"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 19,
+    "d_score": 1.07,
+    "d_tokens": 1,
+    "d_heartbeats": -140,
+    "diff": "-  all_goals apply Exists.imp fun _ => And.imp ?_ .bisim\n-  any_goals exact h.follow_fst ‹_›\n-  any_goals exact h.follow_snd ‹_›\n-  all_goals first | exact Tr.choiceL | exact id\n+  all_goals\n+    apply Exists.imp\n+    rotate_left\n+    first | exact h.follow_fst ‹_› | exact h.follow_snd ‹_›\n+    intro x\n+    apply And.imp _ ChoiceBisim.bisim\n+    first | exact Tr.choiceL | exact id"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 34,
+    "d_score": 0.08,
+    "d_tokens": -4,
+    "d_heartbeats": 52,
+    "diff": "-  case' choice.left | choice.right => cases t\n-  case choiceR | choiceR => exact ⟨_, Tr.choiceR ‹_›, .bisim (.refl _)⟩\n+  case' choice.left | choice.right => cases t <;> rename_i t\n+  case choiceR | choiceR => exact ⟨_, Tr.choiceR t, .bisim (.refl _)⟩\n-    first | exact h.follow_fst ‹_› | exact h.follow_snd ‹_›\n-    intro x\n+    first | exact h.follow_fst t | exact h.follow_snd t\n+    intro"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 50,
+    "d_score": 0.35,
+    "d_tokens": -4,
+    "d_heartbeats": 22,
+    "diff": "-  refine (⟨_, ChoiceBisim.choice ·, ?_⟩)\n+  intro hpq\n+  exists _, ChoiceBisim.choice hpq"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 53,
+    "d_score": 0.29,
+    "d_tokens": -2,
+    "d_heartbeats": -3,
+    "diff": "-  case choiceR | choiceR => exact ⟨_, Tr.choiceR t, .bisim (.refl _)⟩\n+  case choiceR | choiceR => use s, Tr.choiceR t, ChoiceBisim.bisim (HomBisimilarity.refl s)"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 54,
+    "d_score": 0.01,
+    "d_tokens": 0,
+    "d_heartbeats": -1,
+    "diff": "-  case choiceR | choiceR => use s, Tr.choiceR t, ChoiceBisim.bisim (HomBisimilarity.refl s)\n+  case choiceR | choiceR => use s, Tr.choiceR t, ChoiceBisim.bisim (.refl s)"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 58,
+    "d_score": 0.6,
+    "d_tokens": -1,
+    "d_heartbeats": -55,
+    "diff": "-    apply Exists.imp\n-    rotate_left\n-    first | exact h.follow_fst t | exact h.follow_snd t\n-    intro\n-    apply And.imp _ ChoiceBisim.bisim\n+    apply Exists.imp fun _ => And.imp ?_ .bisim\n+    first | apply h.follow_fst | apply h.follow_snd\n+    assumption"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 59,
+    "d_score": 0.04,
+    "d_tokens": 0,
+    "d_heartbeats": -4,
+    "diff": "-    first | exact Tr.choiceL | exact id\n+    first | exact id | exact Tr.choiceL"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 61,
+    "d_score": 0.14,
+    "d_tokens": -1,
+    "d_heartbeats": -1,
+    "diff": "-  case' choice.left | choice.right => cases t <;> rename_i t\n-  case choiceR | choiceR => use s, Tr.choiceR t, ChoiceBisim.bisim (.refl s)\n+  case' choice.left | choice.right => cases t\n+  case choiceR | choiceR => use s, Tr.choiceR ‹_›, ChoiceBisim.bisim (.refl s)"
+   }
+  ]
+ },
+ "fresh_lineages": [
+  {
+   "run_id": "wu-hx-sol-f4",
+   "spend": 0.719607,
+   "score": 84.11,
+   "adopted": false,
+   "restructure": false,
+   "t": "2026-10-11T21:59:51Z"
+  },
+  {
+   "run_id": "wu-hx-sol-f8",
+   "spend": 0.163967,
+   "score": 84.13,
+   "adopted": false,
+   "restructure": false,
+   "t": "2026-10-11T23:47:51Z"
+  },
+  {
+   "run_id": "wu-hx-sol-f12",
+   "spend": 0.479693,
+   "score": 85.42,
+   "adopted": false,
+   "restructure": true,
+   "t": "2026-10-12T00:35:55Z"
+  }
+ ],
+ "budget_milestones": {
+  "2": {
+   "spend": 2.005132,
+   "best": 85.42,
+   "run_id": "wu-hx-sol-f12",
+   "turn": 18,
+   "t": "2026-10-12T00:29:40Z"
+  }
+ }
+}

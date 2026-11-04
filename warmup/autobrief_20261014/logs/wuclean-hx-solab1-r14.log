@@ -1,0 +1,8 @@
+run wuclean-hx-solab1-r14: 1 problems, model=gpt-6.1-sol, turns≤40
+FieldSpecification technique cards: sets, algebra
+FieldSpecification library leads: 10 (40.2 s, 10 compiles)
+FieldSpecification structural mode (plateau; effort medium)
+FieldSpecification auto-brief: appended
+FieldSpecification budget reached: $2.598 + reserve $0.257 > $2.85; session ends
+FieldSpecification DONE best=81.84 checks=1 tool_calls=8 turns=8 out_tok=2232 114s
+done

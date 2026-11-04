@@ -1,0 +1,47 @@
+[
+ {
+  "problem": "CallElimCorrect.extractedOldExprInVars",
+  "best_score": 94.64,
+  "checks": 6,
+  "tool_calls": 6,
+  "turns": 6,
+  "out_tokens": 3133,
+  "seconds": 191
+ },
+ {
+  "problem": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+  "best_score": 86.69,
+  "checks": 5,
+  "tool_calls": 10,
+  "turns": 6,
+  "out_tokens": 1195,
+  "seconds": 178
+ },
+ {
+  "problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+  "best_score": 87.93,
+  "checks": 6,
+  "tool_calls": 15,
+  "turns": 12,
+  "out_tokens": 3454,
+  "seconds": 293
+ },
+ {
+  "problem": "interleaved_affine_gaps_imply_tensor_gaps",
+  "best_score": 90.7,
+  "checks": 3,
+  "tool_calls": 5,
+  "turns": 5,
+  "out_tokens": 2307,
+  "seconds": 116
+ },
+ {
+  "problem": "putnam_1995_a3",
+  "best_score": 95.56,
+  "checks": 4,
+  "tool_calls": 7,
+  "turns": 7,
+  "out_tokens": 3357,
+  "seconds": 135
+ }
+]

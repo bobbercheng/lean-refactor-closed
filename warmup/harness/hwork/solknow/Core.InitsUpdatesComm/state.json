@@ -1,0 +1,106 @@
+{
+ "note": "runner input only: first-session scores of an earlier Sol + briefs line (no proofs, no notes)",
+ "problem": "Core.InitsUpdatesComm",
+ "runs": [
+  {
+   "run_id": "hx-solknow-x10a"
+  }
+ ],
+ "attempts": [
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 82.22
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 85.37
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 86.28
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 86.59
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 88.09
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 88.99
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 89.04
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  }
+ ]
+}

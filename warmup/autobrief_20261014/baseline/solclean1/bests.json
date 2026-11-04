@@ -1,0 +1,137 @@
+{
+ "interleaved_affine_gaps_imply_tensor_gaps": {
+  "score": 88.62,
+  "L": 89.58,
+  "H": 76.27,
+  "Z": 100.0,
+  "tokens": 141,
+  "heartbeats": 2226,
+  "api_spend_usd_list": 2.5797
+ },
+ "Cslib.SKI.parallelReduction_diamond": {
+  "score": 76.68,
+  "L": 59.21,
+  "H": 70.82,
+  "Z": 100.0,
+  "tokens": 166,
+  "heartbeats": 415,
+  "api_spend_usd_list": 2.5781
+ },
+ "putnam_1964_a4": {
+  "score": 96.65,
+  "L": 93.1,
+  "H": 96.83,
+  "Z": 100.0,
+  "tokens": 122,
+  "heartbeats": 3533,
+  "api_spend_usd_list": 2.5629
+ },
+ "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time": {
+  "score": 80.03,
+  "L": 64.17,
+  "H": 75.91,
+  "Z": 100.0,
+  "tokens": 436,
+  "heartbeats": 10146,
+  "api_spend_usd_list": 2.6022
+ },
+ "CallElimCorrect.extractedOldExprInVars": {
+  "score": 94.64,
+  "L": 91.89,
+  "H": 92.03,
+  "Z": 100.0,
+  "tokens": 18,
+  "heartbeats": 215,
+  "api_spend_usd_list": 2.5681
+ },
+ "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius": {
+  "score": 85.8,
+  "L": 78.81,
+  "H": 78.58,
+  "Z": 100.0,
+  "tokens": 310,
+  "heartbeats": 3428,
+  "api_spend_usd_list": 2.5699
+ },
+ "putnam_1995_a3": {
+  "score": 95.63,
+  "L": 96.16,
+  "H": 90.72,
+  "Z": 100.0,
+  "tokens": 157,
+  "heartbeats": 1322,
+  "api_spend_usd_list": 2.5535
+ },
+ "Core.InitsUpdatesComm": {
+  "score": 87.03,
+  "L": 66.96,
+  "H": 94.14,
+  "Z": 100.0,
+  "tokens": 74,
+  "heartbeats": 252,
+  "api_spend_usd_list": 2.5751
+ },
+ "putnam_1964_b2": {
+  "score": 99.02,
+  "L": 98.0,
+  "H": 99.05,
+  "Z": 100.0,
+  "tokens": 35,
+  "heartbeats": 1284,
+  "api_spend_usd_list": 2.5956
+ },
+ "Binius.BinaryBasefold.fold_advances_evaluation_poly": {
+  "score": 94.24,
+  "L": 94.91,
+  "H": 87.82,
+  "Z": 100.0,
+  "tokens": 97,
+  "heartbeats": 5613,
+  "api_spend_usd_list": 2.5881
+ },
+ "CallElimCorrect.substOldPostSubset": {
+  "score": 92.31,
+  "L": 87.86,
+  "H": 89.06,
+  "Z": 100.0,
+  "tokens": 38,
+  "heartbeats": 566,
+  "api_spend_usd_list": 2.6127
+ },
+ "fundamental_theorem_of_variational_calculus'": {
+  "score": 91.14,
+  "L": 85.43,
+  "H": 87.98,
+  "Z": 100.0,
+  "tokens": 124,
+  "heartbeats": 1437,
+  "api_spend_usd_list": 2.6077
+ },
+ "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema": {
+  "score": 86.85,
+  "L": 77.26,
+  "H": 83.28,
+  "Z": 100.0,
+  "tokens": 312,
+  "heartbeats": 4533,
+  "api_spend_usd_list": 2.5653
+ },
+ "Cslib.CCS.bisimilarity_congr_choice": {
+  "score": 86.41,
+  "L": 71.71,
+  "H": 87.52,
+  "Z": 100.0,
+  "tokens": 71,
+  "heartbeats": 484,
+  "api_spend_usd_list": 2.5974
+ },
+ "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress": {
+  "score": 89.45,
+  "L": 75.0,
+  "H": 93.34,
+  "Z": 100.0,
+  "tokens": 102,
+  "heartbeats": 3988,
+  "api_spend_usd_list": 2.5736
+ }
+}

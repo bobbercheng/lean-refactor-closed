@@ -1,0 +1,811 @@
+{
+ "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+ "seed": {
+  "ok": true,
+  "tokens": 408,
+  "heartbeats": 59876,
+  "L": 0.0,
+  "H": -0.01,
+  "Z": 100.0,
+  "score": 33.33
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "no sites",
+   "before": {
+    "ok": true,
+    "tokens": 408,
+    "heartbeats": 59880,
+    "Z": 100.0,
+    "score": 33.33
+   },
+   "after": {
+    "ok": true,
+    "tokens": 408,
+    "heartbeats": 59880,
+    "Z": 100.0,
+    "score": 33.33
+   },
+   "gain": null,
+   "applied": null,
+   "compiles": 3,
+   "seconds": 17.6
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 408,
+    "heartbeats": 59881,
+    "Z": 100.0,
+    "score": 33.33
+   },
+   "after": {
+    "ok": true,
+    "tokens": 448,
+    "heartbeats": 24647,
+    "Z": 100.0,
+    "score": 49.68
+   },
+   "gain": 16.35,
+   "applied": {
+    "exists2refine": 10
+   },
+   "compiles": 15,
+   "seconds": 93.4
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 448,
+    "heartbeats": 24654,
+    "Z": 100.0,
+    "score": 49.67
+   },
+   "after": {
+    "ok": true,
+    "tokens": 448,
+    "heartbeats": 24654,
+    "Z": 100.0,
+    "score": 49.67
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 12,
+   "seconds": 74.4
+  },
+  {
+   "pass": "lint_delete",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 448,
+    "heartbeats": 24652,
+    "Z": 100.0,
+    "score": 49.67
+   },
+   "after": {
+    "ok": true,
+    "tokens": 448,
+    "heartbeats": 24652,
+    "Z": 100.0,
+    "score": 49.67
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 23,
+   "seconds": 114.1
+  }
+ ],
+ "free_applied": [
+  "hb_rewrite"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 448,
+  "heartbeats": 24651,
+  "L": -9.8,
+  "H": 58.83,
+  "Z": 100.0,
+  "score": 49.67
+ },
+ "s0": "lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t' := by\n  generalize eq : [] = Γ at der\n  have der' : Typing Γ t τ := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t₁ _ _ t₂ l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r with\n        | inl val_r =>\n            have ⟨σ, t₁, eq⟩ := l.canonical_form_abs val_l\n            refine ⟨t₁ ^ᵗᵗ t₂, ?_⟩\n            grind\n        | inr red_r =>\n            obtain ⟨t₂', _⟩ := red_r\n            refine ⟨t₁.app t₂', ?_⟩\n            grind\n    | inr red_l =>\n        obtain ⟨t₁', _⟩ := red_l\n        refine ⟨t₁'.app t₂, ?_⟩\n        grind\n  case tapp σ' der _ ih =>\n    right\n    specialize ih rfl der\n    cases ih with\n    | inl val =>\n        obtain ⟨_, t, _⟩ := der.canonical_form_tabs val\n        exists t ^ᵗᵞ σ'\n        grind\n    | inr red =>\n        obtain ⟨t', _⟩ := red\n        refine ⟨.tapp t' σ', ?_⟩\n        grind\n  case let' t₁ σ t₂ τ L der _ ih _ =>\n    right\n    cases ih rfl der with\n    | inl _ =>\n        refine ⟨t₂ ^ᵗᵗ t₁, ?_⟩\n        grind\n    | inr red =>\n        obtain ⟨t₁', _⟩ := red\n        refine ⟨t₁'.let' t₂, ?_⟩\n        grind\n  case inl der _ ih =>\n    cases (ih rfl der) with\n    | inl val => grind\n    | inr red =>\n        right\n        obtain ⟨t', _⟩ := red\n        refine ⟨.inl t', ?_⟩\n        grind\n  case inr der _ ih =>\n    cases (ih rfl der) with\n    | inl val => grind\n    | inr red =>\n        right\n        obtain ⟨t', _⟩ := red\n        refine ⟨.inr t', ?_⟩\n        grind\n  case case t₁ _ _ t₂ _ t₃ _ der _ _ ih _ _ =>\n    right\n    cases ih rfl der with\n    | inl val =>\n        have ⟨t₁, lr⟩ := der.canonical_form_sum val\n        cases lr <;> [exists t₂ ^ᵗᵗ t₁; refine ⟨t₃ ^ᵗᵗ t₁, ?_⟩] <;> grind\n    | inr red =>\n        obtain ⟨t₁', _⟩ := red\n        refine ⟨t₁'.case t₂ t₃, ?_⟩\n        grind\n  case sub => grind\n  case abs σ _ τ L _ _=>\n    left\n    constructor\n    apply LC.abs L\n    · grind only [→ wf, cases Term.LC]\n    · grind only [→ wf]\n  case tabs L _ _=>\n    left\n    constructor\n    apply LC.tabs L\n    · grind only [→ wf, cases Term.LC]\n    · grind only [→ wf]",
+ "exchange": [
+  0.082,
+  0.056
+ ],
+ "profile": {
+  "ok": true,
+  "total": 24652,
+  "floor": null,
+  "reference": 59873,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "2-2",
+    "depth_indent": 2,
+    "text": "generalize eq : [] = Γ at der",
+    "heartbeats": null
+   },
+   {
+    "lines": "3-3",
+    "depth_indent": 2,
+    "text": "have der' : Typing Γ t τ := der",
+    "heartbeats": null
+   },
+   {
+    "lines": "4-4",
+    "depth_indent": 2,
+    "text": "induction der <;> subst eq",
+    "heartbeats": null
+   },
+   {
+    "lines": "5-5",
+    "depth_indent": 2,
+    "text": "case var mem => grind",
+    "heartbeats": null
+   },
+   {
+    "lines": "6-22",
+    "depth_indent": 2,
+    "text": "case app t₁ _ _ t₂ l r ih_l ih_r => right cases ih_l rfl l with | inl val_l => cases ih_r rfl r with",
+    "heartbeats": null
+   },
+   {
+    "lines": "23-34",
+    "depth_indent": 2,
+    "text": "case tapp σ' der _ ih => right specialize ih rfl der cases ih with | inl val => obtain ⟨_, t, _⟩ := ",
+    "heartbeats": null
+   },
+   {
+    "lines": "35-44",
+    "depth_indent": 2,
+    "text": "case let' t₁ σ t₂ τ L der _ ih _ => right cases ih rfl der with | inl _ => refine ⟨t₂ ^ᵗᵗ t₁, ?_⟩ gr",
+    "heartbeats": null
+   },
+   {
+    "lines": "45-52",
+    "depth_indent": 2,
+    "text": "case inl der _ ih => cases (ih rfl der) with | inl val => grind | inr red => right obtain ⟨t', _⟩ :=",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 448,
+  "heartbeats": 24651,
+  "score": 49.67
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 371,
+   "score": null,
+   "error": "86:77: `grind` failed\ncase grind\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nder : Typing [] t τ\nleft : ¬t.Value\nright :"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 313,
+   "score": null,
+   "error": "86:77: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 776,
+   "score": null,
+   "error": "86:77: Tactic `aesop` failed, made no progress\nInitial goal:\n  Var : Type u_1\n  inst✝¹ : HasFresh Var\n  inst✝ : DecidableEq Var\n  t : Term Var\n  τ : Ty Var\n  de"
+  },
+  {
+   "kind": "closer",
+   "line": 66,
+   "label": "replace the closing tactic at line 66 (`cases lr <;> [exists t₂ ^ᵗᵗ t₁; refine …`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 427,
+   "heartbeats": 13829,
+   "score": null,
+   "error": "151:8: `grind` failed\ncase grind.1.3.1\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nt₁"
+  },
+  {
+   "kind": "closer",
+   "line": 66,
+   "label": "replace the closing tactic at line 66 (`cases lr <;> [exists t₂ ^ᵗᵗ t₁; refine …`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 427,
+   "heartbeats": 5311,
+   "score": null,
+   "error": "149:14: unsolved goals\ncase inl\nVar : Type u_1\ninst✝¹ : HasFresh Var\ninst✝ : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nt₁✝ : Te"
+  },
+  {
+   "kind": "closer",
+   "line": 66,
+   "label": "replace the closing tactic at line 66 (`cases lr <;> [exists t₂ ^ᵗᵗ t₁; refine …`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 427,
+   "heartbeats": 6655,
+   "score": null,
+   "error": "149:14: unsolved goals\ncase inl\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nσ τ_1 : T"
+  },
+  {
+   "kind": "closer",
+   "line": 76,
+   "label": "replace the bullet at line 76 (`· grind only [→ wf, cases Term.LC]`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 440,
+   "heartbeats": 24775,
+   "score": null,
+   "error": "161:6: `grind` failed\ncase grind\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ_1 : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nσ : Ty"
+  },
+  {
+   "kind": "closer",
+   "line": 76,
+   "label": "replace the bullet at line 76 (`· grind only [→ wf, cases Term.LC]`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 440,
+   "heartbeats": 24972,
+   "score": null,
+   "error": "161:4: unsolved goals\ncase a\nVar : Type u_1\ninst✝¹ : HasFresh Var\ninst✝ : DecidableEq Var\nt : Term Var\nτ✝ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nσ : Ty Var"
+  },
+  {
+   "kind": "closer",
+   "line": 76,
+   "label": "replace the bullet at line 76 (`· grind only [→ wf, cases Term.LC]`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 440,
+   "heartbeats": 25240,
+   "score": null,
+   "error": "161:4: unsolved goals\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ_1 : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nσ : Ty Var\nt₁ : T"
+  },
+  {
+   "kind": "closer",
+   "line": 82,
+   "label": "replace the bullet at line 82 (`· grind only [→ wf, cases Term.LC]`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 440,
+   "heartbeats": 24766,
+   "score": null,
+   "error": "167:6: `grind` failed\ncase grind\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nσ : Ty V"
+  },
+  {
+   "kind": "closer",
+   "line": 82,
+   "label": "replace the bullet at line 82 (`· grind only [→ wf, cases Term.LC]`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 440,
+   "heartbeats": 24978,
+   "score": null,
+   "error": "167:4: unsolved goals\ncase a\nVar : Type u_1\ninst✝¹ : HasFresh Var\ninst✝ : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nσ✝ : Ty Var"
+  },
+  {
+   "kind": "closer",
+   "line": 82,
+   "label": "replace the bullet at line 82 (`· grind only [→ wf, cases Term.LC]`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 440,
+   "heartbeats": 25239,
+   "score": null,
+   "error": "167:4: unsolved goals\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nσ : Ty Var\nt₁ : Ter"
+  },
+  {
+   "kind": "closer",
+   "line": 77,
+   "label": "replace the bullet at line 77 (`· grind only [→ wf]`) by `grind`",
+   "closer": "grind",
+   "ok": true,
+   "tokens": 443,
+   "heartbeats": 24762,
+   "score": 50.02,
+   "error": "",
+   "d_tokens": -5,
+   "d_hb": 111,
+   "d_score": 0.35
+  },
+  {
+   "kind": "closer",
+   "line": 77,
+   "label": "replace the bullet at line 77 (`· grind only [→ wf]`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 443,
+   "heartbeats": 25251,
+   "score": null,
+   "error": "162:4: unsolved goals\ncase a\nVar : Type u_1\ninst✝¹ : HasFresh Var\ninst✝ : DecidableEq Var\nt : Term Var\nτ✝ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nσ : Ty Var"
+  },
+  {
+   "kind": "closer",
+   "line": 77,
+   "label": "replace the bullet at line 77 (`· grind only [→ wf]`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 443,
+   "heartbeats": 25406,
+   "score": null,
+   "error": "162:4: unsolved goals\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ_1 : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nσ : Ty Var\nt₁ : T"
+  },
+  {
+   "kind": "closer",
+   "line": 83,
+   "label": "replace the bullet at line 83 (`· grind only [→ wf]`) by `grind`",
+   "closer": "grind",
+   "ok": true,
+   "tokens": 443,
+   "heartbeats": 24748,
+   "score": 50.03,
+   "error": "",
+   "d_tokens": -5,
+   "d_hb": 97,
+   "d_score": 0.36
+  },
+  {
+   "kind": "closer",
+   "line": 83,
+   "label": "replace the bullet at line 83 (`· grind only [→ wf]`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 443,
+   "heartbeats": 25243,
+   "score": null,
+   "error": "168:4: unsolved goals\ncase a\nVar : Type u_1\ninst✝¹ : HasFresh Var\ninst✝ : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nσ✝ : Ty Var"
+  },
+  {
+   "kind": "closer",
+   "line": 83,
+   "label": "replace the bullet at line 83 (`· grind only [→ wf]`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 443,
+   "heartbeats": 25416,
+   "score": null,
+   "error": "168:4: unsolved goals\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nσ : Ty Var\nt₁ : Ter"
+  },
+  {
+   "kind": "del-tac",
+   "line": 3,
+   "label": "delete the tactic `have der' : Typing Γ t τ := der`",
+   "closer": "",
+   "ok": false,
+   "tokens": 439,
+   "heartbeats": 959,
+   "score": null,
+   "error": "92:10: Function expected at\n  ih_l rfl\nbut this term has type\n  t₁.Value ∨ ∃ t', t₁ ⭢βᵛ t'\n\nNote: Expected a function because this term is being applied to the "
+  },
+  {
+   "kind": "del-tac",
+   "line": 12,
+   "label": "delete the tactic `have ⟨σ, t₁, eq⟩ := l.canonical_form_abs val_l`",
+   "closer": "",
+   "ok": false,
+   "tokens": 437,
+   "heartbeats": 34471,
+   "score": null,
+   "error": "98:12: `grind` failed\ncase grind.1.1.1.1\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\n"
+  },
+  {
+   "kind": "del-tac",
+   "line": 65,
+   "label": "delete the tactic `have ⟨t₁, lr⟩ := der.canonical_form_sum val`",
+   "closer": "",
+   "ok": false,
+   "tokens": 439,
+   "heartbeats": 3864,
+   "score": null,
+   "error": "150:14: Unknown identifier `lr`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 2,
+   "label": "delete the tactic `generalize eq : [] = Γ at der`",
+   "closer": "",
+   "ok": false,
+   "tokens": 439,
+   "heartbeats": 98,
+   "score": null,
+   "error": "87:21: Unknown identifier `Γ`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 4,
+   "label": "delete the tactic `induction der <;> subst eq`",
+   "closer": "",
+   "ok": false,
+   "tokens": 443,
+   "heartbeats": 68,
+   "score": null,
+   "error": "89:2: Case tag `var` not found.\n\nNote: There are no cases to select."
+  },
+  {
+   "kind": "del-tac",
+   "line": 7,
+   "label": "delete the tactic `right`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 24325,
+   "score": null,
+   "error": "97:19: Invalid `⟨...⟩` notation: The expected type\n  (t₁✝.app t₂).Value ∨ ∃ t', t₁✝.app t₂ ⭢βᵛ t'\nhas more than one constructor\n\nNote: This notation can only be"
+  },
+  {
+   "kind": "del-tac",
+   "line": 13,
+   "label": "delete the tactic `refine ⟨t₁ ^ᵗᵗ t₂, ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 439,
+   "heartbeats": 25601,
+   "score": null,
+   "error": "98:12: `grind` failed\ncase grind.1.1\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nt₁_1"
+  },
+  {
+   "kind": "del-tac",
+   "line": 16,
+   "label": "delete the tactic `obtain ⟨t₂', _⟩ := red_r`",
+   "closer": "",
+   "ok": false,
+   "tokens": 440,
+   "heartbeats": 25872,
+   "score": null,
+   "error": "101:27: Unknown identifier `t₂'`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 17,
+   "label": "delete the tactic `refine ⟨t₁.app t₂', ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 441,
+   "heartbeats": 27592,
+   "score": null,
+   "error": "102:12: `grind` failed\ncase grind.1.3.1.8.3.8.3.8.3.8\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × "
+  },
+  {
+   "kind": "del-tac",
+   "line": 20,
+   "label": "delete the tactic `obtain ⟨t₁', _⟩ := red_l`",
+   "closer": "",
+   "ok": false,
+   "tokens": 440,
+   "heartbeats": 25802,
+   "score": null,
+   "error": "105:16: Unknown identifier `t₁'.app`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 21,
+   "label": "delete the tactic `refine ⟨t₁'.app t₂, ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 441,
+   "heartbeats": 27589,
+   "score": null,
+   "error": "106:8: `grind` failed\ncase grind.1.1.3.1.8.3.8.3.8.3.8\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) ×"
+  },
+  {
+   "kind": "del-tac",
+   "line": 24,
+   "label": "delete the tactic `right`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 23680,
+   "score": null,
+   "error": "113:8: Invalid `⟨...⟩` notation: The expected type\n  (t₁✝.tapp σ').Value ∨ ∃ t', t₁✝.tapp σ' ⭢βᵛ t'\nhas more than one constructor\n\nNote: This notation can only "
+  },
+  {
+   "kind": "del-tac",
+   "line": 25,
+   "label": "delete the tactic `specialize ih rfl der`",
+   "closer": "",
+   "ok": false,
+   "tokens": 444,
+   "heartbeats": 23651,
+   "score": null,
+   "error": "110:4: Tactic `cases` failed: major premise type is not an inductive type\n  [] = [] → Typing [] t₁✝ (σ✝.all τ✝) → t₁✝.Value ∨ ∃ t', t₁✝ ⭢βᵛ t'\n\nExplanation: the"
+  },
+  {
+   "kind": "del-tac",
+   "line": 28,
+   "label": "delete the tactic `obtain ⟨_, t, _⟩ := der.canonical_form_tabs val`",
+   "closer": "",
+   "ok": false,
+   "tokens": 437,
+   "heartbeats": 25352,
+   "score": null,
+   "error": "114:8: `grind` failed\ncase grind.1\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nt₁ : T"
+  },
+  {
+   "kind": "del-tac",
+   "line": 29,
+   "label": "delete the tactic `exists t ^ᵗᵞ σ'`",
+   "closer": "",
+   "ok": false,
+   "tokens": 443,
+   "heartbeats": 24845,
+   "score": null,
+   "error": "114:8: `grind` failed\ncase grind.2\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt_1 : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nt₁ :"
+  },
+  {
+   "kind": "del-tac",
+   "line": 32,
+   "label": "delete the tactic `obtain ⟨t', _⟩ := red`",
+   "closer": "",
+   "ok": false,
+   "tokens": 440,
+   "heartbeats": 25682,
+   "score": null,
+   "error": "117:22: Unknown identifier `t'`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 33,
+   "label": "delete the tactic `refine ⟨.tapp t' σ', ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 440,
+   "heartbeats": 25674,
+   "score": null,
+   "error": "118:8: `grind` failed\ncase grind.1.1.1.1.1.1.1.1.1\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Bin"
+  },
+  {
+   "kind": "del-tac",
+   "line": 36,
+   "label": "delete the tactic `right`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 24254,
+   "score": null,
+   "error": "123:15: Invalid `⟨...⟩` notation: The expected type\n  (t₁.let' t₂).Value ∨ ∃ t', t₁.let' t₂ ⭢βᵛ t'\nhas more than one constructor\n\nNote: This notation can only b"
+  },
+  {
+   "kind": "del-tac",
+   "line": 39,
+   "label": "delete the tactic `refine ⟨t₂ ^ᵗᵗ t₁, ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 439,
+   "heartbeats": 27075,
+   "score": null,
+   "error": "124:8: `grind` failed\ncase grind.1\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ_1 : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nt₁ :"
+  },
+  {
+   "kind": "del-tac",
+   "line": 42,
+   "label": "delete the tactic `obtain ⟨t₁', _⟩ := red`",
+   "closer": "",
+   "ok": false,
+   "tokens": 440,
+   "heartbeats": 34533,
+   "score": null,
+   "error": "127:16: Unknown identifier `t₁'.let'`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 43,
+   "label": "delete the tactic `refine ⟨t₁'.let' t₂, ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 441,
+   "heartbeats": 32836,
+   "score": null,
+   "error": "128:8: `grind` failed\ncase grind.1.3.8.3.8.3.8.3.8.1\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ_1 : Ty Var\nΓ : List ((_ : Var) ×"
+  },
+  {
+   "kind": "del-tac",
+   "line": 49,
+   "label": "delete the tactic `right`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 24576,
+   "score": null,
+   "error": "135:15: Invalid `⟨...⟩` notation: The expected type\n  t₁✝.inl.Value ∨ ∃ t', t₁✝.inl ⭢βᵛ t'\nhas more than one constructor\n\nNote: This notation can only be used w"
+  },
+  {
+   "kind": "del-tac",
+   "line": 50,
+   "label": "delete the tactic `obtain ⟨t', _⟩ := red`",
+   "closer": "",
+   "ok": false,
+   "tokens": 440,
+   "heartbeats": 25856,
+   "score": null,
+   "error": "135:21: Unknown identifier `t'`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 51,
+   "label": "delete the tactic `refine ⟨.inl t', ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 441,
+   "heartbeats": 26885,
+   "score": null,
+   "error": "136:8: `grind` failed\ncase grind.1.3.8.3.8.3.8.3.8.1\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × B"
+  },
+  {
+   "kind": "del-tac",
+   "line": 57,
+   "label": "delete the tactic `right`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 24563,
+   "score": null,
+   "error": "143:15: Invalid `⟨...⟩` notation: The expected type\n  t₁✝.inr.Value ∨ ∃ t', t₁✝.inr ⭢βᵛ t'\nhas more than one constructor\n\nNote: This notation can only be used w"
+  },
+  {
+   "kind": "del-tac",
+   "line": 58,
+   "label": "delete the tactic `obtain ⟨t', _⟩ := red`",
+   "closer": "",
+   "ok": false,
+   "tokens": 440,
+   "heartbeats": 25863,
+   "score": null,
+   "error": "143:21: Unknown identifier `t'`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 59,
+   "label": "delete the tactic `refine ⟨.inr t', ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 441,
+   "heartbeats": 26892,
+   "score": null,
+   "error": "144:8: `grind` failed\ncase grind.1.3.8.3.8.3.8.3.8.1\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × B"
+  },
+  {
+   "kind": "del-tac",
+   "line": 62,
+   "label": "delete the tactic `right`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 3690,
+   "score": null,
+   "error": "150:22: Invalid `⟨...⟩` notation: The expected type\n  (t₁✝.case t₂ t₃).Value ∨ ∃ t', t₁✝.case t₂ t₃ ⭢βᵛ t'\nhas more than one constructor\n\nNote: This notation ca"
+  },
+  {
+   "kind": "del-tac",
+   "line": 68,
+   "label": "delete the tactic `obtain ⟨t₁', _⟩ := red`",
+   "closer": "",
+   "ok": false,
+   "tokens": 440,
+   "heartbeats": 34325,
+   "score": null,
+   "error": "153:16: Unknown identifier `t₁'.case`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 69,
+   "label": "delete the tactic `refine ⟨t₁'.case t₂ t₃, ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 440,
+   "heartbeats": 35801,
+   "score": null,
+   "error": "154:8: `grind` failed\ncase grind.1.3.8.3.8.3.8.3.8.1\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × B"
+  },
+  {
+   "kind": "del-tac",
+   "line": 73,
+   "label": "delete the tactic `left`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 24289,
+   "score": null,
+   "error": "159:4: Tactic `apply` failed: could not unify the conclusion of `LC.abs L`\n  (Term.abs ?m.693 ?m.692).LC\nwith the goal\n  (Term.abs σ t₁✝).Value\n\nNote: The full "
+  },
+  {
+   "kind": "del-tac",
+   "line": 74,
+   "label": "delete the tactic `constructor`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 24292,
+   "score": null,
+   "error": "159:4: Tactic `apply` failed: could not unify the conclusion of `LC.abs L`\n  (Term.abs ?m.693 ?m.692).LC\nwith the goal\n  (Term.abs σ t₁✝).Value\n\nNote: The full "
+  },
+  {
+   "kind": "del-tac",
+   "line": 75,
+   "label": "delete the tactic `apply LC.abs L`",
+   "closer": "",
+   "ok": false,
+   "tokens": 445,
+   "heartbeats": 24370,
+   "score": null,
+   "error": "161:4: No goals to be solved"
+  },
+  {
+   "kind": "del-tac",
+   "line": 79,
+   "label": "delete the tactic `left`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 24286,
+   "score": null,
+   "error": "165:4: Tactic `apply` failed: could not unify the conclusion of `LC.tabs L`\n  (Term.tabs ?m.708 ?m.707).LC\nwith the goal\n  (Term.tabs σ✝ t₁✝).Value\n\nNote: The f"
+  },
+  {
+   "kind": "del-tac",
+   "line": 80,
+   "label": "delete the tactic `constructor`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 24271,
+   "score": null,
+   "error": "165:4: Tactic `apply` failed: could not unify the conclusion of `LC.tabs L`\n  (Term.tabs ?m.708 ?m.707).LC\nwith the goal\n  (Term.tabs σ✝ t₁✝).Value\n\nNote: The f"
+  },
+  {
+   "kind": "del-tac",
+   "line": 81,
+   "label": "delete the tactic `apply LC.tabs L`",
+   "closer": "",
+   "ok": false,
+   "tokens": 445,
+   "heartbeats": 24370,
+   "score": null,
+   "error": "167:4: No goals to be solved"
+  }
+ ],
+ "s1": {
+  "proof": "lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t' := by\n  generalize eq : [] = Γ at der\n  have der' : Typing Γ t τ := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t₁ _ _ t₂ l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r with\n        | inl val_r =>\n            have ⟨σ, t₁, eq⟩ := l.canonical_form_abs val_l\n            refine ⟨t₁ ^ᵗᵗ t₂, ?_⟩\n            grind\n        | inr red_r =>\n            obtain ⟨t₂', _⟩ := red_r\n            refine ⟨t₁.app t₂', ?_⟩\n            grind\n    | inr red_l =>\n        obtain ⟨t₁', _⟩ := red_l\n        refine ⟨t₁'.app t₂, ?_⟩\n        grind\n  case tapp σ' der _ ih =>\n    right\n    specialize ih rfl der\n    cases ih with\n    | inl val =>\n        obtain ⟨_, t, _⟩ := der.canonical_form_tabs val\n        exists t ^ᵗᵞ σ'\n        grind\n    | inr red =>\n        obtain ⟨t', _⟩ := red\n        refine ⟨.tapp t' σ', ?_⟩\n        grind\n  case let' t₁ σ t₂ τ L der _ ih _ =>\n    right\n    cases ih rfl der with\n    | inl _ =>\n        refine ⟨t₂ ^ᵗᵗ t₁, ?_⟩\n        grind\n    | inr red =>\n        obtain ⟨t₁', _⟩ := red\n        refine ⟨t₁'.let' t₂, ?_⟩\n        grind\n  case inl der _ ih =>\n    cases (ih rfl der) with\n    | inl val => grind\n    | inr red =>\n        right\n        obtain ⟨t', _⟩ := red\n        refine ⟨.inl t', ?_⟩\n        grind\n  case inr der _ ih =>\n    cases (ih rfl der) with\n    | inl val => grind\n    | inr red =>\n        right\n        obtain ⟨t', _⟩ := red\n        refine ⟨.inr t', ?_⟩\n        grind\n  case case t₁ _ _ t₂ _ t₃ _ der _ _ ih _ _ =>\n    right\n    cases ih rfl der with\n    | inl val =>\n        have ⟨t₁, lr⟩ := der.canonical_form_sum val\n        cases lr <;> [exists t₂ ^ᵗᵗ t₁; refine ⟨t₃ ^ᵗᵗ t₁, ?_⟩] <;> grind\n    | inr red =>\n        obtain ⟨t₁', _⟩ := red\n        refine ⟨t₁'.case t₂ t₃, ?_⟩\n        grind\n  case sub => grind\n  case abs σ _ τ L _ _=>\n    left\n    constructor\n    apply LC.abs L\n    · grind only [→ wf, cases Term.LC]\n    · grind\n  case tabs L _ _=>\n    left\n    constructor\n    apply LC.tabs L\n    · grind only [→ wf, cases Term.LC]\n    · grind",
+  "labels": [
+   "replace the bullet at line 83 (`· grind only [→ wf]`) by `grind`",
+   "replace the bullet at line 77 (`· grind only [→ wf]`) by `grind`"
+  ],
+  "primary_score": 50.38,
+  "full": {
+   "ok": true,
+   "tokens": 438,
+   "heartbeats": 24854,
+   "L": -7.35,
+   "H": 58.49,
+   "Z": 100.0,
+   "score": 50.38
+  }
+ },
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 408 tokens, 59876 heartbeats, score 33.33. Free passes applied (hb_rewrite): start candidate 448 tokens, 24651 heartbeats, score 49.67.\n- Best combination of the paying single edits below: 438 tokens, 24854 heartbeats, score 50.38 (Z 100.0); your workspace starts from it.\n- Exchange rate here: 1 token = 0.082 points, 100 heartbeats = 0.056 points.\n- Single edits that PAY:\n  - line 83: replace the bullet at line 83 (`· grind only [→ wf]`) by `grind`: -5 tokens, +97 hb, score +0.36\n  - line 77: replace the bullet at line 77 (`· grind only [→ wf]`) by `grind`: -5 tokens, +111 hb, score +0.35\n- Deletions that FAIL (needed as they stand): line 3 the tactic `have der' : Typing Γ t τ := der`; line 12 the tactic `have ⟨σ, t₁, eq⟩ := l.canonical_form_abs val_l`; line 65 the tactic `have ⟨t₁, lr⟩ := der.canonical_form_sum val`; line 2 the tactic `generalize eq : [] = Γ at der`; line 4 the tactic `induction der <;> subst eq`; line 7 the tactic `right`.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the closing tactic at line 66 (`cases lr <;> [exists t₂ ^ᵗᵗ t₁; refine …`) (grind/simp_all/aesop); the bullet at line 76 (`· grind only [→ wf, cases Term.LC]`) (grind/simp_all/aesop); the bullet at line 82 (`· grind only [→ wf, cases Term.LC]`) (grind/simp_all/aesop); the bullet at line 77 (`· grind only [→ wf]`) (simp_all/aesop).",
+ "status": "ok",
+ "best_score": 50.38,
+ "gain": 17.05,
+ "compiles_sweep": 54,
+ "seconds": 509.0,
+ "source": "seed"
+}

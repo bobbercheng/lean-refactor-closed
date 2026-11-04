@@ -1,0 +1,1198 @@
+{
+ "problem": "putnam_1995_a3",
+ "best": {
+  "score": 95.88,
+  "proof": "theorem putnam_1995_a3\n(relation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop)\n(digits_to_num : (Fin 9 → ℤ) → ℤ)\n(hdigits_to_num : digits_to_num = fun dig => ∑ i : Fin 9, (dig i) * 10^i.1)\n(hrelation : ∀ d e : (Fin 9 → ℤ), relation d e ↔ (∀ i : Fin 9, d i < 10 ∧ d i ≥ 0 ∧ e i < 10 ∧ e i ≥ 0) ∧ (∀ i : Fin 9, 7 ∣ (digits_to_num (fun j : Fin 9 => if j = i then e j else d j))))\n: ∀ d e f : (Fin 9 → ℤ), ((relation d e) ∧ (relation e f)) → (∀ i : Fin 9, 7 ∣ d i - f i) := by\n  have swap (x y : _ → ℤ) i :\n      digits_to_num (fun j => if j = i then y j else x j) =\n      digits_to_num x + (y i * 10 ^ i.1 - x i * 10 ^ i.1) := by\n    subst digits_to_num\n    rw [← sub_eq_iff_eq_add', ← Finset.sum_sub_distrib]\n    simp only [ite_mul, ite_sub, sub_self, Finset.sum_ite_eq', Finset.mem_univ, if_true]\n  intro d e f ⟨hd, he⟩\n  simp only [hrelation, swap] at hd he\n  have hs := Finset.dvd_sum (s := Finset.univ) (fun i _ => hd.2 i)\n  simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib,\n    Finset.sum_const, Finset.card_fin, ← congrFun hdigits_to_num] at hs\n  intro i\n  apply (show IsCoprime (7 : ℤ) 10 by decide).pow_right.dvd_of_dvd_mul_right\n  refine Eq.mp (congrArg (7 ∣ ·) ?_) $ dvd_sub (dvd_sub hs (dvd_add (hd.2 i) (he.2 i))) (dvd_mul_right 7 (digits_to_num d))\n  ring1",
+  "tokens": 181,
+  "heartbeats": 1131,
+  "L": 95.57,
+  "H": 92.06,
+  "Z": 100.0,
+  "compat": {
+   "v4.27.0": true,
+   "v4.26.0": true,
+   "v4.25.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "a06f781386e4",
+   "tokens": 255,
+   "heartbeats": 1597,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:43:50Z",
+   "score": 94.18
+  },
+  {
+   "sha": "d72d38d99ae1",
+   "tokens": 204,
+   "heartbeats": 1348,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:44:17Z",
+   "score": 95.18
+  },
+  {
+   "sha": "d08ad3133e0f",
+   "tokens": 201,
+   "heartbeats": 1531,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:44:26Z"
+  },
+  {
+   "sha": "42927bd84df6",
+   "tokens": 200,
+   "heartbeats": 1319,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:44:51Z",
+   "score": 95.28
+  },
+  {
+   "sha": "98705bf3b9cc",
+   "tokens": 204,
+   "heartbeats": 1597,
+   "ok": false,
+   "error": "40:29: Unknown identifier `beta_reduce`",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:45:00Z"
+  },
+  {
+   "sha": "7fbd66d97e11",
+   "tokens": 197,
+   "heartbeats": 1501,
+   "ok": false,
+   "error": "39:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = d i * 10 ^ ↑i - f i * 10 ^ ↑i + ((∑ i, d i * 10 ^ ↑i) * 7 - ?m.251 * 7)",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:46:11Z"
+  },
+  {
+   "sha": "1dd9465c3861",
+   "tokens": 204,
+   "heartbeats": 1387,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:46:14Z"
+  },
+  {
+   "sha": "a585d8681ee8",
+   "tokens": 195,
+   "heartbeats": 986,
+   "ok": false,
+   "error": "40:2: `dsimp` made no progress",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:46:20Z"
+  },
+  {
+   "sha": "82bbd2368b1e",
+   "tokens": 190,
+   "heartbeats": 1089,
+   "ok": false,
+   "error": "40:2: omega could not prove the goal: a possible counterexample may satisfy the constraints 1 ≤ a - b - 7*c ≤ 6 where a := d i * 10 ^ ?m.222 b := f i * 10 ^ ?m.222 c := (d i * 10 ^ ?m.222 - f i * 10 ^ ?m.222) / 7",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:46:47Z"
+  },
+  {
+   "sha": "7d8cbcff594c",
+   "tokens": 194,
+   "heartbeats": 1312,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:46:50Z",
+   "score": 95.35
+  },
+  {
+   "sha": "c03cbf9af8a3",
+   "tokens": 203,
+   "heartbeats": 1388,
+   "ok": false,
+   "error": "39:2: abel1 found that the two sides were not equal",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:46:59Z"
+  },
+  {
+   "sha": "0770eb0eee6a",
+   "tokens": 193,
+   "heartbeats": 2400,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:47:14Z"
+  },
+  {
+   "sha": "b31cb24b0f83",
+   "tokens": 215,
+   "heartbeats": 1125,
+   "ok": false,
+   "error": "35:2: 'change' tactic failed, pattern 7 ∣ 9 * digits_to_num d + (digits_to_num e - digits_to_num d) is not definitionally equal to target 7 ∣ ↑9 * digits_to_num d + (∑ x, e x * 10 ^ ↑x - ∑ x, d x * 10 ^ ↑x)",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:47:17Z"
+  },
+  {
+   "sha": "bc37cd998f75",
+   "tokens": 196,
+   "heartbeats": 1281,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:47:20Z",
+   "score": 95.4
+  },
+  {
+   "sha": "960132146502",
+   "tokens": 194,
+   "heartbeats": 1279,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:47:40Z",
+   "score": 95.42
+  },
+  {
+   "sha": "aa5abf233ad5",
+   "tokens": 194,
+   "heartbeats": 1218,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:47:49Z",
+   "score": 95.57
+  },
+  {
+   "sha": "d749540a79ac",
+   "tokens": 204,
+   "heartbeats": 1280,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:47:57Z"
+  },
+  {
+   "sha": "f92ddfc6eb57",
+   "tokens": 199,
+   "heartbeats": 1102,
+   "ok": false,
+   "error": "39:2: omega could not prove the goal: a possible counterexample may satisfy the constraints a - b - c + g ≥ 1 where a := d i * 10 ^ ↑i b := f i * 10 ^ ↑i c := d i * 10 ^ ?m.230 g := f i * 10 ^ ?m.230",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:48:13Z"
+  },
+  {
+   "sha": "ecc4535a3468",
+   "tokens": 202,
+   "heartbeats": 1249,
+   "ok": false,
+   "error": "39:2: abel1 found that the two sides were not equal",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:48:15Z"
+  },
+  {
+   "sha": "ba5dea1b9a12",
+   "tokens": 194,
+   "heartbeats": 1687,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:48:18Z"
+  },
+  {
+   "sha": "d23d6b077239",
+   "tokens": 194,
+   "heartbeats": 1249,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:48:21Z"
+  },
+  {
+   "sha": "47354bfba89e",
+   "tokens": 185,
+   "heartbeats": 1285,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:48:41Z"
+  },
+  {
+   "sha": "1e44a934dde5",
+   "tokens": 202,
+   "heartbeats": 1210,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:48:44Z"
+  },
+  {
+   "sha": "dfd8ffbd1ae8",
+   "tokens": 207,
+   "heartbeats": 1596,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:48:47Z"
+  },
+  {
+   "sha": "765f832b17a3",
+   "tokens": 179,
+   "heartbeats": 1253,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:48:50Z",
+   "score": 95.61
+  },
+  {
+   "sha": "5b8d08ab8b30",
+   "tokens": 177,
+   "heartbeats": 1421,
+   "ok": false,
+   "error": "38:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ digits_to_num d * 7 + d i * 10 ^ ↑i + (-(f i * 10 ^ ↑i) - ?m.278 * 7) = d i * 10 ^ ↑i - f i * 10 ^ ↑i",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:49:17Z"
+  },
+  {
+   "sha": "55ec89957554",
+   "tokens": 178,
+   "heartbeats": 1166,
+   "ok": false,
+   "error": "26:24: Tactic `rewrite` failed: Did not find an occurrence of the pattern @Eq ?m … [hypotheses omitted] ⊢ ((fun dig => ∑ i, dig i * 10 ^ ↑i) fun j => if j = i then y j else x j) = (fun dig => ∑ i, dig i * 10 ^ ↑i) x + y i * 10 ^ ↑i - x i * 10 ^ ↑i",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:49:31Z"
+  },
+  {
+   "sha": "c18998c8817d",
+   "tokens": 184,
+   "heartbeats": 1364,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:49:37Z"
+  },
+  {
+   "sha": "aea581542b3f",
+   "tokens": 177,
+   "heartbeats": 1236,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:49:55Z",
+   "score": 95.66
+  },
+  {
+   "sha": "0e4e24b59746",
+   "tokens": 181,
+   "heartbeats": 1261,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:50:04Z"
+  },
+  {
+   "sha": "ab73ea85addd",
+   "tokens": 179,
+   "heartbeats": 527,
+   "ok": false,
+   "error": "30:2: `simp` made no progress",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:50:09Z"
+  },
+  {
+   "sha": "18f36927b50d",
+   "tokens": 172,
+   "heartbeats": 1229,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:50:26Z",
+   "score": 95.72
+  },
+  {
+   "sha": "6c9dfb188058",
+   "tokens": 163,
+   "heartbeats": 1296,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:50:36Z"
+  },
+  {
+   "sha": "030f46348ffe",
+   "tokens": 177,
+   "heartbeats": 1235,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:50:39Z"
+  },
+  {
+   "sha": "317b3cb7eece",
+   "tokens": 177,
+   "heartbeats": 1235,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:50:42Z"
+  },
+  {
+   "sha": "c284a0777987",
+   "tokens": 180,
+   "heartbeats": 1557,
+   "ok": false,
+   "error": "37:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = d i * 10 ^ ↑i - f i * 10 ^ ↑i + ((∑ j, d j * 10 ^ ↑j) * 7 - ?m.309 * 7)",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:19:18Z"
+  },
+  {
+   "sha": "13edbe8f0922",
+   "tokens": 190,
+   "heartbeats": 1445,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:19:37Z"
+  },
+  {
+   "sha": "25931d91de28",
+   "tokens": 172,
+   "heartbeats": 1251,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:20:16Z"
+  },
+  {
+   "sha": "39e94a92c646",
+   "tokens": 180,
+   "heartbeats": 1227,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:20:19Z"
+  },
+  {
+   "sha": "048e79add43f",
+   "tokens": 176,
+   "heartbeats": 1243,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:20:22Z"
+  },
+  {
+   "sha": "489a1fb4c013",
+   "tokens": 172,
+   "heartbeats": 1229,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:20:25Z"
+  },
+  {
+   "sha": "1f2a6b779654",
+   "tokens": 175,
+   "heartbeats": 1501,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:21:03Z"
+  },
+  {
+   "sha": "0998e22b62ec",
+   "tokens": 176,
+   "heartbeats": 1305,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:21:06Z"
+  },
+  {
+   "sha": "e68b9df9e866",
+   "tokens": 174,
+   "heartbeats": 1245,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:21:09Z"
+  },
+  {
+   "sha": "32fc01fa4d3e",
+   "tokens": 258,
+   "heartbeats": 1427,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:21:12Z"
+  },
+  {
+   "sha": "ca9ad1ee433c",
+   "tokens": 189,
+   "heartbeats": 1320,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:22:00Z"
+  },
+  {
+   "sha": "03126bf5a4f6",
+   "tokens": 197,
+   "heartbeats": 1366,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:22:03Z"
+  },
+  {
+   "sha": "4adf122d839d",
+   "tokens": 193,
+   "heartbeats": 1298,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:22:05Z"
+  },
+  {
+   "sha": "73af117ebb16",
+   "tokens": 175,
+   "heartbeats": 1275,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:22:23Z"
+  },
+  {
+   "sha": "b093bf8bad81",
+   "tokens": 173,
+   "heartbeats": 1228,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:23:04Z"
+  },
+  {
+   "sha": "c6754423f5b2",
+   "tokens": 175,
+   "heartbeats": 1239,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:23:06Z"
+  },
+  {
+   "sha": "13d65e3637c2",
+   "tokens": 178,
+   "heartbeats": 1236,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:23:09Z"
+  },
+  {
+   "sha": "1da6b7e41915",
+   "tokens": 182,
+   "heartbeats": 1369,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:23:40Z"
+  },
+  {
+   "sha": "f828599e7442",
+   "tokens": 177,
+   "heartbeats": 1573,
+   "ok": false,
+   "error": "36:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ?m.227 - f i * 10 ^ ?m.227 = ∑ i, ∑ x, (if x = i then e x else d x) * 10 ^ ↑x - ∑ x, (if x = i then e x else d x) * 10 ^ ↑x + (-∑ x, (if x = i then f x else e x) * 10 ^ ↑x - (∑ j, d j * 10 ^ ↑j) * 7)",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:23:43Z"
+  },
+  {
+   "sha": "68257a9de70f",
+   "tokens": 185,
+   "heartbeats": 1305,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:39:53Z"
+  },
+  {
+   "sha": "1516bd349713",
+   "tokens": 173,
+   "heartbeats": 774,
+   "ok": false,
+   "error": "34:9: don't know how to synthesize implicit argument `z` @IsCoprime.dvd_of_dvd_m … [hypotheses omitted] ⊢ ℤ",
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:39:56Z"
+  },
+  {
+   "sha": "e9416f8dc123",
+   "tokens": 162,
+   "heartbeats": 1524,
+   "ok": false,
+   "error": "35:2: ring failed, ring expressions not equal … [hypotheses omitted] ⊢ d i * 10 ^ ↑i - f i * 10 ^ ↑i = d i * 10 ^ ↑i - f i * 10 ^ ↑i + ((∑ j, d j * 10 ^ ↑j) * 7 - ?m.256 * 7)",
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:40:30Z"
+  },
+  {
+   "sha": "b98b3049d72a",
+   "tokens": 172,
+   "heartbeats": 1399,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:40:33Z"
+  },
+  {
+   "sha": "33dae2cc05b4",
+   "tokens": 179,
+   "heartbeats": 1370,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r3",
+   "t": "2026-10-11T21:40:36Z"
+  },
+  {
+   "sha": "2208718c80b9",
+   "tokens": 192,
+   "heartbeats": 1463,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:13:47Z"
+  },
+  {
+   "sha": "09f11dea1282",
+   "tokens": 226,
+   "heartbeats": 1361,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:14:23Z"
+  },
+  {
+   "sha": "5077d51810bc",
+   "tokens": 172,
+   "heartbeats": 1226,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:14:26Z",
+   "score": 95.73
+  },
+  {
+   "sha": "b19ef369c83c",
+   "tokens": 176,
+   "heartbeats": 1240,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:14:56Z"
+  },
+  {
+   "sha": "d4a86a057b05",
+   "tokens": 189,
+   "heartbeats": 1046,
+   "ok": false,
+   "error": "36:9: invalid `▸` notation, the equality have this := ?m.264; this has type (d i - f i) * 10 ^ ↑i = ?m.249 but neither side of the equality is mentioned in the type 7 ∣ 9 • digits_to_num d + (digits_to_num e - digits_to_num d) - (digits_to_num d + (e i * 10 ^ ↑i - d i * 10 ^ ↑i) + (digits_to_num e +",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:14:59Z"
+  },
+  {
+   "sha": "f5efd1cddb88",
+   "tokens": 189,
+   "heartbeats": 1138,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:15:15Z",
+   "score": 95.8
+  },
+  {
+   "sha": "f8a010763b0b",
+   "tokens": 189,
+   "heartbeats": 1126,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:15:24Z",
+   "score": 95.82
+  },
+  {
+   "sha": "2e98c5411eea",
+   "tokens": 181,
+   "heartbeats": 1131,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:15:41Z",
+   "score": 95.88
+  },
+  {
+   "sha": "33f1b6395120",
+   "tokens": 181,
+   "heartbeats": 1143,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:15:50Z"
+  },
+  {
+   "sha": "546015a5aa07",
+   "tokens": 183,
+   "heartbeats": 1144,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:16:03Z"
+  },
+  {
+   "sha": "9a3f2bf1df26",
+   "tokens": 183,
+   "heartbeats": 1330,
+   "ok": false,
+   "error": "36:28: Type mismatch 7 ∣ x✝ has type Prop but is expected to have type ?m.245 = x✝ → Prop",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:16:06Z"
+  },
+  {
+   "sha": "90df96e11a64",
+   "tokens": 189,
+   "heartbeats": 1131,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:16:32Z"
+  },
+  {
+   "sha": "7c327fe37617",
+   "tokens": 182,
+   "heartbeats": 1326,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:16:41Z"
+  },
+  {
+   "sha": "cc4a128ce8eb",
+   "tokens": 181,
+   "heartbeats": 1133,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:16:44Z"
+  },
+  {
+   "sha": "20d3b28dc642",
+   "tokens": 212,
+   "heartbeats": 445,
+   "ok": false,
+   "error": "29:8: No goals to be solved",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:17:05Z"
+  },
+  {
+   "sha": "4cece91dee98",
+   "tokens": 206,
+   "heartbeats": 1022,
+   "ok": false,
+   "error": "28:8: Invalid rewrite argument: The pattern to be substituted is a metavariable (`?m.181`) in this equality ?m.181 = if i ∈ Finset.univ then ?m.181 else ?m.182",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:17:13Z"
+  },
+  {
+   "sha": "bb6b9a432387",
+   "tokens": 212,
+   "heartbeats": 1065,
+   "ok": false,
+   "error": "28:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern if i ∈  … [hypotheses omitted] ⊢ ∑ x_1, ((fun j => if j = i then y j else x j) x_1 * 10 ^ ↑x_1 - x x_1 * 10 ^ ↑x_1) = y i * 10 ^ ↑i - x i * 10 ^ ↑i",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:14Z"
+  },
+  {
+   "sha": "eec5cdd6d999",
+   "tokens": 189,
+   "heartbeats": 1372,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:19Z"
+  },
+  {
+   "sha": "ea0e68719e54",
+   "tokens": 178,
+   "heartbeats": 906,
+   "ok": false,
+   "error": "36:9: don't know how to synthesize implicit argument `α` @Eq.mp (7 ∣ 9 • digits_ … [hypotheses omitted] ⊢ Prop",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:22Z"
+  },
+  {
+   "sha": "c6b210d99469",
+   "tokens": 191,
+   "heartbeats": 1122,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:37Z"
+  },
+  {
+   "sha": "1dcf7677d739",
+   "tokens": 181,
+   "heartbeats": 1182,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:40Z"
+  },
+  {
+   "sha": "c8a27c5d41f1",
+   "tokens": 181,
+   "heartbeats": 1138,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:43Z"
+  },
+  {
+   "sha": "27a6ad8b364f",
+   "tokens": 188,
+   "heartbeats": 1164,
+   "ok": false,
+   "error": "38:2: abel1 found that the two sides were not equal",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:45Z"
+  },
+  {
+   "sha": "78e4e0c89fb4",
+   "tokens": 190,
+   "heartbeats": 1177,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:42:01Z"
+  },
+  {
+   "sha": "28a196c700c2",
+   "tokens": 185,
+   "heartbeats": 1192,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:42:04Z"
+  },
+  {
+   "sha": "9bcc24e9998f",
+   "tokens": 181,
+   "heartbeats": 1130,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:42:07Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T20:40:55Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:16:09Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:36:53Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r4",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T22:07:56Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:38:46Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T01:03:16Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r14",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T01:28:15Z"
+  }
+ ],
+ "api_spend": 1.717453,
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 1,
+    "d_score": 60.85,
+    "d_tokens": -3830,
+    "d_heartbeats": 1597,
+    "diff": "+theorem putnam_1995_a3\n+(relation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop)\n+(digits_to_num : (Fin 9 → ℤ) → ℤ)\n+(hdigits_to_num : digits_to_num = fun dig => ∑ i : Fin 9, (dig i) * 10^i.1)\n+(hrelation : ∀ d e : (Fin 9 → ℤ), relation d e ↔ (∀ i : Fin 9, d i < 10 ∧ d i ≥ 0 ∧ e i < 10 ∧ e i ≥ 0) ∧ (∀ i : Fin 9, 7 ∣ (digits_to_num (fun j : Fin 9 => if j = i then e j else d j))))\n+: ∀ d e f : (Fin 9 → ℤ), ((relation d e) ∧ (relation e f)) → (∀ i : Fin 9, 7 ∣ d i - f i) := by\n+  have swap (x y : Fin 9 → ℤ) (i : Fin 9) :\n+      digits_to_num (fun j => if j = i then y j else x j) =\n+      digits_to_num x + (y i - x i) * 10 ^ i.1 := by\n+    rw [hdigits_to_num]\n+    apply sub_eq_iff_eq_add'.mp\n+    rw [← Fi"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 2,
+    "d_score": 1.0,
+    "d_tokens": -51,
+    "d_heartbeats": -249,
+    "diff": "-    have hp (j : Fin 9) : (if j = i then y j else x j) * (10 : ℤ)^j.1 - x j * 10^j.1 = if j = i then (y j-x j)*10^j.1 else 0 := by\n-      split <;> ring\n-    simp only [hp, Finset.sum_ite_eq', Finset.mem_univ, if_true]\n+    simp only [← sub_mul, ite_sub, sub_self, ite_mul, zero_mul, Finset.sum_ite_eq', Finset.mem_univ, if_true]\n-  ring\n+  ring1"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 4,
+    "d_score": 0.1,
+    "d_tokens": -4,
+    "d_heartbeats": -29,
+    "diff": "-    rw [hdigits_to_num]\n-    apply sub_eq_iff_eq_add'.mp\n-    rw [← Finset.sum_sub_distrib]\n-    simp only [← sub_mul, ite_sub, sub_self, ite_mul, zero_mul, Finset.sum_ite_eq', Finset.mem_univ, if_true]\n+    rw [hdigits_to_num, ← sub_eq_iff_eq_add', ← Finset.sum_sub_distrib]\n+    simp only [ite_mul, ite_sub, sub_self, Finset.sum_ite_eq', Finset.mem_univ, if_true, sub_mul]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 10,
+    "d_score": 0.07,
+    "d_tokens": -6,
+    "d_heartbeats": -7,
+    "diff": "-  have swap (x y : Fin 9 → ℤ) (i : Fin 9) :\n+  have swap (x y : _ → ℤ) i :"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 14,
+    "d_score": 0.05,
+    "d_tokens": 2,
+    "d_heartbeats": -31,
+    "diff": "-      digits_to_num x + (y i - x i) * 10 ^ i.1 := by\n+      digits_to_num x + (y i * 10 ^ i.1 - x i * 10 ^ i.1) := by\n-    simp only [ite_mul, ite_sub, sub_self, Finset.sum_ite_eq', Finset.mem_univ, if_true, sub_mul]\n+    simp only [ite_mul, ite_sub, sub_self, Finset.sum_ite_eq', Finset.mem_univ, if_true]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 15,
+    "d_score": 0.02,
+    "d_tokens": -2,
+    "d_heartbeats": -2,
+    "diff": "-  simp only [Finset.sum_add_distrib, sub_mul, Finset.sum_sub_distrib,\n+  simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib,"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 16,
+    "d_score": 0.15,
+    "d_tokens": 0,
+    "d_heartbeats": -61,
+    "diff": "-    Finset.sum_const, Finset.card_fin, nsmul_eq_mul] at hs\n+    Finset.sum_const, Finset.card_fin, nsmul_eq_mul, ← congrFun hdigits_to_num] at hs\n-  rw [hdigits_to_num]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 25,
+    "d_score": 0.04,
+    "d_tokens": -15,
+    "d_heartbeats": 35,
+    "diff": "-  intro d e f h\n-  have hd := (hrelation d e).mp h.1 |>.2\n-  have he := (hrelation e f).mp h.2 |>.2\n+  intro d e f ⟨hd, he⟩\n+  rw [hrelation] at hd he\n-  have hs := Finset.dvd_sum (s := Finset.univ) (fun i _ => hd i)\n+  have hs := Finset.dvd_sum (s := Finset.univ) (fun i _ => hd.2 i)\n-  convert dvd_sub (dvd_sub hs (dvd_add (hd i) (he i))) (dvd_mul_right 7 (digits_to_num d)) using 1\n+  convert dvd_sub (dvd_sub hs (dvd_add (hd.2 i) (he.2 i))) (dvd_mul_right 7 (digits_to_num d)) using 1"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 29,
+    "d_score": 0.05,
+    "d_tokens": -2,
+    "d_heartbeats": -17,
+    "diff": "-    Finset.sum_const, Finset.card_fin, nsmul_eq_mul, ← congrFun hdigits_to_num] at hs\n+    Finset.sum_const, Finset.card_fin, ← congrFun hdigits_to_num] at hs"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 32,
+    "d_score": 0.06,
+    "d_tokens": -5,
+    "d_heartbeats": -7,
+    "diff": "-  rw [hrelation] at hd he\n-  simp only [swap] at hd he\n+  simp only [hrelation, swap] at hd he"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 3,
+    "d_score": 0.01,
+    "d_tokens": 0,
+    "d_heartbeats": -3,
+    "diff": "-    rw [hdigits_to_num, ← sub_eq_iff_eq_add', ← Finset.sum_sub_distrib]\n+    subst digits_to_num\n+    rw [← sub_eq_iff_eq_add', ← Finset.sum_sub_distrib]"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 6,
+    "d_score": 0.07,
+    "d_tokens": 17,
+    "d_heartbeats": -88,
+    "diff": "-  convert dvd_sub (dvd_sub hs (dvd_add (hd.2 i) (he.2 i))) (dvd_mul_right 7 (digits_to_num d)) using 1\n+  have h := dvd_sub (dvd_sub hs (dvd_add (hd.2 i) (he.2 i))) (dvd_mul_right 7 (digits_to_num d))\n+  refine (congrArg (fun z : ℤ => 7 ∣ z) ?_).mpr h"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 7,
+    "d_score": 0.02,
+    "d_tokens": 0,
+    "d_heartbeats": -12,
+    "diff": "-  refine (congrArg (fun z : ℤ => 7 ∣ z) ?_).mpr h\n+  refine Eq.mp (congrArg (fun z : ℤ => 7 ∣ z) ?_) h"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 8,
+    "d_score": 0.06,
+    "d_tokens": -8,
+    "d_heartbeats": 5,
+    "diff": "-  have h := dvd_sub (dvd_sub hs (dvd_add (hd.2 i) (he.2 i))) (dvd_mul_right 7 (digits_to_num d))\n-  refine Eq.mp (congrArg (fun z : ℤ => 7 ∣ z) ?_) h\n+  refine Eq.mp (congrArg (7 ∣ ·) ?_) $ dvd_sub (dvd_sub hs (dvd_add (hd.2 i) (he.2 i))) (dvd_mul_right 7 (digits_to_num d))"
+   }
+  ]
+ },
+ "profile_cache": {
+  "42927bd84df6": {
+   "ok": true,
+   "total": 1319,
+   "floor": 202,
+   "reference": 14248,
+   "max_heartbeat_score": 32.86,
+   "blocks": [
+    {
+     "lines": "7-11",
+     "depth_indent": 2,
+     "text": "have swap (x y : Fin 9 → ℤ) (i : Fin 9) : digits_to_num (fun j => if j = i then y j else x j) = digi",
+     "heartbeats": 287
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "convert dvd_sub (dvd_sub hs (dvd_add (hd i) (he i))) (dvd_mul_right 7 (digits_to_num d)) using 1",
+     "heartbeats": 235
+    },
+    {
+     "lines": "23-23",
+     "depth_indent": 2,
+     "text": "ring1",
+     "heartbeats": 226
+    },
+    {
+     "lines": "17-18",
+     "depth_indent": 2,
+     "text": "simp only [Finset.sum_add_distrib, sub_mul, Finset.sum_sub_distrib, Finset.sum_const, Finset.card_fi",
+     "heartbeats": 167
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "have hs := Finset.dvd_sum (s := Finset.univ) (fun i _ => hd i)",
+     "heartbeats": 64
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "simp only [swap] at hd he",
+     "heartbeats": 57
+    },
+    {
+     "lines": "20-20",
+     "depth_indent": 2,
+     "text": "apply (show IsCoprime (7 : ℤ) 10 by decide).pow_right.dvd_of_dvd_mul_right",
+     "heartbeats": 35
+    },
+    {
+     "lines": "22-22",
+     "depth_indent": 2,
+     "text": "rw [hdigits_to_num]",
+     "heartbeats": 29
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "have he := (hrelation e f).mp h.2 |>.2",
+     "heartbeats": 8
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "have hd := (hrelation d e).mp h.1 |>.2",
+     "heartbeats": 7
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "intro d e f h",
+     "heartbeats": 1
+    },
+    {
+     "lines": "19-19",
+     "depth_indent": 2,
+     "text": "intro i",
+     "heartbeats": 1
+    }
+   ],
+   "points_left_heartbeats": 2.61,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "18f36927b50d": {
+   "ok": true,
+   "total": 1229,
+   "floor": 202,
+   "reference": 14248,
+   "max_heartbeat_score": 32.86,
+   "blocks": [
+    {
+     "lines": "7-11",
+     "depth_indent": 2,
+     "text": "have swap (x y : _ → ℤ) i : digits_to_num (fun j => if j = i then y j else x j) = digits_to_num x + ",
+     "heartbeats": 260
+    },
+    {
+     "lines": "19-19",
+     "depth_indent": 2,
+     "text": "convert dvd_sub (dvd_sub hs (dvd_add (hd.2 i) (he.2 i))) (dvd_mul_right 7 (digits_to_num d)) using 1",
+     "heartbeats": 237
+    },
+    {
+     "lines": "20-20",
+     "depth_indent": 2,
+     "text": "ring1",
+     "heartbeats": 212
+    },
+    {
+     "lines": "15-16",
+     "depth_indent": 2,
+     "text": "simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib, Finset.sum_const, Finset.card_fin, ← cong",
+     "heartbeats": 117
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "simp only [hrelation, swap] at hd he",
+     "heartbeats": 75
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "have hs := Finset.dvd_sum (s := Finset.univ) (fun i _ => hd.2 i)",
+     "heartbeats": 69
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "apply (show IsCoprime (7 : ℤ) 10 by decide).pow_right.dvd_of_dvd_mul_right",
+     "heartbeats": 35
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "intro d e f ⟨hd, he⟩",
+     "heartbeats": 22
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "intro i",
+     "heartbeats": 0
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 6,
+     "text": "digits_to_num (fun j => if j = i then y j else x j) =",
+     "heartbeats": null
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 6,
+     "text": "digits_to_num x + (y i * 10 ^ i.1 - x i * 10 ^ i.1) := by",
+     "heartbeats": null
+    }
+   ],
+   "points_left_heartbeats": 2.4,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "2e98c5411eea": {
+   "ok": true,
+   "total": 1131,
+   "floor": 202,
+   "reference": 14248,
+   "max_heartbeat_score": 32.86,
+   "blocks": [
+    {
+     "lines": "7-12",
+     "depth_indent": 2,
+     "text": "have swap (x y : _ → ℤ) i : digits_to_num (fun j => if j = i then y j else x j) = digits_to_num x + ",
+     "heartbeats": 259
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "ring1",
+     "heartbeats": 198
+    },
+    {
+     "lines": "20-20",
+     "depth_indent": 2,
+     "text": "refine Eq.mp (congrArg (7 ∣ ·) ?_) $ dvd_sub (dvd_sub hs (dvd_add (hd.2 i) (he.2 i))) (dvd_mul_right",
+     "heartbeats": 154
+    },
+    {
+     "lines": "16-17",
+     "depth_indent": 2,
+     "text": "simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib, Finset.sum_const, Finset.card_fin, ← cong",
+     "heartbeats": 116
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 4,
+     "text": "simp only [ite_mul, ite_sub, sub_self, Finset.sum_ite_eq', Finset.mem_univ, if_true]",
+     "heartbeats": 90
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "simp only [hrelation, swap] at hd he",
+     "heartbeats": 75
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "have hs := Finset.dvd_sum (s := Finset.univ) (fun i _ => hd.2 i)",
+     "heartbeats": 69
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 4,
+     "text": "rw [← sub_eq_iff_eq_add', ← Finset.sum_sub_distrib]",
+     "heartbeats": 61
+    },
+    {
+     "lines": "19-19",
+     "depth_indent": 2,
+     "text": "apply (show IsCoprime (7 : ℤ) 10 by decide).pow_right.dvd_of_dvd_mul_right",
+     "heartbeats": 35
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "intro d e f ⟨hd, he⟩",
+     "heartbeats": 22
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 4,
+     "text": "subst digits_to_num",
+     "heartbeats": 6
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "intro i",
+     "heartbeats": 1
+    }
+   ],
+   "points_left_heartbeats": 2.17,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "hb_floor": 202
+}

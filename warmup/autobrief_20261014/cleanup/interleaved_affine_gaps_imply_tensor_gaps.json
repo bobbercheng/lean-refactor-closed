@@ -1,0 +1,635 @@
+{
+ "problem": "interleaved_affine_gaps_imply_tensor_gaps",
+ "seed": {
+  "ok": true,
+  "tokens": 122,
+  "heartbeats": 1384,
+  "L": 90.98,
+  "H": 85.25,
+  "Z": 100.0,
+  "score": 92.08
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 122,
+    "heartbeats": 1384,
+    "Z": 100.0,
+    "score": 92.08
+   },
+   "after": {
+    "ok": true,
+    "tokens": 121,
+    "heartbeats": 1384,
+    "Z": 100.0,
+    "score": 92.1
+   },
+   "gain": 0.02,
+   "applied": {
+    "dollar": 1
+   },
+   "compiles": 7,
+   "seconds": 70.3
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 121,
+    "heartbeats": 1384,
+    "Z": 100.0,
+    "score": 92.1
+   },
+   "after": {
+    "ok": true,
+    "tokens": 121,
+    "heartbeats": 1359,
+    "Z": 100.0,
+    "score": 92.19
+   },
+   "gain": 0.09,
+   "applied": {
+    "rw2rewrite": 2
+   },
+   "compiles": 4,
+   "seconds": 81.8
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 121,
+    "heartbeats": 1359,
+    "Z": 100.0,
+    "score": 92.19
+   },
+   "after": {
+    "ok": true,
+    "tokens": 121,
+    "heartbeats": 1359,
+    "Z": 100.0,
+    "score": 92.19
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 2,
+   "seconds": 38.9
+  },
+  {
+   "pass": "lint_delete",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 121,
+    "heartbeats": 1359,
+    "Z": 100.0,
+    "score": 92.19
+   },
+   "after": {
+    "ok": true,
+    "tokens": 119,
+    "heartbeats": 1354,
+    "Z": 100.0,
+    "score": 92.26
+   },
+   "gain": 0.07,
+   "applied": {
+    "delsearch-arg": 1
+   },
+   "compiles": 22,
+   "seconds": 267.5
+  }
+ ],
+ "free_applied": [
+  "normalize",
+  "hb_rewrite",
+  "lint_delete"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 119,
+  "heartbeats": 1354,
+  "L": 91.2,
+  "H": 85.57,
+  "Z": 100.0,
+  "score": 92.26
+ },
+ "s0": "theorem interleaved_affine_gaps_imply_tensor_gaps\n    (hC_proximityGapAffineLines : e_ε_correlatedAgreementAffineLinesNat\n      (F := F) (A := A) (ι := ι) (C := MC) (e := e) (ε := ε))\n    (h_interleaved_gaps : ∀ m : ℕ, m ≥ 1 →\n      e_ε_correlatedAgreementAffineLinesNat (F := F)\n        (A := InterleavedSymbol A (Fin m)) (ι := ι) (C := MC ^⋈ (Fin m)) e ε) :\n    ∀ (ϑ : ℕ), (hϑ_gt_0 : ϑ > 0) → δ_ε_multilinearCorrelatedAgreement_Nat (F := F) (A := A)\n      (ι := ι) (C := MC) (ϑ := ϑ) (e := e) (ε := ε) := by\n  apply Nat.le_induction\n  · intro u hp\n    rewrite [show u = finMapTwoWords (u 0) (u 1) from funext (Fin.forall_fin_two.2 ⟨rfl, rfl⟩)]\n    apply hC_proximityGapAffineLines\n    rewrite [← @prob_uniform_singleton_finFun_eq F _ ⟨0⟩]\n    simpa only [multilinearCombine₁_eq_affineLineEvaluation,\n      Nat.cast_one, ENNReal.coe_one, one_mul, ENNReal.coe_natCast] using hp\n  · intro n hn ih u hp\n    apply CA_split_rowwise_implies_CA _ u\n    apply h_interleaved_gaps _ Nat.one_le_two_pow\n    refine lt_of_le_of_lt' ?_ $ prob_R_star_gt_threshold MC u e ?_\n    · apply Pr_le_Pr_of_implies\n      intro r hmem\n      exact correlatedAgreement_of_mem_R_star_tensor MC ih u ⟨r, hmem⟩\n    · simp only [← prob_split_last_uniform_sampling_of_finFun,\n        multilinearCombine_affineComb_split_last_close, ← Fin.init_def,\n        ← multilinearCombine_recursive_form, ENNReal.coe_mul]\n      exact hp",
+ "exchange": [
+  0.025,
+  0.355
+ ],
+ "profile": {
+  "ok": true,
+  "total": 1354,
+  "floor": null,
+  "reference": 9381,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "9-9",
+    "depth_indent": 2,
+    "text": "apply Nat.le_induction",
+    "heartbeats": null
+   },
+   {
+    "lines": "10-15",
+    "depth_indent": 2,
+    "text": "· intro u hp rewrite [show u = finMapTwoWords (u 0) (u 1) from funext (Fin.forall_fin_two.2 ⟨rfl, rf",
+    "heartbeats": null
+   },
+   {
+    "lines": "16-26",
+    "depth_indent": 2,
+    "text": "· intro n hn ih u hp apply CA_split_rowwise_implies_CA _ u apply h_interleaved_gaps _ Nat.one_le_two",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 119,
+  "heartbeats": 1354,
+  "score": 92.26
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 1932,
+   "score": null,
+   "error": "1224:58: `grind` failed\ncase grind\nι : Type l\ninst : Fintype ι\ninst_1 : Nonempty ι\ninst_2 : DecidableEq ι\nF : Type\ninst_3 : CommRing F\ninst_4 : Fintype F\ninst_5"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 5229,
+   "score": null,
+   "error": "1224:55: unsolved goals\nι : Type l\ninst✝¹² : Fintype ι\ninst✝¹¹ : Nonempty ι\ninst✝¹⁰ : DecidableEq ι\nF : Type\ninst✝⁹ : CommRing F\ninst✝⁸ : Fintype F\ninst✝⁷ : NoZ"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 6396,
+   "score": null,
+   "error": "1224:55: unsolved goals\nι : Type l\ninst : Fintype ι\ninst_1 : Nonempty ι\ninst_2 : DecidableEq ι\nF : Type\ninst_3 : CommRing F\ninst_4 : Fintype F\ninst_5 : NoZeroDi"
+  },
+  {
+   "kind": "closer",
+   "line": 9,
+   "label": "replace the bullet at line 9 (`· intro n hn ih u hp`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 62,
+   "heartbeats": 2230,
+   "score": null,
+   "error": "1232:4: `grind` failed\ncase grind\nι : Type l\ninst : Fintype ι\ninst_1 : Nonempty ι\ninst_2 : DecidableEq ι\nF : Type\ninst_3 : CommRing F\ninst_4 : Fintype F\ninst_5 "
+  },
+  {
+   "kind": "closer",
+   "line": 9,
+   "label": "replace the bullet at line 9 (`· intro n hn ih u hp`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 62,
+   "heartbeats": 5887,
+   "score": null,
+   "error": "1232:2: unsolved goals\ncase succ\nι : Type l\ninst✝¹² : Fintype ι\ninst✝¹¹ : Nonempty ι\ninst✝¹⁰ : DecidableEq ι\nF : Type\ninst✝⁹ : CommRing F\ninst✝⁸ : Fintype F\nins"
+  },
+  {
+   "kind": "closer",
+   "line": 9,
+   "label": "replace the bullet at line 9 (`· intro n hn ih u hp`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 62,
+   "heartbeats": 6837,
+   "score": null,
+   "error": "1232:2: unsolved goals\nι : Type l\ninst : Fintype ι\ninst_1 : Nonempty ι\ninst_2 : DecidableEq ι\nF : Type\ninst_3 : CommRing F\ninst_4 : Fintype F\ninst_5 : NoZeroDiv"
+  },
+  {
+   "kind": "closer",
+   "line": 3,
+   "label": "replace the bullet at line 3 (`· intro u hp`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 64,
+   "heartbeats": 2133,
+   "score": null,
+   "error": "1226:4: `grind` failed\ncase grind\nι : Type l\ninst : Fintype ι\ninst_1 : Nonempty ι\ninst_2 : DecidableEq ι\nF : Type\ninst_3 : CommRing F\ninst_4 : Fintype F\ninst_5 "
+  },
+  {
+   "kind": "closer",
+   "line": 3,
+   "label": "replace the bullet at line 3 (`· intro u hp`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 64,
+   "heartbeats": 5231,
+   "score": null,
+   "error": "1226:2: unsolved goals\ncase base\nι : Type l\ninst✝¹² : Fintype ι\ninst✝¹¹ : Nonempty ι\ninst✝¹⁰ : DecidableEq ι\nF : Type\ninst✝⁹ : CommRing F\ninst✝⁸ : Fintype F\nins"
+  },
+  {
+   "kind": "closer",
+   "line": 3,
+   "label": "replace the bullet at line 3 (`· intro u hp`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 64,
+   "heartbeats": 6700,
+   "score": null,
+   "error": "1226:2: unsolved goals\nι : Type l\ninst : Fintype ι\ninst_1 : Nonempty ι\ninst_2 : DecidableEq ι\nF : Type\ninst_3 : CommRing F\ninst_4 : Fintype F\ninst_5 : NoZeroDiv"
+  },
+  {
+   "kind": "closer",
+   "line": 16,
+   "label": "replace the bullet at line 16 (`· simp only [← prob_split_last_uniform_…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 102,
+   "heartbeats": 10374,
+   "score": null,
+   "error": "1239:6: `grind` failed\ncase grind\nι : Type l\ninst : Fintype ι\ninst_1 : Nonempty ι\ninst_2 : DecidableEq ι\nF : Type\ninst_3 : CommRing F\ninst_4 : Fintype F\ninst_5 "
+  },
+  {
+   "kind": "closer",
+   "line": 16,
+   "label": "replace the bullet at line 16 (`· simp only [← prob_split_last_uniform_…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 102,
+   "heartbeats": 8760,
+   "score": null,
+   "error": "1239:4: unsolved goals\ncase succ.refine_2\nι : Type l\ninst✝¹² : Fintype ι\ninst✝¹¹ : Nonempty ι\ninst✝¹⁰ : DecidableEq ι\nF : Type\ninst✝⁹ : CommRing F\ninst✝⁸ : Fint"
+  },
+  {
+   "kind": "closer",
+   "line": 16,
+   "label": "replace the bullet at line 16 (`· simp only [← prob_split_last_uniform_…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 102,
+   "heartbeats": 11537,
+   "score": null,
+   "error": "1239:4: unsolved goals\nι : Type l\ninst : Fintype ι\ninst_1 : Nonempty ι\ninst_2 : DecidableEq ι\nF : Type\ninst_3 : CommRing F\ninst_4 : Fintype F\ninst_5 : NoZeroDiv"
+  },
+  {
+   "kind": "closer",
+   "line": 13,
+   "label": "replace the bullet at line 13 (`· apply Pr_le_Pr_of_implies`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 105,
+   "heartbeats": 10912,
+   "score": null,
+   "error": "1236:6: `grind` failed\ncase grind.2\nι : Type l\ninst : Fintype ι\ninst_1 : Nonempty ι\ninst_2 : DecidableEq ι\nF : Type\ninst_3 : CommRing F\ninst_4 : Fintype F\ninst_"
+  },
+  {
+   "kind": "closer",
+   "line": 13,
+   "label": "replace the bullet at line 13 (`· apply Pr_le_Pr_of_implies`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 105,
+   "heartbeats": 8239,
+   "score": null,
+   "error": "1236:4: unsolved goals\ncase succ.refine_1\nι : Type l\ninst✝¹² : Fintype ι\ninst✝¹¹ : Nonempty ι\ninst✝¹⁰ : DecidableEq ι\nF : Type\ninst✝⁹ : CommRing F\ninst✝⁸ : Fint"
+  },
+  {
+   "kind": "closer",
+   "line": 13,
+   "label": "replace the bullet at line 13 (`· apply Pr_le_Pr_of_implies`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 105,
+   "heartbeats": 11159,
+   "score": null,
+   "error": "1236:4: unsolved goals\nι : Type l\ninst : Fintype ι\ninst_1 : Nonempty ι\ninst_2 : DecidableEq ι\nF : Type\ninst_3 : CommRing F\ninst_4 : Fintype F\ninst_5 : NoZeroDiv"
+  },
+  {
+   "kind": "closer",
+   "line": 8,
+   "label": "replace the closing tactic at line 8 (`Nat.cast_one, ENNReal.coe_one, one_mul,…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 110,
+   "heartbeats": null,
+   "score": null,
+   "error": "1231:11: unexpected token '·'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 8,
+   "label": "replace the closing tactic at line 8 (`Nat.cast_one, ENNReal.coe_one, one_mul,…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 110,
+   "heartbeats": null,
+   "score": null,
+   "error": "1231:14: unexpected token '·'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 8,
+   "label": "replace the closing tactic at line 8 (`Nat.cast_one, ENNReal.coe_one, one_mul,…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 110,
+   "heartbeats": null,
+   "score": null,
+   "error": "1231:11: unexpected token '·'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 15,
+   "label": "replace the closing tactic at line 15 (`exact correlatedAgreement_of_mem_R_star…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 110,
+   "heartbeats": 13265,
+   "score": null,
+   "error": "1238:6: `grind` failed\ncase grind\nι : Type l\ninst : Fintype ι\ninst_1 : Nonempty ι\ninst_2 : DecidableEq ι\nF : Type\ninst_3 : CommRing F\ninst_4 : Fintype F\ninst_5 "
+  },
+  {
+   "kind": "closer",
+   "line": 15,
+   "label": "replace the closing tactic at line 15 (`exact correlatedAgreement_of_mem_R_star…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 110,
+   "heartbeats": 7815,
+   "score": null,
+   "error": "1236:4: unsolved goals\ncase succ.refine_1\nι : Type l\ninst✝¹² : Fintype ι\ninst✝¹¹ : Nonempty ι\ninst✝¹⁰ : DecidableEq ι\nF : Type\ninst✝⁹ : CommRing F\ninst✝⁸ : Fint"
+  },
+  {
+   "kind": "closer",
+   "line": 15,
+   "label": "replace the closing tactic at line 15 (`exact correlatedAgreement_of_mem_R_star…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 110,
+   "heartbeats": 18434,
+   "score": null,
+   "error": "1236:4: unsolved goals\nι : Type l\ninst : Fintype ι\ninst_1 : Nonempty ι\ninst_2 : DecidableEq ι\nF : Type\ninst_3 : CommRing F\ninst_4 : Fintype F\ninst_5 : NoZeroDiv"
+  },
+  {
+   "kind": "closer",
+   "line": 18,
+   "label": "replace the closing tactic at line 18 (`← multilinearCombine_recursive_form, EN…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 115,
+   "heartbeats": null,
+   "score": null,
+   "error": "1243:0: unexpected end of input; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 18,
+   "label": "replace the closing tactic at line 18 (`← multilinearCombine_recursive_form, EN…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 115,
+   "heartbeats": null,
+   "score": null,
+   "error": "1243:0: unexpected end of input; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 18,
+   "label": "replace the closing tactic at line 18 (`← multilinearCombine_recursive_form, EN…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 115,
+   "heartbeats": null,
+   "score": null,
+   "error": "1243:0: unexpected end of input; expected ']'"
+  },
+  {
+   "kind": "del-arg",
+   "line": 7,
+   "label": "delete `multilinearCombine₁_eq_affineLineEvaluation` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 117,
+   "heartbeats": 5370,
+   "score": null,
+   "error": "1230:4: Type mismatch: After simplification, term\n  hp\n has type\n  (do\n        let r ← $ᵖ (Fin (Nat.succ 0) → F)\n        pure (Δ₀(multilinearCombine u r, ↑MC) ≤"
+  },
+  {
+   "kind": "del-arg",
+   "line": 8,
+   "label": "delete `Nat.cast_one` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 117,
+   "heartbeats": 1325,
+   "score": null,
+   "error": "1230:4: Type mismatch: After simplification, term\n  hp\n has type\n  (do\n        let r ← $ᵖ (Fin (Nat.succ 0) → F)\n        pure (Δ₀(affineLineEvaluation (u 0) (u "
+  },
+  {
+   "kind": "del-arg",
+   "line": 8,
+   "label": "delete `ENNReal.coe_one` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 117,
+   "heartbeats": 1355,
+   "score": null,
+   "error": "1230:4: Type mismatch: After simplification, term\n  hp\n has type\n  (do\n        let r ← $ᵖ (Fin (Nat.succ 0) → F)\n        pure (Δ₀(affineLineEvaluation (u 0) (u "
+  },
+  {
+   "kind": "del-arg",
+   "line": 8,
+   "label": "delete `one_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 117,
+   "heartbeats": 1355,
+   "score": null,
+   "error": "1230:4: Type mismatch: After simplification, term\n  hp\n has type\n  (do\n        let r ← $ᵖ (Fin (Nat.succ 0) → F)\n        pure (Δ₀(affineLineEvaluation (u 0) (u "
+  },
+  {
+   "kind": "del-arg",
+   "line": 8,
+   "label": "delete `ENNReal.coe_natCast` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 117,
+   "heartbeats": 1335,
+   "score": null,
+   "error": "1230:4: Type mismatch: After simplification, term\n  hp\n has type\n  @GT.gt ENNReal ENNReal.instPartialOrder.toLT\n    ((do\n        let r ← $ᵖ (Fin (Nat.succ 0) → "
+  },
+  {
+   "kind": "del-arg",
+   "line": 16,
+   "label": "delete `← prob_split_last_uniform_sampling_of_finFun` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 116,
+   "heartbeats": 1301,
+   "score": null,
+   "error": "1241:6: Type mismatch\n  hp\nhas type\n  (do\n        let r ← $ᵖ (Fin (n + 1) → F)\n        pure (Δ₀(multilinearCombine u r, ↑MC) ≤ ↑e))\n      True >\n    ↑↑(n + 1) *"
+  },
+  {
+   "kind": "del-arg",
+   "line": 17,
+   "label": "delete `multilinearCombine_affineComb_split_last_close` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 117,
+   "heartbeats": 5448,
+   "score": null,
+   "error": "1241:6: Type mismatch\n  hp\nhas type\n  (do\n        let r ← $ᵖ (Fin (n + 1) → F)\n        pure (Δ₀(multilinearCombine u r, ↑MC) ≤ ↑e))\n      True >\n    ↑↑(n + 1) *"
+  },
+  {
+   "kind": "del-arg",
+   "line": 17,
+   "label": "delete `← Fin.init_def` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 116,
+   "heartbeats": 5433,
+   "score": null,
+   "error": "1242:6: Type mismatch\n  hp\nhas type\n  (do\n        let r ← $ᵖ (Fin (n + 1) → F)\n        pure (Δ₀(multilinearCombine u r, ↑MC) ≤ ↑e))\n      True >\n    ↑↑(n + 1) *"
+  },
+  {
+   "kind": "del-arg",
+   "line": 18,
+   "label": "delete `← multilinearCombine_recursive_form` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 116,
+   "heartbeats": 5443,
+   "score": null,
+   "error": "1241:6: Type mismatch\n  hp\nhas type\n  (do\n        let r ← $ᵖ (Fin (n + 1) → F)\n        pure (Δ₀(multilinearCombine u r, ↑MC) ≤ ↑e))\n      True >\n    ↑↑(n + 1) *"
+  },
+  {
+   "kind": "del-arg",
+   "line": 18,
+   "label": "delete `ENNReal.coe_mul` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 117,
+   "heartbeats": 1359,
+   "score": 92.29,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": 5,
+   "d_score": 0.03
+  },
+  {
+   "kind": "del-tac",
+   "line": 4,
+   "label": "delete the tactic `rewrite [show u = finMapTwoWords (u 0) (u 1) from…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 94,
+   "heartbeats": 200003,
+   "score": null,
+   "error": "1227:4: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limi"
+  },
+  {
+   "kind": "del-tac",
+   "line": 6,
+   "label": "delete the tactic `rewrite [← @prob_uniform_singleton_finFun_eq F _ …`",
+   "closer": "",
+   "ok": false,
+   "tokens": 108,
+   "heartbeats": 1286,
+   "score": null,
+   "error": "1229:4: Type mismatch: After simplification, term\n  hp\n has type\n  (do\n        let r ← $ᵖ (Fin (Nat.succ 0) → F)\n        pure (Δ₀(affineLineEvaluation (u 0) (u "
+  },
+  {
+   "kind": "del-tac",
+   "line": 2,
+   "label": "delete the tactic `apply Nat.le_induction`",
+   "closer": "",
+   "ok": false,
+   "tokens": 117,
+   "heartbeats": 980,
+   "score": null,
+   "error": "1226:38: Function expected at\n  u\nbut this term has type\n  ℕ\n\nNote: Expected a function because this term is being applied to the argument\n  0"
+  },
+  {
+   "kind": "del-tac",
+   "line": 5,
+   "label": "delete the tactic `apply hC_proximityGapAffineLines`",
+   "closer": "",
+   "ok": false,
+   "tokens": 117,
+   "heartbeats": 1178,
+   "score": null,
+   "error": "1228:13: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  (do\n      let r ← $ᵖ F\n      pure (?P r))\n    True\nin the target expression\n  join"
+  },
+  {
+   "kind": "del-tac",
+   "line": 10,
+   "label": "delete the tactic `apply CA_split_rowwise_implies_CA _ u`",
+   "closer": "",
+   "ok": false,
+   "tokens": 115,
+   "heartbeats": 1061,
+   "score": null,
+   "error": "1233:4: Tactic `apply` failed: could not unify the conclusion of `h_interleaved_gaps (2 ^ ?m.109) Nat.one_le_two_pow`\n  jointProximityNat₂ ↑(CodeInterleavable.i"
+  },
+  {
+   "kind": "del-tac",
+   "line": 11,
+   "label": "delete the tactic `apply h_interleaved_gaps _ Nat.one_le_two_pow`",
+   "closer": "",
+   "ok": false,
+   "tokens": 115,
+   "heartbeats": 1003,
+   "score": null,
+   "error": "1234:4: Type mismatch\n  lt_of_le_of_lt' ?m.121 (prob_R_star_gt_threshold MC u e ?m.133)\nhas type\n  ↑?m.131 / ↑(Fintype.card F) < ?m.118\nbut is expected to have "
+  },
+  {
+   "kind": "del-tac",
+   "line": 12,
+   "label": "delete the tactic `refine lt_of_le_of_lt' ?_ $ prob_R_star_gt_thresh…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 110,
+   "heartbeats": 994,
+   "score": null,
+   "error": "1235:6: Tactic `apply` failed: could not unify the conclusion of `@Pr_le_Pr_of_implies`\n  (do\n        let r ← ?D\n        pure (?f r))\n      True ≤\n    (do\n     "
+  },
+  {
+   "kind": "del-tac",
+   "line": 14,
+   "label": "delete the tactic `intro r hmem`",
+   "closer": "",
+   "ok": false,
+   "tokens": 116,
+   "heartbeats": 1204,
+   "score": null,
+   "error": "1237:62: Unknown identifier `r`"
+  }
+ ],
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 122 tokens, 1384 heartbeats, score 92.08. Free passes applied (normalize, hb_rewrite, lint_delete): start candidate 119 tokens, 1354 heartbeats, score 92.26.\n- Exchange rate here: 1 token = 0.025 points, 100 heartbeats = 0.355 points.\n- Deletions that FAIL (needed as they stand): line 7 `multilinearCombine₁_eq_affineLineEvaluation` from the simp list; line 8 `Nat.cast_one` from the simp list; line 8 `ENNReal.coe_one` from the simp list; line 8 `one_mul` from the simp list; line 8 `ENNReal.coe_natCast` from the simp list; line 16 `← prob_split_last_uniform_sampling_of_finFun` from the simp list.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 9 (`· intro n hn ih u hp`) (grind/simp_all/aesop); the bullet at line 3 (`· intro u hp`) (grind/simp_all/aesop); the bullet at line 16 (`· simp only [← prob_split_last_uniform_…`) (grind/simp_all/aesop); the bullet at line 13 (`· apply Pr_le_Pr_of_implies`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 92.26,
+ "gain": 0.18,
+ "compiles_sweep": 42,
+ "seconds": 769.7,
+ "source": "best:3a6f0b940083"
+}

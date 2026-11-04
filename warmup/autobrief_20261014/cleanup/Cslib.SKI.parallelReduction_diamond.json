@@ -1,0 +1,513 @@
+{
+ "problem": "Cslib.SKI.parallelReduction_diamond",
+ "seed": {
+  "ok": true,
+  "tokens": 151,
+  "heartbeats": 415,
+  "L": 62.9,
+  "H": 70.82,
+  "Z": 100.0,
+  "score": 77.91
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 151,
+    "heartbeats": 415,
+    "Z": 100.0,
+    "score": 77.91
+   },
+   "after": {
+    "ok": true,
+    "tokens": 150,
+    "heartbeats": 415,
+    "Z": 100.0,
+    "score": 77.99
+   },
+   "gain": 0.08,
+   "applied": {
+    "dollar": 1
+   },
+   "compiles": 9,
+   "seconds": 11.2
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 150,
+    "heartbeats": 415,
+    "Z": 100.0,
+    "score": 77.99
+   },
+   "after": {
+    "ok": true,
+    "tokens": 150,
+    "heartbeats": 415,
+    "Z": 100.0,
+    "score": 77.99
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 5,
+   "seconds": 10.4
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no sites",
+   "before": {
+    "ok": true,
+    "tokens": 150,
+    "heartbeats": 416,
+    "Z": 100.0,
+    "score": 77.96
+   },
+   "after": {
+    "ok": true,
+    "tokens": 150,
+    "heartbeats": 416,
+    "Z": 100.0,
+    "score": 77.96
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 1,
+   "seconds": 5.0
+  },
+  {
+   "pass": "lint_delete",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 150,
+    "heartbeats": 415,
+    "Z": 100.0,
+    "score": 77.99
+   },
+   "after": {
+    "ok": true,
+    "tokens": 150,
+    "heartbeats": 415,
+    "Z": 100.0,
+    "score": 77.99
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 13,
+   "seconds": 20.8
+  }
+ ],
+ "free_applied": [
+  "normalize"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 150,
+  "heartbeats": 416,
+  "L": 63.14,
+  "H": 70.75,
+  "Z": 100.0,
+  "score": 77.96
+ },
+ "s0": "theorem parallelReduction_diamond : Diamond ParallelReduction := by\n  intro a a₁ a₂ h₁ h₂\n  induction h₁ generalizing a₂\n  case refl => use a₂, h₂, ParallelReduction.refl _\n  case' par ha hb iha ihb => skip\n  all_goals cases h₂\n  case par.par ha' hb' =>\n    specialize iha ha'\n    specialize ihb hb'\n    exact ⟨_, iha.choose_spec.1.par ihb.choose_spec.1, iha.choose_spec.2.par ihb.choose_spec.2⟩\n  case' par.red_I | par.red_K | par.red_S => apply symm\n  case par.red_I | red_I.par ha hb =>\n    cases ha\n    exact ⟨_, hb, .red_I _⟩\n  case par.red_K | red_K.par ha hc =>\n    apply Ka_irreducible at ha\n    exact ha.choose_spec.2.symm ▸ ⟨_, ha.choose_spec.1, .red_K ..⟩\n  case par.red_S | red_S.par ha hb =>\n    have := (Sab_irreducible _ _ _ ha).choose_spec.choose_spec\n    apply this.2.2.symm.subst\n    exact ⟨_, (this.1.par hb).par $ this.2.1.par hb, .red_S ..⟩\n  all_goals\n    refine ⟨_, .refl _, ?_⟩\n    constructor <;> assumption",
+ "exchange": [
+  0.082,
+  2.344
+ ],
+ "profile": {
+  "ok": true,
+  "total": 416,
+  "floor": null,
+  "reference": 1422,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "2-2",
+    "depth_indent": 2,
+    "text": "intro a a₁ a₂ h₁ h₂",
+    "heartbeats": null
+   },
+   {
+    "lines": "3-3",
+    "depth_indent": 2,
+    "text": "induction h₁ generalizing a₂",
+    "heartbeats": null
+   },
+   {
+    "lines": "4-4",
+    "depth_indent": 2,
+    "text": "case refl => use a₂, h₂, ParallelReduction.refl _",
+    "heartbeats": null
+   },
+   {
+    "lines": "5-5",
+    "depth_indent": 2,
+    "text": "case' par ha hb iha ihb => skip",
+    "heartbeats": null
+   },
+   {
+    "lines": "6-6",
+    "depth_indent": 2,
+    "text": "all_goals cases h₂",
+    "heartbeats": null
+   },
+   {
+    "lines": "7-10",
+    "depth_indent": 2,
+    "text": "case par.par ha' hb' => specialize iha ha' specialize ihb hb' exact ⟨_, iha.choose_spec.1.par ihb.ch",
+    "heartbeats": null
+   },
+   {
+    "lines": "11-11",
+    "depth_indent": 2,
+    "text": "case' par.red_I | par.red_K | par.red_S => apply symm",
+    "heartbeats": null
+   },
+   {
+    "lines": "12-14",
+    "depth_indent": 2,
+    "text": "case par.red_I | red_I.par ha hb => cases ha exact ⟨_, hb, .red_I _⟩",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 150,
+  "heartbeats": 415,
+  "score": 77.99
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 11,
+   "score": null,
+   "error": "151:68: `grind` failed\ncase grind\na b c : SKI\nh : a ⭢ₚ b\nh_1 : a ⭢ₚ c\nh_2 : ¬Join ParallelReduction b c\n⊢ False\n[grind] Goal diagnostics\n  [facts] Asserted fact"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 58,
+   "score": null,
+   "error": "151:68: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 169,
+   "score": null,
+   "error": "151:68: Tactic `aesop` failed, made no progress\nInitial goal:\n  ⊢ Diamond ParallelReduction"
+  },
+  {
+   "kind": "closer",
+   "line": 10,
+   "label": "replace the closing tactic at line 10 (`exact ⟨_, iha.choose_spec.1.par ihb.cho…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 141,
+   "heartbeats": 406,
+   "score": null,
+   "error": "160:4: `grind` failed\ncase grind\na a₁ a_1 a' b b' : SKI\nha : a_1 ⭢ₚ a'\nhb : b ⭢ₚ b'\na'_1 : SKI\niha : Join ParallelReduction a' a'_1\nb'_1 : SKI\nihb : Join Parall"
+  },
+  {
+   "kind": "closer",
+   "line": 10,
+   "label": "replace the closing tactic at line 10 (`exact ⟨_, iha.choose_spec.1.par ihb.cho…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 141,
+   "heartbeats": 407,
+   "score": null,
+   "error": "160:4: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 10,
+   "label": "replace the closing tactic at line 10 (`exact ⟨_, iha.choose_spec.1.par ihb.cho…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 141,
+   "heartbeats": 487,
+   "score": null,
+   "error": "160:4: Tactic `aesop` failed, made no progress\nInitial goal:\n  a a₁ a✝ a'✝¹ b✝ b'✝¹ : SKI\n  ha : a✝ ⭢ₚ a'✝¹\n  hb : b✝ ⭢ₚ b'✝¹\n  a'✝ : SKI\n  iha : Join ParallelR"
+  },
+  {
+   "kind": "closer",
+   "line": 17,
+   "label": "replace the closing tactic at line 17 (`exact ha.choose_spec.2.symm ▸ ⟨_, ha.ch…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 140,
+   "heartbeats": 444,
+   "score": null,
+   "error": "167:4: `grind` failed\ncase grind\na a₁ a' b b' : SKI\nhb : b ⭢ₚ b'\nihb : ∀ {a₂ : SKI}, b ⭢ₚ a₂ → Join ParallelReduction b' a₂\na₂ : SKI\niha : ∀ {a₂_1 : SKI}, (K ⬝ "
+  },
+  {
+   "kind": "closer",
+   "line": 17,
+   "label": "replace the closing tactic at line 17 (`exact ha.choose_spec.2.symm ▸ ⟨_, ha.ch…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 140,
+   "heartbeats": 580,
+   "score": null,
+   "error": "167:4: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 17,
+   "label": "replace the closing tactic at line 17 (`exact ha.choose_spec.2.symm ▸ ⟨_, ha.ch…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 140,
+   "heartbeats": 894,
+   "score": null,
+   "error": "165:35: unsolved goals\na a₁ b b' : SKI\nhb : b ⭢ₚ b'\nihb : ∀ {a₂ : SKI}, b ⭢ₚ a₂ → Join ParallelReduction b' a₂\na₂ w : SKI\nleft : a₂ ⭢ₚ w\niha : ∀ {a₂_1 : SKI}, ("
+  },
+  {
+   "kind": "closer",
+   "line": 21,
+   "label": "replace the closing tactic at line 21 (`exact ⟨_, (this.1.par hb).par $ this.2.…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 135,
+   "heartbeats": 750,
+   "score": null,
+   "error": "171:4: `grind` failed\ncase grind.1\na a₁ a' b b' : SKI\nhb : b ⭢ₚ b'\nihb : ∀ {a₂ : SKI}, b ⭢ₚ a₂ → Join ParallelReduction b' a₂\na_1 b_1 : SKI\nha : (S ⬝ a_1 ⬝ b_1)"
+  },
+  {
+   "kind": "closer",
+   "line": 21,
+   "label": "replace the closing tactic at line 21 (`exact ⟨_, (this.1.par hb).par $ this.2.…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 135,
+   "heartbeats": 1172,
+   "score": null,
+   "error": "171:4: Tactic `simp` failed with a nested error:\nmaximum recursion depth has been reached\nuse `set_option maxRecDepth <num>` to increase limit\nuse `set_option d"
+  },
+  {
+   "kind": "closer",
+   "line": 21,
+   "label": "replace the closing tactic at line 21 (`exact ⟨_, (this.1.par hb).par $ this.2.…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 135,
+   "heartbeats": 1430,
+   "score": null,
+   "error": "171:4: Tactic `simp` failed with a nested error:\nmaximum recursion depth has been reached\nuse `set_option maxRecDepth <num>` to increase limit\nuse `set_option d"
+  },
+  {
+   "kind": "closer",
+   "line": 24,
+   "label": "replace the closing tactic at line 24 (`constructor <;> assumption`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 148,
+   "heartbeats": 470,
+   "score": null,
+   "error": "174:4: `grind` failed\ncase grind\na a₁ a_1 a' b b' : SKI\nha : a_1 ⭢ₚ a'\nhb : b ⭢ₚ b'\niha : ∀ {a₂ : SKI}, a_1 ⭢ₚ a₂ → Join ParallelReduction a' a₂\nihb : ∀ {a₂ : S"
+  },
+  {
+   "kind": "closer",
+   "line": 24,
+   "label": "replace the closing tactic at line 24 (`constructor <;> assumption`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 148,
+   "heartbeats": 510,
+   "score": null,
+   "error": "174:4: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 24,
+   "label": "replace the closing tactic at line 24 (`constructor <;> assumption`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 148,
+   "heartbeats": 824,
+   "score": null,
+   "error": "174:4: Tactic `aesop` failed, made no progress\nInitial goal:\n  case par.refl\n  a a₁ a✝ a'✝ b✝ b'✝ : SKI\n  ha : a✝ ⭢ₚ a'✝\n  hb : b✝ ⭢ₚ b'✝\n  iha : ∀ {a₂ : SKI}, "
+  },
+  {
+   "kind": "closer",
+   "line": 14,
+   "label": "replace the closing tactic at line 14 (`exact ⟨_, hb, .red_I _⟩`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 142,
+   "heartbeats": 431,
+   "score": null,
+   "error": "164:4: `grind` failed\ncase grind\na a₁ b b' : SKI\nhb : b ⭢ₚ b'\nihb : ∀ {a₂ : SKI}, b ⭢ₚ a₂ → Join ParallelReduction b' a₂\niha : ∀ {a₂ : SKI}, I ⭢ₚ a₂ → Join Para"
+  },
+  {
+   "kind": "closer",
+   "line": 14,
+   "label": "replace the closing tactic at line 14 (`exact ⟨_, hb, .red_I _⟩`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 142,
+   "heartbeats": 497,
+   "score": null,
+   "error": "164:4: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 14,
+   "label": "replace the closing tactic at line 14 (`exact ⟨_, hb, .red_I _⟩`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 142,
+   "heartbeats": 615,
+   "score": null,
+   "error": "164:4: Tactic `aesop` failed, made no progress\nInitial goal:\n  case refl\n  a a₁ b✝ b'✝ : SKI\n  hb : b✝ ⭢ₚ b'✝\n  ihb : ∀ {a₂ : SKI}, b✝ ⭢ₚ a₂ → Join ParallelRedu"
+  },
+  {
+   "kind": "del-tac",
+   "line": 6,
+   "label": "delete the tactic `all_goals cases h₂`",
+   "closer": "",
+   "ok": false,
+   "tokens": 147,
+   "heartbeats": 24,
+   "score": null,
+   "error": "156:2: Case tag `par.par` not found.\n\nHint: Available tags:\n  • `par`: par.̵p̵a̵r̵\n  • `red_I`: p̵a̵r̵.̵p̵a̵r̵r̲e̲d̲_̲I̲\n  • `red_K`: p̵a̵r̵.̵p̵a̵r̵r̲e̲d̲_̲K̲\n "
+  },
+  {
+   "kind": "del-tac",
+   "line": 19,
+   "label": "delete the tactic `have := (Sab_irreducible _ _ _ ha).choose_spec.ch…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 140,
+   "heartbeats": 361,
+   "score": null,
+   "error": "169:10: Unknown identifier `this`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 2,
+   "label": "delete the tactic `intro a a₁ a₂ h₁ h₂`",
+   "closer": "",
+   "ok": false,
+   "tokens": 144,
+   "heartbeats": 6,
+   "score": null,
+   "error": "152:12: Unknown identifier `h₁`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 3,
+   "label": "delete the tactic `induction h₁ generalizing a₂`",
+   "closer": "",
+   "ok": false,
+   "tokens": 146,
+   "heartbeats": 7,
+   "score": null,
+   "error": "153:2: Case tag `refl` not found.\n\nNote: There are no cases to select."
+  },
+  {
+   "kind": "del-tac",
+   "line": 8,
+   "label": "delete the tactic `specialize iha ha'`",
+   "closer": "",
+   "ok": false,
+   "tokens": 147,
+   "heartbeats": 400,
+   "score": null,
+   "error": "159:18: Invalid field `choose_spec`: The environment does not contain `Function.choose_spec`, so it is not possible to project the field `choose_spec` from an e"
+  },
+  {
+   "kind": "del-tac",
+   "line": 9,
+   "label": "delete the tactic `specialize ihb hb'`",
+   "closer": "",
+   "ok": false,
+   "tokens": 147,
+   "heartbeats": 409,
+   "score": null,
+   "error": "159:40: Invalid field `choose_spec`: The environment does not contain `Function.choose_spec`, so it is not possible to project the field `choose_spec` from an e"
+  },
+  {
+   "kind": "del-tac",
+   "line": 13,
+   "label": "delete the tactic `cases ha`",
+   "closer": "",
+   "ok": false,
+   "tokens": 148,
+   "heartbeats": 441,
+   "score": null,
+   "error": "163:18: Application type mismatch: The argument\n  ParallelReduction.red_I ?m.858\nhas type\n  (I ⬝ ?m.858) ⭢ₚ ?m.858\nbut is expected to have type\n  (a'✝ ⬝ b'✝) ⭢ₚ"
+  },
+  {
+   "kind": "del-tac",
+   "line": 16,
+   "label": "delete the tactic `apply Ka_irreducible at ha`",
+   "closer": "",
+   "ok": false,
+   "tokens": 146,
+   "heartbeats": 386,
+   "score": null,
+   "error": "166:13: Invalid field `choose_spec`: The environment does not contain `Cslib.SKI.ParallelReduction.choose_spec`, so it is not possible to project the field `cho"
+  },
+  {
+   "kind": "del-tac",
+   "line": 20,
+   "label": "delete the tactic `apply this.2.2.symm.subst`",
+   "closer": "",
+   "ok": false,
+   "tokens": 148,
+   "heartbeats": 467,
+   "score": null,
+   "error": "170:53: Application type mismatch: The argument\n  ParallelReduction.red_S ?m.1078 ?m.1079 ?m.1080\nhas type\n  (S ⬝ ?m.1078 ⬝ ?m.1079 ⬝ ?m.1080) ⭢ₚ ?m.1078 ⬝ ?m.1"
+  },
+  {
+   "kind": "del-tac",
+   "line": 23,
+   "label": "delete the tactic `refine ⟨_, .refl _, ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 141,
+   "heartbeats": 376,
+   "score": null,
+   "error": "173:20: Tactic `assumption` failed\n\ncase par.refl.h\na a₁ a✝ a'✝ b✝ b'✝ : SKI\nha : a✝ ⭢ₚ a'✝\nhb : b✝ ⭢ₚ b'✝\niha : ∀ {a₂ : SKI}, a✝ ⭢ₚ a₂ → Join ParallelReduction"
+  },
+  {
+   "kind": "del-tac",
+   "line": 24,
+   "label": "delete the tactic `constructor <;> assumption`",
+   "closer": "",
+   "ok": false,
+   "tokens": 147,
+   "heartbeats": 400,
+   "score": null,
+   "error": "151:65: unsolved goals\ncase par.refl\na a₁ a✝ a'✝ b✝ b'✝ : SKI\nha : a✝ ⭢ₚ a'✝\nhb : b✝ ⭢ₚ b'✝\niha : ∀ {a₂ : SKI}, a✝ ⭢ₚ a₂ → Join ParallelReduction a'✝ a₂\nihb : ∀"
+  }
+ ],
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 151 tokens, 415 heartbeats, score 77.91. Free passes applied (normalize): start candidate 150 tokens, 416 heartbeats, score 77.96.\n- Exchange rate here: 1 token = 0.082 points, 100 heartbeats = 2.344 points.\n- Deletions that FAIL (needed as they stand): line 6 the tactic `all_goals cases h₂`; line 19 the tactic `have := (Sab_irreducible _ _ _ ha).choose_spec.ch…`; line 2 the tactic `intro a a₁ a₂ h₁ h₂`; line 3 the tactic `induction h₁ generalizing a₂`; line 8 the tactic `specialize iha ha'`; line 9 the tactic `specialize ihb hb'`.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the closing tactic at line 10 (`exact ⟨_, iha.choose_spec.1.par ihb.cho…`) (grind/simp_all/aesop); the closing tactic at line 17 (`exact ha.choose_spec.2.symm ▸ ⟨_, ha.ch…`) (grind/simp_all/aesop); the closing tactic at line 21 (`exact ⟨_, (this.1.par hb).par $ this.2.…`) (grind/simp_all/aesop); the closing tactic at line 24 (`constructor <;> assumption`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 77.96,
+ "gain": 0.05,
+ "compiles_sweep": 29,
+ "seconds": 85.3,
+ "source": "best:d60c685ddb02"
+}

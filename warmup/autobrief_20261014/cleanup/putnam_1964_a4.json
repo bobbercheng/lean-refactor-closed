@@ -1,0 +1,447 @@
+{
+ "problem": "putnam_1964_a4",
+ "seed": {
+  "ok": true,
+  "tokens": 117,
+  "heartbeats": 2871,
+  "L": 93.39,
+  "H": 97.43,
+  "Z": 100.0,
+  "score": 96.94
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 117,
+    "heartbeats": 2871,
+    "Z": 100.0,
+    "score": 96.94
+   },
+   "after": {
+    "ok": true,
+    "tokens": 112,
+    "heartbeats": 2871,
+    "Z": 100.0,
+    "score": 97.03
+   },
+   "gain": 0.09,
+   "applied": {
+    "lam": 2,
+    "dollar": 3
+   },
+   "compiles": 7,
+   "seconds": 22.3
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 112,
+    "heartbeats": 2872,
+    "Z": 100.0,
+    "score": 97.03
+   },
+   "after": {
+    "ok": true,
+    "tokens": 112,
+    "heartbeats": 2872,
+    "Z": 100.0,
+    "score": 97.03
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 5,
+   "seconds": 22.7
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 112,
+    "heartbeats": 2872,
+    "Z": 100.0,
+    "score": 97.03
+   },
+   "after": {
+    "ok": true,
+    "tokens": 112,
+    "heartbeats": 2872,
+    "Z": 100.0,
+    "score": 97.03
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 3,
+   "seconds": 15.7
+  },
+  {
+   "pass": "lint_delete",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 112,
+    "heartbeats": 2871,
+    "Z": 100.0,
+    "score": 97.03
+   },
+   "after": {
+    "ok": true,
+    "tokens": 112,
+    "heartbeats": 2871,
+    "Z": 100.0,
+    "score": 97.03
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 11,
+   "seconds": 40.6
+  }
+ ],
+ "free_applied": [
+  "normalize"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 112,
+  "heartbeats": 2871,
+  "L": 93.67,
+  "H": 97.43,
+  "Z": 100.0,
+  "score": 97.03
+ },
+ "s0": "theorem putnam_1964_a4\n(u : ℕ → ℤ)\n(boundedu : ∃ B T : ℤ, ∀ n : ℕ, B ≤ u n ∧ u n ≤ T)\n(hu : ∀ n ≥ 4, u n = ((u (n - 1) + u (n - 2) + u (n - 3) * u (n - 4)) : ℝ) / (u (n - 1) * u (n - 2) + u (n - 3) + u (n - 4)) ∧ (u (n - 1) * u (n - 2) + u (n - 3) + u (n - 4)) ≠ 0)\n: (∃ N c : ℕ, c > 0 ∧ ∀ n ≥ N, u (n + c) = u n) := by\n  obtain ⟨B, T, hB⟩ := boundedu\n  obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi λ_ : Fin 4 => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem $ by intro n k _; exact hB $ n + k\n  have :=  @Nat.strongRec _ λm ih => by\n    by_cases hm : m < 4\n    · simpa using congrFun heq.symm ⟨m, hm⟩\n    · clear hij\n      rify\n      simp (disch := omega) only [hu, Nat.add_sub_assoc, ih]\n  use i, j - i, Nat.sub_pos_of_lt hij\n  intro n hn\n  convert this $ n - i using 2 <;> omega",
+ "exchange": [
+  0.019,
+  0.03
+ ],
+ "profile": {
+  "ok": true,
+  "total": 2871,
+  "floor": null,
+  "reference": 111553,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "6-6",
+    "depth_indent": 2,
+    "text": "obtain ⟨B, T, hB⟩ := boundedu",
+    "heartbeats": null
+   },
+   {
+    "lines": "7-7",
+    "depth_indent": 2,
+    "text": "obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi λ_ : Fin 4 => Set.finite_Icc B T).exists_lt_map_eq_of_fora",
+    "heartbeats": null
+   },
+   {
+    "lines": "8-13",
+    "depth_indent": 2,
+    "text": "have :=  @Nat.strongRec _ λm ih => by by_cases hm : m < 4 · simpa using congrFun heq.symm ⟨m, hm⟩ · ",
+    "heartbeats": null
+   },
+   {
+    "lines": "14-14",
+    "depth_indent": 2,
+    "text": "use i, j - i, Nat.sub_pos_of_lt hij",
+    "heartbeats": null
+   },
+   {
+    "lines": "15-15",
+    "depth_indent": 2,
+    "text": "intro n hn",
+    "heartbeats": null
+   },
+   {
+    "lines": "16-16",
+    "depth_indent": 2,
+    "text": "convert this $ n - i using 2 <;> omega",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 112,
+  "heartbeats": 2871,
+  "score": 97.03
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 2077,
+   "score": null,
+   "error": "21:54: `grind` failed\ncase grind\nu : ℕ → ℤ\nboundedu : ∃ B T, ∀ (n : ℕ), B ≤ u n ∧ u n ≤ T\nhu :\n  ∀ n ≥ 4,\n    ↑(u n) =\n        (↑(u (n - 1)) + ↑(u (n - 2)) + ↑("
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 7379,
+   "score": null,
+   "error": "21:51: unsolved goals\nu : ℕ → ℤ\nboundedu : ∃ B T, ∀ (n : ℕ), B ≤ u n ∧ u n ≤ T\nhu :\n  ∀ (n : ℕ),\n    4 ≤ n →\n      ↑(u n) =\n          (↑(u (n - 1)) + ↑(u (n - 2"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 19134,
+   "score": null,
+   "error": "21:51: unsolved goals\nu : ℕ → ℤ\nhu :\n  ∀ (n : ℕ),\n    4 ≤ n →\n      ↑(u n) =\n          (↑(u (n - 1)) + ↑(u (n - 2)) + ↑(u (n - 3)) * ↑(u (n - 4))) /\n           "
+  },
+  {
+   "kind": "closer",
+   "line": 7,
+   "label": "replace the bullet at line 7 (`· clear hij`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 96,
+   "heartbeats": null,
+   "score": null,
+   "error": "timeout"
+  },
+  {
+   "kind": "closer",
+   "line": 7,
+   "label": "replace the bullet at line 7 (`· clear hij`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 96,
+   "heartbeats": 7333,
+   "score": null,
+   "error": "27:4: unsolved goals\ncase neg\nu : ℕ → ℤ\nB T : ℤ\ni j m : ℕ\nhu :\n  ∀ (n : ℕ),\n    4 ≤ n →\n      ↑(u n) =\n          (↑(u (n - 1)) + ↑(u (n - 2)) + ↑(u (n - 3)) * ↑"
+  },
+  {
+   "kind": "closer",
+   "line": 7,
+   "label": "replace the bullet at line 7 (`· clear hij`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 96,
+   "heartbeats": 15834,
+   "score": null,
+   "error": "27:4: unsolved goals\ncase neg\nu : ℕ → ℤ\nB T : ℤ\ni j m : ℕ\nhu :\n  ∀ (n : ℕ),\n    4 ≤ n →\n      ↑(u n) =\n          (↑(u (n - 1)) + ↑(u (n - 2)) + ↑(u (n - 3)) * ↑"
+  },
+  {
+   "kind": "closer",
+   "line": 9,
+   "label": "replace the closing tactic at line 9 (`simp (disch := omega) only [hu, Nat.add…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 99,
+   "heartbeats": 278181,
+   "score": null,
+   "error": "29:6: `grind` failed\ncase grind.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1."
+  },
+  {
+   "kind": "closer",
+   "line": 9,
+   "label": "replace the closing tactic at line 9 (`simp (disch := omega) only [hu, Nat.add…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 99,
+   "heartbeats": 7844,
+   "score": null,
+   "error": "27:4: unsolved goals\ncase neg\nu : ℕ → ℤ\nB T : ℤ\ni j m : ℕ\nhu :\n  ∀ (n : ℕ),\n    4 ≤ n →\n      ↑(u n) =\n          (↑(u (n - 1)) + ↑(u (n - 2)) + ↑(u (n - 3)) * ↑"
+  },
+  {
+   "kind": "closer",
+   "line": 9,
+   "label": "replace the closing tactic at line 9 (`simp (disch := omega) only [hu, Nat.add…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 99,
+   "heartbeats": 16236,
+   "score": null,
+   "error": "27:4: unsolved goals\ncase neg\nu : ℕ → ℤ\nB T : ℤ\ni j m : ℕ\nhu :\n  ∀ (n : ℕ),\n    4 ≤ n →\n      ↑(u n) =\n          (↑(u (n - 1)) + ↑(u (n - 2)) + ↑(u (n - 3)) * ↑"
+  },
+  {
+   "kind": "closer",
+   "line": 6,
+   "label": "replace the bullet at line 6 (`· simpa using congrFun heq.symm ⟨m, hm⟩`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 104,
+   "heartbeats": 772,
+   "score": null,
+   "error": "26:6: Tactic `grind` failed: the goal mentions the declaration `putnam_1964_a4`, which is being defined. To avoid circular reasoning, try rewriting the goal to "
+  },
+  {
+   "kind": "closer",
+   "line": 6,
+   "label": "replace the bullet at line 6 (`· simpa using congrFun heq.symm ⟨m, hm⟩`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 104,
+   "heartbeats": 6062,
+   "score": null,
+   "error": "26:4: unsolved goals\ncase pos\nu : ℕ → ℤ\nhu✝ :\n  ∀ n ≥ 4,\n    ↑(u n) =\n        (↑(u (n - 1)) + ↑(u (n - 2)) + ↑(u (n - 3)) * ↑(u (n - 4))) /\n          (↑(u (n - "
+  },
+  {
+   "kind": "closer",
+   "line": 6,
+   "label": "replace the bullet at line 6 (`· simpa using congrFun heq.symm ⟨m, hm⟩`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 104,
+   "heartbeats": 500092,
+   "score": null,
+   "error": "26:6: aesop: exceeded maximum number of normalisation iterations (100). This means normalisation probably got stuck in an infinite loop."
+  },
+  {
+   "kind": "closer",
+   "line": 12,
+   "label": "replace the closing tactic at line 12 (`convert this $ n - i using 2 <;> omega`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 103,
+   "heartbeats": 110511,
+   "score": null,
+   "error": "32:2: `grind` failed\ncase grind.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1."
+  },
+  {
+   "kind": "closer",
+   "line": 12,
+   "label": "replace the closing tactic at line 12 (`convert this $ n - i using 2 <;> omega`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 103,
+   "heartbeats": 7944,
+   "score": null,
+   "error": "21:51: unsolved goals\ncase right\nu : ℕ → ℤ\nB T : ℤ\ni j n : ℕ\nhu :\n  ∀ (n : ℕ),\n    4 ≤ n →\n      ↑(u n) =\n          (↑(u (n - 1)) + ↑(u (n - 2)) + ↑(u (n - 3)) "
+  },
+  {
+   "kind": "closer",
+   "line": 12,
+   "label": "replace the closing tactic at line 12 (`convert this $ n - i using 2 <;> omega`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 103,
+   "heartbeats": 10579,
+   "score": null,
+   "error": "21:51: unsolved goals\ncase right\nu : ℕ → ℤ\nB T : ℤ\ni j n : ℕ\nhu :\n  ∀ (n : ℕ),\n    4 ≤ n →\n      ↑(u n) =\n          (↑(u (n - 1)) + ↑(u (n - 2)) + ↑(u (n - 3)) "
+  },
+  {
+   "kind": "del-arg",
+   "line": 9,
+   "label": "delete `hu` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 110,
+   "heartbeats": 1658,
+   "score": null,
+   "error": "29:6: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 9,
+   "label": "delete `Nat.add_sub_assoc` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 110,
+   "heartbeats": 2002,
+   "score": null,
+   "error": "27:4: unsolved goals\ncase neg\nu : ℕ → ℤ\nhu :\n  ∀ n ≥ 4,\n    ↑(u n) =\n        (↑(u (n - 1)) + ↑(u (n - 2)) + ↑(u (n - 3)) * ↑(u (n - 4))) /\n          (↑(u (n - 1"
+  },
+  {
+   "kind": "del-arg",
+   "line": 9,
+   "label": "delete `ih` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 110,
+   "heartbeats": 2522,
+   "score": null,
+   "error": "27:4: unsolved goals\ncase neg\nu : ℕ → ℤ\nhu :\n  ∀ n ≥ 4,\n    ↑(u n) =\n        (↑(u (n - 1)) + ↑(u (n - 2)) + ↑(u (n - 3)) * ↑(u (n - 4))) /\n          (↑(u (n - 1"
+  },
+  {
+   "kind": "del-tac",
+   "line": 8,
+   "label": "delete the tactic `rify`",
+   "closer": "",
+   "ok": false,
+   "tokens": 111,
+   "heartbeats": 1537,
+   "score": null,
+   "error": "28:6: `simp` made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 2,
+   "label": "delete the tactic `obtain ⟨B, T, hB⟩ := boundedu`",
+   "closer": "",
+   "ok": false,
+   "tokens": 102,
+   "heartbeats": 700,
+   "score": null,
+   "error": "22:73: Unknown identifier `B`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 3,
+   "label": "delete the tactic `obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi λ_ : Fi…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 76,
+   "heartbeats": 602,
+   "score": null,
+   "error": "25:27: Unknown identifier `heq.symm`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 5,
+   "label": "delete the tactic `by_cases hm : m < 4`",
+   "closer": "",
+   "ok": false,
+   "tokens": 106,
+   "heartbeats": 1489,
+   "score": null,
+   "error": "25:40: Unknown identifier `hm`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 10,
+   "label": "delete the tactic `use i, j - i, Nat.sub_pos_of_lt hij`",
+   "closer": "",
+   "ok": false,
+   "tokens": 103,
+   "heartbeats": 2139,
+   "score": null,
+   "error": "30:8: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\nu : ℕ → ℤ\nhu :\n  ∀ n ≥ 4,\n    ↑(u n) =\n        (↑(u (n"
+  },
+  {
+   "kind": "del-tac",
+   "line": 11,
+   "label": "delete the tactic `intro n hn`",
+   "closer": "",
+   "ok": false,
+   "tokens": 109,
+   "heartbeats": 2326,
+   "score": null,
+   "error": "31:17: Unknown identifier `n`"
+  }
+ ],
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 117 tokens, 2871 heartbeats, score 96.94. Free passes applied (normalize): start candidate 112 tokens, 2871 heartbeats, score 97.03.\n- Exchange rate here: 1 token = 0.019 points, 100 heartbeats = 0.03 points.\n- Deletions that FAIL (needed as they stand): line 9 `hu` from the simp list; line 9 `Nat.add_sub_assoc` from the simp list; line 9 `ih` from the simp list; line 8 the tactic `rify`; line 2 the tactic `obtain ⟨B, T, hB⟩ := boundedu`; line 3 the tactic `obtain ⟨i, j, hij, heq⟩ := (Set.Finite.pi λ_ : Fi…`.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 7 (`· clear hij`) (grind/simp_all/aesop); the closing tactic at line 9 (`simp (disch := omega) only [hu, Nat.add…`) (grind/simp_all/aesop); the bullet at line 6 (`· simpa using congrFun heq.symm ⟨m, hm⟩`) (grind/simp_all/aesop); the closing tactic at line 12 (`convert this $ n - i using 2 <;> omega`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 97.03,
+ "gain": 0.09,
+ "compiles_sweep": 24,
+ "seconds": 1052.4,
+ "source": "best:ad2a6ea7c525"
+}

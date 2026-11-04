@@ -1,0 +1,1138 @@
+{
+ "problem": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+ "seed": {
+  "ok": true,
+  "tokens": 1906,
+  "heartbeats": 46028,
+  "L": 0.0,
+  "H": 0.1,
+  "Z": 100.0,
+  "score": 33.37
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 1906,
+    "heartbeats": 46030,
+    "Z": 100.0,
+    "score": 33.37
+   },
+   "after": {
+    "ok": true,
+    "tokens": 1906,
+    "heartbeats": 46030,
+    "Z": 100.0,
+    "score": 33.37
+   },
+   "gain": null,
+   "applied": null,
+   "compiles": 76,
+   "seconds": 676.6
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 1906,
+    "heartbeats": 46028,
+    "Z": 100.0,
+    "score": 33.37
+   },
+   "after": {
+    "ok": true,
+    "tokens": 1906,
+    "heartbeats": 46028,
+    "Z": 100.0,
+    "score": 33.37
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 23,
+   "seconds": 348.3
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 1906,
+    "heartbeats": 46028,
+    "Z": 100.0,
+    "score": 33.37
+   },
+   "after": {
+    "ok": true,
+    "tokens": 1906,
+    "heartbeats": 46028,
+    "Z": 100.0,
+    "score": 33.37
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 2,
+   "seconds": 46.7
+  },
+  {
+   "pass": "lint_delete",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 1906,
+    "heartbeats": 46029,
+    "Z": 100.0,
+    "score": 33.37
+   },
+   "after": {
+    "ok": true,
+    "tokens": 1903,
+    "heartbeats": 46027,
+    "Z": 100.0,
+    "score": 33.42
+   },
+   "gain": 0.05,
+   "applied": {
+    "delsearch-arg": 1
+   },
+   "compiles": 24,
+   "seconds": 243.9
+  }
+ ],
+ "free_applied": [
+  "lint_delete"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 1903,
+  "heartbeats": 46027,
+  "L": 0.16,
+  "H": 0.11,
+  "Z": 100.0,
+  "score": 33.42
+ },
+ "s0": "theorem fold_advances_evaluation_poly\n  (i : Fin (ℓ)) (h_i_succ_lt : i + 1 < ℓ + 𝓡)\n  (coeffs : Fin (2 ^ (ℓ - ↑i)) → L) (r_chal : L) :\n  let P_i : L[X] := intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i, by\n    exact Nat.lt_trans (n := i) (k := ℓ+1) (m := ℓ) (h₁ := i.isLt) (by exact Nat.lt_add_one ℓ)\n  ⟩) coeffs\n  let f_i := fun (x : (sDomain 𝔽q β h_ℓ_add_R_rate)\n      ⟨i, by exact Nat.lt_trans (n := i) (k := r) (m := ℓ) (h₁ := by omega) (by omega)⟩) =>\n    P_i.eval (x.val : L)\n  let f_i_plus_1 := fold (i := ⟨i, by omega⟩) (h_i := by omega) (f := f_i) (r_chal := r_chal)\n  let new_coeffs := fun j : Fin (2^(ℓ - (i + 1))) =>\n    (1 - r_chal) * (coeffs ⟨j.val * 2, by\n      rw [←Nat.add_zero (j.val * 2)]\n      apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))\n        (i := 0) (by omega) (by omega)\n    ⟩) +\n    r_chal * (coeffs ⟨j.val * 2 + 1, by\n      apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))\n        (i := 1) (by omega) (by omega)\n    ⟩)\n  let P_i_plus_1 :=\n    intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i+1, by omega⟩) new_coeffs\n  ∀ (y : (sDomain 𝔽q β h_ℓ_add_R_rate)\n    ⟨i+1, by omega⟩), f_i_plus_1 y = P_i_plus_1.eval y.val := by\n  simp only\n  intro y\n  set fiberMap := qMap_total_fiber 𝔽q β (i := ⟨i, by omega⟩) (steps := 1)\n    (h_i_add_steps := by simp only; omega) (y := y)\n  set x₀ := fiberMap 0\n  set x₁ := fiberMap 1\n  set P_i := intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i, by omega⟩) coeffs\n  set new_coeffs := fun j : Fin (2^(ℓ - (i + 1))) =>\n    (1 - r_chal) * (coeffs ⟨j.val * 2, by\n      have h : j.val * 2 < 2^(ℓ - (i + 1)) * 2 := by omega\n      have h2 : 2^(ℓ - i) = 2^(ℓ - (i + 1)) * 2 := by\n        conv_rhs => enter[2]; rw [←Nat.pow_one 2]\n        rw [←pow_add]; congr\n        rw [Nat.sub_add_eq_sub_sub_rev (h1 := by omega) (h2 := by omega)]\n        -- ⊢ ℓ - ↑i = ℓ - (↑i + 1 - 1)\n        rw [Nat.add_sub_cancel (n := i) (m := 1)]\n      omega\n    ⟩) +\n    r_chal * (coeffs ⟨j.val * 2 + 1, by\n      apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1)) (i := 1)\n      · omega\n      · omega\n    ⟩)\n  have h_eval_qMap_x₀ : (AdditiveNTT.qMap 𝔽q β ⟨i, by omega⟩).eval x₀.val = y := by\n    have h := iteratedQuotientMap_k_eq_1_is_qMap 𝔽q β h_ℓ_add_R_rate i (by omega) x₀\n    simp only [Subtype.eq_iff] at h\n    rw [h.symm]\n    have h_res := is_fiber_iff_generates_quotient_point 𝔽q β i (steps := 1) (by omega)\n      (x := x₀) (y := y).mpr (by rw [pointToIterateQuotientIndex_qMap_total_fiber_eq_self])\n    rw [h_res]\n    -- exact qMap_eval_fiber_eq_self ⟦L⟧ ⟨i + 1, by omega⟩ (by simp only; omega) h_i_succ_lt y 0\n  have h_eval_qMap_x₁ : (AdditiveNTT.qMap 𝔽q β ⟨i, by omega⟩).eval x₁.val = y := by\n    have h := iteratedQuotientMap_k_eq_1_is_qMap 𝔽q β h_ℓ_add_R_rate i (by omega) x₁\n    simp only [Subtype.eq_iff] at h\n    rw [h.symm]\n    have h_res := is_fiber_iff_generates_quotient_point 𝔽q β i (steps := 1) (by omega)\n      (x := x₁) (y := y).mpr (by rw [pointToIterateQuotientIndex_qMap_total_fiber_eq_self])\n    rw [h_res]\n  have hx₀ := qMap_total_fiber_basis_sum_repr 𝔽q β i (steps := 1)\n    (h_i_add_steps := by omega) y 0\n  have hx₁ := qMap_total_fiber_basis_sum_repr 𝔽q β i (steps := 1)\n    (h_i_add_steps := by omega) y 1\n  simp only at hx₀ hx₁\n\n  have h_fiber_diff : x₁.val - x₀.val = 1 := by\n    simp only [Fin.isValue, x₁, x₀, fiberMap]\n    rw [hx₁, hx₀]\n    simp only [Fin.isValue, AddSubmonoidClass.coe_finset_sum, SetLike.val_smul]\n    have h_index : ℓ + 𝓡 - i = (ℓ + 𝓡 - (i.val + 1)) + 1 := by omega\n    rw! (castMode := .all) [h_index]\n    rw [Fin.sum_univ_succ, Fin.sum_univ_succ] -- (free_term + y_repr) - (free_term + y_repr) = 1\n    -- First, simplify the free terms\n    simp only [fiber_coeff, eqRec_eq_cast, lt_one_iff, reducePow, Fin.isValue,\n      Fin.coe_ofNat_eq_mod, mod_succ, dite_smul, ite_smul, zero_smul, one_smul, zero_mod]\n    have h_cast_0 :\n        (cast (Eq.symm h_index ▸ rfl : Fin (ℓ + 𝓡 - (↑i + 1) + 1) = Fin (ℓ + 𝓡 - ↑i)) 0).val =\n        0 := by\n      rw [←Fin.cast_eq_cast (h := by omega)]\n      rw [Fin.cast_val_eq_val (h_eq := by omega)]\n      simp only [Fin.coe_ofNat_eq_mod, mod_succ_eq_iff_lt, succ_eq_add_one, lt_add_iff_pos_left]\n      omega\n    have h_cast_1 :\n        (cast (Eq.symm h_index ▸ rfl : Fin (ℓ + 𝓡 - (↑i + 1) + 1) = Fin (ℓ + 𝓡 - ↑i)) 1).val =\n        1 := by\n      rw [←Fin.cast_eq_cast (h := by omega)]\n      rw [Fin.cast_val_eq_val (h_eq := by omega)]\n      simp only [Fin.coe_ofNat_eq_mod, mod_succ_eq_iff_lt, succ_eq_add_one,\n        lt_add_iff_pos_left, tsub_pos_iff_lt]\n      omega\n    simp only [h_cast_0, ↓reduceDIte]\n    have h_getBit_0_of_0 : Nat.getBit (k := 0) (n := 0) = 0 := by\n      simp only [getBit, shiftRight_zero, and_one_is_mod, zero_mod]\n    have h_getBit_0_of_1 : Nat.getBit (k := 0) (n := 1) = 1 := by\n      simp only [getBit, shiftRight_zero, Nat.and_self]\n    simp only [h_getBit_0_of_1, one_ne_zero, ↓reduceIte, h_getBit_0_of_0, zero_add]\n    rw! (castMode := .all) [←h_index]\n    rw [cast_eq]\n    simp only [get_sDomain_basis, Fin.coe_ofNat_eq_mod, zero_mod, add_zero, cast_eq]\n    rw [normalizedWᵢ_eval_βᵢ_eq_1 𝔽q β]\n    ring_nf\n    conv_rhs => rw [←add_zero (a := 1)]\n    rw [add_sub_assoc]\n    congr 1\n    rw [sub_eq_zero]\n    apply Finset.sum_congr (h := by rfl)\n    simp only [mem_univ, congr_eqRec, Fin.val_succ, Nat.add_eq_zero, one_ne_zero, and_false,\n      ↓reduceDIte, add_tsub_cancel_right, Fin.eta, imp_self, implies_true]\n  set P_i_plus_1 :=\n    intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i+1, by omega⟩) new_coeffs\n  -- Set up the even and odd refinement polynomials\n  set P₀_coeffs := fun j : Fin (2^(ℓ - (i + 1))) => coeffs ⟨j.val * 2, by\n    have h1 : ℓ - (i + 1) + 1 = ℓ - i := by omega\n    have h2 : 2^(ℓ - (i + 1) + 1) = 2^(ℓ - i) := by rw [h1]\n    have h3 : 2^(ℓ - (i + 1)) * 2 = 2^(ℓ - (i + 1) + 1) := by rw [pow_succ]\n    rw [← h2, ← h3]; omega⟩\n  set P₁_coeffs := fun j : Fin (2^(ℓ - (i + 1))) => coeffs ⟨j.val * 2 + 1, by\n    have h1 : ℓ - (i + 1) + 1 = ℓ - i := by omega\n    have h2 : 2^(ℓ - (i + 1) + 1) = 2^(ℓ - i) := by rw [h1]\n    have h3 : 2^(ℓ - (i + 1)) * 2 = 2^(ℓ - (i + 1) + 1) := by rw [pow_succ]\n    rw [← h2, ← h3]; omega⟩\n  set P₀ := evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs\n  set P₁ := oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs\n  have h_P_i_eval := evaluation_poly_split_identity 𝔽q β h_ℓ_add_R_rate ⟨i, by omega⟩ coeffs\n  -- Equation 39 : P^(i)(X) = P₀^(i+1)(q^(i)(X)) + X · P₁^(i+1)(q^(i)(X))\n  have h_equation_39_x₀ : P_i.eval x₀.val = P₀.eval y.val + x₀.val * P₁.eval y.val := by\n    simp only [h_P_i_eval, Fin.eta, Polynomial.eval_add, eval_comp,\n      h_eval_qMap_x₀, Polynomial.eval_mul, Polynomial.eval_X, P_i, P₀, P₁]\n  have h_equation_39_x₁ : P_i.eval x₁.val = P₀.eval y.val + x₁.val * P₁.eval y.val := by\n    simp only [h_P_i_eval, Fin.eta, Polynomial.eval_add, eval_comp,\n      h_eval_qMap_x₁, Polynomial.eval_mul, Polynomial.eval_X, P_i, P₀, P₁]\n  set f_i := fun (x : (sDomain 𝔽q β h_ℓ_add_R_rate) ⟨i, by omega⟩) => P_i.eval (x.val : L)\n  set f_i_plus_1 := fold (i := ⟨i, by omega⟩) (h_i := by omega) (f := f_i) (r_chal := r_chal)\n  -- Unfold the definition of f_i_plus_1 using the fold function\n  have h_fold_def : f_i_plus_1 y =\n      f_i x₀ * ((1 - r_chal) * x₁.val - r_chal) +\n      f_i x₁ * (r_chal - (1 - r_chal) * x₀.val) := rfl\n  -- Main calculation following the outline\n  calc f_i_plus_1 y\n    = f_i x₀ * ((1 - r_chal) * x₁.val - r_chal) +\n        f_i x₁ * (r_chal - (1 - r_chal) * x₀.val) := h_fold_def\n    _ = P_i.eval x₀.val * ((1 - r_chal) * x₁.val - r_chal) +\n        P_i.eval x₁.val * (r_chal - (1 - r_chal) * x₀.val) := by simp only [f_i]\n    _ = (P₀.eval y.val + x₀.val * P₁.eval y.val) * ((1 - r_chal) * x₁.val - r_chal) +\n        (P₀.eval y.val + x₁.val * P₁.eval y.val) * (r_chal - (1 - r_chal) * x₀.val) := by\n      rw [h_equation_39_x₀, h_equation_39_x₁]\n    _ = P₀.eval y.val * ((1 - r_chal) * x₁.val - r_chal + r_chal - (1 - r_chal) * x₀.val) +\n        P₁.eval y.val * (x₀.val * ((1 - r_chal) * x₁.val - r_chal) +\n          x₁.val * (r_chal - (1 - r_chal) * x₀.val)) := by ring\n    _ = P₀.eval y.val * ((1 - r_chal) * (x₁.val - x₀.val)) +\n        P₁.eval y.val * ((x₁.val - x₀.val) * r_chal) := by ring\n    _ = P₀.eval y.val * (1 - r_chal) + P₁.eval y.val * r_chal := by rw [h_fiber_diff]; ring\n    _ = P_i_plus_1.eval y.val := by\n      simp only [P_i_plus_1, P₀, P₁, new_coeffs, evenRefinement, oddRefinement,\n        intermediateEvaluationPoly]\n      conv_lhs => enter [1]; rw [mul_comm, ←Polynomial.eval_C_mul]\n      conv_lhs => enter [2]; rw [mul_comm, ←Polynomial.eval_C_mul]\n      -- ⊢ eval y (C (1-r) * ∑...) + eval y (C r * ∑...) = eval y (∑...)\n      rw [←Polynomial.eval_add]\n      -- ⊢ poly_left.eval y = poly_right.eval y\n      congr\n      simp_rw [mul_sum, ←Finset.sum_add_distrib]\n      -- We now prove that the terms inside the sums are equal for each index.\n      apply Finset.sum_congr rfl\n      intro j hj\n      have h_j_lt : j.val < 2 ^ (ℓ - (↑i + 1)) := by\n        rw [Nat.sub_add_eq]\n        omega\n      conv_lhs => enter [1]; rw [mul_comm (a := Polynomial.C (coeffs ⟨j.val * 2, by\n        rw [←Nat.add_zero (j.val * 2)]\n        apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))\n          (i := 0) (by omega) (by omega)⟩)), ←mul_assoc,\n        mul_comm (a := Polynomial.C (1 - r_chal))]; rw [mul_assoc]\n      conv_lhs => enter [2]; rw [mul_comm (a := Polynomial.C (coeffs ⟨j.val * 2 + 1, by\n        apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))\n          (i := 1) (by omega) (by omega)⟩)), ←mul_assoc,\n        mul_comm (a := Polynomial.C r_chal)]; rw [mul_assoc]\n      conv_rhs => rw [mul_comm]\n      rw [←mul_add]\n      congr\n      simp only [←Polynomial.C_mul, ←Polynomial.C_add]",
+ "exchange": [
+  0.017,
+  0.072
+ ],
+ "profile": {
+  "ok": true,
+  "total": 46027,
+  "floor": null,
+  "reference": 46076,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "10-10",
+    "depth_indent": 2,
+    "text": "let f_i_plus_1 := fold (i := ⟨i, by omega⟩) (h_i := by omega) (f := f_i) (r_chal := r_chal)",
+    "heartbeats": null
+   },
+   {
+    "lines": "11-20",
+    "depth_indent": 2,
+    "text": "let new_coeffs := fun j : Fin (2^(ℓ - (i + 1))) => (1 - r_chal) * (coeffs ⟨j.val * 2, by rw [←Nat.ad",
+    "heartbeats": null
+   },
+   {
+    "lines": "21-22",
+    "depth_indent": 2,
+    "text": "let P_i_plus_1 := intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i+1, by omega⟩) new_coeffs",
+    "heartbeats": null
+   },
+   {
+    "lines": "23-24",
+    "depth_indent": 2,
+    "text": "∀ (y : (sDomain 𝔽q β h_ℓ_add_R_rate) ⟨i+1, by omega⟩), f_i_plus_1 y = P_i_plus_1.eval y.val := by",
+    "heartbeats": null
+   },
+   {
+    "lines": "25-25",
+    "depth_indent": 2,
+    "text": "simp only",
+    "heartbeats": null
+   },
+   {
+    "lines": "26-26",
+    "depth_indent": 2,
+    "text": "intro y",
+    "heartbeats": null
+   },
+   {
+    "lines": "27-28",
+    "depth_indent": 2,
+    "text": "set fiberMap := qMap_total_fiber 𝔽q β (i := ⟨i, by omega⟩) (steps := 1) (h_i_add_steps := by simp on",
+    "heartbeats": null
+   },
+   {
+    "lines": "29-29",
+    "depth_indent": 2,
+    "text": "set x₀ := fiberMap 0",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 1903,
+  "heartbeats": 46027,
+  "score": 33.42
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 5093,
+   "score": null,
+   "error": "848:65: `grind` failed\ncase grind.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 4360,
+   "score": null,
+   "error": "848:62: unsolved goals\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽q : Type\ninst✝⁵ : Field "
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 4996,
+   "score": null,
+   "error": "848:62: unsolved goals\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_5 : Field 𝔽q\n"
+  },
+  {
+   "kind": "closer",
+   "line": 46,
+   "label": "replace the proof of `have h_fiber_diff : x₁.val - x₀.val = 1…` (line 46) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1485,
+   "heartbeats": 33293,
+   "score": null,
+   "error": "893:48: `grind` failed\ncase grind.1.1.1.1.1.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : Cha"
+  },
+  {
+   "kind": "closer",
+   "line": 46,
+   "label": "replace the proof of `have h_fiber_diff : x₁.val - x₀.val = 1…` (line 46) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1485,
+   "heartbeats": 31344,
+   "score": null,
+   "error": "893:48: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 46,
+   "label": "replace the proof of `have h_fiber_diff : x₁.val - x₀.val = 1…` (line 46) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1485,
+   "heartbeats": 123323,
+   "score": null,
+   "error": "893:45: unsolved goals\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_5 : Field 𝔽q\n"
+  },
+  {
+   "kind": "closer",
+   "line": 25,
+   "label": "replace the proof of `have h_eval_qMap_x₀ : (AdditiveNTT.qMap…` (line 25) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1842,
+   "heartbeats": 49719,
+   "score": null,
+   "error": "872:84: `grind` failed\ncase grind.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q "
+  },
+  {
+   "kind": "closer",
+   "line": 25,
+   "label": "replace the proof of `have h_eval_qMap_x₀ : (AdditiveNTT.qMap…` (line 25) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1842,
+   "heartbeats": 45763,
+   "score": null,
+   "error": "872:84: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 25,
+   "label": "replace the proof of `have h_eval_qMap_x₀ : (AdditiveNTT.qMap…` (line 25) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1842,
+   "heartbeats": 47595,
+   "score": null,
+   "error": "872:81: unsolved goals\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_5 : Field 𝔽q\n"
+  },
+  {
+   "kind": "closer",
+   "line": 33,
+   "label": "replace the proof of `have h_eval_qMap_x₁ : (AdditiveNTT.qMap…` (line 33) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1842,
+   "heartbeats": 49769,
+   "score": null,
+   "error": "880:84: `grind` failed\ncase grind.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q "
+  },
+  {
+   "kind": "closer",
+   "line": 33,
+   "label": "replace the proof of `have h_eval_qMap_x₁ : (AdditiveNTT.qMap…` (line 33) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1842,
+   "heartbeats": 45828,
+   "score": null,
+   "error": "880:84: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 33,
+   "label": "replace the proof of `have h_eval_qMap_x₁ : (AdditiveNTT.qMap…` (line 33) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1842,
+   "heartbeats": 50201,
+   "score": null,
+   "error": "880:81: unsolved goals\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_5 : Field 𝔽q\n"
+  },
+  {
+   "kind": "closer",
+   "line": 12,
+   "label": "replace the proof of `have h2 : 2^(ℓ - i) = 2^(ℓ - (i + 1)) *…` (line 12) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1854,
+   "heartbeats": 50005,
+   "score": null,
+   "error": "859:54: `grind` failed\ncase grind.1.1.2.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L"
+  },
+  {
+   "kind": "closer",
+   "line": 12,
+   "label": "replace the proof of `have h2 : 2^(ℓ - i) = 2^(ℓ - (i + 1)) *…` (line 12) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1854,
+   "heartbeats": 46959,
+   "score": null,
+   "error": "859:51: unsolved goals\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽q : Type\ninst✝⁵ : Field "
+  },
+  {
+   "kind": "closer",
+   "line": 12,
+   "label": "replace the proof of `have h2 : 2^(ℓ - i) = 2^(ℓ - (i + 1)) *…` (line 12) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1854,
+   "heartbeats": 48592,
+   "score": null,
+   "error": "859:51: unsolved goals\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_5 : Field 𝔽q\n"
+  },
+  {
+   "kind": "closer",
+   "line": 106,
+   "label": "replace the proof of `have h_equation_39_x₀ : P_i.eval x₀.val…` (line 106) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1881,
+   "heartbeats": 60780,
+   "score": null,
+   "error": "953:89: `grind` failed\ncase grind.2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst"
+  },
+  {
+   "kind": "closer",
+   "line": 106,
+   "label": "replace the proof of `have h_equation_39_x₀ : P_i.eval x₀.val…` (line 106) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1881,
+   "heartbeats": 56480,
+   "score": null,
+   "error": "953:86: unsolved goals\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽q : Type\ninst✝⁵ : Field "
+  },
+  {
+   "kind": "closer",
+   "line": 106,
+   "label": "replace the proof of `have h_equation_39_x₀ : P_i.eval x₀.val…` (line 106) by `aesop`",
+   "closer": "aesop",
+   "ok": true,
+   "tokens": 1881,
+   "heartbeats": 79287,
+   "score": 9.74,
+   "error": "",
+   "d_tokens": -22,
+   "d_hb": 33260,
+   "d_score": -23.68
+  },
+  {
+   "kind": "closer",
+   "line": 109,
+   "label": "replace the proof of `have h_equation_39_x₁ : P_i.eval x₁.val…` (line 109) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1881,
+   "heartbeats": 60823,
+   "score": null,
+   "error": "956:89: `grind` failed\ncase grind.2.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst"
+  },
+  {
+   "kind": "closer",
+   "line": 109,
+   "label": "replace the proof of `have h_equation_39_x₁ : P_i.eval x₁.val…` (line 109) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1881,
+   "heartbeats": 56653,
+   "score": null,
+   "error": "956:86: unsolved goals\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽q : Type\ninst✝⁵ : Field "
+  },
+  {
+   "kind": "closer",
+   "line": 109,
+   "label": "replace the proof of `have h_equation_39_x₁ : P_i.eval x₁.val…` (line 109) by `aesop`",
+   "closer": "aesop",
+   "ok": true,
+   "tokens": 1881,
+   "heartbeats": 85324,
+   "score": 5.38,
+   "error": "",
+   "d_tokens": -22,
+   "d_hb": 39297,
+   "d_score": -28.04
+  },
+  {
+   "kind": "closer",
+   "line": 30,
+   "label": "replace the closing tactic at line 30 (`(x := x₀) (y := y).mpr (by rw [pointToI…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1886,
+   "heartbeats": 45760,
+   "score": null,
+   "error": "877:6: Unknown identifier `grind`"
+  },
+  {
+   "kind": "closer",
+   "line": 30,
+   "label": "replace the closing tactic at line 30 (`(x := x₀) (y := y).mpr (by rw [pointToI…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1886,
+   "heartbeats": 45760,
+   "score": null,
+   "error": "877:6: Unknown identifier `simp_all`"
+  },
+  {
+   "kind": "closer",
+   "line": 30,
+   "label": "replace the closing tactic at line 30 (`(x := x₀) (y := y).mpr (by rw [pointToI…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1886,
+   "heartbeats": 45760,
+   "score": null,
+   "error": "877:6: Unknown identifier `aesop`"
+  },
+  {
+   "kind": "closer",
+   "line": 38,
+   "label": "replace the closing tactic at line 38 (`(x := x₁) (y := y).mpr (by rw [pointToI…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1886,
+   "heartbeats": 44680,
+   "score": null,
+   "error": "885:6: Unknown identifier `grind`"
+  },
+  {
+   "kind": "closer",
+   "line": 38,
+   "label": "replace the closing tactic at line 38 (`(x := x₁) (y := y).mpr (by rw [pointToI…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1886,
+   "heartbeats": 44679,
+   "score": null,
+   "error": "885:6: Unknown identifier `simp_all`"
+  },
+  {
+   "kind": "closer",
+   "line": 38,
+   "label": "replace the closing tactic at line 38 (`(x := x₁) (y := y).mpr (by rw [pointToI…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1886,
+   "heartbeats": 44680,
+   "score": null,
+   "error": "885:6: Unknown identifier `aesop`"
+  },
+  {
+   "kind": "closer",
+   "line": 55,
+   "label": "replace the closing tactic at line 55 (`Fin.coe_ofNat_eq_mod, mod_succ, dite_sm…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1890,
+   "heartbeats": null,
+   "score": null,
+   "error": "902:11: unexpected token 'have'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 55,
+   "label": "replace the closing tactic at line 55 (`Fin.coe_ofNat_eq_mod, mod_succ, dite_sm…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1890,
+   "heartbeats": null,
+   "score": null,
+   "error": "902:14: unexpected token 'have'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 55,
+   "label": "replace the closing tactic at line 55 (`Fin.coe_ofNat_eq_mod, mod_succ, dite_sm…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1890,
+   "heartbeats": null,
+   "score": null,
+   "error": "902:11: unexpected token 'have'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 90,
+   "label": "replace the closing tactic at line 90 (`intermediateEvaluationPoly 𝔽q β h_ℓ_add…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1887,
+   "heartbeats": 38482,
+   "score": null,
+   "error": "937:4: Unknown identifier `grind`"
+  },
+  {
+   "kind": "closer",
+   "line": 90,
+   "label": "replace the closing tactic at line 90 (`intermediateEvaluationPoly 𝔽q β h_ℓ_add…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1887,
+   "heartbeats": 38483,
+   "score": null,
+   "error": "937:4: Unknown identifier `simp_all`"
+  },
+  {
+   "kind": "closer",
+   "line": 90,
+   "label": "replace the closing tactic at line 90 (`intermediateEvaluationPoly 𝔽q β h_ℓ_add…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1887,
+   "heartbeats": 38484,
+   "score": null,
+   "error": "937:4: Unknown identifier `aesop`"
+  },
+  {
+   "kind": "closer",
+   "line": 123,
+   "label": "replace the closing tactic at line 123 (`P_i.eval x₁.val * (r_chal - (1 - r_chal…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1883,
+   "heartbeats": null,
+   "score": null,
+   "error": "970:13: unexpected token '_'; expected ':='"
+  },
+  {
+   "kind": "closer",
+   "line": 123,
+   "label": "replace the closing tactic at line 123 (`P_i.eval x₁.val * (r_chal - (1 - r_chal…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1883,
+   "heartbeats": null,
+   "score": null,
+   "error": "970:16: unexpected token '_'; expected ':='"
+  },
+  {
+   "kind": "closer",
+   "line": 123,
+   "label": "replace the closing tactic at line 123 (`P_i.eval x₁.val * (r_chal - (1 - r_chal…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1883,
+   "heartbeats": null,
+   "score": null,
+   "error": "970:13: unexpected token '_'; expected ':='"
+  },
+  {
+   "kind": "closer",
+   "line": 72,
+   "label": "replace the proof of `have h_getBit_0_of_0 : Nat.getBit (k :=…` (line 72) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1893,
+   "heartbeats": 54364,
+   "score": null,
+   "error": "919:66: `grind` failed\ncase grind.1.2.1.1.1.1.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : C"
+  },
+  {
+   "kind": "closer",
+   "line": 72,
+   "label": "replace the proof of `have h_getBit_0_of_0 : Nat.getBit (k :=…` (line 72) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1893,
+   "heartbeats": 50553,
+   "score": null,
+   "error": "919:66: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 72,
+   "label": "replace the proof of `have h_getBit_0_of_0 : Nat.getBit (k :=…` (line 72) by `aesop`",
+   "closer": "aesop",
+   "ok": true,
+   "tokens": 1893,
+   "heartbeats": 106471,
+   "score": -10.13,
+   "error": "",
+   "d_tokens": -10,
+   "d_hb": 60444,
+   "d_score": -43.55
+  },
+  {
+   "kind": "closer",
+   "line": 88,
+   "label": "replace the closing tactic at line 88 (`↓reduceDIte, add_tsub_cancel_right, Fin…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1893,
+   "heartbeats": null,
+   "score": null,
+   "error": "936:16: unexpected token ':='; expected ']'"
+  },
+  {
+   "kind": "del-arg",
+   "line": 27,
+   "label": "delete `Subtype.eq_iff` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1900,
+   "heartbeats": 45594,
+   "score": null,
+   "error": "874:4: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 35,
+   "label": "delete `Subtype.eq_iff` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1900,
+   "heartbeats": 45599,
+   "score": null,
+   "error": "882:4: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 47,
+   "label": "delete `Fin.isValue` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1901,
+   "heartbeats": 46025,
+   "score": 33.46,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -2,
+   "d_score": 0.04
+  },
+  {
+   "kind": "del-arg",
+   "line": 47,
+   "label": "delete `x₁` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 26285,
+   "score": null,
+   "error": "895:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  qMap_total_fiber 𝔽q β ⟨↑i, ⋯⟩ 1 ⋯ y 1\nin the target expression\n  ↑x₁ - ↑(qMap_total_"
+  },
+  {
+   "kind": "del-arg",
+   "line": 47,
+   "label": "delete `x₀` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 26379,
+   "score": null,
+   "error": "895:13: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  qMap_total_fiber 𝔽q β ⟨↑i, ⋯⟩ 1 ⋯ y 0\nin the target expression\n  ↑(∑ x,\n          f"
+  },
+  {
+   "kind": "del-arg",
+   "line": 47,
+   "label": "delete `fiberMap` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 26281,
+   "score": null,
+   "error": "895:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  qMap_total_fiber 𝔽q β ⟨↑i, ⋯⟩ 1 ⋯ y 1\nin the target expression\n  ↑(fiberMap 1) - ↑(f"
+  },
+  {
+   "kind": "del-arg",
+   "line": 49,
+   "label": "delete `Fin.isValue` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1901,
+   "heartbeats": 46024,
+   "score": 33.46,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -3,
+   "d_score": 0.04
+  },
+  {
+   "kind": "del-arg",
+   "line": 49,
+   "label": "delete `AddSubmonoidClass.coe_finset_sum` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 26680,
+   "score": null,
+   "error": "896:4: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 49,
+   "label": "delete `SetLike.val_smul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 39981,
+   "score": null,
+   "error": "932:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?m.1405 - ?m.1406 = 0\nin the target expression\n  1 +\n        (∑ x,\n            ↑(if "
+  },
+  {
+   "kind": "del-arg",
+   "line": 54,
+   "label": "delete `fiber_coeff` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 29943,
+   "score": null,
+   "error": "918:4: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 54,
+   "label": "delete `eqRec_eq_cast` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 32185,
+   "score": null,
+   "error": "918:4: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 54,
+   "label": "delete `lt_one_iff` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 48964,
+   "score": null,
+   "error": "928:4: Application type mismatch: The argument\n  fun h =>\n    Eq.trans\n      (Mathlib.Tactic.Ring.Common.atom_pf'\n        (congrFun'\n          (congrArg HSMul.h"
+  },
+  {
+   "kind": "del-arg",
+   "line": 54,
+   "label": "delete `reducePow` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1901,
+   "heartbeats": 46958,
+   "score": 32.78,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": 931,
+   "d_score": -0.64
+  },
+  {
+   "kind": "del-arg",
+   "line": 54,
+   "label": "delete `Fin.isValue` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1901,
+   "heartbeats": 46021,
+   "score": 33.46,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -6,
+   "d_score": 0.04
+  },
+  {
+   "kind": "del-arg",
+   "line": 55,
+   "label": "delete `Fin.coe_ofNat_eq_mod` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 31539,
+   "score": null,
+   "error": "922:4: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 55,
+   "label": "delete `mod_succ` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1901,
+   "heartbeats": 46109,
+   "score": 33.4,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": 82,
+   "d_score": -0.02
+  },
+  {
+   "kind": "del-arg",
+   "line": 55,
+   "label": "delete `dite_smul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 46228,
+   "score": null,
+   "error": "932:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?m.1405 - ?m.1406 = 0\nin the target expression\n  1 • 1 +\n        (∑ x,\n            ("
+  },
+  {
+   "kind": "del-arg",
+   "line": 55,
+   "label": "delete `ite_smul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 50240,
+   "score": null,
+   "error": "932:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?m.1405 - ?m.1406 = 0\nin the target expression\n  (1 • 1 +\n        ((∑ x,\n           "
+  },
+  {
+   "kind": "del-arg",
+   "line": 55,
+   "label": "delete `zero_smul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 49202,
+   "score": null,
+   "error": "932:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?m.1405 - ?m.1406 = 0\nin the target expression\n  (1 +\n        ((∑ x,\n            if "
+  },
+  {
+   "kind": "del-arg",
+   "line": 55,
+   "label": "delete `one_smul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 47326,
+   "score": null,
+   "error": "932:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?m.1420 - ?m.1421 = 0\nin the target expression\n  1 • 1 = 1\n\ncase e_a\nr : ℕ\ninst✝¹⁰ :"
+  },
+  {
+   "kind": "del-arg",
+   "line": 55,
+   "label": "delete `zero_mod` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1901,
+   "heartbeats": 46024,
+   "score": 33.46,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -3,
+   "d_score": 0.04
+  },
+  {
+   "kind": "del-arg",
+   "line": 61,
+   "label": "delete `Fin.coe_ofNat_eq_mod` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 45793,
+   "score": null,
+   "error": "908:6: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 61,
+   "label": "delete `mod_succ_eq_iff_lt` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 45834,
+   "score": null,
+   "error": "909:6: omega could not prove the goal:\na possible counterexample may satisfy the constraints\n  e ≥ 1\n  d ≥ 1\n  c ≥ 0\n  b ≥ 0\n  b - c - d ≤ 1\n  b - d ≤ 0\n  a ≥ 0"
+  },
+  {
+   "kind": "del-arg",
+   "line": 61,
+   "label": "delete `succ_eq_add_one` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1901,
+   "heartbeats": 45877,
+   "score": 33.56,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -150,
+   "d_score": 0.14
+  },
+  {
+   "kind": "del-arg",
+   "line": 61,
+   "label": "delete `lt_add_iff_pos_left` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1901,
+   "heartbeats": 45885,
+   "score": 33.56,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -142,
+   "d_score": 0.14
+  },
+  {
+   "kind": "del-arg",
+   "line": 68,
+   "label": "delete `Fin.coe_ofNat_eq_mod` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 45832,
+   "score": null,
+   "error": "915:6: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 68,
+   "label": "delete `mod_succ_eq_iff_lt` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 45882,
+   "score": null,
+   "error": "917:6: omega could not prove the goal:\na possible counterexample may satisfy the constraints\n  d ≥ 1\n  d ≥ 0\n  c ≥ 0\n  b ≥ 0\n  b - c - d ≤ 1\n  b - d ≤ 0\n  a ≥ 0"
+  },
+  {
+   "kind": "del-arg",
+   "line": 68,
+   "label": "delete `succ_eq_add_one` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1901,
+   "heartbeats": 46044,
+   "score": 33.44,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": 17,
+   "d_score": 0.02
+  },
+  {
+   "kind": "del-arg",
+   "line": 69,
+   "label": "delete `lt_add_iff_pos_left` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1901,
+   "heartbeats": 46040,
+   "score": 33.45,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": 13,
+   "d_score": 0.03
+  },
+  {
+   "kind": "del-arg",
+   "line": 69,
+   "label": "delete `tsub_pos_iff_lt` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1901,
+   "heartbeats": 46155,
+   "score": 33.36,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": 128,
+   "d_score": -0.06
+  },
+  {
+   "kind": "del-arg",
+   "line": 71,
+   "label": "delete `h_cast_0` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 31255,
+   "score": null,
+   "error": "918:4: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 71,
+   "label": "delete `↓reduceDIte` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1900,
+   "heartbeats": 48115,
+   "score": null,
+   "error": "928:4: Application type mismatch: The argument\n  fun h =>\n    Eq.trans\n      (Mathlib.Tactic.Ring.Common.atom_pf'\n        (congrFun'\n          (congrArg HSMul.h"
+  },
+  {
+   "kind": "del-arg",
+   "line": 73,
+   "label": "delete `getBit` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 46011,
+   "score": null,
+   "error": "920:6: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 73,
+   "label": "delete `shiftRight_zero` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 46029,
+   "score": null,
+   "error": "919:63: unsolved goals\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽q : Type\ninst✝⁵ : Field "
+  },
+  {
+   "kind": "del-arg",
+   "line": 73,
+   "label": "delete `and_one_is_mod` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 46018,
+   "score": null,
+   "error": "919:63: unsolved goals\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽q : Type\ninst✝⁵ : Field "
+  },
+  {
+   "kind": "del-arg",
+   "line": 73,
+   "label": "delete `zero_mod` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1901,
+   "heartbeats": 46018,
+   "score": 33.46,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -9,
+   "d_score": 0.04
+  },
+  {
+   "kind": "del-arg",
+   "line": 75,
+   "label": "delete `getBit` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 46017,
+   "score": null,
+   "error": "922:6: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 75,
+   "label": "delete `shiftRight_zero` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 46031,
+   "score": null,
+   "error": "921:63: unsolved goals\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽q : Type\ninst✝⁵ : Field "
+  },
+  {
+   "kind": "del-arg",
+   "line": 75,
+   "label": "delete `Nat.and_self` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1901,
+   "heartbeats": 46033,
+   "score": null,
+   "error": "921:63: unsolved goals\nr : ℕ\ninst✝¹⁰ : NeZero r\nL : Type\ninst✝⁹ : Field L\ninst✝⁸ : Fintype L\ninst✝⁷ : DecidableEq L\ninst✝⁶ : CharP L 2\n𝔽q : Type\ninst✝⁵ : Field "
+  },
+  {
+   "kind": "del-arg",
+   "line": 76,
+   "label": "delete `h_getBit_0_of_1` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1901,
+   "heartbeats": 46841,
+   "score": 32.87,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": 814,
+   "d_score": -0.55
+  }
+ ],
+ "s1": {
+  "proof": "theorem fold_advances_evaluation_poly\n  (i : Fin (ℓ)) (h_i_succ_lt : i + 1 < ℓ + 𝓡)\n  (coeffs : Fin (2 ^ (ℓ - ↑i)) → L) (r_chal : L) :\n  let P_i : L[X] := intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i, by\n    exact Nat.lt_trans (n := i) (k := ℓ+1) (m := ℓ) (h₁ := i.isLt) (by exact Nat.lt_add_one ℓ)\n  ⟩) coeffs\n  let f_i := fun (x : (sDomain 𝔽q β h_ℓ_add_R_rate)\n      ⟨i, by exact Nat.lt_trans (n := i) (k := r) (m := ℓ) (h₁ := by omega) (by omega)⟩) =>\n    P_i.eval (x.val : L)\n  let f_i_plus_1 := fold (i := ⟨i, by omega⟩) (h_i := by omega) (f := f_i) (r_chal := r_chal)\n  let new_coeffs := fun j : Fin (2^(ℓ - (i + 1))) =>\n    (1 - r_chal) * (coeffs ⟨j.val * 2, by\n      rw [←Nat.add_zero (j.val * 2)]\n      apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))\n        (i := 0) (by omega) (by omega)\n    ⟩) +\n    r_chal * (coeffs ⟨j.val * 2 + 1, by\n      apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))\n        (i := 1) (by omega) (by omega)\n    ⟩)\n  let P_i_plus_1 :=\n    intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i+1, by omega⟩) new_coeffs\n  ∀ (y : (sDomain 𝔽q β h_ℓ_add_R_rate)\n    ⟨i+1, by omega⟩), f_i_plus_1 y = P_i_plus_1.eval y.val := by\n  simp only\n  intro y\n  set fiberMap := qMap_total_fiber 𝔽q β (i := ⟨i, by omega⟩) (steps := 1)\n    (h_i_add_steps := by simp only; omega) (y := y)\n  set x₀ := fiberMap 0\n  set x₁ := fiberMap 1\n  set P_i := intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i, by omega⟩) coeffs\n  set new_coeffs := fun j : Fin (2^(ℓ - (i + 1))) =>\n    (1 - r_chal) * (coeffs ⟨j.val * 2, by\n      have h : j.val * 2 < 2^(ℓ - (i + 1)) * 2 := by omega\n      have h2 : 2^(ℓ - i) = 2^(ℓ - (i + 1)) * 2 := by\n        conv_rhs => enter[2]; rw [←Nat.pow_one 2]\n        rw [←pow_add]; congr\n        rw [Nat.sub_add_eq_sub_sub_rev (h1 := by omega) (h2 := by omega)]\n        -- ⊢ ℓ - ↑i = ℓ - (↑i + 1 - 1)\n        rw [Nat.add_sub_cancel (n := i) (m := 1)]\n      omega\n    ⟩) +\n    r_chal * (coeffs ⟨j.val * 2 + 1, by\n      apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1)) (i := 1)\n      · omega\n      · omega\n    ⟩)\n  have h_eval_qMap_x₀ : (AdditiveNTT.qMap 𝔽q β ⟨i, by omega⟩).eval x₀.val = y := by\n    have h := iteratedQuotientMap_k_eq_1_is_qMap 𝔽q β h_ℓ_add_R_rate i (by omega) x₀\n    simp only [Subtype.eq_iff] at h\n    rw [h.symm]\n    have h_res := is_fiber_iff_generates_quotient_point 𝔽q β i (steps := 1) (by omega)\n      (x := x₀) (y := y).mpr (by rw [pointToIterateQuotientIndex_qMap_total_fiber_eq_self])\n    rw [h_res]\n    -- exact qMap_eval_fiber_eq_self ⟦L⟧ ⟨i + 1, by omega⟩ (by simp only; omega) h_i_succ_lt y 0\n  have h_eval_qMap_x₁ : (AdditiveNTT.qMap 𝔽q β ⟨i, by omega⟩).eval x₁.val = y := by\n    have h := iteratedQuotientMap_k_eq_1_is_qMap 𝔽q β h_ℓ_add_R_rate i (by omega) x₁\n    simp only [Subtype.eq_iff] at h\n    rw [h.symm]\n    have h_res := is_fiber_iff_generates_quotient_point 𝔽q β i (steps := 1) (by omega)\n      (x := x₁) (y := y).mpr (by rw [pointToIterateQuotientIndex_qMap_total_fiber_eq_self])\n    rw [h_res]\n  have hx₀ := qMap_total_fiber_basis_sum_repr 𝔽q β i (steps := 1)\n    (h_i_add_steps := by omega) y 0\n  have hx₁ := qMap_total_fiber_basis_sum_repr 𝔽q β i (steps := 1)\n    (h_i_add_steps := by omega) y 1\n  simp only at hx₀ hx₁\n\n  have h_fiber_diff : x₁.val - x₀.val = 1 := by\n    simp only [Fin.isValue, x₁, x₀, fiberMap]\n    rw [hx₁, hx₀]\n    simp only [Fin.isValue, AddSubmonoidClass.coe_finset_sum, SetLike.val_smul]\n    have h_index : ℓ + 𝓡 - i = (ℓ + 𝓡 - (i.val + 1)) + 1 := by omega\n    rw! (castMode := .all) [h_index]\n    rw [Fin.sum_univ_succ, Fin.sum_univ_succ] -- (free_term + y_repr) - (free_term + y_repr) = 1\n    -- First, simplify the free terms\n    simp only [fiber_coeff, eqRec_eq_cast, lt_one_iff, reducePow, Fin.isValue,\n      Fin.coe_ofNat_eq_mod, mod_succ, dite_smul, ite_smul, zero_smul, one_smul, zero_mod]\n    have h_cast_0 :\n        (cast (Eq.symm h_index ▸ rfl : Fin (ℓ + 𝓡 - (↑i + 1) + 1) = Fin (ℓ + 𝓡 - ↑i)) 0).val =\n        0 := by\n      rw [←Fin.cast_eq_cast (h := by omega)]\n      rw [Fin.cast_val_eq_val (h_eq := by omega)]\n      simp only [Fin.coe_ofNat_eq_mod, mod_succ_eq_iff_lt, lt_add_iff_pos_left]\n      omega\n    have h_cast_1 :\n        (cast (Eq.symm h_index ▸ rfl : Fin (ℓ + 𝓡 - (↑i + 1) + 1) = Fin (ℓ + 𝓡 - ↑i)) 1).val =\n        1 := by\n      rw [←Fin.cast_eq_cast (h := by omega)]\n      rw [Fin.cast_val_eq_val (h_eq := by omega)]\n      simp only [Fin.coe_ofNat_eq_mod, mod_succ_eq_iff_lt, succ_eq_add_one,\n        lt_add_iff_pos_left, tsub_pos_iff_lt]\n      omega\n    simp only [h_cast_0, ↓reduceDIte]\n    have h_getBit_0_of_0 : Nat.getBit (k := 0) (n := 0) = 0 := by\n      simp only [getBit, shiftRight_zero, and_one_is_mod, zero_mod]\n    have h_getBit_0_of_1 : Nat.getBit (k := 0) (n := 1) = 1 := by\n      simp only [getBit, shiftRight_zero, Nat.and_self]\n    simp only [h_getBit_0_of_1, one_ne_zero, ↓reduceIte, h_getBit_0_of_0, zero_add]\n    rw! (castMode := .all) [←h_index]\n    rw [cast_eq]\n    simp only [get_sDomain_basis, Fin.coe_ofNat_eq_mod, zero_mod, add_zero, cast_eq]\n    rw [normalizedWᵢ_eval_βᵢ_eq_1 𝔽q β]\n    ring_nf\n    conv_rhs => rw [←add_zero (a := 1)]\n    rw [add_sub_assoc]\n    congr 1\n    rw [sub_eq_zero]\n    apply Finset.sum_congr (h := by rfl)\n    simp only [mem_univ, congr_eqRec, Fin.val_succ, Nat.add_eq_zero, one_ne_zero, and_false,\n      ↓reduceDIte, add_tsub_cancel_right, Fin.eta, imp_self, implies_true]\n  set P_i_plus_1 :=\n    intermediateEvaluationPoly 𝔽q β h_ℓ_add_R_rate (i := ⟨i+1, by omega⟩) new_coeffs\n  -- Set up the even and odd refinement polynomials\n  set P₀_coeffs := fun j : Fin (2^(ℓ - (i + 1))) => coeffs ⟨j.val * 2, by\n    have h1 : ℓ - (i + 1) + 1 = ℓ - i := by omega\n    have h2 : 2^(ℓ - (i + 1) + 1) = 2^(ℓ - i) := by rw [h1]\n    have h3 : 2^(ℓ - (i + 1)) * 2 = 2^(ℓ - (i + 1) + 1) := by rw [pow_succ]\n    rw [← h2, ← h3]; omega⟩\n  set P₁_coeffs := fun j : Fin (2^(ℓ - (i + 1))) => coeffs ⟨j.val * 2 + 1, by\n    have h1 : ℓ - (i + 1) + 1 = ℓ - i := by omega\n    have h2 : 2^(ℓ - (i + 1) + 1) = 2^(ℓ - i) := by rw [h1]\n    have h3 : 2^(ℓ - (i + 1)) * 2 = 2^(ℓ - (i + 1) + 1) := by rw [pow_succ]\n    rw [← h2, ← h3]; omega⟩\n  set P₀ := evenRefinement 𝔽q β h_ℓ_add_R_rate i coeffs\n  set P₁ := oddRefinement 𝔽q β h_ℓ_add_R_rate i coeffs\n  have h_P_i_eval := evaluation_poly_split_identity 𝔽q β h_ℓ_add_R_rate ⟨i, by omega⟩ coeffs\n  -- Equation 39 : P^(i)(X) = P₀^(i+1)(q^(i)(X)) + X · P₁^(i+1)(q^(i)(X))\n  have h_equation_39_x₀ : P_i.eval x₀.val = P₀.eval y.val + x₀.val * P₁.eval y.val := by\n    simp only [h_P_i_eval, Fin.eta, Polynomial.eval_add, eval_comp,\n      h_eval_qMap_x₀, Polynomial.eval_mul, Polynomial.eval_X, P_i, P₀, P₁]\n  have h_equation_39_x₁ : P_i.eval x₁.val = P₀.eval y.val + x₁.val * P₁.eval y.val := by\n    simp only [h_P_i_eval, Fin.eta, Polynomial.eval_add, eval_comp,\n      h_eval_qMap_x₁, Polynomial.eval_mul, Polynomial.eval_X, P_i, P₀, P₁]\n  set f_i := fun (x : (sDomain 𝔽q β h_ℓ_add_R_rate) ⟨i, by omega⟩) => P_i.eval (x.val : L)\n  set f_i_plus_1 := fold (i := ⟨i, by omega⟩) (h_i := by omega) (f := f_i) (r_chal := r_chal)\n  -- Unfold the definition of f_i_plus_1 using the fold function\n  have h_fold_def : f_i_plus_1 y =\n      f_i x₀ * ((1 - r_chal) * x₁.val - r_chal) +\n      f_i x₁ * (r_chal - (1 - r_chal) * x₀.val) := rfl\n  -- Main calculation following the outline\n  calc f_i_plus_1 y\n    = f_i x₀ * ((1 - r_chal) * x₁.val - r_chal) +\n        f_i x₁ * (r_chal - (1 - r_chal) * x₀.val) := h_fold_def\n    _ = P_i.eval x₀.val * ((1 - r_chal) * x₁.val - r_chal) +\n        P_i.eval x₁.val * (r_chal - (1 - r_chal) * x₀.val) := by simp only [f_i]\n    _ = (P₀.eval y.val + x₀.val * P₁.eval y.val) * ((1 - r_chal) * x₁.val - r_chal) +\n        (P₀.eval y.val + x₁.val * P₁.eval y.val) * (r_chal - (1 - r_chal) * x₀.val) := by\n      rw [h_equation_39_x₀, h_equation_39_x₁]\n    _ = P₀.eval y.val * ((1 - r_chal) * x₁.val - r_chal + r_chal - (1 - r_chal) * x₀.val) +\n        P₁.eval y.val * (x₀.val * ((1 - r_chal) * x₁.val - r_chal) +\n          x₁.val * (r_chal - (1 - r_chal) * x₀.val)) := by ring\n    _ = P₀.eval y.val * ((1 - r_chal) * (x₁.val - x₀.val)) +\n        P₁.eval y.val * ((x₁.val - x₀.val) * r_chal) := by ring\n    _ = P₀.eval y.val * (1 - r_chal) + P₁.eval y.val * r_chal := by rw [h_fiber_diff]; ring\n    _ = P_i_plus_1.eval y.val := by\n      simp only [P_i_plus_1, P₀, P₁, new_coeffs, evenRefinement, oddRefinement,\n        intermediateEvaluationPoly]\n      conv_lhs => enter [1]; rw [mul_comm, ←Polynomial.eval_C_mul]\n      conv_lhs => enter [2]; rw [mul_comm, ←Polynomial.eval_C_mul]\n      -- ⊢ eval y (C (1-r) * ∑...) + eval y (C r * ∑...) = eval y (∑...)\n      rw [←Polynomial.eval_add]\n      -- ⊢ poly_left.eval y = poly_right.eval y\n      congr\n      simp_rw [mul_sum, ←Finset.sum_add_distrib]\n      -- We now prove that the terms inside the sums are equal for each index.\n      apply Finset.sum_congr rfl\n      intro j hj\n      have h_j_lt : j.val < 2 ^ (ℓ - (↑i + 1)) := by\n        rw [Nat.sub_add_eq]\n        omega\n      conv_lhs => enter [1]; rw [mul_comm (a := Polynomial.C (coeffs ⟨j.val * 2, by\n        rw [←Nat.add_zero (j.val * 2)]\n        apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))\n          (i := 0) (by omega) (by omega)⟩)), ←mul_assoc,\n        mul_comm (a := Polynomial.C (1 - r_chal))]; rw [mul_assoc]\n      conv_lhs => enter [2]; rw [mul_comm (a := Polynomial.C (coeffs ⟨j.val * 2 + 1, by\n        apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))\n          (i := 1) (by omega) (by omega)⟩)), ←mul_assoc,\n        mul_comm (a := Polynomial.C r_chal)]; rw [mul_assoc]\n      conv_rhs => rw [mul_comm]\n      rw [←mul_add]\n      congr\n      simp only [←Polynomial.C_mul, ←Polynomial.C_add]",
+  "labels": [
+   "delete `succ_eq_add_one` from the simp list"
+  ],
+  "primary_score": 33.56,
+  "full": {
+   "ok": true,
+   "tokens": 1901,
+   "heartbeats": 45877,
+   "L": 0.26,
+   "H": 0.43,
+   "Z": 100.0,
+   "score": 33.56
+  }
+ },
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 1906 tokens, 46028 heartbeats, score 33.37. Free passes applied (lint_delete): start candidate 1903 tokens, 46027 heartbeats, score 33.42.\n- Best combination of the paying single edits below: 1901 tokens, 45877 heartbeats, score 33.56 (Z 100.0); your workspace starts from it.\n- Exchange rate here: 1 token = 0.017 points, 100 heartbeats = 0.072 points.\n- Single edits that PAY:\n  - line 61: delete `succ_eq_add_one` from the simp list: -2 tokens, -150 hb, score +0.14\n  - line 61: delete `lt_add_iff_pos_left` from the simp list: -2 tokens, -142 hb, score +0.14\n- Compile but do not pay alone: line 106 the proof of `have h_equation_39_x₀ : P_i.eval x₀.val…` (line 106) by `aesop` (-22 tok, +33260 hb); line 109 the proof of `have h_equation_39_x₁ : P_i.eval x₁.val…` (line 109) by `aesop` (-22 tok, +39297 hb); line 72 the proof of `have h_getBit_0_of_0 : Nat.getBit (k :=…` (line 72) by `aesop` (-10 tok, +60444 hb).\n- Deletions that FAIL (needed as they stand): line 27 `Subtype.eq_iff` from the simp list; line 35 `Subtype.eq_iff` from the simp list; line 47 `x₁` from the simp list; line 47 `x₀` from the simp list; line 47 `fiberMap` from the simp list; line 49 `AddSubmonoidClass.coe_finset_sum` from the simp list.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the proof of `have h_fiber_diff : x₁.val - x₀.val = 1…` (line 46) (grind/simp_all/aesop); the proof of `have h_eval_qMap_x₀ : (AdditiveNTT.qMap…` (line 25) (grind/simp_all/aesop); the proof of `have h_eval_qMap_x₁ : (AdditiveNTT.qMap…` (line 33) (grind/simp_all/aesop); the proof of `have h2 : 2^(ℓ - i) = 2^(ℓ - (i + 1)) *…` (line 12) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 33.56,
+ "gain": 0.19,
+ "compiles_sweep": 80,
+ "seconds": 1953.5,
+ "source": "seed"
+}

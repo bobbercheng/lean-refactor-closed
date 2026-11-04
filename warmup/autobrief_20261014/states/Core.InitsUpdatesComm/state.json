@@ -1,0 +1,2372 @@
+{
+ "problem": "Core.InitsUpdatesComm",
+ "best": {
+  "score": 87.04,
+  "proof": "theorem InitsUpdatesComm\n  {P : PureExpr} {σ σ' σ'' : SemanticStore P}\n  {ks ks' : List P.Ident} {vs vs' : List P.Expr} :\n  UpdateStates σ ks vs σ' →\n  InitStates σ' ks' vs' σ'' →\n  ∃ σ₁,\n    σ₁ = (updatedStates σ ks' vs') ∧\n    InitStates σ ks' vs' σ₁ ∧\n    UpdateStates σ₁ ks vs σ'' := by\n  intro hu hi\n  let hn := UpdateStatesNotDefMonotone' (InitStatesNotDefined hi) hu\n  have := InitStatesLength hi\n  refine ⟨_, rfl, updatedStatesInit this hn $ InitStatesNodup hi, ?_⟩\n  let := UpdateStatesLength hu\n  cases InitStatesUpdated hi\n  cases UpdateStatesUpdated hu\n  unfold updatedStates\n  rw [updatedStatesComm]\n  exact updatedStatesUpdate this $ updatedStatesDefMonotone $ UpdateStatesDefined' hu\n  simp_all [List.unzip_zip]\n  intro x hx hx'\n  cases hn x hx' ▸ UpdateStatesDefined' hu x hx",
+  "tokens": 73,
+  "heartbeats": 271,
+  "L": 67.41,
+  "H": 93.7,
+  "Z": 100.0,
+  "compat": {
+   "v4.29.1": true,
+   "v4.27.0": true,
+   "v4.26.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "3b5617238bce",
+   "tokens": 236,
+   "heartbeats": 2036,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T04:59:11Z",
+   "score": 49.1
+  },
+  {
+   "sha": "81a80c4075df",
+   "tokens": 115,
+   "heartbeats": 531,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T04:59:55Z",
+   "score": 78.77
+  },
+  {
+   "sha": "cf02ed2b7ca9",
+   "tokens": 93,
+   "heartbeats": 487,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:00:11Z",
+   "score": 82.39
+  },
+  {
+   "sha": "1bffe5a9546e",
+   "tokens": 87,
+   "heartbeats": 459,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:00:14Z",
+   "score": 83.5
+  },
+  {
+   "sha": "dcd452948dff",
+   "tokens": 83,
+   "heartbeats": 480,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:00:32Z",
+   "score": 83.93
+  },
+  {
+   "sha": "3ad1411fc014",
+   "tokens": 92,
+   "heartbeats": 256,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:00:36Z",
+   "score": 84.33
+  },
+  {
+   "sha": "e65e49de1a14",
+   "tokens": 83,
+   "heartbeats": 503,
+   "ok": false,
+   "error": "967:33: unsolved goals … [hypotheses omitted] ⊢ ∀ ⦃a : P.Ident⦄, a ∈ ks → ¬a ∈ ks'",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:00:55Z"
+  },
+  {
+   "sha": "2e04fc9ba6dd",
+   "tokens": 78,
+   "heartbeats": 337,
+   "ok": false,
+   "error": "977:2: Type mismatch: After simplification, term hk has type isDefined σ ks but is expected to have type ∀ ⦃a : P.Ident⦄, a ∈ ks → ¬a ∈ ks'",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:00:56Z"
+  },
+  {
+   "sha": "a75a086163dd",
+   "tokens": 89,
+   "heartbeats": 254,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:01:11Z",
+   "score": 84.79
+  },
+  {
+   "sha": "5dcb10f5308b",
+   "tokens": 88,
+   "heartbeats": 254,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:01:15Z",
+   "score": 84.94
+  },
+  {
+   "sha": "16dbefe0dc68",
+   "tokens": 87,
+   "heartbeats": 271,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:01:33Z",
+   "score": 84.95
+  },
+  {
+   "sha": "7303b4b74d9f",
+   "tokens": 87,
+   "heartbeats": 296,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:01:37Z"
+  },
+  {
+   "sha": "5c95f029164e",
+   "tokens": 110,
+   "heartbeats": 208,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:02:24Z"
+  },
+  {
+   "sha": "4e8c98a1ce84",
+   "tokens": 81,
+   "heartbeats": null,
+   "ok": false,
+   "error": "973:3: unknown tactic",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:02:26Z"
+  },
+  {
+   "sha": "a18a257101e5",
+   "tokens": 88,
+   "heartbeats": 269,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:02:27Z"
+  },
+  {
+   "sha": "e457bf2eaacb",
+   "tokens": 83,
+   "heartbeats": 445,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:02:45Z"
+  },
+  {
+   "sha": "1228430a5a6d",
+   "tokens": 87,
+   "heartbeats": 165,
+   "ok": false,
+   "error": "975:9: invalid `▸` notation, expected result type of cast is UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs') however, the equality Eq.symm (updatedStatesComm ?m.87) of type updatedStates' (updatedStates' ?m.84 ?m.86) ?m.85 = updatedStates' (updatedStates'",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:02:46Z"
+  },
+  {
+   "sha": "ae01b2815508",
+   "tokens": 81,
+   "heartbeats": 1388,
+   "ok": false,
+   "error": "977:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] UpdateStates σ ks vs σ' [prop] InitStates σ' ks' vs' σ'' [prop] isNotDefined σ ks' [prop] ks'.length = vs'.length [prop] isDefined σ ks [prop] ks.length = vs.length [prop] ks.Disjoi",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:03:43Z"
+  },
+  {
+   "sha": "6263bf421101",
+   "tokens": 66,
+   "heartbeats": 26095,
+   "ok": false,
+   "error": "974:2: `grind` failed case grind.1.1.1.1.1.1.1.1.1.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] UpdateStates σ ks vs σ' [prop] InitStates σ' ks' vs' σ'' [prop] isNotDefined σ ks' [prop] ks'.length = vs'.length [prop] isDefined σ ks [prop] ks.length = ",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:04:13Z"
+  },
+  {
+   "sha": "eb2ece1f2f4b",
+   "tokens": 83,
+   "heartbeats": 438,
+   "ok": false,
+   "error": "967:33: unsolved goals … [hypotheses omitted] ⊢ False",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:04:49Z"
+  },
+  {
+   "sha": "b54fe907b364",
+   "tokens": 90,
+   "heartbeats": 272,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:04:51Z"
+  },
+  {
+   "sha": "291c39264c84",
+   "tokens": 83,
+   "heartbeats": 489,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:04:52Z"
+  },
+  {
+   "sha": "4e286efecc7a",
+   "tokens": 92,
+   "heartbeats": 278,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:05:04Z"
+  },
+  {
+   "sha": "6f6f0c8d3597",
+   "tokens": 89,
+   "heartbeats": 271,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:05:06Z"
+  },
+  {
+   "sha": "b88e0ec6d5a8",
+   "tokens": 89,
+   "heartbeats": 276,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:05:41Z"
+  },
+  {
+   "sha": "5d67b2d048b1",
+   "tokens": 89,
+   "heartbeats": 301,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:05:43Z"
+  },
+  {
+   "sha": "9e6a4617d051",
+   "tokens": 84,
+   "heartbeats": 298,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:06:03Z",
+   "score": 85.19
+  },
+  {
+   "sha": "2f20c16ee571",
+   "tokens": 86,
+   "heartbeats": 270,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:06:06Z"
+  },
+  {
+   "sha": "9660bdf97498",
+   "tokens": 83,
+   "heartbeats": 308,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:06:28Z",
+   "score": 85.26
+  },
+  {
+   "sha": "b64449e9e08a",
+   "tokens": 85,
+   "heartbeats": 289,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:06:31Z"
+  },
+  {
+   "sha": "9a3d5919fc36",
+   "tokens": 73,
+   "heartbeats": 416,
+   "ok": false,
+   "error": "967:33: unsolved goals … [hypotheses omitted] ⊢ ks.Disjoint ks'",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:40:02Z"
+  },
+  {
+   "sha": "3903c916f5f1",
+   "tokens": 79,
+   "heartbeats": 475,
+   "ok": false,
+   "error": "967:33: unsolved goals … [hypotheses omitted] ⊢ False",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:40:03Z"
+  },
+  {
+   "sha": "9d29e6f89a00",
+   "tokens": 84,
+   "heartbeats": 269,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:40:04Z",
+   "score": 85.41
+  },
+  {
+   "sha": "ba174b49fd4b",
+   "tokens": 83,
+   "heartbeats": null,
+   "ok": false,
+   "error": "974:3: unknown tactic",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:40:22Z"
+  },
+  {
+   "sha": "1f8df19e22be",
+   "tokens": 83,
+   "heartbeats": 269,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:40:24Z",
+   "score": 85.56
+  },
+  {
+   "sha": "3a66602f5ffb",
+   "tokens": 85,
+   "heartbeats": 260,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:40:26Z"
+  },
+  {
+   "sha": "d8665e458fbf",
+   "tokens": 82,
+   "heartbeats": 269,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:41:18Z",
+   "score": 85.71
+  },
+  {
+   "sha": "66200d65857c",
+   "tokens": 77,
+   "heartbeats": 520,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:41:21Z"
+  },
+  {
+   "sha": "32d04b39d72e",
+   "tokens": 82,
+   "heartbeats": 269,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:41:22Z"
+  },
+  {
+   "sha": "9c6cb4bc6c63",
+   "tokens": 81,
+   "heartbeats": 270,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:41:39Z",
+   "score": 85.85
+  },
+  {
+   "sha": "c08d335f3eb1",
+   "tokens": 81,
+   "heartbeats": 270,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:41:42Z"
+  },
+  {
+   "sha": "30e8dd384424",
+   "tokens": 76,
+   "heartbeats": 400,
+   "ok": false,
+   "error": "978:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] UpdateStates σ ks vs σ' [prop] InitStates σ' ks' vs' σ'' [prop] isNotDefined σ ks' [prop] isDefined σ ks [prop] ks'.length = vs'.length [prop] ks.length = vs.length [prop] ¬ks.Disjo",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:42:07Z"
+  },
+  {
+   "sha": "aa528ab3c38d",
+   "tokens": 74,
+   "heartbeats": 351,
+   "ok": false,
+   "error": "978:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] UpdateStates σ ks vs σ' [prop] InitStates σ' ks' vs' σ'' [prop] isNotDefined σ ks' [prop] isDefined σ ks [prop] ks'.length = vs'.length [prop] ks.length = vs.length [prop] ¬ks.Disjo",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:42:08Z"
+  },
+  {
+   "sha": "b0d2b77136ea",
+   "tokens": 82,
+   "heartbeats": 296,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:42:09Z"
+  },
+  {
+   "sha": "51f906185327",
+   "tokens": 113,
+   "heartbeats": 261,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:43:31Z"
+  },
+  {
+   "sha": "eb624a77888b",
+   "tokens": 83,
+   "heartbeats": 318,
+   "ok": false,
+   "error": "978:16: Application type mismatch: The argument hx' has type x ∈ List.map Prod.fst ?m.86 but is expected to have type x ∈ ks' in the application hn x hx'",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:43:48Z"
+  },
+  {
+   "sha": "5c3a2d75f116",
+   "tokens": 81,
+   "heartbeats": 165,
+   "ok": false,
+   "error": "975:9: invalid `▸` notation, expected result type of cast is UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs') however, the equality Eq.symm (updatedStatesComm ?m.87) of type updatedStates' (updatedStates' ?m.84 ?m.86) ?m.85 = updatedStates' (updatedStates'",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:44:00Z"
+  },
+  {
+   "sha": "20b25288ae03",
+   "tokens": 79,
+   "heartbeats": 223,
+   "ok": false,
+   "error": "975:7: Tactic `rewrite` failed: Did not find an occurrence of the pattern update … [hypotheses omitted] ⊢ UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs')",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:44:15Z"
+  },
+  {
+   "sha": "75a82b93dcbb",
+   "tokens": 77,
+   "heartbeats": 117,
+   "ok": false,
+   "error": "974:52: Tactic `rewrite` failed: Did not find an occurrence of the pattern updat … [hypotheses omitted] ⊢ UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs')",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:44:56Z"
+  },
+  {
+   "sha": "8b453ea185cb",
+   "tokens": 78,
+   "heartbeats": 467,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:45:20Z"
+  },
+  {
+   "sha": "71f86e779ec0",
+   "tokens": 83,
+   "heartbeats": 275,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:45:21Z"
+  },
+  {
+   "sha": "fb77053940e6",
+   "tokens": 85,
+   "heartbeats": 435,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:45:46Z"
+  },
+  {
+   "sha": "6aad9f316724",
+   "tokens": 82,
+   "heartbeats": 267,
+   "ok": false,
+   "error": "979:2: Type mismatch: After simplification, term hk x hx has type none.isSome = true but is expected to have type False",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:45:47Z"
+  },
+  {
+   "sha": "daeff1cb9212",
+   "tokens": 80,
+   "heartbeats": 278,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:46:18Z",
+   "score": 85.94
+  },
+  {
+   "sha": "41b80f31ac97",
+   "tokens": 82,
+   "heartbeats": 269,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:46:22Z"
+  },
+  {
+   "sha": "32982c2b7f30",
+   "tokens": 79,
+   "heartbeats": 271,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:19:17Z",
+   "score": 86.14
+  },
+  {
+   "sha": "416e19fdb00b",
+   "tokens": 81,
+   "heartbeats": 277,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:19:19Z"
+  },
+  {
+   "sha": "7d2f88ae80f5",
+   "tokens": 84,
+   "heartbeats": 245,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:19:20Z"
+  },
+  {
+   "sha": "9b59ad926a18",
+   "tokens": 80,
+   "heartbeats": 278,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:19:21Z"
+  },
+  {
+   "sha": "3f2c2a4c1194",
+   "tokens": 81,
+   "heartbeats": 279,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:19:22Z"
+  },
+  {
+   "sha": "d831a57c4d4f",
+   "tokens": 81,
+   "heartbeats": 235,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:20:08Z"
+  },
+  {
+   "sha": "94998418522c",
+   "tokens": 81,
+   "heartbeats": 314,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:20:09Z"
+  },
+  {
+   "sha": "99145c8bec38",
+   "tokens": 80,
+   "heartbeats": 262,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:20:10Z"
+  },
+  {
+   "sha": "d1f97dd5a898",
+   "tokens": 79,
+   "heartbeats": null,
+   "ok": false,
+   "error": "974:3: unknown tactic",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:51:40Z"
+  },
+  {
+   "sha": "8f6b94dee79a",
+   "tokens": 80,
+   "heartbeats": 271,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:51:41Z"
+  },
+  {
+   "sha": "86d23785f2b2",
+   "tokens": 81,
+   "heartbeats": 181,
+   "ok": false,
+   "error": "975:8: invalid `▸` notation, the equality Eq.symm (updatedStatesComm ?m.78) has type updatedStates' (updatedStates' ?m.75 ?m.77) ?m.76 = updatedStates' (updatedStates' ?m.75 ?m.76) ?m.77 but neither side of the equality is mentioned in the type UpdateStates (updatedStates' σ ?m.89) ks vs (updatedSta",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:52:03Z"
+  },
+  {
+   "sha": "c72bfce11d0b",
+   "tokens": 75,
+   "heartbeats": 595,
+   "ok": false,
+   "error": "967:33: unsolved goals … [hypotheses omitted] ⊢ ∀ ⦃a : P.Ident⦄, a ∈ ks → ¬a ∈ ks'",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:52:41Z"
+  },
+  {
+   "sha": "3f96ec3bb4f4",
+   "tokens": 73,
+   "heartbeats": 446,
+   "ok": false,
+   "error": "978:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] UpdateStates σ ks vs σ' [prop] InitStates σ' ks' vs' σ'' [prop] isNotDefined σ ks' [prop] isDefined σ ks [prop] ks'.length = vs'.length [prop] ks.length = vs.length [prop] ¬ks.Disjo",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:53:05Z"
+  },
+  {
+   "sha": "a328d8a0ca06",
+   "tokens": 83,
+   "heartbeats": 258,
+   "ok": false,
+   "error": "979:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern σ x in the target expression isDefined σ ks … [hypotheses omitted] ⊢ False",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:53:10Z"
+  },
+  {
+   "sha": "c938b9e73441",
+   "tokens": 105,
+   "heartbeats": 248,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:53:53Z"
+  },
+  {
+   "sha": "666eabf38ea4",
+   "tokens": 75,
+   "heartbeats": 2205,
+   "ok": false,
+   "error": "975:2: Type mismatch updatedStatesUpdate this (updatedStatesDefMonotone hk) has type UpdateStates (updatedStates' σ ?m.79) ks vs (updatedStates (updatedStates' σ ?m.79) ks vs) but is expected to have type UpdateStates (updatedStates' σ (ks'.zip vs')) ks vs (updatedStates' (updatedStates' σ (ks.zip v",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:53:54Z"
+  },
+  {
+   "sha": "3115a502ef0b",
+   "tokens": 75,
+   "heartbeats": 441,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:54:15Z"
+  },
+  {
+   "sha": "dcf511917636",
+   "tokens": 79,
+   "heartbeats": 272,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:54:16Z"
+  },
+  {
+   "sha": "a999360b34ac",
+   "tokens": 76,
+   "heartbeats": 438,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:54:38Z"
+  },
+  {
+   "sha": "80f0fa2fcb64",
+   "tokens": 80,
+   "heartbeats": 369,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:54:39Z"
+  },
+  {
+   "sha": "330a9a183f59",
+   "tokens": 78,
+   "heartbeats": 444,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:54:58Z"
+  },
+  {
+   "sha": "aec638c83775",
+   "tokens": 79,
+   "heartbeats": 441,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:54:58Z"
+  },
+  {
+   "sha": "c13c60b84533",
+   "tokens": 75,
+   "heartbeats": 117,
+   "ok": false,
+   "error": "974:52: Tactic `rewrite` failed: Did not find an occurrence of the pattern updat … [hypotheses omitted] ⊢ UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs')",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:55:28Z"
+  },
+  {
+   "sha": "d5854a81cb70",
+   "tokens": 76,
+   "heartbeats": 118,
+   "ok": false,
+   "error": "974:67: Tactic `rewrite` failed: Did not find an occurrence of the pattern updat … [hypotheses omitted] ⊢ UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs')",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:55:34Z"
+  },
+  {
+   "sha": "40bc844bd3df",
+   "tokens": 75,
+   "heartbeats": 177,
+   "ok": false,
+   "error": "974:53: Tactic `rewrite` failed: Did not find an occurrence of the pattern updat … [hypotheses omitted] ⊢ UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs')",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:55:45Z"
+  },
+  {
+   "sha": "7a63e24e8be5",
+   "tokens": 77,
+   "heartbeats": 165,
+   "ok": false,
+   "error": "974:67: Tactic `rewrite` failed: Did not find an occurrence of the pattern updat … [hypotheses omitted] ⊢ UpdateStates (updatedStates' σ (ks'.zip vs')) ks vs (updatedStates (updatedStates σ ks vs) ks' vs')",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:56:21Z"
+  },
+  {
+   "sha": "8abbd8cad72f",
+   "tokens": 79,
+   "heartbeats": 430,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:56:25Z"
+  },
+  {
+   "sha": "866220960ff3",
+   "tokens": 79,
+   "heartbeats": 278,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T06:56:54Z"
+  },
+  {
+   "sha": "c7264f96037d",
+   "tokens": 82,
+   "heartbeats": 234,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:28:08Z"
+  },
+  {
+   "sha": "4e465d235f90",
+   "tokens": 82,
+   "heartbeats": 263,
+   "ok": false,
+   "error": "979:8: invalid `▸` notation, expected result type of cast is False however, the equality Eq.symm (hn x hx') of type none = σ x does not contain the expected result type on either the left or the right hand side",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:28:09Z"
+  },
+  {
+   "sha": "880341d90379",
+   "tokens": 77,
+   "heartbeats": 291,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:28:30Z",
+   "score": 86.29
+  },
+  {
+   "sha": "31a3c26d07a7",
+   "tokens": 87,
+   "heartbeats": 116,
+   "ok": false,
+   "error": "974:8: invalid `▸` notation, the equality Eq.symm (InitStatesUpdated hi) has type updatedStates σ' ks' vs' = σ'' but neither side of the equality is mentioned in the type ?m.81",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:28:33Z"
+  },
+  {
+   "sha": "4925a134514f",
+   "tokens": 91,
+   "heartbeats": 318,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:28:34Z"
+  },
+  {
+   "sha": "8ce44c973bbb",
+   "tokens": 78,
+   "heartbeats": 282,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:30:04Z"
+  },
+  {
+   "sha": "ac78594ebf8d",
+   "tokens": 80,
+   "heartbeats": 251,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:30:05Z"
+  },
+  {
+   "sha": "033612c14a00",
+   "tokens": 76,
+   "heartbeats": 289,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:30:06Z",
+   "score": 86.45
+  },
+  {
+   "sha": "5f20e773e9da",
+   "tokens": 74,
+   "heartbeats": 202,
+   "ok": false,
+   "error": "975:7: Tactic `rewrite` failed: Did not find an occurrence of the pattern update … [hypotheses omitted] ⊢ UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs')",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:30:29Z"
+  },
+  {
+   "sha": "09b854298d89",
+   "tokens": 79,
+   "heartbeats": 142,
+   "ok": false,
+   "error": "975:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern update … [hypotheses omitted] ⊢ UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs')",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:30:34Z"
+  },
+  {
+   "sha": "761a1b9dbc75",
+   "tokens": 76,
+   "heartbeats": 289,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:30:41Z"
+  },
+  {
+   "sha": "1c3ad352b0fa",
+   "tokens": 76,
+   "heartbeats": 139,
+   "ok": false,
+   "error": "975:9: invalid `▸` notation, expected result type of cast is UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs') however, the equality Eq.symm (updatedStatesComm ?m.149) of type updatedStates' (updatedStates' ?m.146 ?m.148) ?m.147 = updatedStates' (updatedSta",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:31:02Z"
+  },
+  {
+   "sha": "3b087b35dcfb",
+   "tokens": 79,
+   "heartbeats": 156,
+   "ok": false,
+   "error": "975:9: don't know how to synthesize implicit argument `β` @Eq.mpr (UpdateStates  … [hypotheses omitted] ⊢ Prop",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:31:03Z"
+  },
+  {
+   "sha": "331f867ad695",
+   "tokens": 74,
+   "heartbeats": 490,
+   "ok": false,
+   "error": "979:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] isNotDefined σ ks' [prop] ks'.length = vs'.length [prop] ks.length = vs.length [prop] UpdateStates σ ks vs (updatedStates σ ks vs) [prop] InitStates (updatedStates σ ks vs) ks' vs' ",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:31:28Z"
+  },
+  {
+   "sha": "257a293b9569",
+   "tokens": 74,
+   "heartbeats": 642,
+   "ok": false,
+   "error": "978:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] isNotDefined σ ks' [prop] ks'.length = vs'.length [prop] ks.length = vs.length [prop] UpdateStates σ ks vs (updatedStates σ ks vs) [prop] InitStates (updatedStates σ ks vs) ks' vs' ",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:31:29Z"
+  },
+  {
+   "sha": "173d9e58d528",
+   "tokens": 76,
+   "heartbeats": 434,
+   "ok": false,
+   "error": "980:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] isNotDefined σ ks' [prop] ks'.length = vs'.length [prop] ks.length = vs.length [prop] UpdateStates σ ks vs (updatedStates σ ks vs) [prop] InitStates (updatedStates σ ks vs) ks' vs' ",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:31:30Z"
+  },
+  {
+   "sha": "8f331ff0d795",
+   "tokens": 124,
+   "heartbeats": 230,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:32:25Z"
+  },
+  {
+   "sha": "51c9adc68a60",
+   "tokens": 77,
+   "heartbeats": 280,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:07:52Z"
+  },
+  {
+   "sha": "56b5d0ec47bc",
+   "tokens": 82,
+   "heartbeats": 277,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:07:53Z"
+  },
+  {
+   "sha": "7d5f42725446",
+   "tokens": 79,
+   "heartbeats": 251,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:07:54Z"
+  },
+  {
+   "sha": "d7d9f1bf36c0",
+   "tokens": 76,
+   "heartbeats": 292,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:08:13Z"
+  },
+  {
+   "sha": "f19b1f9b1d49",
+   "tokens": 76,
+   "heartbeats": 293,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:08:14Z"
+  },
+  {
+   "sha": "167696cd723c",
+   "tokens": 76,
+   "heartbeats": 292,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:08:15Z"
+  },
+  {
+   "sha": "423c24230c30",
+   "tokens": 72,
+   "heartbeats": 475,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:08:45Z"
+  },
+  {
+   "sha": "71cc383b2666",
+   "tokens": 78,
+   "heartbeats": 294,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:08:46Z"
+  },
+  {
+   "sha": "f99a67f4d8f1",
+   "tokens": 78,
+   "heartbeats": 455,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:08:49Z"
+  },
+  {
+   "sha": "6e573617b825",
+   "tokens": 73,
+   "heartbeats": 453,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:09:33Z"
+  },
+  {
+   "sha": "db0cbe79ebaf",
+   "tokens": 115,
+   "heartbeats": 258,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:10:24Z"
+  },
+  {
+   "sha": "aa03ac21e20a",
+   "tokens": 90,
+   "heartbeats": 161,
+   "ok": false,
+   "error": "976:53: `@[grind →] theorem updatedStatesDefMonotone` failed to find patterns in the antecedents of the theorem, consider using different options or the `grind_pattern` command",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:10:37Z"
+  },
+  {
+   "sha": "ecb32aa63282",
+   "tokens": 110,
+   "heartbeats": 221,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:10:38Z"
+  },
+  {
+   "sha": "041beeaff2e5",
+   "tokens": 91,
+   "heartbeats": 912,
+   "ok": false,
+   "error": "976:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] UpdateStates σ ks vs σ' [prop] InitStates σ' ks' vs' σ'' [prop] isNotDefined σ ks' [prop] ks'.length = vs'.length [prop] isDefined σ ks [prop] ks.Disjoint ks' [prop] updatedStates' ",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:11:11Z"
+  },
+  {
+   "sha": "f766765a5979",
+   "tokens": 80,
+   "heartbeats": 252,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:11:12Z"
+  },
+  {
+   "sha": "cdad58d03d7d",
+   "tokens": 78,
+   "heartbeats": 277,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:11:25Z"
+  },
+  {
+   "sha": "126f5ec2c943",
+   "tokens": 78,
+   "heartbeats": 277,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:11:26Z"
+  },
+  {
+   "sha": "116919042ec8",
+   "tokens": 76,
+   "heartbeats": 292,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:12:05Z"
+  },
+  {
+   "sha": "9ad49f7fd9ec",
+   "tokens": 76,
+   "heartbeats": 287,
+   "ok": false,
+   "error": "977:28: Application type mismatch: The argument this has type ks'.length = vs'.length but is expected to have type ks.length = vs.length in the application updatedStatesUpdate this",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:12:06Z"
+  },
+  {
+   "sha": "1989214afacf",
+   "tokens": 76,
+   "heartbeats": 287,
+   "ok": false,
+   "error": "977:28: Application type mismatch: The argument this has type ks'.length = vs'.length but is expected to have type ks.length = vs.length in the application updatedStatesUpdate this",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:12:06Z"
+  },
+  {
+   "sha": "a948e12a28b6",
+   "tokens": 78,
+   "heartbeats": 371,
+   "ok": false,
+   "error": "978:13: Application type mismatch: The argument hx' has type x ∈ List.map Prod.fst (ks'.zip vs') but is expected to have type x ∈ ks' in the application hn x hx'",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:38:13Z"
+  },
+  {
+   "sha": "f330b2f51b3f",
+   "tokens": 79,
+   "heartbeats": 297,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:38:14Z"
+  },
+  {
+   "sha": "8f1aa6f00323",
+   "tokens": 77,
+   "heartbeats": 296,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:38:45Z"
+  },
+  {
+   "sha": "f99a67f4d8f1",
+   "tokens": 78,
+   "heartbeats": 455,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:38:49Z"
+  },
+  {
+   "sha": "60698eedee3c",
+   "tokens": 76,
+   "heartbeats": 290,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:38:50Z"
+  },
+  {
+   "sha": "fa960631d02e",
+   "tokens": 78,
+   "heartbeats": 307,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:02:15Z"
+  },
+  {
+   "sha": "174874c5a709",
+   "tokens": 84,
+   "heartbeats": 155,
+   "ok": false,
+   "error": "975:90: Invalid argument name `ves` for function `updatedStatesUpdate` Hint: Perhaps you meant one of the following parameter names: • `P`: v̵e̵s̵P̲ • `σ`: v̵e̵s̵σ̲ • `hs`: v̵e̵h̲s • `vs`: ve̵s",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:02:16Z"
+  },
+  {
+   "sha": "6d28a680c584",
+   "tokens": 82,
+   "heartbeats": 284,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:02:48Z"
+  },
+  {
+   "sha": "155e156311f5",
+   "tokens": 74,
+   "heartbeats": 142,
+   "ok": false,
+   "error": "975:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern update … [hypotheses omitted] ⊢ UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs')",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:03:26Z"
+  },
+  {
+   "sha": "ee3b12d389f6",
+   "tokens": 76,
+   "heartbeats": 283,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:03:56Z",
+   "score": 86.5
+  },
+  {
+   "sha": "8169a5d745b7",
+   "tokens": 78,
+   "heartbeats": 485,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:04:49Z"
+  },
+  {
+   "sha": "d3b74f90d6f4",
+   "tokens": 75,
+   "heartbeats": 539,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:04:49Z"
+  },
+  {
+   "sha": "3a909b859656",
+   "tokens": 89,
+   "heartbeats": null,
+   "ok": false,
+   "error": "979:29: unknown tactic",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:04:50Z"
+  },
+  {
+   "sha": "a60842b09bee",
+   "tokens": 95,
+   "heartbeats": 224,
+   "ok": false,
+   "error": "980:30: Type mismatch: After simplification, term hd has type True but is expected to have type (List.map Prod.fst ?m.206).Disjoint (List.map Prod.fst ?m.207)",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:05:22Z"
+  },
+  {
+   "sha": "97354c7eb87e",
+   "tokens": 77,
+   "heartbeats": 432,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:05:23Z"
+  },
+  {
+   "sha": "23a117e9cfb8",
+   "tokens": 74,
+   "heartbeats": 537,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:05:24Z"
+  },
+  {
+   "sha": "ad6aef2416df",
+   "tokens": 76,
+   "heartbeats": 283,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:05:55Z"
+  },
+  {
+   "sha": "13728f155214",
+   "tokens": 74,
+   "heartbeats": 283,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:05:56Z",
+   "score": 86.79
+  },
+  {
+   "sha": "0e8e3d6a197e",
+   "tokens": 73,
+   "heartbeats": 283,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:06:12Z",
+   "score": 86.94
+  },
+  {
+   "sha": "312bebc14330",
+   "tokens": 73,
+   "heartbeats": 289,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:06:14Z"
+  },
+  {
+   "sha": "ad5977c18de1",
+   "tokens": 74,
+   "heartbeats": 275,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:06:57Z"
+  },
+  {
+   "sha": "a23811f58934",
+   "tokens": 76,
+   "heartbeats": 254,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:06:57Z"
+  },
+  {
+   "sha": "e15d2930f083",
+   "tokens": 73,
+   "heartbeats": 283,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:06:58Z"
+  },
+  {
+   "sha": "e33b49c061f5",
+   "tokens": 75,
+   "heartbeats": 263,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:07:30Z"
+  },
+  {
+   "sha": "8e9c6d4b7d32",
+   "tokens": 75,
+   "heartbeats": 142,
+   "ok": false,
+   "error": "975:2: Tactic `clear` failed: variable 'hn' depends on 'hi' case refl.refl … [hypotheses omitted] ⊢ UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs')",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:07:31Z"
+  },
+  {
+   "sha": "fdbbc89b420a",
+   "tokens": 73,
+   "heartbeats": 283,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:07:32Z"
+  },
+  {
+   "sha": "1256f046f1d8",
+   "tokens": 73,
+   "heartbeats": 191,
+   "ok": false,
+   "error": "975:21: Tactic `rewrite` failed: Did not find an occurrence of the pattern updat … [hypotheses omitted] ⊢ UpdateStates (updatedStates' σ (ks'.zip vs')) ks vs (updatedStates (updatedStates σ ks vs) ks' vs')",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:38:40Z"
+  },
+  {
+   "sha": "2eb4ad0001e6",
+   "tokens": 75,
+   "heartbeats": 281,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:38:42Z"
+  },
+  {
+   "sha": "0edfeb75b032",
+   "tokens": 71,
+   "heartbeats": 143,
+   "ok": false,
+   "error": "975:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern update … [hypotheses omitted] ⊢ UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs')",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:39:09Z"
+  },
+  {
+   "sha": "42e7c4836e24",
+   "tokens": 71,
+   "heartbeats": 203,
+   "ok": false,
+   "error": "975:7: Tactic `rewrite` failed: Did not find an occurrence of the pattern update … [hypotheses omitted] ⊢ UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs')",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:39:11Z"
+  },
+  {
+   "sha": "7f13788bdf38",
+   "tokens": 73,
+   "heartbeats": 289,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:39:12Z"
+  },
+  {
+   "sha": "6e3c7e54f094",
+   "tokens": 73,
+   "heartbeats": 299,
+   "ok": false,
+   "error": "977:28: Application type mismatch: The argument this has type ks'.length = vs'.length but is expected to have type ks.length = vs.length in the application updatedStatesUpdate this",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:39:41Z"
+  },
+  {
+   "sha": "6561ed4e56ac",
+   "tokens": 73,
+   "heartbeats": 271,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:39:42Z",
+   "score": 87.04
+  },
+  {
+   "sha": "40de951d6725",
+   "tokens": 73,
+   "heartbeats": 287,
+   "ok": false,
+   "error": "977:28: Application type mismatch: The argument this has type ks'.length = vs'.length but is expected to have type ks.length = vs.length in the application updatedStatesUpdate this",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:39:45Z"
+  },
+  {
+   "sha": "e5babcc57802",
+   "tokens": 111,
+   "heartbeats": 249,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:41:19Z"
+  },
+  {
+   "sha": "a7409b801caa",
+   "tokens": 79,
+   "heartbeats": 235,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:41:45Z"
+  },
+  {
+   "sha": "f0f19771f257",
+   "tokens": 76,
+   "heartbeats": 234,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:41:58Z"
+  },
+  {
+   "sha": "d662ccc36626",
+   "tokens": 75,
+   "heartbeats": 153,
+   "ok": false,
+   "error": "976:9: invalid `▸` notation, the equality Eq.symm (updatedStatesComm ?m.151) has type updatedStates' (updatedStates' ?m.148 ?m.150) ?m.149 = updatedStates' (updatedStates' ?m.148 ?m.149) ?m.150 but neither side of the equality is mentioned in the type isDefined ?m.156 ks → UpdateStates ?m.156 ks vs ",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:42:00Z"
+  },
+  {
+   "sha": "25971701a75b",
+   "tokens": 72,
+   "heartbeats": 209,
+   "ok": false,
+   "error": "977:2: Type mismatch updatedStatesUpdate this (updatedStatesDefMonotone (UpdateStatesDefined' hu)) has type UpdateStates (updatedStates' σ ?m.187) ks vs (updatedStates (updatedStates' σ ?m.187) ks vs) but is expected to have type UpdateStates (updatedStates' σ (ks'.zip vs')) ks vs (updatedStates' (u",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:42:16Z"
+  },
+  {
+   "sha": "128f678a82cd",
+   "tokens": 75,
+   "heartbeats": 163,
+   "ok": false,
+   "error": "976:2: `simp` made no progress",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:42:29Z"
+  },
+  {
+   "sha": "9323b083350f",
+   "tokens": 73,
+   "heartbeats": 271,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:42:33Z"
+  },
+  {
+   "sha": "c41980a29d09",
+   "tokens": 74,
+   "heartbeats": 160,
+   "ok": false,
+   "error": "976:10: don't know how to synthesize implicit argument `σ` @updatedStatesUpdate  … [hypotheses omitted] ⊢ SemanticStore P",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:13:14Z"
+  },
+  {
+   "sha": "e718098ba5e1",
+   "tokens": 74,
+   "heartbeats": 266,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:13:15Z"
+  },
+  {
+   "sha": "99880e805178",
+   "tokens": 75,
+   "heartbeats": 289,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:13:16Z"
+  },
+  {
+   "sha": "dd58e4981681",
+   "tokens": 76,
+   "heartbeats": 255,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:13:17Z"
+  },
+  {
+   "sha": "c78cd77ad153",
+   "tokens": 73,
+   "heartbeats": 271,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:13:47Z"
+  },
+  {
+   "sha": "f0472cca4bc8",
+   "tokens": 73,
+   "heartbeats": 270,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:13:48Z"
+  },
+  {
+   "sha": "5b288ea667a7",
+   "tokens": 73,
+   "heartbeats": 270,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:13:49Z"
+  },
+  {
+   "sha": "ca6029e4ddd2",
+   "tokens": 73,
+   "heartbeats": 271,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:13:50Z"
+  },
+  {
+   "sha": "289d81841785",
+   "tokens": 71,
+   "heartbeats": 591,
+   "ok": false,
+   "error": "978:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] ks'.length = vs'.length [prop] UpdateStates σ ks vs (updatedStates σ ks vs) [prop] ks.length = vs.length [prop] InitStates (updatedStates σ ks vs) ks' vs' (updatedStates (updatedSta",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:14:28Z"
+  },
+  {
+   "sha": "a6b91c749c30",
+   "tokens": 73,
+   "heartbeats": 463,
+   "ok": false,
+   "error": "979:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] ks'.length = vs'.length [prop] UpdateStates σ ks vs (updatedStates σ ks vs) [prop] ks.length = vs.length [prop] InitStates (updatedStates σ ks vs) ks' vs' (updatedStates (updatedSta",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:14:29Z"
+  },
+  {
+   "sha": "9a4b69247df0",
+   "tokens": 76,
+   "heartbeats": 286,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:14:30Z"
+  },
+  {
+   "sha": "e04da5cee926",
+   "tokens": 75,
+   "heartbeats": 272,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:15:16Z"
+  },
+  {
+   "sha": "2e9e32032b0d",
+   "tokens": 74,
+   "heartbeats": 430,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:15:17Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wuclean-hx-solab1-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T04:58:12Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:38:16Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:17:07Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r5",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:49:38Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r6",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:26:31Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r7",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:06:20Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:36:54Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r10",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:01:09Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r11",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:37:09Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r12",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:12:13Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  }
+ ],
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 1,
+    "d_score": 15.77,
+    "d_tokens": 12,
+    "d_heartbeats": 2036,
+    "diff": "+theorem InitsUpdatesComm\n+  {P : PureExpr} {σ σ' σ'' : SemanticStore P}\n+  {ks ks' : List P.Ident} {vs vs' : List P.Expr} :\n+  UpdateStates σ ks vs σ' →\n+  InitStates σ' ks' vs' σ'' →\n+  ∃ σ₁,\n+    σ₁ = (updatedStates σ ks' vs') ∧\n+    InitStates σ ks' vs' σ₁ ∧\n+    UpdateStates σ₁ ks vs σ'' := by\n+  intros Hup Hinit\n+  refine ⟨(updatedStates σ ks' vs'), ?_⟩\n+  have Hk : (isDefined σ' ks) := UpdateStatesDefined Hup\n+  have Hlen1 := InitStatesLength Hinit\n+  have Hlen2 := UpdateStatesLength Hup\n+  induction Hup generalizing σ''\n+  case update_none =>\n+    simp_all\n+    apply And.intro\n+    refine updatedStatesInit Hlen1 ?_ ?_\n+    exact InitStatesNotDefined Hinit\n+    exact InitStatesNodup H"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 2,
+    "d_score": 29.67,
+    "d_tokens": -121,
+    "d_heartbeats": -1505,
+    "diff": "-  intros Hup Hinit\n-  refine ⟨(updatedStates σ ks' vs'), ?_⟩\n-  have Hk : (isDefined σ' ks) := UpdateStatesDefined Hup\n-  have Hlen1 := InitStatesLength Hinit\n-  have Hlen2 := UpdateStatesLength Hup\n-  induction Hup generalizing σ''\n-  case update_none =>\n-    simp_all\n-    apply And.intro\n-    refine updatedStatesInit Hlen1 ?_ ?_\n-    exact InitStatesNotDefined Hinit\n-    exact InitStatesNodup Hinit\n-    simp [InitStatesUpdated Hinit]\n-    constructor\n-  case update_some σ x v σ₀ xs vs σ₁ Hup Hups ih =>\n-    refine ⟨rfl, ?_, ?_⟩\n-    . apply updatedStatesInit Hlen1\n-      apply UpdateStateNotDefMonotone' ?_ Hup\n-      apply UpdateStatesNotDefMonotone' ?_ Hups\n-      exact InitStatesNotDefi"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 3,
+    "d_score": 3.62,
+    "d_tokens": -22,
+    "d_heartbeats": -44,
+    "diff": "+  have hk := UpdateStatesDefined' hu\n-    have hk := UpdateStatesDefined' hu\n-  have he : σ'' = updatedStates (updatedStates σ ks' vs') ks vs := by\n-    rw [InitStatesUpdated hi, UpdateStatesUpdated hu]\n-    exact updatedStatesComm (by simpa [List.unzip_zip, UpdateStatesLength hu, hl] using hd)\n-  rw [he]\n-  exact updatedStatesUpdate (UpdateStatesLength hu) (updatedStatesDefMonotone (UpdateStatesDefined' hu))\n+  rw [InitStatesUpdated hi, UpdateStatesUpdated hu]\n+  unfold updatedStates\n+  rw [updatedStatesComm]\n+  exact updatedStatesUpdate (UpdateStatesLength hu) (updatedStatesDefMonotone hk)\n+  simpa [List.unzip_zip, UpdateStatesLength hu, hl] using hd"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 4,
+    "d_score": 1.11,
+    "d_tokens": -6,
+    "d_heartbeats": -28,
+    "diff": "-  have hd : ks.Disjoint ks' := by\n-    simp only [List.Disjoint, isDefined, isNotDefined] at *\n-    grind\n-  simpa [List.unzip_zip, UpdateStatesLength hu, hl] using hd\n+  simp only [List.unzip_zip (UpdateStatesLength hu), List.unzip_zip hl]\n+  simp only [List.Disjoint, isDefined, isNotDefined] at *\n+  grind"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 5,
+    "d_score": 0.43,
+    "d_tokens": -4,
+    "d_heartbeats": 21,
+    "diff": "-  simp only [List.Disjoint, isDefined, isNotDefined] at *\n-  grind\n+  grind [List.Disjoint, isDefined, isNotDefined]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 6,
+    "d_score": 0.4,
+    "d_tokens": 9,
+    "d_heartbeats": -224,
+    "diff": "-  grind [List.Disjoint, isDefined, isNotDefined]\n+  exact fun x hx hx' => by simpa [hn x hx'] using hk x hx"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 9,
+    "d_score": 0.46,
+    "d_tokens": -3,
+    "d_heartbeats": -2,
+    "diff": "-  exact fun x hx hx' => by simpa [hn x hx'] using hk x hx\n+  intro x hx hx'\n+  simpa [hn x hx'] using hk x hx"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 10,
+    "d_score": 0.15,
+    "d_tokens": -1,
+    "d_heartbeats": 0,
+    "diff": "+  have hu' := UpdateStatesLength hu\n-  exact updatedStatesUpdate (UpdateStatesLength hu) (updatedStatesDefMonotone hk)\n-  simp only [List.unzip_zip (UpdateStatesLength hu), List.unzip_zip hl]\n+  exact updatedStatesUpdate hu' (updatedStatesDefMonotone hk)\n+  simp only [List.unzip_zip hu', List.unzip_zip hl]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 11,
+    "d_score": 0.01,
+    "d_tokens": -1,
+    "d_heartbeats": 17,
+    "diff": "-  simp only [List.unzip_zip hu', List.unzip_zip hl]\n+  simp [List.unzip_zip, hu', hl]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 27,
+    "d_score": 0.24,
+    "d_tokens": -3,
+    "d_heartbeats": 27,
+    "diff": "-  simp [List.unzip_zip, hu', hl]\n+  simp_all only [List.unzip_zip]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 29,
+    "d_score": 0.07,
+    "d_tokens": -1,
+    "d_heartbeats": 10,
+    "diff": "-  simp_all only [List.unzip_zip]\n+  simp_all [List.unzip_zip]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 3,
+    "d_score": 0.15,
+    "d_tokens": 1,
+    "d_heartbeats": -39,
+    "diff": "-  rw [InitStatesUpdated hi, UpdateStatesUpdated hu]\n-  unfold updatedStates\n+  simp only [InitStatesUpdated hi, UpdateStatesUpdated hu, updatedStates]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 5,
+    "d_score": 0.15,
+    "d_tokens": -1,
+    "d_heartbeats": 0,
+    "diff": "-  simp only [InitStatesUpdated hi, UpdateStatesUpdated hu, updatedStates]\n+  simp [InitStatesUpdated hi, UpdateStatesUpdated hu, updatedStates]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 7,
+    "d_score": 0.15,
+    "d_tokens": -1,
+    "d_heartbeats": 0,
+    "diff": "-  have hu' := UpdateStatesLength hu\n+  have := UpdateStatesLength hu\n-  exact updatedStatesUpdate hu' (updatedStatesDefMonotone hk)\n+  exact updatedStatesUpdate this (updatedStatesDefMonotone hk)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 10,
+    "d_score": 0.14,
+    "d_tokens": -1,
+    "d_heartbeats": 1,
+    "diff": "-  have hl := InitStatesLength hi\n+  have := InitStatesLength hi\n+  refine ⟨_, rfl, updatedStatesInit this hn (InitStatesNodup hi), ?_⟩\n-  refine ⟨_, rfl, updatedStatesInit hl hn (InitStatesNodup hi), ?_⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 24,
+    "d_score": 0.09,
+    "d_tokens": -1,
+    "d_heartbeats": 8,
+    "diff": "-  simpa [hn x hx'] using hk x hx\n+  exact nomatch hn x hx' ▸ hk x hx"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 1,
+    "d_score": 0.2,
+    "d_tokens": -1,
+    "d_heartbeats": -7,
+    "diff": "-  exact nomatch hn x hx' ▸ hk x hx\n+  cases hn x hx' ▸ hk x hx"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 3,
+    "d_score": 0.15,
+    "d_tokens": -2,
+    "d_heartbeats": 20,
+    "diff": "-  simp [InitStatesUpdated hi, UpdateStatesUpdated hu, updatedStates]\n+  cases InitStatesUpdated hi\n+  cases UpdateStatesUpdated hu\n+  unfold updatedStates"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 8,
+    "d_score": 0.16,
+    "d_tokens": -1,
+    "d_heartbeats": -2,
+    "diff": "-  have hk := UpdateStatesDefined' hu\n-  exact updatedStatesUpdate this (updatedStatesDefMonotone hk)\n+  exact updatedStatesUpdate this (updatedStatesDefMonotone (UpdateStatesDefined' hu))\n-  cases hn x hx' ▸ hk x hx\n+  cases hn x hx' ▸ UpdateStatesDefined' hu x hx"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 5,
+    "d_score": 0.05,
+    "d_tokens": 0,
+    "d_heartbeats": -6,
+    "diff": "-  have hn := UpdateStatesNotDefMonotone' (InitStatesNotDefined hi) hu\n+  let hn := UpdateStatesNotDefMonotone' (InitStatesNotDefined hi) hu"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 13,
+    "d_score": 0.29,
+    "d_tokens": -2,
+    "d_heartbeats": 0,
+    "diff": "-  exact updatedStatesUpdate this (updatedStatesDefMonotone (UpdateStatesDefined' hu))\n+  exact updatedStatesUpdate this $ updatedStatesDefMonotone $ UpdateStatesDefined' hu"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r10",
+    "check": 14,
+    "d_score": 0.15,
+    "d_tokens": -1,
+    "d_heartbeats": 0,
+    "diff": "-  refine ⟨_, rfl, updatedStatesInit this hn (InitStatesNodup hi), ?_⟩\n+  refine ⟨_, rfl, updatedStatesInit this hn $ InitStatesNodup hi, ?_⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r11",
+    "check": 7,
+    "d_score": 0.1,
+    "d_tokens": 0,
+    "d_heartbeats": -12,
+    "diff": "-  have := UpdateStatesLength hu\n+  let := UpdateStatesLength hu"
+   }
+  ]
+ },
+ "api_spend": 2.579112,
+ "profile_cache": {
+  "1f8df19e22be": {
+   "ok": true,
+   "total": 269,
+   "floor": null,
+   "reference": 4300,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "intro hu hi",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "have hn := UpdateStatesNotDefMonotone' (InitStatesNotDefined hi) hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "have hl := InitStatesLength hi",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "have hk := UpdateStatesDefined' hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "have hu' := UpdateStatesLength hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "refine ⟨_, rfl, updatedStatesInit hl hn (InitStatesNodup hi), ?_⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "simp [InitStatesUpdated hi, UpdateStatesUpdated hu, updatedStates]",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "rw [updatedStatesComm]",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "exact updatedStatesUpdate hu' (updatedStatesDefMonotone hk)",
+     "heartbeats": null
+    },
+    {
+     "lines": "19-19",
+     "depth_indent": 2,
+     "text": "simp_all [List.unzip_zip]",
+     "heartbeats": null
+    },
+    {
+     "lines": "20-20",
+     "depth_indent": 2,
+     "text": "intro x hx hx'",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "simpa [hn x hx'] using hk x hx",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "daeff1cb9212": {
+   "ok": true,
+   "total": 278,
+   "floor": null,
+   "reference": 4300,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "intro hu hi",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "have hn := UpdateStatesNotDefMonotone' (InitStatesNotDefined hi) hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "have hk := UpdateStatesDefined' hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "have := InitStatesLength hi",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "refine ⟨_, rfl, updatedStatesInit this hn (InitStatesNodup hi), ?_⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "have := UpdateStatesLength hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "simp [InitStatesUpdated hi, UpdateStatesUpdated hu, updatedStates]",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "rw [updatedStatesComm]",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "exact updatedStatesUpdate this (updatedStatesDefMonotone hk)",
+     "heartbeats": null
+    },
+    {
+     "lines": "19-19",
+     "depth_indent": 2,
+     "text": "simp_all [List.unzip_zip]",
+     "heartbeats": null
+    },
+    {
+     "lines": "20-20",
+     "depth_indent": 2,
+     "text": "intro x hx hx'",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "exact nomatch hn x hx' ▸ hk x hx",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "32982c2b7f30": {
+   "ok": true,
+   "total": 271,
+   "floor": null,
+   "reference": 4300,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "intro hu hi",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "have hn := UpdateStatesNotDefMonotone' (InitStatesNotDefined hi) hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "have hk := UpdateStatesDefined' hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "have := InitStatesLength hi",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "refine ⟨_, rfl, updatedStatesInit this hn (InitStatesNodup hi), ?_⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "have := UpdateStatesLength hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "simp [InitStatesUpdated hi, UpdateStatesUpdated hu, updatedStates]",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "rw [updatedStatesComm]",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "exact updatedStatesUpdate this (updatedStatesDefMonotone hk)",
+     "heartbeats": null
+    },
+    {
+     "lines": "19-19",
+     "depth_indent": 2,
+     "text": "simp_all [List.unzip_zip]",
+     "heartbeats": null
+    },
+    {
+     "lines": "20-20",
+     "depth_indent": 2,
+     "text": "intro x hx hx'",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "cases hn x hx' ▸ hk x hx",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "033612c14a00": {
+   "ok": true,
+   "total": 289,
+   "floor": null,
+   "reference": 4300,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "intro hu hi",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "have hn := UpdateStatesNotDefMonotone' (InitStatesNotDefined hi) hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "have := InitStatesLength hi",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "refine ⟨_, rfl, updatedStatesInit this hn (InitStatesNodup hi), ?_⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "have := UpdateStatesLength hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "cases InitStatesUpdated hi",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "cases UpdateStatesUpdated hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "unfold updatedStates",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "rw [updatedStatesComm]",
+     "heartbeats": null
+    },
+    {
+     "lines": "19-19",
+     "depth_indent": 2,
+     "text": "exact updatedStatesUpdate this (updatedStatesDefMonotone (UpdateStatesDefined' hu))",
+     "heartbeats": null
+    },
+    {
+     "lines": "20-20",
+     "depth_indent": 2,
+     "text": "simp_all [List.unzip_zip]",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "intro x hx hx'",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "0e8e3d6a197e": {
+   "ok": true,
+   "total": 283,
+   "floor": null,
+   "reference": 4300,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "intro hu hi",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "let hn := UpdateStatesNotDefMonotone' (InitStatesNotDefined hi) hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "have := InitStatesLength hi",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "refine ⟨_, rfl, updatedStatesInit this hn $ InitStatesNodup hi, ?_⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "have := UpdateStatesLength hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "cases InitStatesUpdated hi",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "cases UpdateStatesUpdated hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "unfold updatedStates",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "rw [updatedStatesComm]",
+     "heartbeats": null
+    },
+    {
+     "lines": "19-19",
+     "depth_indent": 2,
+     "text": "exact updatedStatesUpdate this $ updatedStatesDefMonotone $ UpdateStatesDefined' hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "20-20",
+     "depth_indent": 2,
+     "text": "simp_all [List.unzip_zip]",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "intro x hx hx'",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "6561ed4e56ac": {
+   "ok": true,
+   "total": 271,
+   "floor": null,
+   "reference": 4300,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "intro hu hi",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "let hn := UpdateStatesNotDefMonotone' (InitStatesNotDefined hi) hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "have := InitStatesLength hi",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "refine ⟨_, rfl, updatedStatesInit this hn $ InitStatesNodup hi, ?_⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "let := UpdateStatesLength hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "15-15",
+     "depth_indent": 2,
+     "text": "cases InitStatesUpdated hi",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 2,
+     "text": "cases UpdateStatesUpdated hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "unfold updatedStates",
+     "heartbeats": null
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "rw [updatedStatesComm]",
+     "heartbeats": null
+    },
+    {
+     "lines": "19-19",
+     "depth_indent": 2,
+     "text": "exact updatedStatesUpdate this $ updatedStatesDefMonotone $ UpdateStatesDefined' hu",
+     "heartbeats": null
+    },
+    {
+     "lines": "20-20",
+     "depth_indent": 2,
+     "text": "simp_all [List.unzip_zip]",
+     "heartbeats": null
+    },
+    {
+     "lines": "21-21",
+     "depth_indent": 2,
+     "text": "intro x hx hx'",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "budget_milestones": {
+  "2": {
+   "spend": 2.004019,
+   "best": 86.94,
+   "run_id": "wuclean-hx-solab1-r10",
+   "turn": 22,
+   "t": "2026-10-14T12:06:55Z"
+  }
+ }
+}

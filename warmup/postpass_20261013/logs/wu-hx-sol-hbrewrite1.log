@@ -1,0 +1,16 @@
+row#1 no gain compiles 2
+row#2 no sites compiles 0
+row#3 no sites compiles 0
+row#4 no gain compiles 4
+row#5 no sites compiles 0
+row#6 no gain compiles 12
+row#7 no sites compiles 0
+row#8 no sites compiles 0
+row#9 improved compiles 9 applied simponly2dsimp:1 banked +0.11
+row#10 no gain compiles 6
+row#11 no sites compiles 0
+row#12 no gain compiles 4
+row#13 no gain compiles 5
+row#14 no sites compiles 0
+row#15 no gain compiles 5
+hb_rewrite: 15 stored best(s) rewritten, 1 strictly better, 1 banked as new bests (summed gain +0.11), 47 compiles, 0 left for the deadline, 0 errors, 0 bank errors; run wu-hx-sol-hbrewrite1

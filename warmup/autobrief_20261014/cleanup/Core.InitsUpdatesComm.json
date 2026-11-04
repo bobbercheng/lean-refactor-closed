@@ -1,0 +1,381 @@
+{
+ "problem": "Core.InitsUpdatesComm",
+ "seed": {
+  "ok": true,
+  "tokens": 73,
+  "heartbeats": 271,
+  "L": 67.41,
+  "H": 93.7,
+  "Z": 100.0,
+  "score": 87.04
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "no sites",
+   "before": {
+    "ok": true,
+    "tokens": 73,
+    "heartbeats": 271,
+    "Z": 100.0,
+    "score": 87.04
+   },
+   "after": {
+    "ok": true,
+    "tokens": 73,
+    "heartbeats": 271,
+    "Z": 100.0,
+    "score": 87.04
+   },
+   "gain": null,
+   "applied": null,
+   "compiles": 3,
+   "seconds": 2.6
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 73,
+    "heartbeats": 271,
+    "Z": 100.0,
+    "score": 87.04
+   },
+   "after": {
+    "ok": true,
+    "tokens": 73,
+    "heartbeats": 226,
+    "Z": 100.0,
+    "score": 87.38
+   },
+   "gain": 0.34,
+   "applied": {
+    "rw2rewrite": 1
+   },
+   "compiles": 3,
+   "seconds": 6.6
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 73,
+    "heartbeats": 226,
+    "Z": 100.0,
+    "score": 87.38
+   },
+   "after": {
+    "ok": true,
+    "tokens": 73,
+    "heartbeats": 226,
+    "Z": 100.0,
+    "score": 87.38
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 3,
+   "seconds": 4.5
+  },
+  {
+   "pass": "lint_delete",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 73,
+    "heartbeats": 226,
+    "Z": 100.0,
+    "score": 87.38
+   },
+   "after": {
+    "ok": true,
+    "tokens": 73,
+    "heartbeats": 226,
+    "Z": 100.0,
+    "score": 87.38
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 14,
+   "seconds": 19.4
+  }
+ ],
+ "free_applied": [
+  "hb_rewrite"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 73,
+  "heartbeats": 226,
+  "L": 67.41,
+  "H": 94.74,
+  "Z": 100.0,
+  "score": 87.38
+ },
+ "s0": "theorem InitsUpdatesComm\n  {P : PureExpr} {σ σ' σ'' : SemanticStore P}\n  {ks ks' : List P.Ident} {vs vs' : List P.Expr} :\n  UpdateStates σ ks vs σ' →\n  InitStates σ' ks' vs' σ'' →\n  ∃ σ₁,\n    σ₁ = (updatedStates σ ks' vs') ∧\n    InitStates σ ks' vs' σ₁ ∧\n    UpdateStates σ₁ ks vs σ'' := by\n  intro hu hi\n  let hn := UpdateStatesNotDefMonotone' (InitStatesNotDefined hi) hu\n  have := InitStatesLength hi\n  refine ⟨_, rfl, updatedStatesInit this hn $ InitStatesNodup hi, ?_⟩\n  let := UpdateStatesLength hu\n  cases InitStatesUpdated hi\n  cases UpdateStatesUpdated hu\n  unfold updatedStates\n  rewrite [updatedStatesComm]\n  exact updatedStatesUpdate this $ updatedStatesDefMonotone $ UpdateStatesDefined' hu\n  simp_all [List.unzip_zip]\n  intro x hx hx'\n  cases hn x hx' ▸ UpdateStatesDefined' hu x hx",
+ "exchange": [
+  0.149,
+  0.775
+ ],
+ "profile": {
+  "ok": true,
+  "total": 226,
+  "floor": null,
+  "reference": 4300,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "10-10",
+    "depth_indent": 2,
+    "text": "intro hu hi",
+    "heartbeats": null
+   },
+   {
+    "lines": "11-11",
+    "depth_indent": 2,
+    "text": "let hn := UpdateStatesNotDefMonotone' (InitStatesNotDefined hi) hu",
+    "heartbeats": null
+   },
+   {
+    "lines": "12-12",
+    "depth_indent": 2,
+    "text": "have := InitStatesLength hi",
+    "heartbeats": null
+   },
+   {
+    "lines": "13-13",
+    "depth_indent": 2,
+    "text": "refine ⟨_, rfl, updatedStatesInit this hn $ InitStatesNodup hi, ?_⟩",
+    "heartbeats": null
+   },
+   {
+    "lines": "14-14",
+    "depth_indent": 2,
+    "text": "let := UpdateStatesLength hu",
+    "heartbeats": null
+   },
+   {
+    "lines": "15-15",
+    "depth_indent": 2,
+    "text": "cases InitStatesUpdated hi",
+    "heartbeats": null
+   },
+   {
+    "lines": "16-16",
+    "depth_indent": 2,
+    "text": "cases UpdateStatesUpdated hu",
+    "heartbeats": null
+   },
+   {
+    "lines": "17-17",
+    "depth_indent": 2,
+    "text": "unfold updatedStates",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 73,
+  "heartbeats": 226,
+  "score": 87.38
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 113,
+   "score": null,
+   "error": "967:36: `grind` failed\ncase grind\nP : PureExpr\nσ σ' σ'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nh : UpdateStates σ ks vs σ'\nh_1 : InitState"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 146,
+   "score": null,
+   "error": "967:33: unsolved goals\nP : PureExpr\nσ σ' σ'' : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\n⊢ UpdateStates σ ks vs σ' →\n    InitStates σ' ks' vs' "
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": null,
+   "score": null,
+   "error": "967:37: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 14,
+   "label": "replace the closing tactic at line 14 (`cases hn x hx' ▸ UpdateStatesDefined' h…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 65,
+   "heartbeats": 369,
+   "score": null,
+   "error": "980:2: `grind` failed\ncase grind\nP : PureExpr\nσ : SemanticStore P\nks ks' : List P.Ident\nvs vs' : List P.Expr\nthis_1 : ks'.length = vs'.length\nhu : UpdateStates "
+  },
+  {
+   "kind": "closer",
+   "line": 14,
+   "label": "replace the closing tactic at line 14 (`cases hn x hx' ▸ UpdateStatesDefined' h…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 65,
+   "heartbeats": 226,
+   "score": null,
+   "error": "980:2: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 14,
+   "label": "replace the closing tactic at line 14 (`cases hn x hx' ▸ UpdateStatesDefined' h…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 65,
+   "heartbeats": null,
+   "score": null,
+   "error": "980:3: unknown tactic"
+  },
+  {
+   "kind": "del-arg",
+   "line": 12,
+   "label": "delete `List.unzip_zip` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 70,
+   "heartbeats": 283,
+   "score": null,
+   "error": "980:13: Application type mismatch: The argument\n  hx'\nhas type\n  x ∈ List.map Prod.fst (ks'.zip vs')\nbut is expected to have type\n  x ∈ ks'\nin the application\n "
+  },
+  {
+   "kind": "del-tac",
+   "line": 9,
+   "label": "delete the tactic `unfold updatedStates`",
+   "closer": "",
+   "ok": false,
+   "tokens": 71,
+   "heartbeats": 144,
+   "score": null,
+   "error": "975:11: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  updatedStates' (updatedStates' ?m.146 ?m.147) ?m.148\nin the target expression\n  Upd"
+  },
+  {
+   "kind": "del-tac",
+   "line": 12,
+   "label": "delete the tactic `simp_all [List.unzip_zip]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 69,
+   "heartbeats": 252,
+   "score": null,
+   "error": "979:13: Application type mismatch: The argument\n  hx'\nhas type\n  x ∈ (ks'.zip vs').unzip.fst\nbut is expected to have type\n  x ∈ ks'\nin the application\n  hn x hx"
+  },
+  {
+   "kind": "del-tac",
+   "line": 4,
+   "label": "delete the tactic `have := InitStatesLength hi`",
+   "closer": "",
+   "ok": false,
+   "tokens": 69,
+   "heartbeats": 259,
+   "score": null,
+   "error": "970:36: Unknown identifier `this`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 10,
+   "label": "delete the tactic `rewrite [updatedStatesComm]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 69,
+   "heartbeats": 187,
+   "score": null,
+   "error": "976:2: Type mismatch\n  updatedStatesUpdate this (updatedStatesDefMonotone (UpdateStatesDefined' hu))\nhas type\n  UpdateStates (updatedStates' σ ?m.153) ks vs (up"
+  },
+  {
+   "kind": "del-tac",
+   "line": 2,
+   "label": "delete the tactic `intro hu hi`",
+   "closer": "",
+   "ok": false,
+   "tokens": 70,
+   "heartbeats": 45,
+   "score": null,
+   "error": "968:62: Unknown identifier `hi`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 5,
+   "label": "delete the tactic `refine ⟨_, rfl, updatedStatesInit this hn $ InitS…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 58,
+   "heartbeats": 107,
+   "score": null,
+   "error": "976:2: Type mismatch\n  updatedStatesUpdate this (updatedStatesDefMonotone (UpdateStatesDefined' hu))\nhas type\n  UpdateStates (updatedStates' σ ?m.140) ks vs (up"
+  },
+  {
+   "kind": "del-tac",
+   "line": 7,
+   "label": "delete the tactic `cases InitStatesUpdated hi`",
+   "closer": "",
+   "ok": false,
+   "tokens": 70,
+   "heartbeats": 127,
+   "score": null,
+   "error": "975:11: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  updatedStates' (updatedStates' ?m.106 ?m.107) ?m.108\nin the target expression\n  Upd"
+  },
+  {
+   "kind": "del-tac",
+   "line": 8,
+   "label": "delete the tactic `cases UpdateStatesUpdated hu`",
+   "closer": "",
+   "ok": false,
+   "tokens": 70,
+   "heartbeats": 127,
+   "score": null,
+   "error": "975:11: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  updatedStates' (updatedStates' ?m.106 ?m.107) ?m.108\nin the target expression\n  Upd"
+  },
+  {
+   "kind": "del-tac",
+   "line": 11,
+   "label": "delete the tactic `exact updatedStatesUpdate this $ updatedStatesDef…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 65,
+   "heartbeats": 168,
+   "score": null,
+   "error": "977:2: simp_all made no progress"
+  },
+  {
+   "kind": "del-tac",
+   "line": 13,
+   "label": "delete the tactic `intro x hx hx'`",
+   "closer": "",
+   "ok": false,
+   "tokens": 69,
+   "heartbeats": 248,
+   "score": null,
+   "error": "979:11: Unknown identifier `x`"
+  }
+ ],
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 73 tokens, 271 heartbeats, score 87.04. Free passes applied (hb_rewrite): start candidate 73 tokens, 226 heartbeats, score 87.38.\n- Exchange rate here: 1 token = 0.149 points, 100 heartbeats = 0.775 points.\n- Deletions that FAIL (needed as they stand): line 12 `List.unzip_zip` from the simp list; line 9 the tactic `unfold updatedStates`; line 12 the tactic `simp_all [List.unzip_zip]`; line 4 the tactic `have := InitStatesLength hi`; line 10 the tactic `rewrite [updatedStatesComm]`; line 2 the tactic `intro hu hi`.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the closing tactic at line 14 (`cases hn x hx' ▸ UpdateStatesDefined' h…`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 87.38,
+ "gain": 0.34,
+ "compiles_sweep": 17,
+ "seconds": 57.3,
+ "source": "best:6561ed4e56ac"
+}

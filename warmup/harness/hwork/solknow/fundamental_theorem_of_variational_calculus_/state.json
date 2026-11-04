@@ -1,0 +1,106 @@
+{
+ "note": "runner input only: first-session scores of an earlier Sol + briefs line (no proofs, no notes)",
+ "problem": "fundamental_theorem_of_variational_calculus'",
+ "runs": [
+  {
+   "run_id": "hx-solknow-x10a"
+  }
+ ],
+ "attempts": [
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 88.41
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 90.11
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 90.57
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 90.96
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 91.26
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 91.42
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 91.44
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 91.47
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-x10a",
+   "ok": true,
+   "score": 91.51
+  }
+ ]
+}

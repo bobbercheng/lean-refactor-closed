@@ -1,0 +1,21 @@
+# What a run writes inside the package checkout (run_final.py --out holds everything else).
+# The preflight requires harness/ scorer/ llm/ to stay clean: bytecode is ignored.
+__pycache__/
+*.pyc
+# Lean environments, upstream clones and install logs (infra/closed_package/install_envs.sh; tens of GB): everything in envs/ but its
+# README, which stays tracked (envs/README.md says why)
+envs/*
+!envs/README.md
+.envs-download/
+# the staged rows file (harness/final_rows.py stage), the shards' ladder records, compile-slot scratch, guard log
+data/final/
+probe/heldout/
+probe/hbtool/.scratch/
+probe/refhb/.scratch/
+probe/runaway_guard.log
+# session records when a set runs from this checkout
+probe/runs/
+harness/hwork/
+# never: keys live outside the checkout (~/.config/vexorium/)
+*.key
+secrets*

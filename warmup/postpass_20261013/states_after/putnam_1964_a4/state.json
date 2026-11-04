@@ -1,0 +1,1340 @@
+{
+ "problem": "putnam_1964_a4",
+ "best": {
+  "score": 96.86,
+  "proof": "theorem putnam_1964_a4\n(u : ℕ → ℤ)\n(boundedu : ∃ B T : ℤ, ∀ n : ℕ, B ≤ u n ∧ u n ≤ T)\n(hu : ∀ n ≥ 4, u n = ((u (n - 1) + u (n - 2) + u (n - 3) * u (n - 4)) : ℝ) / (u (n - 1) * u (n - 2) + u (n - 3) + u (n - 4)) ∧ (u (n - 1) * u (n - 2) + u (n - 3) + u (n - 4)) ≠ 0)\n: (∃ N c : ℕ, c > 0 ∧ ∀ n ≥ N, u (n + c) = u n) := by\n  obtain ⟨B, T, hB⟩ := boundedu\n  obtain ⟨i, j, hij, h⟩ := (Set.Finite.pi λ_ : Fin 4 => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem\n    $ by exact λn k hk => hB $ n+k\n  have key m : u (i+m) = u (j+m) := by\n    clear hij\n    induction m using Nat.strong_induction_on\n    rename_i m ih\n    by_cases hm : 4 ≤ m\n    · apply @Int.cast_injective ℝ\n      simp (disch := omega) only [hu, Nat.add_sub_assoc, ih]\n    · exact congrFun h ⟨m, Nat.lt_of_not_ge hm⟩\n  use i, j-i, Nat.sub_pos_of_lt hij\n  intro n hn\n  rw [← Nat.add_sub_cancel' hn, key, Nat.add_right_comm, Nat.add_sub_cancel' hij.le]",
+  "tokens": 134,
+  "heartbeats": 2073,
+  "L": 92.43,
+  "H": 98.14,
+  "Z": 100.0,
+  "compat": {
+   "v4.27.0": true,
+   "v4.26.0": true,
+   "v4.25.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "bbf96e170b4d",
+   "tokens": 271,
+   "heartbeats": 2561,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:32:57Z",
+   "score": 94.13
+  },
+  {
+   "sha": "3b1395e4611a",
+   "tokens": 225,
+   "heartbeats": 2366,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:33:37Z",
+   "score": 95.05
+  },
+  {
+   "sha": "9d2b666a05c5",
+   "tokens": 215,
+   "heartbeats": 2326,
+   "ok": false,
+   "error": "24:59: Invalid `⟨...⟩` notation: The expected type of this term could not be determined",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:34:23Z"
+  },
+  {
+   "sha": "27a5a92a505f",
+   "tokens": 214,
+   "heartbeats": 2262,
+   "ok": false,
+   "error": "24:59: Invalid `⟨...⟩` notation: The expected type of this term could not be determined",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:34:27Z"
+  },
+  {
+   "sha": "df11c490c6a4",
+   "tokens": 225,
+   "heartbeats": 2351,
+   "ok": false,
+   "error": "24:59: Invalid `⟨...⟩` notation: The expected type of this term could not be determined",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:34:30Z"
+  },
+  {
+   "sha": "3e1f672efc90",
+   "tokens": 217,
+   "heartbeats": 2346,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:34:47Z",
+   "score": 95.21
+  },
+  {
+   "sha": "ed9b686dc34e",
+   "tokens": 216,
+   "heartbeats": 2282,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:34:56Z",
+   "score": 95.25
+  },
+  {
+   "sha": "5e8169e070ba",
+   "tokens": 194,
+   "heartbeats": 3336,
+   "ok": false,
+   "error": "31:6: unsolved goals case neg.a … [hypotheses omitted] ⊢ (↑(u (j + (m - 1))) + ↑(u (j + (m - 2))) + ↑(u (j + (m - 3))) * ↑(u (j + (m - 4)))) / (↑(u (j + (m - 1))) * ↑(u (j + (m - 2))) + ↑(u (j + (m - 3))) + ↑(u (j + (m - 4)))) = ((↑(u (j + (m - 1 - 1))) + ↑(u (j + (m - 1 - 2))) + ↑(u (j + (m - 1 - 3",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:35:59Z"
+  },
+  {
+   "sha": "aa4d4aede958",
+   "tokens": 206,
+   "heartbeats": 2315,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:36:02Z",
+   "score": 95.43
+  },
+  {
+   "sha": "804d029a0cfc",
+   "tokens": 195,
+   "heartbeats": 2263,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:36:47Z",
+   "score": 95.65
+  },
+  {
+   "sha": "5c0acce5c49f",
+   "tokens": 202,
+   "heartbeats": 2770,
+   "ok": false,
+   "error": "31:43: omega could not prove the goal: a possible counterexample may satisfy the constraints 0 ≤ c ≤ 3 b ≥ 4 b - c ≤ 1 a ≥ 0 a + b - c ≥ 2 where a := ↑j b := ↑m c := ↑(i + m - 1)",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:36:56Z"
+  },
+  {
+   "sha": "ee07b00cc5e8",
+   "tokens": 183,
+   "heartbeats": 2760,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:37:35Z",
+   "score": 95.73
+  },
+  {
+   "sha": "7266fadaacb9",
+   "tokens": 188,
+   "heartbeats": 2295,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:37:45Z",
+   "score": 95.77
+  },
+  {
+   "sha": "2df3efa837f6",
+   "tokens": 178,
+   "heartbeats": 2223,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:38:29Z",
+   "score": 95.98
+  },
+  {
+   "sha": "82bb66c68670",
+   "tokens": 177,
+   "heartbeats": 2821,
+   "ok": false,
+   "error": "24:50: unsolved goals … [hypotheses omitted] ⊢ ((fun i => B) ≤ fun k => u (n + ↑k)) ∧ (fun k => u (n + ↑k)) ≤ fun i => T",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:38:38Z"
+  },
+  {
+   "sha": "ac5486c27dcb",
+   "tokens": 173,
+   "heartbeats": 2103,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:39:29Z",
+   "score": 96.11
+  },
+  {
+   "sha": "628c3a47d01a",
+   "tokens": 165,
+   "heartbeats": 2153,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:39:39Z",
+   "score": 96.25
+  },
+  {
+   "sha": "e16f9015256c",
+   "tokens": 179,
+   "heartbeats": 2229,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:39:48Z"
+  },
+  {
+   "sha": "03fe03fd97a7",
+   "tokens": 161,
+   "heartbeats": 2146,
+   "ok": false,
+   "error": "24:52: Tactic `apply` failed: could not unify the type of `hB` ∀ … [hypotheses omitted] ⊢ (fun n k => u (n + ↑k)) a✝ ∈ univ.pi fun x => Icc B T",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:40:21Z"
+  },
+  {
+   "sha": "90c7c1c89174",
+   "tokens": 162,
+   "heartbeats": 2160,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:40:24Z",
+   "score": 96.3
+  },
+  {
+   "sha": "258342ad6bc0",
+   "tokens": 160,
+   "heartbeats": 2167,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:40:33Z",
+   "score": 96.34
+  },
+  {
+   "sha": "08b668f7ad66",
+   "tokens": 156,
+   "heartbeats": 2170,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:41:38Z",
+   "score": 96.41
+  },
+  {
+   "sha": "0683efa27807",
+   "tokens": 155,
+   "heartbeats": 2189,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:41:47Z",
+   "score": 96.43
+  },
+  {
+   "sha": "2579a23a859c",
+   "tokens": 154,
+   "heartbeats": 2174,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:41:56Z",
+   "score": 96.45
+  },
+  {
+   "sha": "4ea767b2902e",
+   "tokens": 153,
+   "heartbeats": 2170,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:42:42Z",
+   "score": 96.47
+  },
+  {
+   "sha": "8e3106507ee2",
+   "tokens": 151,
+   "heartbeats": 222857,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:42:59Z"
+  },
+  {
+   "sha": "817dd2bad6e6",
+   "tokens": 150,
+   "heartbeats": 2146,
+   "ok": false,
+   "error": "36:2: omega could not prove the goal: a possible counterexample may satisfy the constraints d - e ≥ 1 c ≥ 0 b ≥ 0 b - c ≤ 0 a ≥ 0 a - b ≥ 1 where a := ↑j b := ↑i c := ↑n d := u n e := u (n + (j - i))",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:43:02Z"
+  },
+  {
+   "sha": "184d47c7a429",
+   "tokens": 155,
+   "heartbeats": 839,
+   "ok": false,
+   "error": "26:17: Unknown identifier `boundedu`",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:12:36Z"
+  },
+  {
+   "sha": "9ad90315d3af",
+   "tokens": 150,
+   "heartbeats": 2170,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:12:40Z",
+   "score": 96.53
+  },
+  {
+   "sha": "6f83e3a34b7b",
+   "tokens": 152,
+   "heartbeats": 842,
+   "ok": false,
+   "error": "27:10: failed to elaborate eliminator, expected type is not available",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:12:49Z"
+  },
+  {
+   "sha": "e156883992d5",
+   "tokens": 153,
+   "heartbeats": 2170,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:12:52Z"
+  },
+  {
+   "sha": "8ceec0b1b1bb",
+   "tokens": 151,
+   "heartbeats": 2159,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:13:39Z"
+  },
+  {
+   "sha": "41d8c0f9dc48",
+   "tokens": 151,
+   "heartbeats": 2177,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:13:42Z"
+  },
+  {
+   "sha": "3cb33d731529",
+   "tokens": 150,
+   "heartbeats": 2170,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:13:45Z"
+  },
+  {
+   "sha": "9e91afc40097",
+   "tokens": 149,
+   "heartbeats": 4366,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:13:48Z"
+  },
+  {
+   "sha": "02fc56c458ce",
+   "tokens": 150,
+   "heartbeats": 2171,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:14:54Z"
+  },
+  {
+   "sha": "0a5feb2163a6",
+   "tokens": 169,
+   "heartbeats": 2236,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:04:05Z"
+  },
+  {
+   "sha": "dab136ebb63a",
+   "tokens": 150,
+   "heartbeats": 2184,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:04:08Z"
+  },
+  {
+   "sha": "3a593b45a7d2",
+   "tokens": 153,
+   "heartbeats": 2134,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:05:07Z"
+  },
+  {
+   "sha": "d9d081123769",
+   "tokens": 152,
+   "heartbeats": 2172,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:05:10Z"
+  },
+  {
+   "sha": "c4118a21ae4d",
+   "tokens": 151,
+   "heartbeats": 2174,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:05:13Z"
+  },
+  {
+   "sha": "9d0c2596e202",
+   "tokens": 145,
+   "heartbeats": 2202,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:09:04Z",
+   "score": 96.61
+  },
+  {
+   "sha": "ac4dda347a59",
+   "tokens": 141,
+   "heartbeats": 2201,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:09:39Z",
+   "score": 96.69
+  },
+  {
+   "sha": "ae5829d0ecb4",
+   "tokens": 143,
+   "heartbeats": 2222,
+   "ok": false,
+   "error": "24:4: Application type mismatch: The argument fun n k hk => hB (n + ↑k) has type ∀ (n : ℕ) (k : Fin 4) (hk : ?m.182 n k), B ≤ u (n + ↑k) ∧ u (n + ↑k) ≤ T but is expected to have type ∀ (a : ℕ), ?m.173 a ∈ ?m.172 in the application Finite.exists_lt_map_eq_of_forall_mem fun n k hk => hB (n + ↑k)",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:09:48Z"
+  },
+  {
+   "sha": "f2c52a15e48c",
+   "tokens": 141,
+   "heartbeats": 2197,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:09:54Z"
+  },
+  {
+   "sha": "0da36df5b2b6",
+   "tokens": 160,
+   "heartbeats": 2244,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:11:03Z"
+  },
+  {
+   "sha": "1a6a72bc55e3",
+   "tokens": 139,
+   "heartbeats": 2181,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:11:06Z",
+   "score": 96.73
+  },
+  {
+   "sha": "52113f86b743",
+   "tokens": 137,
+   "heartbeats": 3432,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:11:49Z"
+  },
+  {
+   "sha": "6b170270c3a0",
+   "tokens": 138,
+   "heartbeats": 2498,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:11:52Z"
+  },
+  {
+   "sha": "f6d8eeefb237",
+   "tokens": 311,
+   "heartbeats": 2767,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:13:25Z"
+  },
+  {
+   "sha": "c105f26e6c11",
+   "tokens": 149,
+   "heartbeats": 2282,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:14:45Z"
+  },
+  {
+   "sha": "c6ed25e9c57a",
+   "tokens": 140,
+   "heartbeats": 2168,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:14:48Z"
+  },
+  {
+   "sha": "a757f6ab3f54",
+   "tokens": 140,
+   "heartbeats": 2185,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:14:51Z"
+  },
+  {
+   "sha": "1ee669a6e335",
+   "tokens": 140,
+   "heartbeats": 2073,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:15:16Z",
+   "score": 96.74
+  },
+  {
+   "sha": "71552c53e3d3",
+   "tokens": 139,
+   "heartbeats": 2181,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:15:25Z"
+  },
+  {
+   "sha": "13718623572a",
+   "tokens": 138,
+   "heartbeats": 890,
+   "ok": false,
+   "error": "30:6: failed to synthesize CharZero ?α Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:15:59Z"
+  },
+  {
+   "sha": "04f9b48b16b8",
+   "tokens": 140,
+   "heartbeats": 2073,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r4",
+   "t": "2026-10-11T22:16:02Z"
+  },
+  {
+   "sha": "58ca2b366086",
+   "tokens": 143,
+   "heartbeats": 2073,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:35:56Z"
+  },
+  {
+   "sha": "c3f8f5bcc1e0",
+   "tokens": 141,
+   "heartbeats": 2087,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:35:59Z"
+  },
+  {
+   "sha": "7fd74d249cb2",
+   "tokens": 144,
+   "heartbeats": 2184,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:36:19Z"
+  },
+  {
+   "sha": "b5e4b33d0dd6",
+   "tokens": 142,
+   "heartbeats": 2230,
+   "ok": false,
+   "error": "30:4: unsolved goals case pos.a … [hypotheses omitted] ⊢ (↑(u (i + (m - 1))) + ↑(u (i + (m - 2))) + ↑(u (i + (m - 3))) * ↑(u (i + (m - 4)))) / (↑(u (i + (m - 1))) * ↑(u (i + (m - 2))) + ↑(u (i + (m - 3))) + ↑(u (i + (m - 4)))) = (↑(u (j + (m - 1))) + ↑(u (j + (m - 2))) + ↑(u (j + (m - 3))) * ↑(u (j ",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:37:39Z"
+  },
+  {
+   "sha": "7bda80ad851a",
+   "tokens": 142,
+   "heartbeats": 2092,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:37:42Z"
+  },
+  {
+   "sha": "5e118b4e2dee",
+   "tokens": 140,
+   "heartbeats": 22662,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:37:47Z"
+  },
+  {
+   "sha": "d7ed26447078",
+   "tokens": 143,
+   "heartbeats": 2219,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:40:33Z"
+  },
+  {
+   "sha": "9b50d1a3eb18",
+   "tokens": 140,
+   "heartbeats": 2133,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:40:57Z"
+  },
+  {
+   "sha": "85eb932f820c",
+   "tokens": 141,
+   "heartbeats": 2185,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:00Z"
+  },
+  {
+   "sha": "cec18114f31d",
+   "tokens": 140,
+   "heartbeats": 2069,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:25Z"
+  },
+  {
+   "sha": "c02d3dd803e3",
+   "tokens": 140,
+   "heartbeats": 2066,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:28Z"
+  },
+  {
+   "sha": "90355c9dcfb7",
+   "tokens": 149,
+   "heartbeats": 2068,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:41:47Z"
+  },
+  {
+   "sha": "ca7d88417b3d",
+   "tokens": 138,
+   "heartbeats": 2073,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:42:10Z",
+   "score": 96.78
+  },
+  {
+   "sha": "6bc9bc0b4847",
+   "tokens": 137,
+   "heartbeats": 2073,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:42:19Z",
+   "score": 96.8
+  },
+  {
+   "sha": "b27cb81bbf94",
+   "tokens": 136,
+   "heartbeats": 635,
+   "ok": false,
+   "error": "23:27: typeclass instance problem is stuck Infinite ?m.170 Note: Lean will not try to resolve this typeclass instance problem because the type argument to `Infinite` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass. Hint: Adding type annotations",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:42:44Z"
+  },
+  {
+   "sha": "f5394059051f",
+   "tokens": 136,
+   "heartbeats": 2073,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:42:47Z",
+   "score": 96.82
+  },
+  {
+   "sha": "9681af01cf85",
+   "tokens": 135,
+   "heartbeats": 2181,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:01:20Z"
+  },
+  {
+   "sha": "34473c36e4ba",
+   "tokens": 154,
+   "heartbeats": 2135,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:01:23Z"
+  },
+  {
+   "sha": "80e10f19582a",
+   "tokens": 136,
+   "heartbeats": 2086,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:01:54Z"
+  },
+  {
+   "sha": "e50147995edd",
+   "tokens": 135,
+   "heartbeats": 852,
+   "ok": false,
+   "error": "27:10: failed to elaborate eliminator, expected type is not available",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:01:57Z"
+  },
+  {
+   "sha": "42bccb37c6f8",
+   "tokens": 136,
+   "heartbeats": 2181,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:02:00Z"
+  },
+  {
+   "sha": "b269a538acd7",
+   "tokens": 137,
+   "heartbeats": 2086,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:02:31Z"
+  },
+  {
+   "sha": "790577a27d56",
+   "tokens": 136,
+   "heartbeats": 2086,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:02:34Z"
+  },
+  {
+   "sha": "66645c1928ac",
+   "tokens": 136,
+   "heartbeats": 2176,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-12T00:02:37Z"
+  },
+  {
+   "sha": "fa9993fd1adf",
+   "tokens": 139,
+   "heartbeats": 2073,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:56:16Z"
+  },
+  {
+   "sha": "ae75e9fcbaca",
+   "tokens": 136,
+   "heartbeats": 849,
+   "ok": false,
+   "error": "27:4: Tactic `apply` failed: could not unify the conclusion of `@Nat.strong_induction_on` (∀ … [hypotheses omitted] ⊢ ∀ (m : ℕ), u (i + m) = u (j + m)",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:56:19Z"
+  },
+  {
+   "sha": "e622f301735e",
+   "tokens": 135,
+   "heartbeats": 852,
+   "ok": false,
+   "error": "27:10: failed to elaborate eliminator, expected type is not available",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:56:52Z"
+  },
+  {
+   "sha": "f86015100212",
+   "tokens": 135,
+   "heartbeats": 2195,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:57:12Z"
+  },
+  {
+   "sha": "6301a1fd8a08",
+   "tokens": 137,
+   "heartbeats": 2369,
+   "ok": false,
+   "error": "31:4: unsolved goals case neg.a … [hypotheses omitted] ⊢ (↑(u (i + (m - 1))) + ↑(u (i + (m - 2))) + ↑(u (i + (m - 3))) * ↑(u (i + (m - 4)))) / (↑(u (i + (m - 1))) * ↑(u (i + (m - 2))) + ↑(u (i + (m - 3))) + ↑(u (i + (m - 4)))) = (↑(u (j + (m - 1))) + ↑(u (j + (m - 2))) + ↑(u (j + (m - 3))) * ↑(u (j ",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:57:15Z"
+  },
+  {
+   "sha": "e4f66f74fe9f",
+   "tokens": 136,
+   "heartbeats": 2073,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:57:45Z"
+  },
+  {
+   "sha": "0e49ebbf6ba1",
+   "tokens": 135,
+   "heartbeats": 2191,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:57:48Z"
+  },
+  {
+   "sha": "23a021e31950",
+   "tokens": 134,
+   "heartbeats": 2073,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-normalize1",
+   "t": "2026-10-13T17:00:24Z",
+   "score": 96.86
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T20:30:34Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:08:49Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r4",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T22:01:45Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:34:47Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r9",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:00:00Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:54:49Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r14",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T01:21:17Z"
+  }
+ ],
+ "api_spend": 1.977008,
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 1,
+    "d_score": 60.8,
+    "d_tokens": -1498,
+    "d_heartbeats": 2561,
+    "diff": "+theorem putnam_1964_a4\n+(u : ℕ → ℤ)\n+(boundedu : ∃ B T : ℤ, ∀ n : ℕ, B ≤ u n ∧ u n ≤ T)\n+(hu : ∀ n ≥ 4, u n = ((u (n - 1) + u (n - 2) + u (n - 3) * u (n - 4)) : ℝ) / (u (n - 1) * u (n - 2) + u (n - 3) + u (n - 4)) ∧ (u (n - 1) * u (n - 2) + u (n - 3) + u (n - 4)) ≠ 0)\n+: (∃ N c : ℕ, c > 0 ∧ ∀ n ≥ N, u (n + c) = u n) := by\n+  obtain ⟨B, T, hB⟩ := boundedu\n+  obtain ⟨i, j, hij, h⟩ := (Set.finite_Icc (B,B,B,B) (T,T,T,T)).exists_lt_map_eq_of_forall_mem\n+    (f := fun n : ℕ => (u n, u (n+1), u (n+2), u (n+3))) (fun n => by simp only [Set.mem_Icc, Prod.mk_le_mk, hB, and_self])\n+  have key : ∀ m, u (i+m) = u (j+m) ∧ u (i+m+1) = u (j+m+1) ∧ u (i+m+2) = u (j+m+2) ∧ u (i+m+3) = u (j+m+3) := by\n+    a"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 2,
+    "d_score": 0.92,
+    "d_tokens": -46,
+    "d_heartbeats": -195,
+    "diff": "-  obtain ⟨i, j, hij, h⟩ := (Set.finite_Icc (B,B,B,B) (T,T,T,T)).exists_lt_map_eq_of_forall_mem\n-    (f := fun n : ℕ => (u n, u (n+1), u (n+2), u (n+3))) (fun n => by simp only [Set.mem_Icc, Prod.mk_le_mk, hB, and_self])\n-  have key : ∀ m, u (i+m) = u (j+m) ∧ u (i+m+1) = u (j+m+1) ∧ u (i+m+2) = u (j+m+2) ∧ u (i+m+3) = u (j+m+3) := by\n-    apply Nat.recAux\n-    · simpa using h\n-    · intro m ih\n-      have h1 := (hu (i+m+4) (by omega)).1\n-      have h2 := (hu (j+m+4) (by omega)).1\n-      simp only [ih, Nat.reduceSubDiff, add_tsub_cancel_right, ← add_assoc, true_and] at h1 h2 ⊢\n-      exact_mod_cast h1.trans h2.symm\n+  obtain ⟨i, j, hij, h⟩ := (Set.finite_Icc (fun _ : Fin 4 => B) (fun _ => T))"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 6,
+    "d_score": 0.16,
+    "d_tokens": -8,
+    "d_heartbeats": -20,
+    "diff": "-    (f := fun n : ℕ => fun k : Fin 4 => u (n+k)) (fun n => by constructor <;> intro k; exact (hB _).1; exact (hB _).2)\n+    (f := fun n : ℕ => fun k : Fin 4 => u (n+k)) (fun n => by exact ⟨fun k => (hB _).1, fun k => (hB _).2⟩)\n-        simp (disch := omega) only [Nat.add_sub_assoc] at h1 h2\n-        simp (disch := omega) only [ih] at h1\n+        simp (disch := omega) only [Nat.add_sub_assoc, ih] at h1 h2"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 7,
+    "d_score": 0.04,
+    "d_tokens": -1,
+    "d_heartbeats": -64,
+    "diff": "-      · have h1 := (hu (i+m) (by omega)).1\n-        have h2 := (hu (j+m) (by omega)).1\n-        simp (disch := omega) only [Nat.add_sub_assoc, ih] at h1 h2\n-        exact_mod_cast h1.trans h2.symm\n+      · apply Int.cast_injective (α := ℝ)\n+        rw [(hu (i+m) (by omega)).1, (hu (j+m) (by omega)).1]\n+        simp (disch := omega) only [Nat.add_sub_assoc, ih]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 9,
+    "d_score": 0.18,
+    "d_tokens": -10,
+    "d_heartbeats": 33,
+    "diff": "-    (f := fun n : ℕ => fun k : Fin 4 => u (n+k)) (fun n => by exact ⟨fun k => (hB _).1, fun k => (hB _).2⟩)\n+    (f := fun n (k : Fin 4) => u (n+k)) (fun n => by exact ⟨fun k => (hB _).1, fun k => (hB _).2⟩)\n-        rw [(hu (i+m) (by omega)).1, (hu (j+m) (by omega)).1]\n+        simp (disch := omega) only [hu (i+m), hu (j+m)]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 11,
+    "d_score": 0.22,
+    "d_tokens": -11,
+    "d_heartbeats": -52,
+    "diff": "-  have key : ∀ m, u (i+m) = u (j+m) := by\n-    intro m\n+  have key m : u (i+m) = u (j+m) := by\n-        simp (disch := omega) only [hu (i+m), hu (j+m)]\n+        simp (singlePass := true) (disch := omega) only [hu]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 13,
+    "d_score": 0.08,
+    "d_tokens": -12,
+    "d_heartbeats": 497,
+    "diff": "-    (f := fun n (k : Fin 4) => u (n+k)) (fun n => by exact ⟨fun k => (hB _).1, fun k => (hB _).2⟩)\n+    (f := fun n (k : Fin 4) => u (n+k)) (fun n => by simp [Set.mem_Icc, Pi.le_def, hB])"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 14,
+    "d_score": 0.04,
+    "d_tokens": 5,
+    "d_heartbeats": -465,
+    "diff": "-    (f := fun n (k : Fin 4) => u (n+k)) (fun n => by simp [Set.mem_Icc, Pi.le_def, hB])\n+    (f := fun n (k : Fin 4) => u (n+k)) (fun n => by simp only [Set.mem_Icc, Pi.le_def, hB, implies_true, and_self])"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 15,
+    "d_score": 0.21,
+    "d_tokens": -10,
+    "d_heartbeats": -72,
+    "diff": "-  obtain ⟨i, j, hij, h⟩ := (Set.finite_Icc (fun _ : Fin 4 => B) (fun _ => T)).exists_lt_map_eq_of_forall_mem\n-    (f := fun n (k : Fin 4) => u (n+k)) (fun n => by simp only [Set.mem_Icc, Pi.le_def, hB, implies_true, and_self])\n+  obtain ⟨i, j, hij, h⟩ := (Set.Finite.pi (fun _ : Fin 4 => Set.finite_Icc B T)).exists_lt_map_eq_of_forall_mem\n+    (f := fun n (k : Fin 4) => u (n+k)) (fun n => by exact fun k hk => hB _)"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 17,
+    "d_score": 0.13,
+    "d_tokens": -5,
+    "d_heartbeats": -120,
+    "diff": "-    (f := fun n (k : Fin 4) => u (n+k)) (fun n => by exact fun k hk => hB _)\n+    (f := fun n (k : Fin 4) => u (n+k)) (by intro n k hk; exact hB _)\n+    clear hij\n-        simp (singlePass := true) (disch := omega) only [hu]\n+        simp (disch := omega) only [hu]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 18,
+    "d_score": 0.14,
+    "d_tokens": -8,
+    "d_heartbeats": 50,
+    "diff": "-        simp (disch := omega) only [hu]\n-        simp (disch := omega) only [Nat.add_sub_assoc, ih]\n+        simp (disch := omega) only [hu, Nat.add_sub_assoc, ih]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 21,
+    "d_score": 0.05,
+    "d_tokens": -3,
+    "d_heartbeats": 7,
+    "diff": "-  obtain ⟨i, j, hij, h⟩ := (Set.Finite.pi (fun _ : Fin 4 => Set.finite_Icc B T)).exists_lt_map_eq_of_forall_mem\n+  obtain ⟨i, j, hij, h⟩ := (Set.Finite.pi (fun _ => Set.finite_Icc B T)).exists_lt_map_eq_of_forall_mem"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 22,
+    "d_score": 0.04,
+    "d_tokens": -2,
+    "d_heartbeats": 7,
+    "diff": "-  obtain ⟨i, j, hij, h⟩ := (Set.Finite.pi (fun _ => Set.finite_Icc B T)).exists_lt_map_eq_of_forall_mem\n+  obtain ⟨i, j, hij, h⟩ := (Set.Finite.pi (fun _ : Fin 4 => Set.finite_Icc B T)).exists_lt_map_eq_of_forall_mem\n-  exact ⟨i, j-i, Nat.sub_pos_of_lt hij, fun n hn => by\n-    rw [← Nat.add_sub_cancel' hn, key, Nat.add_right_comm, Nat.add_sub_cancel' hij.le]⟩\n+  use i, j-i, Nat.sub_pos_of_lt hij\n+  intro n hn\n+  rw [← Nat.add_sub_cancel' hn, key, Nat.add_right_comm, Nat.add_sub_cancel' hij.le]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 23,
+    "d_score": 0.07,
+    "d_tokens": -4,
+    "d_heartbeats": 3,
+    "diff": "-  obtain ⟨i, j, hij, h⟩ := (Set.Finite.pi (fun _ : Fin 4 => Set.finite_Icc B T)).exists_lt_map_eq_of_forall_mem\n-    (f := fun n (k : Fin 4) => u (n+k)) (by intro n k hk; exact hB _)\n+  obtain ⟨i, j, hij, h⟩ := (Set.Finite.pi (fun _ => Set.finite_Icc B T)).exists_lt_map_eq_of_forall_mem\n+    (f := fun n (k : Fin 4) => u (n+k)) (by intro n k hk; apply hB)"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 24,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": 19,
+    "diff": "-    (f := fun n (k : Fin 4) => u (n+k)) (by intro n k hk; apply hB)\n+    (f := fun n (k : Fin 4) => u (n+k)) (by intro n k hk; exact hB _)\n-    induction m using Nat.strong_induction_on with\n-    | h m ih =>\n-      by_cases hm : m < 4\n-      · exact congrFun h ⟨m, hm⟩\n-      · apply Int.cast_injective (α := ℝ)\n-        simp (disch := omega) only [hu, Nat.add_sub_assoc, ih]\n+    refine Nat.strong_induction_on m fun m ih => ?_\n+    by_cases hm : m < 4\n+    · exact congrFun h ⟨m, hm⟩\n+    · apply Int.cast_injective (α := ℝ)\n+      simp (disch := omega) only [hu, Nat.add_sub_assoc, ih]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 25,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": -15,
+    "diff": "-    refine Nat.strong_induction_on m fun m ih => ?_\n+    induction m using Nat.strong_induction_on\n+    rename_i m ih"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 26,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": -4,
+    "diff": "-    (f := fun n (k : Fin 4) => u (n+k)) (by intro n k hk; exact hB _)\n+    (f := fun n (k : Fin 4) => u (n+k)) (by intro n k hk; apply hB)"
+   },
+   {
+    "run_id": "wu-hx-sol-r2",
+    "check": 2,
+    "d_score": 0.06,
+    "d_tokens": -3,
+    "d_heartbeats": 0,
+    "diff": "-    · apply Int.cast_injective (α := ℝ)\n+    · apply @Int.cast_injective ℝ"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 6,
+    "d_score": 0.08,
+    "d_tokens": -5,
+    "d_heartbeats": 32,
+    "diff": "-    (f := fun n (k : Fin 4) => u (n+k)) (by intro n k hk; apply hB)\n+    (by exact fun (n : ℕ) (k : Fin 4) hk => hB (n+k))"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 7,
+    "d_score": 0.08,
+    "d_tokens": -4,
+    "d_heartbeats": -1,
+    "diff": "-    (by exact fun (n : ℕ) (k : Fin 4) hk => hB (n+k))\n+    (by exact fun n (k : Fin 4) hk => hB (n+k))"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 11,
+    "d_score": 0.04,
+    "d_tokens": -2,
+    "d_heartbeats": -20,
+    "diff": "-  obtain ⟨i, j, hij, h⟩ := (Set.Finite.pi (fun _ => Set.finite_Icc B T)).exists_lt_map_eq_of_forall_mem\n-    (by exact fun n (k : Fin 4) hk => hB (n+k))\n+  obtain ⟨i, j, hij, h⟩ := (Set.Finite.pi (fun _ : Fin 4 => Set.finite_Icc B T)).exists_lt_map_eq_of_forall_mem\n+    (by exact fun n k hk => hB (n+k))"
+   },
+   {
+    "run_id": "wu-hx-sol-r4",
+    "check": 18,
+    "d_score": 0.01,
+    "d_tokens": 1,
+    "d_heartbeats": -108,
+    "diff": "-    by_cases hm : m < 4\n-    · exact congrFun h ⟨m, hm⟩\n+    by_cases hm : 4 ≤ m\n+    · exact congrFun h ⟨m, Nat.lt_of_not_ge hm⟩"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 13,
+    "d_score": 0.04,
+    "d_tokens": -2,
+    "d_heartbeats": 0,
+    "diff": "-  obtain ⟨i, j, hij, h⟩ := (Set.Finite.pi (fun _ : Fin 4 => Set.finite_Icc B T)).exists_lt_map_eq_of_forall_mem\n+  obtain ⟨i, j, hij, h⟩ := (Set.Finite.pi fun _ : Fin 4 => Set.finite_Icc B T).exists_lt_map_eq_of_forall_mem"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 14,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": 0,
+    "diff": "-    (by exact fun n k hk => hB (n+k))\n+    $ by exact fun n k hk => hB (n+k)"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 16,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": 0,
+    "diff": "-    $ by exact fun n k hk => hB (n+k)\n+    $ by exact fun n k hk => hB $ n+k"
+   }
+  ]
+ },
+ "profile_cache": {
+  "4ea767b2902e": {
+   "ok": true,
+   "total": 2170,
+   "floor": 558,
+   "reference": 111553,
+   "max_heartbeat_score": 33.17,
+   "blocks": [
+    {
+     "lines": "9-16",
+     "depth_indent": 2,
+     "text": "have key m : u (i+m) = u (j+m) := by clear hij induction m using Nat.strong_induction_on rename_i m ",
+     "heartbeats": 1361
+    },
+    {
+     "lines": "15-16",
+     "depth_indent": 4,
+     "text": "· apply Int.cast_injective (α := ℝ) simp (disch := omega) only [hu, Nat.add_sub_assoc, ih]",
+     "heartbeats": 1289
+    },
+    {
+     "lines": "7-8",
+     "depth_indent": 2,
+     "text": "obtain ⟨i, j, hij, h⟩ := (Set.Finite.pi (fun _ => Set.finite_Icc B T)).exists_lt_map_eq_of_forall_me",
+     "heartbeats": 178
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "use i, j-i, Nat.sub_pos_of_lt hij",
+     "heartbeats": 44
+    },
+    {
+     "lines": "19-19",
+     "depth_indent": 2,
+     "text": "rw [← Nat.add_sub_cancel' hn, key, Nat.add_right_comm, Nat.add_sub_cancel' hij.le]",
+     "heartbeats": 19
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 4,
+     "text": "by_cases hm : m < 4",
+     "heartbeats": 18
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 4,
+     "text": "· exact congrFun h ⟨m, hm⟩",
+     "heartbeats": 13
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "obtain ⟨B, T, hB⟩ := boundedu",
+     "heartbeats": 8
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 4,
+     "text": "induction m using Nat.strong_induction_on",
+     "heartbeats": 2
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "intro n hn",
+     "heartbeats": 1
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 4,
+     "text": "clear hij",
+     "heartbeats": 1
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 4,
+     "text": "rename_i m ih",
+     "heartbeats": 1
+    }
+   ],
+   "points_left_heartbeats": 0.48,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "1a6a72bc55e3": {
+   "ok": true,
+   "total": 2181,
+   "floor": 558,
+   "reference": 111553,
+   "max_heartbeat_score": 33.17,
+   "blocks": [
+    {
+     "lines": "9-16",
+     "depth_indent": 2,
+     "text": "have key m : u (i+m) = u (j+m) := by clear hij induction m using Nat.strong_induction_on rename_i m ",
+     "heartbeats": 1362
+    },
+    {
+     "lines": "15-16",
+     "depth_indent": 4,
+     "text": "· apply @Int.cast_injective ℝ simp (disch := omega) only [hu, Nat.add_sub_assoc, ih]",
+     "heartbeats": 1290
+    },
+    {
+     "lines": "7-8",
+     "depth_indent": 2,
+     "text": "obtain ⟨i, j, hij, h⟩ := (Set.Finite.pi (fun _ : Fin 4 => Set.finite_Icc B T)).exists_lt_map_eq_of_f",
+     "heartbeats": 187
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "use i, j-i, Nat.sub_pos_of_lt hij",
+     "heartbeats": 45
+    },
+    {
+     "lines": "19-19",
+     "depth_indent": 2,
+     "text": "rw [← Nat.add_sub_cancel' hn, key, Nat.add_right_comm, Nat.add_sub_cancel' hij.le]",
+     "heartbeats": 19
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 4,
+     "text": "by_cases hm : m < 4",
+     "heartbeats": 18
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 4,
+     "text": "· exact congrFun h ⟨m, hm⟩",
+     "heartbeats": 13
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "obtain ⟨B, T, hB⟩ := boundedu",
+     "heartbeats": 8
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 4,
+     "text": "induction m using Nat.strong_induction_on",
+     "heartbeats": 3
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "intro n hn",
+     "heartbeats": 1
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 4,
+     "text": "rename_i m ih",
+     "heartbeats": 1
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 4,
+     "text": "clear hij",
+     "heartbeats": 0
+    }
+   ],
+   "points_left_heartbeats": 0.48,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "1ee669a6e335": {
+   "ok": true,
+   "total": 2073,
+   "floor": 558,
+   "reference": 111553,
+   "max_heartbeat_score": 33.17,
+   "blocks": [
+    {
+     "lines": "9-16",
+     "depth_indent": 2,
+     "text": "have key m : u (i+m) = u (j+m) := by clear hij induction m using Nat.strong_induction_on rename_i m ",
+     "heartbeats": 1254
+    },
+    {
+     "lines": "14-15",
+     "depth_indent": 4,
+     "text": "· apply @Int.cast_injective ℝ simp (disch := omega) only [hu, Nat.add_sub_assoc, ih]",
+     "heartbeats": 1193
+    },
+    {
+     "lines": "7-8",
+     "depth_indent": 2,
+     "text": "obtain ⟨i, j, hij, h⟩ := (Set.Finite.pi (fun _ : Fin 4 => Set.finite_Icc B T)).exists_lt_map_eq_of_f",
+     "heartbeats": 187
+    },
+    {
+     "lines": "17-17",
+     "depth_indent": 2,
+     "text": "use i, j-i, Nat.sub_pos_of_lt hij",
+     "heartbeats": 45
+    },
+    {
+     "lines": "19-19",
+     "depth_indent": 2,
+     "text": "rw [← Nat.add_sub_cancel' hn, key, Nat.add_right_comm, Nat.add_sub_cancel' hij.le]",
+     "heartbeats": 19
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 4,
+     "text": "by_cases hm : 4 ≤ m",
+     "heartbeats": 19
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "obtain ⟨B, T, hB⟩ := boundedu",
+     "heartbeats": 8
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 4,
+     "text": "induction m using Nat.strong_induction_on",
+     "heartbeats": 3
+    },
+    {
+     "lines": "18-18",
+     "depth_indent": 2,
+     "text": "intro n hn",
+     "heartbeats": 1
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 4,
+     "text": "rename_i m ih",
+     "heartbeats": 1
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 4,
+     "text": "· exact congrFun h ⟨m, Nat.lt_of_not_ge hm⟩",
+     "heartbeats": 1
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 4,
+     "text": "clear hij",
+     "heartbeats": 0
+    }
+   ],
+   "points_left_heartbeats": 0.45,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "hb_floor": 558
+}

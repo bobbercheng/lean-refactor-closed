@@ -1,0 +1,564 @@
+{
+ "problem": "fundamental_theorem_of_variational_calculus'",
+ "best": {
+  "score": 91.31,
+  "proof": "lemma fundamental_theorem_of_variational_calculus' {f : Y → V}\n    (μ : Measure Y) [IsFiniteMeasureOnCompacts μ] [μ.IsOpenPosMeasure]\n    [OpensMeasurableSpace Y]\n    (hf : Continuous f) (hg : ∀ g, IsTestFunction g → ∫ x, ⟪f x, g x⟫_ℝ ∂μ = 0) :\n    f = 0 := by\n  funext x₀\n  false_or_by_contra\n  rename_i hx₀\n  have hc := Continuous.inner' (𝕜 := ℝ) f (λ_ => f x₀) hf continuous_const\n  have hp := real_inner_self_nonneg'.lt_of_ne' $ inner_self_eq_zero'.not.mpr hx₀\n  obtain ⟨φ, hφs, hφc, hφd, hφn, hφ1⟩ :=\n    exists_contDiff_tsupport_subset $ hc.continuousAt.eventually_const_lt hp\n  refine' ((hφd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero\n    (μ := μ) hφc.mul_right _ (by rw [hφ1, one_mul]; apply hp.ne')).ne' $ by\n      simpa only [inner_smul_right'] using\n        hg _ $ IsTestFunction.smul_right ⟨hφd, hφc⟩ contDiff_const\n  intro x\n  by_cases hx : φ x = 0\n  · simp [hx]\n  · exact mul_nonneg (Set.range_subset_iff.mp hφn x).1 (hφs $ subset_tsupport φ hx).le",
+  "tokens": 127,
+  "heartbeats": 1333,
+  "L": 85.08,
+  "H": 88.85,
+  "Z": 100.0,
+  "compat": {
+   "v4.32.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "326f00ef7ce2",
+   "tokens": 233,
+   "heartbeats": 1526,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:24:54Z",
+   "score": 86.62
+  },
+  {
+   "sha": "608432aef1dd",
+   "tokens": 157,
+   "heartbeats": 1067,
+   "ok": false,
+   "error": "123:10: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce … [hypotheses omitted] ⊢ ∫ (x : Y), (φ * fun x => ⟪f x, f x₀⟫_ℝ) x ∂μ = 0",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:20Z"
+  },
+  {
+   "sha": "279681434fba",
+   "tokens": 153,
+   "heartbeats": 1040,
+   "ok": false,
+   "error": "118:36: Invalid field `symm`: The environment does not contain `Function.symm`, so it is not possible to project the field `symm` from an expression mt inner_self_eq_zero'.mp hx₀ of type ⟪f x₀, f x₀⟫_?m.102 = 0 → False",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:23Z"
+  },
+  {
+   "sha": "96babf619c58",
+   "tokens": 143,
+   "heartbeats": 1022,
+   "ok": false,
+   "error": "117:36: Invalid field `symm`: The environment does not contain `Function.symm`, so it is not possible to project the field `symm` from an expression mt inner_self_eq_zero'.mp hx₀ of type `⟪f x₀, f x₀⟫_?m.95 = 0 → False`",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:24Z"
+  },
+  {
+   "sha": "42fd2ffb6fb0",
+   "tokens": 148,
+   "heartbeats": 928,
+   "ok": false,
+   "error": "120:10: don't know how to synthesize implicit argument `x` @Continuous.integral_ … [hypotheses omitted] ⊢ Y",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:53Z"
+  },
+  {
+   "sha": "066fe01490dd",
+   "tokens": 151,
+   "heartbeats": 878,
+   "ok": false,
+   "error": "120:10: don't know how to synthesize implicit argument `x` @Continuous.integral_ … [hypotheses omitted] ⊢ Y",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:55Z"
+  },
+  {
+   "sha": "827a75c254c3",
+   "tokens": 148,
+   "heartbeats": 1097,
+   "ok": false,
+   "error": "122:10: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce case refine'_1 … [hypotheses omitted] ⊢ Y",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:57Z"
+  },
+  {
+   "sha": "afe517331959",
+   "tokens": 149,
+   "heartbeats": 1117,
+   "ok": false,
+   "error": "121:29: Tactic `rewrite` failed: Did not find an occurrence of the pattern φ x₀ in the target expression (φ * fun a => ⟪f a, f x₀⟫_ℝ) ?m.200 ≠ 0 … [hypotheses omitted] ⊢ (φ * fun a => ⟪f a, f x₀⟫_ℝ) ?m.200 ≠ 0",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:26:31Z"
+  },
+  {
+   "sha": "7ed1830fb7ff",
+   "tokens": 153,
+   "heartbeats": 1334,
+   "ok": false,
+   "error": "127:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern φ x₀ in the target expression (φ * fun a => ⟪f a, f x₀⟫_ℝ) x₀ ≠ 0 case refine_2 … [hypotheses omitted] ⊢ (φ * fun a => ⟪f a, f x₀⟫_ℝ) x₀ ≠ 0",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:26:40Z"
+  },
+  {
+   "sha": "76ffea16a556",
+   "tokens": 150,
+   "heartbeats": 1093,
+   "ok": false,
+   "error": "121:28: Tactic `rewrite` failed: Did not find an occurrence of the pattern φ x₀ in the target expression (φ * fun a => ⟪f a, f x₀⟫_ℝ) ?m.200 ≠ 0 … [hypotheses omitted] ⊢ (φ * fun a => ⟪f a, f x₀⟫_ℝ) ?m.200 ≠ 0",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:26:49Z"
+  },
+  {
+   "sha": "9d69e9d5e7a7",
+   "tokens": 146,
+   "heartbeats": 1429,
+   "ok": false,
+   "error": "122:4: Type mismatch: After simplification, term hg (fun x => φ x • f x₀) (IsTestFunction.smul_right { smooth := hφd, supp := hφc } contDiff_const) has type @Eq ℝ (∫ (x : Y), φ x * ⟪f x, f x₀⟫_ℝ ∂μ) 0 but is expected to have type @Eq ℝ (∫ (x : Y), (φ * fun a => ⟪f a, f x₀⟫_ℝ) x ∂μ) 0",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:27:14Z"
+  },
+  {
+   "sha": "610a9937773f",
+   "tokens": 156,
+   "heartbeats": 1358,
+   "ok": false,
+   "error": "128:4: Type mismatch: After simplification, term hg (fun x => φ x • f x₀) (IsTestFunction.smul_right { smooth := hφd, supp := hφc } contDiff_const) has type @Eq ℝ (∫ (x : Y), φ x * ⟪f x, f x₀⟫_ℝ ∂μ) 0 but is expected to have type @Eq ℝ (∫ (x : Y), (φ * fun a => ⟪f a, f x₀⟫_ℝ) x ∂μ) 0",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:27:16Z"
+  },
+  {
+   "sha": "19098acb1049",
+   "tokens": 148,
+   "heartbeats": 1479,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:27:46Z",
+   "score": 90.08
+  },
+  {
+   "sha": "ca8a13f33aca",
+   "tokens": 134,
+   "heartbeats": 1453,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:27:47Z",
+   "score": 90.7
+  },
+  {
+   "sha": "846f1aa46541",
+   "tokens": 153,
+   "heartbeats": 1409,
+   "ok": false,
+   "error": "127:2: Type mismatch: After simplification, term hg (fun x => φ x • f x₀) (IsTestFunction.smul_right { smooth := hφd, supp := hφc } contDiff_const) has type @Eq ℝ (∫ (x : Y), φ x * ⟪f x, f x₀⟫_ℝ ∂μ) 0 but is expected to have type @Eq ℝ (∫ (x : Y), (φ * fun a => ⟪f a, f x₀⟫_ℝ) x ∂μ) 0",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:27:49Z"
+  },
+  {
+   "sha": "e8cc23c5c12e",
+   "tokens": 131,
+   "heartbeats": 1448,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:28:35Z",
+   "score": 90.83
+  },
+  {
+   "sha": "ec15425572c0",
+   "tokens": 126,
+   "heartbeats": 995,
+   "ok": false,
+   "error": "119:9: typeclass instance problem is stuck IsFiniteMeasureOnCompacts ?m.189 Note: Lean will not try to resolve this typeclass instance problem because the fourth type argument to `IsFiniteMeasureOnCompacts` is a metavariable. This argument must be fully determined before Lean will try to resolve the",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:28:36Z"
+  },
+  {
+   "sha": "396ad306ba30",
+   "tokens": 132,
+   "heartbeats": 1430,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:28:38Z",
+   "score": 90.84
+  },
+  {
+   "sha": "20a2a34873eb",
+   "tokens": 137,
+   "heartbeats": 1096,
+   "ok": false,
+   "error": "121:40: Tactic `rewrite` failed: Did not find an occurrence of the pattern φ x₀ in the target expression (φ * fun a => ⟪f a, f x₀⟫_ℝ) ?m.196 ≠ 0 … [hypotheses omitted] ⊢ (φ * fun a => ⟪f a, f x₀⟫_ℝ) ?m.196 ≠ 0",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:29:56Z"
+  },
+  {
+   "sha": "2bebd455152f",
+   "tokens": 136,
+   "heartbeats": 1788,
+   "ok": false,
+   "error": "121:18: Tactic `rewrite` failed: Did not find an occurrence of the pattern φ x₀ in the target expression (φ * fun a => ⟪f a, f x₀⟫_ℝ) ?m.196 ≠ 0 … [hypotheses omitted] ⊢ (φ * fun a => ⟪f a, f x₀⟫_ℝ) ?m.196 ≠ 0",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:30:05Z"
+  },
+  {
+   "sha": "41f73278d156",
+   "tokens": 128,
+   "heartbeats": 979,
+   "ok": false,
+   "error": "120:11: typeclass instance problem is stuck IsFiniteMeasureOnCompacts ?m.193 Note: Lean will not try to resolve this typeclass instance problem because the fourth type argument to `IsFiniteMeasureOnCompacts` is a metavariable. This argument must be fully determined before Lean will try to resolve th",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:30:06Z"
+  },
+  {
+   "sha": "a8d4a25d2350",
+   "tokens": 132,
+   "heartbeats": 1432,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:30:58Z"
+  },
+  {
+   "sha": "b967725dbeb9",
+   "tokens": 126,
+   "heartbeats": 1432,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:30:59Z",
+   "score": 91.07
+  },
+  {
+   "sha": "e38889440bfe",
+   "tokens": 126,
+   "heartbeats": 1427,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:01Z",
+   "score": 91.09
+  },
+  {
+   "sha": "cf4c962bd5e5",
+   "tokens": 128,
+   "heartbeats": 1346,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:41Z",
+   "score": 91.23
+  },
+  {
+   "sha": "a8ee6b16fcc2",
+   "tokens": 124,
+   "heartbeats": 1406,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:43Z"
+  },
+  {
+   "sha": "7f431a1b0f29",
+   "tokens": 124,
+   "heartbeats": 1400,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:45Z",
+   "score": 91.24
+  },
+  {
+   "sha": "4e6d3edb70d4",
+   "tokens": 130,
+   "heartbeats": 1368,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:20Z"
+  },
+  {
+   "sha": "5b3c3e8f82f9",
+   "tokens": 126,
+   "heartbeats": 1423,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:22Z"
+  },
+  {
+   "sha": "7abac3b55e6c",
+   "tokens": 131,
+   "heartbeats": 1332,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:23Z"
+  },
+  {
+   "sha": "d5f891b07422",
+   "tokens": 123,
+   "heartbeats": 1393,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:33:00Z",
+   "score": 91.3
+  },
+  {
+   "sha": "20e169bd39a6",
+   "tokens": 126,
+   "heartbeats": 1375,
+   "ok": false,
+   "error": "126:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern φ x in the target expression 0 x ≤ (fun i => φ i * ⟪f i, f x₀⟫_ℝ) x case pos … [hypotheses omitted] ⊢ 0 x ≤ (fun i => φ i * ⟪f i, f x₀⟫_ℝ) x",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:33:08Z"
+  },
+  {
+   "sha": "22b3002f1c00",
+   "tokens": 127,
+   "heartbeats": 1357,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:33:12Z"
+  },
+  {
+   "sha": "77b9b62e4982",
+   "tokens": 121,
+   "heartbeats": 1993,
+   "ok": false,
+   "error": "122:6: Type mismatch: After simplification, term hg (φ • fun x => ?m.258) { smooth := ContDiff.smul hφd contDiff_const, supp := HasCompactSupport.smul_right hφc } has type ∫ (x : Y), ⟪f x, (φ • fun x => ?m.258) x⟫_ℝ ∂μ = 0 but is expected to have type ∫ (x : Y), φ x * ⟪f x, f x₀⟫_ℝ ∂μ = 0",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:33:41Z"
+  },
+  {
+   "sha": "bb969b1d719e",
+   "tokens": 126,
+   "heartbeats": 1379,
+   "ok": false,
+   "error": "126:2: unsolved goals case pos … [hypotheses omitted] ⊢ 0 x ≤ 0",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:33:43Z"
+  },
+  {
+   "sha": "556f2e9177cb",
+   "tokens": 127,
+   "heartbeats": 1333,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:33:44Z",
+   "score": 91.31
+  },
+  {
+   "sha": "0544f38e5a79",
+   "tokens": 126,
+   "heartbeats": 1066,
+   "ok": false,
+   "error": "121:42: typeclass instance problem is stuck MulOneClass ?m.216 Note: Lean will not try to resolve this typeclass instance problem because the type argument to `MulOneClass` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass. Hint: Adding type anno",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:34:24Z"
+  },
+  {
+   "sha": "ebb604c87964",
+   "tokens": 127,
+   "heartbeats": 1075,
+   "ok": false,
+   "error": "121:33: Type mismatch: After simplification, term LT.lt.ne' hp has type RCLike.re ⟪f x₀, f x₀⟫_ℝ ≠ 0 but is expected to have type φ ?m.196 * ⟪f ?m.196, f x₀⟫_ℝ ≠ 0",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:34:26Z"
+  },
+  {
+   "sha": "2b481f4024f6",
+   "tokens": 130,
+   "heartbeats": 1335,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:34:27Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-f12",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:23:56Z",
+   "mode": "scout"
+  }
+ ],
+ "api_spend": 2.318574,
+ "lineage": "fresh",
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 1,
+    "d_score": 53.29,
+    "d_tokens": -618,
+    "d_heartbeats": 1526,
+    "diff": "+lemma fundamental_theorem_of_variational_calculus' {f : Y → V}\n+    (μ : Measure Y) [IsFiniteMeasureOnCompacts μ] [μ.IsOpenPosMeasure]\n+    [OpensMeasurableSpace Y]\n+    (hf : Continuous f) (hg : ∀ g, IsTestFunction g → ∫ x, ⟪f x, g x⟫_ℝ ∂μ = 0) :\n+    f = 0 := by\n+  funext x₀\n+  by_contra hx₀\n+  have hc : Continuous (fun x => ⟪f x, f x₀⟫_ℝ) :=\n+    Continuous.inner' f (fun _ => f x₀) hf continuous_const\n+  have hp : 0 < ⟪f x₀, f x₀⟫_ℝ :=\n+    lt_of_le_of_ne real_inner_self_nonneg' (Ne.symm (inner_self_eq_zero'.not.mpr hx₀))\n+  obtain ⟨φ, hφs, hφc, hφd, hφn, hφ1⟩ :=\n+    exists_contDiff_tsupport_subset (hc.continuousAt.eventually_const_lt hp)\n+  have hn : 0 ≤ (fun x => φ x * ⟪f x, f x₀⟫_ℝ) "
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 13,
+    "d_score": 3.46,
+    "d_tokens": -85,
+    "d_heartbeats": -47,
+    "diff": "-  have hc : Continuous (fun x => ⟪f x, f x₀⟫_ℝ) :=\n-    Continuous.inner' f (fun _ => f x₀) hf continuous_const\n+  have hc := Continuous.inner' (𝕜 := ℝ) f (fun _ => f x₀) hf continuous_const\n-  have hn : 0 ≤ (fun x => φ x * ⟪f x, f x₀⟫_ℝ) := by\n-    intro x\n+  apply ((hφd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero\n+    hφc.mul_right ?_ (mul_ne_zero (ne_of_eq_of_ne hφ1 one_ne_zero) hp.ne') (μ := μ)).ne'\n+  · simpa only [inner_smul_right', Pi.mul_apply] using\n+      hg _ (IsTestFunction.smul_right ⟨hφd, hφc⟩ contDiff_const)\n+  · intro x\n-  have hz : φ x₀ * ⟪f x₀, f x₀⟫_ℝ ≠ 0 := by\n-    rw [hφ1, one_mul]\n-    exact hp.ne'\n-  have hi := (hφd.continuous.mul hc).integral_"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 14,
+    "d_score": 0.62,
+    "d_tokens": -14,
+    "d_heartbeats": -26,
+    "diff": "-  have hp : 0 < ⟪f x₀, f x₀⟫_ℝ :=\n-    lt_of_le_of_ne real_inner_self_nonneg' (Ne.symm (inner_self_eq_zero'.not.mpr hx₀))\n+  have hp := lt_of_le_of_ne' real_inner_self_nonneg' (inner_self_eq_zero'.not.mpr hx₀)"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 16,
+    "d_score": 0.13,
+    "d_tokens": -3,
+    "d_heartbeats": -5,
+    "diff": "-    hφc.mul_right ?_ (mul_ne_zero (ne_of_eq_of_ne hφ1 one_ne_zero) hp.ne') (μ := μ)).ne'\n+    hφc.mul_right ?_ (mul_ne_zero (hφ1 ▸ one_ne_zero) hp.ne') (μ := μ)).ne'\n-        (hφs (subset_tsupport φ (Function.mem_support.mpr hx))).le\n+        (hφs (subset_tsupport φ hx)).le"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 18,
+    "d_score": 0.01,
+    "d_tokens": 1,
+    "d_heartbeats": -18,
+    "diff": "-  by_contra hx₀\n+  false_or_by_contra\n+  rename_i hx₀"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 23,
+    "d_score": 0.23,
+    "d_tokens": -6,
+    "d_heartbeats": 2,
+    "diff": "-  have hc := Continuous.inner' (𝕜 := ℝ) f (fun _ => f x₀) hf continuous_const\n-  have hp := lt_of_le_of_ne' real_inner_self_nonneg' (inner_self_eq_zero'.not.mpr hx₀)\n+  have hc := Continuous.inner' (𝕜 := ℝ) f (λ_ => f x₀) hf continuous_const\n+  have hp := lt_of_le_of_ne' real_inner_self_nonneg' $ inner_self_eq_zero'.not.mpr hx₀\n-    exists_contDiff_tsupport_subset (hc.continuousAt.eventually_const_lt hp)\n+    exists_contDiff_tsupport_subset $ hc.continuousAt.eventually_const_lt hp\n-    hφc.mul_right ?_ (mul_ne_zero (hφ1 ▸ one_ne_zero) hp.ne') (μ := μ)).ne'\n-  · simpa only [inner_smul_right', Pi.mul_apply] using\n-      hg _ (IsTestFunction.smul_right ⟨hφd, hφc⟩ contDiff_const)\n-  · intro x\n-"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 24,
+    "d_score": 0.02,
+    "d_tokens": 0,
+    "d_heartbeats": -5,
+    "diff": "-  apply ((hφd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero\n-    (μ := μ) hφc.mul_right ?_ $ mul_ne_zero (hφ1 ▸ one_ne_zero) hp.ne').ne' $ by\n+  refine' ((hφd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero\n+    (μ := μ) hφc.mul_right _ $ mul_ne_zero (hφ1 ▸ one_ne_zero) hp.ne').ne' $ by"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 25,
+    "d_score": 0.14,
+    "d_tokens": 2,
+    "d_heartbeats": -81,
+    "diff": "-  refine' ((hφd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero\n-    (μ := μ) hφc.mul_right _ $ mul_ne_zero (hφ1 ▸ one_ne_zero) hp.ne').ne' $ by\n-      simpa only [inner_smul_right', Pi.mul_apply] using\n+  apply ((hφd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero\n+    (μ := μ) hφc.mul_right ?_ (by rw [hφ1, one_mul]; exact hp.ne')).ne' $ by\n+      simpa only [inner_smul_right'] using"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 27,
+    "d_score": 0.01,
+    "d_tokens": -4,
+    "d_heartbeats": 54,
+    "diff": "-  apply ((hφd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero\n-    (μ := μ) hφc.mul_right ?_ (by rw [hφ1, one_mul]; exact hp.ne')).ne' $ by\n+  refine' ((hφd.continuous.fun_mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero\n+    (μ := μ) hφc.mul_right _ $ mul_ne_zero (hφ1 ▸ one_ne_zero) hp.ne').ne' $ by"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 31,
+    "d_score": 0.06,
+    "d_tokens": -1,
+    "d_heartbeats": -7,
+    "diff": "-  have hp := lt_of_le_of_ne' real_inner_self_nonneg' $ inner_self_eq_zero'.not.mpr hx₀\n+  have hp := real_inner_self_nonneg'.lt_of_ne' $ inner_self_eq_zero'.not.mpr hx₀"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 36,
+    "d_score": 0.01,
+    "d_tokens": 4,
+    "d_heartbeats": -60,
+    "diff": "-    (μ := μ) hφc.mul_right _ $ mul_ne_zero (hφ1 ▸ one_ne_zero) hp.ne').ne' $ by\n+    (μ := μ) hφc.mul_right _ (by rw [hφ1, one_mul]; apply hp.ne')).ne' $ by"
+   }
+  ]
+ },
+ "budget_milestones": {
+  "2": {
+   "spend": 2.001373,
+   "best": 90.7,
+   "run_id": "wu-hx-sol-f12",
+   "turn": 13,
+   "t": "2026-10-12T00:28:33Z"
+  }
+ },
+ "profile_cache": {
+  "396ad306ba30": {
+   "ok": true,
+   "total": 1430,
+   "floor": 536,
+   "reference": 11954,
+   "max_heartbeat_score": 31.84,
+   "blocks": [
+    {
+     "lines": "15-16",
+     "depth_indent": 2,
+     "text": "· simpa only [inner_smul_right', Pi.mul_apply] using hg _ (IsTestFunction.smul_right ⟨hφd, hφc⟩ cont",
+     "heartbeats": 217
+    },
+    {
+     "lines": "17-21",
+     "depth_indent": 2,
+     "text": "· intro x by_cases hx : φ x = 0 · simp [hx] · exact mul_nonneg (Set.range_subset_iff.mp hφn x).1 (hφ",
+     "heartbeats": 201
+    },
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "have hp := lt_of_le_of_ne' real_inner_self_nonneg' (inner_self_eq_zero'.not.mpr hx₀)",
+     "heartbeats": 77
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "have hc := Continuous.inner' (𝕜 := ℝ) f (fun _ => f x₀) hf continuous_const",
+     "heartbeats": 64
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "false_or_by_contra",
+     "heartbeats": 12
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "funext x₀",
+     "heartbeats": 4
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "rename_i hx₀",
+     "heartbeats": 0
+    },
+    {
+     "lines": "11-12",
+     "depth_indent": 2,
+     "text": "obtain ⟨φ, hφs, hφc, hφd, hφn, hφ1⟩ := exists_contDiff_tsupport_subset (hc.continuousAt.eventually_c",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-14",
+     "depth_indent": 2,
+     "text": "apply ((hφd.continuous.mul hc).integral_pos_of_hasCompactSupport_nonneg_nonzero hφc.mul_right ?_ (mu",
+     "heartbeats": null
+    },
+    {
+     "lines": "16-16",
+     "depth_indent": 6,
+     "text": "hg _ (IsTestFunction.smul_right ⟨hφd, hφc⟩ contDiff_const)",
+     "heartbeats": null
+    }
+   ],
+   "points_left_heartbeats": 2.49,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "hb_floor": 536
+}

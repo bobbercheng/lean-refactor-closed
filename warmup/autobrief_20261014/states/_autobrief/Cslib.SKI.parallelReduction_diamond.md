@@ -1,0 +1,5 @@
+AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)
+- Seed: 407 tokens, 1422 heartbeats, score 33.33. Free passes applied (normalize, hb_rewrite): start candidate 453 tokens, 894 heartbeats, score 41.94.
+- Exchange rate here: 1 token = 0.082 points, 100 heartbeats = 2.344 points.
+- Deletions that FAIL (needed as they stand): line 18 the tactic `rewrite [I_irreducible a' ha']`; line 22 the tactic `rewrite [ha₂'.2]`; line 27 the tactic `rewrite [h.2.2]`; line 36 the tactic `rewrite [I_irreducible c hc]`; line 45 the tactic `rewrite [h'.2]`; line 58 the tactic `rewrite [h.2.2]`.
+- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 61 (`· apply ParallelReduction.par`) (grind/simp_all/aesop); the closing tactic at line 9 (`exact ⟨.refl $ a' ⬝ b', .par ha' hb'⟩`) (grind/simp_all/aesop); the closing tactic at line 24 (`exact ⟨.red_K a₂' b', ha₂'.1⟩`) (grind/simp_all/aesop); the closing tactic at line 47 (`exact ⟨h'.1, .red_K a₁' c'⟩`) (grind/simp_all/aesop).

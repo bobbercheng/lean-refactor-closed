@@ -1,0 +1,13 @@
+AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)
+- Seed: 1769 tokens, 111554 heartbeats, score 33.33. Free passes applied (lint_delete): start candidate 1658 tokens, 111418 heartbeats, score 35.47.
+- Best combination of the paying single edits below: 1554 tokens, 97180 heartbeats, score 41.68 (Z 100.0); your workspace starts from it.
+- Exchange rate here: 1 token = 0.019 points, 100 heartbeats = 0.03 points.
+- Single edits that PAY:
+  - line 128: replace the proof of `have h₁₈ : (u (i + (m + 4)) : ℝ) = (u (…` (line 128) by `grind`: -54 tokens, -9291 hb, score +3.80
+  - line 14: delete the tactic `have h₅ := hB (n + 1)`: -9 tokens, -1426 hb, score +0.60
+  - line 15: delete the tactic `have h₆ := hB (n + 2)`: -9 tokens, -1435 hb, score +0.60
+  - line 16: delete the tactic `have h₇ := hB (n + 3)`: -9 tokens, -1422 hb, score +0.60
+  - line 13: delete the tactic `have h₄ := hB n`: -5 tokens, -1368 hb, score +0.51
+  - line 83: delete the tactic `have h₄ : i ≥ 0 := by linarith`: -9 tokens, -571 hb, score +0.35
+- Deletions that FAIL (needed as they stand): line 21 `f` from the simp list; line 50 `f` from the simp list; line 32 the tactic `by_contra! h₄`; line 43 the tactic `have h₉ := h₄ j i h₈`; line 45 the tactic `have h₆ : Set.Infinite (Set.range f) := Set.infin…`; line 66 the tactic `have h₃ := h_eq.1`.
+- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the proof of `have h_periodic : ∃ N c : ℕ, c > 0 ∧ ∀ …` (line 56) (grind/simp_all/aesop); the proof of `have h₁ : ∀ m : ℕ, u (i + m) = u (j + m…` (line 58) (grind/simp_all/aesop); the proof of `have h₂ : ∀ m : ℕ, u (i + m) = u (j + m…` (line 60) (grind/simp_all/aesop); the proof of `have h_main : ∃ (i j : ℕ), i < j ∧ (u i…` (line 2) (grind/simp_all/aesop).

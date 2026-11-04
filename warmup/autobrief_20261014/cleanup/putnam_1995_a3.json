@@ -1,0 +1,549 @@
+{
+ "problem": "putnam_1995_a3",
+ "seed": {
+  "ok": true,
+  "tokens": 158,
+  "heartbeats": 1214,
+  "L": 96.13,
+  "H": 91.48,
+  "Z": 100.0,
+  "score": 95.87
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 158,
+    "heartbeats": 1214,
+    "Z": 100.0,
+    "score": 95.87
+   },
+   "after": {
+    "ok": true,
+    "tokens": 157,
+    "heartbeats": 1214,
+    "Z": 100.0,
+    "score": 95.88
+   },
+   "gain": 0.01,
+   "applied": {
+    "lam": 1
+   },
+   "compiles": 7,
+   "seconds": 22.2
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 157,
+    "heartbeats": 1214,
+    "Z": 100.0,
+    "score": 95.88
+   },
+   "after": {
+    "ok": true,
+    "tokens": 157,
+    "heartbeats": 1214,
+    "Z": 100.0,
+    "score": 95.88
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 6,
+   "seconds": 24.9
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 157,
+    "heartbeats": 1214,
+    "Z": 100.0,
+    "score": 95.88
+   },
+   "after": {
+    "ok": true,
+    "tokens": 157,
+    "heartbeats": 1214,
+    "Z": 100.0,
+    "score": 95.88
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 2,
+   "seconds": 12.6
+  },
+  {
+   "pass": "lint_delete",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 157,
+    "heartbeats": 1214,
+    "Z": 100.0,
+    "score": 95.88
+   },
+   "after": {
+    "ok": true,
+    "tokens": 157,
+    "heartbeats": 1214,
+    "Z": 100.0,
+    "score": 95.88
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 23,
+   "seconds": 78.1
+  }
+ ],
+ "free_applied": [
+  "normalize"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 157,
+  "heartbeats": 1214,
+  "L": 96.16,
+  "H": 91.48,
+  "Z": 100.0,
+  "score": 95.88
+ },
+ "s0": "theorem putnam_1995_a3\n(relation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop)\n(digits_to_num : (Fin 9 → ℤ) → ℤ)\n(hdigits_to_num : digits_to_num = fun dig => ∑ i : Fin 9, (dig i) * 10^i.1)\n(hrelation : ∀ d e : (Fin 9 → ℤ), relation d e ↔ (∀ i : Fin 9, d i < 10 ∧ d i ≥ 0 ∧ e i < 10 ∧ e i ≥ 0) ∧ (∀ i : Fin 9, 7 ∣ (digits_to_num (fun j : Fin 9 => if j = i then e j else d j))))\n: ∀ d e f : (Fin 9 → ℤ), ((relation d e) ∧ (relation e f)) → (∀ i : Fin 9, 7 ∣ d i - f i) := by\n  have replace (a b : _ → _) i :\n      digits_to_num (λj => if j = i then b j else a j) =\n        digits_to_num a + (b i * 10^i.1 - a i * 10^i.1) := by\n    apply eq_add_of_sub_eq'\n    simp only [hdigits_to_num, ← Finset.sum_sub_distrib,\n      ite_mul, ite_sub, sub_self, Fintype.sum_ite_eq']\n  intro d e f h i\n  simp only [hrelation, replace] at h\n  choose k hk using h.1.2\n  choose l hl using h.2.2\n  apply (show IsCoprime (7 : ℤ) 10 by decide).pow_right |>.dvd_of_dvd_mul_right\n  refine ⟨(∑ j, k j) - digits_to_num d - k i - l i, ?_⟩\n  simp only [mul_sub, Finset.mul_sum, ← hk, ← hl i, Finset.sum_add_distrib, Finset.sum_sub_distrib,\n    Fin.sum_const, Int.nsmul_eq_mul]\n  rw [hdigits_to_num]\n  ring1",
+ "exchange": [
+  0.008,
+  0.234
+ ],
+ "profile": {
+  "ok": true,
+  "total": 1214,
+  "floor": null,
+  "reference": 14248,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "7-12",
+    "depth_indent": 2,
+    "text": "have replace (a b : _ → _) i : digits_to_num (λj => if j = i then b j else a j) = digits_to_num a + ",
+    "heartbeats": null
+   },
+   {
+    "lines": "13-13",
+    "depth_indent": 2,
+    "text": "intro d e f h i",
+    "heartbeats": null
+   },
+   {
+    "lines": "14-14",
+    "depth_indent": 2,
+    "text": "simp only [hrelation, replace] at h",
+    "heartbeats": null
+   },
+   {
+    "lines": "15-15",
+    "depth_indent": 2,
+    "text": "choose k hk using h.1.2",
+    "heartbeats": null
+   },
+   {
+    "lines": "16-16",
+    "depth_indent": 2,
+    "text": "choose l hl using h.2.2",
+    "heartbeats": null
+   },
+   {
+    "lines": "17-17",
+    "depth_indent": 2,
+    "text": "apply (show IsCoprime (7 : ℤ) 10 by decide).pow_right |>.dvd_of_dvd_mul_right",
+    "heartbeats": null
+   },
+   {
+    "lines": "18-18",
+    "depth_indent": 2,
+    "text": "refine ⟨(∑ j, k j) - digits_to_num d - k i - l i, ?_⟩",
+    "heartbeats": null
+   },
+   {
+    "lines": "19-20",
+    "depth_indent": 2,
+    "text": "simp only [mul_sub, Finset.mul_sum, ← hk, ← hl i, Finset.sum_add_distrib, Finset.sum_sub_distrib, Fi",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 157,
+  "heartbeats": 1214,
+  "score": 95.88
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 1679,
+   "score": null,
+   "error": "22:96: `grind` failed\ncase grind\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, di"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 68548,
+   "score": null,
+   "error": "22:93: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^ "
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 23261,
+   "score": null,
+   "error": "22:93: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\nd e f : Fin 9 → ℤ\ni : Fin 9\nhrelation :\n  ∀ (d e : Fin 9 → ℤ),\n    relation d e ↔\n      (∀ (i "
+  },
+  {
+   "kind": "closer",
+   "line": 7,
+   "label": "replace the closing tactic at line 7 (`ite_mul, ite_sub, sub_self, Fintype.sum…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 150,
+   "heartbeats": null,
+   "score": null,
+   "error": "30:32: unexpected token 'at'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 7,
+   "label": "replace the closing tactic at line 7 (`ite_mul, ite_sub, sub_self, Fintype.sum…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 150,
+   "heartbeats": null,
+   "score": null,
+   "error": "30:32: unexpected token 'at'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 7,
+   "label": "replace the closing tactic at line 7 (`ite_mul, ite_sub, sub_self, Fintype.sum…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 150,
+   "heartbeats": null,
+   "score": null,
+   "error": "30:32: unexpected token 'at'; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 15,
+   "label": "replace the closing tactic at line 15 (`Fin.sum_const, Int.nsmul_eq_mul]`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 154,
+   "heartbeats": null,
+   "score": null,
+   "error": "39:0: unexpected end of input; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 15,
+   "label": "replace the closing tactic at line 15 (`Fin.sum_const, Int.nsmul_eq_mul]`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 154,
+   "heartbeats": null,
+   "score": null,
+   "error": "39:0: unexpected end of input; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 15,
+   "label": "replace the closing tactic at line 15 (`Fin.sum_const, Int.nsmul_eq_mul]`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 154,
+   "heartbeats": null,
+   "score": null,
+   "error": "39:0: unexpected end of input; expected ']'"
+  },
+  {
+   "kind": "del-arg",
+   "line": 6,
+   "label": "delete `hdigits_to_num` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 155,
+   "heartbeats": 1057,
+   "score": null,
+   "error": "27:4: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 6,
+   "label": "delete `← Finset.sum_sub_distrib` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 154,
+   "heartbeats": 1140,
+   "score": null,
+   "error": "25:59: unsolved goals\ncase h\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i "
+  },
+  {
+   "kind": "del-arg",
+   "line": 7,
+   "label": "delete `ite_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 155,
+   "heartbeats": 1170,
+   "score": null,
+   "error": "25:59: unsolved goals\ncase h\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i "
+  },
+  {
+   "kind": "del-arg",
+   "line": 7,
+   "label": "delete `ite_sub` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 155,
+   "heartbeats": 1181,
+   "score": null,
+   "error": "25:59: unsolved goals\ncase h\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i "
+  },
+  {
+   "kind": "del-arg",
+   "line": 7,
+   "label": "delete `sub_self` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 155,
+   "heartbeats": 1199,
+   "score": null,
+   "error": "25:59: unsolved goals\ncase h\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i "
+  },
+  {
+   "kind": "del-arg",
+   "line": 7,
+   "label": "delete `Fintype.sum_ite_eq'` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 155,
+   "heartbeats": 1197,
+   "score": null,
+   "error": "25:59: unsolved goals\ncase h\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i "
+  },
+  {
+   "kind": "del-arg",
+   "line": 9,
+   "label": "delete `hrelation` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 155,
+   "heartbeats": 493,
+   "score": null,
+   "error": "30:2: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 9,
+   "label": "delete `replace` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 155,
+   "heartbeats": 1341,
+   "score": null,
+   "error": "38:2: ring failed, ring expressions not equal\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun d"
+  },
+  {
+   "kind": "del-arg",
+   "line": 14,
+   "label": "delete `mul_sub` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 155,
+   "heartbeats": 685,
+   "score": null,
+   "error": "35:2: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 14,
+   "label": "delete `Finset.mul_sum` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 155,
+   "heartbeats": 1259,
+   "score": null,
+   "error": "38:2: ring failed, ring expressions not equal\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun d"
+  },
+  {
+   "kind": "del-arg",
+   "line": 14,
+   "label": "delete `← hk` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 154,
+   "heartbeats": 1307,
+   "score": null,
+   "error": "38:2: ring failed, ring expressions not equal\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun d"
+  },
+  {
+   "kind": "del-arg",
+   "line": 14,
+   "label": "delete `Finset.sum_add_distrib` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 155,
+   "heartbeats": 1346,
+   "score": null,
+   "error": "38:2: ring failed, ring expressions not equal\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun d"
+  },
+  {
+   "kind": "del-arg",
+   "line": 14,
+   "label": "delete `Finset.sum_sub_distrib` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 155,
+   "heartbeats": 1364,
+   "score": null,
+   "error": "38:2: ring failed, ring expressions not equal\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun d"
+  },
+  {
+   "kind": "del-arg",
+   "line": 15,
+   "label": "delete `Fin.sum_const` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 155,
+   "heartbeats": 1384,
+   "score": null,
+   "error": "37:2: ring failed, ring expressions not equal\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun d"
+  },
+  {
+   "kind": "del-arg",
+   "line": 15,
+   "label": "delete `Int.nsmul_eq_mul` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 155,
+   "heartbeats": 1209,
+   "score": 95.91,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -5,
+   "d_score": 0.03
+  },
+  {
+   "kind": "del-tac",
+   "line": 9,
+   "label": "delete the tactic `simp only [hrelation, replace] at h`",
+   "closer": "",
+   "ok": false,
+   "tokens": 148,
+   "heartbeats": 492,
+   "score": null,
+   "error": "30:20: Invalid projection: Projection operates on types of the form `C ...` where C is a constant. The expression\n  h.left\nhas type `relation d e` which does no"
+  },
+  {
+   "kind": "del-tac",
+   "line": 10,
+   "label": "delete the tactic `choose k hk using h.1.2`",
+   "closer": "",
+   "ok": false,
+   "tokens": 152,
+   "heartbeats": 683,
+   "score": null,
+   "error": "33:16: Unknown identifier `k`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 11,
+   "label": "delete the tactic `choose l hl using h.2.2`",
+   "closer": "",
+   "ok": false,
+   "tokens": 152,
+   "heartbeats": 1352,
+   "score": null,
+   "error": "33:47: Unknown identifier `l`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 16,
+   "label": "delete the tactic `rw [hdigits_to_num]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 153,
+   "heartbeats": 1415,
+   "score": null,
+   "error": "37:2: ring failed, ring expressions not equal\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun d"
+  },
+  {
+   "kind": "del-tac",
+   "line": 5,
+   "label": "delete the tactic `apply eq_add_of_sub_eq'`",
+   "closer": "",
+   "ok": false,
+   "tokens": 155,
+   "heartbeats": 1121,
+   "score": null,
+   "error": "25:59: unsolved goals\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun dig => ∑ i, dig i * 10 ^ "
+  },
+  {
+   "kind": "del-tac",
+   "line": 8,
+   "label": "delete the tactic `intro d e f h i`",
+   "closer": "",
+   "ok": false,
+   "tokens": 151,
+   "heartbeats": 491,
+   "score": null,
+   "error": "29:36: Unknown identifier `h`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 12,
+   "label": "delete the tactic `apply (show IsCoprime (7 : ℤ) 10 by decide).pow_r…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 140,
+   "heartbeats": 1286,
+   "score": null,
+   "error": "37:2: ring failed, ring expressions not equal\nrelation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop\ndigits_to_num : (Fin 9 → ℤ) → ℤ\nhdigits_to_num : digits_to_num = fun d"
+  },
+  {
+   "kind": "del-tac",
+   "line": 13,
+   "label": "delete the tactic `refine ⟨(∑ j, k j) - digits_to_num d - k i - l i,…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 136,
+   "heartbeats": 624,
+   "score": null,
+   "error": "34:2: `simp` made no progress"
+  }
+ ],
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 158 tokens, 1214 heartbeats, score 95.87. Free passes applied (normalize): start candidate 157 tokens, 1214 heartbeats, score 95.88.\n- Exchange rate here: 1 token = 0.008 points, 100 heartbeats = 0.234 points.\n- Deletions that FAIL (needed as they stand): line 6 `hdigits_to_num` from the simp list; line 6 `← Finset.sum_sub_distrib` from the simp list; line 7 `ite_mul` from the simp list; line 7 `ite_sub` from the simp list; line 7 `sub_self` from the simp list; line 7 `Fintype.sum_ite_eq'` from the simp list.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the closing tactic at line 7 (`ite_mul, ite_sub, sub_self, Fintype.sum…`) (grind/simp_all/aesop); the closing tactic at line 15 (`Fin.sum_const, Int.nsmul_eq_mul]`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 95.88,
+ "gain": 0.01,
+ "compiles_sweep": 32,
+ "seconds": 380.8,
+ "source": "best:d6b9ca5550ce"
+}

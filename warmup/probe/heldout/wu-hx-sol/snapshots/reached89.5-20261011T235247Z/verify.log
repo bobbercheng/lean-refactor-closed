@@ -1,0 +1,17 @@
+CallElimCorrect.substOldPostSubset           ok=True compat 1/1 score 92.0 (snapshot 92.0) 
+CallElimCorrect.extractedOldExprInVars       ok=True compat 1/1 score 93.82 (snapshot 93.82) 
+Core.InitsUpdatesComm                        ok=True compat 3/3 score 89.14 (snapshot 89.14) 
+fundamental_theorem_of_variational_calculus' ok=True compat 1/1 score 91.58 (snapshot 91.58) 
+Electromagnetism.ElectromagneticPotential.ti ok=True compat 1/1 score 73.89 (snapshot 73.89) 
+FieldSpecification.WickAlgebra.ι_timeOrderF_ ok=True compat 1/1 score 83.46 (snapshot 83.46) 
+Cslib.LambdaCalculus.LocallyNameless.Fsub.Ty ok=True compat 3/3 score 85.55 (snapshot 85.55) 
+Cslib.SKI.parallelReduction_diamond          ok=True compat 4/4 score 76.75 (snapshot 76.75) 
+Cslib.CCS.bisimilarity_congr_choice          ok=True compat 3/3 score 87.03 (snapshot 87.03) 
+Binius.BinaryBasefold.fiberwise_dist_lt_imp_ ok=True compat 4/4 score 90.97 (snapshot 90.97) 
+Binius.BinaryBasefold.fold_advances_evaluati ok=True compat 3/3 score 93.62 (snapshot 93.62) 
+interleaved_affine_gaps_imply_tensor_gaps    ok=True compat 3/3 score 92.88 (snapshot 92.88) 
+putnam_1964_a4                               ok=True compat 3/3 score 96.82 (snapshot 96.82) 
+putnam_1964_b2                               ok=True compat 2/2 score 99.26 (snapshot 99.26) 
+putnam_1995_a3                               ok=True compat 3/3 score 95.88 (snapshot 95.88) 
+
+re-verified mean 89.51 (snapshot 89.51); all compile everywhere: True

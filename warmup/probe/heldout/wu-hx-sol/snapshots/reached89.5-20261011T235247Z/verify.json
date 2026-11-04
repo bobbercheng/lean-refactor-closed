@@ -1,0 +1,152 @@
+[
+ {
+  "name": "CallElimCorrect.substOldPostSubset",
+  "ok": true,
+  "errors": [],
+  "score": 92.0,
+  "claimed": 92.0,
+  "tokens": 39,
+  "heartbeats": 597,
+  "compat": "1/1"
+ },
+ {
+  "name": "CallElimCorrect.extractedOldExprInVars",
+  "ok": true,
+  "errors": [],
+  "score": 93.82,
+  "claimed": 93.82,
+  "tokens": 20,
+  "heartbeats": 257,
+  "compat": "1/1"
+ },
+ {
+  "name": "Core.InitsUpdatesComm",
+  "ok": true,
+  "errors": [],
+  "score": 89.14,
+  "claimed": 89.14,
+  "tokens": 64,
+  "heartbeats": 173,
+  "compat": "3/3"
+ },
+ {
+  "name": "fundamental_theorem_of_variational_calculus'",
+  "ok": true,
+  "errors": [],
+  "score": 91.58,
+  "claimed": 91.58,
+  "tokens": 119,
+  "heartbeats": 1348,
+  "compat": "1/1"
+ },
+ {
+  "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+  "ok": true,
+  "errors": [],
+  "score": 73.89,
+  "claimed": 73.89,
+  "tokens": 446,
+  "heartbeats": 12426,
+  "compat": "1/1"
+ },
+ {
+  "name": "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time",
+  "ok": true,
+  "errors": [],
+  "score": 83.46,
+  "claimed": 83.46,
+  "tokens": 304,
+  "heartbeats": 10379,
+  "compat": "1/1"
+ },
+ {
+  "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+  "ok": true,
+  "errors": [],
+  "score": 85.55,
+  "claimed": 85.55,
+  "tokens": 127,
+  "heartbeats": 7326,
+  "compat": "3/3"
+ },
+ {
+  "name": "Cslib.SKI.parallelReduction_diamond",
+  "ok": true,
+  "errors": [],
+  "score": 76.75,
+  "claimed": 76.75,
+  "tokens": 135,
+  "heartbeats": 520,
+  "compat": "4/4"
+ },
+ {
+  "name": "Cslib.CCS.bisimilarity_congr_choice",
+  "ok": true,
+  "errors": [],
+  "score": 87.03,
+  "claimed": 87.03,
+  "tokens": 72,
+  "heartbeats": 397,
+  "compat": "3/3"
+ },
+ {
+  "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+  "ok": true,
+  "errors": [],
+  "score": 90.97,
+  "claimed": 90.97,
+  "tokens": 220,
+  "heartbeats": 1931,
+  "compat": "4/4"
+ },
+ {
+  "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+  "ok": true,
+  "errors": [],
+  "score": 93.62,
+  "claimed": 93.62,
+  "tokens": 142,
+  "heartbeats": 5385,
+  "compat": "3/3"
+ },
+ {
+  "name": "interleaved_affine_gaps_imply_tensor_gaps",
+  "ok": true,
+  "errors": [],
+  "score": 92.88,
+  "claimed": 92.88,
+  "tokens": 100,
+  "heartbeats": 1311,
+  "compat": "3/3"
+ },
+ {
+  "name": "putnam_1964_a4",
+  "ok": true,
+  "errors": [],
+  "score": 96.82,
+  "claimed": 96.82,
+  "tokens": 136,
+  "heartbeats": 2073,
+  "compat": "3/3"
+ },
+ {
+  "name": "putnam_1964_b2",
+  "ok": true,
+  "errors": [],
+  "score": 99.26,
+  "claimed": 99.26,
+  "tokens": 25,
+  "heartbeats": 1055,
+  "compat": "2/2"
+ },
+ {
+  "name": "putnam_1995_a3",
+  "ok": true,
+  "errors": [],
+  "score": 95.88,
+  "claimed": 95.88,
+  "tokens": 181,
+  "heartbeats": 1131,
+  "compat": "3/3"
+ }
+]

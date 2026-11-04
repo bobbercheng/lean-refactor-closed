@@ -1,0 +1,2271 @@
+{
+ "problem": "Cslib.CCS.bisimilarity_congr_choice",
+ "best": {
+  "score": 87.31,
+  "proof": "theorem bisimilarity_congr_choice :\n    (p ~[lts (defs := defs)] q) → (choice p r) ~[lts (defs := defs)] (choice q r) := by\n  intro h\n  rw [HomBisimilarity.symm_simulation]\n  exists _, ChoiceBisim.choice h\n  constructor\n  · constructor\n    rintro _ _ ⟨⟩ <;> constructor <;> symm <;> assumption\n  · rintro _ _ (h | h) μ s ht\n    case' choice =>\n      cases ht <;> rename_i ht\n      case choiceR =>\n        use s, Tr.choiceR ht\n        constructor\n        apply_rfl\n    all_goals\n      apply h.follow_fst at ht\n      use ht.choose, ?_, ChoiceBisim.bisim ht.choose_spec.2\n      try apply Tr.choiceL\n      exact ht.choose_spec.1",
+  "tokens": 73,
+  "heartbeats": 348,
+  "L": 70.92,
+  "H": 91.03,
+  "Z": 100.0,
+  "compat": {
+   "v4.33.0-rc2": true,
+   "v4.32.0": true,
+   "v4.31.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "76269472b07b",
+   "tokens": 99,
+   "heartbeats": 364,
+   "ok": false,
+   "error": "328:4: Case tag `choice.left` not found. Hint: Available tags: • `bisim.left`: c̵h̵o̵i̵c̵e̵.̵l̵e̵f̵t̵b̲i̲s̲i̲m̲.̲l̲e̲f̲t̲ • `bisim.right`: c̵h̵o̵i̵c̵e̵.̵l̵e̵f̵t̵b̲i̲s̲i̲m̲.̲r̲i̲g̲h̲t̲",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:20:50Z"
+  },
+  {
+   "sha": "8756096479a5",
+   "tokens": 75,
+   "heartbeats": 369,
+   "ok": false,
+   "error": "331:11: `@[grind →] theorem Tr.choiceL` failed to find patterns in the antecedents of the theorem, consider using different options or the `grind_pattern` command",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:21:43Z"
+  },
+  {
+   "sha": "c4f9889dc4b5",
+   "tokens": 75,
+   "heartbeats": 418,
+   "ok": false,
+   "error": "331:4: duplicate rule 'ChoiceBisim.bisim'; rule 'Tr.choiceL' was already given. Use [<term>,...] to give multiple rules.",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:21:46Z"
+  },
+  {
+   "sha": "ae57ff87f17f",
+   "tokens": 90,
+   "heartbeats": 547,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:21:49Z"
+  },
+  {
+   "sha": "95e856b73eb1",
+   "tokens": 73,
+   "heartbeats": 1179,
+   "ok": false,
+   "error": "331:4: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[lts,lts] q [prop] p_1 ~[lts,lts] q_1 [prop] ∃ s₂', lts.Tr q_1 μ s₂' ∧ s ~[lts,lts] s₂' [prop] ∀ (a : Process Name Constant), lts.Tr (q_1.choice r_1) μ a → ¬ChoiceBisim s a [prop",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:22:07Z"
+  },
+  {
+   "sha": "0c58a2029a68",
+   "tokens": 78,
+   "heartbeats": 3900,
+   "ok": false,
+   "error": "321:85: unsolved goals … [hypotheses omitted] ⊢ ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s s₂' Name : Type u Constant : Type v defs : Constant → Process Name Constant → Prop p q r : Process Name Constant h_1 : p ~[lts] q p_1 q_1 r_1 : Process Name Constant h : p_1 ~[lts] q_1 μ : Act Name s",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:22:10Z"
+  },
+  {
+   "sha": "74e0f7186550",
+   "tokens": 227,
+   "heartbeats": 339,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:23:01Z"
+  },
+  {
+   "sha": "e05d6e58da18",
+   "tokens": 94,
+   "heartbeats": 430,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:23:17Z"
+  },
+  {
+   "sha": "328c9f43f5f6",
+   "tokens": 94,
+   "heartbeats": 440,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:23:20Z"
+  },
+  {
+   "sha": "6e4d229e40b2",
+   "tokens": 94,
+   "heartbeats": 428,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:52:35Z"
+  },
+  {
+   "sha": "28d8adb7d520",
+   "tokens": 93,
+   "heartbeats": 441,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:52:38Z",
+   "score": 83.86
+  },
+  {
+   "sha": "a6e8d76bbf6d",
+   "tokens": 92,
+   "heartbeats": 494,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:53:15Z"
+  },
+  {
+   "sha": "0721bfab2213",
+   "tokens": 107,
+   "heartbeats": 442,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:53:18Z"
+  },
+  {
+   "sha": "5a043a8d44b1",
+   "tokens": 93,
+   "heartbeats": 441,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:53:21Z"
+  },
+  {
+   "sha": "37fcd0b41306",
+   "tokens": 88,
+   "heartbeats": 2181,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:53:23Z"
+  },
+  {
+   "sha": "04b0753ae3cc",
+   "tokens": 91,
+   "heartbeats": 454,
+   "ok": false,
+   "error": "329:21: Application type mismatch: The argument ht has type Tr p✝ μ s but is expected to have type Tr r✝ μ s in the application Tr.choiceR ht",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:54:13Z"
+  },
+  {
+   "sha": "c1bb98da3eb2",
+   "tokens": 92,
+   "heartbeats": 884,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:54:17Z"
+  },
+  {
+   "sha": "4509d09590fc",
+   "tokens": 98,
+   "heartbeats": 403,
+   "ok": false,
+   "error": "328:23: Unknown identifier `ht`",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:54:20Z"
+  },
+  {
+   "sha": "99d1a1a81d18",
+   "tokens": 91,
+   "heartbeats": 435,
+   "ok": false,
+   "error": "328:4: Invalid `⟨...⟩` notation: The expected type `ChoiceBisim s s` has more than one constructor Note: This notation can only be used when the expected type is an inductive type with a single constructor",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:54:48Z"
+  },
+  {
+   "sha": "62055602ffcd",
+   "tokens": 91,
+   "heartbeats": 435,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:54:50Z",
+   "score": 84.18
+  },
+  {
+   "sha": "3bdc14e9a2ea",
+   "tokens": 92,
+   "heartbeats": 438,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:54:57Z"
+  },
+  {
+   "sha": "b4106a7afaaf",
+   "tokens": 89,
+   "heartbeats": 465,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:54:59Z"
+  },
+  {
+   "sha": "6ce8f895c879",
+   "tokens": 87,
+   "heartbeats": 458,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:55:14Z",
+   "score": 84.51
+  },
+  {
+   "sha": "52f7a2340ba3",
+   "tokens": 90,
+   "heartbeats": 432,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:55:21Z"
+  },
+  {
+   "sha": "455b5d6361fb",
+   "tokens": 87,
+   "heartbeats": 459,
+   "ok": false,
+   "error": "323:6: don't know how to synthesize placeholder context: Name : Type u Constant : Type v defs : Constant → Process Name Constant → Prop p q r : Process Name Constant h : p ~[lts] q ⊢ Process Name Constant → Process Name Constant → Prop",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:55:24Z"
+  },
+  {
+   "sha": "0eb9c6c1e7f0",
+   "tokens": 86,
+   "heartbeats": 442,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:55:48Z",
+   "score": 84.78
+  },
+  {
+   "sha": "088f3d0c1d8d",
+   "tokens": 86,
+   "heartbeats": 445,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:55:55Z"
+  },
+  {
+   "sha": "c362d3a8abec",
+   "tokens": 85,
+   "heartbeats": 449,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:55:57Z",
+   "score": 84.85
+  },
+  {
+   "sha": "192e07af97a3",
+   "tokens": 87,
+   "heartbeats": 461,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:56:04Z"
+  },
+  {
+   "sha": "84e07e494941",
+   "tokens": 84,
+   "heartbeats": 433,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:56:28Z",
+   "score": 85.12
+  },
+  {
+   "sha": "321e820bdb32",
+   "tokens": 84,
+   "heartbeats": 447,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:56:35Z"
+  },
+  {
+   "sha": "9ee24b3ca72e",
+   "tokens": 82,
+   "heartbeats": 555,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:56:37Z"
+  },
+  {
+   "sha": "c7a1f2860d28",
+   "tokens": 76,
+   "heartbeats": 445,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:56:52Z",
+   "score": 86.08
+  },
+  {
+   "sha": "d422d65d0a1e",
+   "tokens": 78,
+   "heartbeats": 455,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:56:59Z"
+  },
+  {
+   "sha": "e96068bdc9e8",
+   "tokens": 73,
+   "heartbeats": 440,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:57:13Z",
+   "score": 86.52
+  },
+  {
+   "sha": "905fca565812",
+   "tokens": 74,
+   "heartbeats": 439,
+   "ok": false,
+   "error": "333:4: Type mismatch (Exists.choose_spec ht).left has type lts.Tr q✝ μ ht.choose but is expected to have type lts.Tr (q✝.choice r✝) μ ht.choose",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:57:20Z"
+  },
+  {
+   "sha": "349b30cdda93",
+   "tokens": 72,
+   "heartbeats": 490,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:57:41Z"
+  },
+  {
+   "sha": "67e4b4ad7ad3",
+   "tokens": 73,
+   "heartbeats": 440,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:57:44Z"
+  },
+  {
+   "sha": "da767428b332",
+   "tokens": 71,
+   "heartbeats": 493,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:57:46Z"
+  },
+  {
+   "sha": "2cfc6749e346",
+   "tokens": 73,
+   "heartbeats": 442,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:58:12Z"
+  },
+  {
+   "sha": "6fe13229e447",
+   "tokens": 73,
+   "heartbeats": 443,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:58:14Z"
+  },
+  {
+   "sha": "86bcbd191f0c",
+   "tokens": 80,
+   "heartbeats": 403,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:58:17Z"
+  },
+  {
+   "sha": "abf06d8826d0",
+   "tokens": 71,
+   "heartbeats": 440,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:58:36Z",
+   "score": 86.79
+  },
+  {
+   "sha": "80b4918b9779",
+   "tokens": 77,
+   "heartbeats": 440,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:58:44Z"
+  },
+  {
+   "sha": "50f04c739153",
+   "tokens": 70,
+   "heartbeats": 475,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:59:02Z"
+  },
+  {
+   "sha": "e8bae11a15ac",
+   "tokens": 71,
+   "heartbeats": 434,
+   "ok": false,
+   "error": "333:4: Type mismatch (Exists.choose_spec ht).left has type lts.Tr q✝ μ ht.choose but is expected to have type lts.Tr (q✝.choice r✝) μ ht.choose",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T05:59:05Z"
+  },
+  {
+   "sha": "91d8b334ca53",
+   "tokens": 182,
+   "heartbeats": 540,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:00:45Z"
+  },
+  {
+   "sha": "1e75ee50941e",
+   "tokens": 71,
+   "heartbeats": 309,
+   "ok": false,
+   "error": "330:4: Failed to find Tr q✝ μ s as the type of a parameter of lts.Tr p✝ ?m.590 ?m.591 → ∃ s₂', lts.Tr q✝ ?m.590 s₂' ∧ ?m.591 ~[lts,lts] s₂'.",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:01:03Z"
+  },
+  {
+   "sha": "46ab74504d91",
+   "tokens": 71,
+   "heartbeats": 450,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:01:26Z"
+  },
+  {
+   "sha": "a176a2445ac6",
+   "tokens": 75,
+   "heartbeats": 310,
+   "ok": false,
+   "error": "330:5: Failed to find Tr q✝ μ s as the type of a parameter of lts.Tr p✝ ?m.590 ?m.591 → ∃ s₂', lts.Tr q✝ ?m.590 s₂' ∧ ?m.591 ~[lts,lts] s₂'.",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:01:29Z"
+  },
+  {
+   "sha": "a96d107b7770",
+   "tokens": 71,
+   "heartbeats": 440,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:27:36Z"
+  },
+  {
+   "sha": "673d3fc770e0",
+   "tokens": 76,
+   "heartbeats": 429,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:27:38Z"
+  },
+  {
+   "sha": "11ff197a8f33",
+   "tokens": 73,
+   "heartbeats": 447,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:27:41Z"
+  },
+  {
+   "sha": "9c7c24419f23",
+   "tokens": 73,
+   "heartbeats": 443,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:27:43Z"
+  },
+  {
+   "sha": "aebf916c335f",
+   "tokens": 74,
+   "heartbeats": 446,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:27:46Z"
+  },
+  {
+   "sha": "b243a59d7a28",
+   "tokens": 69,
+   "heartbeats": 352,
+   "ok": false,
+   "error": "330:39: Failed to find lts.Tr (q✝.choice r✝) μ s as the type of a parameter of lts.Tr q✝ ?m.417 ?m.418 → ∃ s₁', lts.Tr p✝ ?m.417 s₁' ∧ s₁' ~[lts,lts] ?m.418.",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:28:16Z"
+  },
+  {
+   "sha": "a5ff5ebab6cf",
+   "tokens": 71,
+   "heartbeats": 548,
+   "ok": false,
+   "error": "331:4: Invalid `⟨...⟩` notation: The expected type `ChoiceBisim s ht.choose` has more than one constructor Note: This notation can only be used when the expected type is an inductive type with a single constructor",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:28:28Z"
+  },
+  {
+   "sha": "ffd640d0260b",
+   "tokens": 71,
+   "heartbeats": 440,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:28:30Z"
+  },
+  {
+   "sha": "3d2d08040f0a",
+   "tokens": 88,
+   "heartbeats": 1786,
+   "ok": false,
+   "error": "327:12: `grind` failed case grind.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[{ Tr := Tr },{ Tr := Tr }] q [prop] s ~[{ Tr := Tr },{ Tr := Tr }] t [prop] Tr s μ u [prop] ∀ (a : Process Name Constant), Tr t μ a → ¬u ~[{ Tr := Tr },{ Tr := Tr }] a [pro",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:30:09Z"
+  },
+  {
+   "sha": "fa5d7f90b4e2",
+   "tokens": 90,
+   "heartbeats": 4427,
+   "ok": false,
+   "error": "321:85: unsolved goals case inl.left … [hypotheses omitted] ⊢ ∃ s₂', Tr t μ s₂' ∧ (u ~[{ Tr := Tr }] s₂' ∨ u = p.choice r ∧ s₂' = q.choice r) ‖ ⊢ ∃ s₁', Tr s μ s₁' ∧ (s₁' ~[{ Tr := Tr }] u ∨ s₁' = p.choice r ∧ u = q.choice r) ‖ ⊢ ∃ s₂', Tr (q.choice r) μ s₂' ∧ (u ~[{ Tr := Tr }] s₂' ∨ u = p.choice r",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:30:11Z"
+  },
+  {
+   "sha": "4aaf48a0bad9",
+   "tokens": 73,
+   "heartbeats": 449,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:05:03Z"
+  },
+  {
+   "sha": "3c0bd105b8a2",
+   "tokens": 71,
+   "heartbeats": 657,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:05:06Z"
+  },
+  {
+   "sha": "d52c30c9e9c1",
+   "tokens": 71,
+   "heartbeats": 440,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:05:08Z"
+  },
+  {
+   "sha": "3b3f77bbe3f7",
+   "tokens": 73,
+   "heartbeats": 447,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:05:45Z"
+  },
+  {
+   "sha": "6860c8cd4665",
+   "tokens": 71,
+   "heartbeats": 460,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:05:47Z"
+  },
+  {
+   "sha": "98f075c06a18",
+   "tokens": 70,
+   "heartbeats": 490,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:06:05Z"
+  },
+  {
+   "sha": "bda8781508c8",
+   "tokens": 70,
+   "heartbeats": 490,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:06:08Z"
+  },
+  {
+   "sha": "5cfba5558681",
+   "tokens": 109,
+   "heartbeats": 414,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:06:43Z"
+  },
+  {
+   "sha": "5ec903f21916",
+   "tokens": 69,
+   "heartbeats": 3932,
+   "ok": false,
+   "error": "321:85: unsolved goals … [hypotheses omitted] ⊢ ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s s₂' Name : Type u Constant : Type v defs : Constant → Process Name Constant → Prop p q r : Process Name Constant h_1 : p ~[lts] q p_1 q_1 r_1 : Process Name Constant h : p_1 ~[lts] q_1 μ : Act Name s",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:07:18Z"
+  },
+  {
+   "sha": "3f6cd53cfcef",
+   "tokens": 73,
+   "heartbeats": 4843,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:07:20Z"
+  },
+  {
+   "sha": "2830085aadbe",
+   "tokens": 69,
+   "heartbeats": 1453,
+   "ok": false,
+   "error": "332:4: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[{ Tr := Tr },{ Tr := Tr }] q [prop] p_1 ~[{ Tr := Tr },{ Tr := Tr }] q_1 [prop] ∃ s₂', Tr q_1 μ s₂' ∧ s ~[{ Tr := Tr },{ Tr := Tr }] s₂' [prop] ∀ (a : Process Name Constant), ",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:07:23Z"
+  },
+  {
+   "sha": "da1ce91f0e9a",
+   "tokens": 67,
+   "heartbeats": 513,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:07:46Z"
+  },
+  {
+   "sha": "60a906ed8f33",
+   "tokens": 71,
+   "heartbeats": 494,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:07:48Z"
+  },
+  {
+   "sha": "1774bb6982ef",
+   "tokens": 68,
+   "heartbeats": 512,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:07:50Z"
+  },
+  {
+   "sha": "59455cbe32b4",
+   "tokens": 67,
+   "heartbeats": 743,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:08:09Z"
+  },
+  {
+   "sha": "28a12396cb8b",
+   "tokens": 68,
+   "heartbeats": 495,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:08:11Z"
+  },
+  {
+   "sha": "e41e0f1e9aa5",
+   "tokens": 68,
+   "heartbeats": 726,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:08:13Z"
+  },
+  {
+   "sha": "51c6280dca67",
+   "tokens": 67,
+   "heartbeats": 495,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:08:44Z",
+   "score": 86.85
+  },
+  {
+   "sha": "bc074787f2d7",
+   "tokens": 67,
+   "heartbeats": 542,
+   "ok": false,
+   "error": "334:8: don't know how to synthesize placeholder context: … [hypotheses omitted] ⊢ Process Name Constant",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:08:51Z"
+  },
+  {
+   "sha": "61885c98f9ba",
+   "tokens": 67,
+   "heartbeats": 548,
+   "ok": false,
+   "error": "329:10: don't know how to synthesize placeholder context: … [hypotheses omitted] ⊢ Process Name Constant",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:08:53Z"
+  },
+  {
+   "sha": "1a2aca342e0a",
+   "tokens": 67,
+   "heartbeats": 364,
+   "ok": false,
+   "error": "333:4: Failed to find Tr q✝ μ s as the type of a parameter of lts.Tr p✝ ?m.606 ?m.607 → ∃ s₂', lts.Tr q✝ ?m.606 s₂' ∧ ?m.607 ~[lts,lts] s₂'.",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:10:15Z"
+  },
+  {
+   "sha": "2c584adc3dde",
+   "tokens": 66,
+   "heartbeats": 764,
+   "ok": false,
+   "error": "330:6: Tactic `assumption` failed case right Name : Type u Constant : Type v defs : Constant → Process Name Constant → Prop p q r : Process Name Constant h✝ : p ~[lts] q p✝ q✝ r✝ : Process Name Constant h : p✝ ~[lts] q✝ μ : Act Name s : Process Name Constant ht : Tr r✝ μ s ⊢ ChoiceBisim s s",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:11:00Z"
+  },
+  {
+   "sha": "691e5c1203f2",
+   "tokens": 67,
+   "heartbeats": 770,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:11:02Z"
+  },
+  {
+   "sha": "7d803a08ba8d",
+   "tokens": 69,
+   "heartbeats": 496,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:11:05Z"
+  },
+  {
+   "sha": "46c736733151",
+   "tokens": 66,
+   "heartbeats": 530,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:11:22Z"
+  },
+  {
+   "sha": "6b3470b2532c",
+   "tokens": 67,
+   "heartbeats": 498,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:11:51Z"
+  },
+  {
+   "sha": "6bf9c80f2e32",
+   "tokens": 67,
+   "heartbeats": 495,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:11:54Z"
+  },
+  {
+   "sha": "4ea78e320be8",
+   "tokens": 67,
+   "heartbeats": 498,
+   "ok": false,
+   "error": "335:14: Invalid dotted identifier notation: The expected type of `.choiceL` could not be determined Hint: Using one of these would be unambiguous: [apply] `choiceL` [apply] `Tr.choiceL` [apply] `Tr.below.choiceL`",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:12:06Z"
+  },
+  {
+   "sha": "42d46929a4a9",
+   "tokens": 71,
+   "heartbeats": 439,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:41:03Z"
+  },
+  {
+   "sha": "760f1c6f36e8",
+   "tokens": 71,
+   "heartbeats": 494,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:41:05Z"
+  },
+  {
+   "sha": "ccfb609ef8e6",
+   "tokens": 70,
+   "heartbeats": 500,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:41:07Z"
+  },
+  {
+   "sha": "dd1332ff57f9",
+   "tokens": 67,
+   "heartbeats": 495,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:41:30Z"
+  },
+  {
+   "sha": "aa79475cc17c",
+   "tokens": 65,
+   "heartbeats": 1508,
+   "ok": false,
+   "error": "335:4: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[{ Tr := Tr },{ Tr := Tr }] q [prop] p_1 ~[{ Tr := Tr },{ Tr := Tr }] q_1 [prop] ∃ s₂', Tr q_1 μ s₂' ∧ s ~[{ Tr := Tr },{ Tr := Tr }] s₂' [prop] ∀ (a : Process Name Constant), ",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:42:24Z"
+  },
+  {
+   "sha": "58670f83b40c",
+   "tokens": 74,
+   "heartbeats": 4888,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:42:26Z"
+  },
+  {
+   "sha": "935b9aecfbf0",
+   "tokens": 75,
+   "heartbeats": 7158,
+   "ok": false,
+   "error": "335:4: failed",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:42:29Z"
+  },
+  {
+   "sha": "8771149fe800",
+   "tokens": 68,
+   "heartbeats": 613,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:42:31Z"
+  },
+  {
+   "sha": "8a6b70dacbe5",
+   "tokens": 67,
+   "heartbeats": 495,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:42:52Z"
+  },
+  {
+   "sha": "da1f40d8735a",
+   "tokens": 81,
+   "heartbeats": 321,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:43:57Z"
+  },
+  {
+   "sha": "14990e3d582f",
+   "tokens": 75,
+   "heartbeats": 352,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:19Z",
+   "score": 87.02
+  },
+  {
+   "sha": "3b76c9b84aac",
+   "tokens": 75,
+   "heartbeats": 362,
+   "ok": false,
+   "error": "324:6: don't know how to synthesize placeholder context: Name : Type u Constant : Type v defs : Constant → Process Name Constant → Prop p q r : Process Name Constant h : p ~[lts] q ⊢ Process Name Constant → Process Name Constant → Prop",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:25Z"
+  },
+  {
+   "sha": "191d237b24c2",
+   "tokens": 77,
+   "heartbeats": 593,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:27Z"
+  },
+  {
+   "sha": "9a9e7fe5c757",
+   "tokens": 80,
+   "heartbeats": 315,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:44:29Z"
+  },
+  {
+   "sha": "1e7938eaede7",
+   "tokens": 69,
+   "heartbeats": 636,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:45:00Z"
+  },
+  {
+   "sha": "d5ae16aaaede",
+   "tokens": 78,
+   "heartbeats": 3975,
+   "ok": false,
+   "error": "326:2: unsolved goals case left Name : Type u Constant : Type v defs : Constant → Process Name Constant → Prop p q r : Process Name Constant h : p ~[lts] q a b : Process Name Constant a_1 : ChoiceBisim a b ⊢ b ~[lts,lts] a",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:45:03Z"
+  },
+  {
+   "sha": "e1395b42a92f",
+   "tokens": 79,
+   "heartbeats": 325,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:45:05Z"
+  },
+  {
+   "sha": "13edab0f17d3",
+   "tokens": 76,
+   "heartbeats": 348,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:45:07Z"
+  },
+  {
+   "sha": "aac57879cd72",
+   "tokens": 70,
+   "heartbeats": 486,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:45:24Z"
+  },
+  {
+   "sha": "5f0a5cbadabd",
+   "tokens": 69,
+   "heartbeats": 457,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:45:26Z"
+  },
+  {
+   "sha": "9d48714c25f4",
+   "tokens": 79,
+   "heartbeats": 426,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:45:28Z"
+  },
+  {
+   "sha": "3479c4d7d31a",
+   "tokens": 71,
+   "heartbeats": 448,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:46:18Z"
+  },
+  {
+   "sha": "4b9dbbfe6415",
+   "tokens": 70,
+   "heartbeats": 415,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:46:20Z",
+   "score": 87.14
+  },
+  {
+   "sha": "e58ba0cb5e1c",
+   "tokens": 85,
+   "heartbeats": 350,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:46:27Z"
+  },
+  {
+   "sha": "e606a6912623",
+   "tokens": 70,
+   "heartbeats": 424,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:47:42Z"
+  },
+  {
+   "sha": "c8f45a2cd430",
+   "tokens": 69,
+   "heartbeats": 433,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:47:44Z"
+  },
+  {
+   "sha": "889fe416ef5e",
+   "tokens": 73,
+   "heartbeats": 418,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:47:47Z"
+  },
+  {
+   "sha": "c3b29fdbde2e",
+   "tokens": 70,
+   "heartbeats": 418,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:47:49Z"
+  },
+  {
+   "sha": "ec8ff51fa039",
+   "tokens": 70,
+   "heartbeats": 433,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:48:15Z"
+  },
+  {
+   "sha": "a3a2d7f16739",
+   "tokens": 71,
+   "heartbeats": 433,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:48:17Z"
+  },
+  {
+   "sha": "144f0e87a4e4",
+   "tokens": 73,
+   "heartbeats": 405,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:48:20Z"
+  },
+  {
+   "sha": "f875fec5e46e",
+   "tokens": 74,
+   "heartbeats": 348,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:49:13Z",
+   "score": 87.18
+  },
+  {
+   "sha": "ea2688112fec",
+   "tokens": 73,
+   "heartbeats": 366,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:49:19Z"
+  },
+  {
+   "sha": "473497ce55ba",
+   "tokens": 73,
+   "heartbeats": 348,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:49:21Z",
+   "score": 87.31
+  },
+  {
+   "sha": "aad1323c6f30",
+   "tokens": 73,
+   "heartbeats": 349,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:49:53Z"
+  },
+  {
+   "sha": "e5d20e96e80f",
+   "tokens": 74,
+   "heartbeats": 349,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:49:56Z"
+  },
+  {
+   "sha": "b19fa1dc9383",
+   "tokens": 74,
+   "heartbeats": 385,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:49:58Z"
+  },
+  {
+   "sha": "43dfd3136588",
+   "tokens": 71,
+   "heartbeats": 382,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:50:28Z"
+  },
+  {
+   "sha": "a4eb8d566443",
+   "tokens": 70,
+   "heartbeats": 400,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:50:31Z"
+  },
+  {
+   "sha": "b2df183bbce8",
+   "tokens": 71,
+   "heartbeats": 382,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:50:33Z"
+  },
+  {
+   "sha": "8ec597baea1a",
+   "tokens": 73,
+   "heartbeats": 402,
+   "ok": false,
+   "error": "337:6: Invalid `⟨...⟩` notation: The expected type `ChoiceBisim s ht.choose` has more than one constructor Note: This notation can only be used when the expected type is an inductive type with a single constructor",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:51:07Z"
+  },
+  {
+   "sha": "7202617faecd",
+   "tokens": 73,
+   "heartbeats": 463,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:51:09Z"
+  },
+  {
+   "sha": "94c49f7be2a7",
+   "tokens": 71,
+   "heartbeats": 436,
+   "ok": false,
+   "error": "337:6: Invalid `⟨...⟩` notation: The expected type `ChoiceBisim s ht.choose` has more than one constructor Note: This notation can only be used when the expected type is an inductive type with a single constructor",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:51:11Z"
+  },
+  {
+   "sha": "b1512a9c4856",
+   "tokens": 71,
+   "heartbeats": 93,
+   "ok": false,
+   "error": "323:8: Application type mismatch: The argument HomBisimilarity.symm_simulation has type HomBisimilarity ?m.21 = fun s₁ s₂ => ∃ r, r s₁ s₂ ∧ Std.Symm r ∧ IsHomSimulation ?m.21 r but is expected to have type (p.choice r) ~[lts] (q.choice r) = ?m.23 in the application Eq.mpr HomBisimilarity.symm_simula",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:20:26Z"
+  },
+  {
+   "sha": "69bae92de7e6",
+   "tokens": 72,
+   "heartbeats": 88,
+   "ok": false,
+   "error": "323:9: Application type mismatch: The argument HomBisimilarity.symm_simulation has type HomBisimilarity ?m.21 = fun s₁ s₂ => ∃ r, r s₁ s₂ ∧ Std.Symm r ∧ IsHomSimulation ?m.21 r but is expected to have type (p.choice r) ~[lts] (q.choice r) = ?m.23 in the application Eq.mpr HomBisimilarity.symm_simula",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:20:31Z"
+  },
+  {
+   "sha": "fe8bca22da50",
+   "tokens": 73,
+   "heartbeats": 357,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:20:47Z"
+  },
+  {
+   "sha": "8cd0bd24ab81",
+   "tokens": 76,
+   "heartbeats": 356,
+   "ok": false,
+   "error": "327:50: Unknown constant `Cslib.LTS.HomBisimilarity.symm`",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:20:49Z"
+  },
+  {
+   "sha": "335bbedbbedf",
+   "tokens": 74,
+   "heartbeats": 387,
+   "ok": false,
+   "error": "327:53: Unknown constant `Cslib.LTS.HomBisimilarity.symm`",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:20:52Z"
+  },
+  {
+   "sha": "55dfb0f18621",
+   "tokens": 71,
+   "heartbeats": 306,
+   "ok": false,
+   "error": "336:6: Failed to find lts.Tr s₁✝ μ s as the type of a parameter of lts.Tr p ?m.544 ?m.545 → ∃ s₂', lts.Tr q ?m.544 s₂' ∧ ?m.545 ~[lts,lts] s₂'.",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:21:09Z"
+  },
+  {
+   "sha": "51207a874fce",
+   "tokens": 73,
+   "heartbeats": 349,
+   "ok": false,
+   "error": "327:39: Type mismatch Bisimilarity.symm h has type q ~[lts,lts] p but is expected to have type b✝ ~[lts] a✝¹",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:21:11Z"
+  },
+  {
+   "sha": "f5149a0f44e0",
+   "tokens": 73,
+   "heartbeats": 349,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:21:34Z"
+  },
+  {
+   "sha": "90c7d8a0b4dc",
+   "tokens": 73,
+   "heartbeats": 358,
+   "ok": false,
+   "error": "324:6: don't know how to synthesize placeholder context: Name : Type u Constant : Type v defs : Constant → Process Name Constant → Prop p q r : Process Name Constant h : p ~[lts] q ⊢ Process Name Constant → Process Name Constant → Prop",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:21:37Z"
+  },
+  {
+   "sha": "6a5ca62acbac",
+   "tokens": 67,
+   "heartbeats": 495,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:24:11Z"
+  },
+  {
+   "sha": "15646ebbd90c",
+   "tokens": 67,
+   "heartbeats": 495,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:24:41Z"
+  },
+  {
+   "sha": "730bb9946a39",
+   "tokens": 66,
+   "heartbeats": 545,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:24:44Z"
+  },
+  {
+   "sha": "9415943d7d5f",
+   "tokens": 70,
+   "heartbeats": 336,
+   "ok": false,
+   "error": "331:2: Case tag `choice.right.choiceL` not found. Hint: Available tags: • `choice.left`: c̵h̵o̵i̵c̵e̵.̵r̵i̵g̵h̵t̵.̵c̵h̵o̵i̵c̵e̵L̵c̲h̲o̲i̲c̲e̲.̲l̲e̲f̲t̲ • `choice.right`: choice.right.̵c̵h̵o̵i̵c̵e̵L̵ • `bisim.left`: c̵h̵o̵i̵c̵e̵.̵r̵i̵g̵h̵t̵.̵c̵h̵o̵i̵c̵e̵L̵b̲i̲s̲i̲m̲.̲l̲e̲f̲t̲ • `bisim.right`: c̵h̵o̵i",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:24:46Z"
+  },
+  {
+   "sha": "c4dae575997d",
+   "tokens": 70,
+   "heartbeats": 508,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:24:56Z"
+  },
+  {
+   "sha": "4e39bab4c80c",
+   "tokens": 74,
+   "heartbeats": 458,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:24:59Z"
+  },
+  {
+   "sha": "c93bab2b067b",
+   "tokens": 76,
+   "heartbeats": 353,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:44:51Z"
+  },
+  {
+   "sha": "5b4995ab0772",
+   "tokens": 77,
+   "heartbeats": 320,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:44:53Z"
+  },
+  {
+   "sha": "7e4d915380a1",
+   "tokens": 75,
+   "heartbeats": 349,
+   "ok": false,
+   "error": "327:44: Unknown constant `Cslib.LTS.HomBisimilarity.symm`",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:44:56Z"
+  },
+  {
+   "sha": "d855971de243",
+   "tokens": 77,
+   "heartbeats": 348,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:46:23Z"
+  },
+  {
+   "sha": "47dc752d38aa",
+   "tokens": 74,
+   "heartbeats": 386,
+   "ok": false,
+   "error": "338:6: `repeat1'` made no progress",
+   "run_id": "wuclean-hx-solab1-r8",
+   "t": "2026-10-14T08:46:25Z"
+  },
+  {
+   "sha": "5a002ba9ac5c",
+   "tokens": 74,
+   "heartbeats": 350,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:13:54Z"
+  },
+  {
+   "sha": "320f960e36ca",
+   "tokens": 74,
+   "heartbeats": 385,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:13:56Z"
+  },
+  {
+   "sha": "52e340aaabd3",
+   "tokens": 80,
+   "heartbeats": 344,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:13:58Z"
+  },
+  {
+   "sha": "c29ff0513cef",
+   "tokens": 66,
+   "heartbeats": 548,
+   "ok": false,
+   "error": "327:4: `grind` failed case grind.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] p ~[lts,lts] q [prop] ChoiceBisim a b [prop] ¬ChoiceBisim b a [prop] p ~[lts,lts] q = ∃ r, r p q ∧ lts.IsBisimulation lts r [prop] b ~[lts,lts] a → ChoiceBisim b a [prop] a ~[lt",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:14:24Z"
+  },
+  {
+   "sha": "fc1a6e1efb44",
+   "tokens": 69,
+   "heartbeats": 461,
+   "ok": false,
+   "error": "326:2: unsolved goals case left Name : Type u Constant : Type v defs : Constant → Process Name Constant → Prop p q r : Process Name Constant h : p ~[lts] q a b : Process Name Constant a_1 : ChoiceBisim a b ⊢ b ~[lts] a",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:14:26Z"
+  },
+  {
+   "sha": "6d25a47106bc",
+   "tokens": 76,
+   "heartbeats": 397,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:14:28Z"
+  },
+  {
+   "sha": "f018debb33a7",
+   "tokens": 75,
+   "heartbeats": 353,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:14:30Z"
+  },
+  {
+   "sha": "91728e12d1b0",
+   "tokens": 68,
+   "heartbeats": 572,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:14:53Z"
+  },
+  {
+   "sha": "b72c80c02ca8",
+   "tokens": 69,
+   "heartbeats": 545,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:16:20Z"
+  },
+  {
+   "sha": "38594e16e41c",
+   "tokens": 73,
+   "heartbeats": 446,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:16:23Z"
+  },
+  {
+   "sha": "18c628e2a068",
+   "tokens": 103,
+   "heartbeats": 69,
+   "ok": false,
+   "error": "323:9: don't know how to synthesize implicit argument `b` @And.intro ((fun s t = … [hypotheses omitted] ⊢ Prop",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:17:38Z"
+  },
+  {
+   "sha": "5f21ea3e526b",
+   "tokens": 108,
+   "heartbeats": 1140,
+   "ok": false,
+   "error": "328:16: Application type mismatch: The argument Tr.choiceR ht has type Tr (choice ?m.480 q✝) μ u but is expected to have type lts.Tr t μ u in the application And.intro (Tr.choiceR ht)",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:17:46Z"
+  },
+  {
+   "sha": "bc8ca805436b",
+   "tokens": 111,
+   "heartbeats": 421,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:18:41Z"
+  },
+  {
+   "sha": "ec7886b2dfe2",
+   "tokens": 74,
+   "heartbeats": 350,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:19:09Z"
+  },
+  {
+   "sha": "5d43032f6737",
+   "tokens": 77,
+   "heartbeats": 347,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:19:11Z"
+  },
+  {
+   "sha": "d08374c955e2",
+   "tokens": 76,
+   "heartbeats": 351,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:19:14Z"
+  },
+  {
+   "sha": "098fa98f1ac6",
+   "tokens": 71,
+   "heartbeats": 383,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:19:47Z"
+  },
+  {
+   "sha": "5bc4845831f8",
+   "tokens": 72,
+   "heartbeats": 1962,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:19:50Z"
+  },
+  {
+   "sha": "a2edc228397b",
+   "tokens": 71,
+   "heartbeats": 342,
+   "ok": false,
+   "error": "338:6: Tactic failed on all goals: apply Tr.choiceL",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:19:52Z"
+  },
+  {
+   "sha": "50087014b61f",
+   "tokens": 71,
+   "heartbeats": 130,
+   "ok": false,
+   "error": "326:2: unsolved goals case left.choice … [hypotheses omitted] ⊢ q✝ ~[lts] p✝ ‖ ⊢ b✝ ~[lts] a✝¹",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:20:14Z"
+  },
+  {
+   "sha": "755b2184eaf3",
+   "tokens": 75,
+   "heartbeats": 347,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:20:16Z"
+  },
+  {
+   "sha": "6d713f514803",
+   "tokens": 75,
+   "heartbeats": 375,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:25Z"
+  },
+  {
+   "sha": "faf469d28a96",
+   "tokens": 80,
+   "heartbeats": 383,
+   "ok": false,
+   "error": "327:53: Invalid configuration option `config` for `Lean.Meta.SolveByElim.SolveByElimConfig`",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:28Z"
+  },
+  {
+   "sha": "d7d903075d19",
+   "tokens": 76,
+   "heartbeats": 161,
+   "ok": false,
+   "error": "327:50: Unknown constant `Cslib.LTS.Bisimilarity.comm`",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:30Z"
+  },
+  {
+   "sha": "68ed57ab9629",
+   "tokens": 75,
+   "heartbeats": 379,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:33Z"
+  },
+  {
+   "sha": "7aafc93ebe9a",
+   "tokens": 73,
+   "heartbeats": 350,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:54Z"
+  },
+  {
+   "sha": "c62d0f430014",
+   "tokens": 74,
+   "heartbeats": 314,
+   "ok": false,
+   "error": "339:6: No goals to be solved",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:49:58Z"
+  },
+  {
+   "sha": "3f3254959c3c",
+   "tokens": 77,
+   "heartbeats": 348,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:50:01Z"
+  },
+  {
+   "sha": "c12a33ac9649",
+   "tokens": 74,
+   "heartbeats": 345,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:51:26Z"
+  },
+  {
+   "sha": "7b81dcf9b92b",
+   "tokens": 76,
+   "heartbeats": 353,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:51:29Z"
+  },
+  {
+   "sha": "43dc6216d0ce",
+   "tokens": 79,
+   "heartbeats": 355,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:51:31Z"
+  },
+  {
+   "sha": "beab808be684",
+   "tokens": 176,
+   "heartbeats": 536,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:53:00Z"
+  },
+  {
+   "sha": "24e42f2c4fcb",
+   "tokens": 76,
+   "heartbeats": 425,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:53:47Z"
+  },
+  {
+   "sha": "e352df2df6b9",
+   "tokens": 73,
+   "heartbeats": 372,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:54:09Z"
+  },
+  {
+   "sha": "888753284628",
+   "tokens": 72,
+   "heartbeats": 342,
+   "ok": false,
+   "error": "327:38: failed",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:54:11Z"
+  },
+  {
+   "sha": "1070fb99633b",
+   "tokens": 72,
+   "heartbeats": 339,
+   "ok": false,
+   "error": "327:38: `repeat1'` made no progress",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:54:14Z"
+  },
+  {
+   "sha": "b8a3d087f661",
+   "tokens": 73,
+   "heartbeats": 383,
+   "ok": false,
+   "error": "327:53: Invalid configuration option `h` for `Lean.Meta.SolveByElim.SolveByElimConfig`",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:55:15Z"
+  },
+  {
+   "sha": "60b190bef57b",
+   "tokens": 76,
+   "heartbeats": 413,
+   "ok": false,
+   "error": "327:38: failed",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:55:17Z"
+  },
+  {
+   "sha": "63da6df46d7e",
+   "tokens": 71,
+   "heartbeats": 542,
+   "ok": false,
+   "error": "327:38: Tactic `aesop` failed, made no progress Initial goal: case left.choice Name : Type u Constant : Type v defs : Constant → Process Name Constant → Prop p q r : Process Name Constant h : p ~[lts] q p✝ q✝ r✝ : Process Name Constant a✝ : p✝ ~[lts] q✝ ⊢ q✝ ~[lts] p✝",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:55:20Z"
+  },
+  {
+   "sha": "468fdeae98d6",
+   "tokens": 98,
+   "heartbeats": 770,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:56:41Z"
+  },
+  {
+   "sha": "be487d8b241e",
+   "tokens": 74,
+   "heartbeats": 349,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:57:04Z"
+  },
+  {
+   "sha": "00bd09c315c6",
+   "tokens": 74,
+   "heartbeats": 349,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:57:06Z"
+  },
+  {
+   "sha": "797f34901f69",
+   "tokens": 73,
+   "heartbeats": 353,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T12:57:09Z"
+  },
+  {
+   "sha": "1c7727ca4d68",
+   "tokens": 72,
+   "heartbeats": 464,
+   "ok": false,
+   "error": "338:6: failed",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:22:26Z"
+  },
+  {
+   "sha": "f543924ecf94",
+   "tokens": 77,
+   "heartbeats": 426,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:22:28Z"
+  },
+  {
+   "sha": "d216f9b12961",
+   "tokens": 74,
+   "heartbeats": 397,
+   "ok": false,
+   "error": "326:4: Tactic `aesop` failed, made no progress Initial goal: case left Name : Type u Constant : Type v defs : Constant → Process Name Constant → Prop p q r : Process Name Constant h : p ~[lts] q ⊢ Std.Symm ChoiceBisim",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:23:11Z"
+  },
+  {
+   "sha": "d9a2bebf5b3a",
+   "tokens": 73,
+   "heartbeats": 348,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:23:14Z"
+  },
+  {
+   "sha": "f3fdff812253",
+   "tokens": 78,
+   "heartbeats": 350,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:23:16Z"
+  },
+  {
+   "sha": "10ffc429d6ee",
+   "tokens": 75,
+   "heartbeats": 348,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:23:39Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wuclean-hx-solab1-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:13:56Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:52:06Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:25:34Z",
+   "pattern_cards": 1,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r5",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:04:17Z",
+   "pattern_cards": 1,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r6",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:40:07Z",
+   "pattern_cards": 1,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r7",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:19:10Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:43:13Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r10",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:12:54Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r11",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:48:30Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r12",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:21:12Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  }
+ ],
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 1,
+    "d_score": 26.12,
+    "d_tokens": 23,
+    "d_heartbeats": 484,
+    "diff": "+theorem bisimilarity_congr_choice :\n+    (p ~[lts (defs := defs)] q) → (choice p r) ~[lts (defs := defs)] (choice q r) := by\n+  intro h\n+  exists @ChoiceBisim _ _ defs\n+  constructor\n+  · constructor\n+    assumption\n+  intro s1 s2 r μ\n+  constructor\n+  case left =>\n+    intro s1' htr\n+    cases r\n+    case choice p q r hbisim =>\n+      obtain ⟨rel, hr, hb⟩ := hbisim\n+      cases htr\n+      case choiceL a b c htr =>\n+        obtain ⟨s2', htr2, hr2⟩ := hb.follow_fst hr htr\n+        refine ⟨s2', ?_⟩\n+        constructor\n+        · apply Tr.choiceL htr2\n+        · constructor\n+          apply hb.le_bisimilarity _ _ hr2\n+      case choiceR a b c htr =>\n+        refine ⟨s1', ?_⟩\n+        construc"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 2,
+    "d_score": 13.33,
+    "d_tokens": -94,
+    "d_heartbeats": -98,
+    "diff": "-  exists @ChoiceBisim _ _ defs\n-  constructor\n-  · constructor\n-    assumption\n-  intro s1 s2 r μ\n-  constructor\n-  case left =>\n-    intro s1' htr\n-    cases r\n-    case choice p q r hbisim =>\n-      obtain ⟨rel, hr, hb⟩ := hbisim\n-      cases htr\n-      case choiceL a b c htr =>\n-        obtain ⟨s2', htr2, hr2⟩ := hb.follow_fst hr htr\n-        refine ⟨s2', ?_⟩\n-        constructor\n-        · apply Tr.choiceL htr2\n-        · constructor\n-          apply hb.le_bisimilarity _ _ hr2\n-      case choiceR a b c htr =>\n-        refine ⟨s1', ?_⟩\n-        constructor\n-        · apply Tr.choiceR htr\n-        · constructor\n-          apply HomBisimilarity.refl\n-    case bisim hbisim =>\n-      obtain "
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 5,
+    "d_score": 6.41,
+    "d_tokens": -51,
+    "d_heartbeats": 42,
+    "diff": "-    constructor\n-    · intro s ht\n-      cases ht with\n-      | choiceL ht =>\n-        obtain ⟨t, ht, hb⟩ := h.follow_fst ht\n-        exact ⟨t, .choiceL ht, .bisim hb⟩\n-      | choiceR ht => exact ⟨s, .choiceR ht, .bisim (.refl s)⟩\n-    · intro s ht\n-      cases ht with\n-      | choiceL ht =>\n-        obtain ⟨t, ht, hb⟩ := h.follow_snd ht\n-        exact ⟨t, .choiceL ht, .bisim hb⟩\n-      | choiceR ht => exact ⟨s, .choiceR ht, .bisim (.refl s)⟩\n+    constructor <;> intro s ht <;> cases ht with\n+    | choiceL ht =>\n+      first | apply h.follow_fst at ht | apply h.follow_snd at ht\n+      obtain ⟨t, ht, hb⟩ := ht\n+      exact ⟨t, .choiceL ht, .bisim hb⟩\n+    | choiceR ht => exact ⟨s, .choiceR "
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 11,
+    "d_score": 3.93,
+    "d_tokens": -30,
+    "d_heartbeats": 6,
+    "diff": "-  cases hr with\n-  | choice h =>\n-    constructor <;> intro s ht <;> cases ht with\n-    | choiceL ht =>\n-      first | apply h.follow_fst at ht | apply h.follow_snd at ht\n-      obtain ⟨t, ht, hb⟩ := ht\n-      exact ⟨t, .choiceL ht, .bisim hb⟩\n-    | choiceR ht => exact ⟨s, .choiceR ht, .bisim (.refl s)⟩\n-  | bisim h =>\n-    constructor <;> intro s ht\n-    all_goals\n-      first | apply h.follow_fst at ht | apply h.follow_snd at ht\n-      obtain ⟨t, ht, hb⟩ := ht\n-      exact ⟨t, ht, .bisim hb⟩\n+  cases hr <;> rename_i h\n+  all_goals constructor <;> intro s ht\n+  case' choice.left | choice.right => cases ht <;> rename_i ht\n+  case choice.left.choiceR | choice.right.choiceR =>\n+    exact ⟨s,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 13,
+    "d_score": 0.55,
+    "d_tokens": -4,
+    "d_heartbeats": -2,
+    "diff": "-  refine ⟨@ChoiceBisim _ _ defs, .choice h, ?_⟩\n+  refine ⟨_, ChoiceBisim.choice h, ?_⟩"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 16,
+    "d_score": 0.17,
+    "d_tokens": -1,
+    "d_heartbeats": -4,
+    "diff": "-  intro s1 s2 hr μ\n-  cases hr <;> rename_i h\n+  rintro s1 s2 (h | h) μ"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 2,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": 13,
+    "diff": "-    first | exact ht | exact Tr.choiceL ht\n+    first | assumption | exact Tr.choiceL ht"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 11,
+    "d_score": 0.32,
+    "d_tokens": -2,
+    "d_heartbeats": -6,
+    "diff": "-    exact ⟨s, .choiceR ht, .bisim (.refl s)⟩\n+    use s, Tr.choiceR ht, ChoiceBisim.bisim (.refl s)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 14,
+    "d_score": 0.33,
+    "d_tokens": -4,
+    "d_heartbeats": 23,
+    "diff": "-  refine ⟨_, ChoiceBisim.choice h, ?_⟩\n+  exists _, ChoiceBisim.choice h"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 17,
+    "d_score": 0.27,
+    "d_tokens": -1,
+    "d_heartbeats": -16,
+    "diff": "-    obtain ⟨t, ht, hb⟩ := ht\n-    refine ⟨t, ?_, .bisim hb⟩\n-    first | assumption | exact Tr.choiceL ht\n+    rcases ht with ⟨t, ht⟩\n+    refine ⟨t, ?_, .bisim ht.2⟩\n+    first | exact ht.1 | exact Tr.choiceL ht.1"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 19,
+    "d_score": 0.07,
+    "d_tokens": -1,
+    "d_heartbeats": 7,
+    "diff": "-    rcases ht with ⟨t, ht⟩\n-    refine ⟨t, ?_, .bisim ht.2⟩\n-    first | exact ht.1 | exact Tr.choiceL ht.1\n+    obtain ⟨t, ht, hb⟩ := ht\n+    use t, ?_, ChoiceBisim.bisim hb\n+    first | assumption | exact Tr.choiceL ht"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 21,
+    "d_score": 0.27,
+    "d_tokens": -1,
+    "d_heartbeats": -16,
+    "diff": "-    obtain ⟨t, ht, hb⟩ := ht\n-    use t, ?_, ChoiceBisim.bisim hb\n-    first | assumption | exact Tr.choiceL ht\n+    rcases ht with ⟨t, ht⟩\n+    use t, ?_, ChoiceBisim.bisim ht.2\n+    first | exact ht.1 | exact Tr.choiceL ht.1"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 24,
+    "d_score": 0.96,
+    "d_tokens": -8,
+    "d_heartbeats": 12,
+    "diff": "-    rcases ht with ⟨t, ht⟩\n-    use t, ?_, ChoiceBisim.bisim ht.2\n-    first | exact ht.1 | exact Tr.choiceL ht.1\n+    use ht.choose, ?_, ChoiceBisim.bisim ht.choose_spec.2\n+    first | exact ht.choose_spec.1 | exact Tr.choiceL ht.choose_spec.1"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 26,
+    "d_score": 0.44,
+    "d_tokens": -3,
+    "d_heartbeats": -5,
+    "diff": "-    first | exact ht.choose_spec.1 | exact Tr.choiceL ht.choose_spec.1\n+    try apply Tr.choiceL\n+    exact ht.choose_spec.1"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 34,
+    "d_score": 0.27,
+    "d_tokens": -2,
+    "d_heartbeats": 0,
+    "diff": "-  case' choice.left | choice.right => cases ht <;> rename_i ht\n-  case choice.left.choiceR | choice.right.choiceR =>\n-    use s, Tr.choiceR ht, ChoiceBisim.bisim (.refl s)\n+  case' choice.left | choice.right =>\n+    cases ht <;> rename_i ht\n+    case choiceR => use s, Tr.choiceR ht, ChoiceBisim.bisim (.refl s)"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 18,
+    "d_score": 0.06,
+    "d_tokens": -4,
+    "d_heartbeats": 55,
+    "diff": "-    case choiceR => use s, Tr.choiceR ht, ChoiceBisim.bisim (.refl s)\n+    case choiceR =>\n+      use s, Tr.choiceR ht\n+      constructor\n+      apply_rfl"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 12,
+    "d_score": 0.17,
+    "d_tokens": 8,
+    "d_heartbeats": -143,
+    "diff": "+  rw [HomBisimilarity.symm_simulation]\n-  rintro s1 s2 (h | h) μ\n-  all_goals constructor <;> intro s ht\n-  case' choice.left | choice.right =>\n-    cases ht <;> rename_i ht\n-    case choiceR =>\n-      use s, Tr.choiceR ht\n-      constructor\n-      apply_rfl\n-  all_goals\n-    first | apply h.follow_fst at ht | apply h.follow_snd at ht\n-    use ht.choose, ?_, ChoiceBisim.bisim ht.choose_spec.2\n-    try apply Tr.choiceL\n-    exact ht.choose_spec.1\n+  constructor\n+  · constructor\n+    rintro _ _ (h | h) <;> constructor <;> exact h.symm\n+  · rintro _ _ (h | h) μ s ht\n+    case' choice =>\n+      cases ht <;> rename_i ht\n+      case choiceR =>\n+        use s, Tr.choiceR ht\n+        constructor\n+ "
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 24,
+    "d_score": 0.12,
+    "d_tokens": -5,
+    "d_heartbeats": 63,
+    "diff": "-    rintro _ _ (h | h) <;> constructor <;> exact h.symm\n+    grind only [ChoiceBisim, → Bisimilarity.symm]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 33,
+    "d_score": 0.04,
+    "d_tokens": 4,
+    "d_heartbeats": -67,
+    "diff": "-    grind only [ChoiceBisim, → Bisimilarity.symm]\n+    rintro _ _ ⟨h⟩ <;> constructor <;> symm <;> assumption"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 35,
+    "d_score": 0.13,
+    "d_tokens": -1,
+    "d_heartbeats": 0,
+    "diff": "-    rintro _ _ ⟨h⟩ <;> constructor <;> symm <;> assumption\n+    rintro _ _ ⟨⟩ <;> constructor <;> symm <;> assumption"
+   }
+  ]
+ },
+ "api_spend": 2.561543,
+ "profile_cache": {
+  "4cb669448b55": {
+   "ok": true,
+   "total": 428,
+   "floor": null,
+   "reference": 3879,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "intro h",
+     "heartbeats": null
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "refine ⟨_, ChoiceBisim.choice h, ?_⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "rintro s1 s2 (h | h) μ",
+     "heartbeats": null
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "all_goals constructor <;> intro s ht",
+     "heartbeats": null
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "case' choice.left | choice.right => cases ht <;> rename_i ht",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-9",
+     "depth_indent": 2,
+     "text": "case choice.left.choiceR | choice.right.choiceR => exact ⟨s, .choiceR ht, .bisim (.refl s)⟩",
+     "heartbeats": null
+    },
+    {
+     "lines": "10-14",
+     "depth_indent": 2,
+     "text": "all_goals first | apply h.follow_fst at ht | apply h.follow_snd at ht obtain ⟨t, ht, hb⟩ := ht refin",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "abf06d8826d0": {
+   "ok": true,
+   "total": 440,
+   "floor": null,
+   "reference": 3879,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "intro h",
+     "heartbeats": null
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "exists _, ChoiceBisim.choice h",
+     "heartbeats": null
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "rintro s1 s2 (h | h) μ",
+     "heartbeats": null
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "all_goals constructor <;> intro s ht",
+     "heartbeats": null
+    },
+    {
+     "lines": "7-9",
+     "depth_indent": 2,
+     "text": "case' choice.left | choice.right => cases ht <;> rename_i ht case choiceR => use s, Tr.choiceR ht, C",
+     "heartbeats": null
+    },
+    {
+     "lines": "10-14",
+     "depth_indent": 2,
+     "text": "all_goals first | apply h.follow_fst at ht | apply h.follow_snd at ht use ht.choose, ?_, ChoiceBisim",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "51c6280dca67": {
+   "ok": true,
+   "total": 495,
+   "floor": null,
+   "reference": 3879,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "intro h",
+     "heartbeats": null
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "exists _, ChoiceBisim.choice h",
+     "heartbeats": null
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "rintro s1 s2 (h | h) μ",
+     "heartbeats": null
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "all_goals constructor <;> intro s ht",
+     "heartbeats": null
+    },
+    {
+     "lines": "7-12",
+     "depth_indent": 2,
+     "text": "case' choice.left | choice.right => cases ht <;> rename_i ht case choiceR => use s, Tr.choiceR ht co",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-17",
+     "depth_indent": 2,
+     "text": "all_goals first | apply h.follow_fst at ht | apply h.follow_snd at ht use ht.choose, ?_, ChoiceBisim",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "473497ce55ba": {
+   "ok": true,
+   "total": 348,
+   "floor": null,
+   "reference": 3879,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "intro h",
+     "heartbeats": null
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "rw [HomBisimilarity.symm_simulation]",
+     "heartbeats": null
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "exists _, ChoiceBisim.choice h",
+     "heartbeats": null
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "constructor",
+     "heartbeats": null
+    },
+    {
+     "lines": "7-8",
+     "depth_indent": 2,
+     "text": "· constructor rintro _ _ ⟨⟩ <;> constructor <;> symm <;> assumption",
+     "heartbeats": null
+    },
+    {
+     "lines": "9-20",
+     "depth_indent": 2,
+     "text": "· rintro _ _ (h | h) μ s ht case' choice => cases ht <;> rename_i ht case choiceR => use s, Tr.choic",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "budget_milestones": {
+  "2": {
+   "spend": 2.005813,
+   "best": 87.31,
+   "run_id": "wuclean-hx-solab1-r10",
+   "turn": 19,
+   "t": "2026-10-14T12:17:43Z"
+  }
+ }
+}

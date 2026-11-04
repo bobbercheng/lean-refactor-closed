@@ -1,0 +1,253 @@
+{
+ "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+ "seed": {
+  "ok": true,
+  "tokens": 70,
+  "heartbeats": 5664,
+  "L": 82.84,
+  "H": 90.54,
+  "Z": 100.0,
+  "score": 91.13
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "no sites",
+   "before": {
+    "ok": true,
+    "tokens": 70,
+    "heartbeats": 5663,
+    "Z": 100.0,
+    "score": 91.13
+   },
+   "after": {
+    "ok": true,
+    "tokens": 70,
+    "heartbeats": 5663,
+    "Z": 100.0,
+    "score": 91.13
+   },
+   "gain": null,
+   "applied": null,
+   "compiles": 3,
+   "seconds": 10.2
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "no sites",
+   "before": null,
+   "after": null,
+   "gain": null,
+   "applied": {},
+   "compiles": 0,
+   "seconds": 0.0
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no sites",
+   "before": {
+    "ok": true,
+    "tokens": 70,
+    "heartbeats": 5664,
+    "Z": 100.0,
+    "score": 91.13
+   },
+   "after": {
+    "ok": true,
+    "tokens": 70,
+    "heartbeats": 5664,
+    "Z": 100.0,
+    "score": 91.13
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 1,
+   "seconds": 10.1
+  },
+  {
+   "pass": "lint_delete",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 70,
+    "heartbeats": 5663,
+    "Z": 100.0,
+    "score": 91.13
+   },
+   "after": {
+    "ok": true,
+    "tokens": 70,
+    "heartbeats": 5663,
+    "Z": 100.0,
+    "score": 91.13
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 5,
+   "seconds": 22.9
+  }
+ ],
+ "free_applied": [],
+ "start": {
+  "ok": true,
+  "tokens": 70,
+  "heartbeats": 5664,
+  "L": 82.84,
+  "H": 90.54,
+  "Z": 100.0,
+  "score": 91.13
+ },
+ "s0": "lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t' := by\n  let := der.wf.2.1\n  generalize eq : [] = Γ at der\n  induction der <;> subst_vars\n  all_goals grind (gen := 2) [→ canonical_form_abs, → Red.abs, → Red.appₗ, → Red.appᵣ, → canonical_form_tabs, → Red.tapp, → Red.tabs, → Red.let_bind, → Red.let_body, → Red.inl, → Red.inr, → canonical_form_sum, → Red.case_inl, → Red.case_inr, → Red.case]",
+ "exchange": [
+  0.082,
+  0.056
+ ],
+ "profile": {
+  "ok": true,
+  "total": 5664,
+  "floor": null,
+  "reference": 59873,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "2-2",
+    "depth_indent": 2,
+    "text": "let := der.wf.2.1",
+    "heartbeats": null
+   },
+   {
+    "lines": "3-3",
+    "depth_indent": 2,
+    "text": "generalize eq : [] = Γ at der",
+    "heartbeats": null
+   },
+   {
+    "lines": "4-4",
+    "depth_indent": 2,
+    "text": "induction der <;> subst_vars",
+    "heartbeats": null
+   },
+   {
+    "lines": "5-5",
+    "depth_indent": 2,
+    "text": "all_goals grind (gen := 2) [→ canonical_form_abs, → Red.abs, → Red.appₗ, → Red.appᵣ, → canonical_for",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 70,
+  "heartbeats": 5665,
+  "score": 91.13
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 371,
+   "score": null,
+   "error": "86:77: `grind` failed\ncase grind\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nder : Typing [] t τ\nleft : ¬t.Value\nright :"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 313,
+   "score": null,
+   "error": "86:77: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 776,
+   "score": null,
+   "error": "86:77: Tactic `aesop` failed, made no progress\nInitial goal:\n  Var : Type u_1\n  inst✝¹ : HasFresh Var\n  inst✝ : DecidableEq Var\n  t : Term Var\n  τ : Ty Var\n  de"
+  },
+  {
+   "kind": "closer",
+   "line": 5,
+   "label": "replace the closing tactic at line 5 (`all_goals grind (gen := 2) [→ canonical…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 18,
+   "heartbeats": 403,
+   "score": null,
+   "error": "86:74: unsolved goals\ncase abs\nVar : Type u_1\ninst✝¹ : HasFresh Var\ninst✝ : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nσ✝ : Ty V"
+  },
+  {
+   "kind": "closer",
+   "line": 5,
+   "label": "replace the closing tactic at line 5 (`all_goals grind (gen := 2) [→ canonical…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 18,
+   "heartbeats": 562,
+   "score": null,
+   "error": "90:2: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 5,
+   "label": "replace the closing tactic at line 5 (`all_goals grind (gen := 2) [→ canonical…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 18,
+   "heartbeats": 1051,
+   "score": null,
+   "error": "90:2: Tactic `aesop` failed, made no progress\nInitial goal:\n  case var\n  Var : Type u_1\n  inst✝¹ : HasFresh Var\n  inst✝ : DecidableEq Var\n  t : Term Var\n  τ : T"
+  },
+  {
+   "kind": "del-tac",
+   "line": 5,
+   "label": "delete the tactic `all_goals grind (gen := 2) [→ canonical_form_abs,…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 17,
+   "heartbeats": 342,
+   "score": null,
+   "error": "86:74: unsolved goals\ncase var\nVar : Type u_1\ninst✝¹ : HasFresh Var\ninst✝ : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\nσ✝ : Ty V"
+  },
+  {
+   "kind": "del-tac",
+   "line": 3,
+   "label": "delete the tactic `generalize eq : [] = Γ at der`",
+   "closer": "",
+   "ok": false,
+   "tokens": 61,
+   "heartbeats": 65,
+   "score": null,
+   "error": "88:2: Invalid target: Index in target's type is not a variable (consider using the `cases` tactic instead)\n  []"
+  },
+  {
+   "kind": "del-tac",
+   "line": 4,
+   "label": "delete the tactic `induction der <;> subst_vars`",
+   "closer": "",
+   "ok": false,
+   "tokens": 66,
+   "heartbeats": 261,
+   "score": null,
+   "error": "89:12: `grind` failed\ncase grind\nVar : Type u_1\ninst : HasFresh Var\ninst_1 : DecidableEq Var\nt : Term Var\nτ : Ty Var\nΓ : List ((_ : Var) × Binding Var)\neq : [] "
+  }
+ ],
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 70 tokens, 5664 heartbeats, score 91.13.\n- Exchange rate here: 1 token = 0.082 points, 100 heartbeats = 0.056 points.\n- Deletions that FAIL (needed as they stand): line 5 the tactic `all_goals grind (gen := 2) [→ canonical_form_abs,…`; line 3 the tactic `generalize eq : [] = Γ at der`; line 4 the tactic `induction der <;> subst_vars`.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the closing tactic at line 5 (`all_goals grind (gen := 2) [→ canonical…`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 91.13,
+ "gain": 0.0,
+ "compiles_sweep": 9,
+ "seconds": 85.9,
+ "source": "best:87172bca979f"
+}

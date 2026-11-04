@@ -1,0 +1,114 @@
+{
+ "taken": "20261013T192012Z",
+ "tag": "postpass",
+ "mean_local": 90.55,
+ "spend_total": 31.8388,
+ "spend_max": 2.6215,
+ "problems": {
+  "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius": {
+   "score": 91.65,
+   "tokens": 203,
+   "heartbeats": 1790,
+   "improved": true,
+   "spend": 1.8996
+  },
+  "Binius.BinaryBasefold.fold_advances_evaluation_poly": {
+   "score": 93.62,
+   "tokens": 142,
+   "heartbeats": 5385,
+   "improved": true,
+   "spend": 1.9044
+  },
+  "CallElimCorrect.extractedOldExprInVars": {
+   "score": 94.49,
+   "tokens": 17,
+   "heartbeats": 239,
+   "improved": true,
+   "spend": 1.9712
+  },
+  "CallElimCorrect.substOldPostSubset": {
+   "score": 92.0,
+   "tokens": 39,
+   "heartbeats": 597,
+   "improved": true,
+   "spend": 2.0313
+  },
+  "Core.InitsUpdatesComm": {
+   "score": 89.14,
+   "tokens": 64,
+   "heartbeats": 173,
+   "improved": true,
+   "spend": 2.5498
+  },
+  "Cslib.CCS.bisimilarity_congr_choice": {
+   "score": 87.3,
+   "tokens": 70,
+   "heartbeats": 396,
+   "improved": true,
+   "spend": 2.547
+  },
+  "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress": {
+   "score": 85.92,
+   "tokens": 125,
+   "heartbeats": 6944,
+   "improved": true,
+   "spend": 2.516
+  },
+  "Cslib.SKI.parallelReduction_diamond": {
+   "score": 76.91,
+   "tokens": 132,
+   "heartbeats": 524,
+   "improved": true,
+   "spend": 2.0748
+  },
+  "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema": {
+   "score": 83.54,
+   "tokens": 341,
+   "heartbeats": 6647,
+   "improved": true,
+   "spend": 2.1345
+  },
+  "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time": {
+   "score": 86.89,
+   "tokens": 259,
+   "heartbeats": 7595,
+   "improved": true,
+   "spend": 2.2642
+  },
+  "fundamental_theorem_of_variational_calculus'": {
+   "score": 91.61,
+   "tokens": 119,
+   "heartbeats": 1337,
+   "improved": true,
+   "spend": 2.6215
+  },
+  "interleaved_affine_gaps_imply_tensor_gaps": {
+   "score": 93.07,
+   "tokens": 97,
+   "heartbeats": 1279,
+   "improved": true,
+   "spend": 1.9024
+  },
+  "putnam_1964_a4": {
+   "score": 96.86,
+   "tokens": 134,
+   "heartbeats": 2073,
+   "improved": true,
+   "spend": 1.977
+  },
+  "putnam_1964_b2": {
+   "score": 99.27,
+   "tokens": 25,
+   "heartbeats": 1047,
+   "improved": true,
+   "spend": 1.7276
+  },
+  "putnam_1995_a3": {
+   "score": 95.96,
+   "tokens": 173,
+   "heartbeats": 1122,
+   "improved": true,
+   "spend": 1.7175
+  }
+ }
+}

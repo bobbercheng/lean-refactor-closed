@@ -1,0 +1,13 @@
+AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)
+- Seed: 224 tokens, 4300 heartbeats, score 33.33. Free passes applied (hb_rewrite, hb_polish, lint_delete): start candidate 244 tokens, 2431 heartbeats, score 44.85.
+- Best combination of the paying single edits below: 236 tokens, 2036 heartbeats, score 49.1 (Z 100.0); your workspace starts from it.
+- Exchange rate here: 1 token = 0.149 points, 100 heartbeats = 0.775 points.
+- Single edits that PAY:
+  - line 28: delete `Nat.add_right_cancel_iff` from the simp list: -2 tokens, -250 hb, score +2.23
+  - line 38: delete `Nat.add_right_cancel_iff` from the simp list: -2 tokens, -109 hb, score +1.14
+  - line 41: delete the tactic `apply Not.intro`: -2 tokens, -3 hb, score +0.32
+  - line 40: delete `List.mem_cons` from the simp list: -2 tokens, -1 hb, score +0.30
+  - line 47: replace the bullet at line 47 (`. simp_all`) by `grind`: +0 tokens, -23 hb, score +0.17
+- Compile but do not pay alone: line 33 the bullet at line 33 (`. simp_all only`) by `grind` (-1 tok, +34 hb); line 33 the bullet at line 33 (`. simp_all only`) by `simp_all` (-1 tok, +124 hb).
+- Deletions that FAIL (needed as they stand): line 24 `updatedStates` from the simp list; line 27 `isDefined` from the simp list; line 27 `Option.isSome` from the simp list; line 28 `List.length_cons` from the simp list; line 28 `Bool.false_eq_true` from the simp list; line 38 `List.length_cons` from the simp list.
+- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 23 (`. apply UpdateStates.update_some (σ':=u…`) (grind/simp_all/aesop); the bullet at line 24 (`. simp [UpdateStateUpdated Hup, updated…`) (grind/simp_all/aesop); the bullet at line 26 (`. have Hdef := UpdateStateDefined' Hup`) (grind/simp_all/aesop); the bullet at line 38 (`. rewrite [List.unzip_zip] <;> simp_all…`) (grind/simp_all/aesop).

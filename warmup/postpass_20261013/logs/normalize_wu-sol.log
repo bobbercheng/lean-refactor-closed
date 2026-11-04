@@ -1,0 +1,17 @@
+Binius.BinaryBasefold.fold_advances_evaluati no sites           tok 142 -> 142  hb 5380 -> 5380  score 93.62 -> 93.62    compiles 3
+CallElimCorrect.extractedOldExprInVars       no sites           tok 17 -> 17  hb 239 -> 239  score 94.49 -> 94.49    compiles 1
+CallElimCorrect.substOldPostSubset           no sites           tok 39 -> 39  hb 597 -> 597  score 92.0 -> 92.0    compiles 1
+Core.InitsUpdatesComm                        no sites           tok 64 -> 64  hb 173 -> 173  score 89.14 -> 89.14    compiles 3
+Cslib.CCS.bisimilarity_congr_choice          improved           tok 72 -> 70  hb 397 -> 397  score 87.03 -> 87.29  {'lam': 1, 'dollar': 1}  compiles 7
+Cslib.LambdaCalculus.LocallyNameless.Fsub.Ty improved           tok 127 -> 125  hb 6942 -> 6944  score 85.76 -> 85.92  {'dollar': 2}  compiles 7
+Cslib.SKI.parallelReduction_diamond          no sites           tok 132 -> 132  hb 524 -> 524  score 76.91 -> 76.91    compiles 4
+Binius.BinaryBasefold.fiberwise_dist_lt_imp_ no gain            tok 207 -> 207  hb 1802 -> 1802  score 91.53 -> 91.53    compiles 14
+Electromagnetism.ElectromagneticPotential.ti improved           tok 347 -> 341  hb 6771 -> 6769  score 83.24 -> 83.39  {'lam': 4, 'dollar': 2}  compiles 9
+fundamental_theorem_of_variational_calculus' no sites           tok 119 -> 119  hb 1348 -> 1348  score 91.58 -> 91.58    compiles 1
+FieldSpecification.WickAlgebra.ι_timeOrderF_ improved           tok 254 -> 250  hb 7969 -> 7967  score 86.74 -> 86.85  {'lam': 1, 'dollar': 3}  compiles 3
+putnam_1964_a4                               improved           tok 136 -> 134  hb 2073 -> 2073  score 96.82 -> 96.86  {'lam': 2}  compiles 7
+putnam_1964_b2                               no sites           tok 25 -> 25  hb 1055 -> 1055  score 99.26 -> 99.26    compiles 2
+putnam_1995_a3                               improved           tok 181 -> 173  hb 1131 -> 1131  score 95.88 -> 95.94  {'lam': 2, 'bare': 1, 'dollar': 4}  compiles 7
+interleaved_affine_gaps_imply_tensor_gaps    improved           tok 98 -> 97  hb 1291 -> 1291  score 93.0 -> 93.02  {'dollar': 1}  compiles 7
+
+wu-sol: 7/15 improved; summed gain +0.80 = +0.053 on the 15-problem line; 221s -> /home/user/source/lean-refactor/probe/normalize/wu-sol.jsonl

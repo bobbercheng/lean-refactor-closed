@@ -1,0 +1,6 @@
+AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)
+- Seed: 130 tokens, 1334 heartbeats, score 91.19. Free passes applied (normalize): start candidate 121 tokens, 1334 heartbeats, score 91.54.
+- Exchange rate here: 1 token = 0.039 points, 100 heartbeats = 0.279 points.
+- Heartbeat hot spots: lines 8-8 ~43% (`have hp := real_inner_self_nonneg'.…`); lines 9-9 ~36% (`have hc := hf.inner' (𝕜 := ℝ) f (λ_…`); lines 7-7 ~17% (`by_contra hx`).
+- Deletions that FAIL (needed as they stand): line 12 `inner_smul_right'` from the simp list; line 12 `Pi.mul_apply` from the simp list; line 4 the tactic `have hp := real_inner_self_nonneg'.lt_of_ne' $ in…`; line 5 the tactic `have hc := hf.inner' (𝕜 := ℝ) f (λ_ => f x₀) cont…`; line 2 the tactic `ext x₀`; line 3 the tactic `by_contra hx`.
+- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the closing tactic at line 12 (`simpa only [inner_smul_right', Pi.mul_a…`) (grind/simp_all/aesop); the closing tactic at line 10 (`else mul_nonneg (hr $ Set.mem_range_sel…`) (grind/simp_all/aesop); the closing tactic at line 7 (`(hc.continuousAt.preimage_mem_nhds $ Ic…`) (grind/simp_all/aesop).

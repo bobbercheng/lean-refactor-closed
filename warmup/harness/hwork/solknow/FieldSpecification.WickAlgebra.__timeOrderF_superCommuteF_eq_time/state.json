@@ -1,0 +1,26 @@
+{
+ "note": "runner input only: first-session scores of an earlier Sol + briefs line (no proofs, no notes)",
+ "problem": "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time",
+ "runs": [
+  {
+   "run_id": "hx-solknow-a"
+  }
+ ],
+ "attempts": [
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 81.1
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 81.73
+  }
+ ]
+}

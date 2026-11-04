@@ -1,0 +1,181 @@
+{
+ "note": "runner input only: first-session scores of an earlier Sol + briefs line (no proofs, no notes)",
+ "problem": "Cslib.CCS.bisimilarity_congr_choice",
+ "runs": [
+  {
+   "run_id": "hx-solknow-a"
+  }
+ ],
+ "attempts": [
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 81.78
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 83.61
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 84.02
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 85.27
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 85.67
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 86.01
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 86.37
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 86.64
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 86.87
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 87.01
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 87.03
+  }
+ ]
+}

@@ -1,0 +1,1095 @@
+{
+ "problem": "Cslib.CCS.bisimilarity_congr_choice",
+ "seed": {
+  "ok": true,
+  "tokens": 251,
+  "heartbeats": 3879,
+  "L": 0.0,
+  "H": 0.0,
+  "Z": 100.0,
+  "score": 33.33
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 251,
+    "heartbeats": 3879,
+    "Z": 100.0,
+    "score": 33.33
+   },
+   "after": {
+    "ok": true,
+    "tokens": 250,
+    "heartbeats": 3879,
+    "Z": 100.0,
+    "score": 33.47
+   },
+   "gain": 0.14,
+   "applied": {
+    "semi": 1
+   },
+   "compiles": 7,
+   "seconds": 17.8
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 250,
+    "heartbeats": 3879,
+    "Z": 100.0,
+    "score": 33.47
+   },
+   "after": {
+    "ok": true,
+    "tokens": 274,
+    "heartbeats": 484,
+    "Z": 100.0,
+    "score": 59.45
+   },
+   "gain": 25.98,
+   "applied": {
+    "exists2refine": 6
+   },
+   "compiles": 11,
+   "seconds": 38.3
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no sites",
+   "before": {
+    "ok": true,
+    "tokens": 274,
+    "heartbeats": 484,
+    "Z": 100.0,
+    "score": 59.45
+   },
+   "after": {
+    "ok": true,
+    "tokens": 274,
+    "heartbeats": 484,
+    "Z": 100.0,
+    "score": 59.45
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 1,
+   "seconds": 8.5
+  },
+  {
+   "pass": "lint_delete",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 274,
+    "heartbeats": 484,
+    "Z": 100.0,
+    "score": 59.45
+   },
+   "after": {
+    "ok": true,
+    "tokens": 274,
+    "heartbeats": 484,
+    "Z": 100.0,
+    "score": 59.45
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 23,
+   "seconds": 69.4
+  }
+ ],
+ "free_applied": [
+  "normalize",
+  "hb_rewrite"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 274,
+  "heartbeats": 484,
+  "L": -9.16,
+  "H": 87.52,
+  "Z": 100.0,
+  "score": 59.45
+ },
+ "s0": "theorem bisimilarity_congr_choice :\n    (p ~[lts (defs := defs)] q) → (choice p r) ~[lts (defs := defs)] (choice q r) := by\n  intro h\n  exists @ChoiceBisim _ _ defs\n  constructor\n  · constructor\n    assumption\n  intro s1 s2 r μ\n  constructor\n  case left =>\n    intro s1' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain ⟨rel, hr, hb⟩ := hbisim\n      cases htr\n      case choiceL a b c htr =>\n        obtain ⟨s2', htr2, hr2⟩ := hb.follow_fst hr htr\n        refine ⟨s2', ?_⟩\n        constructor\n        · apply Tr.choiceL htr2\n        · constructor\n          apply hb.le_bisimilarity _ _ hr2\n      case choiceR a b c htr =>\n        refine ⟨s1', ?_⟩\n        constructor\n        · apply Tr.choiceR htr\n        · constructor\n          apply HomBisimilarity.refl\n    case bisim hbisim =>\n      obtain ⟨rel, hr, hb⟩ := hbisim\n      obtain ⟨s2', htr2, hr2⟩ := hb.follow_fst hr htr\n      refine ⟨s2', ?_⟩\n      constructor\n      · assumption\n      constructor\n      apply hb.le_bisimilarity _ _ hr2\n  case right =>\n    intro s2' htr\n    cases r\n    case choice p q r hbisim =>\n      obtain ⟨rel, hr, hb⟩ := hbisim\n      cases htr\n      case choiceL a b c htr =>\n        obtain ⟨s1', htr1, hr1⟩ := hb.follow_snd hr htr\n        refine ⟨s1', ?_⟩\n        constructor\n        · apply Tr.choiceL htr1\n        · constructor\n          apply hb.le_bisimilarity _ _ hr1\n      case choiceR a b c htr =>\n        refine ⟨s2', ?_⟩\n        constructor\n        · apply Tr.choiceR htr\n        · constructor\n          apply HomBisimilarity.refl\n    case bisim hbisim =>\n      obtain ⟨rel, hr, hb⟩ := hbisim\n      obtain ⟨s1', htr1, hr1⟩ := hb.follow_snd hr htr\n      refine ⟨s1', ?_⟩\n      constructor\n      · assumption\n      · constructor\n        apply hb.le_bisimilarity _ _ hr1",
+ "exchange": [
+  0.133,
+  0.859
+ ],
+ "profile": {
+  "ok": true,
+  "total": 484,
+  "floor": null,
+  "reference": 3879,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "3-3",
+    "depth_indent": 2,
+    "text": "intro h",
+    "heartbeats": null
+   },
+   {
+    "lines": "4-4",
+    "depth_indent": 2,
+    "text": "exists @ChoiceBisim _ _ defs",
+    "heartbeats": null
+   },
+   {
+    "lines": "5-5",
+    "depth_indent": 2,
+    "text": "constructor",
+    "heartbeats": null
+   },
+   {
+    "lines": "6-7",
+    "depth_indent": 2,
+    "text": "· constructor assumption",
+    "heartbeats": null
+   },
+   {
+    "lines": "8-8",
+    "depth_indent": 2,
+    "text": "intro s1 s2 r μ",
+    "heartbeats": null
+   },
+   {
+    "lines": "9-9",
+    "depth_indent": 2,
+    "text": "constructor",
+    "heartbeats": null
+   },
+   {
+    "lines": "10-36",
+    "depth_indent": 2,
+    "text": "case left => intro s1' htr cases r case choice p q r hbisim => obtain ⟨rel, hr, hb⟩ := hbisim cases ",
+    "heartbeats": null
+   },
+   {
+    "lines": "37-63",
+    "depth_indent": 2,
+    "text": "case right => intro s2' htr cases r case choice p q r hbisim => obtain ⟨rel, hr, hb⟩ := hbisim cases",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 274,
+  "heartbeats": 484,
+  "score": 59.45
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 108,
+   "score": null,
+   "error": "321:88: `grind` failed\ncase grind\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\np q r : Process Name Constant\nh : p ~[lts,lts] "
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 66,
+   "score": null,
+   "error": "321:88: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 135,
+   "score": null,
+   "error": "321:85: unsolved goals\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\np q r : Process Name Constant\na : p ~[lts] q\n⊢ (p.choice r"
+  },
+  {
+   "kind": "closer",
+   "line": 20,
+   "label": "replace the bullet at line 20 (`· constructor`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 269,
+   "heartbeats": 545,
+   "score": null,
+   "error": "340:10: `grind` failed\ncase grind.1\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\na b c : Process Name Constant\nh : a ~[lts] b\n"
+  },
+  {
+   "kind": "closer",
+   "line": 20,
+   "label": "replace the bullet at line 20 (`· constructor`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 269,
+   "heartbeats": 491,
+   "score": null,
+   "error": "340:10: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 20,
+   "label": "replace the bullet at line 20 (`· constructor`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 269,
+   "heartbeats": 597,
+   "score": null,
+   "error": "340:10: Tactic `aesop` failed, made no progress\nInitial goal:\n  case right\n  Name : Type u\n  Constant : Type v\n  defs : Constant → Process Name Constant → Prop\n"
+  },
+  {
+   "kind": "closer",
+   "line": 47,
+   "label": "replace the bullet at line 47 (`· constructor`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 269,
+   "heartbeats": 546,
+   "score": null,
+   "error": "367:10: `grind` failed\ncase grind.1\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\na b c : Process Name Constant\nh : a ~[lts] b\n"
+  },
+  {
+   "kind": "closer",
+   "line": 47,
+   "label": "replace the bullet at line 47 (`· constructor`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 269,
+   "heartbeats": 491,
+   "score": null,
+   "error": "367:10: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 47,
+   "label": "replace the bullet at line 47 (`· constructor`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 269,
+   "heartbeats": 597,
+   "score": null,
+   "error": "367:10: Tactic `aesop` failed, made no progress\nInitial goal:\n  case right\n  Name : Type u\n  Constant : Type v\n  defs : Constant → Process Name Constant → Prop\n"
+  },
+  {
+   "kind": "closer",
+   "line": 61,
+   "label": "replace the bullet at line 61 (`· constructor`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 269,
+   "heartbeats": 515,
+   "score": null,
+   "error": "381:8: `grind` failed\ncase grind\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\np q r : Process Name Constant\nh : p ~[lts] q\ns1 "
+  },
+  {
+   "kind": "closer",
+   "line": 61,
+   "label": "replace the bullet at line 61 (`· constructor`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 269,
+   "heartbeats": 494,
+   "score": null,
+   "error": "381:8: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 61,
+   "label": "replace the bullet at line 61 (`· constructor`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 269,
+   "heartbeats": 601,
+   "score": null,
+   "error": "381:8: Tactic `aesop` failed, made no progress\nInitial goal:\n  case right\n  Name : Type u\n  Constant : Type v\n  defs : Constant → Process Name Constant → Prop\n "
+  },
+  {
+   "kind": "closer",
+   "line": 26,
+   "label": "replace the bullet at line 26 (`· constructor`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 543,
+   "score": null,
+   "error": "346:10: `grind` failed\ncase grind.1\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\na b c : Process Name Constant\nh : a ~[lts] b\n"
+  },
+  {
+   "kind": "closer",
+   "line": 26,
+   "label": "replace the bullet at line 26 (`· constructor`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 490,
+   "score": null,
+   "error": "346:10: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 26,
+   "label": "replace the bullet at line 26 (`· constructor`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 586,
+   "score": null,
+   "error": "346:10: Tactic `aesop` failed, made no progress\nInitial goal:\n  case right\n  Name : Type u\n  Constant : Type v\n  defs : Constant → Process Name Constant → Prop\n"
+  },
+  {
+   "kind": "closer",
+   "line": 53,
+   "label": "replace the bullet at line 53 (`· constructor`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 543,
+   "score": null,
+   "error": "373:10: `grind` failed\ncase grind.1\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\na b c : Process Name Constant\nh : a ~[lts] b\n"
+  },
+  {
+   "kind": "closer",
+   "line": 53,
+   "label": "replace the bullet at line 53 (`· constructor`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 490,
+   "score": null,
+   "error": "373:10: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 53,
+   "label": "replace the bullet at line 53 (`· constructor`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 585,
+   "score": null,
+   "error": "373:10: Tactic `aesop` failed, made no progress\nInitial goal:\n  case right\n  Name : Type u\n  Constant : Type v\n  defs : Constant → Process Name Constant → Prop\n"
+  },
+  {
+   "kind": "closer",
+   "line": 21,
+   "label": "replace the closing tactic at line 21 (`apply hb.le_bisimilarity _ _ hr2`) by `grind`",
+   "closer": "grind",
+   "ok": true,
+   "tokens": 270,
+   "heartbeats": 558,
+   "score": 59.35,
+   "error": "",
+   "d_tokens": -4,
+   "d_hb": 74,
+   "d_score": -0.1
+  },
+  {
+   "kind": "closer",
+   "line": 21,
+   "label": "replace the closing tactic at line 21 (`apply hb.le_bisimilarity _ _ hr2`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 270,
+   "heartbeats": 495,
+   "score": null,
+   "error": "341:10: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 21,
+   "label": "replace the closing tactic at line 21 (`apply hb.le_bisimilarity _ _ hr2`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 270,
+   "heartbeats": 617,
+   "score": null,
+   "error": "341:10: Tactic `aesop` failed, made no progress\nInitial goal:\n  case right\n  Name : Type u\n  Constant : Type v\n  defs : Constant → Process Name Constant → Prop\n"
+  },
+  {
+   "kind": "closer",
+   "line": 35,
+   "label": "replace the closing tactic at line 35 (`apply hb.le_bisimilarity _ _ hr2`) by `grind`",
+   "closer": "grind",
+   "ok": true,
+   "tokens": 270,
+   "heartbeats": 561,
+   "score": 59.32,
+   "error": "",
+   "d_tokens": -4,
+   "d_hb": 77,
+   "d_score": -0.13
+  },
+  {
+   "kind": "closer",
+   "line": 35,
+   "label": "replace the closing tactic at line 35 (`apply hb.le_bisimilarity _ _ hr2`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 270,
+   "heartbeats": 496,
+   "score": null,
+   "error": "355:6: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 35,
+   "label": "replace the closing tactic at line 35 (`apply hb.le_bisimilarity _ _ hr2`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 270,
+   "heartbeats": 620,
+   "score": null,
+   "error": "355:6: Tactic `aesop` failed, made no progress\nInitial goal:\n  case right\n  Name : Type u\n  Constant : Type v\n  defs : Constant → Process Name Constant → Prop\n "
+  },
+  {
+   "kind": "closer",
+   "line": 48,
+   "label": "replace the closing tactic at line 48 (`apply hb.le_bisimilarity _ _ hr1`) by `grind`",
+   "closer": "grind",
+   "ok": true,
+   "tokens": 270,
+   "heartbeats": 558,
+   "score": 59.35,
+   "error": "",
+   "d_tokens": -4,
+   "d_hb": 74,
+   "d_score": -0.1
+  },
+  {
+   "kind": "closer",
+   "line": 48,
+   "label": "replace the closing tactic at line 48 (`apply hb.le_bisimilarity _ _ hr1`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 270,
+   "heartbeats": 495,
+   "score": null,
+   "error": "368:10: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 48,
+   "label": "replace the closing tactic at line 48 (`apply hb.le_bisimilarity _ _ hr1`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 270,
+   "heartbeats": 617,
+   "score": null,
+   "error": "368:10: Tactic `aesop` failed, made no progress\nInitial goal:\n  case right\n  Name : Type u\n  Constant : Type v\n  defs : Constant → Process Name Constant → Prop\n"
+  },
+  {
+   "kind": "closer",
+   "line": 62,
+   "label": "replace the closing tactic at line 62 (`apply hb.le_bisimilarity _ _ hr1`) by `grind`",
+   "closer": "grind",
+   "ok": true,
+   "tokens": 270,
+   "heartbeats": 559,
+   "score": 59.34,
+   "error": "",
+   "d_tokens": -4,
+   "d_hb": 75,
+   "d_score": -0.11
+  },
+  {
+   "kind": "closer",
+   "line": 62,
+   "label": "replace the closing tactic at line 62 (`apply hb.le_bisimilarity _ _ hr1`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 270,
+   "heartbeats": 498,
+   "score": null,
+   "error": "382:8: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 62,
+   "label": "replace the closing tactic at line 62 (`apply hb.le_bisimilarity _ _ hr1`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 270,
+   "heartbeats": 621,
+   "score": null,
+   "error": "382:8: Tactic `aesop` failed, made no progress\nInitial goal:\n  case right\n  Name : Type u\n  Constant : Type v\n  defs : Constant → Process Name Constant → Prop\n "
+  },
+  {
+   "kind": "closer",
+   "line": 5,
+   "label": "replace the bullet at line 5 (`· constructor`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 510,
+   "score": null,
+   "error": "325:4: `grind` failed\ncase grind\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\np q r : Process Name Constant\nh : p ~[lts] q\nh_1"
+  },
+  {
+   "kind": "closer",
+   "line": 5,
+   "label": "replace the bullet at line 5 (`· constructor`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 488,
+   "score": null,
+   "error": "325:4: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 5,
+   "label": "replace the bullet at line 5 (`· constructor`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 565,
+   "score": null,
+   "error": "325:4: Tactic `aesop` failed, made no progress\nInitial goal:\n  case left\n  Name : Type u\n  Constant : Type v\n  defs : Constant → Process Name Constant → Prop\n  "
+  },
+  {
+   "kind": "closer",
+   "line": 27,
+   "label": "replace the closing tactic at line 27 (`apply HomBisimilarity.refl`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 592,
+   "score": null,
+   "error": "347:10: `grind` failed\ncase grind.1\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\na b c : Process Name Constant\nh : a ~[lts] b\n"
+  },
+  {
+   "kind": "closer",
+   "line": 27,
+   "label": "replace the closing tactic at line 27 (`apply HomBisimilarity.refl`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 494,
+   "score": null,
+   "error": "347:10: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 27,
+   "label": "replace the closing tactic at line 27 (`apply HomBisimilarity.refl`) by `aesop`",
+   "closer": "aesop",
+   "ok": true,
+   "tokens": 273,
+   "heartbeats": 588,
+   "score": 58.69,
+   "error": "",
+   "d_tokens": -1,
+   "d_hb": 104,
+   "d_score": -0.76
+  },
+  {
+   "kind": "closer",
+   "line": 54,
+   "label": "replace the closing tactic at line 54 (`apply HomBisimilarity.refl`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 592,
+   "score": null,
+   "error": "374:10: `grind` failed\ncase grind.1\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\na b c : Process Name Constant\nh : a ~[lts] b\n"
+  },
+  {
+   "kind": "closer",
+   "line": 54,
+   "label": "replace the closing tactic at line 54 (`apply HomBisimilarity.refl`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 494,
+   "score": null,
+   "error": "374:10: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 54,
+   "label": "replace the closing tactic at line 54 (`apply HomBisimilarity.refl`) by `aesop`",
+   "closer": "aesop",
+   "ok": true,
+   "tokens": 273,
+   "heartbeats": 587,
+   "score": 58.7,
+   "error": "",
+   "d_tokens": -1,
+   "d_hb": 103,
+   "d_score": -0.75
+  },
+  {
+   "kind": "closer",
+   "line": 19,
+   "label": "replace the bullet at line 19 (`· apply Tr.choiceL htr2`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 556,
+   "score": null,
+   "error": "339:10: `grind` failed\ncase grind.1\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\na b c : Process Name Constant\nh : a ~[lts] b\n"
+  },
+  {
+   "kind": "closer",
+   "line": 19,
+   "label": "replace the bullet at line 19 (`· apply Tr.choiceL htr2`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 499,
+   "score": null,
+   "error": "339:10: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 19,
+   "label": "replace the bullet at line 19 (`· apply Tr.choiceL htr2`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 623,
+   "score": null,
+   "error": "339:10: Tactic `aesop` failed, made no progress\nInitial goal:\n  case left\n  Name : Type u\n  Constant : Type v\n  defs : Constant → Process Name Constant → Prop\n "
+  },
+  {
+   "kind": "closer",
+   "line": 46,
+   "label": "replace the bullet at line 46 (`· apply Tr.choiceL htr1`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 556,
+   "score": null,
+   "error": "366:10: `grind` failed\ncase grind.1\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\na b c : Process Name Constant\nh : a ~[lts] b\n"
+  },
+  {
+   "kind": "closer",
+   "line": 46,
+   "label": "replace the bullet at line 46 (`· apply Tr.choiceL htr1`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 499,
+   "score": null,
+   "error": "366:10: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 46,
+   "label": "replace the bullet at line 46 (`· apply Tr.choiceL htr1`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 623,
+   "score": null,
+   "error": "366:10: Tactic `aesop` failed, made no progress\nInitial goal:\n  case left\n  Name : Type u\n  Constant : Type v\n  defs : Constant → Process Name Constant → Prop\n "
+  },
+  {
+   "kind": "closer",
+   "line": 25,
+   "label": "replace the bullet at line 25 (`· apply Tr.choiceR htr`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 551,
+   "score": null,
+   "error": "345:10: `grind` failed\ncase grind.1\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\na b c : Process Name Constant\nh : a ~[lts] b\n"
+  },
+  {
+   "kind": "closer",
+   "line": 25,
+   "label": "replace the bullet at line 25 (`· apply Tr.choiceR htr`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 493,
+   "score": null,
+   "error": "345:10: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 25,
+   "label": "replace the bullet at line 25 (`· apply Tr.choiceR htr`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 605,
+   "score": null,
+   "error": "345:10: Tactic `aesop` failed, made no progress\nInitial goal:\n  case left\n  Name : Type u\n  Constant : Type v\n  defs : Constant → Process Name Constant → Prop\n "
+  },
+  {
+   "kind": "del-tac",
+   "line": 2,
+   "label": "delete the tactic `intro h`",
+   "closer": "",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 38,
+   "score": null,
+   "error": "322:2: Invalid `⟨...⟩` notation: The expected type\n  p ~[lts] q → (p.choice r) ~[lts] (q.choice r)\nis not an inductive type\n\nNote: This notation can only be use"
+  },
+  {
+   "kind": "del-tac",
+   "line": 3,
+   "label": "delete the tactic `exists @ChoiceBisim _ _ defs`",
+   "closer": "",
+   "ok": false,
+   "tokens": 268,
+   "heartbeats": 42,
+   "score": null,
+   "error": "325:4: Tactic `assumption` failed\n\ncase h.left\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\np q r : Process Name Constant\nh : "
+  },
+  {
+   "kind": "del-tac",
+   "line": 4,
+   "label": "delete the tactic `constructor`",
+   "closer": "",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 86,
+   "score": null,
+   "error": "325:4: Tactic `assumption` failed\n\ncase left\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\np q r : Process Name Constant\nh : p "
+  },
+  {
+   "kind": "del-tac",
+   "line": 7,
+   "label": "delete the tactic `intro s1 s2 r μ`",
+   "closer": "",
+   "ok": false,
+   "tokens": 269,
+   "heartbeats": 86,
+   "score": null,
+   "error": "327:2: Tactic `constructor` failed: target is not an inductive datatype\n\ncase right\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Pr"
+  },
+  {
+   "kind": "del-tac",
+   "line": 8,
+   "label": "delete the tactic `constructor`",
+   "closer": "",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 89,
+   "score": null,
+   "error": "328:2: Case tag `left` not found.\n\nHint: The only available case tag is `right`.\n  l̵e̵f̵r̲i̲g̲h̲t"
+  },
+  {
+   "kind": "del-tac",
+   "line": 10,
+   "label": "delete the tactic `intro s1' htr`",
+   "closer": "",
+   "ok": false,
+   "tokens": 271,
+   "heartbeats": 355,
+   "score": null,
+   "error": "333:12: Unknown identifier `htr`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 11,
+   "label": "delete the tactic `cases r`",
+   "closer": "",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 295,
+   "score": null,
+   "error": "331:4: Case tag `choice` not found.\n\nNote: There are no cases to select."
+  },
+  {
+   "kind": "del-tac",
+   "line": 13,
+   "label": "delete the tactic `obtain ⟨rel, hr, hb⟩ := hbisim`",
+   "closer": "",
+   "ok": false,
+   "tokens": 264,
+   "heartbeats": 451,
+   "score": null,
+   "error": "335:35: Unknown identifier `hb.follow_fst`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 14,
+   "label": "delete the tactic `cases htr`",
+   "closer": "",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 365,
+   "score": null,
+   "error": "334:6: Case tag `choiceL` not found.\n\nNote: There are no cases to select."
+  },
+  {
+   "kind": "del-tac",
+   "line": 16,
+   "label": "delete the tactic `obtain ⟨s2', htr2, hr2⟩ := hb.follow_fst hr htr`",
+   "closer": "",
+   "ok": false,
+   "tokens": 262,
+   "heartbeats": 474,
+   "score": null,
+   "error": "336:16: Unknown identifier `s2'`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 17,
+   "label": "delete the tactic `refine ⟨s2', ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 268,
+   "heartbeats": 473,
+   "score": null,
+   "error": "338:10: Tactic `apply` failed: could not unify the type of `Tr.choiceL htr2`\n  Tr (q.choice ?m.368) μ s2'\nwith the goal\n  lts.Tr (q.choice r) μ ?w ∧ ChoiceBisim"
+  },
+  {
+   "kind": "del-tac",
+   "line": 18,
+   "label": "delete the tactic `constructor`",
+   "closer": "",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 472,
+   "score": null,
+   "error": "338:10: Tactic `apply` failed: could not unify the type of `Tr.choiceL htr2`\n  Tr (q.choice ?m.367) μ s2'\nwith the goal\n  lts.Tr (q.choice r) μ s2' ∧ ChoiceBisi"
+  },
+  {
+   "kind": "del-tac",
+   "line": 23,
+   "label": "delete the tactic `refine ⟨s1', ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 268,
+   "heartbeats": 477,
+   "score": null,
+   "error": "344:10: Tactic `apply` failed: could not unify the type of `Tr.choiceR htr`\n  Tr (choice ?m.404 r) μ s1'\nwith the goal\n  lts.Tr (q.choice r) μ ?w ∧ ChoiceBisim "
+  },
+  {
+   "kind": "del-tac",
+   "line": 24,
+   "label": "delete the tactic `constructor`",
+   "closer": "",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 478,
+   "score": null,
+   "error": "344:10: Tactic `apply` failed: could not unify the type of `Tr.choiceR htr`\n  Tr (choice ?m.403 r) μ s1'\nwith the goal\n  lts.Tr (q.choice r) μ s1' ∧ ChoiceBisim"
+  },
+  {
+   "kind": "del-tac",
+   "line": 29,
+   "label": "delete the tactic `obtain ⟨rel, hr, hb⟩ := hbisim`",
+   "closer": "",
+   "ok": false,
+   "tokens": 264,
+   "heartbeats": 455,
+   "score": null,
+   "error": "349:33: Unknown identifier `hb.follow_fst`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 30,
+   "label": "delete the tactic `obtain ⟨s2', htr2, hr2⟩ := hb.follow_fst hr htr`",
+   "closer": "",
+   "ok": false,
+   "tokens": 262,
+   "heartbeats": 482,
+   "score": null,
+   "error": "350:14: Unknown identifier `s2'`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 31,
+   "label": "delete the tactic `refine ⟨s2', ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 268,
+   "heartbeats": 475,
+   "score": null,
+   "error": "352:8: Tactic `assumption` failed\n\ncase h\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\np q r : Process Name Constant\nh : p ~[l"
+  },
+  {
+   "kind": "del-tac",
+   "line": 32,
+   "label": "delete the tactic `constructor`",
+   "closer": "",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 477,
+   "score": null,
+   "error": "352:8: Tactic `assumption` failed\n\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\np q r : Process Name Constant\nh : p ~[lts] q\ns"
+  },
+  {
+   "kind": "del-tac",
+   "line": 34,
+   "label": "delete the tactic `constructor`",
+   "closer": "",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 478,
+   "score": null,
+   "error": "354:6: Tactic `apply` failed: could not unify the type of `IsBisimulation.le_bisimilarity hb s1' s2' hr2`\n  s1' ~[lts,lts] s2'\nwith the goal\n  ChoiceBisim s1' s"
+  },
+  {
+   "kind": "del-tac",
+   "line": 37,
+   "label": "delete the tactic `intro s2' htr`",
+   "closer": "",
+   "ok": false,
+   "tokens": 271,
+   "heartbeats": 354,
+   "score": null,
+   "error": "360:12: Unknown identifier `htr`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 38,
+   "label": "delete the tactic `cases r`",
+   "closer": "",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 295,
+   "score": null,
+   "error": "358:4: Case tag `choice` not found.\n\nNote: There are no cases to select."
+  },
+  {
+   "kind": "del-tac",
+   "line": 40,
+   "label": "delete the tactic `obtain ⟨rel, hr, hb⟩ := hbisim`",
+   "closer": "",
+   "ok": false,
+   "tokens": 264,
+   "heartbeats": 451,
+   "score": null,
+   "error": "362:35: Unknown identifier `hb.follow_snd`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 41,
+   "label": "delete the tactic `cases htr`",
+   "closer": "",
+   "ok": false,
+   "tokens": 272,
+   "heartbeats": 364,
+   "score": null,
+   "error": "361:6: Case tag `choiceL` not found.\n\nNote: There are no cases to select."
+  },
+  {
+   "kind": "del-tac",
+   "line": 43,
+   "label": "delete the tactic `obtain ⟨s1', htr1, hr1⟩ := hb.follow_snd hr htr`",
+   "closer": "",
+   "ok": false,
+   "tokens": 262,
+   "heartbeats": 474,
+   "score": null,
+   "error": "363:16: Unknown identifier `s1'`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 44,
+   "label": "delete the tactic `refine ⟨s1', ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 268,
+   "heartbeats": 473,
+   "score": null,
+   "error": "365:10: Tactic `apply` failed: could not unify the type of `Tr.choiceL htr1`\n  Tr (p.choice ?m.817) μ s1'\nwith the goal\n  lts.Tr (p.choice r) μ ?w ∧ ChoiceBisim"
+  },
+  {
+   "kind": "del-tac",
+   "line": 45,
+   "label": "delete the tactic `constructor`",
+   "closer": "",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 472,
+   "score": null,
+   "error": "365:10: Tactic `apply` failed: could not unify the type of `Tr.choiceL htr1`\n  Tr (p.choice ?m.816) μ s1'\nwith the goal\n  lts.Tr (p.choice r) μ s1' ∧ ChoiceBisi"
+  },
+  {
+   "kind": "del-tac",
+   "line": 50,
+   "label": "delete the tactic `refine ⟨s2', ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 268,
+   "heartbeats": 477,
+   "score": null,
+   "error": "371:10: Tactic `apply` failed: could not unify the type of `Tr.choiceR htr`\n  Tr (choice ?m.853 r) μ s2'\nwith the goal\n  lts.Tr (p.choice r) μ ?w ∧ ChoiceBisim "
+  },
+  {
+   "kind": "del-tac",
+   "line": 51,
+   "label": "delete the tactic `constructor`",
+   "closer": "",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 478,
+   "score": null,
+   "error": "371:10: Tactic `apply` failed: could not unify the type of `Tr.choiceR htr`\n  Tr (choice ?m.852 r) μ s2'\nwith the goal\n  lts.Tr (p.choice r) μ s2' ∧ ChoiceBisim"
+  },
+  {
+   "kind": "del-tac",
+   "line": 56,
+   "label": "delete the tactic `obtain ⟨rel, hr, hb⟩ := hbisim`",
+   "closer": "",
+   "ok": false,
+   "tokens": 264,
+   "heartbeats": 454,
+   "score": null,
+   "error": "376:33: Unknown identifier `hb.follow_snd`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 57,
+   "label": "delete the tactic `obtain ⟨s1', htr1, hr1⟩ := hb.follow_snd hr htr`",
+   "closer": "",
+   "ok": false,
+   "tokens": 262,
+   "heartbeats": 482,
+   "score": null,
+   "error": "377:14: Unknown identifier `s1'`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 58,
+   "label": "delete the tactic `refine ⟨s1', ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 268,
+   "heartbeats": 479,
+   "score": null,
+   "error": "379:8: Tactic `assumption` failed\n\ncase h\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\np q r : Process Name Constant\nh : p ~[l"
+  },
+  {
+   "kind": "del-tac",
+   "line": 59,
+   "label": "delete the tactic `constructor`",
+   "closer": "",
+   "ok": false,
+   "tokens": 273,
+   "heartbeats": 477,
+   "score": null,
+   "error": "379:8: Tactic `assumption` failed\n\nName : Type u\nConstant : Type v\ndefs : Constant → Process Name Constant → Prop\np q r : Process Name Constant\nh : p ~[lts] q\ns"
+  }
+ ],
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 251 tokens, 3879 heartbeats, score 33.33. Free passes applied (normalize, hb_rewrite): start candidate 274 tokens, 484 heartbeats, score 59.45.\n- Exchange rate here: 1 token = 0.133 points, 100 heartbeats = 0.859 points.\n- Compile but do not pay alone: line 21 the closing tactic at line 21 (`apply hb.le_bisimilarity _ _ hr2`) by `grind` (-4 tok, +74 hb); line 35 the closing tactic at line 35 (`apply hb.le_bisimilarity _ _ hr2`) by `grind` (-4 tok, +77 hb); line 48 the closing tactic at line 48 (`apply hb.le_bisimilarity _ _ hr1`) by `grind` (-4 tok, +74 hb).\n- Deletions that FAIL (needed as they stand): line 2 the tactic `intro h`; line 3 the tactic `exists @ChoiceBisim _ _ defs`; line 4 the tactic `constructor`; line 7 the tactic `intro s1 s2 r μ`; line 8 the tactic `constructor`; line 10 the tactic `intro s1' htr`.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 20 (`· constructor`) (grind/simp_all/aesop); the bullet at line 47 (`· constructor`) (grind/simp_all/aesop); the bullet at line 61 (`· constructor`) (grind/simp_all/aesop); the bullet at line 26 (`· constructor`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 59.45,
+ "gain": 26.12,
+ "compiles_sweep": 80,
+ "seconds": 292.5,
+ "source": "seed"
+}

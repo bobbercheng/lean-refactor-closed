@@ -1,0 +1,1124 @@
+{
+ "problem": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+ "seed": {
+  "ok": true,
+  "tokens": 1372,
+  "heartbeats": 27101,
+  "L": 0.0,
+  "H": 0.04,
+  "Z": 100.0,
+  "score": 33.35
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 1372,
+    "heartbeats": 27111,
+    "Z": 100.0,
+    "score": 33.33
+   },
+   "after": {
+    "ok": true,
+    "tokens": 1325,
+    "heartbeats": 27112,
+    "Z": 100.0,
+    "score": 34.48
+   },
+   "gain": 1.15,
+   "applied": {
+    "lam": 29,
+    "dollar": 10,
+    "bare": 4
+   },
+   "compiles": 11,
+   "seconds": 83.8
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 1325,
+    "heartbeats": 27114,
+    "Z": 100.0,
+    "score": 34.47
+   },
+   "after": {
+    "ok": true,
+    "tokens": 1325,
+    "heartbeats": 27114,
+    "Z": 100.0,
+    "score": 34.47
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 24,
+   "seconds": 197.3
+  },
+  {
+   "pass": "hb_polish",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 1325,
+    "heartbeats": 27114,
+    "Z": 100.0,
+    "score": 34.47
+   },
+   "after": {
+    "ok": true,
+    "tokens": 1377,
+    "heartbeats": 17218,
+    "Z": 100.0,
+    "score": 45.38
+   },
+   "gain": 10.91,
+   "applied": {
+    "simp only": 8
+   },
+   "compiles": 5,
+   "seconds": 40.3
+  },
+  {
+   "pass": "lint_delete",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 1377,
+    "heartbeats": 17218,
+    "Z": 100.0,
+    "score": 45.38
+   },
+   "after": {
+    "ok": true,
+    "tokens": 1371,
+    "heartbeats": 17128,
+    "Z": 100.0,
+    "score": 45.63
+   },
+   "gain": 0.25,
+   "applied": {
+    "delsearch-arg": 3
+   },
+   "compiles": 24,
+   "seconds": 187.4
+  }
+ ],
+ "free_applied": [
+  "normalize",
+  "hb_polish",
+  "lint_delete"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 1371,
+  "heartbeats": 17130,
+  "L": 0.07,
+  "H": 36.82,
+  "Z": 100.0,
+  "score": 45.63
+ },
+ "s0": "lemma time_deriv_time_deriv_electricField_of_isExtrema {A : ElectromagneticPotential d}\n    {𝓕 : FreeSpace}\n    (hA : ContDiff ℝ ∞ A) (J : LorentzCurrentDensity d)\n    (hJ : ContDiff ℝ ∞ J) (h : IsExtrema 𝓕 A J)\n    (t : Time) (x : Space d) (i : Fin d) :\n    ∂ₜ (∂ₜ (A.electricField 𝓕.c · x i)) t =\n      𝓕.c ^ 2 * ∑ j, (∂[j] (∂[j] (A.electricField 𝓕.c t · i)) x) -\n      𝓕.c ^ 2 / 𝓕.ε₀ * ∂[i] (J.chargeDensity 𝓕.c t ·) x -\n      𝓕.c ^ 2 * 𝓕.μ₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n  have hEs : ∀ j, ContDiff ℝ 2 (λy => A.electricField 𝓕.c t y j) :=\n    λj => electricField_apply_contDiff_space (i := j) (hA.of_le $ right_eq_inf.mp rfl) t\n  have hEd : ∀ j k, Differentiable ℝ (∂[k] λy => A.electricField 𝓕.c t y j) :=\n    λj k => Space.deriv_differentiable (hEs j) k\n  have hBt : ∀ j, Differentiable ℝ\n      (λs => ∂[j] (λy => A.magneticFieldMatrix 𝓕.c s y (j, i)) x) :=\n    λj => Space.space_deriv_differentiable_time (i := j)\n      (magneticFieldMatrix_contDiff _ (hA.of_le $ right_eq_inf.mp rfl) (j, i)) x\n  have hJt : Differentiable ℝ (λs => J.currentDensity 𝓕.c s x i) :=\n    LorentzCurrentDensity.currentDensity_apply_differentiable_time (hJ.differentiable $ by simp only [ne_eq, WithTop.coe_eq_zero, ENat.top_ne_zero, not_false_eq_true]) x i\n  calc _\n    _= ∂ₜ (λt =>\n      1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, Space.deriv j (λx => magneticFieldMatrix 𝓕.c A t x (j, i)) x -\n      1 / 𝓕.ε₀ * LorentzCurrentDensity.currentDensity 𝓕.c J t x i) t := by\n        conv_lhs =>\n          enter [1]\n          change λt => ∂ₜ (A.electricField 𝓕.c · x i) t\n          enter [t]\n          rw [Time.deriv_euclid $ electricField_differentiable_time\n            (hA.of_le $ right_eq_inf.mp rfl) _,\n            time_deriv_electricField_of_isExtrema hA J hJ h]\n    _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∂ₜ (λt => ∑ j, ∂[j] (A.magneticFieldMatrix 𝓕.c t · (j, i)) x) t -\n      1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n      rw [Time.deriv_eq]\n      rw [fderiv_fun_sub]\n      simp only [FunLike.coe_sub, Pi.sub_apply]\n      rw [fderiv_const_mul (Differentiable.fun_sum λj _ => hBt j).differentiableAt]\n      rw [fderiv_const_mul hJt.differentiableAt]\n      simp only [_root_.smul_apply, smul_eq_mul, Time.deriv_eq]\n      · exact ((Differentiable.fun_sum λj _ => hBt j).const_mul _).differentiableAt\n      · exact hJt.differentiableAt.const_mul _\n    _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ((∑ j, ∂ₜ λt => ∂[j] (A.magneticFieldMatrix 𝓕.c t · (j, i)) x) t) -\n      1 / 𝓕.ε₀ * (∂ₜ (J.currentDensity 𝓕.c · x i) t) := by\n      congr\n      rw [Time.deriv_eq]\n      rw [fderiv_fun_sum λi _ => (hBt i).differentiableAt]\n      simp only [FunLike.coe_sum, Finset.sum_apply]\n      rfl\n    _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * (∑ j, ∂[j] λx => ∂ₜ (A.magneticFieldMatrix 𝓕.c · x (j, i)) t) x -\n        1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n      congr\n      simp only [Finset.sum_apply]\n      congr\n      funext k\n      rw [Space.time_deriv_comm_space_deriv]\n      apply magneticFieldMatrix_contDiff\n      apply hA.of_le $ right_eq_inf.mp rfl\n    _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) *(∑ j, ∂[j] λx => ∂[j] (A.electricField 𝓕.c t · i) x -\n        ∂[i] (A.electricField 𝓕.c t · j) x) x -\n        1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n        congr\n        simp only [Finset.sum_apply]\n        congr\n        funext k\n        congr\n        funext x\n        rw [time_deriv_magneticFieldMatrix _ $ hA.of_le $ ENat.LEInfty.out]\n    _ = (1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (λx => ∂[j] (A.electricField 𝓕.c t · i) x) x -\n          ∂[j] (λx => ∂[i] (A.electricField 𝓕.c t · j) x) x)) -\n          1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n        congr\n        simp only [Finset.sum_apply]\n        congr\n        funext j\n        rw [Space.deriv_eq_fderiv_basis]\n        rw [fderiv_fun_sub (hEd _ _).differentiableAt (hEd _ _).differentiableAt]\n        simp only [_root_.sub_apply, ← deriv_eq_fderiv_basis]\n    _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (λx => ∂[j] (A.electricField 𝓕.c t · i) x) x) -\n          1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (λx => ∂[i] (A.electricField 𝓕.c t · j) x) x) -\n          1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by simp only [mul_inv_rev, Finset.sum_sub_distrib, mul_sub]\n    _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (λx => ∂[j] (A.electricField 𝓕.c t · i) x) x) -\n        1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[i] (λx => ∂[j] (A.electricField 𝓕.c t · j) x) x) -\n        1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n        congr\n        funext j\n        rw [Space.deriv_commute _ $ hEs _, Space.deriv_eq_fderiv_basis]\n      _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (λx => ∂[j] (A.electricField 𝓕.c t · i) x) x) -\n          1 / (𝓕.μ₀ * 𝓕.ε₀) * (∂[i] (λx => ∑ j, ∂[j] (A.electricField 𝓕.c t · j) x) x) -\n          1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n        congr\n        rw [Space.deriv_eq_fderiv_basis]\n        rw [fderiv_fun_sum]\n        simp only [_root_.sum_apply, ← deriv_eq_fderiv_basis]\n        intro j _\n        exact (hEd j j).differentiableAt\n      _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (λx => ∂[j] (A.electricField 𝓕.c t · i) x) x) -\n          1 / (𝓕.μ₀ * 𝓕.ε₀) * (∂[i] (λx => (∇ ⬝ (A.electricField 𝓕.c t)) x) x) -\n          1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n        rfl\n      _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (∂[j] (A.electricField 𝓕.c t · i)) x) -\n          1 / (𝓕.μ₀ * 𝓕.ε₀ ^ 2) * ∂[i] (J.chargeDensity 𝓕.c t ·) x -\n          1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n        congr 2\n        rw [isExtrema_iff_gauss_ampere_magneticFieldMatrix] at h\n\n        conv_lhs =>\n          enter [2, 2, x]\n          rw [(h t x).1]\n        trans 1 / (𝓕.μ₀ * 𝓕.ε₀) * Space.deriv i\n            (λx => (1/ 𝓕.ε₀) * LorentzCurrentDensity.chargeDensity 𝓕.c J t x) x\n        · congr\n          funext x\n          ring\n        · rw [Space.deriv_eq_fderiv_basis]\n          rw [fderiv_const_mul]\n          simp only [one_div, mul_inv_rev, _root_.smul_apply, ← deriv_eq_fderiv_basis, smul_eq_mul]\n          field_simp\n          apply Differentiable.differentiableAt\n          apply LorentzCurrentDensity.chargeDensity_differentiable_space\n          exact hJ.differentiable $ by simp only [ne_eq, WithTop.coe_eq_zero, ENat.top_ne_zero, not_false_eq_true]\n        · exact hA\n        · exact hJ\n      _ = 𝓕.c ^ 2 * ∑ j, (∂[j] (∂[j] (A.electricField 𝓕.c t · i)) x) -\n            𝓕.c ^ 2 / 𝓕.ε₀ * ∂[i] (J.chargeDensity 𝓕.c t ·) x -\n            𝓕.c ^ 2 * 𝓕.μ₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n          simp only [one_div, mul_inv_rev, FreeSpace.c_sq]\n          field_simp",
+ "exchange": [
+  0.024,
+  0.123
+ ],
+ "profile": {
+  "ok": true,
+  "total": 17125,
+  "floor": 660,
+  "reference": 27112,
+  "max_heartbeat_score": 32.52,
+  "blocks": [
+   {
+    "lines": "20-126",
+    "depth_indent": 2,
+    "text": "calc _ _= ∂ₜ (λt => 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, Space.deriv j (λx => magneticFieldMatrix 𝓕.c A t x (j, ",
+    "heartbeats": 15715
+   },
+   {
+    "lines": "34-34",
+    "depth_indent": 6,
+    "text": "rw [fderiv_fun_sub]",
+    "heartbeats": 1795
+   },
+   {
+    "lines": "14-17",
+    "depth_indent": 2,
+    "text": "have hBt : ∀ j, Differentiable ℝ (λs => ∂[j] (λy => A.magneticFieldMatrix 𝓕.c s y (j, i)) x) := λj =",
+    "heartbeats": 234
+   },
+   {
+    "lines": "12-13",
+    "depth_indent": 2,
+    "text": "have hEd : ∀ j k, Differentiable ℝ (∂[k] λy => A.electricField 𝓕.c t y j) := λj k => Space.deriv_dif",
+    "heartbeats": 232
+   },
+   {
+    "lines": "10-11",
+    "depth_indent": 2,
+    "text": "have hEs : ∀ j, ContDiff ℝ 2 (λy => A.electricField 𝓕.c t y j) := λj => electricField_apply_contDiff",
+    "heartbeats": 212
+   },
+   {
+    "lines": "33-33",
+    "depth_indent": 6,
+    "text": "rw [Time.deriv_eq]",
+    "heartbeats": 75
+   },
+   {
+    "lines": "18-19",
+    "depth_indent": 2,
+    "text": "have hJt : Differentiable ℝ (λs => J.currentDensity 𝓕.c s x i) := LorentzCurrentDensity.currentDensi",
+    "heartbeats": 72
+   },
+   {
+    "lines": "32-32",
+    "depth_indent": 6,
+    "text": "1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by",
+    "heartbeats": null
+   }
+  ],
+  "points_left_heartbeats": 20.24,
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 1371,
+  "heartbeats": 17125,
+  "score": 45.64
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 1486,
+   "score": null,
+   "error": "393:63: `grind` failed\ncase grind.1.1\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 5148,
+   "score": null,
+   "error": "393:60: unsolved goals\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh : IsExtrema "
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 7268,
+   "score": null,
+   "error": "393:60: unsolved goals\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh : IsExtrema "
+  },
+  {
+   "kind": "closer",
+   "line": 105,
+   "label": "replace the bullet at line 105 (`· rw [Space.deriv_eq_fderiv_basis]`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1330,
+   "heartbeats": 20236,
+   "score": null,
+   "error": "497:10: `grind` failed\ncase grind.2.2.1\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞"
+  },
+  {
+   "kind": "closer",
+   "line": 105,
+   "label": "replace the bullet at line 105 (`· rw [Space.deriv_eq_fderiv_basis]`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1330,
+   "heartbeats": 26740,
+   "score": null,
+   "error": "497:8: unsolved goals\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nt : Time\nx : Sp"
+  },
+  {
+   "kind": "closer",
+   "line": 105,
+   "label": "replace the bullet at line 105 (`· rw [Space.deriv_eq_fderiv_basis]`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1330,
+   "heartbeats": 30225,
+   "score": null,
+   "error": "497:8: unsolved goals\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nt : Time\nx : Sp"
+  },
+  {
+   "kind": "closer",
+   "line": 11,
+   "label": "replace the closing tactic at line 11 (`LorentzCurrentDensity.currentDensity_ap…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1353,
+   "heartbeats": 17074,
+   "score": null,
+   "error": "403:4: Unknown identifier `grind`"
+  },
+  {
+   "kind": "closer",
+   "line": 11,
+   "label": "replace the closing tactic at line 11 (`LorentzCurrentDensity.currentDensity_ap…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1353,
+   "heartbeats": 17073,
+   "score": null,
+   "error": "403:4: Unknown identifier `simp_all`"
+  },
+  {
+   "kind": "closer",
+   "line": 11,
+   "label": "replace the closing tactic at line 11 (`LorentzCurrentDensity.currentDensity_ap…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1353,
+   "heartbeats": 17074,
+   "score": null,
+   "error": "403:4: Unknown identifier `aesop`"
+  },
+  {
+   "kind": "closer",
+   "line": 71,
+   "label": "replace the closing tactic at line 71 (`1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1347,
+   "heartbeats": null,
+   "score": null,
+   "error": "463:15: unexpected token '_'; expected ':='"
+  },
+  {
+   "kind": "closer",
+   "line": 71,
+   "label": "replace the closing tactic at line 71 (`1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1347,
+   "heartbeats": null,
+   "score": null,
+   "error": "463:18: unexpected token '_'; expected ':='"
+  },
+  {
+   "kind": "closer",
+   "line": 71,
+   "label": "replace the closing tactic at line 71 (`1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1347,
+   "heartbeats": null,
+   "score": null,
+   "error": "463:15: unexpected token '_'; expected ':='"
+  },
+  {
+   "kind": "closer",
+   "line": 111,
+   "label": "replace the closing tactic at line 111 (`exact hJ.differentiable $ by simp only …`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1357,
+   "heartbeats": 21346,
+   "score": null,
+   "error": "503:10: `grind` failed\ncase grind\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh :"
+  },
+  {
+   "kind": "closer",
+   "line": 111,
+   "label": "replace the closing tactic at line 111 (`exact hJ.differentiable $ by simp only …`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1357,
+   "heartbeats": 27378,
+   "score": null,
+   "error": "497:8: unsolved goals\ncase ha\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nt : Tim"
+  },
+  {
+   "kind": "closer",
+   "line": 111,
+   "label": "replace the closing tactic at line 111 (`exact hJ.differentiable $ by simp only …`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1357,
+   "heartbeats": 30430,
+   "score": null,
+   "error": "497:8: unsolved goals\ncase ha\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nt : Tim"
+  },
+  {
+   "kind": "closer",
+   "line": 3,
+   "label": "replace the closing tactic at line 3 (`λj => electricField_apply_contDiff_spac…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1357,
+   "heartbeats": 17058,
+   "score": null,
+   "error": "395:4: Unknown identifier `grind`"
+  },
+  {
+   "kind": "closer",
+   "line": 3,
+   "label": "replace the closing tactic at line 3 (`λj => electricField_apply_contDiff_spac…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1357,
+   "heartbeats": 17060,
+   "score": null,
+   "error": "395:4: Unknown identifier `simp_all`"
+  },
+  {
+   "kind": "closer",
+   "line": 3,
+   "label": "replace the closing tactic at line 3 (`λj => electricField_apply_contDiff_spac…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1357,
+   "heartbeats": 17061,
+   "score": null,
+   "error": "395:4: Unknown identifier `aesop`"
+  },
+  {
+   "kind": "closer",
+   "line": 31,
+   "label": "replace the bullet at line 31 (`· exact ((Differentiable.fun_sum λj _ =…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1358,
+   "heartbeats": 17492,
+   "score": null,
+   "error": "423:8: `grind` failed\ncase grind\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh : "
+  },
+  {
+   "kind": "closer",
+   "line": 31,
+   "label": "replace the bullet at line 31 (`· exact ((Differentiable.fun_sum λj _ =…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1358,
+   "heartbeats": 32342,
+   "score": null,
+   "error": "423:6: unsolved goals\ncase hf\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh : IsE"
+  },
+  {
+   "kind": "closer",
+   "line": 31,
+   "label": "replace the bullet at line 31 (`· exact ((Differentiable.fun_sum λj _ =…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1358,
+   "heartbeats": 37646,
+   "score": null,
+   "error": "423:6: unsolved goals\ncase hf\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh : IsE"
+  },
+  {
+   "kind": "closer",
+   "line": 9,
+   "label": "replace the closing tactic at line 9 (`(magneticFieldMatrix_contDiff _ (hA.of_…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1356,
+   "heartbeats": 17079,
+   "score": null,
+   "error": "401:6: Unknown identifier `grind`"
+  },
+  {
+   "kind": "closer",
+   "line": 9,
+   "label": "replace the closing tactic at line 9 (`(magneticFieldMatrix_contDiff _ (hA.of_…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1356,
+   "heartbeats": 17078,
+   "score": null,
+   "error": "401:6: Unknown identifier `simp_all`"
+  },
+  {
+   "kind": "closer",
+   "line": 9,
+   "label": "replace the closing tactic at line 9 (`(magneticFieldMatrix_contDiff _ (hA.of_…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1356,
+   "heartbeats": 17079,
+   "score": null,
+   "error": "401:6: Unknown identifier `aesop`"
+  },
+  {
+   "kind": "closer",
+   "line": 58,
+   "label": "replace the closing tactic at line 58 (`rw [time_deriv_magneticFieldMatrix _ $ …`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1363,
+   "heartbeats": 17882,
+   "score": null,
+   "error": "450:8: `grind` failed\ncase grind.1\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh "
+  },
+  {
+   "kind": "closer",
+   "line": 58,
+   "label": "replace the closing tactic at line 58 (`rw [time_deriv_magneticFieldMatrix _ $ …`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1363,
+   "heartbeats": 21490,
+   "score": null,
+   "error": "443:56: unsolved goals\ncase e_a.e_a.e_f.e_f\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff"
+  },
+  {
+   "kind": "closer",
+   "line": 58,
+   "label": "replace the closing tactic at line 58 (`rw [time_deriv_magneticFieldMatrix _ $ …`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1363,
+   "heartbeats": 23263,
+   "score": null,
+   "error": "443:56: unsolved goals\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh : IsExtrema "
+  },
+  {
+   "kind": "closer",
+   "line": 101,
+   "label": "replace the closing tactic at line 101 (`(λx => (1/ 𝓕.ε₀) * LorentzCurrentDensit…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1356,
+   "heartbeats": 15737,
+   "score": null,
+   "error": "493:12: Unknown identifier `grind`"
+  },
+  {
+   "kind": "closer",
+   "line": 101,
+   "label": "replace the closing tactic at line 101 (`(λx => (1/ 𝓕.ε₀) * LorentzCurrentDensit…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1356,
+   "heartbeats": 15739,
+   "score": null,
+   "error": "493:12: Unknown identifier `simp_all`"
+  },
+  {
+   "kind": "closer",
+   "line": 101,
+   "label": "replace the closing tactic at line 101 (`(λx => (1/ 𝓕.ε₀) * LorentzCurrentDensit…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1356,
+   "heartbeats": 15736,
+   "score": null,
+   "error": "493:12: Unknown identifier `aesop`"
+  },
+  {
+   "kind": "closer",
+   "line": 77,
+   "label": "replace the closing tactic at line 77 (`rw [Space.deriv_commute _ $ hEs _, Spac…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1362,
+   "heartbeats": 24417,
+   "score": null,
+   "error": "469:8: `grind` failed\ncase grind.1.2\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\n"
+  },
+  {
+   "kind": "closer",
+   "line": 77,
+   "label": "replace the closing tactic at line 77 (`rw [Space.deriv_commute _ $ hEs _, Spac…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1362,
+   "heartbeats": 21427,
+   "score": null,
+   "error": "466:56: unsolved goals\ncase e_a.e_a.e_a.e_f\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff"
+  },
+  {
+   "kind": "closer",
+   "line": 77,
+   "label": "replace the closing tactic at line 77 (`rw [Space.deriv_commute _ $ hEs _, Spac…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1362,
+   "heartbeats": 23226,
+   "score": null,
+   "error": "466:56: unsolved goals\ncase e_a.e_a.e_a.e_f\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff"
+  },
+  {
+   "kind": "closer",
+   "line": 68,
+   "label": "replace the closing tactic at line 68 (`simp only [_root_.sub_apply, ← deriv_eq…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1364,
+   "heartbeats": 22935,
+   "score": null,
+   "error": "460:8: `grind` failed\ncase grind.2.1.1\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ "
+  },
+  {
+   "kind": "closer",
+   "line": 68,
+   "label": "replace the closing tactic at line 68 (`simp only [_root_.sub_apply, ← deriv_eq…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1364,
+   "heartbeats": 22114,
+   "score": null,
+   "error": "453:58: unsolved goals\ncase e_a.e_a.e_f\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞"
+  },
+  {
+   "kind": "closer",
+   "line": 68,
+   "label": "replace the closing tactic at line 68 (`simp only [_root_.sub_apply, ← deriv_eq…`) by `aesop`",
+   "closer": "aesop",
+   "ok": true,
+   "tokens": 1364,
+   "heartbeats": 24219,
+   "score": 37.08,
+   "error": "",
+   "d_tokens": -7,
+   "d_hb": 7094,
+   "d_score": -8.56
+  },
+  {
+   "kind": "closer",
+   "line": 22,
+   "label": "replace the closing tactic at line 22 (`time_deriv_electricField_of_isExtrema h…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1366,
+   "heartbeats": null,
+   "score": null,
+   "error": "416:50: unexpected token ':='; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 22,
+   "label": "replace the closing tactic at line 22 (`time_deriv_electricField_of_isExtrema h…`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1366,
+   "heartbeats": null,
+   "score": null,
+   "error": "416:50: unexpected token ':='; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 22,
+   "label": "replace the closing tactic at line 22 (`time_deriv_electricField_of_isExtrema h…`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1366,
+   "heartbeats": null,
+   "score": null,
+   "error": "416:50: unexpected token ':='; expected ']'"
+  },
+  {
+   "kind": "closer",
+   "line": 5,
+   "label": "replace the closing tactic at line 5 (`λj k => Space.deriv_differentiable (hEs…`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1363,
+   "heartbeats": 17032,
+   "score": null,
+   "error": "397:4: Unknown identifier `grind`"
+  },
+  {
+   "kind": "del-arg",
+   "line": 11,
+   "label": "delete `ne_eq` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 17121,
+   "score": null,
+   "error": "403:91: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 11,
+   "label": "delete `WithTop.coe_eq_zero` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 17129,
+   "score": null,
+   "error": "403:88: unsolved goals\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh : IsExtrema "
+  },
+  {
+   "kind": "del-arg",
+   "line": 11,
+   "label": "delete `ENat.top_ne_zero` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 17136,
+   "score": null,
+   "error": "403:88: unsolved goals\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh : IsExtrema "
+  },
+  {
+   "kind": "del-arg",
+   "line": 11,
+   "label": "delete `not_false_eq_true` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 17130,
+   "score": null,
+   "error": "403:88: unsolved goals\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh : IsExtrema "
+  },
+  {
+   "kind": "del-arg",
+   "line": 27,
+   "label": "delete `FunLike.coe_sub` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 16686,
+   "score": null,
+   "error": "423:8: Type mismatch\n  Differentiable.differentiableAt (Differentiable.const_mul (Differentiable.fun_sum fun j x => hBt j) ?m.1584)\nhas type\n  DifferentiableAt "
+  },
+  {
+   "kind": "del-arg",
+   "line": 27,
+   "label": "delete `Pi.sub_apply` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 16804,
+   "score": null,
+   "error": "423:8: Type mismatch\n  Differentiable.differentiableAt (Differentiable.const_mul (Differentiable.fun_sum fun j x => hBt j) ?m.1584)\nhas type\n  DifferentiableAt "
+  },
+  {
+   "kind": "del-arg",
+   "line": 30,
+   "label": "delete `_root_.smul_apply` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 16838,
+   "score": null,
+   "error": "423:8: Type mismatch\n  Differentiable.differentiableAt (Differentiable.const_mul (Differentiable.fun_sum fun j x => hBt j) ?m.1584)\nhas type\n  DifferentiableAt "
+  },
+  {
+   "kind": "del-arg",
+   "line": 30,
+   "label": "delete `smul_eq_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 17094,
+   "score": null,
+   "error": "423:8: Type mismatch\n  Differentiable.differentiableAt (Differentiable.const_mul (Differentiable.fun_sum fun j x => hBt j) ?m.1584)\nhas type\n  DifferentiableAt "
+  },
+  {
+   "kind": "del-arg",
+   "line": 30,
+   "label": "delete `Time.deriv_eq` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 17120,
+   "score": null,
+   "error": "423:8: Type mismatch\n  Differentiable.differentiableAt (Differentiable.const_mul (Differentiable.fun_sum fun j x => hBt j) ?m.1584)\nhas type\n  DifferentiableAt "
+  },
+  {
+   "kind": "del-arg",
+   "line": 38,
+   "label": "delete `FunLike.coe_sum` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 16945,
+   "score": null,
+   "error": "431:6: Tactic `rfl` failed: The left-hand side\n  (∑ i_1, fderiv ℝ (fun s => Space.deriv i_1 (fun y => magneticFieldMatrix 𝓕.c A s y (i_1, i)) x) t) 1\nis not def"
+  },
+  {
+   "kind": "del-arg",
+   "line": 38,
+   "label": "delete `Finset.sum_apply` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 17120,
+   "score": null,
+   "error": "431:6: Tactic `rfl` failed: The left-hand side\n  (∑ i_1, ⇑(fderiv ℝ (fun s => Space.deriv i_1 (fun y => magneticFieldMatrix 𝓕.c A s y (i_1, i)) x) t)) 1\nis not "
+  },
+  {
+   "kind": "del-arg",
+   "line": 43,
+   "label": "delete `Finset.sum_apply` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1368,
+   "heartbeats": 16854,
+   "score": null,
+   "error": "435:6: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 53,
+   "label": "delete `Finset.sum_apply` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1368,
+   "heartbeats": 17224,
+   "score": null,
+   "error": "447:8: Tactic `apply` failed: could not unify the conclusion of `@funext`\n  ?f = ?g\nwith the goal\n  (∑ j, Space.deriv j fun x => ∂ₜ (fun x_1 => magneticFieldMat"
+  },
+  {
+   "kind": "del-arg",
+   "line": 63,
+   "label": "delete `Finset.sum_apply` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1368,
+   "heartbeats": 16256,
+   "score": null,
+   "error": "457:8: Tactic `apply` failed: could not unify the conclusion of `@funext`\n  ?f = ?g\nwith the goal\n  (∑ x,\n        Space.deriv x fun x_1 =>\n          Space.deriv"
+  },
+  {
+   "kind": "del-arg",
+   "line": 68,
+   "label": "delete `_root_.sub_apply` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 16898,
+   "score": null,
+   "error": "453:58: unsolved goals\ncase e_a.e_a.e_f\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞"
+  },
+  {
+   "kind": "del-arg",
+   "line": 68,
+   "label": "delete `← deriv_eq_fderiv_basis` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1368,
+   "heartbeats": 17071,
+   "score": null,
+   "error": "453:58: unsolved goals\ncase e_a.e_a.e_f\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞"
+  },
+  {
+   "kind": "del-arg",
+   "line": 71,
+   "label": "delete `mul_inv_rev` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1369,
+   "heartbeats": 17125,
+   "score": 45.68,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": 0,
+   "d_score": 0.04
+  },
+  {
+   "kind": "del-arg",
+   "line": 71,
+   "label": "delete `Finset.sum_sub_distrib` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 17076,
+   "score": null,
+   "error": "463:58: unsolved goals\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh : IsExtrema "
+  },
+  {
+   "kind": "del-arg",
+   "line": 71,
+   "label": "delete `mul_sub` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 17108,
+   "score": null,
+   "error": "463:58: unsolved goals\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh : IsExtrema "
+  },
+  {
+   "kind": "del-arg",
+   "line": 84,
+   "label": "delete `_root_.sum_apply` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 16792,
+   "score": null,
+   "error": "477:14: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\ncase e_a.e_a.e_a\nd : ℕ\nA : ElectromagneticPotential "
+  },
+  {
+   "kind": "del-arg",
+   "line": 84,
+   "label": "delete `← deriv_eq_fderiv_basis` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1368,
+   "heartbeats": 17000,
+   "score": null,
+   "error": "477:14: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\ncase e_a.e_a.e_a\nd : ℕ\nA : ElectromagneticPotential "
+  },
+  {
+   "kind": "del-arg",
+   "line": 107,
+   "label": "delete `one_div` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1369,
+   "heartbeats": 17105,
+   "score": 45.71,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -20,
+   "d_score": 0.07
+  },
+  {
+   "kind": "del-arg",
+   "line": 107,
+   "label": "delete `mul_inv_rev` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1369,
+   "heartbeats": 17108,
+   "score": 45.71,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -17,
+   "d_score": 0.07
+  },
+  {
+   "kind": "del-arg",
+   "line": 107,
+   "label": "delete `_root_.smul_apply` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 16165,
+   "score": null,
+   "error": "501:10: Tactic `apply` failed: could not unify the conclusion of `@Differentiable.differentiableAt`\n  DifferentiableAt ?𝕜 ?f ?x\nwith the goal\n  𝓕.ε₀ * ((1 / 𝓕.ε"
+  },
+  {
+   "kind": "del-arg",
+   "line": 107,
+   "label": "delete `← deriv_eq_fderiv_basis` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1368,
+   "heartbeats": 16324,
+   "score": null,
+   "error": "501:10: Tactic `apply` failed: could not unify the conclusion of `@Differentiable.differentiableAt`\n  DifferentiableAt ?𝕜 ?f ?x\nwith the goal\n  (fderiv ℝ (Loren"
+  },
+  {
+   "kind": "del-arg",
+   "line": 107,
+   "label": "delete `smul_eq_mul` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 16322,
+   "score": null,
+   "error": "501:10: Tactic `apply` failed: could not unify the conclusion of `@Differentiable.differentiableAt`\n  DifferentiableAt ?𝕜 ?f ?x\nwith the goal\n  𝓕.ε₀ * (1 / 𝓕.ε₀"
+  },
+  {
+   "kind": "del-arg",
+   "line": 111,
+   "label": "delete `ne_eq` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 17118,
+   "score": null,
+   "error": "503:39: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 111,
+   "label": "delete `WithTop.coe_eq_zero` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 17126,
+   "score": null,
+   "error": "503:36: unsolved goals\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh :\n  ∀ (t : T"
+  },
+  {
+   "kind": "del-arg",
+   "line": 111,
+   "label": "delete `ENat.top_ne_zero` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 17129,
+   "score": null,
+   "error": "503:36: unsolved goals\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh :\n  ∀ (t : T"
+  },
+  {
+   "kind": "del-arg",
+   "line": 111,
+   "label": "delete `not_false_eq_true` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 17123,
+   "score": null,
+   "error": "503:36: unsolved goals\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh :\n  ∀ (t : T"
+  },
+  {
+   "kind": "del-arg",
+   "line": 117,
+   "label": "delete `one_div` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1369,
+   "heartbeats": 17105,
+   "score": 45.71,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -20,
+   "d_score": 0.07
+  },
+  {
+   "kind": "del-arg",
+   "line": 117,
+   "label": "delete `mul_inv_rev` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1369,
+   "heartbeats": 17088,
+   "score": 45.73,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -37,
+   "d_score": 0.09
+  },
+  {
+   "kind": "del-arg",
+   "line": 117,
+   "label": "delete `FreeSpace.c_sq` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1369,
+   "heartbeats": 17549,
+   "score": null,
+   "error": "508:66: unsolved goals\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh : IsExtrema "
+  },
+  {
+   "kind": "del-tac",
+   "line": 18,
+   "label": "delete the tactic `change λt => ∂ₜ (A.electricField 𝓕.c · x i) t`",
+   "closer": "",
+   "ok": true,
+   "tokens": 1358,
+   "heartbeats": 17085,
+   "score": 46.0,
+   "error": "",
+   "d_tokens": -13,
+   "d_hb": -40,
+   "d_score": 0.36
+  },
+  {
+   "kind": "del-tac",
+   "line": 27,
+   "label": "delete the tactic `simp only [FunLike.coe_sub, Pi.sub_apply]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 1364,
+   "heartbeats": 16533,
+   "score": null,
+   "error": "422:8: Type mismatch\n  Differentiable.differentiableAt (Differentiable.const_mul (Differentiable.fun_sum fun j x => hBt j) ?m.1583)\nhas type\n  DifferentiableAt "
+  },
+  {
+   "kind": "del-tac",
+   "line": 30,
+   "label": "delete the tactic `simp only [_root_.smul_apply, smul_eq_mul, Time.d…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 1362,
+   "heartbeats": 16538,
+   "score": null,
+   "error": "422:8: Type mismatch\n  Differentiable.differentiableAt (Differentiable.const_mul (Differentiable.fun_sum fun j x => hBt j) ?m.1583)\nhas type\n  DifferentiableAt "
+  },
+  {
+   "kind": "del-tac",
+   "line": 38,
+   "label": "delete the tactic `simp only [FunLike.coe_sum, Finset.sum_apply]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 1364,
+   "heartbeats": 16894,
+   "score": null,
+   "error": "430:6: Tactic `rfl` failed: The left-hand side\n  (∑ i_1, fderiv ℝ (fun s => Space.deriv i_1 (fun y => magneticFieldMatrix 𝓕.c A s y (i_1, i)) x) t) 1\nis not def"
+  },
+  {
+   "kind": "del-tac",
+   "line": 39,
+   "label": "delete the tactic `rfl`",
+   "closer": "",
+   "ok": false,
+   "tokens": 1370,
+   "heartbeats": 17083,
+   "score": null,
+   "error": "426:56: unsolved goals\ncase e_a.e_a\nd : ℕ\nA : ElectromagneticPotential d\n𝓕 : FreeSpace\nhA : ContDiff ℝ ∞ A.val\nJ : LorentzCurrentDensity d\nhJ : ContDiff ℝ ∞ J\nh"
+  },
+  {
+   "kind": "del-tac",
+   "line": 43,
+   "label": "delete the tactic `simp only [Finset.sum_apply]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 1366,
+   "heartbeats": 16877,
+   "score": null,
+   "error": "436:6: Tactic `apply` failed: could not unify the conclusion of `@funext`\n  ?f = ?g\nwith the goal\n  (∑ j, ∂ₜ fun t => Space.deriv j (fun x => magneticFieldMatri"
+  },
+  {
+   "kind": "del-tac",
+   "line": 53,
+   "label": "delete the tactic `simp only [Finset.sum_apply]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 1366,
+   "heartbeats": 17160,
+   "score": null,
+   "error": "446:8: Tactic `apply` failed: could not unify the conclusion of `@funext`\n  ?f = ?g\nwith the goal\n  (∑ j, Space.deriv j fun x => ∂ₜ (fun x_1 => magneticFieldMat"
+  }
+ ],
+ "s1": {
+  "proof": "lemma time_deriv_time_deriv_electricField_of_isExtrema {A : ElectromagneticPotential d}\n    {𝓕 : FreeSpace}\n    (hA : ContDiff ℝ ∞ A) (J : LorentzCurrentDensity d)\n    (hJ : ContDiff ℝ ∞ J) (h : IsExtrema 𝓕 A J)\n    (t : Time) (x : Space d) (i : Fin d) :\n    ∂ₜ (∂ₜ (A.electricField 𝓕.c · x i)) t =\n      𝓕.c ^ 2 * ∑ j, (∂[j] (∂[j] (A.electricField 𝓕.c t · i)) x) -\n      𝓕.c ^ 2 / 𝓕.ε₀ * ∂[i] (J.chargeDensity 𝓕.c t ·) x -\n      𝓕.c ^ 2 * 𝓕.μ₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n  have hEs : ∀ j, ContDiff ℝ 2 (λy => A.electricField 𝓕.c t y j) :=\n    λj => electricField_apply_contDiff_space (i := j) (hA.of_le $ right_eq_inf.mp rfl) t\n  have hEd : ∀ j k, Differentiable ℝ (∂[k] λy => A.electricField 𝓕.c t y j) :=\n    λj k => Space.deriv_differentiable (hEs j) k\n  have hBt : ∀ j, Differentiable ℝ\n      (λs => ∂[j] (λy => A.magneticFieldMatrix 𝓕.c s y (j, i)) x) :=\n    λj => Space.space_deriv_differentiable_time (i := j)\n      (magneticFieldMatrix_contDiff _ (hA.of_le $ right_eq_inf.mp rfl) (j, i)) x\n  have hJt : Differentiable ℝ (λs => J.currentDensity 𝓕.c s x i) :=\n    LorentzCurrentDensity.currentDensity_apply_differentiable_time (hJ.differentiable $ by simp only [ne_eq, WithTop.coe_eq_zero, ENat.top_ne_zero, not_false_eq_true]) x i\n  calc _\n    _= ∂ₜ (λt =>\n      1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, Space.deriv j (λx => magneticFieldMatrix 𝓕.c A t x (j, i)) x -\n      1 / 𝓕.ε₀ * LorentzCurrentDensity.currentDensity 𝓕.c J t x i) t := by\n        conv_lhs =>\n          enter [1]\n          enter [t]\n          rw [Time.deriv_euclid $ electricField_differentiable_time\n            (hA.of_le $ right_eq_inf.mp rfl) _,\n            time_deriv_electricField_of_isExtrema hA J hJ h]\n    _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∂ₜ (λt => ∑ j, ∂[j] (A.magneticFieldMatrix 𝓕.c t · (j, i)) x) t -\n      1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n      rw [Time.deriv_eq]\n      rw [fderiv_fun_sub]\n      simp only [FunLike.coe_sub, Pi.sub_apply]\n      rw [fderiv_const_mul (Differentiable.fun_sum λj _ => hBt j).differentiableAt]\n      rw [fderiv_const_mul hJt.differentiableAt]\n      simp only [_root_.smul_apply, smul_eq_mul, Time.deriv_eq]\n      · exact ((Differentiable.fun_sum λj _ => hBt j).const_mul _).differentiableAt\n      · exact hJt.differentiableAt.const_mul _\n    _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ((∑ j, ∂ₜ λt => ∂[j] (A.magneticFieldMatrix 𝓕.c t · (j, i)) x) t) -\n      1 / 𝓕.ε₀ * (∂ₜ (J.currentDensity 𝓕.c · x i) t) := by\n      congr\n      rw [Time.deriv_eq]\n      rw [fderiv_fun_sum λi _ => (hBt i).differentiableAt]\n      simp only [FunLike.coe_sum, Finset.sum_apply]\n      rfl\n    _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * (∑ j, ∂[j] λx => ∂ₜ (A.magneticFieldMatrix 𝓕.c · x (j, i)) t) x -\n        1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n      congr\n      simp only [Finset.sum_apply]\n      congr\n      funext k\n      rw [Space.time_deriv_comm_space_deriv]\n      apply magneticFieldMatrix_contDiff\n      apply hA.of_le $ right_eq_inf.mp rfl\n    _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) *(∑ j, ∂[j] λx => ∂[j] (A.electricField 𝓕.c t · i) x -\n        ∂[i] (A.electricField 𝓕.c t · j) x) x -\n        1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n        congr\n        simp only [Finset.sum_apply]\n        congr\n        funext k\n        congr\n        funext x\n        rw [time_deriv_magneticFieldMatrix _ $ hA.of_le $ ENat.LEInfty.out]\n    _ = (1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (λx => ∂[j] (A.electricField 𝓕.c t · i) x) x -\n          ∂[j] (λx => ∂[i] (A.electricField 𝓕.c t · j) x) x)) -\n          1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n        congr\n        simp only [Finset.sum_apply]\n        congr\n        funext j\n        rw [Space.deriv_eq_fderiv_basis]\n        rw [fderiv_fun_sub (hEd _ _).differentiableAt (hEd _ _).differentiableAt]\n        simp only [_root_.sub_apply, ← deriv_eq_fderiv_basis]\n    _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (λx => ∂[j] (A.electricField 𝓕.c t · i) x) x) -\n          1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (λx => ∂[i] (A.electricField 𝓕.c t · j) x) x) -\n          1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by simp only [mul_inv_rev, Finset.sum_sub_distrib, mul_sub]\n    _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (λx => ∂[j] (A.electricField 𝓕.c t · i) x) x) -\n        1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[i] (λx => ∂[j] (A.electricField 𝓕.c t · j) x) x) -\n        1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n        congr\n        funext j\n        rw [Space.deriv_commute _ $ hEs _, Space.deriv_eq_fderiv_basis]\n      _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (λx => ∂[j] (A.electricField 𝓕.c t · i) x) x) -\n          1 / (𝓕.μ₀ * 𝓕.ε₀) * (∂[i] (λx => ∑ j, ∂[j] (A.electricField 𝓕.c t · j) x) x) -\n          1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n        congr\n        rw [Space.deriv_eq_fderiv_basis]\n        rw [fderiv_fun_sum]\n        simp only [_root_.sum_apply, ← deriv_eq_fderiv_basis]\n        intro j _\n        exact (hEd j j).differentiableAt\n      _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (λx => ∂[j] (A.electricField 𝓕.c t · i) x) x) -\n          1 / (𝓕.μ₀ * 𝓕.ε₀) * (∂[i] (λx => (∇ ⬝ (A.electricField 𝓕.c t)) x) x) -\n          1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n        rfl\n      _ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (∂[j] (A.electricField 𝓕.c t · i)) x) -\n          1 / (𝓕.μ₀ * 𝓕.ε₀ ^ 2) * ∂[i] (J.chargeDensity 𝓕.c t ·) x -\n          1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n        congr 2\n        rw [isExtrema_iff_gauss_ampere_magneticFieldMatrix] at h\n\n        conv_lhs =>\n          enter [2, 2, x]\n          rw [(h t x).1]\n        trans 1 / (𝓕.μ₀ * 𝓕.ε₀) * Space.deriv i\n            (λx => (1/ 𝓕.ε₀) * LorentzCurrentDensity.chargeDensity 𝓕.c J t x) x\n        · congr\n          funext x\n          ring\n        · rw [Space.deriv_eq_fderiv_basis]\n          rw [fderiv_const_mul]\n          simp only [_root_.smul_apply, ← deriv_eq_fderiv_basis, smul_eq_mul]\n          field_simp\n          apply Differentiable.differentiableAt\n          apply LorentzCurrentDensity.chargeDensity_differentiable_space\n          exact hJ.differentiable $ by simp only [ne_eq, WithTop.coe_eq_zero, ENat.top_ne_zero, not_false_eq_true]\n        · exact hA\n        · exact hJ\n      _ = 𝓕.c ^ 2 * ∑ j, (∂[j] (∂[j] (A.electricField 𝓕.c t · i)) x) -\n            𝓕.c ^ 2 / 𝓕.ε₀ * ∂[i] (J.chargeDensity 𝓕.c t ·) x -\n            𝓕.c ^ 2 * 𝓕.μ₀ * ∂ₜ (J.currentDensity 𝓕.c · x i) t := by\n          simp only [FreeSpace.c_sq]\n          field_simp",
+  "labels": [
+   "delete the tactic `change λt => ∂ₜ (A.electricField 𝓕.c · x i) t`",
+   "delete `mul_inv_rev` from the simp list",
+   "delete `one_div` from the simp list",
+   "delete `mul_inv_rev` from the simp list",
+   "delete `one_div` from the simp list"
+  ],
+  "primary_score": 46.29,
+  "full": {
+   "ok": true,
+   "tokens": 1350,
+   "heartbeats": 17010,
+   "L": 1.6,
+   "H": 37.26,
+   "Z": 100.0,
+   "score": 46.29
+  }
+ },
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 1372 tokens, 27101 heartbeats, score 33.35. Free passes applied (normalize, hb_polish, lint_delete): start candidate 1371 tokens, 17130 heartbeats, score 45.63.\n- Best combination of the paying single edits below: 1350 tokens, 17010 heartbeats, score 46.29 (Z 100.0); your workspace starts from it.\n- Exchange rate here: 1 token = 0.024 points, 100 heartbeats = 0.123 points.\n- Heartbeat hot spots: lines 20-126 ~86% (`calc _ _= ∂ₜ (λt => 1 / (𝓕.μ₀ * 𝓕.ε…`); lines 34-34 ~10% (`rw [fderiv_fun_sub]`); lines 14-17 ~1% (`have hBt : ∀ j, Differentiable ℝ (λ…`).\n- Single edits that PAY:\n  - line 18: delete the tactic `change λt => ∂ₜ (A.electricField 𝓕.c · x i) t`: -13 tokens, -40 hb, score +0.36\n  - line 117: delete `mul_inv_rev` from the simp list: -2 tokens, -37 hb, score +0.09\n  - line 107: delete `one_div` from the simp list: -2 tokens, -20 hb, score +0.07\n  - line 107: delete `mul_inv_rev` from the simp list: -2 tokens, -17 hb, score +0.07\n  - line 117: delete `one_div` from the simp list: -2 tokens, -20 hb, score +0.07\n- Compile but do not pay alone: line 68 the closing tactic at line 68 (`simp only [_root_.sub_apply, ← deriv_eq…`) by `aesop` (-7 tok, +7094 hb).\n- Deletions that FAIL (needed as they stand): line 11 `ne_eq` from the simp list; line 11 `WithTop.coe_eq_zero` from the simp list; line 11 `ENat.top_ne_zero` from the simp list; line 11 `not_false_eq_true` from the simp list; line 27 `FunLike.coe_sub` from the simp list; line 27 `Pi.sub_apply` from the simp list.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 105 (`· rw [Space.deriv_eq_fderiv_basis]`) (grind/simp_all/aesop); the closing tactic at line 11 (`LorentzCurrentDensity.currentDensity_ap…`) (grind/simp_all/aesop); the closing tactic at line 71 (`1 / 𝓕.ε₀ * ∂ₜ (J.currentDensity 𝓕.c · x…`) (grind/simp_all/aesop); the closing tactic at line 111 (`exact hJ.differentiable $ by simp only …`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 46.29,
+ "gain": 12.94,
+ "compiles_sweep": 80,
+ "seconds": 1058.8,
+ "source": "seed"
+}

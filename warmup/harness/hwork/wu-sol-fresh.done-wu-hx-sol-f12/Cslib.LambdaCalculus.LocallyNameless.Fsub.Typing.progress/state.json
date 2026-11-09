@@ -1,0 +1,447 @@
+{
+ "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+ "best": {
+  "score": 83.76,
+  "proof": "lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t' := by\n  have lc := der.wf.2.1\n  generalize eq : [] = Γ at der\n  induction der <;> subst eq\n  case var => grind\n  any_goals (left; constructor; assumption)\n  all_goals simp_all only [body_let, body_case, true_imp_iff]\n  all_goals cases lc <;> try simp_all only [true_imp_iff]\n  all_goals casesm* _ ∨ _, ∃ _, _\n  case' app.app.inl.inl vl vr => obtain ⟨_, _, rfl⟩ := Typing.canonical_form_abs vl ‹_›\n  case' tapp.tapp.inl v => obtain ⟨_, _, rfl⟩ := Typing.canonical_form_tabs v ‹_›\n  case' case.intro.inl v => obtain ⟨_, rfl | rfl⟩ := Typing.canonical_form_sum v ‹_› <;> cases v\n  all_goals try casesm* _ ∧ _\n  any_goals (left; constructor; assumption)\n  all_goals right; solve_by_elim (constructor := true) [Exists.intro, Red.appᵣ, Red.abs, Red.tabs, Red.let_body, Red.case, Red.case_inl, Red.case_inr]",
+  "tokens": 161,
+  "heartbeats": 5547,
+  "L": 60.54,
+  "H": 90.74,
+  "Z": 100.0,
+  "compat": {
+   "v4.33.0-rc2": true,
+   "v4.32.0": true,
+   "v4.31.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "5da3bf72a0c7",
+   "tokens": 41,
+   "heartbeats": 2181,
+   "ok": false,
+   "error": "91:75: ambiguous identifier ``LC`, possible interpretations: [Cslib.LambdaCalculus.LocallyNameless.Fsub.Term.LC, Cslib.LambdaCalculus.LocallyNameless.Fsub.Ty.LC]",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:11Z"
+  },
+  {
+   "sha": "1a3db13fc4ce",
+   "tokens": 41,
+   "heartbeats": 2188,
+   "ok": false,
+   "error": "91:75: ambiguous identifier ``LC`, possible interpretations: [Cslib.LambdaCalculus.LocallyNameless.Fsub.Term.LC, Cslib.LambdaCalculus.LocallyNameless.Fsub.Ty.LC]",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:14Z"
+  },
+  {
+   "sha": "c5d992062260",
+   "tokens": 38,
+   "heartbeats": 19823,
+   "ok": false,
+   "error": "90:4: `grind` failed case grind.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.app t₂).Val",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:21Z"
+  },
+  {
+   "sha": "6526a8bb4e73",
+   "tokens": 73,
+   "heartbeats": 69474,
+   "ok": false,
+   "error": "90:4: `grind` failed case grind.1.2.1.2.3.3.1.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:44Z"
+  },
+  {
+   "sha": "0dfb72eebf58",
+   "tokens": 41,
+   "heartbeats": 37144,
+   "ok": false,
+   "error": "90:4: `grind` failed case grind.1.1.1.1.2.2.3 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.app t",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:25:53Z"
+  },
+  {
+   "sha": "4d4e52e360cb",
+   "tokens": 274,
+   "heartbeats": 10553,
+   "ok": false,
+   "error": "114:12: failed",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:26:37Z"
+  },
+  {
+   "sha": "075eeb5ab330",
+   "tokens": 279,
+   "heartbeats": 6699,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:26:56Z",
+   "score": 73.48
+  },
+  {
+   "sha": "94592339b592",
+   "tokens": 279,
+   "heartbeats": 6037,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:27:06Z",
+   "score": 73.84
+  },
+  {
+   "sha": "0d5059936fa5",
+   "tokens": 142,
+   "heartbeats": 1336,
+   "ok": false,
+   "error": "97:55: Invalid field `canonical_form_abs`: The environment does not contain `Cslib.LambdaCalculus.LocallyNameless.Fsub.Term.Value.canonical_form_abs`, so it is not possible to project the field `canonical_form_abs` from an expression l of type `t₁✝.Value`",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:28:57Z"
+  },
+  {
+   "sha": "3565f034bf3d",
+   "tokens": 182,
+   "heartbeats": 1445,
+   "ok": false,
+   "error": "100:12: no match",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:29:28Z"
+  },
+  {
+   "sha": "cfb4e897ef2a",
+   "tokens": 183,
+   "heartbeats": 6819,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:29:41Z",
+   "score": 81.25
+  },
+  {
+   "sha": "e4dc86324669",
+   "tokens": 85,
+   "heartbeats": 1703,
+   "ok": false,
+   "error": "97:12: duplicate rule 'Typing.canonical_form_tabs'; rule 'Typing.canonical_form_abs' was already given. Use [<term>,...] to give multiple rules.",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:29:51Z"
+  },
+  {
+   "sha": "e00bae5d301e",
+   "tokens": 97,
+   "heartbeats": 19918,
+   "ok": false,
+   "error": "97:12: Tactic `aesop` failed, made no progress Initial goal: case app.app.inr.inl … [hypotheses omitted] ⊢ (t₁✝.app t₂✝).Value ∨ ∃ t', t₁✝.app t₂✝ ⭢βᵛ t'",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:30:09Z"
+  },
+  {
+   "sha": "68bcba043741",
+   "tokens": 133,
+   "heartbeats": 41575,
+   "ok": false,
+   "error": "97:12: `grind` failed case grind.1.1.3.4.4.3.3.4.4 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC [prop] t₂.LC [prop] t₁.Value [prop] t₂.Value [prop] ¬(t₁.app t₂).Value [prop] ∀ (a : Term Var), ¬t₁.a",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:30:19Z"
+  },
+  {
+   "sha": "38e4e4195e80",
+   "tokens": 187,
+   "heartbeats": 2614,
+   "ok": false,
+   "error": "97:72: Tactic `assumption` failed … [hypotheses omitted] ⊢ Typing [] t₂✝ (arrow ?m.863 ?m.864)",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:00Z"
+  },
+  {
+   "sha": "623277a248b2",
+   "tokens": 168,
+   "heartbeats": 6792,
+   "ok": false,
+   "error": "102:19: failed",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:03Z"
+  },
+  {
+   "sha": "9f035d76a55d",
+   "tokens": 173,
+   "heartbeats": 295,
+   "ok": false,
+   "error": "93:12: `simp` made no progress",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:44Z"
+  },
+  {
+   "sha": "5c863d10029b",
+   "tokens": 97,
+   "heartbeats": 295,
+   "ok": false,
+   "error": "93:12: `simp` made no progress",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:47Z"
+  },
+  {
+   "sha": "677ca906927c",
+   "tokens": 178,
+   "heartbeats": 295,
+   "ok": false,
+   "error": "93:12: `simp` made no progress",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:31:50Z"
+  },
+  {
+   "sha": "97815556480e",
+   "tokens": 174,
+   "heartbeats": 6655,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:01Z",
+   "score": 82.08
+  },
+  {
+   "sha": "ebf684783435",
+   "tokens": 98,
+   "heartbeats": 24347,
+   "ok": false,
+   "error": "86:74: unsolved goals case inl … [hypotheses omitted] ⊢ (w.inl.case t₂ t₃).Value ∨ ∃ t', w.inl.case t₂ t₃ ⭢βᵛ t' ‖ ⊢ (w.inr.case t₂ t₃).Value ∨ ∃ t', w.inr.case t₂ t₃ ⭢βᵛ t'",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:12Z"
+  },
+  {
+   "sha": "da9945c8d34d",
+   "tokens": 163,
+   "heartbeats": 1180,
+   "ok": false,
+   "error": "93:25: simp_all made no progress",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:44Z"
+  },
+  {
+   "sha": "4788bca02508",
+   "tokens": 80,
+   "heartbeats": 1180,
+   "ok": false,
+   "error": "93:25: simp_all made no progress",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:47Z"
+  },
+  {
+   "sha": "44c7790e0a67",
+   "tokens": 105,
+   "heartbeats": 1180,
+   "ok": false,
+   "error": "93:25: simp_all made no progress",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:32:50Z"
+  },
+  {
+   "sha": "38a88fa73bcc",
+   "tokens": 164,
+   "heartbeats": 6912,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:33:03Z",
+   "score": 82.75
+  },
+  {
+   "sha": "e40261d962a5",
+   "tokens": 81,
+   "heartbeats": 111386,
+   "ok": false,
+   "error": "94:12: aesop: internal error during proof reconstruction: goal 199 was not normalised.",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:33:18Z"
+  },
+  {
+   "sha": "d432205b19fc",
+   "tokens": 106,
+   "heartbeats": 112830,
+   "ok": false,
+   "error": "94:12: aesop: internal error during proof reconstruction: goal 199 was not normalised.",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:33:25Z"
+  },
+  {
+   "sha": "28529b4654b6",
+   "tokens": 155,
+   "heartbeats": 11937,
+   "ok": false,
+   "error": "99:12: failed",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:34:02Z"
+  },
+  {
+   "sha": "911ee2a2631b",
+   "tokens": 163,
+   "heartbeats": 5510,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:34:05Z",
+   "score": 83.62
+  },
+  {
+   "sha": "73aa70799f56",
+   "tokens": 160,
+   "heartbeats": 11939,
+   "ok": false,
+   "error": "99:12: failed",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:34:15Z"
+  },
+  {
+   "sha": "da628940fe5e",
+   "tokens": 152,
+   "heartbeats": 7751,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:34:40Z"
+  },
+  {
+   "sha": "aa3470e47a08",
+   "tokens": 156,
+   "heartbeats": 7786,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:34:43Z"
+  },
+  {
+   "sha": "880c7c7abab9",
+   "tokens": 159,
+   "heartbeats": 7127,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:34:46Z"
+  },
+  {
+   "sha": "a76faf6c59b7",
+   "tokens": 161,
+   "heartbeats": 6231,
+   "ok": false,
+   "error": "100:19: failed",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:35:19Z"
+  },
+  {
+   "sha": "1098c7584967",
+   "tokens": 161,
+   "heartbeats": 5424,
+   "ok": false,
+   "error": "100:19: failed",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:35:23Z"
+  },
+  {
+   "sha": "5fd2812b01a0",
+   "tokens": 161,
+   "heartbeats": 5547,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:35:26Z",
+   "score": 83.76
+  },
+  {
+   "sha": "9559af44f4cd",
+   "tokens": 158,
+   "heartbeats": 1493,
+   "ok": false,
+   "error": "97:2: Case tag `case.intro.intro.inl` not found. Hint: Available tags: • `tapp.tapp.inl`: c̵a̵s̵e̵.̵i̵n̵t̵r̵o̵.̵i̵n̵t̵r̵o̵.̵i̵n̵l̵t̲a̲p̲p̲.̲t̲a̲p̲p̲.̲i̲n̲l̲ • `app.app.inl.inl`: c̵a̵s̵e̵.̵i̵n̵t̵r̵o̵.̵i̵n̵t̵r̵o̵.̵i̵n̵l̵a̲p̲p̲.̲a̲p̲p̲.̲i̲n̲l̲.̲i̲n̲l̲ • `app.app.inl.inr`: c̵a̵s̵e̵.̵i̵n̵t̵r̵o̵.̵i̵n̵t̵r̵",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:35:51Z"
+  },
+  {
+   "sha": "920e03f8db51",
+   "tokens": 160,
+   "heartbeats": 1493,
+   "ok": false,
+   "error": "97:2: Case tag `case.intro.inl.intro` not found. Hint: Available tags: • `tapp.tapp.inl`: c̵a̵s̵e̵.̵i̵n̵t̵r̵o̵.̵i̵n̵l̵.̵i̵n̵t̵r̵o̵t̲a̲p̲p̲.̲t̲a̲p̲p̲.̲i̲n̲l̲ • `app.app.inl.inl`: c̵a̵s̵e̵.̵i̵n̵t̵r̵o̵.̵i̵n̵l̵.̵i̵n̵t̵r̵o̵a̲p̲p̲.̲a̲p̲p̲.̲i̲n̲l̲.̲i̲n̲l̲ • `app.app.inl.inr`: c̵a̵s̵e̵.̵i̵n̵t̵r̵o̵.̵i̵n̵l̵.̵",
+   "run_id": "wu-hx-sol-f12",
+   "t": "2026-10-12T00:35:55Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-f12",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:23:56Z",
+   "mode": "scout"
+  }
+ ],
+ "api_spend": 2.324948,
+ "lineage": "fresh",
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 7,
+    "d_score": 40.15,
+    "d_tokens": -129,
+    "d_heartbeats": 6699,
+    "diff": "+lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t' := by\n+  generalize eq : [] = Γ at der\n+  have der' := der\n+  induction der <;> subst eq\n+  all_goals have lc := der'.wf.2.1\n+  case var => grind\n+  case abs | tabs => left; constructor; assumption\n+  case sub d _ ih => exact ih rfl d\n+  case' app l r il ir =>\n+    rcases il rfl l with vl | ⟨_, rl⟩\n+    case' inl =>\n+      rcases ir rfl r with vr | ⟨_, rr⟩\n+      case' inl => obtain ⟨_, _, rfl⟩ := l.canonical_form_abs vl\n+    all_goals cases lc\n+  case' tapp d _ ih =>\n+    rcases ih rfl d with v | ⟨_, r⟩\n+    case' inl => obtain ⟨_, _, rfl⟩ := d.canonical_form_tabs v\n+    all_goals cases lc\n+  case' let' d _ ih _ =>\n+   "
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 8,
+    "d_score": 0.36,
+    "d_tokens": 0,
+    "d_heartbeats": -662,
+    "diff": "-  all_goals solve_by_elim (maxDepth := 8) [Or.inl, Or.inr, Exists.intro, Value.inl, Value.inr,\n-    Red.appₗ, Red.appᵣ, Red.abs, Red.tapp, Red.tabs, Red.let_bind, Red.let_body,\n-    Red.inl, Red.inr, Red.case, Red.case_inl, Red.case_inr]\n+  all_goals first\n+    | solve_by_elim [Or.inl, Value.inl, Value.inr]\n+    | right; solve_by_elim [Exists.intro,\n+        Red.appₗ, Red.appᵣ, Red.abs, Red.tapp, Red.tabs, Red.let_bind, Red.let_body,\n+        Red.inl, Red.inr, Red.case, Red.case_inl, Red.case_inr]"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 11,
+    "d_score": 7.41,
+    "d_tokens": -96,
+    "d_heartbeats": 782,
+    "diff": "+  have lc := der.wf.2.1\n-  have der' := der\n-  all_goals have lc := der'.wf.2.1\n-  case sub d _ ih => exact ih rfl d\n-  case' app l r il ir =>\n-    rcases il rfl l with vl | ⟨_, rl⟩\n-    case' inl =>\n-      rcases ir rfl r with vr | ⟨_, rr⟩\n-      case' inl => obtain ⟨_, _, rfl⟩ := l.canonical_form_abs vl\n-    all_goals cases lc\n-  case' tapp d _ ih =>\n-    rcases ih rfl d with v | ⟨_, r⟩\n-    case' inl => obtain ⟨_, _, rfl⟩ := d.canonical_form_tabs v\n-    all_goals cases lc\n-  case' let' d _ ih _ =>\n-    obtain ⟨_, b⟩ := body_let.mp lc\n-    rcases ih rfl d with v | ⟨_, r⟩\n-  case' inl d _ ih | inr d _ ih =>\n-    rcases ih rfl d with v | ⟨_, r⟩\n-  case' case d _ _ ih _ _ =>\n-    obtain ⟨_, "
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 20,
+    "d_score": 0.83,
+    "d_tokens": -9,
+    "d_heartbeats": -164,
+    "diff": "-  all_goals simp_all only [body_let, body_case, true_imp_iff]\n-  all_goals try cases lc\n-  all_goals try simp_all only [true_imp_iff]\n+  all_goals try simp only [body_let, body_case] at lc\n+  all_goals cases lc <;> simp_all only [true_imp_iff]\n-  case' case.intro.inl v => obtain ⟨_, h | h⟩ := Typing.canonical_form_sum v ‹_› <;> subst h <;> cases v\n+  case' case.intro.inl v => obtain ⟨_, rfl | rfl⟩ := Typing.canonical_form_sum v ‹_› <;> cases v\n-  all_goals right; solve_by_elim [Exists.intro,\n-    Red.appₗ, Red.appᵣ, Red.abs, Red.tapp, Red.tabs, Red.let_bind, Red.let_body,\n-    Red.inl, Red.inr, Red.case, Red.case_inl, Red.case_inr]\n+  all_goals right; solve_by_elim (constructor := true) [Ex"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 25,
+    "d_score": 0.67,
+    "d_tokens": -10,
+    "d_heartbeats": 257,
+    "diff": "-  case sub d _ ih => exact ih lc rfl\n-  all_goals try simp only [body_let, body_case] at lc\n-  all_goals cases lc <;> simp_all only [true_imp_iff]\n+  all_goals simp_all only [body_let, body_case, true_imp_iff]\n+  all_goals cases lc <;> try simp_all only [true_imp_iff]"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 29,
+    "d_score": 0.87,
+    "d_tokens": -1,
+    "d_heartbeats": -1402,
+    "diff": "-  any_goals solve_by_elim [Or.inl, Value.inl, Value.inr]\n+  any_goals (left; constructor; assumption)"
+   },
+   {
+    "run_id": "wu-hx-sol-f12",
+    "check": 36,
+    "d_score": 0.14,
+    "d_tokens": -2,
+    "d_heartbeats": 37,
+    "diff": "-  case abs | tabs => left; constructor; assumption\n+  any_goals (left; constructor; assumption)"
+   }
+  ]
+ },
+ "budget_milestones": {
+  "2": {
+   "spend": 2.00748,
+   "best": 81.25,
+   "run_id": "wu-hx-sol-f12",
+   "turn": 20,
+   "t": "2026-10-12T00:30:43Z"
+  }
+ }
+}

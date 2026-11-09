@@ -1,0 +1,1204 @@
+{
+ "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+ "best": {
+  "score": 85.76,
+  "proof": "lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t' := by\n  generalize eq : [] = Γ at der\n  have lc := der.wf.2.1\n  induction der <;> subst eq\n  case var => simp_all\n  any_goals solve_by_elim\n  case' app l _ _ _ => have := l.canonical_form_abs\n  case' tapp d _ _ => have := d.canonical_form_tabs\n  case' case d _ _ _ _ _ => have := d.canonical_form_sum\n  all_goals repeat' first | simp_all only [body_let, body_case, true_implies] | casesm* And .., Or .., Exists .., Value (.inl _), Value (.inr _) <;> subst_vars | cases lc\n  any_goals left; constructor; assumption\n  all_goals right; solve_by_elim only [*, Exists.intro, Red.appᵣ, Red.abs, Red.tabs, Red.let_body, Red.case_inl, Red.case_inr, Red.case]",
+  "tokens": 127,
+  "heartbeats": 6942,
+  "L": 68.87,
+  "H": 88.41,
+  "Z": 100.0,
+  "compat": {
+   "v4.33.0-rc2": true,
+   "v4.32.0": true,
+   "v4.31.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "f7d086952932",
+   "tokens": 53,
+   "heartbeats": 17812,
+   "ok": false,
+   "error": "93:12: `grind` failed case grind.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.app t₂).Va",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:14:32Z"
+  },
+  {
+   "sha": "be930f582d6d",
+   "tokens": 110,
+   "heartbeats": 178221,
+   "ok": false,
+   "error": "93:12: `grind` failed case grind.2.1.3.3.2.1.3.2.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.app t₂).LC [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC → t₁.Value ∨ Exists t₁.Red [prop] t₂.LC → t₂.Value ∨ Exists t₂.Red [prop] ¬(t₁.",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:15:19Z"
+  },
+  {
+   "sha": "8ac54463637b",
+   "tokens": 92,
+   "heartbeats": 819,
+   "ok": false,
+   "error": "86:74: unsolved goals case app.app … [hypotheses omitted] ⊢ (t₁✝.app t₂✝).Value ∨ ∃ t', t₁✝.app t₂✝ ⭢βᵛ t' ‖ ⊢ (t₁✝.tapp σ'✝).Value ∨ ∃ t', t₁✝.tapp σ'✝ ⭢βᵛ t' ‖ ⊢ (t₁✝.let' t₂✝).Value ∨ ∃ t', t₁✝.let' t₂✝ ⭢βᵛ t' ‖ ⊢ t₁✝.inl.Value ∨ ∃ t', t₁✝.inl ⭢βᵛ t' ‖ ⊢ t₁✝.inr.Value ∨ ∃ t', t₁✝.inr ⭢βᵛ t' ‖ ⊢ (",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:15:23Z"
+  },
+  {
+   "sha": "a3ab6aad244c",
+   "tokens": 314,
+   "heartbeats": 983,
+   "ok": false,
+   "error": "98:6: unsolved goals case app.inl.inl.abs … [hypotheses omitted] ⊢ ((Term.abs w✝¹ w✝).app t₂✝).Value ∨ ∃ t', (Term.abs w✝¹ w✝).app t₂✝ ⭢βᵛ t'",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:16:18Z"
+  },
+  {
+   "sha": "33991956a2ba",
+   "tokens": 308,
+   "heartbeats": 5794,
+   "ok": false,
+   "error": "119:102: Invalid configuration option `config` for `Lean.Meta.SolveByElim.SolveByElimConfig`",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:16:32Z"
+  },
+  {
+   "sha": "4f0929c404be",
+   "tokens": 202,
+   "heartbeats": 1057,
+   "ok": false,
+   "error": "95:12: no match",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:17:00Z"
+  },
+  {
+   "sha": "a54d8466743d",
+   "tokens": 204,
+   "heartbeats": 868104,
+   "ok": false,
+   "error": "99:77: Tactic `assumption` failed … [hypotheses omitted] ⊢ Typing [] t₂✝ (arrow ?m.849 ?m.850)",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:23:52Z"
+  },
+  {
+   "sha": "75763621b3e0",
+   "tokens": 138,
+   "heartbeats": 38545,
+   "ok": false,
+   "error": "99:12: `grind` failed case grind.1.1.1.4.8.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC [prop] t₂.LC [prop] t₁.Value [prop] t₂.Value [prop] ¬(t₁.app t₂).Value [prop] ∀ (a : Term Var), ¬t₁.a",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:24:26Z"
+  },
+  {
+   "sha": "1552a328fecb",
+   "tokens": 304,
+   "heartbeats": 5794,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:24:45Z",
+   "score": 71.94
+  },
+  {
+   "sha": "57f8ff804663",
+   "tokens": 135,
+   "heartbeats": 47931,
+   "ok": false,
+   "error": "99:12: `grind` failed case grind.1.1.1.4.8.8.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.arrow τ_1) [prop] Typing [] t₂ σ [prop] t₁.LC [prop] t₂.LC [prop] t₁.Value [prop] t₂.Value [prop] ¬(t₁.app t₂).Value [prop] ∀ (a : Term Var), ¬t₁.a",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:25:10Z"
+  },
+  {
+   "sha": "7de1ab9f35fe",
+   "tokens": 189,
+   "heartbeats": 2421,
+   "ok": false,
+   "error": "102:12: simp_all made no progress",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:25:48Z"
+  },
+  {
+   "sha": "388e7b61bde7",
+   "tokens": 190,
+   "heartbeats": 9024,
+   "ok": false,
+   "error": "105:87: Tactic `exfalso` failed: The metavariable below has already been assigned Note: This likely indicates an internal error in this tactic or a prior one … [hypotheses omitted] ⊢ w✝.inl.case t₂✝ t₃✝ ⭢βᵛ (Term.bvar Nat.zero).case t₂✝ t₃✝",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:26:07Z"
+  },
+  {
+   "sha": "54c469d5ad86",
+   "tokens": 205,
+   "heartbeats": 8563,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:26:19Z",
+   "score": 78.48
+  },
+  {
+   "sha": "edd98ac7363f",
+   "tokens": 180,
+   "heartbeats": 9872,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:26:47Z",
+   "score": 79.8
+  },
+  {
+   "sha": "a67293b5ed9b",
+   "tokens": 169,
+   "heartbeats": 9895,
+   "ok": false,
+   "error": "100:210: unexpected token '{'; expected command",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:26:57Z"
+  },
+  {
+   "sha": "c30db0f5babf",
+   "tokens": 162,
+   "heartbeats": 9545,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:27:40Z",
+   "score": 81.45
+  },
+  {
+   "sha": "c1bcb45c759a",
+   "tokens": 145,
+   "heartbeats": 9817,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:27:51Z",
+   "score": 82.69
+  },
+  {
+   "sha": "9946f47e5233",
+   "tokens": 134,
+   "heartbeats": 832294,
+   "ok": false,
+   "error": "86:74: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached Note: Use `set_option maxHeartbeats <num>` to set the limit. Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:34:40Z"
+  },
+  {
+   "sha": "70667599587b",
+   "tokens": 131,
+   "heartbeats": 827035,
+   "ok": false,
+   "error": "86:74: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached Note: Use `set_option maxHeartbeats <num>` to set the limit. Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:41:47Z"
+  },
+  {
+   "sha": "f765f03a471e",
+   "tokens": 116,
+   "heartbeats": 200161,
+   "ok": false,
+   "error": "95:12: `grind` failed case grind.1.1.7.9.1.3.10.10.10.7.10.1.1.1.3 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.case t₂ t₃).LC [prop] Typing [] t₁ (σ.sum τ_1) [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) δ [prop] ∀ x ∉ L, Typing [⟨x, Bi",
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:42:22Z"
+  },
+  {
+   "sha": "7d1a3ef78cff",
+   "tokens": 140,
+   "heartbeats": 17070,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:42:26Z"
+  },
+  {
+   "sha": "23fde22ecdf9",
+   "tokens": 140,
+   "heartbeats": 9135,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:43:02Z",
+   "score": 83.48
+  },
+  {
+   "sha": "41a358639d46",
+   "tokens": 142,
+   "heartbeats": 9193,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:43:12Z"
+  },
+  {
+   "sha": "a5150e01823f",
+   "tokens": 137,
+   "heartbeats": 8949,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:43:15Z",
+   "score": 83.82
+  },
+  {
+   "sha": "727ba7a62d5f",
+   "tokens": 129,
+   "heartbeats": 9302,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:43:40Z",
+   "score": 84.28
+  },
+  {
+   "sha": "af1e9f9ced32",
+   "tokens": 132,
+   "heartbeats": 8879,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:43:50Z"
+  },
+  {
+   "sha": "a4efcecac5d9",
+   "tokens": 124,
+   "heartbeats": 8460,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:44:06Z",
+   "score": 85.16
+  },
+  {
+   "sha": "bf659a047520",
+   "tokens": 127,
+   "heartbeats": 8644,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r1",
+   "t": "2026-10-11T20:44:17Z"
+  },
+  {
+   "sha": "91a27c9b1e0c",
+   "tokens": 122,
+   "heartbeats": 6431,
+   "ok": false,
+   "error": "96:49: failed",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:04:36Z"
+  },
+  {
+   "sha": "214dab1c7d30",
+   "tokens": 147,
+   "heartbeats": 7939,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:04:39Z"
+  },
+  {
+   "sha": "9465a2c1d62d",
+   "tokens": 124,
+   "heartbeats": 13312,
+   "ok": false,
+   "error": "96:49: failed",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:04:43Z"
+  },
+  {
+   "sha": "cebeca415f13",
+   "tokens": 137,
+   "heartbeats": 8726,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:05:49Z"
+  },
+  {
+   "sha": "efce6904d7ee",
+   "tokens": 128,
+   "heartbeats": 8596,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:05:52Z"
+  },
+  {
+   "sha": "b25d4f0ec018",
+   "tokens": 118,
+   "heartbeats": 11523,
+   "ok": false,
+   "error": "96:49: failed",
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:05:56Z"
+  },
+  {
+   "sha": "fe31185fd7ec",
+   "tokens": 126,
+   "heartbeats": 8692,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:06:29Z"
+  },
+  {
+   "sha": "a619faf1265f",
+   "tokens": 125,
+   "heartbeats": 9089,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:06:32Z"
+  },
+  {
+   "sha": "9eccf61f06e0",
+   "tokens": 127,
+   "heartbeats": 7803,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r2",
+   "t": "2026-10-11T21:06:35Z",
+   "score": 85.28
+  },
+  {
+   "sha": "de1cbf7e5100",
+   "tokens": 127,
+   "heartbeats": 11692,
+   "ok": false,
+   "error": "96:49: failed",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:28:17Z"
+  },
+  {
+   "sha": "ac9bd4a71681",
+   "tokens": 127,
+   "heartbeats": 11773,
+   "ok": false,
+   "error": "96:49: failed",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:28:21Z"
+  },
+  {
+   "sha": "1179440edd4e",
+   "tokens": 138,
+   "heartbeats": 4654,
+   "ok": false,
+   "error": "96:49: failed",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:28:27Z"
+  },
+  {
+   "sha": "ccb27efcf190",
+   "tokens": 132,
+   "heartbeats": 887,
+   "ok": false,
+   "error": "96:28: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:29:26Z"
+  },
+  {
+   "sha": "f5d709bae88d",
+   "tokens": 135,
+   "heartbeats": 882,
+   "ok": false,
+   "error": "97:28: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:29:44Z"
+  },
+  {
+   "sha": "cca4ff44ddfb",
+   "tokens": 126,
+   "heartbeats": 8647,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:29:48Z"
+  },
+  {
+   "sha": "b5a8c0eaff94",
+   "tokens": 138,
+   "heartbeats": 957,
+   "ok": false,
+   "error": "93:12: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:30:44Z"
+  },
+  {
+   "sha": "164ac57b85dd",
+   "tokens": 129,
+   "heartbeats": 4959,
+   "ok": false,
+   "error": "96:49: failed",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:30:48Z"
+  },
+  {
+   "sha": "33433d298e78",
+   "tokens": 125,
+   "heartbeats": 5662,
+   "ok": false,
+   "error": "96:49: failed",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:31:09Z"
+  },
+  {
+   "sha": "2f111092ed0a",
+   "tokens": 133,
+   "heartbeats": 695,
+   "ok": false,
+   "error": "95:12: `simp` made no progress",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:31:13Z"
+  },
+  {
+   "sha": "ef1acf945cff",
+   "tokens": 133,
+   "heartbeats": 8213,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:31:16Z"
+  },
+  {
+   "sha": "2b15c3f17149",
+   "tokens": 134,
+   "heartbeats": 7051,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:31:58Z"
+  },
+  {
+   "sha": "67e54ef8ba12",
+   "tokens": 134,
+   "heartbeats": 7113,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:32:02Z"
+  },
+  {
+   "sha": "0b962f25b500",
+   "tokens": 139,
+   "heartbeats": 7058,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:32:38Z"
+  },
+  {
+   "sha": "d43222ca92af",
+   "tokens": 144,
+   "heartbeats": 7856,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:32:42Z"
+  },
+  {
+   "sha": "81ae2094e845",
+   "tokens": 94,
+   "heartbeats": 30754,
+   "ok": false,
+   "error": "95:12: `grind` failed case grind.2.3.9.2.2.4.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] (t₁.case t₂ t₃).LC [prop] Typing [] t₁ (σ.sum τ_1) [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) δ [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty τ_1⟩] (t₃ ^",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:33:00Z"
+  },
+  {
+   "sha": "d12a6f53dde2",
+   "tokens": 129,
+   "heartbeats": 20728,
+   "ok": false,
+   "error": "96:12: `grind` failed case grind.1.1.1.1.1.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Typing [] t₁ (σ.sum τ_1) [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty σ⟩] (t₂ ^ᵗᵗ Term.fvar x) δ [prop] ∀ x ∉ L, Typing [⟨x, Binding.ty τ_1⟩] (t₃ ^ᵗᵗ Term.fvar x) δ [pro",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:33:05Z"
+  },
+  {
+   "sha": "628bb3600d82",
+   "tokens": 125,
+   "heartbeats": 7799,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:33:21Z",
+   "score": 85.45
+  },
+  {
+   "sha": "12ea0672f0e4",
+   "tokens": 129,
+   "heartbeats": 7552,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:33:32Z"
+  },
+  {
+   "sha": "233459751922",
+   "tokens": 130,
+   "heartbeats": 5232,
+   "ok": false,
+   "error": "96:2: Tactic failed on all goals: left; solve_by_elim (maxDepth := 2)",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:33:35Z"
+  },
+  {
+   "sha": "621f42a84636",
+   "tokens": 127,
+   "heartbeats": 7326,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:34:02Z",
+   "score": 85.55
+  },
+  {
+   "sha": "2afff0105d47",
+   "tokens": 130,
+   "heartbeats": 8775,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:34:13Z"
+  },
+  {
+   "sha": "ec0a38d72fd3",
+   "tokens": 136,
+   "heartbeats": 1386,
+   "ok": false,
+   "error": "97:2: Tactic failed on all goals: left; constructor; assumption",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:34:35Z"
+  },
+  {
+   "sha": "1d6043dd3e2a",
+   "tokens": 131,
+   "heartbeats": 1288,
+   "ok": false,
+   "error": "96:2: Tactic failed on all goals: left; constructor; assumption",
+   "run_id": "wu-hx-sol-r8",
+   "t": "2026-10-11T23:34:39Z"
+  },
+  {
+   "sha": "b30c52c4b912",
+   "tokens": 127,
+   "heartbeats": 11292,
+   "ok": false,
+   "error": "97:19: failed",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:54:01Z"
+  },
+  {
+   "sha": "00d10eb594f0",
+   "tokens": 127,
+   "heartbeats": 11210,
+   "ok": false,
+   "error": "97:19: failed",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:54:04Z"
+  },
+  {
+   "sha": "45cbfca7731f",
+   "tokens": 133,
+   "heartbeats": 695,
+   "ok": false,
+   "error": "95:12: `simp` made no progress",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:54:58Z"
+  },
+  {
+   "sha": "0db8459341f7",
+   "tokens": 133,
+   "heartbeats": 695,
+   "ok": false,
+   "error": "95:12: `simp` made no progress",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:55:01Z"
+  },
+  {
+   "sha": "4a6d41c446d3",
+   "tokens": 130,
+   "heartbeats": 1113,
+   "ok": false,
+   "error": "96:2: Tactic failed on all goals: left; constructor; assumption",
+   "run_id": "wu-hx-sol-r9",
+   "t": "2026-10-11T23:55:04Z"
+  },
+  {
+   "sha": "fab6fcf83510",
+   "tokens": 127,
+   "heartbeats": 11507,
+   "ok": false,
+   "error": "98:19: failed",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:44:49Z"
+  },
+  {
+   "sha": "bed5a4c35a3c",
+   "tokens": 127,
+   "heartbeats": 11569,
+   "ok": false,
+   "error": "97:19: failed",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:44:53Z"
+  },
+  {
+   "sha": "eb4f12ce48a4",
+   "tokens": 132,
+   "heartbeats": 879,
+   "ok": false,
+   "error": "96:28: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:45:25Z"
+  },
+  {
+   "sha": "5e4f28be5762",
+   "tokens": 131,
+   "heartbeats": 879,
+   "ok": false,
+   "error": "96:28: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:45:28Z"
+  },
+  {
+   "sha": "eeab5a817a1a",
+   "tokens": 135,
+   "heartbeats": 874,
+   "ok": false,
+   "error": "97:28: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:45:38Z"
+  },
+  {
+   "sha": "b98574e1cb8b",
+   "tokens": 125,
+   "heartbeats": 2328,
+   "ok": false,
+   "error": "96:2: Tactic failed on all goals: left; constructor; assumption",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:45:59Z"
+  },
+  {
+   "sha": "f0a4fdb614f8",
+   "tokens": 129,
+   "heartbeats": 1635,
+   "ok": false,
+   "error": "96:2: Tactic failed on all goals: left; constructor; assumption",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:46:02Z"
+  },
+  {
+   "sha": "55288460bf00",
+   "tokens": 126,
+   "heartbeats": 8170,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:46:06Z"
+  },
+  {
+   "sha": "eb4e2c7f2b0f",
+   "tokens": 125,
+   "heartbeats": 7297,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:46:40Z",
+   "score": 85.73
+  },
+  {
+   "sha": "215c6b1e3379",
+   "tokens": 130,
+   "heartbeats": null,
+   "ok": false,
+   "error": "95:29: unknown tactic",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:47:05Z"
+  },
+  {
+   "sha": "b7b134471d03",
+   "tokens": 132,
+   "heartbeats": 6588,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:47:30Z"
+  },
+  {
+   "sha": "e05e664ea956",
+   "tokens": 127,
+   "heartbeats": 6942,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:47:33Z",
+   "score": 85.76
+  },
+  {
+   "sha": "1a97190144e1",
+   "tokens": 133,
+   "heartbeats": 6676,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:47:43Z"
+  },
+  {
+   "sha": "fcfff02b37d5",
+   "tokens": 131,
+   "heartbeats": 7084,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:48:25Z"
+  },
+  {
+   "sha": "3e9519108b16",
+   "tokens": 136,
+   "heartbeats": 7890,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:48:28Z"
+  },
+  {
+   "sha": "2b1766f012e0",
+   "tokens": 132,
+   "heartbeats": 11960,
+   "ok": false,
+   "error": "97:19: failed",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:48:32Z"
+  },
+  {
+   "sha": "edb8b47d300c",
+   "tokens": 113,
+   "heartbeats": 25118,
+   "ok": true,
+   "error": null,
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:48:57Z"
+  },
+  {
+   "sha": "1e1badf901a5",
+   "tokens": 105,
+   "heartbeats": 35931,
+   "ok": false,
+   "error": "96:12: Tactic `aesop` failed, made no progress Initial goal: case inl.inl.inl … [hypotheses omitted] ⊢ t₁✝.inl.Value ∨ ∃ t', t₁✝.inl ⭢βᵛ t'",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:49:01Z"
+  },
+  {
+   "sha": "69540488f1ed",
+   "tokens": 119,
+   "heartbeats": null,
+   "ok": false,
+   "error": "97:40: unexpected token ']'; expected identifier",
+   "run_id": "wu-hx-sol-r13",
+   "t": "2026-10-12T00:49:05Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T20:12:47Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:02:04Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r8",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:26:30Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r9",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T23:52:05Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T00:43:58Z"
+  },
+  {
+   "run_id": "wu-hx-sol-r14",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-12T01:15:33Z"
+  }
+ ],
+ "api_spend": 2.515989,
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 9,
+    "d_score": 38.61,
+    "d_tokens": -104,
+    "d_heartbeats": 5794,
+    "diff": "+lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t' := by\n+  generalize eq : [] = Γ at der\n+  have lc := der.wf.2.1\n+  induction der <;> subst eq\n+  case var => simp_all\n+  case abs => exact Or.inl (.abs lc)\n+  case tabs => exact Or.inl (.tabs lc)\n+  case sub => grind\n+  case' app l r ih₁ ih₂ =>\n+    cases lc\n+    rcases ih₁ rfl (by assumption) with v | ⟨_, h⟩ <;>\n+      rcases ih₂ rfl (by assumption) with v' | ⟨_, h'⟩\n+    case' inl.inl =>\n+      obtain ⟨_, _, rfl⟩ := l.canonical_form_abs v\n+      cases v\n+  case' tapp d s ih =>\n+    cases lc\n+    rcases ih rfl (by assumption) with v | ⟨_, h⟩\n+    case' inl =>\n+      obtain ⟨_, _, rfl⟩ := d.canonical_form_tabs v\n+      c"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 13,
+    "d_score": 6.54,
+    "d_tokens": -99,
+    "d_heartbeats": 2769,
+    "diff": "-  case' app l r ih₁ ih₂ =>\n-    cases lc\n-    rcases ih₁ rfl (by assumption) with v | ⟨_, h⟩ <;>\n-      rcases ih₂ rfl (by assumption) with v' | ⟨_, h'⟩\n-    case' inl.inl =>\n-      obtain ⟨_, _, rfl⟩ := l.canonical_form_abs v\n-      cases v\n-  case' tapp d s ih =>\n-    cases lc\n-    rcases ih rfl (by assumption) with v | ⟨_, h⟩\n-    case' inl =>\n-      obtain ⟨_, _, rfl⟩ := d.canonical_form_tabs v\n-      cases v\n-  case' let' d _ ih _ =>\n-    obtain ⟨_, _⟩ := body_let.mp lc\n-    rcases ih rfl (by assumption) with v | ⟨_, h⟩\n-  case' inl d _ ih | inr d _ ih =>\n-    cases lc\n-    rcases ih rfl (by assumption) with v | ⟨_, h⟩\n-  case' case d _ _ ih _ _ =>\n-    obtain ⟨_, _, _⟩ := body_case.mp"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 14,
+    "d_score": 1.32,
+    "d_tokens": -25,
+    "d_heartbeats": 1309,
+    "diff": "-  all_goals simp_all only [body_let, body_case]\n-  all_goals try casesm* _ ∧ _\n-  all_goals try cases lc\n-  all_goals simp_all only [true_implies]\n-  all_goals try casesm* _ ∨ _, ∃ _, _\n-  all_goals try simp_all only [true_implies]\n-  all_goals try casesm* _ ∨ _, ∃ _, _\n+  all_goals repeat' first | simp_all only [body_let, body_case, true_implies] | casesm* _ ∧ _, _ ∨ _, ∃ _, _ | cases lc"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 16,
+    "d_score": 1.65,
+    "d_tokens": -18,
+    "d_heartbeats": -327,
+    "diff": "-  all_goals first | solve_by_elim [Or.inl, Value.inl, Value.inr] | right; exact ⟨_, by solve_by_elim (maxDepth := 8) [Value.lc, Red.appₗ, Red.appᵣ, Red.abs, Red.tabs, Red.tapp, Red.let_bind, Red.let_body, Red.inl, Red.inr, Red.case, Red.case_inl, Red.case_inr]⟩\n+  all_goals first | solve_by_elim [Or.inl] | right; solve_by_elim (maxDepth := 8) [Exists.intro, Value.lc, Red.appᵣ, Red.abs, Red.tabs, Red.let_body, Red.case_inl, Red.case_inr, Red.case]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 17,
+    "d_score": 1.24,
+    "d_tokens": -17,
+    "d_heartbeats": 272,
+    "diff": "-  case abs => exact Or.inl (.abs lc)\n-  case tabs => exact Or.inl (.tabs lc)\n-  case sub => grind\n+  any_goals solve_by_elim [Or.inl]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 22,
+    "d_score": 0.79,
+    "d_tokens": -5,
+    "d_heartbeats": -682,
+    "diff": "-  all_goals repeat' first | simp_all only [body_let, body_case, true_implies] | casesm* _ ∧ _, _ ∨ _, ∃ _, _ | cases lc\n-  all_goals subst_vars\n-  all_goals try casesm* Value (Term.inl _), Value (Term.inr _)\n-  all_goals first | solve_by_elim [Or.inl] | right; solve_by_elim (maxDepth := 8) [Exists.intro, Value.lc, Red.appᵣ, Red.abs, Red.tabs, Red.let_body, Red.case_inl, Red.case_inr, Red.case]\n+  all_goals repeat' first | simp_all only [body_let, body_case, true_implies] | casesm* _ ∧ _, _ ∨ _, Exists _ | cases lc\n+  all_goals try casesm* Value (.inl _), Value (.inr _)\n+  all_goals first | left; solve_by_elim | right; solve_by_elim (maxDepth := 8) [Exists.intro, Value.lc, Red.appᵣ, Red.abs,"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 24,
+    "d_score": 0.34,
+    "d_tokens": -3,
+    "d_heartbeats": -186,
+    "diff": "+  all_goals subst_vars\n-  all_goals first | left; solve_by_elim | right; solve_by_elim (maxDepth := 8) [Exists.intro, Value.lc, Red.appᵣ, Red.abs, Red.tabs, Red.let_body, Red.case_inl, Red.case_inr, Red.case]\n+  all_goals first | left; solve_by_elim | right; solve_by_elim [Exists.intro, Value.lc, Red.appᵣ, Red.abs, Red.tabs, Red.let_body, Red.case_inl, Red.case_inr, Red.case]"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 25,
+    "d_score": 0.46,
+    "d_tokens": -8,
+    "d_heartbeats": 353,
+    "diff": "-  case' app l _ _ _ => have canon := l.canonical_form_abs\n-  case' tapp d _ _ => have canon := d.canonical_form_tabs\n-  case' case d _ _ _ _ _ => have canon := d.canonical_form_sum\n-  all_goals repeat' first | simp_all only [body_let, body_case, true_implies] | casesm* _ ∧ _, _ ∨ _, Exists _ | cases lc\n-  all_goals subst_vars\n-  all_goals try casesm* Value (.inl _), Value (.inr _)\n+  case' app l _ _ _ => have := l.canonical_form_abs\n+  case' tapp d _ _ => have := d.canonical_form_tabs\n+  case' case d _ _ _ _ _ => have := d.canonical_form_sum\n+  all_goals repeat' first | simp_all only [body_let, body_case, true_implies] | casesm* _ ∧ _, _ ∨ _, Exists _, Value (.inl _), Value (.inr _) | cases"
+   },
+   {
+    "run_id": "wu-hx-sol-r1",
+    "check": 27,
+    "d_score": 0.88,
+    "d_tokens": -5,
+    "d_heartbeats": -842,
+    "diff": "-  any_goals solve_by_elim [Or.inl]\n+  any_goals solve_by_elim\n-  all_goals first | left; solve_by_elim | right; solve_by_elim [Exists.intro, Value.lc, Red.appᵣ, Red.abs, Red.tabs, Red.let_body, Red.case_inl, Red.case_inr, Red.case]\n+  all_goals first | left; solve_by_elim | right; solve_by_elim [Exists.intro, Red.appᵣ, Red.abs, Red.tabs, Red.let_body, Red.case_inl, Red.case_inr, Red.case]"
+   },
+   {
+    "run_id": "wu-hx-sol-r2",
+    "check": 9,
+    "d_score": 0.12,
+    "d_tokens": 3,
+    "d_heartbeats": -657,
+    "diff": "-  all_goals first | left; solve_by_elim | right; solve_by_elim [Exists.intro, Red.appᵣ, Red.abs, Red.tabs, Red.let_body, Red.case_inl, Red.case_inr, Red.case]\n+  all_goals first | left; solve_by_elim | right; solve_by_elim only [*, Exists.intro, Red.appᵣ, Red.abs, Red.tabs, Red.let_body, Red.case_inl, Red.case_inr, Red.case]"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 18,
+    "d_score": 0.17,
+    "d_tokens": -2,
+    "d_heartbeats": -4,
+    "diff": "-  all_goals first | left; solve_by_elim | right; solve_by_elim only [*, Exists.intro, Red.appᵣ, Red.abs, Red.tabs, Red.let_body, Red.case_inl, Red.case_inr, Red.case]\n+  any_goals left; solve_by_elim\n+  all_goals right; solve_by_elim only [*, Exists.intro, Red.appᵣ, Red.abs, Red.tabs, Red.let_body, Red.case_inl, Red.case_inr, Red.case]"
+   },
+   {
+    "run_id": "wu-hx-sol-r8",
+    "check": 21,
+    "d_score": 0.1,
+    "d_tokens": 2,
+    "d_heartbeats": -473,
+    "diff": "-  any_goals left; solve_by_elim\n+  any_goals left; constructor; assumption"
+   },
+   {
+    "run_id": "wu-hx-sol-r13",
+    "check": 9,
+    "d_score": 0.18,
+    "d_tokens": -2,
+    "d_heartbeats": -29,
+    "diff": "-  all_goals repeat' first | simp_all only [body_let, body_case, true_implies] | casesm* _ ∧ _, _ ∨ _, Exists _, Value (.inl _), Value (.inr _) | cases lc\n+  all_goals repeat' first | simp_all only [body_let, body_case, true_implies] | casesm* And .., Or .., Exists .., Value (.inl _), Value (.inr _) | cases lc"
+   },
+   {
+    "run_id": "wu-hx-sol-r13",
+    "check": 12,
+    "d_score": 0.03,
+    "d_tokens": 2,
+    "d_heartbeats": -355,
+    "diff": "-  all_goals repeat' first | simp_all only [body_let, body_case, true_implies] | casesm* And .., Or .., Exists .., Value (.inl _), Value (.inr _) | cases lc\n+  all_goals repeat' first | simp_all only [body_let, body_case, true_implies] | casesm* And .., Or .., Exists .., Value (.inl _), Value (.inr _) <;> subst_vars | cases lc"
+   }
+  ]
+ },
+ "profile_cache": {
+  "a4efcecac5d9": {
+   "ok": true,
+   "total": 8460,
+   "floor": 50,
+   "reference": 59873,
+   "max_heartbeat_score": 33.31,
+   "blocks": [
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "all_goals repeat' first | simp_all only [body_let, body_case, true_implies] | casesm* _ ∧ _, _ ∨ _, ",
+     "heartbeats": 4071
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "all_goals first | left; solve_by_elim | right; solve_by_elim [Exists.intro, Red.appᵣ, Red.abs, Red.t",
+     "heartbeats": 3688
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "any_goals solve_by_elim",
+     "heartbeats": 437
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "induction der <;> subst eq",
+     "heartbeats": 154
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "case var => simp_all",
+     "heartbeats": 19
+    },
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "have lc := der.wf.2.1",
+     "heartbeats": 10
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "case' app l _ _ _ => have := l.canonical_form_abs",
+     "heartbeats": 9
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "case' case d _ _ _ _ _ => have := d.canonical_form_sum",
+     "heartbeats": 8
+    },
+    {
+     "lines": "2-2",
+     "depth_indent": 2,
+     "text": "generalize eq : [] = Γ at der",
+     "heartbeats": 7
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "case' tapp d _ _ => have := d.canonical_form_tabs",
+     "heartbeats": 7
+    }
+   ],
+   "points_left_heartbeats": 4.68,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "9eccf61f06e0": {
+   "ok": true,
+   "total": 7803,
+   "floor": 50,
+   "reference": 59873,
+   "max_heartbeat_score": 33.31,
+   "blocks": [
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "all_goals repeat' first | simp_all only [body_let, body_case, true_implies] | casesm* _ ∧ _, _ ∨ _, ",
+     "heartbeats": 4071
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "all_goals first | left; solve_by_elim | right; solve_by_elim only [*, Exists.intro, Red.appᵣ, Red.ab",
+     "heartbeats": 3031
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "any_goals solve_by_elim",
+     "heartbeats": 437
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "induction der <;> subst eq",
+     "heartbeats": 154
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "case var => simp_all",
+     "heartbeats": 19
+    },
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "have lc := der.wf.2.1",
+     "heartbeats": 10
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "case' app l _ _ _ => have := l.canonical_form_abs",
+     "heartbeats": 9
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "case' case d _ _ _ _ _ => have := d.canonical_form_sum",
+     "heartbeats": 8
+    },
+    {
+     "lines": "2-2",
+     "depth_indent": 2,
+     "text": "generalize eq : [] = Γ at der",
+     "heartbeats": 7
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "case' tapp d _ _ => have := d.canonical_form_tabs",
+     "heartbeats": 7
+    }
+   ],
+   "points_left_heartbeats": 4.32,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "621f42a84636": {
+   "ok": true,
+   "total": 7326,
+   "floor": 50,
+   "reference": 59873,
+   "max_heartbeat_score": 33.31,
+   "blocks": [
+    {
+     "lines": "10-10",
+     "depth_indent": 2,
+     "text": "all_goals repeat' first | simp_all only [body_let, body_case, true_implies] | casesm* _ ∧ _, _ ∨ _, ",
+     "heartbeats": 4071
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "all_goals right; solve_by_elim only [*, Exists.intro, Red.appᵣ, Red.abs, Red.tabs, Red.let_body, Red",
+     "heartbeats": 2484
+    },
+    {
+     "lines": "6-6",
+     "depth_indent": 2,
+     "text": "any_goals solve_by_elim",
+     "heartbeats": 437
+    },
+    {
+     "lines": "4-4",
+     "depth_indent": 2,
+     "text": "induction der <;> subst eq",
+     "heartbeats": 154
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "any_goals left; constructor; assumption",
+     "heartbeats": 70
+    },
+    {
+     "lines": "5-5",
+     "depth_indent": 2,
+     "text": "case var => simp_all",
+     "heartbeats": 19
+    },
+    {
+     "lines": "3-3",
+     "depth_indent": 2,
+     "text": "have lc := der.wf.2.1",
+     "heartbeats": 10
+    },
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "case' app l _ _ _ => have := l.canonical_form_abs",
+     "heartbeats": 9
+    },
+    {
+     "lines": "9-9",
+     "depth_indent": 2,
+     "text": "case' case d _ _ _ _ _ => have := d.canonical_form_sum",
+     "heartbeats": 8
+    },
+    {
+     "lines": "2-2",
+     "depth_indent": 2,
+     "text": "generalize eq : [] = Γ at der",
+     "heartbeats": 7
+    },
+    {
+     "lines": "8-8",
+     "depth_indent": 2,
+     "text": "case' tapp d _ _ => have := d.canonical_form_tabs",
+     "heartbeats": 7
+    }
+   ],
+   "points_left_heartbeats": 4.05,
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "hb_floor": 50,
+ "fresh_lineages": [
+  {
+   "run_id": "wu-hx-sol-f3",
+   "spend": 0.087403,
+   "score": 72.76,
+   "adopted": false,
+   "restructure": false,
+   "t": "2026-10-11T21:30:30Z"
+  },
+  {
+   "run_id": "wu-hx-sol-f4",
+   "spend": 0.614243,
+   "score": 73.54,
+   "adopted": false,
+   "restructure": false,
+   "t": "2026-10-11T21:59:51Z"
+  },
+  {
+   "run_id": "wu-hx-sol-f12",
+   "spend": 0.602798,
+   "score": 83.76,
+   "adopted": false,
+   "restructure": true,
+   "t": "2026-10-12T00:35:55Z"
+  }
+ ],
+ "budget_milestones": {
+  "2": {
+   "spend": 2.00748,
+   "best": 81.25,
+   "run_id": "wu-hx-sol-f12",
+   "turn": 20,
+   "t": "2026-10-12T00:30:43Z"
+  }
+ }
+}

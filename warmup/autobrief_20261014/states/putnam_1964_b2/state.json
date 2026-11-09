@@ -1,0 +1,2234 @@
+{
+ "problem": "putnam_1964_b2",
+ "best": {
+  "score": 98.89,
+  "proof": "theorem putnam_1964_b2\n(S : Type*) [Fintype S] [Nonempty S]\n(P : Finset (Set S))\n(hPP : ∀ T ∈ P, ∀ U ∈ P, T ∩ U ≠ ∅)\n(hPS : ¬∃ T : Set S, T ∉ P ∧ (∀ U ∈ P, T ∩ U ≠ ∅))\n: (P.card = 2 ^ (Fintype.card S - 1)) := by\n  classical\n  suffices Pᶜ.card = P.card by\n    rw [Finset.card_compl, Fintype.card_set, ← mul_pow_sub_one NeZero.out] at this\n    omega\n  apply Finset.card_equiv compl_involutive.toPerm\n  simp\n  grind",
+  "tokens": 25,
+  "heartbeats": 2575,
+  "L": 98.57,
+  "H": 98.09,
+  "Z": 100.0,
+  "compat": {
+   "v4.26.0": true,
+   "v4.25.0": true
+  }
+ },
+ "attempts": [
+  {
+   "sha": "6683edf92011",
+   "tokens": 74,
+   "heartbeats": 2530,
+   "ok": false,
+   "error": "26:43: Unknown constant `OrderIso.compl.toEquiv`",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:33:03Z"
+  },
+  {
+   "sha": "1640c8d8570b",
+   "tokens": 87,
+   "heartbeats": 2719,
+   "ok": false,
+   "error": "26:43: Unknown constant `OrderIso.compl.toEquiv`",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:33:07Z"
+  },
+  {
+   "sha": "f38c556ff44d",
+   "tokens": 78,
+   "heartbeats": 2564,
+   "ok": false,
+   "error": "25:47: unsolved goals S : Type u_1 inst✝¹ : Fintype S inst✝ : Nonempty S P : Finset (Set S) hPP : ∀ T ∈ P, ∀ U ∈ P, T ∩ U ≠ ∅ hPS : ¬∃ T ∉ P, ∀ U ∈ P, T ∩ U ≠ ∅ hm : ∀ (A : Set S), Aᶜ ∈ P ↔ A ∉ P ⊢ ∀ (i : Set S), i ∈ P ↔ (OrderIso.compl (Set S)) i ∉ P",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:33:24Z"
+  },
+  {
+   "sha": "cfb805deb5c5",
+   "tokens": 80,
+   "heartbeats": 3638,
+   "ok": false,
+   "error": "25:47: unsolved goals S : Type u_1 inst✝¹ : Fintype S inst✝ : Nonempty S P : Finset (Set S) hPP : ∀ T ∈ P, ∀ U ∈ P, T ∩ U ≠ ∅ hPS : ¬∃ T ∉ P, ∀ U ∈ P, T ∩ U ≠ ∅ hm : ∀ (A : Set S), Aᶜ ∈ P ↔ A ∉ P ⊢ ∀ (i : Set S), i ∈ P ↔ OrderDual.toDual i ∈ P",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:33:38Z"
+  },
+  {
+   "sha": "9cc1386c84f9",
+   "tokens": 74,
+   "heartbeats": 2510,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:33:42Z",
+   "score": 97.97
+  },
+  {
+   "sha": "49036eb2c6a9",
+   "tokens": 71,
+   "heartbeats": 2502,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:33:58Z",
+   "score": 98.03
+  },
+  {
+   "sha": "ea7d063d7e1b",
+   "tokens": 60,
+   "heartbeats": 2584,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:34:51Z",
+   "score": 98.22
+  },
+  {
+   "sha": "aad7483ee1a7",
+   "tokens": 55,
+   "heartbeats": 2547,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:35:08Z",
+   "score": 98.32
+  },
+  {
+   "sha": "4a469dc84d1b",
+   "tokens": 48,
+   "heartbeats": 2066,
+   "ok": false,
+   "error": "29:4: Invalid rewrite argument: The pattern to be substituted is a metavariable (`?m.91`) in this equality ?m.91 = ?m.91 - 1 + 1",
+   "run_id": "wuclean-hx-solab1-r1",
+   "t": "2026-10-14T05:35:16Z"
+  },
+  {
+   "sha": "8e371b0f6560",
+   "tokens": 43,
+   "heartbeats": 1705,
+   "ok": false,
+   "error": "26:53: Unknown constant `Function.Involutive.toPerm_apply`",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:08:05Z"
+  },
+  {
+   "sha": "4ced4cf872c7",
+   "tokens": 39,
+   "heartbeats": 2586,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:08:09Z",
+   "score": 98.62
+  },
+  {
+   "sha": "b8753f229db3",
+   "tokens": 37,
+   "heartbeats": 2658,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:08:33Z",
+   "score": 98.64
+  },
+  {
+   "sha": "820f750fdf55",
+   "tokens": 39,
+   "heartbeats": 2021,
+   "ok": false,
+   "error": "26:4: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ P) = ((Involutive.toPerm compl ⋯) i ∉ Pᶜ) [prop] ((Involutive.",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:08:40Z"
+  },
+  {
+   "sha": "b884af75407b",
+   "tokens": 36,
+   "heartbeats": 1113,
+   "ok": false,
+   "error": "26:4: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ P) = ((Involutive.toPerm compl ⋯) i ∉ Pᶜ) [prop] i ∈ P → i ∈ P",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:08:44Z"
+  },
+  {
+   "sha": "1c44b316f2d2",
+   "tokens": 37,
+   "heartbeats": 2233,
+   "ok": false,
+   "error": "30:2: omega could not prove the goal: a possible counterexample may satisfy the constraints b ≥ 0 a - b ≥ 1 where a := ↑2 ^ (Fintype.card S - 1) b := ↑2 ^ (Fintype.card S - Nat.succ 0)",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:09:54Z"
+  },
+  {
+   "sha": "afd5dc301535",
+   "tokens": 37,
+   "heartbeats": 2232,
+   "ok": false,
+   "error": "30:2: omega could not prove the goal: a possible counterexample may satisfy the constraints b ≥ 0 a - b ≥ 1 where a := ↑2 ^ (Fintype.card S - 1) b := ↑2 ^ (Fintype.card S).pred",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:09:57Z"
+  },
+  {
+   "sha": "27964732ac19",
+   "tokens": 41,
+   "heartbeats": 2115,
+   "ok": false,
+   "error": "26:4: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ P) = ((Involutive.toPerm compl ⋯) i ∉ Pᶜ) [prop] ⇑(Involutive.",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:10:01Z"
+  },
+  {
+   "sha": "d27210c4a82d",
+   "tokens": 43,
+   "heartbeats": 2580,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:10:42Z"
+  },
+  {
+   "sha": "a1ac27d88860",
+   "tokens": 48,
+   "heartbeats": 2661,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:10:46Z"
+  },
+  {
+   "sha": "8c7e27d162d7",
+   "tokens": 41,
+   "heartbeats": 1128,
+   "ok": false,
+   "error": "24:32: unsolved goals S : Type u_1 inst✝¹ : Fintype S inst✝ : Nonempty S P : Finset (Set S) hPP : ∀ T ∈ P, ∀ U ∈ P, T ∩ U ≠ ∅ hPS : ¬∃ T ∉ P, ∀ U ∈ P, T ∩ U ≠ ∅ ⊢ ∀ (i : Set S), i ∈ P ↔ iᶜ ∉ P",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:10:49Z"
+  },
+  {
+   "sha": "37feaf846782",
+   "tokens": 37,
+   "heartbeats": 5871,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:11:03Z"
+  },
+  {
+   "sha": "9ceffba68e1d",
+   "tokens": 37,
+   "heartbeats": 7590,
+   "ok": false,
+   "error": "24:32: unsolved goals case mp.h … [hypotheses omitted] ⊢ False ‖ ⊢ i ∈ P",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:11:07Z"
+  },
+  {
+   "sha": "612b0d2c8b90",
+   "tokens": 71,
+   "heartbeats": 2173,
+   "ok": false,
+   "error": "29:11: invalid `grind` theorem, failed to find an usable pattern using different modifiers",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:11:50Z"
+  },
+  {
+   "sha": "959b82e305bc",
+   "tokens": 70,
+   "heartbeats": 2556,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:12:05Z"
+  },
+  {
+   "sha": "60ef3a8f86fc",
+   "tokens": 86,
+   "heartbeats": 2206,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:12:09Z"
+  },
+  {
+   "sha": "f2b26bfefc7c",
+   "tokens": 33,
+   "heartbeats": 2515,
+   "ok": false,
+   "error": "30:2: omega could not prove the goal: a possible counterexample may satisfy the constraints b ≤ -1 a ≤ -1 -1 ≤ 2*a - b ≤ 0 where a := ↑(2 ^ Fintype.card S) / 2 b := ↑2 ^ Fintype.card S",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:12:47Z"
+  },
+  {
+   "sha": "b28901902f38",
+   "tokens": 34,
+   "heartbeats": 2460,
+   "ok": false,
+   "error": "30:2: omega could not prove the goal: a possible counterexample may satisfy the constraints b ≤ -1 a ≤ -1 -1 ≤ 2*a - b ≤ 0 where a := ↑(2 ^ Fintype.card S) / 2 b := ↑2 ^ Fintype.card S",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:12:51Z"
+  },
+  {
+   "sha": "47d472074ddf",
+   "tokens": 42,
+   "heartbeats": 2753,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:13:46Z"
+  },
+  {
+   "sha": "240f26639234",
+   "tokens": 39,
+   "heartbeats": 2632,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:13:49Z"
+  },
+  {
+   "sha": "3015459eb30a",
+   "tokens": 36,
+   "heartbeats": 2661,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:14:03Z"
+  },
+  {
+   "sha": "472303d0f669",
+   "tokens": 33,
+   "heartbeats": 2556,
+   "ok": false,
+   "error": "31:2: omega could not prove the goal: a possible counterexample may satisfy the constraints c ≤ -1 b ≤ -1 -1 ≤ 2*b - c ≤ 0 a ≥ 0 where a := ↑(Fintype.card (Set S)) b := ↑(2 ^ Fintype.card S) / 2 c := ↑2 ^ Fintype.card S",
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:14:11Z"
+  },
+  {
+   "sha": "a601a48205c5",
+   "tokens": 38,
+   "heartbeats": 2658,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:15:00Z"
+  },
+  {
+   "sha": "1eebd00cd366",
+   "tokens": 38,
+   "heartbeats": 2657,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r2",
+   "t": "2026-10-14T06:15:04Z"
+  },
+  {
+   "sha": "0ca09e001dbc",
+   "tokens": 32,
+   "heartbeats": 2676,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:35:52Z",
+   "score": 98.73
+  },
+  {
+   "sha": "33ddb57d487e",
+   "tokens": 32,
+   "heartbeats": 2673,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:36:00Z"
+  },
+  {
+   "sha": "0558cf5cb0a8",
+   "tokens": 31,
+   "heartbeats": 576,
+   "ok": false,
+   "error": "23:21: failed to synthesize HasCompl (Finset (Set S)) Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:36:19Z"
+  },
+  {
+   "sha": "be76b1acbccd",
+   "tokens": 32,
+   "heartbeats": 3462,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:36:23Z"
+  },
+  {
+   "sha": "4be91f339101",
+   "tokens": 33,
+   "heartbeats": 2647,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:36:26Z"
+  },
+  {
+   "sha": "d42f35059761",
+   "tokens": 31,
+   "heartbeats": 2672,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:36:44Z",
+   "score": 98.75
+  },
+  {
+   "sha": "15ffb1a15d8f",
+   "tokens": 31,
+   "heartbeats": 2717,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:36:51Z"
+  },
+  {
+   "sha": "5d84cba4df4c",
+   "tokens": 31,
+   "heartbeats": 2669,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:36:54Z"
+  },
+  {
+   "sha": "ef32aa443dd0",
+   "tokens": 28,
+   "heartbeats": 2665,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:37:15Z",
+   "score": 98.81
+  },
+  {
+   "sha": "9ee741897eab",
+   "tokens": 28,
+   "heartbeats": 2668,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:37:21Z"
+  },
+  {
+   "sha": "1576ba0896fe",
+   "tokens": 28,
+   "heartbeats": 2662,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:37:25Z"
+  },
+  {
+   "sha": "24e016437e33",
+   "tokens": 61,
+   "heartbeats": 2563,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:38:09Z"
+  },
+  {
+   "sha": "41bd02d20a01",
+   "tokens": 28,
+   "heartbeats": 1079,
+   "ok": false,
+   "error": "27:4: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ P) = (iᶜ ∉ Pᶜ) [prop] i ∈ P → i ∈ P → ¬i ∩ i = ∅ [prop] (∃ U, ",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:38:43Z"
+  },
+  {
+   "sha": "6fc537b40242",
+   "tokens": 29,
+   "heartbeats": 794,
+   "ok": false,
+   "error": "26:4: `simp` made no progress",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:38:50Z"
+  },
+  {
+   "sha": "07eb9ed663d6",
+   "tokens": 28,
+   "heartbeats": 5878,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:38:53Z"
+  },
+  {
+   "sha": "8f1ed63dacc5",
+   "tokens": 25,
+   "heartbeats": null,
+   "ok": false,
+   "error": "28:63: unexpected identifier; expected ']'",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:39:27Z"
+  },
+  {
+   "sha": "fe7fb530a31f",
+   "tokens": 24,
+   "heartbeats": null,
+   "ok": false,
+   "error": "28:61: unexpected identifier; expected ']'",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:39:31Z"
+  },
+  {
+   "sha": "e85e01b5368f",
+   "tokens": 26,
+   "heartbeats": null,
+   "ok": false,
+   "error": "28:68: unexpected identifier; expected ']'",
+   "run_id": "wuclean-hx-solab1-r3",
+   "t": "2026-10-14T06:39:34Z"
+  },
+  {
+   "sha": "f0f8f6fca0b2",
+   "tokens": 33,
+   "heartbeats": 1220,
+   "ok": false,
+   "error": "27:4: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ P) = (iᶜ ∈ P) [prop] iᶜ ∈ P → i ∈ P → ¬iᶜ ∩ i = ∅ [prop] iᶜ ∈ P ",
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:47:41Z"
+  },
+  {
+   "sha": "cabe92df4b7e",
+   "tokens": 30,
+   "heartbeats": 1240,
+   "ok": false,
+   "error": "27:4: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ P) = (iᶜ ∈ P) [prop] iᶜ ∈ P → i ∈ P → ¬iᶜ ∩ i = ∅ [prop] iᶜ ∈ ",
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:47:45Z"
+  },
+  {
+   "sha": "f6653f502822",
+   "tokens": 30,
+   "heartbeats": 2712,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:47:48Z"
+  },
+  {
+   "sha": "cdd402a640b5",
+   "tokens": 30,
+   "heartbeats": 2710,
+   "ok": false,
+   "error": "27:11: Structure `Lean.Grind.Config` does not have a field named `symm`",
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:47:52Z"
+  },
+  {
+   "sha": "8119ba269686",
+   "tokens": 34,
+   "heartbeats": 2586,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:47:55Z"
+  },
+  {
+   "sha": "02cf6b4d4682",
+   "tokens": 33,
+   "heartbeats": 2780,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:48:47Z"
+  },
+  {
+   "sha": "6d3520981dc7",
+   "tokens": 30,
+   "heartbeats": 2712,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:48:51Z"
+  },
+  {
+   "sha": "9bb050cdd001",
+   "tokens": 33,
+   "heartbeats": 1406,
+   "ok": false,
+   "error": "27:4: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ P) = (iᶜ ∈ P) [prop] iᶜ ∈ P → i ∈ P → ¬iᶜ ∩ i = ∅ [prop] iᶜ ∈ ",
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:48:54Z"
+  },
+  {
+   "sha": "d4c20eedf925",
+   "tokens": 30,
+   "heartbeats": 2712,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:48:58Z"
+  },
+  {
+   "sha": "59628191576e",
+   "tokens": 28,
+   "heartbeats": 2664,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:49:04Z"
+  },
+  {
+   "sha": "2a07a47d1ba2",
+   "tokens": 27,
+   "heartbeats": 576,
+   "ok": false,
+   "error": "23:21: failed to synthesize HasCompl (Finset (Set S)) Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:49:25Z"
+  },
+  {
+   "sha": "f4b4d24f97f8",
+   "tokens": 29,
+   "heartbeats": 2642,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:49:28Z"
+  },
+  {
+   "sha": "07fd697990da",
+   "tokens": 28,
+   "heartbeats": 3450,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r4",
+   "t": "2026-10-14T06:49:32Z"
+  },
+  {
+   "sha": "dc4dcac10343",
+   "tokens": 30,
+   "heartbeats": 2711,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:19:30Z"
+  },
+  {
+   "sha": "c8bb09931ee1",
+   "tokens": 27,
+   "heartbeats": 2665,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:20:10Z",
+   "score": 98.83
+  },
+  {
+   "sha": "eef5028c7008",
+   "tokens": 30,
+   "heartbeats": 2712,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:20:17Z"
+  },
+  {
+   "sha": "7c04910c568a",
+   "tokens": 33,
+   "heartbeats": 1629,
+   "ok": false,
+   "error": "27:4: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ P) = (iᶜ ∈ P) [prop] iᶜ ∈ P → i ∈ P → ¬iᶜ ∩ i = ∅ [prop] iᶜ ∈ ",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:20:20Z"
+  },
+  {
+   "sha": "92a4635e7497",
+   "tokens": 28,
+   "heartbeats": 2627,
+   "ok": false,
+   "error": "28:61: failed to synthesize NeZero (Fintype.card S - 1) Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:20:24Z"
+  },
+  {
+   "sha": "62fa0beff98f",
+   "tokens": 25,
+   "heartbeats": 2666,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:20:40Z",
+   "score": 98.86
+  },
+  {
+   "sha": "dfdabbbef731",
+   "tokens": 27,
+   "heartbeats": 2665,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:20:47Z"
+  },
+  {
+   "sha": "934afa680587",
+   "tokens": 26,
+   "heartbeats": 2642,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:20:51Z"
+  },
+  {
+   "sha": "8e90c8bc1389",
+   "tokens": 25,
+   "heartbeats": 1082,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ P) = (iᶜ ∉ Pᶜ) [prop] i ∈ P → i ∈ P → ¬i ∩ i = ∅ [prop] (∃ U, ",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:21:12Z"
+  },
+  {
+   "sha": "71cdf3e988cf",
+   "tokens": 27,
+   "heartbeats": 1215,
+   "ok": false,
+   "error": "28:2: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ P) = ((Involutive.toPerm compl ⋯) i ∉ Pᶜ) [prop] Involutive.to",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:21:16Z"
+  },
+  {
+   "sha": "f5fa66c1a8ff",
+   "tokens": 29,
+   "heartbeats": 1140,
+   "ok": false,
+   "error": "22:41: unsolved goals S : Type u_1 inst✝¹ : Fintype S inst✝ : Nonempty S P : Finset (Set S) hPP : ∀ T ∈ P, ∀ U ∈ P, T ∩ U ≠ ∅ hPS : ¬∃ T ∉ P, ∀ U ∈ P, T ∩ U ≠ ∅ ⊢ ∀ (i : Set S), i ∈ P ↔ iᶜ ∉ P",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:21:19Z"
+  },
+  {
+   "sha": "956401b32e66",
+   "tokens": 60,
+   "heartbeats": 2564,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:21:57Z"
+  },
+  {
+   "sha": "d5504aff3253",
+   "tokens": 28,
+   "heartbeats": 984,
+   "ok": false,
+   "error": "29:9: invalid `grind` theorem, failed to find an usable pattern using different modifiers",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:22:51Z"
+  },
+  {
+   "sha": "1076e4602254",
+   "tokens": 28,
+   "heartbeats": 2652,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:22:54Z"
+  },
+  {
+   "sha": "62fa0beff98f",
+   "tokens": 25,
+   "heartbeats": 2665,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:23:02Z"
+  },
+  {
+   "sha": "83412335a750",
+   "tokens": 26,
+   "heartbeats": 2666,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:23:30Z"
+  },
+  {
+   "sha": "0b02612e0f77",
+   "tokens": 28,
+   "heartbeats": 2665,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:23:33Z"
+  },
+  {
+   "sha": "68830f739eba",
+   "tokens": 27,
+   "heartbeats": 2591,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:23:37Z"
+  },
+  {
+   "sha": "6982b4eb921b",
+   "tokens": 25,
+   "heartbeats": null,
+   "ok": false,
+   "error": "28:3: unknown tactic",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:24:34Z"
+  },
+  {
+   "sha": "baa5363d747d",
+   "tokens": 26,
+   "heartbeats": 2697,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:24:37Z"
+  },
+  {
+   "sha": "99250d62e430",
+   "tokens": 29,
+   "heartbeats": 2121,
+   "ok": false,
+   "error": "28:2: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ P) = ((Involutive.toPerm compl ⋯) i ∉ Pᶜ) [prop] ((Involutive.",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:24:41Z"
+  },
+  {
+   "sha": "230d08c59de3",
+   "tokens": 44,
+   "heartbeats": 1425,
+   "ok": false,
+   "error": "27:4: `grind` failed case grind.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (A ∉ P) = ∀ a ∈ P, ¬aᶜ = A [prop] A ∈ P → A ∈ P → ¬A ∩ A = ∅ [pro",
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:25:30Z"
+  },
+  {
+   "sha": "914d5c3e4993",
+   "tokens": 36,
+   "heartbeats": 2510,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:25:34Z"
+  },
+  {
+   "sha": "624d4f24a972",
+   "tokens": 38,
+   "heartbeats": 2602,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r5",
+   "t": "2026-10-14T07:25:37Z"
+  },
+  {
+   "sha": "e62a2ae65d1f",
+   "tokens": 25,
+   "heartbeats": 2662,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:56:46Z",
+   "score": 98.87
+  },
+  {
+   "sha": "4b844c4dd698",
+   "tokens": 25,
+   "heartbeats": 3539,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:56:53Z"
+  },
+  {
+   "sha": "8f6387c5502b",
+   "tokens": 25,
+   "heartbeats": 2668,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:56:57Z"
+  },
+  {
+   "sha": "35822e82465e",
+   "tokens": 49,
+   "heartbeats": 2501,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:57:00Z"
+  },
+  {
+   "sha": "905c7189a3b6",
+   "tokens": 27,
+   "heartbeats": 2708,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:57:32Z"
+  },
+  {
+   "sha": "7e38fa568fac",
+   "tokens": 27,
+   "heartbeats": 1241,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ P) = (iᶜ ∈ P) [prop] iᶜ ∈ P → i ∈ P → ¬iᶜ ∩ i = ∅ [prop] iᶜ ∈ ",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:57:35Z"
+  },
+  {
+   "sha": "99681ee5af00",
+   "tokens": 27,
+   "heartbeats": 2709,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:57:39Z"
+  },
+  {
+   "sha": "516ba80d1fca",
+   "tokens": 27,
+   "heartbeats": 2708,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:57:42Z"
+  },
+  {
+   "sha": "99bbc2576016",
+   "tokens": 29,
+   "heartbeats": 2677,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:57:46Z"
+  },
+  {
+   "sha": "6e369b1bae00",
+   "tokens": 29,
+   "heartbeats": 1954,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ P) = ((OrderIso.compl (Set S)) i ∈ P) [prop] (OrderIso.compl (",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:57:49Z"
+  },
+  {
+   "sha": "f3dd2d233a0a",
+   "tokens": 28,
+   "heartbeats": 2466,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:58:37Z"
+  },
+  {
+   "sha": "a69293bb2d22",
+   "tokens": 28,
+   "heartbeats": 2465,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:58:40Z"
+  },
+  {
+   "sha": "c3483b8005d2",
+   "tokens": 28,
+   "heartbeats": 981,
+   "ok": false,
+   "error": "29:9: invalid `grind` theorem, failed to find an usable pattern using different modifiers",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:58:44Z"
+  },
+  {
+   "sha": "2471b21e83db",
+   "tokens": 28,
+   "heartbeats": 951,
+   "ok": false,
+   "error": "29:9: invalid `grind` theorem, failed to find an usable pattern using different modifiers",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:58:47Z"
+  },
+  {
+   "sha": "25684a3c95a8",
+   "tokens": 28,
+   "heartbeats": 2790,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T07:58:51Z"
+  },
+  {
+   "sha": "bf728332b437",
+   "tokens": 67,
+   "heartbeats": 2585,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:00:17Z"
+  },
+  {
+   "sha": "56fece8fbc57",
+   "tokens": 65,
+   "heartbeats": 2616,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:00:20Z"
+  },
+  {
+   "sha": "1b5ff2727e76",
+   "tokens": 36,
+   "heartbeats": 2467,
+   "ok": false,
+   "error": "30:2: `grind` failed case grind.2 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ∃ x, x ∈ T ∩ U [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ∃ x, x ∈ a ∩ U)) ∨ a ∈ P [prop] (i ∈ P) = (iᶜ ∈ P) [prop] iᶜ ∈ P → i ∈ P → ∃ x, x ∈ iᶜ ∩ i ",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:00:53Z"
+  },
+  {
+   "sha": "a4c7c932c6ef",
+   "tokens": 34,
+   "heartbeats": 1189,
+   "ok": false,
+   "error": "30:2: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, (T ∩ U).Nonempty [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → (a ∩ U).Nonempty)) ∨ a ∈ P [prop] (i ∈ P) = (iᶜ ∈ P) [prop] iᶜ ∈ P → i ∈ P → (iᶜ ∩ i).Non",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:00:56Z"
+  },
+  {
+   "sha": "5a092a94b91b",
+   "tokens": 28,
+   "heartbeats": 2760,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:01:00Z"
+  },
+  {
+   "sha": "dc111f5b7d36",
+   "tokens": 35,
+   "heartbeats": 1933,
+   "ok": false,
+   "error": "27:95: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] x ∈ P [prop] xᶜ ∈ P [eqc] True propositions [prop] Nonempty S [prop]",
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:01:38Z"
+  },
+  {
+   "sha": "9938d276b519",
+   "tokens": 29,
+   "heartbeats": 2792,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:01:42Z"
+  },
+  {
+   "sha": "d4e1f934030e",
+   "tokens": 34,
+   "heartbeats": 2881,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:01:45Z"
+  },
+  {
+   "sha": "b7dae72d6c7f",
+   "tokens": 25,
+   "heartbeats": 2575,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:02:23Z",
+   "score": 98.89
+  },
+  {
+   "sha": "dfd0808e68a0",
+   "tokens": 26,
+   "heartbeats": 2595,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:02:30Z"
+  },
+  {
+   "sha": "300588d892f6",
+   "tokens": 25,
+   "heartbeats": 2578,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:02:33Z"
+  },
+  {
+   "sha": "b623028aef04",
+   "tokens": 27,
+   "heartbeats": 2622,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:02:54Z"
+  },
+  {
+   "sha": "e10c03453290",
+   "tokens": 27,
+   "heartbeats": 2460,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:02:58Z"
+  },
+  {
+   "sha": "8ecead0bc891",
+   "tokens": 27,
+   "heartbeats": 2622,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:03:01Z"
+  },
+  {
+   "sha": "c14bd552b6a6",
+   "tokens": 28,
+   "heartbeats": 2441,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:03:21Z"
+  },
+  {
+   "sha": "baf62e861804",
+   "tokens": 28,
+   "heartbeats": 2559,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:03:24Z"
+  },
+  {
+   "sha": "d88242434499",
+   "tokens": 30,
+   "heartbeats": 2300,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:03:28Z"
+  },
+  {
+   "sha": "5896a7c5456a",
+   "tokens": 25,
+   "heartbeats": 2677,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:04:11Z"
+  },
+  {
+   "sha": "739cdfe14170",
+   "tokens": 25,
+   "heartbeats": 2622,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r6",
+   "t": "2026-10-14T08:04:14Z"
+  },
+  {
+   "sha": "fe914994138d",
+   "tokens": 27,
+   "heartbeats": 2622,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:29:31Z"
+  },
+  {
+   "sha": "8050027ed680",
+   "tokens": 25,
+   "heartbeats": 1248,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ Pᶜ) = (iᶜ ∉ P) [prop] iᶜ ∈ P → iᶜ ∈ P → ¬iᶜ ∩ iᶜ = ∅ [prop] (∃",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:29:34Z"
+  },
+  {
+   "sha": "3480907a912a",
+   "tokens": 25,
+   "heartbeats": 5795,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:29:38Z"
+  },
+  {
+   "sha": "798da91e380b",
+   "tokens": 25,
+   "heartbeats": 3382,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:29:41Z"
+  },
+  {
+   "sha": "f205f90c95f7",
+   "tokens": 24,
+   "heartbeats": 646,
+   "ok": false,
+   "error": "23:11: failed to synthesize HasCompl (Finset (Set S)) Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.",
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:30:32Z"
+  },
+  {
+   "sha": "bbdfe7d8374c",
+   "tokens": 26,
+   "heartbeats": 2609,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:30:36Z"
+  },
+  {
+   "sha": "f17fbca7b036",
+   "tokens": 27,
+   "heartbeats": 2608,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:30:39Z"
+  },
+  {
+   "sha": "7218cb27d8ac",
+   "tokens": 31,
+   "heartbeats": 2496,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:30:43Z"
+  },
+  {
+   "sha": "bdbba0b37335",
+   "tokens": 26,
+   "heartbeats": 2575,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:30:47Z"
+  },
+  {
+   "sha": "20c3a2709b3a",
+   "tokens": 25,
+   "heartbeats": 2579,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:31:17Z"
+  },
+  {
+   "sha": "8028b60e5b6f",
+   "tokens": 26,
+   "heartbeats": 2554,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:31:21Z"
+  },
+  {
+   "sha": "963e704ef1e6",
+   "tokens": 27,
+   "heartbeats": 2500,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r7",
+   "t": "2026-10-14T08:31:25Z"
+  },
+  {
+   "sha": "b8e2aac8060f",
+   "tokens": 31,
+   "heartbeats": 2496,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:26:16Z"
+  },
+  {
+   "sha": "f2a84415040e",
+   "tokens": 28,
+   "heartbeats": 2946,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:26:20Z"
+  },
+  {
+   "sha": "c5c9c010afad",
+   "tokens": 31,
+   "heartbeats": 2463,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:26:23Z"
+  },
+  {
+   "sha": "a370b45c6d91",
+   "tokens": 29,
+   "heartbeats": 2886,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∉ P) = ((Involutive.toPerm compl ⋯) i ∉ P) [prop] (Involutiv",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:26:27Z"
+  },
+  {
+   "sha": "5d3b57f5d9cd",
+   "tokens": 29,
+   "heartbeats": 1254,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ Pᶜ) = (iᶜ ∉ P) [prop] iᶜ ∈ P → iᶜ ∈ P → ¬iᶜ ∩ iᶜ = ∅ [prop] (∃",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:26:30Z"
+  },
+  {
+   "sha": "d300823d641c",
+   "tokens": 26,
+   "heartbeats": null,
+   "ok": false,
+   "error": "29:3: unknown tactic",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:27:06Z"
+  },
+  {
+   "sha": "9774caef5a23",
+   "tokens": 24,
+   "heartbeats": 2741,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:27:09Z"
+  },
+  {
+   "sha": "1928e71f0518",
+   "tokens": 23,
+   "heartbeats": 7736,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:27:13Z"
+  },
+  {
+   "sha": "b322197f096c",
+   "tokens": 60,
+   "heartbeats": 2560,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:27:42Z"
+  },
+  {
+   "sha": "0fa6eb5711e7",
+   "tokens": 72,
+   "heartbeats": 3933,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:29:52Z"
+  },
+  {
+   "sha": "b65615fa300b",
+   "tokens": 24,
+   "heartbeats": 3225,
+   "ok": false,
+   "error": "25:4: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:31:00Z"
+  },
+  {
+   "sha": "29b206af6f7e",
+   "tokens": 27,
+   "heartbeats": 2587,
+   "ok": false,
+   "error": "26:11: Structure `Lean.Meta.Omega.OmegaConfig` does not have a field named `zetaDelta`",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:31:04Z"
+  },
+  {
+   "sha": "51911caa4022",
+   "tokens": 29,
+   "heartbeats": 3261,
+   "ok": false,
+   "error": "28:2: `grind` failed case grind.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∈ Pᶜ) = ((Involutive.toPerm compl ⋯) i ∉ P) [prop] Involutiv",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:31:22Z"
+  },
+  {
+   "sha": "65faa9094818",
+   "tokens": 30,
+   "heartbeats": 2229,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind.1.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∉ P) = (iᶜ ∉ P) [prop] iᶜ ∈ P → i ∈ P → ¬iᶜ ∩ i = ∅ [pro",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:31:26Z"
+  },
+  {
+   "sha": "b13dfa6857ca",
+   "tokens": 36,
+   "heartbeats": 2578,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:31:29Z"
+  },
+  {
+   "sha": "017ba1fd8ac0",
+   "tokens": 41,
+   "heartbeats": 2474,
+   "ok": false,
+   "error": "27:4: `grind` failed case grind.2.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (∃ a ∈ P, aᶜ = A) = (A ∈ P) [prop] A ∈ P → A ∈ P → ¬A ∩ A = ∅ [pr",
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:31:48Z"
+  },
+  {
+   "sha": "532619d86222",
+   "tokens": 37,
+   "heartbeats": 2595,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:32:14Z"
+  },
+  {
+   "sha": "7d0c6b899ea2",
+   "tokens": 33,
+   "heartbeats": 2595,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:32:33Z"
+  },
+  {
+   "sha": "e5cc03d56102",
+   "tokens": 43,
+   "heartbeats": 2535,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r10",
+   "t": "2026-10-14T12:32:37Z"
+  },
+  {
+   "sha": "55dc8e06a5b5",
+   "tokens": 27,
+   "heartbeats": 2621,
+   "ok": false,
+   "error": "29:8: Option is not boolean-valued, so `(splits := ...)` syntax must be used",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:31Z"
+  },
+  {
+   "sha": "a4980dd4f411",
+   "tokens": 27,
+   "heartbeats": 2621,
+   "ok": false,
+   "error": "29:9: Structure `Lean.Grind.Config` does not have a field named `eta`",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:35Z"
+  },
+  {
+   "sha": "264a7f2621d4",
+   "tokens": 27,
+   "heartbeats": 2622,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:38Z"
+  },
+  {
+   "sha": "6b62dff4cbc1",
+   "tokens": 24,
+   "heartbeats": 3225,
+   "ok": false,
+   "error": "25:4: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:42Z"
+  },
+  {
+   "sha": "a4f53b7eb406",
+   "tokens": 27,
+   "heartbeats": 2625,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:00:45Z"
+  },
+  {
+   "sha": "1359fedaec53",
+   "tokens": 30,
+   "heartbeats": 2563,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:01:09Z"
+  },
+  {
+   "sha": "6247018f2710",
+   "tokens": 30,
+   "heartbeats": 1204,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∉ P) = (iᶜ ∉ P) [prop] iᶜ ∈ P → i ∈ P → ¬iᶜ ∩ i = ∅ [prop] iᶜ ∈ P ",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:01:13Z"
+  },
+  {
+   "sha": "60b814d09710",
+   "tokens": 45,
+   "heartbeats": 2430,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:01:16Z"
+  },
+  {
+   "sha": "638f1c612af3",
+   "tokens": 28,
+   "heartbeats": 2990,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:02:19Z"
+  },
+  {
+   "sha": "081a72c57656",
+   "tokens": 28,
+   "heartbeats": 2718,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:02:22Z"
+  },
+  {
+   "sha": "7334d537315a",
+   "tokens": 28,
+   "heartbeats": 2447,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:02:26Z"
+  },
+  {
+   "sha": "d05a650ba577",
+   "tokens": 30,
+   "heartbeats": 2529,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:02:29Z"
+  },
+  {
+   "sha": "40b226fe8c67",
+   "tokens": 28,
+   "heartbeats": 4044,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:02:33Z"
+  },
+  {
+   "sha": "aa48c4790943",
+   "tokens": 28,
+   "heartbeats": 2704,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:02:36Z"
+  },
+  {
+   "sha": "ec24e703875c",
+   "tokens": 35,
+   "heartbeats": 1916,
+   "ok": false,
+   "error": "28:57: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] x ∉ P [prop] xᶜ ∉ P [eqc] True propositions [prop] Nonempty S [prop]",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:03:14Z"
+  },
+  {
+   "sha": "e2de84c39db6",
+   "tokens": 38,
+   "heartbeats": 2174,
+   "ok": false,
+   "error": "28:57: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] x ∉ P [prop] xᶜ ∉ P [prop] xᶜ ∩ x = ∅ [prop] xᶜ ∈ P → x ∈ P → ¬xᶜ ∩ ",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:03:36Z"
+  },
+  {
+   "sha": "d7a96ed0827c",
+   "tokens": 38,
+   "heartbeats": 1858,
+   "ok": false,
+   "error": "29:57: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ T ∉ P, ∃ U ∈ P, T ∩ U = ∅ [prop] x ∉ P [prop] xᶜ ∉ P [eqc] True propositions [prop] Nonempty S [prop] ∀ T ∉ P, ∃ U ∈ P, T ∩ U",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:03:40Z"
+  },
+  {
+   "sha": "061b98b17997",
+   "tokens": 38,
+   "heartbeats": 1771,
+   "ok": false,
+   "error": "28:64: invalid `grind` theorem, failed to find an usable pattern using different modifiers",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:03:43Z"
+  },
+  {
+   "sha": "9d245d08adbc",
+   "tokens": 40,
+   "heartbeats": 2008,
+   "ok": false,
+   "error": "28:57: `grind` failed case grind … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] x ∉ P [prop] xᶜ ∉ P [eqc] True propositions [prop] Nonempty S [prop]",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:03:46Z"
+  },
+  {
+   "sha": "a233e094b8d4",
+   "tokens": 55,
+   "heartbeats": 2713,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:04:17Z"
+  },
+  {
+   "sha": "4010b855a369",
+   "tokens": 27,
+   "heartbeats": 2609,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:04:51Z"
+  },
+  {
+   "sha": "3b617135d28e",
+   "tokens": 27,
+   "heartbeats": 2623,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:04:54Z"
+  },
+  {
+   "sha": "8554784c235d",
+   "tokens": 27,
+   "heartbeats": 2618,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:04:58Z"
+  },
+  {
+   "sha": "499bc3978ec4",
+   "tokens": 27,
+   "heartbeats": 2622,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:05:01Z"
+  },
+  {
+   "sha": "1c9a4f3dd6d1",
+   "tokens": 27,
+   "heartbeats": 2619,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:05:05Z"
+  },
+  {
+   "sha": "67856d81f565",
+   "tokens": 27,
+   "heartbeats": 2625,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:05:08Z"
+  },
+  {
+   "sha": "7222d0389772",
+   "tokens": 32,
+   "heartbeats": 2567,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:06:21Z"
+  },
+  {
+   "sha": "1383a1186dd5",
+   "tokens": 29,
+   "heartbeats": 2599,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:06:25Z"
+  },
+  {
+   "sha": "e8556aa1e689",
+   "tokens": 31,
+   "heartbeats": 2504,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:06:29Z"
+  },
+  {
+   "sha": "82efa9c8d2ed",
+   "tokens": 25,
+   "heartbeats": 1461,
+   "ok": false,
+   "error": "25:4: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:07:32Z"
+  },
+  {
+   "sha": "4b9a1654816a",
+   "tokens": 26,
+   "heartbeats": 2996,
+   "ok": false,
+   "error": "25:4: Tactic `simp` failed with a nested error: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic information",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:07:35Z"
+  },
+  {
+   "sha": "fa245aba061a",
+   "tokens": 27,
+   "heartbeats": 2184,
+   "ok": false,
+   "error": "26:4: omega could not prove the goal: a possible counterexample may satisfy the constraints a ≥ 0 where a := ↑P.card",
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:07:39Z"
+  },
+  {
+   "sha": "19cb1ebcee50",
+   "tokens": 26,
+   "heartbeats": 2587,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:07:42Z"
+  },
+  {
+   "sha": "6267045e3fff",
+   "tokens": 30,
+   "heartbeats": 2694,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:08:11Z"
+  },
+  {
+   "sha": "60938d282960",
+   "tokens": 30,
+   "heartbeats": 2622,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:08:14Z"
+  },
+  {
+   "sha": "d863eb6bc0d8",
+   "tokens": 30,
+   "heartbeats": 2624,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:08:18Z"
+  },
+  {
+   "sha": "bc9cc68cab66",
+   "tokens": 29,
+   "heartbeats": 2701,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r11",
+   "t": "2026-10-14T13:08:21Z"
+  },
+  {
+   "sha": "35152dc57b88",
+   "tokens": 36,
+   "heartbeats": 2578,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:30:23Z"
+  },
+  {
+   "sha": "82de8492e66e",
+   "tokens": 30,
+   "heartbeats": 2553,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind.1.1.1.1.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∉ P) = (iᶜ ∉ P) [prop] iᶜ ∈ P → i ∈ P → ¬iᶜ ∩ i = ∅ ",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:30:58Z"
+  },
+  {
+   "sha": "f3ebd81d2c0d",
+   "tokens": 33,
+   "heartbeats": 3047,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind.2.1.1.2.2.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∉ P) = (iᶜ ∉ P) [prop] iᶜ ∈ P → i ∈ P → ¬iᶜ ∩ i = ∅ ",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:31:01Z"
+  },
+  {
+   "sha": "b75dedf3e75a",
+   "tokens": 33,
+   "heartbeats": 2521,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∉ P) = (iᶜ ∉ P) [prop] iᶜ ∈ P → i ∈ P → ¬iᶜ ∩ i = ∅ [prop] i",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:31:05Z"
+  },
+  {
+   "sha": "30485b3e71dd",
+   "tokens": 29,
+   "heartbeats": 2462,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:31:08Z"
+  },
+  {
+   "sha": "797f5c916537",
+   "tokens": 31,
+   "heartbeats": 2463,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:31:44Z"
+  },
+  {
+   "sha": "685d753038d5",
+   "tokens": 35,
+   "heartbeats": null,
+   "ok": false,
+   "error": "29:81: unexpected identifier; expected ']'",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:32:26Z"
+  },
+  {
+   "sha": "a641fa88c57a",
+   "tokens": 34,
+   "heartbeats": 2595,
+   "ok": true,
+   "error": null,
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:32:30Z"
+  },
+  {
+   "sha": "3237a98eb881",
+   "tokens": 38,
+   "heartbeats": 867,
+   "ok": false,
+   "error": "25:11: invalid `grind` theorem, failed to find an usable pattern using different modifiers",
+   "run_id": "wuclean-hx-solab1-r12",
+   "t": "2026-10-14T13:32:33Z"
+  },
+  {
+   "sha": "9aa16bd0a5be",
+   "tokens": 30,
+   "heartbeats": 2575,
+   "ok": false,
+   "error": "29:2: `grind` failed case grind.1.1.1 … [hypotheses omitted] ⊢ False [grind] Goal diagnostics [facts] Asserted facts [prop] Nonempty S [prop] ∀ T ∈ P, ∀ U ∈ P, ¬T ∩ U = ∅ [prop] ∀ (a : Set S), (∃ U, ¬(U ∈ P → ¬a ∩ U = ∅)) ∨ a ∈ P [prop] (i ∉ P) = (iᶜ ∉ P) [prop] iᶜ ∈ P → i ∈ P → ¬iᶜ ∩ i = ∅ [prop] i",
+   "run_id": "wuclean-hx-solab1-r13",
+   "t": "2026-10-14T13:43:36Z"
+  }
+ ],
+ "runs": [
+  {
+   "run_id": "wuclean-hx-solab1-r1",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T05:27:00Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r2",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:07:02Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r3",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:34:15Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r4",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T06:45:38Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r5",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:18:11Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r6",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T07:54:59Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r7",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T08:27:38Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r10",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:24:38Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r11",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T12:59:34Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r12",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:29:13Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  },
+  {
+   "run_id": "wuclean-hx-solab1-r13",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-14T13:42:21Z",
+   "pattern_cards": 2,
+   "auto_brief": true
+  }
+ ],
+ "ledger": {
+  "wins": [
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 1,
+    "d_score": 42.03,
+    "d_tokens": -882,
+    "d_heartbeats": 32568,
+    "diff": "+theorem putnam_1964_b2\n+(S : Type*) [Fintype S] [Nonempty S]\n+(P : Finset (Set S))\n+(hPP : ∀ T ∈ P, ∀ U ∈ P, T ∩ U ≠ ∅)\n+(hPS : ¬∃ T : Set S, T ∉ P ∧ (∀ U ∈ P, T ∩ U ≠ ∅))\n+: (P.card = 2 ^ (Fintype.card S - 1)) := by \n+  have h_no_empty : ∀ (T : Set S), T ∈ P → T.Nonempty := by\n+    intro T hT\n+    have h₁ : T ∩ T ≠ ∅ := hPP T hT T hT\n+    have h₂ : T ∩ T = T := by simp only [inter_self]\n+    rw [h₂] at h₁\n+    exact Set.nonempty_iff_ne_empty.mpr h₁\n+  \n+  have h_subset_or_compl : ∀ (A : Set S), A ∈ P ∨ Aᶜ ∈ P := by grind\n+  \n+  have h_not_both : ∀ (A : Set S), A ∈ P → Aᶜ ∉ P := by\n+    intro A hA\n+    by_contra h\n+    have h₁ : Aᶜ ∈ P := h\n+    have h₂ : A ∩ Aᶜ = ∅ := by\n+      ext x\n+    "
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 5,
+    "d_score": 20.29,
+    "d_tokens": -685,
+    "d_heartbeats": -29365,
+    "diff": "-: (P.card = 2 ^ (Fintype.card S - 1)) := by \n-  have h_no_empty : ∀ (T : Set S), T ∈ P → T.Nonempty := by\n-    intro T hT\n-    have h₁ : T ∩ T ≠ ∅ := hPP T hT T hT\n-    have h₂ : T ∩ T = T := by simp only [inter_self]\n-    rw [h₂] at h₁\n-    exact Set.nonempty_iff_ne_empty.mpr h₁\n-  \n-  have h_subset_or_compl : ∀ (A : Set S), A ∈ P ∨ Aᶜ ∈ P := by grind\n-  \n-  have h_not_both : ∀ (A : Set S), A ∈ P → Aᶜ ∉ P := by\n-    intro A hA\n-    by_contra h\n-    have h₁ : Aᶜ ∈ P := h\n-    have h₂ : A ∩ Aᶜ = ∅ := by\n-      ext x\n-      simp only [inter_compl_self, mem_empty_iff_false]\n-    have h₃ : A ∩ Aᶜ ≠ ∅ := hPP A hA Aᶜ h₁\n-    rw [h₂] at h₃\n-    contradiction\n-  \n-  have h_card : P.card = 2 ^ (Fint"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 7,
+    "d_score": 1.32,
+    "d_tokens": -65,
+    "d_heartbeats": -315,
+    "diff": "-  have hor : ∀ A : Set S, A ∈ P ∨ Aᶜ ∈ P := by grind\n-  have hn : ∀ A : Set S, A ∈ P → Aᶜ ∉ P := by\n-    intro A hA hc\n-    exact hPP A hA Aᶜ hc (Set.inter_compl_self A)\n+  have hm : ∀ A : Set S, Aᶜ ∈ P ↔ A ∉ P := by grind\n-    apply Finset.card_bij' (fun A _ => Aᶜ) (fun A _ => Aᶜ)\n-    case hi => simpa using hn\n-    case hj =>\n-      intro A hA\n-      simp only [Finset.mem_sdiff, Finset.mem_univ, true_and] at hA\n-      exact (hor A).resolve_left hA\n-    all_goals simp\n-  have ht : P.card + P.card = 2 ^ Fintype.card S := by\n-    simpa [← hc, Finset.union_eq_left.mpr (Finset.subset_univ P), Fintype.card_set] using Finset.card_sdiff_add_card (Finset.univ : Finset (Set S)) P\n+    apply Finset."
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 8,
+    "d_score": 0.09,
+    "d_tokens": -4,
+    "d_heartbeats": -62,
+    "diff": "-  have ht := Finset.card_sdiff_add_card (Finset.univ : Finset (Set S)) P\n-  simp only [← hc, Finset.union_eq_left.mpr (Finset.subset_univ P), Finset.card_univ, Fintype.card_set] at ht\n+  have ht := Finset.card_sdiff_add_card_inter (Finset.univ : Finset (Set S)) P\n+  simp only [← hc, Finset.univ_inter, Finset.card_univ, Fintype.card_set] at ht"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 10,
+    "d_score": 0.36,
+    "d_tokens": -17,
+    "d_heartbeats": -167,
+    "diff": "-  have hp : 2 ^ Fintype.card S = 2 ^ (Fintype.card S - 1) * 2 := by\n-    rw [← pow_succ, Nat.sub_add_cancel (Fintype.card_pos_iff.mpr ‹Nonempty S›)]\n+  rw [← Nat.sub_add_cancel (NeZero.one_le : 1 ≤ Fintype.card S), pow_succ] at ht"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 11,
+    "d_score": 0.15,
+    "d_tokens": -8,
+    "d_heartbeats": 3,
+    "diff": "-  have ht := Finset.card_sdiff_add_card_inter (Finset.univ : Finset (Set S)) P\n+  have ht := Finset.card_sdiff_add_card_inter Finset.univ P"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 12,
+    "d_score": 0.09,
+    "d_tokens": -5,
+    "d_heartbeats": 32,
+    "diff": "-  simp only [← hc, Finset.univ_inter, Finset.card_univ, Fintype.card_set] at ht\n-  rw [← Nat.sub_add_cancel (NeZero.one_le : 1 ≤ Fintype.card S), pow_succ] at ht\n+  rw [← hc, Finset.univ_inter, Finset.card_univ, Fintype.card_set,\n+    ← Nat.sub_add_cancel (NeZero.one_le : 1 ≤ Fintype.card S), pow_succ] at ht"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 17,
+    "d_score": 0.31,
+    "d_tokens": -14,
+    "d_heartbeats": -184,
+    "diff": "-    apply Finset.card_bij' (fun A _ => Aᶜ) (fun A _ => Aᶜ) <;> simp [hm]\n+    apply Finset.card_equiv compl_involutive.toPerm\n+    simp [hm]"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 18,
+    "d_score": 0.06,
+    "d_tokens": -3,
+    "d_heartbeats": -8,
+    "diff": "-  have hm : ∀ A : Set S, Aᶜ ∈ P ↔ A ∉ P := by grind\n+  have hm : ∀ A, Aᶜ ∈ P ↔ A ∉ P := by grind"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 19,
+    "d_score": 0.19,
+    "d_tokens": -11,
+    "d_heartbeats": 82,
+    "diff": "-  have ht := Finset.card_sdiff_add_card_inter Finset.univ P\n-  rw [← hc, Finset.univ_inter, Finset.card_univ, Fintype.card_set,\n-    ← Nat.sub_add_cancel (NeZero.one_le : 1 ≤ Fintype.card S), pow_succ] at ht\n+  rw [Finset.card_univ_diff, Fintype.card_set,\n+    ← Nat.sub_add_cancel (NeZero.one_le : 1 ≤ Fintype.card S), pow_succ] at hc"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r1",
+    "check": 20,
+    "d_score": 0.1,
+    "d_tokens": -5,
+    "d_heartbeats": -37,
+    "diff": "-  have hc : P.card = (Finset.univ \\ P).card := by\n+  have hc : P.card = Pᶜ.card := by\n-  rw [Finset.card_univ_diff, Fintype.card_set,\n+  rw [Finset.card_compl, Fintype.card_set,"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 2,
+    "d_score": 0.3,
+    "d_tokens": -16,
+    "d_heartbeats": 39,
+    "diff": "-  have hm : ∀ A, Aᶜ ∈ P ↔ A ∉ P := by grind\n-    simp [hm]\n+    intro A\n+    simp\n+    grind"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r2",
+    "check": 3,
+    "d_score": 0.02,
+    "d_tokens": -2,
+    "d_heartbeats": 72,
+    "diff": "-    intro A"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 1,
+    "d_score": 0.09,
+    "d_tokens": -5,
+    "d_heartbeats": 18,
+    "diff": "-    ← Nat.sub_add_cancel (NeZero.one_le : 1 ≤ Fintype.card S), pow_succ] at hc\n+    ← pow_sub_one_mul (NeZero.ne _) 2] at hc"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 6,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": -4,
+    "diff": "-    ← pow_sub_one_mul (NeZero.ne _) 2] at hc\n+    ← pow_sub_one_mul (NeZero.ne _)] at hc"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r3",
+    "check": 9,
+    "d_score": 0.06,
+    "d_tokens": -3,
+    "d_heartbeats": -7,
+    "diff": "-    ← pow_sub_one_mul (NeZero.ne _)] at hc\n+    ← pow_sub_one_mul NeZero.out] at hc"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 2,
+    "d_score": 0.02,
+    "d_tokens": -1,
+    "d_heartbeats": 0,
+    "diff": "-  have hc : P.card = Pᶜ.card := by\n-    apply Finset.card_equiv compl_involutive.toPerm\n-    simp\n-    grind\n-  rw [Finset.card_compl, Fintype.card_set,\n-    ← pow_sub_one_mul NeZero.out] at hc\n-  omega\n+  suffices hc : P.card = Pᶜ.card by\n+    rw [Finset.card_compl, Fintype.card_set, ← pow_sub_one_mul NeZero.out] at hc\n+    omega\n+  apply Finset.card_equiv compl_involutive.toPerm\n+  simp\n+  grind"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r5",
+    "check": 6,
+    "d_score": 0.03,
+    "d_tokens": -2,
+    "d_heartbeats": 1,
+    "diff": "-  suffices hc : P.card = Pᶜ.card by\n-    rw [Finset.card_compl, Fintype.card_set, ← pow_sub_one_mul NeZero.out] at hc\n+  suffices P.card = Pᶜ.card by\n+    rw [Finset.card_compl, Fintype.card_set, ← pow_sub_one_mul NeZero.out] at this"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 1,
+    "d_score": 0.01,
+    "d_tokens": 0,
+    "d_heartbeats": -4,
+    "diff": "-    rw [Finset.card_compl, Fintype.card_set, ← pow_sub_one_mul NeZero.out] at this\n+    rw [Finset.card_compl, Fintype.card_set, ← mul_pow_sub_one NeZero.out] at this"
+   },
+   {
+    "run_id": "wuclean-hx-solab1-r6",
+    "check": 24,
+    "d_score": 0.02,
+    "d_tokens": 0,
+    "d_heartbeats": -87,
+    "diff": "-  suffices P.card = Pᶜ.card by\n+  suffices Pᶜ.card = P.card by"
+   }
+  ]
+ },
+ "api_spend": 2.592615,
+ "profile_cache": {
+  "b8753f229db3": {
+   "ok": true,
+   "total": 2658,
+   "floor": null,
+   "reference": 134548,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-11",
+     "depth_indent": 2,
+     "text": "have hc : P.card = Pᶜ.card := by apply Finset.card_equiv compl_involutive.toPerm simp grind",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-13",
+     "depth_indent": 2,
+     "text": "rw [Finset.card_compl, Fintype.card_set, ← Nat.sub_add_cancel (NeZero.one_le : 1 ≤ Fintype.card S), ",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "omega",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "ef32aa443dd0": {
+   "ok": true,
+   "total": 2665,
+   "floor": null,
+   "reference": 134548,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-11",
+     "depth_indent": 2,
+     "text": "have hc : P.card = Pᶜ.card := by apply Finset.card_equiv compl_involutive.toPerm simp grind",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-13",
+     "depth_indent": 2,
+     "text": "rw [Finset.card_compl, Fintype.card_set, ← pow_sub_one_mul NeZero.out] at hc",
+     "heartbeats": null
+    },
+    {
+     "lines": "14-14",
+     "depth_indent": 2,
+     "text": "omega",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "62fa0beff98f": {
+   "ok": true,
+   "total": 2665,
+   "floor": null,
+   "reference": 134548,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-10",
+     "depth_indent": 2,
+     "text": "suffices P.card = Pᶜ.card by rw [Finset.card_compl, Fintype.card_set, ← pow_sub_one_mul NeZero.out] ",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "apply Finset.card_equiv compl_involutive.toPerm",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "simp",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "grind",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  },
+  "b7dae72d6c7f": {
+   "ok": true,
+   "total": 2575,
+   "floor": null,
+   "reference": 134548,
+   "max_heartbeat_score": null,
+   "blocks": [
+    {
+     "lines": "7-7",
+     "depth_indent": 2,
+     "text": "classical",
+     "heartbeats": null
+    },
+    {
+     "lines": "8-10",
+     "depth_indent": 2,
+     "text": "suffices Pᶜ.card = P.card by rw [Finset.card_compl, Fintype.card_set, ← mul_pow_sub_one NeZero.out] ",
+     "heartbeats": null
+    },
+    {
+     "lines": "11-11",
+     "depth_indent": 2,
+     "text": "apply Finset.card_equiv compl_involutive.toPerm",
+     "heartbeats": null
+    },
+    {
+     "lines": "12-12",
+     "depth_indent": 2,
+     "text": "simp",
+     "heartbeats": null
+    },
+    {
+     "lines": "13-13",
+     "depth_indent": 2,
+     "text": "grind",
+     "heartbeats": null
+    }
+   ],
+   "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+  }
+ },
+ "budget_milestones": {
+  "2": {
+   "spend": 2.002406,
+   "best": 98.89,
+   "run_id": "wuclean-hx-solab1-r10",
+   "turn": 25,
+   "t": "2026-10-14T12:32:49Z"
+  }
+ }
+}

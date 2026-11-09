@@ -1,0 +1,36 @@
+{"problem": "CallElimCorrect.extractedOldExprInVars", "turn": 0, "out_tok": 31, "stop": "tool_use", "tools": ["lean_goals"], "text": ""}
+{"problem": "CallElimCorrect.extractedOldExprInVars", "turn": 1, "out_tok": 237, "stop": "tool_use", "tools": ["lean_profile"], "text": ""}
+{"problem": "CallElimCorrect.extractedOldExprInVars", "turn": 2, "out_tok": 743, "stop": "tool_use", "tools": ["lean_check_variants"], "text": ""}
+{"problem": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema", "turn": 0, "out_tok": 21, "stop": "tool_use", "tools": ["lean_profile"], "text": ""}
+{"problem": "CallElimCorrect.extractedOldExprInVars", "turn": 3, "out_tok": 967, "stop": "tool_use", "tools": ["lean_check_variants"], "text": ""}
+{"problem": "interleaved_affine_gaps_imply_tensor_gaps", "turn": 0, "out_tok": 21, "stop": "tool_use", "tools": ["lean_profile"], "text": ""}
+{"problem": "interleaved_affine_gaps_imply_tensor_gaps", "turn": 1, "out_tok": 70, "stop": "tool_use", "tools": ["lean_goals"], "text": ""}
+{"problem": "CallElimCorrect.extractedOldExprInVars", "turn": 4, "out_tok": 148, "stop": "tool_use", "tools": ["lean_run"], "text": ""}
+{"problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius", "turn": 0, "out_tok": 21, "stop": "tool_use", "tools": ["lean_profile"], "text": ""}
+{"problem": "interleaved_affine_gaps_imply_tensor_gaps", "turn": 2, "out_tok": 1766, "stop": "tool_use", "tools": ["lean_check_variants"], "text": ""}
+{"problem": "CallElimCorrect.extractedOldExprInVars", "turn": 5, "out_tok": 1007, "stop": "tool_use", "tools": ["lean_check_variants"], "text": ""}
+{"problem": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema", "turn": 1, "out_tok": 67, "stop": "tool_use", "tools": ["read_file"], "text": ""}
+{"problem": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema", "turn": 2, "out_tok": 136, "stop": "tool_use", "tools": ["lean_run"], "text": ""}
+{"problem": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema", "turn": 3, "out_tok": 320, "stop": "tool_use", "tools": ["shell"], "text": ""}
+{"problem": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema", "turn": 4, "out_tok": 105, "stop": "tool_use", "tools": ["lean_check", "lean_check", "lean_check", "lean_check", "lean_check"], "text": ""}
+{"problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius", "turn": 1, "out_tok": 232, "stop": "tool_use", "tools": ["shell"], "text": ""}
+{"problem": "interleaved_affine_gaps_imply_tensor_gaps", "turn": 3, "out_tok": 105, "stop": "tool_use", "tools": ["read_file"], "text": ""}
+{"problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius", "turn": 2, "out_tok": 332, "stop": "tool_use", "tools": ["lean_run"], "text": ""}
+{"problem": "interleaved_affine_gaps_imply_tensor_gaps", "turn": 4, "out_tok": 345, "stop": "tool_use", "tools": ["shell"], "text": ""}
+{"problem": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema", "turn": 5, "out_tok": 546, "stop": "tool_use", "tools": ["shell"], "text": ""}
+{"problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius", "turn": 3, "out_tok": 679, "stop": "tool_use", "tools": ["shell"], "text": ""}
+{"problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius", "turn": 4, "out_tok": 21, "stop": "tool_use", "tools": ["lean_check"], "text": ""}
+{"problem": "putnam_1995_a3", "turn": 0, "out_tok": 21, "stop": "tool_use", "tools": ["lean_profile"], "text": ""}
+{"problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius", "turn": 5, "out_tok": 88, "stop": "tool_use", "tools": ["lean_check", "lean_check", "lean_check", "lean_check"], "text": ""}
+{"problem": "putnam_1995_a3", "turn": 1, "out_tok": 325, "stop": "tool_use", "tools": ["shell"], "text": ""}
+{"problem": "putnam_1995_a3", "turn": 2, "out_tok": 2221, "stop": "tool_use", "tools": ["lean_check_variants"], "text": ""}
+{"problem": "putnam_1995_a3", "turn": 3, "out_tok": 467, "stop": "tool_use", "tools": ["shell"], "text": ""}
+{"problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius", "turn": 6, "out_tok": 784, "stop": "max_tokens", "tools": ["lean_skeleton"], "text": ""}
+{"problem": "putnam_1995_a3", "turn": 4, "out_tok": 135, "stop": "tool_use", "tools": ["shell"], "text": ""}
+{"problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius", "turn": 7, "out_tok": 267, "stop": "tool_use", "tools": ["shell"], "text": ""}
+{"problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius", "turn": 8, "out_tok": 24, "stop": "tool_use", "tools": ["lean_skeleton"], "text": ""}
+{"problem": "putnam_1995_a3", "turn": 5, "out_tok": 135, "stop": "tool_use", "tools": ["shell"], "text": ""}
+{"problem": "putnam_1995_a3", "turn": 6, "out_tok": 53, "stop": "tool_use", "tools": ["lean_search"], "text": ""}
+{"problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius", "turn": 9, "out_tok": 287, "stop": "tool_use", "tools": ["shell"], "text": ""}
+{"problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius", "turn": 10, "out_tok": 21, "stop": "tool_use", "tools": ["lean_check"], "text": ""}
+{"problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius", "turn": 11, "out_tok": 698, "stop": "tool_use", "tools": ["shell"], "text": ""}

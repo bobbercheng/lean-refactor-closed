@@ -1,0 +1,5 @@
+AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)
+- Seed: 73 tokens, 348 heartbeats, score 87.31. Free passes applied (hb_rewrite): start candidate 73 tokens, 338 heartbeats, score 87.4.
+- Exchange rate here: 1 token = 0.133 points, 100 heartbeats = 0.859 points.
+- Deletions that FAIL (needed as they stand): line 18 the tactic `try apply Tr.choiceL`; line 3 the tactic `rewrite [HomBisimilarity.symm_simulation]`; line 2 the tactic `intro h`; line 4 the tactic `exists _, ChoiceBisim.choice h`; line 5 the tactic `constructor`; line 10 the tactic `cases ht <;> rename_i ht`.
+- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 8 (`· rintro _ _ (h | h) μ s ht`) (grind/simp_all/aesop); the bullet at line 6 (`· constructor`) (grind/simp_all/aesop); the closing tactic at line 7 (`rintro _ _ ⟨⟩ <;> constructor <;> symm …`) (grind/simp_all/aesop); the closing tactic at line 19 (`exact ht.choose_spec.1`) (grind/simp_all/aesop).

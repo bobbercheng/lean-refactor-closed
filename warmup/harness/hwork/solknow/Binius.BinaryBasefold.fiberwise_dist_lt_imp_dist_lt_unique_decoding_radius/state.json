@@ -1,0 +1,36 @@
+{
+ "note": "runner input only: first-session scores of an earlier Sol + briefs line (no proofs, no notes)",
+ "problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+ "runs": [
+  {
+   "run_id": "hx-solknow-a"
+  }
+ ],
+ "attempts": [
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 76.03
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 79.72
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 84.79
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": null
+  },
+  {
+   "run_id": "hx-solknow-a",
+   "ok": true,
+   "score": 85.05
+  }
+ ]
+}

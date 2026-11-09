@@ -1,0 +1,78 @@
+[2026-10-13T23:21:54+00:00] worktree /home/user/source/lra-ab/wuclean-solclean1-hx at 5f778c2601cd70a21167942b63ba52a2b17ea3ec: warm-up rows used as committed
+[2026-10-13T23:21:54+00:00] round 1 (rung $1.00): 15 resume, 0 fresh restart (spent so far $0.00)
+[2026-10-14T00:10:07+00:00] round 1 done: mean so far 76.25
+[2026-10-14T00:10:07+00:00] round 2 (rung $1.00): 13 resume, 1 fresh restart (spent so far $6.04)
+[2026-10-14T00:19:14+00:00]   fresh lineage (restart): +$0.153, 77.0 -> ADOPTED
+[2026-10-14T00:53:05+00:00] round 2 done: mean so far 81.90
+[2026-10-14T00:53:05+00:00] round 3 (rung $1.00): 11 resume, 0 fresh restart (spent so far $9.50)
+[2026-10-14T01:15:41+00:00] round 3 done: mean so far 82.17
+[2026-10-14T01:15:41+00:00] round 4 (rung $1.00): 1 resume, 3 fresh restart (spent so far $10.88)
+[2026-10-14T01:20:44+00:00]   fresh lineage (restart): +$0.097, 77.08 -> main best kept
+[2026-10-14T01:20:44+00:00]   fresh lineage (restart): +$0.073, 33.33 -> main best kept
+[2026-10-14T01:20:44+00:00]   fresh lineage (restart): +$0.057, 33.33 -> main best kept
+[2026-10-14T01:20:44+00:00] round 4 done: mean so far 82.17
+[2026-10-14T01:20:44+00:00] MILESTONE $1.00 wuclean arm solclean1, rung $1.00: mean 82.17 over 15
+[2026-10-14T01:20:44+00:00]   None n=15 82.17; arklib n=3 86.16; cslib n=3 80.42; physlib n=3 80.16; putnambench n=3 75.29; strata n=3 88.82
+[2026-10-14T01:20:44+00:00]   spend: total $11.19, mean $0.746, MAX $0.795 per problem (rung $1.00; past $2: 0)
+[2026-10-14T01:20:44+00:00]   score at budget: $0.50 55.94 · $1.00 61.82
+[2026-10-14T01:20:44+00:00] round 5 (rung $2.00): 3 resume, 12 fresh restart (spent so far $11.19)
+[2026-10-14T01:57:39+00:00]   fresh lineage (restart): +$0.245, 87.19 -> main best kept
+[2026-10-14T01:57:39+00:00]   fresh lineage (restart): +$0.262, 68.64 -> main best kept
+[2026-10-14T01:57:39+00:00]   fresh lineage (restart): +$0.282, 85.54 -> main best kept
+[2026-10-14T01:57:39+00:00]   fresh lineage (restart): +$0.315, 65.81 -> main best kept
+[2026-10-14T01:57:39+00:00]   fresh lineage (restart): +$0.348, 79.87 -> ADOPTED
+[2026-10-14T01:57:39+00:00]   fresh lineage (restart): +$0.217, 69.42 -> main best kept
+[2026-10-14T01:57:39+00:00]   fresh lineage (restart): +$0.284, 84.39 -> main best kept
+[2026-10-14T01:57:39+00:00]   fresh lineage (restart): +$0.283, 74.06 -> main best kept
+[2026-10-14T01:57:39+00:00]   fresh lineage (restart): +$0.276, 89.91 -> main best kept
+[2026-10-14T01:57:39+00:00]   fresh lineage (restart): +$0.252, 83.74 -> main best kept
+[2026-10-14T01:57:39+00:00]   fresh lineage (restart): +$0.255, 95.57 -> main best kept
+[2026-10-14T01:57:39+00:00]   fresh lineage (restart): +$0.257, 94.2 -> ADOPTED
+[2026-10-14T01:57:39+00:00] round 5 done: mean so far 86.51
+[2026-10-14T01:57:39+00:00] round 6 (rung $2.00): 8 resume, 7 fresh restart (spent so far $15.39)
+[2026-10-14T02:22:36+00:00]   fresh lineage (restart): +$0.284, 85.54 -> main best kept
+[2026-10-14T02:22:36+00:00]   fresh lineage (restart): +$0.244, 65.44 -> main best kept
+[2026-10-14T02:22:36+00:00]   fresh lineage (restart): +$0.250, 69.9 -> main best kept
+[2026-10-14T02:22:36+00:00]   fresh lineage (restart): +$0.251, 85.32 -> main best kept
+[2026-10-14T02:22:36+00:00]   fresh lineage (restart): +$0.294, 70.64 -> main best kept
+[2026-10-14T02:22:36+00:00]   fresh lineage (restart): +$0.201, 85.22 -> main best kept
+[2026-10-14T02:22:36+00:00]   fresh lineage (restart): +$0.237, 95.48 -> main best kept
+[2026-10-14T02:26:26+00:00] round 6 done: mean so far 87.52
+[2026-10-14T02:26:26+00:00] round 7 (rung $2.00): 14 resume, 1 fresh restart (spent so far $19.66)
+[2026-10-14T02:34:32+00:00]   fresh lineage (restart): +$0.290, 92.16 -> main best kept
+[2026-10-14T03:01:59+00:00] round 7 done: mean so far 88.18
+[2026-10-14T03:01:59+00:00] round 8 (rung $2.00): 13 resume, 1 fresh restart (spent so far $23.68)
+[2026-10-14T03:03:45+00:00]   fresh lineage (restart): +$0.100, 83.92 -> main best kept
+[2026-10-14T03:26:01+00:00] round 8 done: mean so far 88.40
+[2026-10-14T03:26:01+00:00] round 9 (rung $2.00): 3 resume, 1 fresh restart (spent so far $25.67)
+[2026-10-14T03:28:19+00:00]   fresh lineage (restart): +$0.075, 33.33 -> main best kept
+[2026-10-14T03:30:31+00:00] round 9 done: mean so far 88.42
+[2026-10-14T03:30:31+00:00] MILESTONE $2.00 wuclean arm solclean1, rung $2.00: mean 88.42 over 15
+[2026-10-14T03:30:31+00:00]   None n=15 88.42; arklib n=3 87.56; cslib n=3 83.83; physlib n=3 84.54; putnambench n=3 96.56; strata n=3 89.59
+[2026-10-14T03:30:31+00:00]   spend: total $25.96, mean $1.730, MAX $1.774 per problem (rung $2.00; past $2: 0)
+[2026-10-14T03:30:31+00:00]   score at budget: $0.50 55.94 · $1.00 61.82 · $1.50 74.85 · $2.00 78.68
+[2026-10-14T03:30:31+00:00] RESCUE: 10 candidate(s) skipped as not stuck (gained >= 0.5 on this rung, or no session yet)
+[2026-10-14T03:30:31+00:00] RESCUE: one fresh RESTRUCTURE session (empty workspace, effort high) for 4 problems furthest below target
+[2026-10-14T03:52:19+00:00]   fresh lineage (restructure): +$0.434, 76.0 -> main best kept
+[2026-10-14T03:52:19+00:00]   fresh lineage (restructure): +$0.499, 86.03 -> main best kept
+[2026-10-14T03:52:19+00:00]   fresh lineage (restructure): +$0.459, 84.75 -> main best kept
+[2026-10-14T03:52:19+00:00]   fresh lineage (restructure): +$0.536, 87.17 -> main best kept
+[2026-10-14T03:52:19+00:00] AFTER RESCUE wuclean arm solclean1, rung $2.00: mean 88.42 over 15
+[2026-10-14T03:52:19+00:00]   None n=15 88.42; arklib n=3 87.56; cslib n=3 83.83; physlib n=3 84.54; putnambench n=3 96.56; strata n=3 89.59
+[2026-10-14T03:52:19+00:00]   spend: total $27.89, mean $1.859, MAX $2.285 per problem (rung $2.00; past $2: 4)
+[2026-10-14T03:52:19+00:00]   score at budget: $0.50 55.94 · $1.00 61.82 · $1.50 74.85 · $2.00 78.68
+[2026-10-14T03:52:19+00:00] round 11 (rung $2.85): 14 resume, 1 fresh restart (spent so far $27.89)
+[2026-10-14T03:57:49+00:00]   fresh lineage (restart): +$0.279, 88.83 -> main best kept
+[2026-10-14T04:32:05+00:00] round 11 done: mean so far 89.08
+[2026-10-14T04:32:05+00:00] round 12 (rung $2.85): 15 resume, 0 fresh restart (spent so far $32.35)
+[2026-10-14T05:07:04+00:00] round 12 done: mean so far 89.37
+[2026-10-14T05:07:04+00:00] round 13 (rung $2.85): 10 resume, 1 fresh restart (spent so far $35.91)
+[2026-10-14T05:11:56+00:00]   fresh lineage (restart): +$0.190, 33.33 -> main best kept
+[2026-10-14T05:28:27+00:00] round 13 done: mean so far 89.63
+[2026-10-14T05:28:27+00:00] round 14 (rung $2.85): 7 resume, 0 fresh restart (spent so far $38.09)
+[2026-10-14T05:39:05+00:00] round 14 done: mean so far 89.63
+[2026-10-14T05:39:05+00:00] MILESTONE $2.85 wuclean arm solclean1, rung $2.85: mean 89.63 over 15
+[2026-10-14T05:39:05+00:00]   None n=15 89.63; arklib n=3 89.55; cslib n=3 84.18; physlib n=3 86.01; putnambench n=3 97.10; strata n=3 91.33
+[2026-10-14T05:39:05+00:00]   spend: total $38.73, mean $2.582, MAX $2.613 per problem (rung $2.85; past $2: 15)
+[2026-10-14T05:39:05+00:00]   score at budget: $0.50 55.94 · $1.00 61.82 · $1.50 74.85 · $2.00 78.68 · $2.50 79.09 · $2.85 81.70
+[2026-10-14T05:39:05+00:00] HELDOUT DONE

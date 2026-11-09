@@ -1,0 +1,20 @@
+[
+ {
+  "problem": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+  "best_score": 33.33,
+  "checks": 0,
+  "tool_calls": 4,
+  "turns": 4,
+  "out_tokens": 12252,
+  "seconds": 152
+ },
+ {
+  "problem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+  "best_score": 72.76,
+  "checks": 4,
+  "tool_calls": 8,
+  "turns": 8,
+  "out_tokens": 2932,
+  "seconds": 250
+ }
+]

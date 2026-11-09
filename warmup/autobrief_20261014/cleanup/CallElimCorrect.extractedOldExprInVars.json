@@ -1,0 +1,304 @@
+{
+ "problem": "CallElimCorrect.extractedOldExprInVars",
+ "seed": {
+  "ok": true,
+  "tokens": 18,
+  "heartbeats": 215,
+  "L": 91.89,
+  "H": 92.03,
+  "Z": 100.0,
+  "score": 94.64
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "no sites",
+   "before": {
+    "ok": true,
+    "tokens": 18,
+    "heartbeats": 215,
+    "Z": 100.0,
+    "score": 94.64
+   },
+   "after": {
+    "ok": true,
+    "tokens": 18,
+    "heartbeats": 215,
+    "Z": 100.0,
+    "score": 94.64
+   },
+   "gain": null,
+   "applied": null,
+   "compiles": 1,
+   "seconds": 4.5
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "no sites",
+   "before": null,
+   "after": null,
+   "gain": null,
+   "applied": {},
+   "compiles": 0,
+   "seconds": 0.0
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no sites",
+   "before": {
+    "ok": true,
+    "tokens": 18,
+    "heartbeats": 215,
+    "Z": 100.0,
+    "score": 94.64
+   },
+   "after": {
+    "ok": true,
+    "tokens": 18,
+    "heartbeats": 215,
+    "Z": 100.0,
+    "score": 94.64
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 1,
+   "seconds": 4.2
+  },
+  {
+   "pass": "lint_delete",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 18,
+    "heartbeats": 215,
+    "Z": 100.0,
+    "score": 94.64
+   },
+   "after": {
+    "ok": true,
+    "tokens": 18,
+    "heartbeats": 215,
+    "Z": 100.0,
+    "score": 94.64
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 9,
+   "seconds": 36.6
+  }
+ ],
+ "free_applied": [],
+ "start": {
+  "ok": true,
+  "tokens": 18,
+  "heartbeats": 215,
+  "L": 91.89,
+  "H": 92.03,
+  "Z": 100.0,
+  "score": 94.64
+ },
+ "s0": "open OldExpressions in\ntheorem extractedOldExprInVars :\n  NormalizedOldExpr post →\n  (extractOldExprVars post).Subset\n  (Imperative.HasVarsPure.getVars post) := by\n  rintro -\n  apply List.Sublist.subset\n  fun_induction extractOldExprVars\n  any_goals apply List.nil_sublist\n  all_goals repeat apply List.Sublist.append\n  any_goals assumption\n  apply List.Sublist.refl",
+ "exchange": [
+  0.15,
+  1.235
+ ],
+ "profile": {
+  "ok": true,
+  "total": 215,
+  "floor": null,
+  "reference": 2698,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "6-6",
+    "depth_indent": 2,
+    "text": "rintro -",
+    "heartbeats": null
+   },
+   {
+    "lines": "7-7",
+    "depth_indent": 2,
+    "text": "apply List.Sublist.subset",
+    "heartbeats": null
+   },
+   {
+    "lines": "8-8",
+    "depth_indent": 2,
+    "text": "fun_induction extractOldExprVars",
+    "heartbeats": null
+   },
+   {
+    "lines": "9-9",
+    "depth_indent": 2,
+    "text": "any_goals apply List.nil_sublist",
+    "heartbeats": null
+   },
+   {
+    "lines": "10-10",
+    "depth_indent": 2,
+    "text": "all_goals repeat apply List.Sublist.append",
+    "heartbeats": null
+   },
+   {
+    "lines": "11-11",
+    "depth_indent": 2,
+    "text": "any_goals assumption",
+    "heartbeats": null
+   },
+   {
+    "lines": "12-12",
+    "depth_indent": 2,
+    "text": "apply List.Sublist.refl",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 18,
+  "heartbeats": 215,
+  "score": 94.64
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 34,
+   "score": null,
+   "error": "2871:46: `grind` failed\ncase grind\npost :\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\n      Expr :=\n        Lamb"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 68,
+   "score": null,
+   "error": "2871:43: unsolved goals\npost : Expression.Expr\n⊢ NormalizedOldExpr post → (extractOldExprVars post).Subset (Imperative.HasVarsPure.getVars post)"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": null,
+   "score": null,
+   "error": "2871:47: unknown tactic"
+  },
+  {
+   "kind": "closer",
+   "line": 8,
+   "label": "replace the closing tactic at line 8 (`apply List.Sublist.refl`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 17,
+   "heartbeats": 505,
+   "score": null,
+   "error": "2878:2: `grind` failed\ncase grind.2\nm m_1 : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nty : "
+  },
+  {
+   "kind": "closer",
+   "line": 8,
+   "label": "replace the closing tactic at line 8 (`apply List.Sublist.refl`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 17,
+   "heartbeats": 230,
+   "score": null,
+   "error": "2871:43: unsolved goals\ncase a.case7\nm✝² m✝¹ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\nty"
+  },
+  {
+   "kind": "closer",
+   "line": 8,
+   "label": "replace the closing tactic at line 8 (`apply List.Sublist.refl`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 17,
+   "heartbeats": null,
+   "score": null,
+   "error": "2878:3: unknown tactic"
+  },
+  {
+   "kind": "del-tac",
+   "line": 5,
+   "label": "delete the tactic `any_goals apply List.nil_sublist`",
+   "closer": "",
+   "ok": false,
+   "tokens": 15,
+   "heartbeats": 212,
+   "score": null,
+   "error": "2871:43: unsolved goals\ncase a.case2\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\ndeBruij"
+  },
+  {
+   "kind": "del-tac",
+   "line": 6,
+   "label": "delete the tactic `all_goals repeat apply List.Sublist.append`",
+   "closer": "",
+   "ok": false,
+   "tokens": 14,
+   "heartbeats": 145,
+   "score": null,
+   "error": "2877:2: Tactic `apply` failed: could not unify the conclusion of `@List.Sublist.refl`\n  List.Sublist ?l ?l\nwith the goal\n  (extractOldExprVars tr✝ ++ extractOld"
+  },
+  {
+   "kind": "del-tac",
+   "line": 7,
+   "label": "delete the tactic `any_goals assumption`",
+   "closer": "",
+   "ok": false,
+   "tokens": 16,
+   "heartbeats": 145,
+   "score": null,
+   "error": "2877:2: Tactic `apply` failed: could not unify the conclusion of `@List.Sublist.refl`\n  List.Sublist ?l ?l\nwith the goal\n  (extractOldExprVars e✝).Sublist (Impe"
+  },
+  {
+   "kind": "del-tac",
+   "line": 2,
+   "label": "delete the tactic `rintro -`",
+   "closer": "",
+   "ok": false,
+   "tokens": 16,
+   "heartbeats": 19,
+   "score": null,
+   "error": "2872:2: Tactic `apply` failed: could not unify the conclusion of `@List.Sublist.subset`\n  List.Sublist ?l₁ ?l₂ → ?l₁ ⊆ ?l₂\nwith the goal\n  NormalizedOldExpr pos"
+  },
+  {
+   "kind": "del-tac",
+   "line": 3,
+   "label": "delete the tactic `apply List.Sublist.subset`",
+   "closer": "",
+   "ok": false,
+   "tokens": 16,
+   "heartbeats": 70,
+   "score": null,
+   "error": "2874:2: Tactic failed on all goals:\n  apply List.nil_sublist"
+  },
+  {
+   "kind": "del-tac",
+   "line": 4,
+   "label": "delete the tactic `fun_induction extractOldExprVars`",
+   "closer": "",
+   "ok": false,
+   "tokens": 16,
+   "heartbeats": 21,
+   "score": null,
+   "error": "2874:2: Tactic failed on all goals:\n  apply List.nil_sublist"
+  }
+ ],
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 18 tokens, 215 heartbeats, score 94.64.\n- Exchange rate here: 1 token = 0.15 points, 100 heartbeats = 1.235 points.\n- Deletions that FAIL (needed as they stand): line 5 the tactic `any_goals apply List.nil_sublist`; line 6 the tactic `all_goals repeat apply List.Sublist.append`; line 7 the tactic `any_goals assumption`; line 2 the tactic `rintro -`; line 3 the tactic `apply List.Sublist.subset`; line 4 the tactic `fun_induction extractOldExprVars`.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the closing tactic at line 8 (`apply List.Sublist.refl`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 94.64,
+ "gain": 0.0,
+ "compiles_sweep": 12,
+ "seconds": 117.9,
+ "source": "best:61dff361d04f"
+}

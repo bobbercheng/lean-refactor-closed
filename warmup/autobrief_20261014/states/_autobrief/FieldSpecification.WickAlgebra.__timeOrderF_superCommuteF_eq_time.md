@@ -1,0 +1,13 @@
+AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)
+- Seed: 1217 tokens, 42193 heartbeats, score 33.27. Free passes applied (normalize, hb_rewrite, hb_polish, lint_delete): start candidate 1329 tokens, 29254 heartbeats, score 40.44.
+- Best combination of the paying single edits below: 1321 tokens, 29159 heartbeats, score 40.74 (Z 100.0); your workspace starts from it.
+- Exchange rate here: 1 token = 0.027 points, 100 heartbeats = 0.079 points.
+- Heartbeat hot spots: lines 10-112 ~50% (`· rintro x ⟨φs, rfl⟩ simp only [ofL…`); lines 18-18 ~29% (`dsimp only [pa]`); lines 114-115 ~9% (`· intro x y hx hy hpx hpy simp_all …`).
+- Single edits that PAY:
+  - line 63: delete `List.append_assoc` from the simp list: -2 tokens, -44 hb, score +0.09
+  - line 63: delete `Bool.decide_and` from the simp list: -2 tokens, -27 hb, score +0.08
+  - line 63: delete `List.cons_append` from the simp list: -2 tokens, -18 hb, score +0.07
+  - line 63: delete `decide_not` from the simp list: -2 tokens, -14 hb, score +0.07
+- Compile but do not pay alone: line 108 the bullet at line 108 (`· intro x hx hpx`) by `aesop` (-18 tok, +1558 hb); line 66 the closing tactic at line 66 (`simp only [List.append_assoc, List.cons…`) by `simp_all` (-16 tok, +1866 hb); line 66 the closing tactic at line 66 (`simp only [List.append_assoc, List.cons…`) by `aesop` (-16 tok, +2230 hb).
+- Deletions that FAIL (needed as they stand): line 8 `ofListBasis_eq_ofList` from the simp list; line 15 `pa` from the simp list; line 26 `ofListBasis_eq_ofList` from the simp list; line 26 `List.cons_append` from the simp list; line 26 `List.nil_append` from the simp list; line 26 `ofList_singleton` from the simp list.
+- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 7 (`· rintro x ⟨φs, rfl⟩`) (grind/simp_all/aesop); the bullet at line 14 (`· rintro x ⟨φs', rfl⟩`) (grind/simp_all/aesop); the bullet at line 102 (`· rw [crAnTimeOrderSign, Wick.koszulSig…`) (grind/simp_all/aesop); the closing tactic at line 63 (`(by simp_all only [List.append_assoc, L…`) (grind/simp_all/aesop).

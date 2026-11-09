@@ -1,0 +1,1126 @@
+{
+ "problem": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+ "seed": {
+  "ok": true,
+  "tokens": 1463,
+  "heartbeats": 15987,
+  "L": 0.0,
+  "H": 0.12,
+  "Z": 100.0,
+  "score": 33.37
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 1463,
+    "heartbeats": 15986,
+    "Z": 100.0,
+    "score": 33.37
+   },
+   "after": {
+    "ok": true,
+    "tokens": 1447,
+    "heartbeats": 15987,
+    "Z": 100.0,
+    "score": 33.74
+   },
+   "gain": 0.37,
+   "applied": {
+    "lam": 2,
+    "dollar": 11,
+    "semi": 3
+   },
+   "compiles": 55,
+   "seconds": 534.7
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 1447,
+    "heartbeats": 15986,
+    "Z": 100.0,
+    "score": 33.74
+   },
+   "after": {
+    "ok": true,
+    "tokens": 1451,
+    "heartbeats": 15530,
+    "Z": 100.0,
+    "score": 34.6
+   },
+   "gain": 0.86,
+   "applied": {
+    "rw2rewrite": 10,
+    "simponly2dsimp": 2,
+    "use2refine": 1
+   },
+   "compiles": 24,
+   "seconds": 333.0
+  },
+  {
+   "pass": "hb_polish",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 1451,
+    "heartbeats": 15531,
+    "Z": 100.0,
+    "score": 34.6
+   },
+   "after": {
+    "ok": true,
+    "tokens": 1445,
+    "heartbeats": 15504,
+    "Z": 100.0,
+    "score": 34.79
+   },
+   "gain": 0.19,
+   "applied": {
+    "pruned lemmas": 3
+   },
+   "compiles": 8,
+   "seconds": 199.0
+  },
+  {
+   "pass": "lint_delete",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 1445,
+    "heartbeats": 15504,
+    "Z": 100.0,
+    "score": 34.79
+   },
+   "after": {
+    "ok": true,
+    "tokens": 1437,
+    "heartbeats": 15489,
+    "Z": 100.0,
+    "score": 35.0
+   },
+   "gain": 0.21,
+   "applied": {
+    "lint-tac": 1,
+    "delsearch-arg": 2
+   },
+   "compiles": 24,
+   "seconds": 335.9
+  }
+ ],
+ "free_applied": [
+  "normalize",
+  "hb_rewrite",
+  "hb_polish",
+  "lint_delete"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 1437,
+  "heartbeats": 15489,
+  "L": 1.78,
+  "H": 3.23,
+  "Z": 100.0,
+  "score": 35.0
+ },
+ "s0": "theorem fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius (i : Fin ℓ) (steps : ℕ)\n    [NeZero steps] (h_i_add_steps : i.val + steps ≤ ℓ)\n    (f : OracleFunction 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩)\n  (h_fw_dist_lt : fiberwiseClose 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate)\n    (i := i) (steps := steps) (h_i_add_steps := h_i_add_steps) (f := f)) :\n  hammingClose 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩ f := by\n  unfold fiberwiseClose at h_fw_dist_lt\n  unfold hammingClose\n  -- 2 * Δ₀(f, ↑(BBF_Code 𝔽q β ⟨↑i, ⋯⟩)) < ↑(BBF_CodeDistance ℓ 𝓡 ⟨↑i, ⋯⟩)\n  let d_fw := fiberwiseDistance 𝔽q β (i := i) steps h_i_add_steps f\n  let C_i := (BBF_Code 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩)\n  let d_H := Code.distFromCode f C_i\n  let d_i := BBF_CodeDistance ℓ 𝓡 $ ⟨i, by omega⟩\n  let d_i_plus_steps := BBF_CodeDistance ℓ 𝓡 ⟨i.val + steps, by omega⟩\n\n  have h_d_i_gt_0 : d_i > 0 := by\n    dsimp [d_i, BBF_CodeDistance] -- ⊢ 2 ^ (ℓ + 𝓡 - ↑i) - 2 ^ (ℓ - ↑i) + 1 > 0\n    have h_exp_lt : ℓ - i.val < ℓ + 𝓡 - i.val := by\n      exact Nat.sub_lt_sub_right (a := ℓ) (b := ℓ + 𝓡) (c := i.val) (by omega) $ by\n        apply Nat.lt_add_of_pos_right\n        exact pos_of_neZero 𝓡\n    have h_pow_lt : 2 ^ (ℓ - i.val) < 2 ^ (ℓ + 𝓡 - i.val) := by\n      exact Nat.pow_lt_pow_right (by norm_num) h_exp_lt\n    omega\n\n  have h_C_i_nonempty : Nonempty C_i := by\n    simp only [nonempty_subtype]\n    exact Submodule.nonempty $ BBF_Code 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i.val, by omega⟩\n\n  -- 1. Relate Hamming distance `d_H` to fiber-wise distance `d_fw`.\n  obtain ⟨g', h_g'_mem, h_g'_min_card⟩ : ∃ g' ∈ C_i, d_fw\n    = (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g').ncard := by\n    -- Let `S` be the set of all possible fiber-wise disagreement sizes.\n    let S := (fun (g : C_i) => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps\n      f g).ncard) '' Set.univ\n    -- The code `C_i` (a submodule) is non-empty, so `S` is also non-empty.\n    have hS_nonempty : S.Nonempty := by\n      refine Set.image_nonempty.mpr ?_\n\n      exact Set.univ_nonempty\n    -- For a non-empty set of natural numbers, `sInf` is an element of the set.\n    have h_sInf_mem : sInf S ∈ S := Nat.sInf_mem hS_nonempty\n    -- By definition, `d_fw = sInf S`.\n    -- Since `sInf S` is in the image set `S`, there must be an element `g_subtype` in the domain\n    -- (`C_i`) that maps to it. This `g_subtype` is the codeword we're looking for.\n    rewrite [Set.mem_image] at h_sInf_mem\n    rcases h_sInf_mem with ⟨g_subtype, _, h_eq⟩\n    -- Extract the codeword and its membership proof.\n    exact ⟨g_subtype.val, g_subtype.property, by exact id $ Eq.symm h_eq⟩\n\n  -- The Hamming distance to any codeword `g'` is bounded by `d_fw * 2 ^ steps`.\n  have h_dist_le_fw_dist_times_fiber_size : (hammingDist f g' : ℕ∞) ≤ d_fw * 2 ^ steps := by\n    -- This proves `dist f g' ≤ (fiberwiseDisagreementSet ... f g').ncard * 2 ^ steps`\n    -- and lifts to ℕ∞. We prove the `Nat` version `hammingDist f g' ≤ ...`,\n    -- which is equivalent.\n    change (Δ₀(f, g') : ℕ∞) ≤ ↑d_fw * ((2 ^ steps : ℕ) : ℕ∞)\n    rewrite [←ENat.coe_mul, ENat.coe_le_coe, h_g'_min_card]\n    -- Let ΔH be the finset of actually bad x points where f and g' disagree.\n    set ΔH := Finset.filter (λx => f x ≠ g' x) Finset.univ\n    have h_dist_eq_card : hammingDist f g' = ΔH.card := by\n      dsimp only [hammingDist, ΔH]\n    rewrite [h_dist_eq_card]\n    -- Y_bad is the set of quotient points y that THERE EXISTS a bad fiber point x\n    set Y_bad := fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g'\n    simp only at * -- simplify domain indices everywhere\n\n    -- ⊢ #ΔH ≤ Y_bad.ncard * 2 ^ steps\n\n    have hFinType_Y_bad : Fintype Y_bad := by exact Fintype.ofFinite ↑Y_bad\n    -- Every point of disagreement `x` must belong to a fiber over some `y` in `Y_bad`,\n    -- BY DEFINITION of `Y_bad`. Therefore, `ΔH` is a subset of the union of the fibers\n    -- of `Y_bad`\n    have h_ΔH_subset_bad_fiber_points : ΔH ⊆ Finset.biUnion Y_bad.toFinset\n        (t := λy => ((qMap_total_fiber 𝔽q β (i := ⟨i, by omega⟩) (steps := steps)\n          (h_i_add_steps := by apply Nat.lt_add_of_pos_right_of_le; omega) (y := y)) ''\n          (Finset.univ : Finset $ Fin $ (2:ℕ)^steps)).toFinset) := by\n      -- ⊢ If any x ∈ ΔH, then x ∈ Union(qMap_total_fiber(y), ∀ y ∈ Y_bad)\n      intro x hx_in_ΔH\n      -- ⊢ x ∈ Union(qMap_total_fiber(y), ∀ y ∈ Y_bad)\n      simp only [ΔH, Finset.mem_filter] at hx_in_ΔH\n      -- Now we actually apply iterated qMap into x to get y_of_x,\n      -- then x ∈ qMap_total_fiber(y_of_x) by definition\n      let y_of_x := iteratedQuotientMap 𝔽q β h_ℓ_add_R_rate i steps h_i_add_steps x\n      apply Finset.mem_biUnion.mpr\n      refine ⟨y_of_x, ?_⟩\n      -- ⊢ y_of_x ∈ Y_bad.toFinset ∧ x ∈ qMap_total_fiber(y_of_x)\n      have h_elemenet_Y_bad : y_of_x ∈ Y_bad.toFinset := by\n        -- ⊢ y ∈ Y_bad.toFinset\n        simp only [fiberwiseDisagreementSet, iteratedQuotientMap, ne_eq, Subtype.exists,\n          Set.toFinset_setOf, mem_filter, mem_univ, true_and, Y_bad]\n        -- one bad fiber point of y_of_x is x itself\n        let X := x.val\n        have h_X_in_source : X ∈ sDomain 𝔽q β h_ℓ_add_R_rate (i := ⟨i, by omega⟩) := by\n          exact Submodule.coe_mem x\n        use X\n        use h_X_in_source\n        -- ⊢ Ŵ_steps⁽ⁱ⁾(X) = y (iterated quotient map) ∧ ¬f ⟨X, ⋯⟩ = g' ⟨X, ⋯⟩\n        have h_forward_iterated_qmap : Polynomial.eval X\n            (intermediateNormVpoly 𝔽q β h_ℓ_add_R_rate ⟨↑i, by omega⟩\n              ⟨steps, by simp only; omega⟩) = y_of_x := by\n          dsimp only [iteratedQuotientMap, X, y_of_x];\n        have h_eval_diff : f ⟨X, by omega⟩ ≠ g' ⟨X, by omega⟩ := by\n          unfold X\n          simp only [Subtype.coe_eta, ne_eq, hx_in_ΔH, not_false_eq_true]\n        simp only [h_forward_iterated_qmap, Subtype.coe_eta, h_eval_diff,\n          not_false_eq_true, and_self]\n      simp only [h_elemenet_Y_bad, true_and]\n\n      set qMapFiber := qMap_total_fiber 𝔽q β (i := ⟨i, by omega⟩) (steps := steps)\n        (h_i_add_steps := by apply Nat.lt_add_of_pos_right_of_le; omega) (y := y_of_x)\n      simp only [coe_univ, Set.image_univ, Set.toFinset_range, mem_image, mem_univ, true_and]\n      use (pointToIterateQuotientIndex (i := ⟨i, by omega⟩) (steps := steps)\n        (h_i_add_steps := by omega) (x := x))\n      have h_res := is_fiber_iff_generates_quotient_point 𝔽q β i steps (by omega)\n        (x := x) (y := y_of_x).mp $ by rfl\n      exact h_res\n    -- ⊢ #ΔH ≤ Y_bad.ncard * 2 ^ steps\n    -- The cardinality of a subset is at most the cardinality of the superset.\n    apply (Finset.card_le_card h_ΔH_subset_bad_fiber_points).trans\n    -- The cardinality of a disjoint union is the sum of cardinalities.\n    rewrite [Finset.card_biUnion]\n    · -- The size of the sum is the number of bad fibers (`Y_bad.ncard`) times\n      -- the size of each fiber (`2 ^ steps`).\n      simp only [Set.toFinset_card]\n      have h_card_fiber_per_quotient_point := card_qMap_total_fiber 𝔽q β\n        (h_ℓ_add_R_rate := h_ℓ_add_R_rate) i steps h_i_add_steps\n      simp only [Set.image_univ, Fintype.card_ofFinset,\n        Subtype.forall] at h_card_fiber_per_quotient_point\n      have h_card_fiber_of_each_y : ∀ y ∈ Y_bad.toFinset,\n          Fintype.card ((qMap_total_fiber 𝔽q β (i := ⟨↑i, by omega⟩) (steps := steps)\n            (h_i_add_steps := by apply Nat.lt_add_of_pos_right_of_le; omega) (y := y)) ''\n            ↑(Finset.univ : Finset $ Fin $ (2:ℕ)^steps)) = 2 ^ steps := by\n        intro y hy_in_Y_bad\n        have hy_card_fiber_of_y := h_card_fiber_per_quotient_point (a := y) (b := by\n          exact Submodule.coe_mem y)\n        simp only [coe_univ, Set.image_univ, Fintype.card_ofFinset, hy_card_fiber_of_y]\n      rewrite [Finset.sum_congr rfl h_card_fiber_of_each_y]\n      -- ⊢ ∑ x ∈ Y_bad.toFinset, 2 ^ steps ≤ Y_bad.encard.toNat * 2 ^ steps\n      simp only [sum_const, Set.toFinset_card, smul_eq_mul, ge_iff_le]\n      conv_rhs => rw [←_root_.Nat.card_coe_set_eq] -- convert .ncard back to .card\n      -- ⊢ Fintype.card ↑Y_bad ≤ Nat.card ↑Y_bad\n      simp only [card_eq_fintype_card, le_refl]\n    · -- Prove that the fibers for distinct quotient points y₁, y₂ are disjoint.\n      intro y₁ hy₁ y₂ hy₂ hy_ne\n      have h_disjoint := qMap_total_fiber_disjoint (i := ⟨↑i, by omega⟩) (steps := steps)\n        (h_i_add_steps := by omega) (y₁ := y₁) (y₂ := y₂) (hy_ne := hy_ne)\n      simp only [Function.onFun, coe_univ]\n      exact h_disjoint\n\n  -- The minimum distance `d_H` is bounded by the distance to this specific `g'`.\n  have h_dist_bridge : d_H ≤ d_fw * 2 ^ steps := by\n    -- exact h_dist_le_fw_dist_times_fiber_size\n    apply le_trans (a := d_H) (c := d_fw * 2 ^ steps) (b := hammingDist f g')\n    · -- ⊢ d_H ≤ ↑Δ₀(f, g')\n      simp only [distFromCode, SetLike.mem_coe, hammingDist, ne_eq, d_H];\n      -- ⊢ Δ₀(f, C_i) ≤ ↑Δ₀(f, g')\n      -- ⊢ sInf {d | ∃ v ∈ C_i, ↑(#{i | f i ≠ v i}) ≤ d} ≤ ↑(#{i | f i ≠ g' i})\n      apply sInf_le\n      use g'\n    · exact h_dist_le_fw_dist_times_fiber_size\n\n  -- 2. Use the premise : `2 * d_fw < d_{i+steps}`.\n  -- As a `Nat` inequality, this is equivalent to `2 * d_fw ≤ d_{i+steps} - 1`.\n  have h_fw_bound : 2 * d_fw ≤ d_i_plus_steps - 1 := by\n    -- Convert the ENat inequality to a Nat inequality using `a < b ↔ a + 1 ≤ b`.\n    exact Nat.le_of_lt_succ $ WithTop.coe_lt_coe.1 h_fw_dist_lt\n\n  -- 3. The Algebraic Identity.\n  -- The core of the proof is the identity : `(d_{i+steps} - 1) * 2 ^ steps = d_i - 1`.\n  have h_algebraic_identity : (d_i_plus_steps - 1) * 2 ^ steps = d_i - 1 := by\n    dsimp [d_i, d_i_plus_steps, BBF_CodeDistance]\n    rewrite [Nat.sub_mul, ←Nat.pow_add, ←Nat.pow_add];\n    have h1 : ℓ + 𝓡 - (↑i + steps) + steps = ℓ + 𝓡 - i := by\n      rw [Nat.sub_add_eq_sub_sub_rev (h1 := by omega) (h2 := by omega),\n        Nat.add_sub_cancel (n := i) (m := steps)]\n    have h2 : (ℓ - (↑i + steps) + steps) = ℓ - i := by\n      rw [Nat.sub_add_eq_sub_sub_rev (h1 := by omega) (h2 := by omega),\n        Nat.add_sub_cancel (n := i) (m := steps)]\n    rw [h1, h2]\n\n  -- 4. Conclusion : Chain the inequalities to prove `2 * d_H < d_i`.\n  -- We know `d_H` is finite, since `C_i` is nonempty.\n  have h_dH_ne_top : d_H ≠ ⊤ := by\n    simp only [ne_eq, d_H]\n    rewrite [Code.distFromCode_eq_top_iff_empty f C_i]\n    exact Set.nonempty_iff_ne_empty'.mp h_C_i_nonempty\n\n  -- We can now work with the `Nat` value of `d_H`.\n  let d_H_nat := ENat.toNat d_H\n  have h_dH_eq : d_H = d_H_nat := (ENat.coe_toNat h_dH_ne_top).symm\n\n  -- The calculation is now done entirely in `Nat`.\n  have h_final_inequality : 2 * d_H_nat ≤ d_i - 1 := by\n    have h_bridge_nat : d_H_nat ≤ d_fw * 2 ^ steps := by\n        rewrite [←ENat.coe_le_coe]\n        exact le_of_eq_of_le (id $ Eq.symm h_dH_eq) h_dist_bridge\n    calc 2 * d_H_nat\n      _ ≤ 2 * (d_fw * 2 ^ steps) := by gcongr\n      _ = (2 * d_fw) * 2 ^ steps := by rw [mul_assoc]\n      _ ≤ (d_i_plus_steps - 1) * 2 ^ steps := by gcongr;\n      _ = d_i - 1 := h_algebraic_identity\n\n  simp only [d_H, d_H_nat] at h_dH_eq\n  -- This final line is equivalent to the goal statement.\n  rewrite [h_dH_eq]\n  -- ⊢ 2 * ↑Δ₀(f, C_i).toNat < ↑(BBF_CodeDistance ℓ 𝓡 ⟨↑i, ⋯⟩)\n  change ((2 : ℕ) : ℕ∞) * ↑Δ₀(f, C_i).toNat < ↑(BBF_CodeDistance ℓ 𝓡 ⟨↑i, by omega⟩)\n  rewrite [←ENat.coe_mul, ENat.coe_lt_coe]\n  apply Nat.lt_of_le_pred (n := 2 * Δ₀(f, C_i).toNat) (m := d_i) (h := h_d_i_gt_0)\n    (h_final_inequality)",
+ "exchange": [
+  0.023,
+  0.208
+ ],
+ "profile": {
+  "ok": true,
+  "total": 15489,
+  "floor": null,
+  "reference": 16006,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "7-7",
+    "depth_indent": 2,
+    "text": "unfold fiberwiseClose at h_fw_dist_lt",
+    "heartbeats": null
+   },
+   {
+    "lines": "8-9",
+    "depth_indent": 2,
+    "text": "unfold hammingClose -- 2 * Δ₀(f, ↑(BBF_Code 𝔽q β ⟨↑i, ⋯⟩)) < ↑(BBF_CodeDistance ℓ 𝓡 ⟨↑i, ⋯⟩)",
+    "heartbeats": null
+   },
+   {
+    "lines": "10-10",
+    "depth_indent": 2,
+    "text": "let d_fw := fiberwiseDistance 𝔽q β (i := i) steps h_i_add_steps f",
+    "heartbeats": null
+   },
+   {
+    "lines": "11-11",
+    "depth_indent": 2,
+    "text": "let C_i := (BBF_Code 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩)",
+    "heartbeats": null
+   },
+   {
+    "lines": "12-12",
+    "depth_indent": 2,
+    "text": "let d_H := Code.distFromCode f C_i",
+    "heartbeats": null
+   },
+   {
+    "lines": "13-13",
+    "depth_indent": 2,
+    "text": "let d_i := BBF_CodeDistance ℓ 𝓡 $ ⟨i, by omega⟩",
+    "heartbeats": null
+   },
+   {
+    "lines": "14-15",
+    "depth_indent": 2,
+    "text": "let d_i_plus_steps := BBF_CodeDistance ℓ 𝓡 ⟨i.val + steps, by omega⟩",
+    "heartbeats": null
+   },
+   {
+    "lines": "16-25",
+    "depth_indent": 2,
+    "text": "have h_d_i_gt_0 : d_i > 0 := by dsimp [d_i, BBF_CodeDistance] -- ⊢ 2 ^ (ℓ + 𝓡 - ↑i) - 2 ^ (ℓ - ↑i) +",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 1437,
+  "heartbeats": 15488,
+  "score": 35.0
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 2616,
+   "score": null,
+   "error": "1280:77: `grind` failed\ncase grind.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\nin"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 646,
+   "score": null,
+   "error": "1280:77: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 926,
+   "score": null,
+   "error": "1280:77: tactic 'aesop' failed, made no progress\nInitial goal:\n  r : ℕ\n  inst✝¹¹ : NeZero r\n  L : Type\n  inst✝¹⁰ : Field L\n  inst✝⁹ : Fintype L\n  inst✝⁸ : Decid"
+  },
+  {
+   "kind": "closer",
+   "line": 47,
+   "label": "replace the proof of `have h_dist_le_fw_dist_times_fiber_size…` (line 47) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 749,
+   "heartbeats": 14072,
+   "score": null,
+   "error": "1326:93: `grind` failed\ncase grind.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : T"
+  },
+  {
+   "kind": "closer",
+   "line": 47,
+   "label": "replace the proof of `have h_dist_le_fw_dist_times_fiber_size…` (line 47) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 749,
+   "heartbeats": 8950,
+   "score": null,
+   "error": "1326:90: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "closer",
+   "line": 47,
+   "label": "replace the proof of `have h_dist_le_fw_dist_times_fiber_size…` (line 47) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 749,
+   "heartbeats": 12265,
+   "score": null,
+   "error": "1326:90: unsolved goals\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_5 : Field 𝔽q"
+  },
+  {
+   "kind": "closer",
+   "line": 117,
+   "label": "replace the bullet at line 117 (`·`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1277,
+   "heartbeats": 23670,
+   "score": null,
+   "error": "1396:6: `grind` failed\ncase grind.1.1.1.1.1.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : Cha"
+  },
+  {
+   "kind": "closer",
+   "line": 117,
+   "label": "replace the bullet at line 117 (`·`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1277,
+   "heartbeats": 17115,
+   "score": null,
+   "error": "1396:4: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Field"
+  },
+  {
+   "kind": "closer",
+   "line": 117,
+   "label": "replace the bullet at line 117 (`·`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1277,
+   "heartbeats": 24612,
+   "score": null,
+   "error": "1396:4: unsolved goals\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_5 : Field 𝔽q\n"
+  },
+  {
+   "kind": "closer",
+   "line": 82,
+   "label": "replace the proof of `have h_elemenet_Y_bad : y_of_x ∈ Y_bad.…` (line 82) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1298,
+   "heartbeats": 21803,
+   "score": null,
+   "error": "1361:60: `grind` failed\ncase grind.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3"
+  },
+  {
+   "kind": "closer",
+   "line": 82,
+   "label": "replace the proof of `have h_elemenet_Y_bad : y_of_x ∈ Y_bad.…` (line 82) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1298,
+   "heartbeats": 14266,
+   "score": null,
+   "error": "1361:57: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "closer",
+   "line": 82,
+   "label": "replace the proof of `have h_elemenet_Y_bad : y_of_x ∈ Y_bad.…` (line 82) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1298,
+   "heartbeats": 21654,
+   "score": null,
+   "error": "1361:57: unsolved goals\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_5 : Field 𝔽q"
+  },
+  {
+   "kind": "closer",
+   "line": 165,
+   "label": "replace the proof of `have h_algebraic_identity : (d_i_plus_s…` (line 165) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1313,
+   "heartbeats": 22078,
+   "score": null,
+   "error": "1444:79: `grind` failed\ncase grind.1.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n"
+  },
+  {
+   "kind": "closer",
+   "line": 165,
+   "label": "replace the proof of `have h_algebraic_identity : (d_i_plus_s…` (line 165) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1313,
+   "heartbeats": 17889,
+   "score": null,
+   "error": "1444:76: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "closer",
+   "line": 165,
+   "label": "replace the proof of `have h_algebraic_identity : (d_i_plus_s…` (line 165) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1313,
+   "heartbeats": 24593,
+   "score": null,
+   "error": "1444:76: unsolved goals\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_5 : Field 𝔽q"
+  },
+  {
+   "kind": "closer",
+   "line": 146,
+   "label": "replace the proof of `have h_dist_bridge : d_H ≤ d_fw * 2 ^ s…` (line 146) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1393,
+   "heartbeats": 21978,
+   "score": null,
+   "error": "1425:52: `grind` failed\ncase grind.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q"
+  },
+  {
+   "kind": "closer",
+   "line": 146,
+   "label": "replace the proof of `have h_dist_bridge : d_H ≤ d_fw * 2 ^ s…` (line 146) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1393,
+   "heartbeats": 17088,
+   "score": null,
+   "error": "1425:49: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "closer",
+   "line": 146,
+   "label": "replace the proof of `have h_dist_bridge : d_H ≤ d_fw * 2 ^ s…` (line 146) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1393,
+   "heartbeats": 21504,
+   "score": null,
+   "error": "1425:49: unsolved goals\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_5 : Field 𝔽q"
+  },
+  {
+   "kind": "closer",
+   "line": 11,
+   "label": "replace the proof of `have h_d_i_gt_0 : d_i > 0 :=` (line 11) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1358,
+   "heartbeats": 21183,
+   "score": null,
+   "error": "1290:34: `grind` failed\ncase grind.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Typ"
+  },
+  {
+   "kind": "closer",
+   "line": 11,
+   "label": "replace the proof of `have h_d_i_gt_0 : d_i > 0 :=` (line 11) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1358,
+   "heartbeats": 15547,
+   "score": null,
+   "error": "1290:31: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "closer",
+   "line": 11,
+   "label": "replace the proof of `have h_d_i_gt_0 : d_i > 0 :=` (line 11) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1358,
+   "heartbeats": 16202,
+   "score": null,
+   "error": "1290:31: unsolved goals\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_5 : Field 𝔽q"
+  },
+  {
+   "kind": "closer",
+   "line": 188,
+   "label": "replace the proof of `have h_final_inequality : 2 * d_H_nat ≤…` (line 188) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1355,
+   "heartbeats": 21930,
+   "score": null,
+   "error": "1467:56: `grind` failed\ncase grind.1.1.1.1.1.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : Ch"
+  },
+  {
+   "kind": "closer",
+   "line": 188,
+   "label": "replace the proof of `have h_final_inequality : 2 * d_H_nat ≤…` (line 188) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1355,
+   "heartbeats": 17696,
+   "score": null,
+   "error": "1467:53: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "closer",
+   "line": 188,
+   "label": "replace the proof of `have h_final_inequality : 2 * d_H_nat ≤…` (line 188) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1355,
+   "heartbeats": 23070,
+   "score": null,
+   "error": "1467:56: Tactic `simp` failed with a nested error:\nmaximum recursion depth has been reached\nuse `set_option maxRecDepth <num>` to increase limit\nuse `set_option"
+  },
+  {
+   "kind": "closer",
+   "line": 138,
+   "label": "replace the bullet at line 138 (`·`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1382,
+   "heartbeats": 24646,
+   "score": null,
+   "error": "1417:6: `grind` failed\ncase grind.1.1.1.1.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP"
+  },
+  {
+   "kind": "closer",
+   "line": 138,
+   "label": "replace the bullet at line 138 (`·`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1382,
+   "heartbeats": 17210,
+   "score": null,
+   "error": "1417:4: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Field"
+  },
+  {
+   "kind": "closer",
+   "line": 138,
+   "label": "replace the bullet at line 138 (`·`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1382,
+   "heartbeats": 24273,
+   "score": null,
+   "error": "1417:4: unsolved goals\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_5 : Field 𝔽q\n"
+  },
+  {
+   "kind": "closer",
+   "line": 149,
+   "label": "replace the bullet at line 149 (`·`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1420,
+   "heartbeats": 22121,
+   "score": null,
+   "error": "1428:6: `grind` failed\ncase grind.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q "
+  },
+  {
+   "kind": "closer",
+   "line": 149,
+   "label": "replace the bullet at line 149 (`·`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1420,
+   "heartbeats": 17139,
+   "score": null,
+   "error": "1428:4: unsolved goals\ncase a\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ "
+  },
+  {
+   "kind": "closer",
+   "line": 149,
+   "label": "replace the bullet at line 149 (`·`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1420,
+   "heartbeats": 21461,
+   "score": null,
+   "error": "1428:4: unsolved goals\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_5 : Field 𝔽q\n"
+  },
+  {
+   "kind": "closer",
+   "line": 13,
+   "label": "replace the proof of `have h_exp_lt : ℓ - i.val < ℓ + 𝓡 - i.v…` (line 13) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1408,
+   "heartbeats": 21576,
+   "score": null,
+   "error": "1292:52: `grind` failed\ncase grind.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\n"
+  },
+  {
+   "kind": "closer",
+   "line": 13,
+   "label": "replace the proof of `have h_exp_lt : ℓ - i.val < ℓ + 𝓡 - i.v…` (line 13) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1408,
+   "heartbeats": 16175,
+   "score": null,
+   "error": "1292:52: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 13,
+   "label": "replace the proof of `have h_exp_lt : ℓ - i.val < ℓ + 𝓡 - i.v…` (line 13) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1408,
+   "heartbeats": 16405,
+   "score": null,
+   "error": "1292:52: tactic 'aesop' failed, made no progress\nInitial goal:\n  r : ℕ\n  inst✝¹¹ : NeZero r\n  L : Type\n  inst✝¹⁰ : Field L\n  inst✝⁹ : Fintype L\n  inst✝⁸ : Decid"
+  },
+  {
+   "kind": "closer",
+   "line": 159,
+   "label": "replace the proof of `have h_fw_bound : 2 * d_fw ≤ d_i_plus_s…` (line 159) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1433,
+   "heartbeats": 22640,
+   "score": null,
+   "error": "1438:56: `grind` failed\ncase grind.1.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n"
+  },
+  {
+   "kind": "closer",
+   "line": 159,
+   "label": "replace the proof of `have h_fw_bound : 2 * d_fw ≤ d_i_plus_s…` (line 159) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1433,
+   "heartbeats": 18141,
+   "score": null,
+   "error": "1438:53: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "closer",
+   "line": 159,
+   "label": "replace the proof of `have h_fw_bound : 2 * d_fw ≤ d_i_plus_s…` (line 159) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1433,
+   "heartbeats": 23685,
+   "score": null,
+   "error": "1438:53: unsolved goals\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_5 : Field 𝔽q"
+  },
+  {
+   "kind": "closer",
+   "line": 178,
+   "label": "replace the proof of `have h_dH_ne_top : d_H ≠ ⊤ :=` (line 178) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1422,
+   "heartbeats": 22869,
+   "score": null,
+   "error": "1457:35: `grind` failed\ncase grind.1.1.1.1.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n"
+  },
+  {
+   "kind": "closer",
+   "line": 178,
+   "label": "replace the proof of `have h_dH_ne_top : d_H ≠ ⊤ :=` (line 178) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 1422,
+   "heartbeats": 18624,
+   "score": null,
+   "error": "1457:32: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "closer",
+   "line": 178,
+   "label": "replace the proof of `have h_dH_ne_top : d_H ≠ ⊤ :=` (line 178) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 1422,
+   "heartbeats": 32085,
+   "score": null,
+   "error": "1457:32: unsolved goals\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Type\ninst_5 : Field 𝔽q"
+  },
+  {
+   "kind": "closer",
+   "line": 21,
+   "label": "replace the proof of `have h_C_i_nonempty : Nonempty C_i :=` (line 21) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 1416,
+   "heartbeats": 21803,
+   "score": null,
+   "error": "1300:43: `grind` failed\ncase grind.1.1.1.1\nr : ℕ\ninst : NeZero r\nL : Type\ninst_1 : Field L\ninst_2 : Fintype L\ninst_3 : DecidableEq L\ninst_4 : CharP L 2\n𝔽q : Typ"
+  },
+  {
+   "kind": "del-arg",
+   "line": 12,
+   "label": "delete `d_i` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15075,
+   "score": null,
+   "error": "1291:4: `dsimp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 12,
+   "label": "delete `BBF_CodeDistance` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15400,
+   "score": null,
+   "error": "1298:4: omega could not prove the goal:\na possible counterexample may satisfy the constraints\n  g - h ≥ 1\n  e ≥ 1\n  d ≥ 0\n  d - e ≥ 1\n  d ≥ 0\n  c ≥ 0\n  c - e ≤ "
+  },
+  {
+   "kind": "del-arg",
+   "line": 22,
+   "label": "delete `nonempty_subtype` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1434,
+   "heartbeats": 15434,
+   "score": null,
+   "error": "1302:4: Type mismatch\n  Submodule.nonempty\n    (BBF_Code 𝔽q β ⟨↑i, Decidable.byContradiction fun a => is_fiber_iff_generates_quotient_point._proof_1 i steps a⟩)"
+  },
+  {
+   "kind": "del-arg",
+   "line": 56,
+   "label": "delete `hammingDist` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15486,
+   "score": null,
+   "error": "1334:56: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "del-arg",
+   "line": 56,
+   "label": "delete `ΔH` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1435,
+   "heartbeats": 15490,
+   "score": 35.05,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": 2,
+   "d_score": 0.05
+  },
+  {
+   "kind": "del-arg",
+   "line": 75,
+   "label": "delete `ΔH` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15427,
+   "score": null,
+   "error": "1376:65: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "del-arg",
+   "line": 75,
+   "label": "delete `Finset.mem_filter` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15452,
+   "score": null,
+   "error": "1376:65: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "del-arg",
+   "line": 84,
+   "label": "delete `fiberwiseDisagreementSet` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 13114,
+   "score": null,
+   "error": "1369:8: Type mismatch\n  X\nhas type\n  L\nof sort `Type` but is expected to have type\n  y_of_x ∈ (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g').toFinse"
+  },
+  {
+   "kind": "del-arg",
+   "line": 84,
+   "label": "delete `iteratedQuotientMap` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 14947,
+   "score": null,
+   "error": "1361:57: unsolved goals\ncase h\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶"
+  },
+  {
+   "kind": "del-arg",
+   "line": 84,
+   "label": "delete `ne_eq` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15241,
+   "score": null,
+   "error": "1361:57: unsolved goals\ncase h\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶"
+  },
+  {
+   "kind": "del-arg",
+   "line": 84,
+   "label": "delete `Subtype.exists` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15073,
+   "score": null,
+   "error": "1369:8: Type mismatch\n  X\nhas type\n  L\nbut is expected to have type\n  ↥(sDomain 𝔽q β h_ℓ_add_R_rate ⟨↑i, ⋯⟩)"
+  },
+  {
+   "kind": "del-arg",
+   "line": 85,
+   "label": "delete `Set.toFinset_setOf` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 13909,
+   "score": null,
+   "error": "1368:8: Type mismatch\n  X\nhas type\n  L\nof sort `Type` but is expected to have type\n  y_of_x ∈\n    {y |\n        ∃ x,\n          ⟨Polynomial.eval (↑x) (intermediat"
+  },
+  {
+   "kind": "del-arg",
+   "line": 85,
+   "label": "delete `mem_filter` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 14402,
+   "score": null,
+   "error": "1369:8: Type mismatch\n  X\nhas type\n  L\nof sort `Type` but is expected to have type\n  y_of_x ∈\n    {x |\n      ∃ x_1,\n        ⟨Polynomial.eval (↑x_1) (intermediat"
+  },
+  {
+   "kind": "del-arg",
+   "line": 85,
+   "label": "delete `mem_univ` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15462,
+   "score": null,
+   "error": "1369:8: Type mismatch\n  X\nhas type\n  L\nof sort `Type` but is expected to have type\n  y_of_x ∈ univ\nof sort `Prop`"
+  },
+  {
+   "kind": "del-arg",
+   "line": 85,
+   "label": "delete `true_and` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15441,
+   "score": null,
+   "error": "1369:8: Type mismatch\n  X\nhas type\n  L\nof sort `Type` but is expected to have type\n  True\nof sort `Prop`"
+  },
+  {
+   "kind": "del-arg",
+   "line": 85,
+   "label": "delete `Y_bad` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 12773,
+   "score": null,
+   "error": "1363:8: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 96,
+   "label": "delete `iteratedQuotientMap` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": null,
+   "score": null,
+   "error": "1375:23: unexpected token ','; expected term"
+  },
+  {
+   "kind": "del-arg",
+   "line": 96,
+   "label": "delete `X` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1435,
+   "heartbeats": 15484,
+   "score": 35.06,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -4,
+   "d_score": 0.06
+  },
+  {
+   "kind": "del-arg",
+   "line": 96,
+   "label": "delete `y_of_x` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15475,
+   "score": null,
+   "error": "1374:56: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "del-arg",
+   "line": 99,
+   "label": "delete `Subtype.coe_eta` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1435,
+   "heartbeats": 15459,
+   "score": 35.11,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -29,
+   "d_score": 0.11
+  },
+  {
+   "kind": "del-arg",
+   "line": 99,
+   "label": "delete `ne_eq` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15464,
+   "score": null,
+   "error": "1376:65: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "del-arg",
+   "line": 99,
+   "label": "delete `hx_in_ΔH` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15468,
+   "score": null,
+   "error": "1376:65: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "del-arg",
+   "line": 99,
+   "label": "delete `not_false_eq_true` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15466,
+   "score": null,
+   "error": "1376:65: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "del-arg",
+   "line": 100,
+   "label": "delete `h_forward_iterated_qmap` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15318,
+   "score": null,
+   "error": "1361:57: unsolved goals\ncase h\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶"
+  },
+  {
+   "kind": "del-arg",
+   "line": 100,
+   "label": "delete `Subtype.coe_eta` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1435,
+   "heartbeats": 15474,
+   "score": 35.08,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -14,
+   "d_score": 0.08
+  },
+  {
+   "kind": "del-arg",
+   "line": 100,
+   "label": "delete `h_eval_diff` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15325,
+   "score": null,
+   "error": "1361:57: unsolved goals\ncase h\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶"
+  },
+  {
+   "kind": "del-arg",
+   "line": 101,
+   "label": "delete `not_false_eq_true` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15325,
+   "score": null,
+   "error": "1361:57: unsolved goals\ncase h\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶"
+  },
+  {
+   "kind": "del-arg",
+   "line": 101,
+   "label": "delete `and_self` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15322,
+   "score": null,
+   "error": "1361:57: unsolved goals\ncase h\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶"
+  },
+  {
+   "kind": "del-arg",
+   "line": 102,
+   "label": "delete `h_elemenet_Y_bad` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15359,
+   "score": null,
+   "error": "1386:6: Type mismatch\n  pointToIterateQuotientIndex 𝔽q β ⟨↑i, ?m.792⟩ steps ?m.793 x\nhas type\n  Fin (2 ^ steps)\nof sort `Type` but is expected to have type\n  y_"
+  },
+  {
+   "kind": "del-arg",
+   "line": 102,
+   "label": "delete `true_and` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1435,
+   "heartbeats": 15484,
+   "score": 35.06,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -4,
+   "d_score": 0.06
+  },
+  {
+   "kind": "del-arg",
+   "line": 106,
+   "label": "delete `coe_univ` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 14760,
+   "score": null,
+   "error": "1385:6: `simp` made no progress"
+  },
+  {
+   "kind": "del-arg",
+   "line": 106,
+   "label": "delete `Set.image_univ` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15163,
+   "score": null,
+   "error": "1386:6: Type mismatch\n  pointToIterateQuotientIndex 𝔽q β ⟨↑i, ?m.787⟩ steps ?m.788 x\nhas type\n  Fin (2 ^ steps)\nof sort `Type` but is expected to have type\n  x "
+  },
+  {
+   "kind": "del-arg",
+   "line": 106,
+   "label": "delete `Set.toFinset_range` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15166,
+   "score": null,
+   "error": "1386:6: Type mismatch\n  pointToIterateQuotientIndex 𝔽q β ⟨↑i, ?m.787⟩ steps ?m.788 x\nhas type\n  Fin (2 ^ steps)\nof sort `Type` but is expected to have type\n  x "
+  },
+  {
+   "kind": "del-arg",
+   "line": 106,
+   "label": "delete `mem_image` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15159,
+   "score": null,
+   "error": "1386:6: Type mismatch\n  pointToIterateQuotientIndex 𝔽q β ⟨↑i, ?m.787⟩ steps ?m.788 x\nhas type\n  Fin (2 ^ steps)\nof sort `Type` but is expected to have type\n  x "
+  },
+  {
+   "kind": "del-arg",
+   "line": 106,
+   "label": "delete `mem_univ` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15297,
+   "score": null,
+   "error": "1390:6: Type mismatch\n  h_res\nhas type\n  qMap_total_fiber 𝔽q β ⟨↑i, ⋯⟩ steps ⋯ y_of_x (pointToIterateQuotientIndex 𝔽q β ⟨↑i, ⋯⟩ steps h_i_add_steps x) = x\nbut i"
+  },
+  {
+   "kind": "del-arg",
+   "line": 106,
+   "label": "delete `true_and` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15309,
+   "score": null,
+   "error": "1390:6: Type mismatch\n  h_res\nhas type\n  qMap_total_fiber 𝔽q β ⟨↑i, ⋯⟩ steps ⋯ y_of_x (pointToIterateQuotientIndex 𝔽q β ⟨↑i, ⋯⟩ steps h_i_add_steps x) = x\nbut i"
+  },
+  {
+   "kind": "del-arg",
+   "line": 119,
+   "label": "delete `Set.toFinset_card` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1434,
+   "heartbeats": 15272,
+   "score": null,
+   "error": "1411:15: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ∑ x ∈ Y_bad.toFinset, Fintype.card ↑(qMap_total_fiber 𝔽q β ⟨↑i, ⋯⟩ steps ⋯ x '' ↑u"
+  },
+  {
+   "kind": "del-arg",
+   "line": 122,
+   "label": "delete `Set.image_univ` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 15396,
+   "score": null,
+   "error": "1406:72: unsolved goals\nr : ℕ\ninst✝¹¹ : NeZero r\nL : Type\ninst✝¹⁰ : Field L\ninst✝⁹ : Fintype L\ninst✝⁸ : DecidableEq L\ninst✝⁷ : CharP L 2\n𝔽q : Type\ninst✝⁶ : Fiel"
+  },
+  {
+   "kind": "del-arg",
+   "line": 122,
+   "label": "delete `Fintype.card_ofFinset` from the simp list",
+   "closer": "",
+   "ok": true,
+   "tokens": 1435,
+   "heartbeats": 15481,
+   "score": 35.06,
+   "error": "",
+   "d_tokens": -2,
+   "d_hb": -7,
+   "d_score": 0.06
+  },
+  {
+   "kind": "del-arg",
+   "line": 123,
+   "label": "delete `Subtype.forall` from the simp list",
+   "closer": "",
+   "ok": false,
+   "tokens": 1435,
+   "heartbeats": 14683,
+   "score": null,
+   "error": "1407:67: Invalid argument name `a` for function\n\nHint: Perhaps you meant one of the following parameter names:\n  • `y`: a̵y̲"
+  }
+ ],
+ "s1": {
+  "proof": "theorem fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius (i : Fin ℓ) (steps : ℕ)\n    [NeZero steps] (h_i_add_steps : i.val + steps ≤ ℓ)\n    (f : OracleFunction 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩)\n  (h_fw_dist_lt : fiberwiseClose 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate)\n    (i := i) (steps := steps) (h_i_add_steps := h_i_add_steps) (f := f)) :\n  hammingClose 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩ f := by\n  unfold fiberwiseClose at h_fw_dist_lt\n  unfold hammingClose\n  -- 2 * Δ₀(f, ↑(BBF_Code 𝔽q β ⟨↑i, ⋯⟩)) < ↑(BBF_CodeDistance ℓ 𝓡 ⟨↑i, ⋯⟩)\n  let d_fw := fiberwiseDistance 𝔽q β (i := i) steps h_i_add_steps f\n  let C_i := (BBF_Code 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i, by omega⟩)\n  let d_H := Code.distFromCode f C_i\n  let d_i := BBF_CodeDistance ℓ 𝓡 $ ⟨i, by omega⟩\n  let d_i_plus_steps := BBF_CodeDistance ℓ 𝓡 ⟨i.val + steps, by omega⟩\n\n  have h_d_i_gt_0 : d_i > 0 := by\n    dsimp [d_i, BBF_CodeDistance] -- ⊢ 2 ^ (ℓ + 𝓡 - ↑i) - 2 ^ (ℓ - ↑i) + 1 > 0\n    have h_exp_lt : ℓ - i.val < ℓ + 𝓡 - i.val := by\n      exact Nat.sub_lt_sub_right (a := ℓ) (b := ℓ + 𝓡) (c := i.val) (by omega) $ by\n        apply Nat.lt_add_of_pos_right\n        exact pos_of_neZero 𝓡\n    have h_pow_lt : 2 ^ (ℓ - i.val) < 2 ^ (ℓ + 𝓡 - i.val) := by\n      exact Nat.pow_lt_pow_right (by norm_num) h_exp_lt\n    omega\n\n  have h_C_i_nonempty : Nonempty C_i := by\n    simp only [nonempty_subtype]\n    exact Submodule.nonempty $ BBF_Code 𝔽q β (h_ℓ_add_R_rate := h_ℓ_add_R_rate) ⟨i.val, by omega⟩\n\n  -- 1. Relate Hamming distance `d_H` to fiber-wise distance `d_fw`.\n  obtain ⟨g', h_g'_mem, h_g'_min_card⟩ : ∃ g' ∈ C_i, d_fw\n    = (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g').ncard := by\n    -- Let `S` be the set of all possible fiber-wise disagreement sizes.\n    let S := (fun (g : C_i) => (fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps\n      f g).ncard) '' Set.univ\n    -- The code `C_i` (a submodule) is non-empty, so `S` is also non-empty.\n    have hS_nonempty : S.Nonempty := by\n      refine Set.image_nonempty.mpr ?_\n\n      exact Set.univ_nonempty\n    -- For a non-empty set of natural numbers, `sInf` is an element of the set.\n    have h_sInf_mem : sInf S ∈ S := Nat.sInf_mem hS_nonempty\n    -- By definition, `d_fw = sInf S`.\n    -- Since `sInf S` is in the image set `S`, there must be an element `g_subtype` in the domain\n    -- (`C_i`) that maps to it. This `g_subtype` is the codeword we're looking for.\n    rewrite [Set.mem_image] at h_sInf_mem\n    rcases h_sInf_mem with ⟨g_subtype, _, h_eq⟩\n    -- Extract the codeword and its membership proof.\n    exact ⟨g_subtype.val, g_subtype.property, by exact id $ Eq.symm h_eq⟩\n\n  -- The Hamming distance to any codeword `g'` is bounded by `d_fw * 2 ^ steps`.\n  have h_dist_le_fw_dist_times_fiber_size : (hammingDist f g' : ℕ∞) ≤ d_fw * 2 ^ steps := by\n    -- This proves `dist f g' ≤ (fiberwiseDisagreementSet ... f g').ncard * 2 ^ steps`\n    -- and lifts to ℕ∞. We prove the `Nat` version `hammingDist f g' ≤ ...`,\n    -- which is equivalent.\n    change (Δ₀(f, g') : ℕ∞) ≤ ↑d_fw * ((2 ^ steps : ℕ) : ℕ∞)\n    rewrite [←ENat.coe_mul, ENat.coe_le_coe, h_g'_min_card]\n    -- Let ΔH be the finset of actually bad x points where f and g' disagree.\n    set ΔH := Finset.filter (λx => f x ≠ g' x) Finset.univ\n    have h_dist_eq_card : hammingDist f g' = ΔH.card := by\n      dsimp only [hammingDist, ΔH]\n    rewrite [h_dist_eq_card]\n    -- Y_bad is the set of quotient points y that THERE EXISTS a bad fiber point x\n    set Y_bad := fiberwiseDisagreementSet 𝔽q β i steps h_i_add_steps f g'\n    simp only at * -- simplify domain indices everywhere\n\n    -- ⊢ #ΔH ≤ Y_bad.ncard * 2 ^ steps\n\n    have hFinType_Y_bad : Fintype Y_bad := by exact Fintype.ofFinite ↑Y_bad\n    -- Every point of disagreement `x` must belong to a fiber over some `y` in `Y_bad`,\n    -- BY DEFINITION of `Y_bad`. Therefore, `ΔH` is a subset of the union of the fibers\n    -- of `Y_bad`\n    have h_ΔH_subset_bad_fiber_points : ΔH ⊆ Finset.biUnion Y_bad.toFinset\n        (t := λy => ((qMap_total_fiber 𝔽q β (i := ⟨i, by omega⟩) (steps := steps)\n          (h_i_add_steps := by apply Nat.lt_add_of_pos_right_of_le; omega) (y := y)) ''\n          (Finset.univ : Finset $ Fin $ (2:ℕ)^steps)).toFinset) := by\n      -- ⊢ If any x ∈ ΔH, then x ∈ Union(qMap_total_fiber(y), ∀ y ∈ Y_bad)\n      intro x hx_in_ΔH\n      -- ⊢ x ∈ Union(qMap_total_fiber(y), ∀ y ∈ Y_bad)\n      simp only [ΔH, Finset.mem_filter] at hx_in_ΔH\n      -- Now we actually apply iterated qMap into x to get y_of_x,\n      -- then x ∈ qMap_total_fiber(y_of_x) by definition\n      let y_of_x := iteratedQuotientMap 𝔽q β h_ℓ_add_R_rate i steps h_i_add_steps x\n      apply Finset.mem_biUnion.mpr\n      refine ⟨y_of_x, ?_⟩\n      -- ⊢ y_of_x ∈ Y_bad.toFinset ∧ x ∈ qMap_total_fiber(y_of_x)\n      have h_elemenet_Y_bad : y_of_x ∈ Y_bad.toFinset := by\n        -- ⊢ y ∈ Y_bad.toFinset\n        simp only [fiberwiseDisagreementSet, iteratedQuotientMap, ne_eq, Subtype.exists,\n          Set.toFinset_setOf, mem_filter, mem_univ, true_and, Y_bad]\n        -- one bad fiber point of y_of_x is x itself\n        let X := x.val\n        have h_X_in_source : X ∈ sDomain 𝔽q β h_ℓ_add_R_rate (i := ⟨i, by omega⟩) := by\n          exact Submodule.coe_mem x\n        use X\n        use h_X_in_source\n        -- ⊢ Ŵ_steps⁽ⁱ⁾(X) = y (iterated quotient map) ∧ ¬f ⟨X, ⋯⟩ = g' ⟨X, ⋯⟩\n        have h_forward_iterated_qmap : Polynomial.eval X\n            (intermediateNormVpoly 𝔽q β h_ℓ_add_R_rate ⟨↑i, by omega⟩\n              ⟨steps, by simp only; omega⟩) = y_of_x := by\n          dsimp only [iteratedQuotientMap, y_of_x];\n        have h_eval_diff : f ⟨X, by omega⟩ ≠ g' ⟨X, by omega⟩ := by\n          unfold X\n          simp only [ne_eq, hx_in_ΔH, not_false_eq_true]\n        simp only [h_forward_iterated_qmap, h_eval_diff,\n          not_false_eq_true, and_self]\n      simp only [h_elemenet_Y_bad]\n\n      set qMapFiber := qMap_total_fiber 𝔽q β (i := ⟨i, by omega⟩) (steps := steps)\n        (h_i_add_steps := by apply Nat.lt_add_of_pos_right_of_le; omega) (y := y_of_x)\n      simp only [coe_univ, Set.image_univ, Set.toFinset_range, mem_image, mem_univ, true_and]\n      use (pointToIterateQuotientIndex (i := ⟨i, by omega⟩) (steps := steps)\n        (h_i_add_steps := by omega) (x := x))\n      have h_res := is_fiber_iff_generates_quotient_point 𝔽q β i steps (by omega)\n        (x := x) (y := y_of_x).mp $ by rfl\n      exact h_res\n    -- ⊢ #ΔH ≤ Y_bad.ncard * 2 ^ steps\n    -- The cardinality of a subset is at most the cardinality of the superset.\n    apply (Finset.card_le_card h_ΔH_subset_bad_fiber_points).trans\n    -- The cardinality of a disjoint union is the sum of cardinalities.\n    rewrite [Finset.card_biUnion]\n    · -- The size of the sum is the number of bad fibers (`Y_bad.ncard`) times\n      -- the size of each fiber (`2 ^ steps`).\n      simp only [Set.toFinset_card]\n      have h_card_fiber_per_quotient_point := card_qMap_total_fiber 𝔽q β\n        (h_ℓ_add_R_rate := h_ℓ_add_R_rate) i steps h_i_add_steps\n      simp only [Set.image_univ,\n        Subtype.forall] at h_card_fiber_per_quotient_point\n      have h_card_fiber_of_each_y : ∀ y ∈ Y_bad.toFinset,\n          Fintype.card ((qMap_total_fiber 𝔽q β (i := ⟨↑i, by omega⟩) (steps := steps)\n            (h_i_add_steps := by apply Nat.lt_add_of_pos_right_of_le; omega) (y := y)) ''\n            ↑(Finset.univ : Finset $ Fin $ (2:ℕ)^steps)) = 2 ^ steps := by\n        intro y hy_in_Y_bad\n        have hy_card_fiber_of_y := h_card_fiber_per_quotient_point (a := y) (b := by\n          exact Submodule.coe_mem y)\n        simp only [coe_univ, Set.image_univ, Fintype.card_ofFinset, hy_card_fiber_of_y]\n      rewrite [Finset.sum_congr rfl h_card_fiber_of_each_y]\n      -- ⊢ ∑ x ∈ Y_bad.toFinset, 2 ^ steps ≤ Y_bad.encard.toNat * 2 ^ steps\n      simp only [sum_const, Set.toFinset_card, smul_eq_mul, ge_iff_le]\n      conv_rhs => rw [←_root_.Nat.card_coe_set_eq] -- convert .ncard back to .card\n      -- ⊢ Fintype.card ↑Y_bad ≤ Nat.card ↑Y_bad\n      simp only [card_eq_fintype_card, le_refl]\n    · -- Prove that the fibers for distinct quotient points y₁, y₂ are disjoint.\n      intro y₁ hy₁ y₂ hy₂ hy_ne\n      have h_disjoint := qMap_total_fiber_disjoint (i := ⟨↑i, by omega⟩) (steps := steps)\n        (h_i_add_steps := by omega) (y₁ := y₁) (y₂ := y₂) (hy_ne := hy_ne)\n      simp only [Function.onFun, coe_univ]\n      exact h_disjoint\n\n  -- The minimum distance `d_H` is bounded by the distance to this specific `g'`.\n  have h_dist_bridge : d_H ≤ d_fw * 2 ^ steps := by\n    -- exact h_dist_le_fw_dist_times_fiber_size\n    apply le_trans (a := d_H) (c := d_fw * 2 ^ steps) (b := hammingDist f g')\n    · -- ⊢ d_H ≤ ↑Δ₀(f, g')\n      simp only [distFromCode, SetLike.mem_coe, hammingDist, ne_eq, d_H];\n      -- ⊢ Δ₀(f, C_i) ≤ ↑Δ₀(f, g')\n      -- ⊢ sInf {d | ∃ v ∈ C_i, ↑(#{i | f i ≠ v i}) ≤ d} ≤ ↑(#{i | f i ≠ g' i})\n      apply sInf_le\n      use g'\n    · exact h_dist_le_fw_dist_times_fiber_size\n\n  -- 2. Use the premise : `2 * d_fw < d_{i+steps}`.\n  -- As a `Nat` inequality, this is equivalent to `2 * d_fw ≤ d_{i+steps} - 1`.\n  have h_fw_bound : 2 * d_fw ≤ d_i_plus_steps - 1 := by\n    -- Convert the ENat inequality to a Nat inequality using `a < b ↔ a + 1 ≤ b`.\n    exact Nat.le_of_lt_succ $ WithTop.coe_lt_coe.1 h_fw_dist_lt\n\n  -- 3. The Algebraic Identity.\n  -- The core of the proof is the identity : `(d_{i+steps} - 1) * 2 ^ steps = d_i - 1`.\n  have h_algebraic_identity : (d_i_plus_steps - 1) * 2 ^ steps = d_i - 1 := by\n    dsimp [d_i, d_i_plus_steps, BBF_CodeDistance]\n    rewrite [Nat.sub_mul, ←Nat.pow_add, ←Nat.pow_add];\n    have h1 : ℓ + 𝓡 - (↑i + steps) + steps = ℓ + 𝓡 - i := by\n      rw [Nat.sub_add_eq_sub_sub_rev (h1 := by omega) (h2 := by omega),\n        Nat.add_sub_cancel (n := i) (m := steps)]\n    have h2 : (ℓ - (↑i + steps) + steps) = ℓ - i := by\n      rw [Nat.sub_add_eq_sub_sub_rev (h1 := by omega) (h2 := by omega),\n        Nat.add_sub_cancel (n := i) (m := steps)]\n    rw [h1, h2]\n\n  -- 4. Conclusion : Chain the inequalities to prove `2 * d_H < d_i`.\n  -- We know `d_H` is finite, since `C_i` is nonempty.\n  have h_dH_ne_top : d_H ≠ ⊤ := by\n    simp only [ne_eq, d_H]\n    rewrite [Code.distFromCode_eq_top_iff_empty f C_i]\n    exact Set.nonempty_iff_ne_empty'.mp h_C_i_nonempty\n\n  -- We can now work with the `Nat` value of `d_H`.\n  let d_H_nat := ENat.toNat d_H\n  have h_dH_eq : d_H = d_H_nat := (ENat.coe_toNat h_dH_ne_top).symm\n\n  -- The calculation is now done entirely in `Nat`.\n  have h_final_inequality : 2 * d_H_nat ≤ d_i - 1 := by\n    have h_bridge_nat : d_H_nat ≤ d_fw * 2 ^ steps := by\n        rewrite [←ENat.coe_le_coe]\n        exact le_of_eq_of_le (id $ Eq.symm h_dH_eq) h_dist_bridge\n    calc 2 * d_H_nat\n      _ ≤ 2 * (d_fw * 2 ^ steps) := by gcongr\n      _ = (2 * d_fw) * 2 ^ steps := by rw [mul_assoc]\n      _ ≤ (d_i_plus_steps - 1) * 2 ^ steps := by gcongr;\n      _ = d_i - 1 := h_algebraic_identity\n\n  simp only [d_H, d_H_nat] at h_dH_eq\n  -- This final line is equivalent to the goal statement.\n  rewrite [h_dH_eq]\n  -- ⊢ 2 * ↑Δ₀(f, C_i).toNat < ↑(BBF_CodeDistance ℓ 𝓡 ⟨↑i, ⋯⟩)\n  change ((2 : ℕ) : ℕ∞) * ↑Δ₀(f, C_i).toNat < ↑(BBF_CodeDistance ℓ 𝓡 ⟨↑i, by omega⟩)\n  rewrite [←ENat.coe_mul, ENat.coe_lt_coe]\n  apply Nat.lt_of_le_pred (n := 2 * Δ₀(f, C_i).toNat) (m := d_i) (h := h_d_i_gt_0)\n    (h_final_inequality)",
+  "labels": [
+   "delete `Subtype.coe_eta` from the simp list",
+   "delete `Subtype.coe_eta` from the simp list",
+   "delete `X` from the simp list",
+   "delete `true_and` from the simp list",
+   "delete `Fintype.card_ofFinset` from the simp list"
+  ],
+  "primary_score": 35.36,
+  "full": {
+   "ok": true,
+   "tokens": 1427,
+   "heartbeats": 15427,
+   "L": 2.46,
+   "H": 3.62,
+   "Z": 100.0,
+   "score": 35.36
+  }
+ },
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 1463 tokens, 15987 heartbeats, score 33.37. Free passes applied (normalize, hb_rewrite, hb_polish, lint_delete): start candidate 1437 tokens, 15489 heartbeats, score 35.0.\n- Best combination of the paying single edits below: 1427 tokens, 15427 heartbeats, score 35.36 (Z 100.0); your workspace starts from it.\n- Exchange rate here: 1 token = 0.023 points, 100 heartbeats = 0.208 points.\n- Single edits that PAY:\n  - line 99: delete `Subtype.coe_eta` from the simp list: -2 tokens, -29 hb, score +0.11\n  - line 100: delete `Subtype.coe_eta` from the simp list: -2 tokens, -14 hb, score +0.08\n  - line 96: delete `X` from the simp list: -2 tokens, -4 hb, score +0.06\n  - line 102: delete `true_and` from the simp list: -2 tokens, -4 hb, score +0.06\n  - line 122: delete `Fintype.card_ofFinset` from the simp list: -2 tokens, -7 hb, score +0.06\n- Deletions that FAIL (needed as they stand): line 12 `d_i` from the simp list; line 12 `BBF_CodeDistance` from the simp list; line 22 `nonempty_subtype` from the simp list; line 56 `hammingDist` from the simp list; line 75 `ΔH` from the simp list; line 75 `Finset.mem_filter` from the simp list.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the proof of `have h_dist_le_fw_dist_times_fiber_size…` (line 47) (grind/simp_all/aesop); the bullet at line 117 (`·`) (grind/simp_all/aesop); the proof of `have h_elemenet_Y_bad : y_of_x ∈ Y_bad.…` (line 82) (grind/simp_all/aesop); the proof of `have h_algebraic_identity : (d_i_plus_s…` (line 165) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 35.36,
+ "gain": 1.99,
+ "compiles_sweep": 80,
+ "seconds": 2188.9,
+ "source": "seed"
+}

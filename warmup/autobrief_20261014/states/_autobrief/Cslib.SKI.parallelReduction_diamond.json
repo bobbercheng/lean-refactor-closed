@@ -1,0 +1,908 @@
+{
+ "problem": "Cslib.SKI.parallelReduction_diamond",
+ "seed": {
+  "ok": true,
+  "tokens": 407,
+  "heartbeats": 1422,
+  "L": 0.0,
+  "H": 0.0,
+  "Z": 100.0,
+  "score": 33.33
+ },
+ "free": [
+  {
+   "pass": "normalize",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 407,
+    "heartbeats": 1422,
+    "Z": 100.0,
+    "score": 33.33
+   },
+   "after": {
+    "ok": true,
+    "tokens": 405,
+    "heartbeats": 1422,
+    "Z": 100.0,
+    "score": 33.5
+   },
+   "gain": 0.17,
+   "applied": {
+    "dollar": 1,
+    "semi": 1
+   },
+   "compiles": 16,
+   "seconds": 23.6
+  },
+  {
+   "pass": "hb_rewrite",
+   "status": "improved",
+   "before": {
+    "ok": true,
+    "tokens": 405,
+    "heartbeats": 1422,
+    "Z": 100.0,
+    "score": 33.5
+   },
+   "after": {
+    "ok": true,
+    "tokens": 453,
+    "heartbeats": 894,
+    "Z": 100.0,
+    "score": 41.94
+   },
+   "gain": 8.44,
+   "applied": {
+    "rw2rewrite": 6,
+    "use2refine": 12
+   },
+   "compiles": 20,
+   "seconds": 45.3
+  },
+  {
+   "pass": "hb_polish",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 453,
+    "heartbeats": 894,
+    "Z": 100.0,
+    "score": 41.94
+   },
+   "after": {
+    "ok": true,
+    "tokens": 453,
+    "heartbeats": 894,
+    "Z": 100.0,
+    "score": 41.94
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 3,
+   "seconds": 9.4
+  },
+  {
+   "pass": "lint_delete",
+   "status": "no gain",
+   "before": {
+    "ok": true,
+    "tokens": 453,
+    "heartbeats": 894,
+    "Z": 100.0,
+    "score": 41.94
+   },
+   "after": {
+    "ok": true,
+    "tokens": 453,
+    "heartbeats": 894,
+    "Z": 100.0,
+    "score": 41.94
+   },
+   "gain": null,
+   "applied": {},
+   "compiles": 23,
+   "seconds": 36.9
+  }
+ ],
+ "free_applied": [
+  "normalize",
+  "hb_rewrite"
+ ],
+ "start": {
+  "ok": true,
+  "tokens": 453,
+  "heartbeats": 894,
+  "L": -11.3,
+  "H": 37.13,
+  "Z": 100.0,
+  "score": 41.94
+ },
+ "s0": "theorem parallelReduction_diamond : Diamond ParallelReduction := by\n  intro a a₁ a₂ h₁ h₂\n  cases h₁\n  case refl => exact ⟨a₂, h₂, .refl a₂⟩\n  case par a a' b b' ha' hb' =>\n    cases h₂\n    case refl =>\n      refine ⟨a' ⬝ b', ?_⟩\n      exact ⟨.refl $ a' ⬝ b', .par ha' hb'⟩\n    case par a'' b'' ha'' hb'' =>\n      let ⟨a₃, ha⟩ := parallelReduction_diamond ha' ha''\n      let ⟨b₃, hb⟩ := parallelReduction_diamond hb' hb''\n      refine ⟨a₃ ⬝ b₃, ?_⟩\n      constructor\n      · exact .par ha.1 hb.1\n      · exact .par ha.2 hb.2\n    case red_I =>\n      rewrite [I_irreducible a' ha']\n      use b', .red_I b'\n    case red_K =>\n      let ⟨a₂', ha₂'⟩ := Ka_irreducible a₂ a' ha'\n      rewrite [ha₂'.2]\n      refine ⟨a₂', ?_⟩\n      exact ⟨.red_K a₂' b', ha₂'.1⟩\n    case red_S a c =>\n      let ⟨a'', c', h⟩ := Sab_irreducible a c a' ha'\n      rewrite [h.2.2]\n      refine ⟨a'' ⬝ b' ⬝ (c' ⬝ b'), .red_S a'' c' b', ?_⟩\n      apply ParallelReduction.par <;>\n        apply ParallelReduction.par <;>\n        grind\n  case red_I =>\n    cases h₂\n    case refl => refine ⟨a₁, ?_⟩; exact ⟨.refl a₁, .red_I a₁⟩\n    case par c a₁' hc ha =>\n      rewrite [I_irreducible c hc]\n      refine ⟨a₁', ?_⟩\n      exact ⟨ha, .red_I a₁'⟩\n    case red_I => refine ⟨a₁, ?_⟩; exact ⟨.refl a₁, .refl a₁⟩\n  case red_K c =>\n    cases h₂\n    case refl => refine ⟨a₁, ?_⟩; exact ⟨.refl a₁, .red_K a₁ c⟩\n    case par a' c' ha hc =>\n      let ⟨a₁', h'⟩ := Ka_irreducible a₁ a' ha\n      rewrite [h'.2]\n      refine ⟨a₁', ?_⟩\n      exact ⟨h'.1, .red_K a₁' c'⟩\n    case red_K =>\n      refine ⟨a₁, ?_⟩\n      exact ⟨.refl a₁, .refl a₁⟩\n  case red_S a b c =>\n    cases h₂\n    case refl =>\n      refine ⟨a ⬝ c ⬝ (b ⬝ c), ?_⟩\n      exact ⟨.refl _, .red_S ..⟩\n    case par d c' hd hc =>\n      let ⟨a', b', h⟩ := Sab_irreducible a b d hd\n      rewrite [h.2.2]\n      refine ⟨a' ⬝ c' ⬝ (b' ⬝ c'), ?_⟩\n      constructor\n      · apply ParallelReduction.par\n        · exact .par h.left hc\n        · exact .par h.2.1 hc\n      · exact .red_S ..\n    case red_S => exact ⟨a ⬝ c ⬝ (b ⬝ c), .refl _, .refl _,⟩",
+ "exchange": [
+  0.082,
+  2.344
+ ],
+ "profile": {
+  "ok": true,
+  "total": 894,
+  "floor": null,
+  "reference": 1422,
+  "max_heartbeat_score": null,
+  "blocks": [
+   {
+    "lines": "2-2",
+    "depth_indent": 2,
+    "text": "intro a a₁ a₂ h₁ h₂",
+    "heartbeats": null
+   },
+   {
+    "lines": "3-3",
+    "depth_indent": 2,
+    "text": "cases h₁",
+    "heartbeats": null
+   },
+   {
+    "lines": "4-4",
+    "depth_indent": 2,
+    "text": "case refl => exact ⟨a₂, h₂, .refl a₂⟩",
+    "heartbeats": null
+   },
+   {
+    "lines": "5-31",
+    "depth_indent": 2,
+    "text": "case par a a' b b' ha' hb' => cases h₂ case refl => refine ⟨a' ⬝ b', ?_⟩ exact ⟨.refl $ a' ⬝ b', .pa",
+    "heartbeats": null
+   },
+   {
+    "lines": "32-39",
+    "depth_indent": 2,
+    "text": "case red_I => cases h₂ case refl => refine ⟨a₁, ?_⟩; exact ⟨.refl a₁, .red_I a₁⟩ case par c a₁' hc h",
+    "heartbeats": null
+   },
+   {
+    "lines": "40-50",
+    "depth_indent": 2,
+    "text": "case red_K c => cases h₂ case refl => refine ⟨a₁, ?_⟩; exact ⟨.refl a₁, .red_K a₁ c⟩ case par a' c' ",
+    "heartbeats": null
+   },
+   {
+    "lines": "51-65",
+    "depth_indent": 2,
+    "text": "case red_S a b c => cases h₂ case refl => refine ⟨a ⬝ c ⬝ (b ⬝ c), ?_⟩ exact ⟨.refl _, .red_S ..⟩ ca",
+    "heartbeats": null
+   }
+  ],
+  "note": "each block's cost = heartbeats saved if it and its later siblings were `sorry` minus the same for the next sibling; nested blocks are profiled under the costliest step. Costs include elaborating terms (notation, instance search). Odd values mean a cut changed elaboration."
+ },
+ "sweep_base": {
+  "ok": true,
+  "tokens": 453,
+  "heartbeats": 894,
+  "score": 41.94
+ },
+ "edits": [
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 11,
+   "score": null,
+   "error": "151:68: `grind` failed\ncase grind\na b c : SKI\nh : a ⭢ₚ b\nh_1 : a ⭢ₚ c\nh_2 : ¬Join ParallelReduction b c\n⊢ False\n[grind] Goal diagnostics\n  [facts] Asserted fact"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 58,
+   "score": null,
+   "error": "151:68: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 1,
+   "label": "replace the whole proof by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 2,
+   "heartbeats": 169,
+   "score": null,
+   "error": "151:68: Tactic `aesop` failed, made no progress\nInitial goal:\n  ⊢ Diamond ParallelReduction"
+  },
+  {
+   "kind": "closer",
+   "line": 61,
+   "label": "replace the bullet at line 61 (`· apply ParallelReduction.par`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 442,
+   "heartbeats": 908,
+   "score": null,
+   "error": "211:8: `grind` failed\ncase grind\na b c d c' : SKI\nhd : (S ⬝ a ⬝ b) ⭢ₚ d\nhc : c ⭢ₚ c'\na' b' : SKI\nh : a ⭢ₚ a' ∧ b ⭢ₚ b' ∧ d = S ⬝ a' ⬝ b'\nh_1 : ¬(a ⬝ c ⬝ (b ⬝ c)"
+  },
+  {
+   "kind": "closer",
+   "line": 61,
+   "label": "replace the bullet at line 61 (`· apply ParallelReduction.par`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 442,
+   "heartbeats": 926,
+   "score": null,
+   "error": "211:6: unsolved goals\ncase left\na b c d c' a' b' : SKI\nhd : (S ⬝ a ⬝ b) ⭢ₚ S ⬝ a' ⬝ b'\nhc : c ⭢ₚ c'\nh : a ⭢ₚ a' ∧ b ⭢ₚ b' ∧ d = S ⬝ a' ⬝ b'\n⊢ (a ⬝ c ⬝ (b ⬝ c)) "
+  },
+  {
+   "kind": "closer",
+   "line": 61,
+   "label": "replace the bullet at line 61 (`· apply ParallelReduction.par`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 442,
+   "heartbeats": 1085,
+   "score": null,
+   "error": "211:6: unsolved goals\ncase left\na b c c' a' b' : SKI\nhd : (S ⬝ a ⬝ b) ⭢ₚ S ⬝ a' ⬝ b'\nhc : c ⭢ₚ c'\nleft : a ⭢ₚ a'\nleft_1 : b ⭢ₚ b'\n⊢ (a ⬝ c ⬝ (b ⬝ c)) ⭢ₚ a' ⬝ c'"
+  },
+  {
+   "kind": "closer",
+   "line": 9,
+   "label": "replace the closing tactic at line 9 (`exact ⟨.refl $ a' ⬝ b', .par ha' hb'⟩`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 442,
+   "heartbeats": 902,
+   "score": null,
+   "error": "159:6: `grind` failed\ncase grind.1\na a' b b' : SKI\nha' : a ⭢ₚ a'\nhb' : b ⭢ₚ b'\nh_1 : ¬(a' ⬝ b') ⭢ₚ a' ⬝ b'\n⊢ False\n[grind] Goal diagnostics\n  [facts] Asserted f"
+  },
+  {
+   "kind": "closer",
+   "line": 9,
+   "label": "replace the closing tactic at line 9 (`exact ⟨.refl $ a' ⬝ b', .par ha' hb'⟩`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 442,
+   "heartbeats": 897,
+   "score": null,
+   "error": "159:6: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 9,
+   "label": "replace the closing tactic at line 9 (`exact ⟨.refl $ a' ⬝ b', .par ha' hb'⟩`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 442,
+   "heartbeats": 1009,
+   "score": null,
+   "error": "157:14: unsolved goals\ncase left\na a' b b' : SKI\nha' : a ⭢ₚ a'\nhb' : b ⭢ₚ b'\n⊢ (a' ⬝ b') ⭢ₚ a' ⬝ b'\n\ncase right\na a' b b' : SKI\nha' : a ⭢ₚ a'\nhb' : b ⭢ₚ b'\n⊢ (a"
+  },
+  {
+   "kind": "closer",
+   "line": 24,
+   "label": "replace the closing tactic at line 24 (`exact ⟨.red_K a₂' b', ha₂'.1⟩`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 446,
+   "heartbeats": 903,
+   "score": null,
+   "error": "174:6: `grind` failed\ncase grind\na₂ a' b b' : SKI\nhb' : b ⭢ₚ b'\nha' : (K ⬝ a₂) ⭢ₚ a'\na₂' : SKI\nha₂' : a₂ ⭢ₚ a₂' ∧ a' = K ⬝ a₂'\nh : ¬(K ⬝ a₂' ⬝ b') ⭢ₚ a₂' ∨ ¬a₂ "
+  },
+  {
+   "kind": "closer",
+   "line": 24,
+   "label": "replace the closing tactic at line 24 (`exact ⟨.red_K a₂' b', ha₂'.1⟩`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 446,
+   "heartbeats": 913,
+   "score": null,
+   "error": "170:15: unsolved goals\na₂ a' b b' : SKI\nhb' : b ⭢ₚ b'\na₂' : SKI\nha' : (K ⬝ a₂) ⭢ₚ K ⬝ a₂'\nha₂' : a₂ ⭢ₚ a₂' ∧ a' = K ⬝ a₂'\n⊢ (K ⬝ a₂' ⬝ b') ⭢ₚ a₂'"
+  },
+  {
+   "kind": "closer",
+   "line": 24,
+   "label": "replace the closing tactic at line 24 (`exact ⟨.red_K a₂' b', ha₂'.1⟩`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 446,
+   "heartbeats": 1040,
+   "score": null,
+   "error": "170:15: unsolved goals\na₂ b b' : SKI\nhb' : b ⭢ₚ b'\na₂' : SKI\nha' : (K ⬝ a₂) ⭢ₚ K ⬝ a₂'\nleft : a₂ ⭢ₚ a₂'\n⊢ (K ⬝ a₂' ⬝ b') ⭢ₚ a₂'"
+  },
+  {
+   "kind": "closer",
+   "line": 47,
+   "label": "replace the closing tactic at line 47 (`exact ⟨h'.1, .red_K a₁' c'⟩`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 446,
+   "heartbeats": 903,
+   "score": null,
+   "error": "197:6: `grind` failed\ncase grind\na₁ c a' c' : SKI\nha : (K ⬝ a₁) ⭢ₚ a'\nhc : c ⭢ₚ c'\na₁' : SKI\nh' : a₁ ⭢ₚ a₁' ∧ a' = K ⬝ a₁'\nh : ¬a₁ ⭢ₚ a₁' ∨ ¬(K ⬝ a₁' ⬝ c') ⭢ₚ a"
+  },
+  {
+   "kind": "closer",
+   "line": 47,
+   "label": "replace the closing tactic at line 47 (`exact ⟨h'.1, .red_K a₁' c'⟩`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 446,
+   "heartbeats": 915,
+   "score": null,
+   "error": "193:25: unsolved goals\na₁ c a' c' a₁' : SKI\nha : (K ⬝ a₁) ⭢ₚ K ⬝ a₁'\nhc : c ⭢ₚ c'\nh' : a₁ ⭢ₚ a₁' ∧ a' = K ⬝ a₁'\n⊢ (K ⬝ a₁' ⬝ c') ⭢ₚ a₁'"
+  },
+  {
+   "kind": "closer",
+   "line": 47,
+   "label": "replace the closing tactic at line 47 (`exact ⟨h'.1, .red_K a₁' c'⟩`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 446,
+   "heartbeats": 1042,
+   "score": null,
+   "error": "193:25: unsolved goals\na₁ c c' a₁' : SKI\nha : (K ⬝ a₁) ⭢ₚ K ⬝ a₁'\nhc : c ⭢ₚ c'\nleft : a₁ ⭢ₚ a₁'\n⊢ (K ⬝ a₁' ⬝ c') ⭢ₚ a₁'"
+  },
+  {
+   "kind": "closer",
+   "line": 50,
+   "label": "replace the closing tactic at line 50 (`exact ⟨.refl a₁, .refl a₁⟩`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 446,
+   "heartbeats": 902,
+   "score": null,
+   "error": "200:6: `grind` failed\ncase grind.1\na₁ c : SKI\nh_1 : ¬a₁ ⭢ₚ a₁\n⊢ False\n[grind] Goal diagnostics\n  [facts] Asserted facts\n    [prop] ¬a₁ ⭢ₚ a₁ ∨ ¬a₁ ⭢ₚ a₁\n    [pr"
+  },
+  {
+   "kind": "closer",
+   "line": 50,
+   "label": "replace the closing tactic at line 50 (`exact ⟨.refl a₁, .refl a₁⟩`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 446,
+   "heartbeats": 897,
+   "score": null,
+   "error": "198:15: unsolved goals\na₁ c : SKI\n⊢ a₁ ⭢ₚ a₁"
+  },
+  {
+   "kind": "closer",
+   "line": 50,
+   "label": "replace the closing tactic at line 50 (`exact ⟨.refl a₁, .refl a₁⟩`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 446,
+   "heartbeats": 958,
+   "score": null,
+   "error": "198:15: unsolved goals\na₁ c : SKI\n⊢ a₁ ⭢ₚ a₁"
+  },
+  {
+   "kind": "closer",
+   "line": 55,
+   "label": "replace the closing tactic at line 55 (`exact ⟨.refl _, .red_S ..⟩`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 446,
+   "heartbeats": 905,
+   "score": null,
+   "error": "205:6: `grind` failed\ncase grind.1\na b c : SKI\nh_1 : ¬(a ⬝ c ⬝ (b ⬝ c)) ⭢ₚ a ⬝ c ⬝ (b ⬝ c)\n⊢ False\n[grind] Goal diagnostics\n  [facts] Asserted facts\n    [prop] "
+  },
+  {
+   "kind": "closer",
+   "line": 55,
+   "label": "replace the closing tactic at line 55 (`exact ⟨.refl _, .red_S ..⟩`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 446,
+   "heartbeats": 897,
+   "score": null,
+   "error": "205:6: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 55,
+   "label": "replace the closing tactic at line 55 (`exact ⟨.refl _, .red_S ..⟩`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 446,
+   "heartbeats": 998,
+   "score": null,
+   "error": "203:14: unsolved goals\ncase left\na b c : SKI\n⊢ (a ⬝ c ⬝ (b ⬝ c)) ⭢ₚ a ⬝ c ⬝ (b ⬝ c)\n\ncase right\na b c : SKI\n⊢ (S ⬝ a ⬝ b ⬝ c) ⭢ₚ a ⬝ c ⬝ (b ⬝ c)"
+  },
+  {
+   "kind": "closer",
+   "line": 38,
+   "label": "replace the closing tactic at line 38 (`exact ⟨ha, .red_I a₁'⟩`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 902,
+   "score": null,
+   "error": "188:6: `grind` failed\ncase grind\na₁ c a₁' : SKI\nhc : I ⭢ₚ c\nha : a₁ ⭢ₚ a₁'\nh : ¬a₁ ⭢ₚ a₁' ∨ ¬(I ⬝ a₁') ⭢ₚ a₁'\n⊢ False\n[grind] Goal diagnostics\n  [facts] Asserte"
+  },
+  {
+   "kind": "closer",
+   "line": 38,
+   "label": "replace the closing tactic at line 38 (`exact ⟨ha, .red_I a₁'⟩`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 903,
+   "score": null,
+   "error": "185:25: unsolved goals\na₁ c a₁' : SKI\nhc : I ⭢ₚ c\nha : a₁ ⭢ₚ a₁'\n⊢ (I ⬝ a₁') ⭢ₚ a₁'"
+  },
+  {
+   "kind": "closer",
+   "line": 38,
+   "label": "replace the closing tactic at line 38 (`exact ⟨ha, .red_I a₁'⟩`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 977,
+   "score": null,
+   "error": "185:25: unsolved goals\na₁ c a₁' : SKI\nhc : I ⭢ₚ c\nha : a₁ ⭢ₚ a₁'\n⊢ (I ⬝ a₁') ⭢ₚ a₁'"
+  },
+  {
+   "kind": "closer",
+   "line": 15,
+   "label": "replace the bullet at line 15 (`· exact .par ha.1 hb.1`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 450,
+   "heartbeats": 909,
+   "score": null,
+   "error": "165:8: `grind` failed\ncase grind\na a' b b' : SKI\nha' : a ⭢ₚ a'\nhb' : b ⭢ₚ b'\na'' b'' : SKI\nha'' : a ⭢ₚ a''\nhb'' : b ⭢ₚ b''\na₃ : SKI\nha : a' ⭢ₚ a₃ ∧ a'' ⭢ₚ a₃\nb₃"
+  },
+  {
+   "kind": "closer",
+   "line": 15,
+   "label": "replace the bullet at line 15 (`· exact .par ha.1 hb.1`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 450,
+   "heartbeats": 924,
+   "score": null,
+   "error": "165:8: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 15,
+   "label": "replace the bullet at line 15 (`· exact .par ha.1 hb.1`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 450,
+   "heartbeats": 1055,
+   "score": null,
+   "error": "165:6: unsolved goals\ncase left\na a' b b' : SKI\nha' : a ⭢ₚ a'\nhb' : b ⭢ₚ b'\na'' b'' : SKI\nha'' : a ⭢ₚ a''\nhb'' : b ⭢ₚ b''\na₃ b₃ : SKI\nleft : a' ⭢ₚ a₃\nright : a'"
+  },
+  {
+   "kind": "closer",
+   "line": 16,
+   "label": "replace the bullet at line 16 (`· exact .par ha.2 hb.2`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 450,
+   "heartbeats": 909,
+   "score": null,
+   "error": "166:8: `grind` failed\ncase grind\na a' b b' : SKI\nha' : a ⭢ₚ a'\nhb' : b ⭢ₚ b'\na'' b'' : SKI\nha'' : a ⭢ₚ a''\nhb'' : b ⭢ₚ b''\na₃ : SKI\nha : a' ⭢ₚ a₃ ∧ a'' ⭢ₚ a₃\nb₃"
+  },
+  {
+   "kind": "closer",
+   "line": 16,
+   "label": "replace the bullet at line 16 (`· exact .par ha.2 hb.2`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 450,
+   "heartbeats": 924,
+   "score": null,
+   "error": "166:8: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 16,
+   "label": "replace the bullet at line 16 (`· exact .par ha.2 hb.2`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 450,
+   "heartbeats": 1055,
+   "score": null,
+   "error": "166:6: unsolved goals\ncase right\na a' b b' : SKI\nha' : a ⭢ₚ a'\nhb' : b ⭢ₚ b'\na'' b'' : SKI\nha'' : a ⭢ₚ a''\nhb'' : b ⭢ₚ b''\na₃ b₃ : SKI\nleft : a' ⭢ₚ a₃\nright : a"
+  },
+  {
+   "kind": "closer",
+   "line": 62,
+   "label": "replace the bullet at line 62 (`· exact .par h.left hc`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 450,
+   "heartbeats": 912,
+   "score": null,
+   "error": "212:10: `grind` failed\ncase grind\na b c d c' : SKI\nhd : (S ⬝ a ⬝ b) ⭢ₚ d\nhc : c ⭢ₚ c'\na' b' : SKI\nh : a ⭢ₚ a' ∧ b ⭢ₚ b' ∧ d = S ⬝ a' ⬝ b'\nh_1 : ¬(a ⬝ c) ⭢ₚ a' ⬝"
+  },
+  {
+   "kind": "closer",
+   "line": 62,
+   "label": "replace the bullet at line 62 (`· exact .par h.left hc`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 450,
+   "heartbeats": 929,
+   "score": null,
+   "error": "212:8: unsolved goals\ncase left.a\na b c d c' a' b' : SKI\nhd : (S ⬝ a ⬝ b) ⭢ₚ S ⬝ a' ⬝ b'\nhc : c ⭢ₚ c'\nh : a ⭢ₚ a' ∧ b ⭢ₚ b' ∧ d = S ⬝ a' ⬝ b'\n⊢ (a ⬝ c) ⭢ₚ a' ⬝ "
+  },
+  {
+   "kind": "closer",
+   "line": 62,
+   "label": "replace the bullet at line 62 (`· exact .par h.left hc`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 450,
+   "heartbeats": 1081,
+   "score": null,
+   "error": "212:8: unsolved goals\ncase left.a\na b c c' a' b' : SKI\nhd : (S ⬝ a ⬝ b) ⭢ₚ S ⬝ a' ⬝ b'\nhc : c ⭢ₚ c'\nleft : a ⭢ₚ a'\nleft_1 : b ⭢ₚ b'\n⊢ (a ⬝ c) ⭢ₚ a' ⬝ c'"
+  },
+  {
+   "kind": "closer",
+   "line": 63,
+   "label": "replace the bullet at line 63 (`· exact .par h.2.1 hc`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 450,
+   "heartbeats": 912,
+   "score": null,
+   "error": "213:10: `grind` failed\ncase grind\na b c d c' : SKI\nhd : (S ⬝ a ⬝ b) ⭢ₚ d\nhc : c ⭢ₚ c'\na' b' : SKI\nh : a ⭢ₚ a' ∧ b ⭢ₚ b' ∧ d = S ⬝ a' ⬝ b'\nh_1 : ¬(b ⬝ c) ⭢ₚ b' ⬝"
+  },
+  {
+   "kind": "closer",
+   "line": 63,
+   "label": "replace the bullet at line 63 (`· exact .par h.2.1 hc`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 450,
+   "heartbeats": 929,
+   "score": null,
+   "error": "213:8: unsolved goals\ncase left.a\na b c d c' a' b' : SKI\nhd : (S ⬝ a ⬝ b) ⭢ₚ S ⬝ a' ⬝ b'\nhc : c ⭢ₚ c'\nh : a ⭢ₚ a' ∧ b ⭢ₚ b' ∧ d = S ⬝ a' ⬝ b'\n⊢ (b ⬝ c) ⭢ₚ b' ⬝ "
+  },
+  {
+   "kind": "closer",
+   "line": 63,
+   "label": "replace the bullet at line 63 (`· exact .par h.2.1 hc`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 450,
+   "heartbeats": 1081,
+   "score": null,
+   "error": "213:8: unsolved goals\ncase left.a\na b c c' a' b' : SKI\nhd : (S ⬝ a ⬝ b) ⭢ₚ S ⬝ a' ⬝ b'\nhc : c ⭢ₚ c'\nleft : a ⭢ₚ a'\nleft_1 : b ⭢ₚ b'\n⊢ (b ⬝ c) ⭢ₚ b' ⬝ c'"
+  },
+  {
+   "kind": "closer",
+   "line": 19,
+   "label": "replace the closing tactic at line 19 (`use b', .red_I b'`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 449,
+   "heartbeats": 896,
+   "score": null,
+   "error": "169:6: `grind` failed\ncase grind\na₂ a' b' : SKI\nha' : I ⭢ₚ a'\nhb' : a₂ ⭢ₚ b'\nh : ¬Join ParallelReduction (I ⬝ b') a₂\n⊢ False\n[grind] Goal diagnostics\n  [facts] "
+  },
+  {
+   "kind": "closer",
+   "line": 19,
+   "label": "replace the closing tactic at line 19 (`use b', .red_I b'`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 449,
+   "heartbeats": 892,
+   "score": null,
+   "error": "169:6: simp_all made no progress"
+  },
+  {
+   "kind": "closer",
+   "line": 19,
+   "label": "replace the closing tactic at line 19 (`use b', .red_I b'`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 449,
+   "heartbeats": 952,
+   "score": null,
+   "error": "169:6: Tactic `aesop` failed, made no progress\nInitial goal:\n  a₂ a' b' : SKI\n  ha' : I ⭢ₚ a'\n  hb' : a₂ ⭢ₚ b'\n  ⊢ Join ParallelReduction (I ⬝ b') a₂"
+  },
+  {
+   "kind": "closer",
+   "line": 64,
+   "label": "replace the bullet at line 64 (`· exact .red_S ..`) by `grind`",
+   "closer": "grind",
+   "ok": false,
+   "tokens": 451,
+   "heartbeats": 916,
+   "score": null,
+   "error": "214:8: `grind` failed\ncase grind\na b c d c' : SKI\nhd : (S ⬝ a ⬝ b) ⭢ₚ d\nhc : c ⭢ₚ c'\na' b' : SKI\nh : a ⭢ₚ a' ∧ b ⭢ₚ b' ∧ d = S ⬝ a' ⬝ b'\nh_1 : ¬(S ⬝ a' ⬝ b' ⬝ c"
+  },
+  {
+   "kind": "closer",
+   "line": 64,
+   "label": "replace the bullet at line 64 (`· exact .red_S ..`) by `simp_all`",
+   "closer": "simp_all",
+   "ok": false,
+   "tokens": 451,
+   "heartbeats": 934,
+   "score": null,
+   "error": "214:6: unsolved goals\ncase right\na b c d c' a' b' : SKI\nhd : (S ⬝ a ⬝ b) ⭢ₚ S ⬝ a' ⬝ b'\nhc : c ⭢ₚ c'\nh : a ⭢ₚ a' ∧ b ⭢ₚ b' ∧ d = S ⬝ a' ⬝ b'\n⊢ (S ⬝ a' ⬝ b' ⬝ c'"
+  },
+  {
+   "kind": "closer",
+   "line": 64,
+   "label": "replace the bullet at line 64 (`· exact .red_S ..`) by `aesop`",
+   "closer": "aesop",
+   "ok": false,
+   "tokens": 451,
+   "heartbeats": 1092,
+   "score": null,
+   "error": "214:6: unsolved goals\ncase right\na b c c' a' b' : SKI\nhd : (S ⬝ a ⬝ b) ⭢ₚ S ⬝ a' ⬝ b'\nhc : c ⭢ₚ c'\nleft : a ⭢ₚ a'\nleft_1 : b ⭢ₚ b'\n⊢ (S ⬝ a' ⬝ b' ⬝ c') ⭢ₚ a' ⬝ "
+  },
+  {
+   "kind": "del-tac",
+   "line": 18,
+   "label": "delete the tactic `rewrite [I_irreducible a' ha']`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 917,
+   "score": null,
+   "error": "168:6: Type mismatch\n  ParallelReduction.red_I b'\nhas type\n  (I ⬝ b') ⭢ₚ b'\nbut is expected to have type\n  (a' ⬝ b') ⭢ₚ b'"
+  },
+  {
+   "kind": "del-tac",
+   "line": 22,
+   "label": "delete the tactic `rewrite [ha₂'.2]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 449,
+   "heartbeats": 916,
+   "score": null,
+   "error": "173:13: Application type mismatch: The argument\n  ParallelReduction.red_K a₂' b'\nhas type\n  (K ⬝ a₂' ⬝ b') ⭢ₚ a₂'\nbut is expected to have type\n  (a' ⬝ b') ⭢ₚ a₂"
+  },
+  {
+   "kind": "del-tac",
+   "line": 27,
+   "label": "delete the tactic `rewrite [h.2.2]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 449,
+   "heartbeats": 915,
+   "score": null,
+   "error": "177:36: Application type mismatch: The argument\n  ParallelReduction.red_S a'' c' b'\nhas type\n  (S ⬝ a'' ⬝ c' ⬝ b') ⭢ₚ a'' ⬝ b' ⬝ (c' ⬝ b')\nbut is expected to ha"
+  },
+  {
+   "kind": "del-tac",
+   "line": 36,
+   "label": "delete the tactic `rewrite [I_irreducible c hc]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 917,
+   "score": null,
+   "error": "187:17: Application type mismatch: The argument\n  ParallelReduction.red_I a₁'\nhas type\n  (I ⬝ a₁') ⭢ₚ a₁'\nbut is expected to have type\n  (c ⬝ a₁') ⭢ₚ a₁'\nin the"
+  },
+  {
+   "kind": "del-tac",
+   "line": 45,
+   "label": "delete the tactic `rewrite [h'.2]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 449,
+   "heartbeats": 916,
+   "score": null,
+   "error": "196:19: Application type mismatch: The argument\n  ParallelReduction.red_K a₁' c'\nhas type\n  (K ⬝ a₁' ⬝ c') ⭢ₚ a₁'\nbut is expected to have type\n  (a' ⬝ c') ⭢ₚ a₁"
+  },
+  {
+   "kind": "del-tac",
+   "line": 58,
+   "label": "delete the tactic `rewrite [h.2.2]`",
+   "closer": "",
+   "ok": false,
+   "tokens": 449,
+   "heartbeats": 894,
+   "score": null,
+   "error": "213:8: Type mismatch\n  ParallelReduction.red_S ?m.1207 ?m.1208 ?m.1209\nhas type\n  (S ⬝ ?m.1207 ⬝ ?m.1208 ⬝ ?m.1209) ⭢ₚ ?m.1207 ⬝ ?m.1209 ⬝ (?m.1208 ⬝ ?m.1209)\nb"
+  },
+  {
+   "kind": "del-tac",
+   "line": 2,
+   "label": "delete the tactic `intro a a₁ a₂ h₁ h₂`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 6,
+   "score": null,
+   "error": "152:8: Unknown identifier `h₁`"
+  },
+  {
+   "kind": "del-tac",
+   "line": 3,
+   "label": "delete the tactic `cases h₁`",
+   "closer": "",
+   "ok": false,
+   "tokens": 451,
+   "heartbeats": 7,
+   "score": null,
+   "error": "153:2: Case tag `refl` not found.\n\nNote: There are no cases to select."
+  },
+  {
+   "kind": "del-tac",
+   "line": 6,
+   "label": "delete the tactic `cases h₂`",
+   "closer": "",
+   "ok": false,
+   "tokens": 451,
+   "heartbeats": 308,
+   "score": null,
+   "error": "156:4: Case tag `refl` not found.\n\nNote: There are no cases to select."
+  },
+  {
+   "kind": "del-tac",
+   "line": 8,
+   "label": "delete the tactic `refine ⟨a' ⬝ b', ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 445,
+   "heartbeats": 895,
+   "score": null,
+   "error": "158:13: Unknown constant `Cslib.SKI.refl`\n\nNote: Inferred this name from the expected resulting type of `.refl`:\n  SKI"
+  },
+  {
+   "kind": "del-tac",
+   "line": 13,
+   "label": "delete the tactic `refine ⟨a₃ ⬝ b₃, ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 445,
+   "heartbeats": 890,
+   "score": null,
+   "error": "164:14: Unknown constant `And.par`\n\nNote: Inferred this name from the expected resulting type of `.par`:\n  (a' ⬝ b') ⭢ₚ ?w ∧ (a'' ⬝ b'') ⭢ₚ ?w"
+  },
+  {
+   "kind": "del-tac",
+   "line": 14,
+   "label": "delete the tactic `constructor`",
+   "closer": "",
+   "ok": false,
+   "tokens": 452,
+   "heartbeats": 573,
+   "score": null,
+   "error": "164:14: Unknown constant `And.par`\n\nNote: Inferred this name from the expected resulting type of `.par`:\n  (a' ⬝ b') ⭢ₚ a₃ ⬝ b₃ ∧ (a'' ⬝ b'') ⭢ₚ a₃ ⬝ b₃"
+  },
+  {
+   "kind": "del-tac",
+   "line": 23,
+   "label": "delete the tactic `refine ⟨a₂', ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 918,
+   "score": null,
+   "error": "173:13: Unknown constant `Cslib.SKI.red_K`\n\nNote: Inferred this name from the expected resulting type of `.red_K`:\n  SKI"
+  },
+  {
+   "kind": "del-tac",
+   "line": 28,
+   "label": "delete the tactic `refine ⟨a'' ⬝ b' ⬝ (c' ⬝ b'), .red_S a'' c' b', ?…`",
+   "closer": "",
+   "ok": false,
+   "tokens": 434,
+   "heartbeats": 808,
+   "score": null,
+   "error": "178:6: Tactic `apply` failed: could not unify the conclusion of `ParallelReduction.par`\n  (?a ⬝ ?b) ⭢ₚ ?a' ⬝ ?b'\nwith the goal\n  Join ParallelReduction (S ⬝ a''"
+  },
+  {
+   "kind": "del-tac",
+   "line": 33,
+   "label": "delete the tactic `cases h₂`",
+   "closer": "",
+   "ok": false,
+   "tokens": 451,
+   "heartbeats": 812,
+   "score": null,
+   "error": "183:4: Case tag `refl` not found.\n\nNote: There are no cases to select."
+  },
+  {
+   "kind": "del-tac",
+   "line": 37,
+   "label": "delete the tactic `refine ⟨a₁', ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 917,
+   "score": null,
+   "error": "187:13: Application type mismatch: The argument\n  ha\nhas type\n  a₁ ⭢ₚ a₁'\nof sort `Prop` but is expected to have type\n  SKI\nof sort `Type` in the application\n  "
+  },
+  {
+   "kind": "del-tac",
+   "line": 41,
+   "label": "delete the tactic `cases h₂`",
+   "closer": "",
+   "ok": false,
+   "tokens": 451,
+   "heartbeats": 773,
+   "score": null,
+   "error": "191:4: Case tag `refl` not found.\n\nNote: There are no cases to select."
+  },
+  {
+   "kind": "del-tac",
+   "line": 46,
+   "label": "delete the tactic `refine ⟨a₁', ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 917,
+   "score": null,
+   "error": "196:13: Application type mismatch: The argument\n  h'.left\nhas type\n  a₁ ⭢ₚ a₁'\nof sort `Prop` but is expected to have type\n  SKI\nof sort `Type` in the applicati"
+  },
+  {
+   "kind": "del-tac",
+   "line": 49,
+   "label": "delete the tactic `refine ⟨a₁, ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 447,
+   "heartbeats": 900,
+   "score": null,
+   "error": "199:13: Unknown constant `Cslib.SKI.refl`\n\nNote: Inferred this name from the expected resulting type of `.refl`:\n  SKI"
+  },
+  {
+   "kind": "del-tac",
+   "line": 52,
+   "label": "delete the tactic `cases h₂`",
+   "closer": "",
+   "ok": false,
+   "tokens": 451,
+   "heartbeats": 715,
+   "score": null,
+   "error": "202:4: Case tag `refl` not found.\n\nNote: There are no cases to select."
+  },
+  {
+   "kind": "del-tac",
+   "line": 54,
+   "label": "delete the tactic `refine ⟨a ⬝ c ⬝ (b ⬝ c), ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 439,
+   "heartbeats": 894,
+   "score": null,
+   "error": "204:13: Unknown constant `Cslib.SKI.refl`\n\nNote: Inferred this name from the expected resulting type of `.refl`:\n  SKI"
+  },
+  {
+   "kind": "del-tac",
+   "line": 59,
+   "label": "delete the tactic `refine ⟨a' ⬝ c' ⬝ (b' ⬝ c'), ?_⟩`",
+   "closer": "",
+   "ok": false,
+   "tokens": 439,
+   "heartbeats": 884,
+   "score": null,
+   "error": "210:8: Tactic `apply` failed: could not unify the conclusion of `ParallelReduction.par`\n  (?a ⬝ ?b) ⭢ₚ ?a' ⬝ ?b'\nwith the goal\n  (a ⬝ c ⬝ (b ⬝ c)) ⭢ₚ ?w ∧ (S ⬝ "
+  },
+  {
+   "kind": "del-tac",
+   "line": 60,
+   "label": "delete the tactic `constructor`",
+   "closer": "",
+   "ok": false,
+   "tokens": 452,
+   "heartbeats": 879,
+   "score": null,
+   "error": "210:8: Tactic `apply` failed: could not unify the conclusion of `ParallelReduction.par`\n  (?a ⬝ ?b) ⭢ₚ ?a' ⬝ ?b'\nwith the goal\n  (a ⬝ c ⬝ (b ⬝ c)) ⭢ₚ a' ⬝ c' ⬝ "
+  }
+ ],
+ "brief": "AUTO-BRIEF (measured on THIS seed by the harness before your session: single edits compiled on the primary toolchain; facts about single edits, not limits: combinations and rewrites can do better)\n- Seed: 407 tokens, 1422 heartbeats, score 33.33. Free passes applied (normalize, hb_rewrite): start candidate 453 tokens, 894 heartbeats, score 41.94.\n- Exchange rate here: 1 token = 0.082 points, 100 heartbeats = 2.344 points.\n- Deletions that FAIL (needed as they stand): line 18 the tactic `rewrite [I_irreducible a' ha']`; line 22 the tactic `rewrite [ha₂'.2]`; line 27 the tactic `rewrite [h.2.2]`; line 36 the tactic `rewrite [I_irreducible c hc]`; line 45 the tactic `rewrite [h'.2]`; line 58 the tactic `rewrite [h.2.2]`.\n- Closers that do NOT close: the whole proof (grind/simp_all/aesop); the bullet at line 61 (`· apply ParallelReduction.par`) (grind/simp_all/aesop); the closing tactic at line 9 (`exact ⟨.refl $ a' ⬝ b', .par ha' hb'⟩`) (grind/simp_all/aesop); the closing tactic at line 24 (`exact ⟨.red_K a₂' b', ha₂'.1⟩`) (grind/simp_all/aesop); the closing tactic at line 47 (`exact ⟨h'.1, .red_K a₁' c'⟩`) (grind/simp_all/aesop).",
+ "status": "ok",
+ "best_score": 41.94,
+ "gain": 8.61,
+ "compiles_sweep": 65,
+ "seconds": 192.4,
+ "source": "seed"
+}

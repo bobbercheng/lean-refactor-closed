@@ -1,0 +1,19 @@
+{
+ "problem": "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time",
+ "best": {
+  "score": 33.33,
+  "proof": null,
+  "tokens": 1217,
+  "heartbeats": null
+ },
+ "attempts": [],
+ "runs": [
+  {
+   "run_id": "wu-hx-sol-f4",
+   "model": "gpt-6.1-sol",
+   "started": "2026-10-11T21:40:36Z"
+  }
+ ],
+ "api_spend": 1.04968,
+ "lineage": "fresh"
+}
